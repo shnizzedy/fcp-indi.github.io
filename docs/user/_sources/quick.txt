@@ -1,7 +1,64 @@
 C-PAC Quickstart
 ================
 
-Run on Docker
+.. contents::
+   :local:
+
+Load C-PAC in a Container
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Running C-PAC in a container at a minimum requires just a few pieces of information:
+
+* System: What container software? (Singularity or Docker)
+* Container: What output directory? (A mapping from a local directory to a directory in the container)
+* Container: What working directory? (A mapping from a local directory to a directory in the container)
+* Container: What container image? (A Singularity image or Docker image)
+* C-PAC: What input data? (``bids_dir``, Directory of data in BIDS format, within the container or online)
+* C-PAC: What output directory? (``output_dir``, Within the container)
+* C-PAC: Level of the analysis that will be performed
+
+See :ref:`Parameters and Options <_parameters_and_options>` for valid values for "level of analysis" and for a full list of parameters and options.
+
+Run in Singularity
+------------------
+
+For those who wish to avoid the administrator rights requirements often associated with Docker usage (or the security hazards when used on a shared computing system), `Singularity <https://singularityhub.github.io/singularityhub-docs/>`_ is a good option. Singularity is a container solution just like Docker, except it is designed specifically to offer secure deployment on shared cluster environments.
+
+Pull Singularity image
+######################
+
+You can pull a Singularity container much like how you would pull a Docker container, except you are pulling from `Singularity Hub <https://singularityhub.github.io/singularityhub-docs/>`_:
+
+.. code-block:: console
+
+    singularity pull shub://FCP-INDI/C-PAC
+
+This will produce a Singularity container image in your current directory, named something like ``C-PAC-latest.sif``.
+
+Running a Singularity image is similar to running a Docker image, except you use ``-B`` for mappings instead of ``-v``.
+
+Run using data from the web
+###########################
+
+.. code-block:: console
+
+    singularity run \
+            -B /Users/You/some_folder:/outputs \
+            -B /tmp:/scratch \
+            FCP-INDI-C-PAC-master-latest.simg s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU /outputs participant --participant_ndx 0
+
+Run using local data
+####################
+
+.. code-block:: console
+
+    singularity run \
+            -B /Users/You/local_bids_data:/bids_dataset \
+            -B /Users/You/some_folder:/outputs \
+            -B /tmp:/scratch \
+            FCP-INDI-C-PAC-master-latest.simg /bids_dataset /outputs participant
+
+Run in Docker
 -------------
 
 A C-PAC `Docker image <https://www.docker.com/>`_ is available so that you can easily get an analysis running without needing to install C-PAC.
@@ -9,6 +66,9 @@ A C-PAC `Docker image <https://www.docker.com/>`_ is available so that you can e
 The Docker image is designed following the specification established by the `BIDS-Apps project <https://github.com/BIDS-Apps>`_, an initiative to create a collection of reproducible neuroimaging workflows that can be executed as self-contained environments using `Docker <https://www.docker.com/>`_ containers.  These workflows take as input any dataset that is organized according to the `Brain Imaging Data Structure (BIDS) standard <https://bids.neuroimaging.io>`_ and generating first-level outputs for this dataset. However, you can provide the C-PAC Docker image with a custom non-BIDS dataset by entering your own data configuration file. More details below.
 
 In addition, we have created a Docker default pipeline configuration as part of this initiative that allows you to run the C-PAC pipeline on your data in an environment that is fully provisioned with all of C-PAC's dependencies - more details about the default pipeline are available further below. If you wish to run your own pipeline configuration, you can also provide this to the Docker image at run-time.
+
+Pull Docker image
+#################
 
 To start, first pull the image from Docker Hub:
 
@@ -18,7 +78,21 @@ To start, first pull the image from Docker Hub:
 
 Once this is complete, you can use the ``fcpindi/c-pac:latest`` image tag to invoke runs. The full C-PAC Docker image usage options are shown here, with some specific use cases.
 
+Run using data from the web
+###########################
+
+.. code-block:: console
+
+    docker run -i --rm \
+            -v /Users/You/some_folder:/outputs \
+            -v /tmp:/scratch \
+            fcpindi/c-pac:latest s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU /outputs participant --participant_ndx 0
+
+
 As a quick example, in order to run the C-PAC Docker container in participant mode, for one participant, using a BIDS dataset stored on your machine or server, and using the Docker image's default pipeline configuration (broken into multiple lines for visual clarity):
+
+Run using local data
+####################
 
 .. code-block:: console
 
@@ -29,15 +103,6 @@ As a quick example, in order to run the C-PAC Docker container in participant mo
             fcpindi/c-pac:latest /bids_dataset /outputs participant
 
 Note, the ``-v`` flags map your local filesystem locations to a "location" within the Docker image. (For example, the ``/bids_dataset`` and ``/outputs`` directories in the command above are arbitrary names). If you provided ``/Users/You/local_bids_data`` to the ``bids_dir`` input parameter, Docker would not be able to access or see that directory, so it needs to be mapped first. In this example, the local machine's ``/tmp`` directory has been mapped to the ``/scratch`` name because the C-PAC Docker image's default pipeline sets the working directory to ``/scratch``. If you wish to keep your working directory somewhere more permanent, you can simply map this like so: ``-v /Users/You/working_dir:/scratch``.
-
-You can also provide a link to an AWS S3 bucket containing a BIDS directory as the data source:
-
-.. code-block:: console
-
-    docker run -i --rm \
-            -v /Users/You/some_folder:/outputs \
-            -v /tmp:/scratch \
-            fcpindi/c-pac:latest s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant
 
 To run the C-PAC Docker container with a pipeline configuration file other than the container's default pipeline, assuming the configuration file is in the ``/Users/You/Documents`` directory:
 
@@ -66,7 +131,12 @@ Finally, to run the Docker container with a specific data configuration file (in
 
 Note: we are still providing ``/bids_dataset`` to the ``bids_dir`` input parameter. However, we have mapped this to any directory on your machine, as C-PAC will not look for data in this directory when you provide a data configuration YAML with the ``--data_config_file`` flag. In addition, if the dataset in your data configuration file is not in BIDS format, just make sure to add the ``--skip_bids_validator`` flag at the end of your command to bypass the BIDS validation process.
 
-The full list of parameters and options that can be passed to the Docker container are shown below:
+.. _parameters_and_options:
+
+Parameters and Options
+^^^^^^^^^^^^^^^^^^^^^^
+
+The full list of parameters and options that can be passed to C-PAC in a container are shown below:
 
 .. code-block:: console
 
@@ -150,7 +220,7 @@ The full list of parameters and options that can be passed to the Docker contain
                             participant label, in which case it is the index into
                             the list that follows the particpant_label flag.
 
-Note that any of the optional arguments above will over-ride any pipeline settings in the default pipeline or in the pipeline configuration file you provide via the ``--pipeline_file`` parameter.
+Note that any of the optional arguments above will override any pipeline settings in the default pipeline or in the pipeline configuration file you provide via the ``--pipeline_file`` parameter.
 
 **Further usage notes:**
 
@@ -164,37 +234,8 @@ Note that any of the optional arguments above will over-ride any pipeline settin
 
 * The ``participant_label`` and ``participant_ndx`` arguments allow the user to specify which of the many datasets should be processed, which is useful when parallelizing the run of multiple participants.
 
-Run On Singularity
-------------------
-
-For those who wish to avoid the administrator rights requirements often associated with Docker usage (or the security hazards when used on a shared computing system), `Singularity <https://singularityhub.github.io/singularityhub-docs/>`_ is a good option. Singularity is a container solution just like Docker, except it is designed specifically to offer secure deployment on shared cluster environments.
-
-You can pull a Singularity container much like how you would pull a Docker container, except you are pulling from `Singularity Hub <https://singularityhub.github.io/singularityhub-docs/>`_:
-
-.. code-block:: console
-
-    singularity pull shub://FCP-INDI/C-PAC
-
-This will produce a Singularity container image in your current directory, named something like ``FCP-INDI-C-PAC-master-latest.simg``.
-
-Running a Singularity image is similar to running a Docker image, except you use ``-B`` for mappings instead of ``-v``:
-
-.. code-block:: console
-
-    singularity run \
-            -B /Users/You/local_bids_data:/bids_dataset \
-            -B /Users/You/some_folder:/outputs \
-            -B /tmp:/scratch \
-            FCP-INDI-C-PAC-master-latest.simg /bids_dataset /outputs participant
-
-Again, you can also provide an AWS S3 link for the data:
-
-.. code-block:: console
-
-    singularity run \
-            -B /Users/You/some_folder:/outputs \
-            -B /tmp:/scratch \
-            FCP-INDI-C-PAC-master-latest.simg s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant
+Run a Pipeline
+^^^^^^^^^^^^^^
 
 Default Pipeline
 ----------------
@@ -249,7 +290,7 @@ Or you can provide it to the C-PAC Singularity container like so:
             -B /Users/You/some_folder:/outputs \
             -B /tmp:/scratch \
             -B /Users/You/Documents:/configs \
-            fcpindi_c-pac_latest-{date}-{hash value}.img s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant --pipeline_file /configs/pipeline_config.yml
+            fcpindi_c-pac_latest-{date}-{hash value}.img s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU /outputs participant --pipeline_file /configs/pipeline_config.yml
 
 **Reporting errors and getting help**
 

@@ -135,7 +135,7 @@ You can also provide a link to an AWS S3 bucket containing a BIDS directory as t
     docker run -i --rm \
             -v /Users/You/some_folder:/outputs \
             -v /tmp:/scratch \
-            fcpindi/c-pac:latest s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant
+            fcpindi/c-pac:latest s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU /outputs participant
 
 To run the C-PAC Docker container with a pipeline configuration file other than the container's default pipeline, assuming the configuration file is in the ``/Users/You/Documents`` directory:
 
@@ -207,10 +207,10 @@ Again, you can also provide an AWS S3 link for the data:
     singularity run \
             -B /Users/You/some_folder:/outputs \
             -B /tmp:/scratch \
-            fcpindi_c-pac_latest-{date}-{hash value}.img s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant
+            fcpindi_c-pac_latest-{date}-{hash value}.img s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU /outputs participant
 
 On the AWS Cloud
-------------------------------
+----------------
 
 The C-PAC team has released an Amazon Marketplace AMI, making it easier for researchers to use C-PAC in the cloud.  You can use the AMI to either launch a single machine for basic runs or create a high performance computing (HPC) cluster using Starcluster.  Clusters can be dynamically scaled up as your computational needs increase.  Detailed explanations of cloud computing and HPC are beyond the scope of this documentation, but we will define a few key terms before we start.  If these terms are familiar, you may skip them and proceed to later sections.
 
