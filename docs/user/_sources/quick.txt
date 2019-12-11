@@ -6,7 +6,7 @@ Run on Docker
 
 A C-PAC `Docker image <https://www.docker.com/>`_ is available so that you can easily get an analysis running without needing to install C-PAC.
 
-The Docker image is designed following the specification established by the `BIDS-Apps project <https://github.com/BIDS-Apps>`_, an initiative to create a collection of reproducible neuroimaging workflows that can be executed as self-contained environments using `Docker <https://www.docker.com/>`_ containers.  These workflows take as input any dataset that is organized according to the `Brain Imaging Data Structure (BIDS) standard <http://http://bids.neuroimaging.io>`_ and generating first-level outputs for this dataset. However, you can provide the C-PAC Docker image with a custom non-BIDS dataset by entering your own data configuration file. More details below.
+The Docker image is designed following the specification established by the `BIDS-Apps project <https://github.com/BIDS-Apps>`_, an initiative to create a collection of reproducible neuroimaging workflows that can be executed as self-contained environments using `Docker <https://www.docker.com/>`_ containers.  These workflows take as input any dataset that is organized according to the `Brain Imaging Data Structure (BIDS) standard <https://bids.neuroimaging.io>`_ and generating first-level outputs for this dataset. However, you can provide the C-PAC Docker image with a custom non-BIDS dataset by entering your own data configuration file. More details below.
 
 In addition, we have created a Docker default pipeline configuration as part of this initiative that allows you to run the C-PAC pipeline on your data in an environment that is fully provisioned with all of C-PAC's dependencies - more details about the default pipeline are available further below. If you wish to run your own pipeline configuration, you can also provide this to the Docker image at run-time.
 
@@ -269,14 +269,14 @@ We currently have a publication in preparation, in the meantime please cite our 
 
 	@ARTICLE{cpac2013,
 	    AUTHOR={Craddock, Cameron  and  Sikka, Sharad  and  Cheung, Brian  and  Khanuja, Ranjeet  and  Ghosh, Satrajit S
-	        and Yan, Chaogan  and  Li, Qingyang  and  Lurie, Daniel  and  Vogelstein, Joshua  and  Burns, Randal  and  
+	        and Yan, Chaogan  and  Li, Qingyang  and  Lurie, Daniel  and  Vogelstein, Joshua  and  Burns, Randal  and
 	        Colcombe, Stanley  and  Mennes, Maarten  and  Kelly, Clare  and  Di Martino, Adriana  and  Castellanos,
-	        Francisco Xavier  and  Milham, Michael},  
-	    TITLE={Towards Automated Analysis of Connectomes: The Configurable Pipeline for the Analysis of Connectomes (C-PAC)},     
+	        Francisco Xavier  and  Milham, Michael},
+	    TITLE={Towards Automated Analysis of Connectomes: The Configurable Pipeline for the Analysis of Connectomes (C-PAC)},
 	    JOURNAL={Frontiers in Neuroinformatics},
 	    YEAR={2013},
 	    NUMBER={42},
-	    URL={http://www.frontiersin.org/neuroinformatics/10.3389/conf.fninf.2013.09.00042/full},
+	    URL={https://www.frontiersin.org/neuroinformatics/10.3389/conf.fninf.2013.09.00042/full},
 	    DOI={10.3389/conf.fninf.2013.09.00042},
 	    ISSN={1662-5196}
 	}
@@ -320,14 +320,14 @@ References
 
 18. Smith, S. M., Fox, P. T., Miller, K. L., Glahn, D. C., Fox, P. M., Mackay, C. E., et al. (2009). Correspondence of the brain’s functional architecture during activation and rest. Proceedings of the National Academy of Sciences of the United States of America, 106(31), 13040–13045. doi:10.1073/pnas.0905267106
 
-19. Dosenbach, N. U. F., Nardos, B., Cohen, A. L., Fair, D. a, Power, J. D., Church, J. a, … Schlaggar, B. L. (2010). Prediction of individual brain maturity using fMRI. Science (New York, N.Y.), 329(5997), 1358–61. `http://doi.org/10.1126/science.1194144 <http://doi.org/10.1126/science.1194144>`_
+19. Dosenbach, N. U. F., Nardos, B., Cohen, A. L., Fair, D. a, Power, J. D., Church, J. a, … Schlaggar, B. L. (2010). Prediction of individual brain maturity using fMRI. Science (New York, N.Y.), 329(5997), 1358–61. `https://doi.org/10.1126/science.1194144 <https://doi.org/10.1126/science.1194144>`_
 
-20. Tzourio-Mazoyer, N., Landeau, B., Papathanassiou, D., Crivello, F., Etard, O., Delcroix, N., … Joliot, M. (2002). Automated anatomical labeling of activations in SPM using a macroscopic anatomical parcellation of the MNI MRI single-subject brain. NeuroImage, 15(1), 273–89. `http://doi.org/10.1006/nimg.2001.0978 <http://doi.org/10.1006/nimg.2001.0978>`_
+20. Tzourio-Mazoyer, N., Landeau, B., Papathanassiou, D., Crivello, F., Etard, O., Delcroix, N., … Joliot, M. (2002). Automated anatomical labeling of activations in SPM using a macroscopic anatomical parcellation of the MNI MRI single-subject brain. NeuroImage, 15(1), 273–89. `https://doi.org/10.1006/nimg.2001.0978 <https://doi.org/10.1006/nimg.2001.0978>`_
 
-21. Eickhoff, S. B., Stephan, K. E., Mohlberg, H., Grefkes, C., Fink, G. R., Amunts, K., & Zilles, K. (2005). A new SPM toolbox for combining probabilistic cytoarchitectonic maps and functional imaging data. NeuroImage, 25(4), 1325–35. `http://doi.org/10.1016/j.neuroimage.2004.12.034 <http://doi.org/10.1016/j.neuroimage.2004.12.034>`_
+21. Eickhoff, S. B., Stephan, K. E., Mohlberg, H., Grefkes, C., Fink, G. R., Amunts, K., & Zilles, K. (2005). A new SPM toolbox for combining probabilistic cytoarchitectonic maps and functional imaging data. NeuroImage, 25(4), 1325–35. `https://doi.org/10.1016/j.neuroimage.2004.12.034 <https://doi.org/10.1016/j.neuroimage.2004.12.034>`_
 
-22. Harvard-Oxford cortical and subcortical structural atlases, `http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Atlases <http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Atlases>`_
+22. Harvard-Oxford cortical and subcortical structural atlases, `https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Atlases <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Atlases>`_
 
-23. Lancaster, J. L., Woldorff, M. G., Parsons, L. M., Liotti, M., Freitas, C. S., Rainey, L., … Fox, P. T. (2000). Automated Talairach atlas labels for functional brain mapping. Human Brain Mapping, 10(3), 120–31. Retrieved from `http://www.ncbi.nlm.nih.gov/pubmed/10912591 <http://www.ncbi.nlm.nih.gov/pubmed/10912591>`_
+23. Lancaster, J. L., Woldorff, M. G., Parsons, L. M., Liotti, M., Freitas, C. S., Rainey, L., … Fox, P. T. (2000). Automated Talairach atlas labels for functional brain mapping. Human Brain Mapping, 10(3), 120–31. Retrieved from `https://www.ncbi.nlm.nih.gov/pubmed/10912591 <https://www.ncbi.nlm.nih.gov/pubmed/10912591>`_
 
-24. Craddock, R. C., James, G. A., Holtzheimer, P. E., Hu, X. P., & Mayberg, H. S. (2011). A whole brain fMRI atlas generated via spatially constrained spectral clustering. Human Brain Mapping, 0(July 2010). `http://doi.org/10.1002/hbm.21333 <http://doi.org/10.1002/hbm.21333>`_
+24. Craddock, R. C., James, G. A., Holtzheimer, P. E., Hu, X. P., & Mayberg, H. S. (2011). A whole brain fMRI atlas generated via spatially constrained spectral clustering. Human Brain Mapping, 0(July 2010). `https://doi.org/10.1002/hbm.21333 <https://doi.org/10.1002/hbm.21333>`_
