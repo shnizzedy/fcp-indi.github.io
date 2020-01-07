@@ -16,6 +16,7 @@ jobs:
             pip install --user -r https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/requirements.txt
             pip install --user git+https://github.com/FCP-INDI/C-PAC.git
             pip install --user sphinx
+            pip install --user numpydoc
       - run:
           name: Build docs
           command: |
@@ -29,7 +30,7 @@ jobs:
       - run:
           name: Deploy docs
           command: |
-            git clone --single-branch --branch master git@github.com:FCP-INDI/fcp-indi.github.com.git /tmp/repo
+            git clone --single-branch --branch master git@github.com:shnizzedy/fcp-indi.github.com.git /tmp/repo
             rsync -rtv ./ /tmp/repo/ --exclude '.git'
             cd /tmp/repo
             git rm -f .gitignore || rm -f .gitignore || true
