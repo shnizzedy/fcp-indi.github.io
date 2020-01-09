@@ -183,7 +183,10 @@ running <code class="docutils literal notranslate"><span class="pre">singularity
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">version</span> <span class="mf">3.5</span><span class="o">.</span><span class="mi">1</span>
 </pre></div>
 </div>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">pull</span> <span class="n">shub</span><span class="p">:</span><span class="o">//</span><span class="n">FCP</span><span class="o">-</span><span class="n">INDI</span><span class="o">/</span><span class="n">C</span><span class="o">-</span><span class="n">PAC</span>
+<p>For the purposes of this guide, if an image already exists, we’ll delete
+that one.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>[ ! -e C-PAC_latest.sif ] || rm C-PAC_latest.sif
+singularity pull shub://FCP-INDI/C-PAC
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[34mINFO:   [0m Use image from cache
@@ -196,20 +199,20 @@ running <code class="docutils literal notranslate"><span class="pre">singularity
 <p>First, we’ll run our Singularity container on our <a class="reference external" href="configs/BasicAnatomical.yml">Basic Anatomical
 configuration</a>. Before we run, we’ll
 create an outputs directory and a working directory.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p $HOME/CPAC-data/anat/outputs
-mkdir -p $HOME/CPAC-data/anat/tmp
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">anat</span><span class="o">/</span><span class="n">outputs</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">anat</span><span class="o">/</span><span class="n">tmp</span>
 </pre></div>
 </div>
 <p>Now we run on a single participant from ADHD200 to test the
 configuration.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run \
-  -B $HOME/CPAC-data/anat/outputs:/outputs \
-  -B $HOME/CPAC-data/anat/tmp:/scratch \
-  C-PAC_latest.sif \
-  s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU \
-  /outputs participant \
-  --pipeline_file configs/BasicAnatomical.yml \
-  --participant_ndx 1
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">anat</span><span class="o">/</span><span class="n">outputs</span><span class="p">:</span><span class="o">/</span><span class="n">outputs</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">anat</span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">scratch</span> \
+  <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> \
+  <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">fcp</span><span class="o">-</span><span class="n">indi</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">ADHD200</span><span class="o">/</span><span class="n">RawDataBIDS</span><span class="o">/</span><span class="n">NYU</span> \
+  <span class="o">/</span><span class="n">outputs</span> <span class="n">participant</span> \
+  <span class="o">--</span><span class="n">pipeline_file</span> <span class="n">configs</span><span class="o">/</span><span class="n">BasicAnatomical</span><span class="o">.</span><span class="n">yml</span> \
+  <span class="o">--</span><span class="n">participant_ndx</span> <span class="mi">1</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Skipping</span> <span class="n">bids</span><span class="o">-</span><span class="n">validator</span> <span class="k">for</span> <span class="n">S3</span> <span class="n">datasets</span><span class="o">...</span>
@@ -401,6 +404,22 @@ configuration.</p>
         <span class="n">System</span> <span class="n">time</span> <span class="n">of</span> <span class="n">completion</span><span class="p">:</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">09</span> <span class="mi">15</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">12</span>
 </pre></div>
 </div>
+<p>(Same thing, but with anat-only config from repo)</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">anatonly</span><span class="o">/</span><span class="n">outputs</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">anatonly</span><span class="o">/</span><span class="n">tmp</span>
+<span class="n">singularity</span> <span class="n">run</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">anat</span><span class="o">/</span><span class="n">outputs</span><span class="p">:</span><span class="o">/</span><span class="n">outputs</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">anat</span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">scratch</span> \
+  <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> \
+  <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">fcp</span><span class="o">-</span><span class="n">indi</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">ADHD200</span><span class="o">/</span><span class="n">RawDataBIDS</span><span class="o">/</span><span class="n">NYU</span> \
+  <span class="o">/</span><span class="n">outputs</span> <span class="n">participant</span> \
+  <span class="o">--</span><span class="n">pipeline_file</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FCP</span><span class="o">-</span><span class="n">INDI</span><span class="o">/</span><span class="n">C</span><span class="o">-</span><span class="n">PAC</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">CPAC</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">configs</span><span class="o">/</span><span class="n">pipeline_config_anat</span><span class="o">-</span><span class="n">only</span><span class="o">.</span><span class="n">yml</span> \
+  <span class="o">--</span><span class="n">participant_ndx</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[31mFATAL:  [0m container creation failed: mount /proc/self/fd/3-&gt;/usr/local/var/singularity/mnt/session/rootfs error: while mounting image /proc/self/fd/3: kernel reported a bad superblock for squashfs image partition, possible causes are that your kernel doesn&#39;t support the compression algorithm or the image is corrupted
+</pre></div>
+</div>
 </div>
 <div class="section" id="registration">
 <h4>Registration<a class="headerlink" href="#registration" title="Permalink to this headline">¶</a></h4>
@@ -408,20 +427,20 @@ configuration.</p>
 Registration
 configuration</a>. Before we
 run, we’ll create an outputs directory and a working directory.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p $HOME/CPAC-data/reg/outputs
-mkdir -p $HOME/CPAC-data/reg/tmp
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">reg</span><span class="o">/</span><span class="n">outputs</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">reg</span><span class="o">/</span><span class="n">tmp</span>
 </pre></div>
 </div>
 <p>Now we run on a single participant from ADHD200 to test the
 configuration.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run \
-  -B $HOME/CPAC-data/reg/outputs:/outputs \
-  -B $HOME/CPAC-data/reg/tmp:/scratch \
-  C-PAC_latest.sif \
-  s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU \
-  /outputs participant \
-  --pipeline_file configs/BasicAnatomical+Registration.yml \
-  --participant_ndx 1
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">reg</span><span class="o">/</span><span class="n">outputs</span><span class="p">:</span><span class="o">/</span><span class="n">outputs</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">reg</span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">scratch</span> \
+  <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> \
+  <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">fcp</span><span class="o">-</span><span class="n">indi</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">ADHD200</span><span class="o">/</span><span class="n">RawDataBIDS</span><span class="o">/</span><span class="n">NYU</span> \
+  <span class="o">/</span><span class="n">outputs</span> <span class="n">participant</span> \
+  <span class="o">--</span><span class="n">pipeline_file</span> <span class="n">configs</span><span class="o">/</span><span class="n">BasicAnatomical</span><span class="o">+</span><span class="n">Registration</span><span class="o">.</span><span class="n">yml</span> \
+  <span class="o">--</span><span class="n">participant_ndx</span> <span class="mi">1</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Skipping</span> <span class="n">bids</span><span class="o">-</span><span class="n">validator</span> <span class="k">for</span> <span class="n">S3</span> <span class="n">datasets</span><span class="o">...</span>
@@ -698,20 +717,20 @@ configuration.</p>
 configuration</a>.
 Before we run, we’ll create an outputs directory and a working
 directory.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p $HOME/CPAC-data/func/outputs
-mkdir -p $HOME/CPAC-data/func/tmp
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">func</span><span class="o">/</span><span class="n">outputs</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">func</span><span class="o">/</span><span class="n">tmp</span>
 </pre></div>
 </div>
 <p>Now we run on a single participant from ADHD200 to test the
 configuration.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run \
-  -B $HOME/CPAC-data/func/outputs:/outputs \
-  -B $HOME/CPAC-data/func/tmp:/scratch \
-  C-PAC_latest.sif \
-  s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU \
-  /outputs participant \
-  --pipeline_file configs/BasicAnatomical+Registration+Functional.yml \
-  --participant_ndx 1
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">func</span><span class="o">/</span><span class="n">outputs</span><span class="p">:</span><span class="o">/</span><span class="n">outputs</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">func</span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">scratch</span> \
+  <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> \
+  <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">fcp</span><span class="o">-</span><span class="n">indi</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">ADHD200</span><span class="o">/</span><span class="n">RawDataBIDS</span><span class="o">/</span><span class="n">NYU</span> \
+  <span class="o">/</span><span class="n">outputs</span> <span class="n">participant</span> \
+  <span class="o">--</span><span class="n">pipeline_file</span> <span class="n">configs</span><span class="o">/</span><span class="n">BasicAnatomical</span><span class="o">+</span><span class="n">Registration</span><span class="o">+</span><span class="n">Functional</span><span class="o">.</span><span class="n">yml</span> \
+  <span class="o">--</span><span class="n">participant_ndx</span> <span class="mi">1</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Skipping</span> <span class="n">bids</span><span class="o">-</span><span class="n">validator</span> <span class="k">for</span> <span class="n">S3</span> <span class="n">datasets</span><span class="o">...</span>
@@ -774,20 +793,20 @@ configuration.</p>
 configuration</a> which includes derivatives.
 Before we run, we’ll create an outputs directory and a working
 directory.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p $HOME/CPAC-data/default/outputs
-mkdir -p $HOME/CPAC-data/default/tmp
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">outputs</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">tmp</span>
 </pre></div>
 </div>
 <p>Now we run on a single participant from ADHD200 to test the
 configuration.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run \
-  -B $HOME/CPAC-data/outputs:/outputs \
-  -B $HOME/CPAC-data/tmp:/scratch \
-  C-PAC_latest.sif \
-  s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS/NYU \
-  /outputs participant \
-  --pipeline_file configs/Default.yml \
-  --participant_ndx 1
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">outputs</span><span class="p">:</span><span class="o">/</span><span class="n">outputs</span> \
+  <span class="o">-</span><span class="n">B</span> <span class="o">./</span><span class="n">CPAC</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">scratch</span> \
+  <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> \
+  <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">fcp</span><span class="o">-</span><span class="n">indi</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">ADHD200</span><span class="o">/</span><span class="n">RawDataBIDS</span><span class="o">/</span><span class="n">NYU</span> \
+  <span class="o">/</span><span class="n">outputs</span> <span class="n">participant</span> \
+  <span class="o">--</span><span class="n">pipeline_file</span> <span class="n">configs</span><span class="o">/</span><span class="n">Default</span><span class="o">.</span><span class="n">yml</span> \
+  <span class="o">--</span><span class="n">participant_ndx</span> <span class="mi">1</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Skipping</span> <span class="n">bids</span><span class="o">-</span><span class="n">validator</span> <span class="k">for</span> <span class="n">S3</span> <span class="n">datasets</span><span class="o">...</span>
