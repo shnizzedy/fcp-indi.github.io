@@ -140,7 +140,7 @@ already_skullstripped: [0]
 
 
 # Choice of using AFNI-3dSkullStrip or FSL-BET or niworkflows-ants or UNet for monkey data to perform SkullStripping
-# Options: ['AFNI', 'FSL', 'niworkflows-ants', 'unet'] 
+# Options: ['AFNI', 'FSL', 'niworkflows-ants', 'unet']
 skullstrip_option: [AFNI]
 
 
@@ -423,25 +423,25 @@ PRIORS_CSF: '$FSLDIR/data/standard/tissuepriors/2mm/avg152T1_csf_bin.nii.gz'
 
 
 # Use threshold to further refine the resulting segmentation tissue masks.
-# FSL-FAST Thresholding - Use FSL FAST generated tissue class files (binary masks) to generate the resulting segmentation tissue masks. 
+# FSL-FAST Thresholding - Use FSL FAST generated tissue class files (binary masks) to generate the resulting segmentation tissue masks.
 # Customized Thresholding - Set the threshold value for tissue probability maps to generate the resulting segmentation tissue masks.
 seg_use_threshold: [FSL-FAST Thresholding]
 
-
-# Set the threshold value for refining the resulting CSF segmentation tissue mask.
-# The default value is 0.95.
-# CSF (cerebrospinal fluid) threshold.
-undefined
-
-# Set the threshold value for refining the resulting White Matter segmentation tissue mask.
-# The default value is 0.95.
-# White matter threshold.
-undefined
-
-# Set the threshold value for refining the resulting Gray Matter segmentation tissue mask.
-# The default value is 0.95.
-# Gray matter threshold.
-undefined
+#
+# # Set the threshold value for refining the resulting CSF segmentation tissue mask.
+# # The default value is 0.95.
+# # CSF (cerebrospinal fluid) threshold.
+# undefined
+#
+# # Set the threshold value for refining the resulting White Matter segmentation tissue mask.
+# # The default value is 0.95.
+# # White matter threshold.
+# undefined
+#
+# # Set the threshold value for refining the resulting Gray Matter segmentation tissue mask.
+# # The default value is 0.95.
+# # Gray matter threshold.
+# undefined
 
 
 # Erode binarized tissue mask.
@@ -456,8 +456,8 @@ seg_erosion_prop: 0.6
 
 # Generate white matter, gray matter, CSF masks based on EPI template segmentation masks, T1 template segmentation masks, or not use template-based segmentation.
 # Optimal for use with functional-only pipelines commonly used for rodent data, users can now employ a template-based tissue segmentation approach that applies inverse registration transforms to template-space tissue priors.
-# If use template based segmentation, please make sure to specify white matter, gray matter, CSF mask paths at below three configurations. 
-# These masks should be in the same space of your registration template, e.g. if you choose 'EPI_template' , below tissue masks should also be EPI template tissue masks. 
+# If use template based segmentation, please make sure to specify white matter, gray matter, CSF mask paths at below three configurations.
+# These masks should be in the same space of your registration template, e.g. if you choose 'EPI_template' , below tissue masks should also be EPI template tissue masks.
 # Options: ['EPI_template', 'T1_template', 'None']
 template_based_segmentation: [EPI_template]
 
@@ -554,14 +554,14 @@ fmap_distcorr_skullstrip: [BET]
 
 
 # Set the threshold value for the skull-stripping of the magnitude file (when using BET). Depending on the data, a tighter extraction may be necessary in order to prevent noisy voxels from interfering with preparing the field map.
-# The default value is 0.5. 
+# The default value is 0.5.
 fmap_distcorr_frac: [0.5]
 
-
-
-# Set the threshold value for the skull-stripping of the magnitude file (when using AFNI). Depending on the data, a tighter extraction may be necessary in order to prevent noisy voxels from interfering with preparing the field map.
-# The default value is 0.6.
-undefined
+# 
+#
+# # Set the threshold value for the skull-stripping of the magnitude file (when using AFNI). Depending on the data, a tighter extraction may be necessary in order to prevent noisy voxels from interfering with preparing the field map.
+# # The default value is 0.6.
+# undefined
 
 
 # Set the Delta-TE value, used for preparing field map, time delay between the first and second echo images. Default value is 2.46 ms.
@@ -618,7 +618,7 @@ func_reg_input_volume: 0
 
 
 
-# Choose which tool to be used in functional masking - AFNI (3dAutoMask), FSL (BET),  FSL_AFNI (BET+3dAutoMask), or refine functional mask by registering anatomical mask to functional space. 
+# Choose which tool to be used in functional masking - AFNI (3dAutoMask), FSL (BET),  FSL_AFNI (BET+3dAutoMask), or refine functional mask by registering anatomical mask to functional space.
 # Options: ['AFNI', 'FSL', 'FSL_AFNI', 'Anatomical_Refined']
 functionalMasking: [AFNI]
 
@@ -1011,4 +1011,3 @@ peer_scrub: false
 
 # Motion scrubbing threshold (PyPEER only)
 peer_scrub_thresh: 0.2
-
