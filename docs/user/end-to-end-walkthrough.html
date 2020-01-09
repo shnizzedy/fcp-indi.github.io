@@ -63,16 +63,26 @@ the actual outputs of the code in those cells.</p>
 <div class="section" id="contents">
 <h3>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li><a class="reference external" href="#Configuration">Configuration</a></li>
-<li><a class="reference external" href="#General-configuration">General configuration</a></li>
-<li><a class="reference external" href="#Anatomical-configuration">Anatomical configuration</a></li>
-<li><a class="reference external" href="#Functional-configuration">Functional configuration</a></li>
-<li><a class="reference external" href="#Derivatives-configuration">Derivatives configuration</a></li>
-<li><a class="reference external" href="#Local-requirements">Local requirements</a></li>
-<li><a class="reference external" href="#Software-and-environment-requirements">Software and environment
+<li><a class="reference external" href="#configuration">Configuration</a><ol class="arabic">
+<li><a class="reference external" href="#general-configuration">General configuration</a></li>
+<li><a class="reference external" href="#anatomical-configuration">Anatomical configuration</a></li>
+<li><a class="reference external" href="#functional-configuration">Functional configuration</a></li>
+<li><a class="reference external" href="#derivatives-configuration">Derivatives configuration</a></li>
+</ol>
+</li>
+<li><a class="reference external" href="#local-requirements">Local requirements</a><ol class="arabic">
+<li><a class="reference external" href="#software-and-environment-requirements">Software and environment
 requirements</a></li>
-<li><a class="reference external" href="#Data-requirements">Data requirements</a></li>
-<li><a class="reference external" href="#Running-C-PAC">Running C-PAC</a></li>
+<li><a class="reference external" href="#data-requirements">Data requirements</a></li>
+</ol>
+</li>
+<li><a class="reference external" href="#running-c-pac">Running C-PAC</a><ol class="arabic">
+<li><a class="reference external" href="#basic-anatomical">Basic anatomical</a></li>
+<li><a class="reference external" href="#registration">Registration</a></li>
+<li><a class="reference external" href="#functional">Functional</a></li>
+<li><a class="reference external" href="#derivatives">Derivatives</a></li>
+</ol>
+</li>
 </ol>
 </div>
 <div class="section" id="configuration">
@@ -181,10 +191,17 @@ running <code class="docutils literal notranslate"><span class="pre">singularity
 </div>
 <div class="section" id="running-c-pac">
 <h3>Running C-PAC<a class="headerlink" href="#running-c-pac" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-anatomical">
+<h4>Basic anatomical<a class="headerlink" href="#basic-anatomical" title="Permalink to this headline">¶</a></h4>
+<p>First, we’ll run our Singularity container on our <a class="reference external" href="configs/BasicAnatomical.yml">Basic Anatomical
+configuration</a>. Before we run, we’ll
+create an outputs directory and a working directory.</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p $HOME/CPAC-data/anat/outputs
 mkdir -p $HOME/CPAC-data/anat/tmp
 </pre></div>
 </div>
+<p>Now we run on a single participant from ADHD200 to test the
+configuration.</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run \
   -B $HOME/CPAC-data/anat/outputs:/outputs \
   -B $HOME/CPAC-data/anat/tmp:/scratch \
@@ -384,10 +401,19 @@ mkdir -p $HOME/CPAC-data/anat/tmp
         <span class="n">System</span> <span class="n">time</span> <span class="n">of</span> <span class="n">completion</span><span class="p">:</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">09</span> <span class="mi">15</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">12</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="registration">
+<h4>Registration<a class="headerlink" href="#registration" title="Permalink to this headline">¶</a></h4>
+<p>Next, we’ll run our Singularity container on our <a class="reference external" href="configs/BasicAnatomical+Registration.yml">Basic Anatomical +
+Registration
+configuration</a>. Before we
+run, we’ll create an outputs directory and a working directory.</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p $HOME/CPAC-data/reg/outputs
 mkdir -p $HOME/CPAC-data/reg/tmp
 </pre></div>
 </div>
+<p>Now we run on a single participant from ADHD200 to test the
+configuration.</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run \
   -B $HOME/CPAC-data/reg/outputs:/outputs \
   -B $HOME/CPAC-data/reg/tmp:/scratch \
@@ -665,10 +691,19 @@ mkdir -p $HOME/CPAC-data/reg/tmp
         <span class="n">System</span> <span class="n">time</span> <span class="n">of</span> <span class="n">completion</span><span class="p">:</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">09</span> <span class="mi">15</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">31</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="functional">
+<h4>Functional<a class="headerlink" href="#functional" title="Permalink to this headline">¶</a></h4>
+<p>Next, we’ll run our Singularity container on our <a class="reference external" href="configs/BasicAnatomical+Registration+Functional.yml">Functional
+configuration</a>.
+Before we run, we’ll create an outputs directory and a working
+directory.</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p $HOME/CPAC-data/func/outputs
 mkdir -p $HOME/CPAC-data/func/tmp
 </pre></div>
 </div>
+<p>Now we run on a single participant from ADHD200 to test the
+configuration.</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run \
   -B $HOME/CPAC-data/func/outputs:/outputs \
   -B $HOME/CPAC-data/func/tmp:/scratch \
@@ -732,12 +767,19 @@ mkdir -p $HOME/CPAC-data/func/tmp
 <span class="ne">Exception</span><span class="p">:</span> <span class="n">Key</span> <span class="n">anatomical_csf_mask</span> <span class="n">already</span> <span class="n">exists</span> <span class="ow">in</span> <span class="n">resource</span> <span class="n">pool</span><span class="p">,</span> <span class="n">replacing</span> <span class="k">with</span> <span class="p">(</span><span class="n">resting_preproc_sub</span><span class="o">-</span><span class="mi">0010090</span><span class="n">_ses</span><span class="o">-</span><span class="mf">1.</span><span class="n">seg_preproc_epi_template_0</span><span class="p">,</span> <span class="s1">&#39;outputspec.csf_mask&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="p">::</span> <span class="n">bash</span>
+</div>
+<div class="section" id="derivatives">
+<h4>Derivatives<a class="headerlink" href="#derivatives" title="Permalink to this headline">¶</a></h4>
+<p>Finally, we’ll run our Singularity container on our <a class="reference external" href="configs/Default.yml">defualt
+configuration</a> which includes derivatives.
+Before we run, we’ll create an outputs directory and a working
+directory.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p $HOME/CPAC-data/default/outputs
+mkdir -p $HOME/CPAC-data/default/tmp
 </pre></div>
 </div>
-<blockquote>
-<div>mkdir -p $HOME/CPAC-data/default/outputs
-mkdir -p $HOME/CPAC-data/default/tmp</div></blockquote>
+<p>Now we run on a single participant from ADHD200 to test the
+configuration.</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run \
   -B $HOME/CPAC-data/outputs:/outputs \
   -B $HOME/CPAC-data/tmp:/scratch \
@@ -800,6 +842,7 @@ mkdir -p $HOME/CPAC-data/default/tmp</div></blockquote>
     <span class="s1">&#39;replacing with </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 <span class="ne">Exception</span><span class="p">:</span> <span class="n">Key</span> <span class="n">anatomical_csf_mask</span> <span class="n">already</span> <span class="n">exists</span> <span class="ow">in</span> <span class="n">resource</span> <span class="n">pool</span><span class="p">,</span> <span class="n">replacing</span> <span class="k">with</span> <span class="p">(</span><span class="n">resting_preproc_sub</span><span class="o">-</span><span class="mi">0010090</span><span class="n">_ses</span><span class="o">-</span><span class="mf">1.</span><span class="n">seg_preproc_epi_template_0</span><span class="p">,</span> <span class="s1">&#39;outputspec.csf_mask&#39;</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
