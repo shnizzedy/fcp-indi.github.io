@@ -14,11 +14,7 @@ jobs:
           command: |
             apt-get update && apt-get -y install rsync python-dev graphviz libgraphviz-dev pkg-config pandoc
             pip install --user -r https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/requirements.txt
-            pip install --user git+https://github.com/FCP-INDI/C-PAC.git
-            pip install --user sphinx
-            pip install --user numpydoc
-            pip install --user jupyter
-            pip install --user bash_kernel
+            pip install --user -r requirements.txt
       - run:
           name: Generate RST from latest notebook
           command: |
@@ -37,6 +33,7 @@ jobs:
       - run:
           name: Deploy docs
           command: |
+            export GITMESSAGE=`git log -1 --oneline --pretty=%s`
             git clone --single-branch --branch master git@github.com:${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git /tmp/repo
             rsync -rtv ./ /tmp/repo/ --exclude '.git'
             cd /tmp/repo
@@ -46,6 +43,6 @@ jobs:
             git rm -fr docs/developer/.doctrees || rm -f docs/developer/.doctrees || true
             git rm -fr docs/user/_sources || rm -f docs/user/_sources || true
             git rm -fr docs/user/.doctrees || rm -f docs/user/.doctrees || true
-            git commit -m "updates"
+            git commit -m "${GITMESSAGE}" --allow-empty
             git push -f origin master
             cd -
