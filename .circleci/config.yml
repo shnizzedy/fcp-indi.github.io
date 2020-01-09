@@ -17,6 +17,13 @@ jobs:
             pip install --user git+https://github.com/FCP-INDI/C-PAC.git
             pip install --user sphinx
             pip install --user numpydoc
+            pip install --user jupyterlab
+            pip install --user bash_kernel
+      - run:
+          name: Generate RST from latest notebook
+          command: |
+            jupyter nbconvert --to rst docs/user/_sources/end-to-end-walkthrough.ipynb
+            mv docs/user/_sources/end-to-end-walkthrough.rst docs/user/_sources/end-to-end-walkthrough.txt
       - run:
           name: Build docs
           command: |
