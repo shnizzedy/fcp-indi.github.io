@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Generate RST from latest notebook
           command: |
-            /usr/local/bin/jupyter nbconvert --to rst docs/user/_sources/end-to-end-walkthrough.ipynb
+            python -m nbconvert --to rst docs/user/_sources/end-to-end-walkthrough.ipynb
             mv docs/user/_sources/end-to-end-walkthrough.rst docs/user/_sources/end-to-end-walkthrough.txt
       - run:
           name: Build docs
