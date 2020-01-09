@@ -12,12 +12,11 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get update && apt-get -y install rsync python-dev graphviz libgraphviz-dev pkg-config
+            apt-get update && apt-get -y install rsync python-dev graphviz libgraphviz-dev pkg-config pandoc
             pip install --user -r https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/requirements.txt
             pip install --user git+https://github.com/FCP-INDI/C-PAC.git
             pip install --user sphinx
             pip install --user numpydoc
-            pip install --user pandoc
             pip install --user jupyter
             pip install --user bash_kernel
       - run:
