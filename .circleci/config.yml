@@ -12,11 +12,14 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get update && apt-get -y install rsync python-dev graphviz libgraphviz-dev pkg-config
+            apt-get update && apt-get -y install rsync python-dev graphviz libgraphviz-dev pkg-config pandoc
             pip install --user -r https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/requirements.txt
-            pip install --user git+https://github.com/FCP-INDI/C-PAC.git
-            pip install --user sphinx
-            pip install --user numpydoc
+            pip install --user -r requirements.txt
+      - run:
+          name: Generate RST from latest notebook
+          command: |
+            python -m nbconvert --to rst docs/user/_sources/end-to-end-walkthrough.ipynb
+            mv docs/user/_sources/end-to-end-walkthrough.rst docs/user/_sources/end-to-end-walkthrough.txt
       - run:
           name: Build docs
           command: |
