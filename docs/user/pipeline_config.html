@@ -46,7 +46,8 @@
 <h1>Setting Up A Pipeline Configuration<a class="headerlink" href="#setting-up-a-pipeline-configuration" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>There are two ways of setting up a pipeline configuration for C-PAC:</p>
+<p>This section explains how to create a new pipeline or edit an existing one. If you wish to use one of the pre-configured pipelines that come packaged with C-PAC, you can view the current available library of <a class="reference internal" href="preconfig.html"><span class="doc">pipelines here</span></a>.</p>
+<p>There are two ways of setting up or editing a pipeline configuration for C-PAC:</p>
 <ul class="simple">
 <li>Using the pipeline configuration interface in the C-PAC GUI</li>
 <li>Using a text editor (useful for remote servers where using the C-PAC GUI is not possible or impractical)</li>
@@ -56,19 +57,7 @@
 <ul class="simple">
 <li>Workflow - A workflow accomplishes a particular processing task (e.g. functional preprocessing, scrubbing, nuisance correction). Each workflow can be turned on or off in the pipeline configuration.  Sometimes a workflow can be set to both on and off, allowing for pipelines to branch.</li>
 <li>Pipeline - A pipeline is a combination of workflows.</li>
-<li><dl class="first docutils">
-<dt>Strategy -  A strategy is a set of preprocessing options. Specifically, a strategy is defined by nuisance corrections and scrubbing settings. Strategies can branch depending on which of these workflows are turned on or off and how they are configured.  Their names are constructed by concatenating the following parameters:</dt>
-<dd><ul class="first last">
-<li>Number of principle components calculated by CompCor (if enabled)</li>
-<li>Nuisance corrections selected.</li>
-<li>Scrubbing threshold (if enabled)</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<p>For instance, <code class="file docutils literal notranslate"><span class="pre">_compcor_ncomponents_5_linear1.motion1.compcor1.SCRUB_0.2</span></code> is a strategy with 5 principle components for compcor, linear drift, motion, and compcor corrections applied, and a scrubbing threshold of 0.2 mm.</p>
-<ul class="simple">
+<li>Strategy -  A strategy is a set of preprocessing options. Specifically, a strategy is defined by nuisance corrections and scrubbing settings. Strategies can branch depending on which of these workflows are turned on or off and how they are configured.</li>
 <li>Derivative - Derivatives are the results of processing a participant’s raw data (i.e., connectivity measures).</li>
 </ul>
 </div>

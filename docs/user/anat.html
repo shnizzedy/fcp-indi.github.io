@@ -120,19 +120,19 @@
 <img alt="_images/bet_gui.png" src="_images/bet_gui.png" />
 </div>
 <ol class="arabic simple">
-<li><strong>Frac - [0.5]:</strong> Set the threshold value controlling the brain vs non-brain voxels. Default is 0.5</li>
-<li><strong>Mask - [Off, On]:</strong> Mask created along with skull stripping. Default option is Off.</li>
-<li><strong>Mesh - [Off, On]:</strong> Mesh created along with skull stripping. Default is Off.</li>
-<li><strong>Outline - [Off, On]:</strong> Create a surface outline image, Default is Off.</li>
-<li><strong>Padding - [Off, On]:</strong> Add padding to the end of the image, improving BET. Mutually exclusive functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+<li><strong>Threshold - [0.5]:</strong> Set the threshold value controlling the brain vs non-brain voxels. Default is 0.5</li>
 <li><strong>Radius - [0]:</strong> Integer value of head radius. Default is 0.</li>
-<li><strong>Reduce bias - [Off, On]:</strong> Reduce bias and cleanup neck. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
-<li><strong>Remove_bias - [Off,On]:</strong> Eyes and optic nerve cleanup. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
-<li><strong>Robust - [Off, On]:</strong> Robust brain center estimation. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+<li><strong>Vertical gradient - [Off,On]:</strong> Vertical gradient un fractional intensity threshold. Within the range of (-1,1).</li>
+<li><strong>Apply threshold - [Off,On]:</strong> Apply thresholding to segmented brain image and mask. Default is Off.</li>
+<li><strong>Mask - [Off, On]:</strong> Mask created along with skull stripping. Default option is On.</li>
+<li><strong>Mesh - [Off, On]:</strong> Mesh created along with skull stripping. Default is Off.</li>
 <li><strong>Skull - [Off,On]:</strong> Create a Skull Image. Default is Off.</li>
 <li><strong>Surfaces - [Off, On]:</strong> Get additional skull and scalp surfaces by running bet2 and betsurf. This is mutually exclusive with reduce bias, robust, padding, remove_eyes.</li>
-<li><strong>Threshold - [Off,On]:</strong> Apply thresholding to segmented brain image and mask. Default is Off.</li>
-<li><strong>Vertical gradient - [Off,On]:</strong> Vertical gradient un fractional intensity threshold. Within the range of (-1,1).</li>
+<li><strong>Surfaces outline - [Off, On]:</strong> Create a surface outline image, Default is Off.</li>
+<li><strong>Padding - [Off, On]:</strong> Add padding to the end of the image, improving BET. Mutually exclusive functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+<li><strong>Reduce bias - [Off, On]:</strong> Reduce bias and cleanup neck. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+<li><strong>Remove eyes - [Off,On]:</strong> Eyes and optic nerve cleanup. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+<li><strong>Robust brain center - [Off, On]:</strong> Robust brain center estimation. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
 </ol>
 </div>
 <div class="section" id="configuring-niworkflows-ants-options">

@@ -70,7 +70,7 @@
 <span class="go">        fcpindi/c-pac:latest s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant</span>
 </pre></div>
 </div>
-<p>To run the C-PAC Docker container with a pipeline configuration file other than the container’s default pipeline, assuming the configuration file is in the <code class="docutils literal notranslate"><span class="pre">/Users/You/Documents</span></code> directory:</p>
+<p>To run the C-PAC Docker container with a pipeline configuration file other than the container’s default pipeline (for example, a pipeline configuration YAML file created in the <a class="reference external" href="https://fcp-indi.github.io/C-PAC_GUI/versions/latest/browser/#/">C-PAC pipeline builder GUI</a>), assuming the configuration file is in the <code class="docutils literal notranslate"><span class="pre">/Users/You/Documents</span></code> directory:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run -i --rm \</span>
 <span class="go">        -v /Users/You/local_bids_data:/bids_dataset \</span>
 <span class="go">        -v /Users/You/some_folder:/outputs \</span>
@@ -81,6 +81,17 @@
 </pre></div>
 </div>
 <p>In this case, we need to map the directory containing the pipeline configuration file <code class="docutils literal notranslate"><span class="pre">/Users/You/Documents</span></code> to a Docker image virtual directory <code class="docutils literal notranslate"><span class="pre">/configs</span></code>. Note we are using this <code class="docutils literal notranslate"><span class="pre">/configs</span></code> directory in the <code class="docutils literal notranslate"><span class="pre">--pipeline_file</span></code> input flag. In addition, if there are any ROIs, masks, or input files listed in your pipeline configuration file, the directory these are in must be mapped as well- assuming <code class="docutils literal notranslate"><span class="pre">/Users/You/resources</span></code> is your directory of ROI and/or mask files, we map it with <code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">/Users/You/resources:/resources</span></code>. In the pipeline configuration file you are providing, these ROI and mask files must be listed as <code class="docutils literal notranslate"><span class="pre">/resources/ROI.nii.gz</span></code> (etc.) because we have mapped <code class="docutils literal notranslate"><span class="pre">/Users/You/resources</span></code> to <code class="docutils literal notranslate"><span class="pre">/resources</span></code>.</p>
+<p>In addition, several pre-configured pipelines come packaged with C-PAC and can be easily invoked using the <code class="docutils literal notranslate"><span class="pre">--preconfig</span></code> flag:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run -i --rm \</span>
+<span class="go">        -v /Users/You/local_bids_data:/bids_dataset \</span>
+<span class="go">        -v /Users/You/some_folder:/outputs \</span>
+<span class="go">        -v /tmp:/scratch \</span>
+<span class="go">        -v /Users/You/Documents:/configs \</span>
+<span class="go">        -v /Users/You/resources:/resources \</span>
+<span class="go">        fcpindi/c-pac:latest /bids_dataset /outputs participant --preconfig anat-only</span>
+</pre></div>
+</div>
+<p>A full list of pre-configured pipelines and their details are <a class="reference internal" href="preconfig.html"><span class="doc">available here</span></a>.</p>
 <p>Finally, to run the Docker container with a specific data configuration file (instead of providing a BIDS data directory):</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run -i --rm \</span>
 <span class="go">        -v /Users/You/any_directory:/bids_dataset \</span>
@@ -137,6 +148,8 @@
 <span class="go">                        support for legacy data organization and cloud based</span>
 <span class="go">                        storage. A bids_dir must still be specified when using</span>
 <span class="go">                        this option, but its value will be ignored.</span>
+<span class="go">  --preconfig PIPELINE_LABEL</span>
+<span class="go">                        Name of the pre-configured pipeline to run.</span>
 <span class="go">  --aws_input_creds AWS_INPUT_CREDS</span>
 <span class="go">                        Credentials for reading from S3. If not provided and</span>
 <span class="go">                        s3 paths are specified in the data config we will try</span>

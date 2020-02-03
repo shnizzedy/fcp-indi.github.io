@@ -52,7 +52,8 @@
 </div>
 <ol class="arabic simple">
 <li><strong>ANT’s N4BiasFieldCorrection - [On, Off]:</strong> Choose On to perform N4 Bias Field Correction on mean EPI image, may help enhance coregistration quality. Default is Off.</li>
-<li><strong>Motion Statistics before Slice Timing Correction - [On, Off]:</strong> Choose On to calculate motion parameter estimation before slice timing correction, with actual motion correction still occurring after slice timing correction. The motion parameters go on to be used in nuisance regression and statistics reporting. Default is Off.</li>
+<li><strong>Motion Statistics before Slice Timing Correction - [On, Off, On/Off]:</strong> Choose On to calculate motion parameter estimation before slice timing correction, with actual motion correction still occurring after slice timing correction. The motion parameters go on to be used in nuisance regression and statistics reporting. Default is Off.</li>
+<li><strong>Despike - [On, Off]:</strong> Choose On to perform AFNI 3dDespike. Default is Off.</li>
 <li><strong>Scaling - [On, Off]:</strong> Choose On to scale the brain to a different size, especially optimal for rodent data.</li>
 <li><strong>Scaling Factor - [integer]:</strong>  The scaling factor of the brain. Default is 10.</li>
 </ol>
@@ -263,6 +264,29 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><strong>Functional Volume to Use as Input (Selected Functional Volume only) - [integer]:</strong> Only for when ‘Use as Functional-to-Anatomical Registration Input’ is set to ‘Selected Functional Volume’. Input the index of which volume from the functional 4D timeseries input file you wish to use as the input for functional-to-anatomical registration.</li>
 <li><strong>Functional Masking - [AFNI, FSL, FSL_AFNI, Anatomical_Refined]:</strong> Choose which tool to be used in functional masking - AFNI (3dAutoMask), FSL (BET), FSL_AFNI (BET+3dAutoMask) or Anatomical_Refined (generate functional mask by registering anatomical mask to functional space). Default is AFNI.</li>
 </ol>
+<div class="section" id="configuring-fsl-bet-options">
+<h3>Configuring FSL BET options:<a class="headerlink" href="#configuring-fsl-bet-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note:</strong> These options are pre-set for FSL BET’s default values. These do not need to be modified unless you are looking to optimize the results of skull-stripping for your particular dataset.</p>
+<div class="figure">
+<img alt="_images/func_masking_fsl.png" src="_images/func_masking_fsl.png" />
+</div>
+<ol class="arabic simple">
+<li><strong>Threshold - [0.3]:</strong> Set the threshold value controlling the brain vs non-brain voxels. Default is 0.3</li>
+<li><strong>Radius - [0]:</strong> Integer value of head radius. Default is 0.</li>
+<li><strong>Vertical gradient - [0]:</strong> Vertical gradient un fractional intensity threshold. Within the range of (-1,1).</li>
+<li><strong>Func_mean - [Off,On]:</strong> Apply to 4D FMRI data, if bold_bet_functional_mean_boolean : Off. Mutually exclusive with functional,reduce_bias,robust,padding,remove_eyes,surfaces. Default is Off.</li>
+<li><strong>Apply Threshold - [Off,On]:</strong> Apply thresholding to segmented brain image and mask. Default is Off.</li>
+<li><strong>Mask - [Off, On]:</strong> Mask created along with skull stripping. Default option is Off.</li>
+<li><strong>Mesh - [Off, On]:</strong> Mesh created along with skull stripping. Default is Off.</li>
+<li><strong>Skull - [Off,On]:</strong> Create a Skull Image. Default is Off.</li>
+<li><strong>Surfaces - [Off, On]:</strong> Get additional skull and scalp surfaces by running bet2 and betsurf. This is mutually exclusive with reduce bias, robust, padding, remove_eyes.</li>
+<li><strong>Surfaces Outline - [Off, On]:</strong> Create a surface outline image, Default is Off.</li>
+<li><strong>Padding - [Off, On]:</strong> Add padding to the end of the image, improving BET. Mutually exclusive functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+<li><strong>Reduce bias - [Off, On]:</strong> Reduce bias and cleanup neck. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+<li><strong>Remove eyes - [Off,On]:</strong> Eyes and optic nerve cleanup. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+<li><strong>Robust brain center - [Off, On]:</strong> Robust brain center estimation. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
+</ol>
+</div>
 <div class="section" id="id2">
 <h3>Configuration Without the GUI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config.html"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run functional to anatomical registration:</p>
