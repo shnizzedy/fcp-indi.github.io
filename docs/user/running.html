@@ -16,24 +16,24 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Group-Level Analysis" href="group_analysis.html" />
-    <link rel="prev" title="PyPEER Integration" href="pypeer.html" /> 
+    <link rel="index" title="Index" href="genindex" />
+    <link rel="search" title="Search" href="search" />
+    <link rel="next" title="Group-Level Analysis" href="group_analysis" />
+    <link rel="prev" title="PyPEER Integration" href="pypeer" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
+          <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="group_analysis.html" title="Group-Level Analysis"
+          <a href="group_analysis" title="Group-Level Analysis"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="pypeer.html" title="PyPEER Integration"
+          <a href="pypeer" title="PyPEER Integration"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -234,7 +234,7 @@
 <li><strong>Elastic Block Storage (EBS)</strong> - A form of persistent storage offered by Amazon for use with instances.  When you have terminated an instance, items stored in an EBS volume can be accessed by any future instances that you start up.</li>
 <li><strong>EC2 Instance Store</strong> - A form of temporary storage that comes included with some instance types.  Instance store volumes must be added manually before launching an instance, and all files stored on them will be lost when the instance is terminated.  The instance store is typically mounted at <code class="docutils literal notranslate"><span class="pre">/mnt</span></code>.</li>
 </ul>
-<p>Lastly, it would be important to review any terms related to <a class="reference internal" href="compute_config.html"><span class="doc">the Sun Grid Engine job scheduler</span></a>.</p>
+<p>Lastly, it would be important to review any terms related to <a class="reference internal" href="compute_config"><span class="doc">the Sun Grid Engine job scheduler</span></a>.</p>
 <div class="section" id="creating-aws-access-and-network-keys">
 <h3>Creating AWS Access and Network Keys<a class="headerlink" href="#creating-aws-access-and-network-keys" title="Permalink to this headline">¶</a></h3>
 <p>Before you can create a single C-PAC machine or a C-PAC HPC cluster, you must first generate credentials that will allow you to log into any AWS instance that you create.  The following steps will walk you through the process of creating all the necessary credentials and encryption keys that you will need.</p>
@@ -455,7 +455,7 @@
 </pre></div>
 </div>
 <p>The <cite>job-ID</cite> is a number assigned to your job when it is submitted to the scheduler.  The <cite>state</cite> of the job can be represented by one of several values: <cite>r</cite> means that the job is running, <cite>qw</cite> means that the job is queued and waiting, and <cite>E</cite> means that an error has occurred. The <cite>queue</cite> column indicates on which nodes of your cluster the C-PAC job is being executed.</p>
-<p>If an error has occurred on any of the nodes while your pipeline executes, you should check the <cite>cluster_temp_files</cite> directory that was created in the directory from which you ran C-PAC.  This will contain copies of the job submission scripts that C-PAC generated to start your job.  It will also contain files containing the standard out and error messages for a given job.  You should check these first to determine what may have caused the error.  If these files do not help you determine what may have caused the error, feel free to ask for <a class="reference internal" href="help.html"><span class="doc">help</span></a> on the C-PAC forum.</p>
+<p>If an error has occurred on any of the nodes while your pipeline executes, you should check the <cite>cluster_temp_files</cite> directory that was created in the directory from which you ran C-PAC.  This will contain copies of the job submission scripts that C-PAC generated to start your job.  It will also contain files containing the standard out and error messages for a given job.  You should check these first to determine what may have caused the error.  If these files do not help you determine what may have caused the error, feel free to ask for <a class="reference internal" href="help"><span class="doc">help</span></a> on the C-PAC forum.</p>
 </div>
 <div class="section" id="terminating-a-starcluster-instance">
 <h4>Terminating a Starcluster Instance<a class="headerlink" href="#terminating-a-starcluster-instance" title="Permalink to this headline">¶</a></h4>
@@ -490,18 +490,17 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="index.html">
+            <p class="logo"><a href="index">
               <img class="logo" src="_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table of Contents</a></h3>
+<h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="end-to-end-walkthrough.html">1. End-to-end walkthrough</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quick.html">2. C-PAC Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_list_config.html">3. Specify Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline_config.html">4. Select Your Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">5. Pre-Process Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="derivatives.html">6. Compute Derivatives</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">7. All Run Options</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_config">3. Select Your Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives">5. Compute Derivatives</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. All Run Options</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#with-docker">With Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-on-singularity">Run On Singularity</a></li>
@@ -509,17 +508,17 @@
 <li class="toctree-l2"><a class="reference internal" href="#with-openneuro">With OpenNeuro</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="group_analysis.html">8. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output_dir.html">9. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help.html">10. Troubleshoot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes.html">11. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix.html">12. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_analysis">7. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_dir">8. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help">9. Troubleshoot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
+    <form class="search" action="search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -536,15 +535,15 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
+          <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="group_analysis.html" title="Group-Level Analysis"
+          <a href="group_analysis" title="Group-Level Analysis"
              >next</a> |</li>
         <li class="right" >
-          <a href="pypeer.html" title="PyPEER Integration"
+          <a href="pypeer" title="PyPEER Integration"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
       </ul>
     </div>
 

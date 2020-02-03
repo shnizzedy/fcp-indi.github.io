@@ -16,24 +16,24 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Pre-Processing Steps" href="preprocessing.html" />
-    <link rel="prev" title="Setting Up A Data Configuration File (Participant/Subject List)" href="subject_list_config.html" /> 
+    <link rel="index" title="Index" href="genindex" />
+    <link rel="search" title="Search" href="search" />
+    <link rel="next" title="Pre-Processing Steps" href="preprocessing" />
+    <link rel="prev" title="Setting Up A Data Configuration File (Participant/Subject List)" href="subject_list_config" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
+          <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="preprocessing.html" title="Pre-Processing Steps"
+          <a href="preprocessing" title="Pre-Processing Steps"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="subject_list_config.html" title="Setting Up A Data Configuration File (Participant/Subject List)"
+          <a href="subject_list_config" title="Setting Up A Data Configuration File (Participant/Subject List)"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -46,7 +46,7 @@
 <h1>Setting Up A Pipeline Configuration<a class="headerlink" href="#setting-up-a-pipeline-configuration" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>This section explains how to create a new pipeline or edit an existing one. If you wish to use one of the pre-configured pipelines that come packaged with C-PAC, you can view the current available library of <a class="reference internal" href="preconfig.html"><span class="doc">pipelines here</span></a>.</p>
+<p>This section explains how to create a new pipeline or edit an existing one. If you wish to use one of the pre-configured pipelines that come packaged with C-PAC, you can view the current available library of <a class="reference internal" href="preconfig"><span class="doc">pipelines here</span></a>.</p>
 <p>There are two ways of setting up or editing a pipeline configuration for C-PAC:</p>
 <ul class="simple">
 <li>Using the pipeline configuration interface in the C-PAC GUI</li>
@@ -84,7 +84,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">run</span> <span class="o">--</span><span class="n">pipe_config</span> <span class="p">{</span><span class="n">path</span> <span class="n">to</span> <span class="n">pipeline</span> <span class="n">config</span><span class="p">}</span> <span class="p">{</span><span class="n">path</span> <span class="n">to</span> <span class="n">data</span> <span class="n">config</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>Pipeline configuration files, like the data settings and data configuration files discussed in the <a class="reference internal" href="subject_list_config.html"><span class="doc">data configuration builder section</span></a>, are stored as YAML files.  Similarly, each of the parameters used by C-PAC to assemble your pipeline can be specified as key-value pairs, so a pipeline configuration YAML would have multiple lines of the form <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> like so:</p>
+<p>Pipeline configuration files, like the data settings and data configuration files discussed in the <a class="reference internal" href="subject_list_config"><span class="doc">data configuration builder section</span></a>, are stored as YAML files.  Similarly, each of the parameters used by C-PAC to assemble your pipeline can be specified as key-value pairs, so a pipeline configuration YAML would have multiple lines of the form <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> like so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Name for this pipeline configuration - useful for identification.</span>
 <span class="n">pipelineName</span> <span class="p">:</span>  <span class="n">pipeline01</span>
 
@@ -105,7 +105,7 @@
 <span class="n">outputDirectory</span> <span class="p">:</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runs</span><span class="o">/</span><span class="n">pipeline01</span><span class="o">/</span><span class="n">output</span>
 </pre></div>
 </div>
-<p>An example of a pipeline configuration YAML file can be found <a class="reference external" href="https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/CPAC/resources/configs/pipeline_config_template.yml">here</a>.  Tables explaining the keys and their potential values can be found on the individual pages for each of the outputs C-PAC is capable of producing.  All pipeline configuration files should have the keys in the <a class="reference internal" href="output_config.html"><span class="doc">Output Settings</span></a> table defined.</p>
+<p>An example of a pipeline configuration YAML file can be found <a class="reference external" href="https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/CPAC/resources/configs/pipeline_config_template.yml">here</a>.  Tables explaining the keys and their potential values can be found on the individual pages for each of the outputs C-PAC is capable of producing.  All pipeline configuration files should have the keys in the <a class="reference internal" href="output_config"><span class="doc">Output Settings</span></a> table defined.</p>
 <div class="section" id="why-a-list">
 <h3>Why a list?<a class="headerlink" href="#why-a-list" title="Permalink to this headline">¶</a></h3>
 <p>You may notice as you learn about the settings for various outputs that many of the values for C-PAC’s configurable settings are stored in lists (i.e., multiple values are separated by commas and surrounded by square brackets).  Such lists containing 1s and 0s (for ‘True’ and ‘False’ respectively) allow you to toggle on multiple options at the same time, and branch a pipeline into two different analysis strategies. See the <a class="reference external" href="http://fcp-indi.github.io/docs/developer/workflows/cpac_pipeline.html">developer documentation</a> for more information about how lists are used in C-PAC.</p>
@@ -116,28 +116,28 @@
 <div class="section" id="data-management-and-environment-settings">
 <h3>Data Management and Environment Settings<a class="headerlink" href="#data-management-and-environment-settings" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><a class="reference internal" href="compute_config.html"><span class="doc">Computer Settings</span></a></li>
-<li><a class="reference internal" href="output_config.html"><span class="doc">Output Settings</span></a></li>
+<li><a class="reference internal" href="compute_config"><span class="doc">Computer Settings</span></a></li>
+<li><a class="reference internal" href="output_config"><span class="doc">Output Settings</span></a></li>
 </ul>
 </div>
 <div class="section" id="pre-and-post-processing">
 <h3>Pre- and post-processing<a class="headerlink" href="#pre-and-post-processing" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><a class="reference internal" href="anat.html"><span class="doc">Anatomical Preprocessing</span></a></li>
-<li><a class="reference internal" href="func.html"><span class="doc">Functional Preprocessing</span></a></li>
-<li><a class="reference internal" href="nuisance.html"><span class="doc">Nuisance Corrections</span></a></li>
-<li><a class="reference internal" href="tse.html"><span class="doc">Time Series Extraction</span></a></li>
-<li><a class="reference internal" href="after_warp.html"><span class="doc">After Warp Settings</span></a></li>
+<li><a class="reference internal" href="anat"><span class="doc">Anatomical Preprocessing</span></a></li>
+<li><a class="reference internal" href="func"><span class="doc">Functional Preprocessing</span></a></li>
+<li><a class="reference internal" href="nuisance"><span class="doc">Nuisance Corrections</span></a></li>
+<li><a class="reference internal" href="tse"><span class="doc">Time Series Extraction</span></a></li>
+<li><a class="reference internal" href="after_warp"><span class="doc">After Warp Settings</span></a></li>
 </ul>
 </div>
 <div class="section" id="derivatives">
 <h3>Derivatives<a class="headerlink" href="#derivatives" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><a class="reference internal" href="sca.html"><span class="doc">Seed-based Correlation Analysis (SCA) and Dual Regression</span></a> - Analyze the connectivity between brain regions.</li>
-<li><a class="reference internal" href="vmhc.html"><span class="doc">Voxel-mirrored Homotopic Connectivity (VMHC)</span></a> - Investigate connectivity between hemispheres.</li>
-<li><a class="reference internal" href="alff.html"><span class="doc">Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (fALFF)</span></a> - Measure the power of slow fluctuations in brain activity.</li>
-<li><a class="reference internal" href="reho.html"><span class="doc">Regional Homogeneity (ReHo)</span></a> - Measure the similarity of activity patterns across neighboring voxels.</li>
-<li><a class="reference internal" href="centrality.html"><span class="doc">Network Centrality</span></a> - Analyze the structure of functional networks.</li>
+<li><a class="reference internal" href="sca"><span class="doc">Seed-based Correlation Analysis (SCA) and Dual Regression</span></a> - Analyze the connectivity between brain regions.</li>
+<li><a class="reference internal" href="vmhc"><span class="doc">Voxel-mirrored Homotopic Connectivity (VMHC)</span></a> - Investigate connectivity between hemispheres.</li>
+<li><a class="reference internal" href="alff"><span class="doc">Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (fALFF)</span></a> - Measure the power of slow fluctuations in brain activity.</li>
+<li><a class="reference internal" href="reho"><span class="doc">Regional Homogeneity (ReHo)</span></a> - Measure the similarity of activity patterns across neighboring voxels.</li>
+<li><a class="reference internal" href="centrality"><span class="doc">Network Centrality</span></a> - Analyze the structure of functional networks.</li>
 </ul>
 </div>
 </div>
@@ -149,35 +149,34 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="index.html">
+            <p class="logo"><a href="index">
               <img class="logo" src="_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table of Contents</a></h3>
+<h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="end-to-end-walkthrough.html">1. End-to-end walkthrough</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quick.html">2. C-PAC Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_list_config.html">3. Specify Your Data</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Select Your Pipeline</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Select Your Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-the-gui">Using the GUI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-a-text-editor">Using a Text Editor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configurable-settings">Configurable Settings</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">5. Pre-Process Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="derivatives.html">6. Compute Derivatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">7. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="group_analysis.html">8. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output_dir.html">9. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help.html">10. Troubleshoot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes.html">11. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix.html">12. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives">5. Compute Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running">6. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_analysis">7. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_dir">8. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help">9. Troubleshoot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
+    <form class="search" action="search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -194,15 +193,15 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
+          <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="preprocessing.html" title="Pre-Processing Steps"
+          <a href="preprocessing" title="Pre-Processing Steps"
              >next</a> |</li>
         <li class="right" >
-          <a href="subject_list_config.html" title="Setting Up A Data Configuration File (Participant/Subject List)"
+          <a href="subject_list_config" title="Setting Up A Data Configuration File (Participant/Subject List)"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
       </ul>
     </div>
 

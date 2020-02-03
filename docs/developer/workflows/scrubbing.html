@@ -16,28 +16,28 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Group Analysis" href="group_analysis.html" />
-    <link rel="prev" title="Generate Motion and Power Statistics" href="generate_motion_statistics.html" /> 
+    <link rel="index" title="Index" href="../genindex" />
+    <link rel="search" title="Search" href="../search" />
+    <link rel="next" title="Group Analysis" href="group_analysis" />
+    <link rel="prev" title="Generate Motion and Power Statistics" href="generate_motion_statistics" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
+          <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="group_analysis.html" title="Group Analysis"
+          <a href="group_analysis" title="Group Analysis"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="generate_motion_statistics.html" title="Generate Motion and Power Statistics"
+          <a href="generate_motion_statistics" title="Generate Motion and Power Statistics"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Workflows</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index" accesskey="U">Workflows</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -50,7 +50,7 @@
 <span id="scrubbing"></span><h1>Scrubbing<a class="headerlink" href="#module-CPAC.scrubbing" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="CPAC.scrubbing.create_scrubbing_preproc">
-<code class="descclassname">CPAC.scrubbing.</code><code class="descname">create_scrubbing_preproc</code><span class="sig-paren">(</span><em>wf_name='scrubbing'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/scrubbing/scrubbing.html#create_scrubbing_preproc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.scrubbing.create_scrubbing_preproc" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.scrubbing.</code><code class="descname">create_scrubbing_preproc</code><span class="sig-paren">(</span><em>wf_name='scrubbing'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/scrubbing/scrubbing#create_scrubbing_preproc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.scrubbing.create_scrubbing_preproc" title="Permalink to this definition">¶</a></dt>
 <dd><p>This workflow essentially takes the list of offending timepoints that are to be removed
 and removes it from the motion corrected input image. Also, it removes the information
 of discarded time points from the movement parameters file obtained during motion correction.</p>
@@ -114,7 +114,7 @@ in the frames_in_1D file</p>
 
 <dl class="function">
 <dt id="CPAC.scrubbing.get_mov_parameters">
-<code class="descclassname">CPAC.scrubbing.</code><code class="descname">get_mov_parameters</code><span class="sig-paren">(</span><em>infile_a</em>, <em>infile_b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/scrubbing/scrubbing.html#get_mov_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.scrubbing.get_mov_parameters" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.scrubbing.</code><code class="descname">get_mov_parameters</code><span class="sig-paren">(</span><em>infile_a</em>, <em>infile_b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/scrubbing/scrubbing#get_mov_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.scrubbing.get_mov_parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to get the new movement parameters
 file after removing the offending time frames 
 (i.e., those exceeding FD 0.5mm/0.2mm threshold)</p>
@@ -146,7 +146,7 @@ for the valid time frames</p>
 
 <dl class="function">
 <dt id="CPAC.scrubbing.get_indx">
-<code class="descclassname">CPAC.scrubbing.</code><code class="descname">get_indx</code><span class="sig-paren">(</span><em>scrub_input</em>, <em>frames_in_1D_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/scrubbing/scrubbing.html#get_indx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.scrubbing.get_indx" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.scrubbing.</code><code class="descname">get_indx</code><span class="sig-paren">(</span><em>scrub_input</em>, <em>frames_in_1D_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/scrubbing/scrubbing#get_indx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.scrubbing.get_indx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to get the list of time 
 frames that are to be included</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -180,14 +180,14 @@ looks something like ” 4dfile.nii.gz[0,1,2,..100] “</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
+            <p class="logo"><a href="../index">
               <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="generate_motion_statistics.html"
+  <p class="topless"><a href="generate_motion_statistics"
                         title="previous chapter">Generate Motion and Power Statistics</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="group_analysis.html"
+  <p class="topless"><a href="group_analysis"
                         title="next chapter">Group Analysis</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -199,7 +199,7 @@ looks something like ” 4dfile.nii.gz[0,1,2,..100] “</p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
+    <form class="search" action="../search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -216,19 +216,19 @@ looks something like ” 4dfile.nii.gz[0,1,2,..100] “</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
+          <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="group_analysis.html" title="Group Analysis"
+          <a href="group_analysis" title="Group Analysis"
              >next</a> |</li>
         <li class="right" >
-          <a href="generate_motion_statistics.html" title="Generate Motion and Power Statistics"
+          <a href="generate_motion_statistics" title="Generate Motion and Power Statistics"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Workflows</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index" >Workflows</a> &#187;</li> 
       </ul>
     </div>
 

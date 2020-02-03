@@ -16,25 +16,25 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Functional Preprocessing" href="func.html" />
-    <link rel="prev" title="Pre-Processing Steps" href="preprocessing.html" /> 
+    <link rel="index" title="Index" href="genindex" />
+    <link rel="search" title="Search" href="search" />
+    <link rel="next" title="Functional Preprocessing" href="func" />
+    <link rel="prev" title="Pre-Processing Steps" href="preprocessing" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
+          <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="func.html" title="Functional Preprocessing"
+          <a href="func" title="Functional Preprocessing"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="preprocessing.html" title="Pre-Processing Steps"
+          <a href="preprocessing" title="Pre-Processing Steps"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="preprocessing.html" accesskey="U">Pre-Processing Steps</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="preprocessing" accesskey="U">Pre-Processing Steps</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -177,7 +177,7 @@
 </div>
 <div class="section" id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
-<p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config.html"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run anatomical preprocessing:</p>
+<p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run anatomical preprocessing:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="10%" />
@@ -295,7 +295,7 @@ fslmaths avg152T1_${tissue}.nii.gz -thr $threshold -bin avg152T1_${tissue}_2mm_b
 </div>
 <div class="section" id="id1">
 <h3>Configuration Without the GUI<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config.html"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run anatomical tissue segmentation:</p>
+<p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run anatomical tissue segmentation:</p>
 <p>The box below contains an example of what these parameters might look like when defined in the YAML:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>runSegmentationPreprocessing : [1]
 seg_use_priors: True
@@ -333,38 +333,37 @@ template_based_segmentation_CSF :  $FSLDIR/data/standard/tissuepriors/2mm/avg152
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="index.html">
+            <p class="logo"><a href="index">
               <img class="logo" src="_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
-<h3><a href="index.html">Table of Contents</a></h3>
+<h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="end-to-end-walkthrough.html">1. End-to-end walkthrough</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quick.html">2. C-PAC Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_list_config.html">3. Specify Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline_config.html">4. Select Your Pipeline</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="preprocessing.html">5. Pre-Process Your Data</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_config">3. Select Your Pipeline</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Anatomical Preprocessing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="func.html">Functional Preprocessing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nuisance.html">Nuisance Corrections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="aroma_ica.html">ICA Denoising</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tse.html">Timeseries Extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tse.html#configuring-roi-time-series-extraction">Configuring ROI Time Series Extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="after_warp.html">After Warp Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="func">Functional Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nuisance">Nuisance Corrections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aroma_ica">ICA Denoising</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tse">Timeseries Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tse#configuring-roi-time-series-extraction">Configuring ROI Time Series Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="after_warp">After Warp Settings</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="derivatives.html">6. Compute Derivatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">7. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="group_analysis.html">8. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output_dir.html">9. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help.html">10. Troubleshoot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes.html">11. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix.html">12. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives">5. Compute Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running">6. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_analysis">7. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_dir">8. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help">9. Troubleshoot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
+    <form class="search" action="search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -381,16 +380,16 @@ template_based_segmentation_CSF :  $FSLDIR/data/standard/tissuepriors/2mm/avg152
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
+          <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="func.html" title="Functional Preprocessing"
+          <a href="func" title="Functional Preprocessing"
              >next</a> |</li>
         <li class="right" >
-          <a href="preprocessing.html" title="Pre-Processing Steps"
+          <a href="preprocessing" title="Pre-Processing Steps"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="preprocessing.html" >Pre-Processing Steps</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="preprocessing" >Pre-Processing Steps</a> &#187;</li> 
       </ul>
     </div>
 

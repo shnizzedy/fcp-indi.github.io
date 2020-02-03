@@ -16,20 +16,20 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+    <link rel="index" title="Index" href="../../../genindex" />
+    <link rel="search" title="Search" href="../../../search" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
+          <a href="../../../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
+          <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -50,7 +50,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nb</span>
 
-<div class="viewcode-block" id="check_if_file_is_empty"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.check_if_file_is_empty">[docs]</a><span class="k">def</span> <span class="nf">check_if_file_is_empty</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
+<div class="viewcode-block" id="check_if_file_is_empty"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.check_if_file_is_empty">[docs]</a><span class="k">def</span> <span class="nf">check_if_file_is_empty</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Raise exception if regressor fie is empty.</span>
 
@@ -77,7 +77,7 @@
     <span class="k">return</span> <span class="n">in_file</span></div>
 
 
-<div class="viewcode-block" id="pick_wm_prob_0"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.pick_wm_prob_0">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_prob_0</span><span class="p">(</span><span class="n">probability_maps</span><span class="p">):</span>
+<div class="viewcode-block" id="pick_wm_prob_0"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.pick_wm_prob_0">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_prob_0</span><span class="p">(</span><span class="n">probability_maps</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the csf probability map from the list of segmented probability maps</span>
@@ -105,7 +105,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="pick_wm_prob_1"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.pick_wm_prob_1">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_prob_1</span><span class="p">(</span><span class="n">probability_maps</span><span class="p">):</span>
+<div class="viewcode-block" id="pick_wm_prob_1"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.pick_wm_prob_1">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_prob_1</span><span class="p">(</span><span class="n">probability_maps</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the gray matter probability map from the list of segmented probability maps</span>
@@ -133,7 +133,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="pick_wm_prob_2"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.pick_wm_prob_2">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_prob_2</span><span class="p">(</span><span class="n">probability_maps</span><span class="p">):</span>
+<div class="viewcode-block" id="pick_wm_prob_2"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.pick_wm_prob_2">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_prob_2</span><span class="p">(</span><span class="n">probability_maps</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the white matter probability map from the list of segmented probability maps</span>
@@ -161,7 +161,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="pick_wm_class_0"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.pick_wm_class_0">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_class_0</span><span class="p">(</span><span class="n">tissue_class_files</span><span class="p">):</span>
+<div class="viewcode-block" id="pick_wm_class_0"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.pick_wm_class_0">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_class_0</span><span class="p">(</span><span class="n">tissue_class_files</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the csf tissu class file from the list of segmented tissue class files</span>
@@ -189,7 +189,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="pick_wm_class_1"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.pick_wm_class_1">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_class_1</span><span class="p">(</span><span class="n">tissue_class_files</span><span class="p">):</span>
+<div class="viewcode-block" id="pick_wm_class_1"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.pick_wm_class_1">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_class_1</span><span class="p">(</span><span class="n">tissue_class_files</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the gray matter tissue class file from the list of segmented tissue class files</span>
@@ -217,7 +217,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="pick_wm_class_2"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.pick_wm_class_2">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_class_2</span><span class="p">(</span><span class="n">tissue_class_files</span><span class="p">):</span>
+<div class="viewcode-block" id="pick_wm_class_2"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.pick_wm_class_2">[docs]</a><span class="k">def</span> <span class="nf">pick_wm_class_2</span><span class="p">(</span><span class="n">tissue_class_files</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the white matter tissue class file from the list of segmented tissue class files</span>
@@ -250,7 +250,7 @@
 <span class="c1"># https://poldracklab.stanford.edu/</span>
 <span class="c1"># We are temporarily maintaining our own copy for more granular control.</span>
 
-<div class="viewcode-block" id="mask_erosion"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.mask_erosion">[docs]</a><span class="k">def</span> <span class="nf">mask_erosion</span><span class="p">(</span><span class="n">roi_mask</span><span class="p">,</span> <span class="n">skullstrip_mask</span><span class="p">,</span> <span class="n">mask_erosion_prop</span><span class="p">):</span>
+<div class="viewcode-block" id="mask_erosion"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.mask_erosion">[docs]</a><span class="k">def</span> <span class="nf">mask_erosion</span><span class="p">(</span><span class="n">roi_mask</span><span class="p">,</span> <span class="n">skullstrip_mask</span><span class="p">,</span> <span class="n">mask_erosion_prop</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns eroded segment mask and skull-stripped brain mask </span>
@@ -310,7 +310,7 @@
 <span class="c1"># https://poldracklab.stanford.edu/</span>
 <span class="c1"># We are temporarily maintaining our own copy for more granular control.</span>
 
-<div class="viewcode-block" id="erosion"><a class="viewcode-back" href="../../../workflows/seg_preproc.html#CPAC.seg_preproc.erosion">[docs]</a><span class="k">def</span> <span class="nf">erosion</span><span class="p">(</span><span class="n">roi_mask</span><span class="p">,</span> <span class="n">erosion_prop</span><span class="p">):</span>
+<div class="viewcode-block" id="erosion"><a class="viewcode-back" href="../../../workflows/seg_preproc#CPAC.seg_preproc.erosion">[docs]</a><span class="k">def</span> <span class="nf">erosion</span><span class="p">(</span><span class="n">roi_mask</span><span class="p">,</span> <span class="n">erosion_prop</span><span class="p">):</span>
 
 
     <span class="sd">&quot;&quot;&quot;</span>
@@ -355,13 +355,13 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../../../index.html">
+            <p class="logo"><a href="../../../index">
               <img class="logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
+    <form class="search" action="../../../search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -378,13 +378,13 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
+          <a href="../../../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
+          <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li> 
       </ul>
     </div>
 

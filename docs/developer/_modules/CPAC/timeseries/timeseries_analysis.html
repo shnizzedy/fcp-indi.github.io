@@ -16,20 +16,20 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+    <link rel="index" title="Index" href="../../../genindex" />
+    <link rel="search" title="Search" href="../../../search" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
+          <a href="../../../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
+          <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -46,7 +46,7 @@
 <span class="kn">from</span> <span class="nn">nipype</span> <span class="kn">import</span> <span class="n">logging</span>
 
 
-<div class="viewcode-block" id="get_voxel_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries.html#CPAC.timeseries.get_voxel_timeseries">[docs]</a><span class="k">def</span> <span class="nf">get_voxel_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;voxel_timeseries&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="get_voxel_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries#CPAC.timeseries.get_voxel_timeseries">[docs]</a><span class="k">def</span> <span class="nf">get_voxel_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;voxel_timeseries&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to extract time series for each voxel</span>
 <span class="sd">    in the data that is present in the input mask</span>
@@ -191,7 +191,7 @@
     <span class="k">return</span> <span class="n">roi_outputs</span>
 
 
-<div class="viewcode-block" id="get_roi_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries.html#CPAC.timeseries.get_roi_timeseries">[docs]</a><span class="k">def</span> <span class="nf">get_roi_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;roi_timeseries&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="get_roi_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries#CPAC.timeseries.get_roi_timeseries">[docs]</a><span class="k">def</span> <span class="nf">get_roi_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;roi_timeseries&#39;</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to extract timeseries for each node in the ROI mask.</span>
@@ -293,7 +293,7 @@
     <span class="k">return</span> <span class="n">wflow</span></div>
 
 
-<div class="viewcode-block" id="get_spatial_map_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries.html#CPAC.timeseries.get_spatial_map_timeseries">[docs]</a><span class="k">def</span> <span class="nf">get_spatial_map_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;spatial_map_timeseries&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="get_spatial_map_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries#CPAC.timeseries.get_spatial_map_timeseries">[docs]</a><span class="k">def</span> <span class="nf">get_spatial_map_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;spatial_map_timeseries&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to regress each provided spatial</span>
 <span class="sd">    map to the subjects functional 4D file in order</span>
@@ -372,7 +372,7 @@
     <span class="k">return</span> <span class="n">wflow</span></div>
 
 
-<div class="viewcode-block" id="get_vertices_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries.html#CPAC.timeseries.get_vertices_timeseries">[docs]</a><span class="k">def</span> <span class="nf">get_vertices_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;vertices_timeseries&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="get_vertices_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries#CPAC.timeseries.get_vertices_timeseries">[docs]</a><span class="k">def</span> <span class="nf">get_vertices_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;vertices_timeseries&#39;</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to get vertices time series from a FreeSurfer surface file </span>
@@ -495,7 +495,7 @@
     <span class="k">return</span> <span class="n">wflow</span>
 
 
-<div class="viewcode-block" id="gen_roi_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries.html#CPAC.timeseries.gen_roi_timeseries">[docs]</a><span class="k">def</span> <span class="nf">gen_roi_timeseries</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">output_type</span><span class="p">):</span>
+<div class="viewcode-block" id="gen_roi_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries#CPAC.timeseries.gen_roi_timeseries">[docs]</a><span class="k">def</span> <span class="nf">gen_roi_timeseries</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">output_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to extract mean of voxel across</span>
 <span class="sd">    all timepoints for each node in roi mask</span>
@@ -619,7 +619,7 @@
     <span class="k">return</span> <span class="n">out_list</span></div>
 
 
-<div class="viewcode-block" id="gen_voxel_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries.html#CPAC.timeseries.gen_voxel_timeseries">[docs]</a><span class="k">def</span> <span class="nf">gen_voxel_timeseries</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">output_type</span><span class="p">):</span>
+<div class="viewcode-block" id="gen_voxel_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries#CPAC.timeseries.gen_voxel_timeseries">[docs]</a><span class="k">def</span> <span class="nf">gen_voxel_timeseries</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">output_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to extract timeseries for each voxel</span>
 <span class="sd">    in the data that is present in the input mask</span>
@@ -715,7 +715,7 @@
     <span class="k">return</span> <span class="n">out_list</span></div>
 
 
-<div class="viewcode-block" id="gen_vertices_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries.html#CPAC.timeseries.gen_vertices_timeseries">[docs]</a><span class="k">def</span> <span class="nf">gen_vertices_timeseries</span><span class="p">(</span><span class="n">rh_surface_file</span><span class="p">,</span>
+<div class="viewcode-block" id="gen_vertices_timeseries"><a class="viewcode-back" href="../../../workflows/timeseries#CPAC.timeseries.gen_vertices_timeseries">[docs]</a><span class="k">def</span> <span class="nf">gen_vertices_timeseries</span><span class="p">(</span><span class="n">rh_surface_file</span><span class="p">,</span>
                         <span class="n">lh_surface_file</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
@@ -774,13 +774,13 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../../../index.html">
+            <p class="logo"><a href="../../../index">
               <img class="logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
+    <form class="search" action="../../../search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -797,13 +797,13 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
+          <a href="../../../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
+          <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
