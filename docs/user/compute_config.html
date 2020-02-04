@@ -40,15 +40,15 @@
 <img alt="_images/compute_gui.png" src="_images/compute_gui.png" />
 </div>
 <ol class="arabic simple">
+<li><strong>Maximum Memory Per Participant (GB) - [number]:</strong>  The maximum amount of memory each participant’s workflow can allocate. Use this to place an upper bound of memory usage. <strong>Warning: ‘Memory Per Participant’ multiplied by ‘Number of Participants to Run Simultaneously’ must not be more than the total amount of RAM. Conversely, using too little RAM can impede the speed of a pipeline run. It is recommended that you set this to a value that when multiplied by ‘Number of Participants to Run Simultaneously’ is as much RAM you can safely allocate.</strong></li>
+<li><strong>Maximum Cores Per Participant - [integer]:</strong> Number of cores (on a single machine) or slots on a node (cluster/grid) per subject. Slots are cores on a cluster/grid node. ‘Number of Cores Per Subject’ multiplied by ‘Number of Subjects to Run Simultaneously’ multiplied by ‘Number of Cores for Anatomical Registration (ANTS)’ must not be greater than the total number of cores.</li>
+<li><strong>Number of Participants to Run Simultaneously - [integer]:</strong> This number depends on computing resources.</li>
+<li><strong>Number of Cores for Anatomical Registration (ANTS) - [integer]:</strong> This number depends on computing resources.</li>
+<li><strong>FSL directory - [path]:</strong> Full path to the FSL version to be used by CPAC. If you have specified an FSL path in your .bashrc file, this path will be set automatically.</li>
 <li><strong>Run CPAC on a Cluster/Grid - [False, True]:</strong> Select False if you intend to run CPAC on a single machine. If set to True, CPAC will attempt to submit jobs through the job scheduler / resource manager selected below.</li>
-<li><strong>FSL Path - [path]:</strong> Full path to the FSL version to be used by CPAC. If you have specified an FSL path in your .bashrc file, this path will be set automatically.</li>
 <li><strong>Job Scheduler / Resource Manager - [SGE, PBS, SLURM]:</strong> Sun Grid Engine (SGE), Portable Batch System (PBS) or Slurm. Only applies if you are running on a grid or compute cluster.  See the section below entitled <cite>SGE Configuration</cite> for more information on how to set up SGE.</li>
 <li><strong>SGE Parallel Environment - [text]:</strong> SGE Parallel Environment to use when running CPAC. Only applies when you are running on a grid or compute cluster using SGE.  See the section below entitled <cite>SGE Configuration</cite> for more information on how to set up SGE.</li>
 <li><strong>SGE Queue - [text]:</strong> SGE Queue to use when running CPAC. Only applies when you are running on a grid or compute cluster using SGE.  See the section below entitled <cite>SGE Configuration</cite> for more information on how to set up SGE.</li>
-<li><strong>Memory Per Subject (GB) - [number]:</strong>  The maximum amount of memory each participant’s workflow can allocate. Use this to place an upper bound of memory usage. <strong>Warning: ‘Memory Per Participant’ multiplied by ‘Number of Participants to Run Simultaneously’ must not be more than the total amount of RAM. Conversely, using too little RAM can impede the speed of a pipeline run. It is recommended that you set this to a value that when multiplied by ‘Number of Participants to Run Simultaneously’ is as much RAM you can safely allocate.</strong></li>
-<li><strong>Number of Cores Per Subject - [integer]:</strong> Number of cores (on a single machine) or slots on a node (cluster/grid) per subject. Slots are cores on a cluster/grid node. ‘Number of Cores Per Subject’ multiplied by ‘Number of Subjects to Run Simultaneously’ multiplied by ‘Number of Cores for Anatomical Registration (ANTS)’ must not be greater than the total number of cores.</li>
-<li><strong>Number of Subjects to Run Simultaneously - [integer]:</strong> This number depends on computing resources.</li>
-<li><strong>Number of Cores for Anatomical Registration (ANTS) - [integer]:</strong> This number depends on computing resources.</li>
 </ol>
 <div class="section" id="configuration-without-the-gui">
 <h2>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h2>
@@ -226,7 +226,7 @@
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, C-PAC Team.
+        &#169; Copyright 2020, C-PAC Team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>

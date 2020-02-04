@@ -40,19 +40,19 @@
 <img alt="_images/output_gui.png" src="_images/output_gui.png" />
 </div>
 <ol class="arabic simple">
-<li><strong>Pipeline Name - [text]:</strong> Name for this pipeline configuration - useful for identification.  <em>Note that including an individual participant’s ID code in this will presently cause C-PAC to crash.</em></li>
 <li><strong>Working Directory - [path]:</strong> Directory where CPAC should store temporary and intermediate files.  <em>Path should not contain spaces.</em></li>
-<li><strong>Crash Log Directory - [path]:</strong> Directory where CPAC should write crash logs.  <em>Path should not contain spaces.</em></li>
-<li><strong>Log Directory - [path]:</strong> Directory where CPAC should place run logs.  <em>Path should not contain spaces.</em></li>
 <li><strong>Output Directory - [path]:</strong> Directory where CPAC should place processed data.  This can also be an S3 bucket path prepended with ‘s3://’.  <em>Path should not contain spaces.</em></li>
+<li><strong>Log Directory - [path]:</strong> Directory where CPAC should place run logs.  <em>Path should not contain spaces.</em></li>
+<li><strong>Crash Log Directory - [path]:</strong> Directory where CPAC should write crash logs.  <em>Path should not contain spaces.</em></li>
 <li><strong>AWS Output Bucket Credentials (optional) - [path]:</strong>  If setting the <em>Output Directory</em> to an S3  bucket, insert the path to your AWS credentials file here.,</li>
 <li><strong>S3 Encryption - [On, Off]:</strong> Enable server-side 256-AES encryption on data to the S3 bucket,</li>
 <li><strong>Write Extra Functional Outputs - [On, Off]:</strong> Include extra versions and intermediate steps of functional preprocessing in the output directory.</li>
 <li><strong>Write Debugging Outputs - [On, Off]:</strong> Include extra outputs in the output directory that may be of interest when more information about intermediate steps is needed.</li>
+<li><strong>Enable logging - [On, Off]:</strong> Whether to write log details of the pipeline. run to the logging files..</li>
+<li><strong>Remove Working Directory [On, Off]:</strong> Deletes the contents of the Working Directory after running.  This saves disk space, but any additional preprocessing or analysis will have to be completely re-run.)</li>
+<li><strong>Create organized output directory - [On, Off]:</strong> Create a simplified version of the output directory.</li>
+<li><strong>Regenerate Outputs - [On, Off]:</strong>  Uses the contents of the working directory to regenerate all outputs and their symbolic links.  Requires an intact working directory from a previous C-PAC run.</li>
 <li><strong>Enable Quality Control Interface - [On, Off]:</strong> Generate quality control pages containing preprocessing and derivative outputs.</li>
-<li><strong>Remove Working Directory [False, True]:</strong> Deletes the contents of the Working Directory after running.  This saves disk space, but any additional preprocessing or analysis will have to be completely re-run.)</li>
-<li><strong>Regenerate Outputs - [False, True]:</strong>  Uses the contents of the working directory to regenerate all outputs and their symbolic links.  Requires an intact working directory from a previous C-PAC run.</li>
-<li><strong>Create Symbolic Links - [On, Off]:</strong> Create a simplified version of the output directory.</li>
 </ol>
 <div class="section" id="configuration-without-the-gui">
 <h2>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h2>
@@ -182,7 +182,7 @@
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, C-PAC Team.
+        &#169; Copyright 2020, C-PAC Team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
