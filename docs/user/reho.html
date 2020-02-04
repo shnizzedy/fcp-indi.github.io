@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>6.2. Regional Homogeneity &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>Regional Homogeneity &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -18,8 +18,8 @@
     
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
-    <link rel="next" title="6.3. Network Centrality" href="centrality" />
-    <link rel="prev" title="6.1. Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (f/ALFF)" href="alff" /> 
+    <link rel="next" title="Network Centrality" href="centrality" />
+    <link rel="prev" title="Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (f/ALFF)" href="alff" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,10 +28,10 @@
           <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="centrality" title="6.3. Network Centrality"
+          <a href="centrality" title="Network Centrality"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="alff" title="6.1. Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (f/ALFF)"
+          <a href="alff" title="Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (f/ALFF)"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="derivatives" accesskey="U">6. Computable Derivatives</a> &#187;</li> 
@@ -44,9 +44,9 @@
           <div class="body" role="main">
             
   <div class="section" id="regional-homogeneity">
-<h1>6.2. Regional Homogeneity<a class="headerlink" href="#regional-homogeneity" title="Permalink to this headline">¶</a></h1>
+<h1>Regional Homogeneity<a class="headerlink" href="#regional-homogeneity" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction-background">
-<h2>6.2.1. Introduction &amp; Background<a class="headerlink" href="#introduction-background" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction &amp; Background<a class="headerlink" href="#introduction-background" title="Permalink to this headline">¶</a></h2>
 <p>Regional Homogeneity (ReHo) is a voxel-based measure of brain activity which evaluates the similarity or synchronization between the time series of a given voxel and its nearest neighbors (Zang et al., 2004). This measure is based on the hypothesis that intrinsic brain activity is manifested by clusters of voxels rather than single voxels. Kendall’s coefficient of concordance (KCC) (Kendall and Gibbons, 1990) is used as an index to evaluate the similarity of the time series within a cluster of a given voxel and its nearest neighbors. ReHo requires no <em>a priori</em> definition of ROIs and can provide information about the local/regional activity of regions throughout the brain.</p>
 <div class="figure">
 <img alt="_images/reho_yan_dmn.png" src="_images/reho_yan_dmn.png" />
@@ -54,7 +54,7 @@
 <p>The figure above (taken from Yan and Zang, 2010) shows the default mode network as detected by ReHo analysis (colors indicate <em>t</em> values).</p>
 </div>
 <div class="section" id="computation-and-analysis-considerations">
-<h2>6.2.2. Computation and Analysis Considerations<a class="headerlink" href="#computation-and-analysis-considerations" title="Permalink to this headline">¶</a></h2>
+<h2>Computation and Analysis Considerations<a class="headerlink" href="#computation-and-analysis-considerations" title="Permalink to this headline">¶</a></h2>
 <p>KCC is computed for every voxel in a subject, and is based on the time series of each voxel, the number of time points within a time series, and the number of voxels within a cluster (Zang et al, 2004). Depending on whether neighboring voxels are taken to include those on the side, edge, or corner of a given voxel, cluster size can be 7, 19, or 27 voxels, respectively. Values of KCC range from 0 to 1, with higher values indicating greater similarity between the activation pattern of a given voxel and that of its neighbors. Voxel-based maps are generated based on KCC values and then standardized using Z-scores in order to perform group analysis. For more detail on how CPAC handles these computations, please see the <a class="reference external" href="http://fcp-indi.github.com/docs/developer/workflows/reho.html">ReHo section of the developer documentation</a>.</p>
 <div class="figure">
 <img alt="_images/reho_voxel_schematic.png" src="_images/reho_voxel_schematic.png" />
@@ -62,12 +62,12 @@
 <p>The results of ReHo analysis have been shown to vary significantly depending on both the number of neighbors in a cluster and the amount of spatial smoothing applied to the data. For example, Zang and colleagues (2004) found more neighbors and greater smoothing to yield greater differences between conditions in a motor task.</p>
 </div>
 <div class="section" id="applications-and-recommendations">
-<h2>6.2.3. Applications and Recommendations<a class="headerlink" href="#applications-and-recommendations" title="Permalink to this headline">¶</a></h2>
+<h2>Applications and Recommendations<a class="headerlink" href="#applications-and-recommendations" title="Permalink to this headline">¶</a></h2>
 <p>ReHo as an index of ongoing activity has been widely used in the resting-state literature. ReHo in the Default Mode Network (DMN) has been observed to increase during rest (Long et al., 2008) and decrease during task engagement (Zang et al., 2004), findings that fit well with the existing literature. In healthy subjects, ReHo measures are associated with individual differences in behavioral inhibition (Tian et al., 2012) and normal aging (Wu et al., 2007). In patient populations, altered ReHo has been observed in multiple conditions, including Alzheimer’s Disease (Liu et al., 2008), ADHD (Cao et al., 2006), and schizophrenia (Liu et al., 2006).</p>
 <p>ReHo analysis can also be applied to task evoked fMRI data and is appropriate for application in block-based and slow event-related designs, but may not provide reliable results in rapid event-related studies. In such paradigms, the hemodynamic signal for a given timepoint is the result of multiple trials, and ReHo is unable to account for this overlapping of signals.</p>
 </div>
 <div class="section" id="configuring-cpac-to-run-reho">
-<h2>6.2.4. Configuring CPAC to Run ReHo<a class="headerlink" href="#configuring-cpac-to-run-reho" title="Permalink to this headline">¶</a></h2>
+<h2>Configuring CPAC to Run ReHo<a class="headerlink" href="#configuring-cpac-to-run-reho" title="Permalink to this headline">¶</a></h2>
 <div class="figure">
 <img alt="_images/reho_gui.png" src="_images/reho_gui.png" />
 </div>
@@ -76,7 +76,7 @@
 <li><strong>Voxel Cluster Size - [7,19,27]:</strong> Number of neighboring voxels used when calculating ReHo. 7 (Faces), 19 (Faces + Edges), or 27 (Faces + Edges + Corners).</li>
 </ol>
 <div class="section" id="configuration-without-the-gui">
-<h3>6.2.4.1. Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
+<h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run anatomical preprocessing:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -104,7 +104,7 @@
 </div>
 </div>
 <div class="section" id="references">
-<h2>6.2.5. References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p>Cao, Q., Zang, Y., Sun, L., Sui, M., Long, X., Zou, Q., Wang, Y., 2006. <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/16791098">Abnormal neural activity in children with attention deficit hyperactivity disorder: a resting-state functional magnetic resonance imaging study</a>. Neuroreport 17, 1033-1036.</p>
 <p>He, Y., Wang, L., Zang, Y., Tian, L., Zhang, X., Li, K., Jiang, T., 2007. <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/17254803">Regional coherence changes in the early stages of Alzheimer’s disease: a combined structural and resting-state functional MRI study</a>. Neuroimage 35, 488-500.</p>
 <p>Kendall, M.G., Gibbons, J.D., 1990. Rank Correlation Methods, 5th ed. Oxford University Press.</p>
@@ -133,12 +133,12 @@
 <li class="toctree-l1"><a class="reference internal" href="pipeline_config">4. Select Your Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing">5. Pre-Process Your Data</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="derivatives">6. Compute Derivatives</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="alff">6.1. ALFF and f/ALFF</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.2. ReHo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centrality">6.3. Network Centrality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sca">6.4. SCA/Dual Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vmhc">6.5. VMHC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pypeer">6.6. PyPEER Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alff">ALFF and f/ALFF</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ReHo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centrality">Network Centrality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sca">SCA/Dual Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vmhc">VMHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypeer">PyPEER Integration</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running">7. All Run Options</a></li>
@@ -172,10 +172,10 @@
           <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="centrality" title="6.3. Network Centrality"
+          <a href="centrality" title="Network Centrality"
              >next</a> |</li>
         <li class="right" >
-          <a href="alff" title="6.1. Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (f/ALFF)"
+          <a href="alff" title="Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (f/ALFF)"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="derivatives" >6. Computable Derivatives</a> &#187;</li> 

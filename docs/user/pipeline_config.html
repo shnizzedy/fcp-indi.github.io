@@ -45,7 +45,7 @@
   <div class="section" id="setting-up-a-pipeline-configuration">
 <h1>4. Setting Up A Pipeline Configuration<a class="headerlink" href="#setting-up-a-pipeline-configuration" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
-<h2>4.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>This section explains how to create a new pipeline or edit an existing one. If you wish to use one of the pre-configured pipelines that come packaged with C-PAC, you can view the current available library of <a class="reference internal" href="preconfig"><span class="doc">pipelines here</span></a>.</p>
 <p>There are two ways of setting up or editing a pipeline configuration for C-PAC:</p>
 <ul class="simple">
@@ -53,7 +53,7 @@
 <li>Using a text editor (useful for remote servers where using the C-PAC GUI is not possible or impractical)</li>
 </ul>
 <div class="section" id="definitions">
-<h3>4.1.1. Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h3>
+<h3>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Workflow - A workflow accomplishes a particular processing task (e.g. functional preprocessing, scrubbing, nuisance correction). Each workflow can be turned on or off in the pipeline configuration.  Sometimes a workflow can be set to both on and off, allowing for pipelines to branch.</li>
 <li>Pipeline - A pipeline is a combination of workflows.</li>
@@ -63,7 +63,7 @@
 </div>
 </div>
 <div class="section" id="using-a-text-editor">
-<h2>4.2. Using a Text Editor<a class="headerlink" href="#using-a-text-editor" title="Permalink to this headline">¶</a></h2>
+<h2>Using a Text Editor<a class="headerlink" href="#using-a-text-editor" title="Permalink to this headline">¶</a></h2>
 <p>From terminal, you can quickly generate a default pipeline configuration YAML file template in the directory you are in:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">pipe_config</span> <span class="n">new_template</span>
 </pre></div>
@@ -95,21 +95,21 @@
 </div>
 <p>An example of a pipeline configuration YAML file can be found <a class="reference external" href="https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/CPAC/resources/configs/pipeline_config_template.yml">here</a>.  Tables explaining the keys and their potential values can be found on the individual pages for each of the outputs C-PAC is capable of producing.  All pipeline configuration files should have the keys in the <a class="reference internal" href="output_config"><span class="doc">Output Settings</span></a> table defined.</p>
 <div class="section" id="why-a-list">
-<h3>4.2.1. Why a list?<a class="headerlink" href="#why-a-list" title="Permalink to this headline">¶</a></h3>
+<h3>Why a list?<a class="headerlink" href="#why-a-list" title="Permalink to this headline">¶</a></h3>
 <p>You may notice as you learn about the settings for various outputs that many of the values for C-PAC’s configurable settings are stored in lists (i.e., multiple values are separated by commas and surrounded by square brackets).  Such lists containing 1s and 0s (for ‘True’ and ‘False’ respectively) allow you to toggle on multiple options at the same time, and branch a pipeline into two different analysis strategies. See the <a class="reference external" href="http://fcp-indi.github.io/docs/developer/workflows/cpac_pipeline.html">developer documentation</a> for more information about how lists are used in C-PAC.</p>
 </div>
 </div>
 <div class="section" id="configurable-settings">
-<h2>4.3. Configurable Settings<a class="headerlink" href="#configurable-settings" title="Permalink to this headline">¶</a></h2>
+<h2>Configurable Settings<a class="headerlink" href="#configurable-settings" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="data-management-and-environment-settings">
-<h3>4.3.1. Data Management and Environment Settings<a class="headerlink" href="#data-management-and-environment-settings" title="Permalink to this headline">¶</a></h3>
+<h3>Data Management and Environment Settings<a class="headerlink" href="#data-management-and-environment-settings" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference internal" href="compute_config"><span class="doc">Computer Settings</span></a></li>
 <li><a class="reference internal" href="output_config"><span class="doc">Output Settings</span></a></li>
 </ul>
 </div>
 <div class="section" id="pre-and-post-processing">
-<h3>4.3.2. Pre- and post-processing<a class="headerlink" href="#pre-and-post-processing" title="Permalink to this headline">¶</a></h3>
+<h3>Pre- and post-processing<a class="headerlink" href="#pre-and-post-processing" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference internal" href="anat"><span class="doc">Anatomical Preprocessing</span></a></li>
 <li><a class="reference internal" href="func"><span class="doc">Functional Preprocessing</span></a></li>
@@ -119,7 +119,7 @@
 </ul>
 </div>
 <div class="section" id="derivatives">
-<h3>4.3.3. Derivatives<a class="headerlink" href="#derivatives" title="Permalink to this headline">¶</a></h3>
+<h3>Derivatives<a class="headerlink" href="#derivatives" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference internal" href="sca"><span class="doc">Seed-based Correlation Analysis (SCA) and Dual Regression</span></a> - Analyze the connectivity between brain regions.</li>
 <li><a class="reference internal" href="vmhc"><span class="doc">Voxel-mirrored Homotopic Connectivity (VMHC)</span></a> - Investigate connectivity between hemispheres.</li>
@@ -146,9 +146,9 @@
 <li class="toctree-l1"><a class="reference internal" href="quick">2. C-PAC Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_list_config">3. Specify Your Data</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">4. Select Your Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">4.1. Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-a-text-editor">4.2. Using a Text Editor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configurable-settings">4.3. Configurable Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-text-editor">Using a Text Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configurable-settings">Configurable Settings</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing">5. Pre-Process Your Data</a></li>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>6.4. Seed-based Correlation Analysis (SCA) and Dual Regression &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>Seed-based Correlation Analysis (SCA) and Dual Regression &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -18,8 +18,8 @@
     
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
-    <link rel="next" title="6.5. Voxel-Mirrored Homotopic Connectivity (VMHC)" href="vmhc" />
-    <link rel="prev" title="6.3. Network Centrality" href="centrality" /> 
+    <link rel="next" title="Voxel-Mirrored Homotopic Connectivity (VMHC)" href="vmhc" />
+    <link rel="prev" title="Network Centrality" href="centrality" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,10 +28,10 @@
           <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="vmhc" title="6.5. Voxel-Mirrored Homotopic Connectivity (VMHC)"
+          <a href="vmhc" title="Voxel-Mirrored Homotopic Connectivity (VMHC)"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="centrality" title="6.3. Network Centrality"
+          <a href="centrality" title="Network Centrality"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="derivatives" accesskey="U">6. Computable Derivatives</a> &#187;</li> 
@@ -44,17 +44,17 @@
           <div class="body" role="main">
             
   <div class="section" id="seed-based-correlation-analysis-sca-and-dual-regression">
-<h1>6.4. Seed-based Correlation Analysis (SCA) and Dual Regression<a class="headerlink" href="#seed-based-correlation-analysis-sca-and-dual-regression" title="Permalink to this headline">¶</a></h1>
+<h1>Seed-based Correlation Analysis (SCA) and Dual Regression<a class="headerlink" href="#seed-based-correlation-analysis-sca-and-dual-regression" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="connectivity-in-the-brain">
-<h2>6.4.1. Connectivity in the Brain<a class="headerlink" href="#connectivity-in-the-brain" title="Permalink to this headline">¶</a></h2>
+<h2>Connectivity in the Brain<a class="headerlink" href="#connectivity-in-the-brain" title="Permalink to this headline">¶</a></h2>
 <p>Brain connectivity can refer to multiple distinct concepts, and it is important to understand the differences between them. When referring to anatomy, connectivity may refer to physical connections between brain areas, such as the long-distance fiber tracts revealed through methods such as Diffusion Tensor Imaging. Another form of connectivity that is commonly discussed in the literature is “functional connectivity”, which is what we will be focusing on here.</p>
 </div>
 <div class="section" id="what-is-functional-connectivity">
-<h2>6.4.2. What is Functional Connectivity?<a class="headerlink" href="#what-is-functional-connectivity" title="Permalink to this headline">¶</a></h2>
+<h2>What is Functional Connectivity?<a class="headerlink" href="#what-is-functional-connectivity" title="Permalink to this headline">¶</a></h2>
 <p>Perhaps the most confusing thing to understand about functional connectivity is that in most cases, connectivity is never actually measured. This is because the term “functional connectivity” has come to refer to similarities in patterns of brain activity between regions. Two regions are said to be functionally connected if the time series of their activity is highly correlated. The reasoning behind this definition is that brain areas with similar activity patterns are likely to be communicating and sharing information.</p>
 </div>
 <div class="section" id="seed-based-correlation-analysis">
-<h2>6.4.3. Seed-based Correlation Analysis<a class="headerlink" href="#seed-based-correlation-analysis" title="Permalink to this headline">¶</a></h2>
+<h2>Seed-based Correlation Analysis<a class="headerlink" href="#seed-based-correlation-analysis" title="Permalink to this headline">¶</a></h2>
 <p>Seed-based Correlation Analysis (SCA) is one of the most common ways to explore functional connectivity within the brain. Based on the time series of a seed voxel (or ROI), connectivity is calculated as the correlation of time series for all other voxels in the brain. The result of SCA is a connectivity map showing Z-scores for each voxel indicating how well its time series correlates with the time series of the seed. Below is an example connectivity map showing correlated voxels based on a seed in the precuneus.</p>
 <div class="figure">
 <img alt="_images/sca_map.png" src="_images/sca_map.png" />
@@ -62,7 +62,7 @@
 <p>Astute readers will note that the pattern of connectivity mapped above closely resembles the anatomy of the Default Network. Indeed, SCA may be used to explore functional networks that share similar patterns of activity.</p>
 </div>
 <div class="section" id="dual-regression">
-<h2>6.4.4. Dual Regression<a class="headerlink" href="#dual-regression" title="Permalink to this headline">¶</a></h2>
+<h2>Dual Regression<a class="headerlink" href="#dual-regression" title="Permalink to this headline">¶</a></h2>
 <p>Many large-scale functional brain networks have been shown to be reproducible across subjects (Smith et al, 2009; Yeo et al, 2011). Dual Regression (Beckman et al, 2009; Filippini et al, 2009) allows researchers to investigate individual and group differences in the structure of these networks, as well as to identify subject-specific networks based on networks identified at the group level.</p>
 <p>The following steps are performed for each spatial map provided for Dual Regression:</p>
 <ol class="arabic simple">
@@ -73,7 +73,7 @@
 <p>The spatial maps used during Dual Regression can be generated any number of ways, but a common practice is to use Independent Component Analysis (Smith et al, 2009) or clustering algorithms (Yeo et al, 2011) to generate group-specific maps of large-scale brain networks.</p>
 </div>
 <div class="section" id="configuring-c-pac">
-<h2>6.4.5. Configuring C-PAC<a class="headerlink" href="#configuring-c-pac" title="Permalink to this headline">¶</a></h2>
+<h2>Configuring C-PAC<a class="headerlink" href="#configuring-c-pac" title="Permalink to this headline">¶</a></h2>
 <p>Before SCA can be calculated, you <strong>must</strong> first extract a seed time series from which to calculate correlations. This is done by configuring and running <a class="reference internal" href="tse"><span class="doc">Time Series Extraction</span></a>.  <strong>You will not be able to proceed in the GUI without first entering in an ROI Specification, and will receive an error if the specification is not defined.</strong></p>
 <div class="figure">
 <img alt="_images/sca_gui.png" src="_images/sca_gui.png" />
@@ -93,7 +93,7 @@
 <li><strong>Normalize Time Series (Dual Regression) - [On, Off]:</strong>  Normalize each time series before running Dual Regression.</li>
 </ol>
 <div class="section" id="configuration-without-the-gui">
-<h3>6.4.5.1. Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
+<h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run SCA:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -125,7 +125,7 @@
 </div>
 </div>
 <div class="section" id="references">
-<h2>6.4.6. References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p>C.F. Beckmann, C.E. Mackay, N. Filippini, and S.M. Smith. <a class="reference external" href="http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/DualRegression?action=AttachFile&amp;do=get&amp;target=CB09.pdf">Group comparison of resting-state FMRI data using multi-subject ICA and dual regression</a>. OHBM, 2009.</p>
 <ol class="upperalpha simple" start="14">
 <li>Filippini, B.J. MacIntosh, M.G. Hough, G.M. Goodwin, G.B. Frisoni, S.M. Smith, P.M. Matthews, C.F. Beckmann and C.E. Mackay. <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/19357304">Distinct patterns of brain activity in young carriers of the APOE-ε4 allele</a>. PNAS, 106(17):7209-14, 2009.</li>
@@ -134,7 +134,7 @@
 <p>Thomas Yeo, B. T., Krienen, F. M., Sepulcre, J., Sabuncu, M. R., Lashkari, D., Hollinshead, M., et al. (2011). The organization of the human cerebral cortex estimated by intrinsic functional connectivity. Journal of Neurophysiology, 106(3), 1125–1165. doi:10.1152/jn.00338.2011</p>
 </div>
 <div class="section" id="external-resources">
-<h2>6.4.7. External Resources<a class="headerlink" href="#external-resources" title="Permalink to this headline">¶</a></h2>
+<h2>External Resources<a class="headerlink" href="#external-resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="http://mindhive.mit.edu/node/58">mindhive - ConnectivityFAQ</a></li>
 <li><a class="reference external" href="http://www.scholarpedia.org/article/Brain_connectivity">Brain Connectivity - Scholarpedia</a></li>
@@ -159,12 +159,12 @@
 <li class="toctree-l1"><a class="reference internal" href="pipeline_config">4. Select Your Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing">5. Pre-Process Your Data</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="derivatives">6. Compute Derivatives</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="alff">6.1. ALFF and f/ALFF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reho">6.2. ReHo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centrality">6.3. Network Centrality</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.4. SCA/Dual Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vmhc">6.5. VMHC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pypeer">6.6. PyPEER Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alff">ALFF and f/ALFF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reho">ReHo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centrality">Network Centrality</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SCA/Dual Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vmhc">VMHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypeer">PyPEER Integration</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running">7. All Run Options</a></li>
@@ -198,10 +198,10 @@
           <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="vmhc" title="6.5. Voxel-Mirrored Homotopic Connectivity (VMHC)"
+          <a href="vmhc" title="Voxel-Mirrored Homotopic Connectivity (VMHC)"
              >next</a> |</li>
         <li class="right" >
-          <a href="centrality" title="6.3. Network Centrality"
+          <a href="centrality" title="Network Centrality"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="derivatives" >6. Computable Derivatives</a> &#187;</li> 
