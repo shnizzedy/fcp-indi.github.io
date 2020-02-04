@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Troubleshooting and Help &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>10. Troubleshooting and Help &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -18,8 +18,8 @@
     
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
-    <link rel="next" title="Release Notes" href="rnotes" />
-    <link rel="prev" title="Check Your Outputs" href="output_dir" /> 
+    <link rel="next" title="11. Release Notes" href="rnotes" />
+    <link rel="prev" title="9. Check Your Outputs" href="output_dir" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,10 +28,10 @@
           <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="rnotes" title="Release Notes"
+          <a href="rnotes" title="11. Release Notes"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="output_dir" title="Check Your Outputs"
+          <a href="output_dir" title="9. Check Your Outputs"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
       </ul>
@@ -43,12 +43,12 @@
           <div class="body" role="main">
             
   <div class="section" id="troubleshooting-and-help">
-<h1>Troubleshooting and Help<a class="headerlink" href="#troubleshooting-and-help" title="Permalink to this headline">¶</a></h1>
+<h1>10. Troubleshooting and Help<a class="headerlink" href="#troubleshooting-and-help" title="Permalink to this headline">¶</a></h1>
 <p>C-PAC is beta software, which means that it is still under active development and has not yet undergone large-scale testing. As such, although we have done our best to ensure a stable pipeline, there may still be a few bugs that we did not catch.</p>
 <p>If you find a bug, or would like to request a new feature please visit the <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/issues">GitHub Issues page for CPAC</a>.</p>
 <p>If you have a question that is not answered in the User Guide or encounter an issue not covered in the <cite>Common Issues and Solutions</cite> section below, you should submit it to the <a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">C-PAC user forum</a>.</p>
 <div class="section" id="view-crash-files">
-<h2>View Crash Files<a class="headerlink" href="#view-crash-files" title="Permalink to this headline">¶</a></h2>
+<h2>10.1. View Crash Files<a class="headerlink" href="#view-crash-files" title="Permalink to this headline">¶</a></h2>
 <p>If you run C-PAC through the container (Docker/Singularity), you need to enter the container by typing:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run -i -t --entrypoint=&#39;/bin/bash&#39; --rm -v /Users/You/some_folder:/outputs fcpindi/c-pac:latest</span>
 </pre></div>
@@ -60,7 +60,7 @@
 <p>Where <code class="file docutils literal notranslate"><span class="pre">crash-file.pklz</span></code> is the name of the crash file you wish to view.</p>
 </div>
 <div class="section" id="common-issues">
-<h2>Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
+<h2>10.2. Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">My run is crashing with the crash files indicating a memory error.  What is going on?</p>
 <blockquote>
@@ -95,21 +95,22 @@
             </a></p>
 <h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline_config">3. Select Your Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="derivatives">5. Compute Derivatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running">6. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="group_analysis">7. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output_dir">8. Check Your Outputs</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Troubleshoot</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#view-crash-files">View Crash Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#common-issues">Common Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_case_wizard/index">1. Use Case Wizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick">2. C-PAC Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_list_config">3. Specify Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_config">4. Select Your Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing">5. Pre-Process Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives">6. Compute Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running">7. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_analysis">8. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_dir">9. Check Your Outputs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Troubleshoot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#view-crash-files">10.1. View Crash Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-issues">10.2. Common Issues</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">11. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix">12. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -135,10 +136,10 @@
           <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="rnotes" title="Release Notes"
+          <a href="rnotes" title="11. Release Notes"
              >next</a> |</li>
         <li class="right" >
-          <a href="output_dir" title="Check Your Outputs"
+          <a href="output_dir" title="9. Check Your Outputs"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
       </ul>

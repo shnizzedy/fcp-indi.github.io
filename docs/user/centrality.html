@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Network Centrality &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>6.3. Network Centrality &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -18,8 +18,8 @@
     
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
-    <link rel="next" title="Seed-based Correlation Analysis (SCA) and Dual Regression" href="sca" />
-    <link rel="prev" title="Regional Homogeneity" href="reho" /> 
+    <link rel="next" title="6.4. Seed-based Correlation Analysis (SCA) and Dual Regression" href="sca" />
+    <link rel="prev" title="6.2. Regional Homogeneity" href="reho" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,13 +28,13 @@
           <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="sca" title="Seed-based Correlation Analysis (SCA) and Dual Regression"
+          <a href="sca" title="6.4. Seed-based Correlation Analysis (SCA) and Dual Regression"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="reho" title="Regional Homogeneity"
+          <a href="reho" title="6.2. Regional Homogeneity"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="derivatives" accesskey="U">Computable Derivatives</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="derivatives" accesskey="U">6. Computable Derivatives</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -44,9 +44,9 @@
           <div class="body" role="main">
             
   <div class="section" id="network-centrality">
-<h1>Network Centrality<a class="headerlink" href="#network-centrality" title="Permalink to this headline">¶</a></h1>
+<h1>6.3. Network Centrality<a class="headerlink" href="#network-centrality" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction-background">
-<h2>Introduction &amp; Background<a class="headerlink" href="#introduction-background" title="Permalink to this headline">¶</a></h2>
+<h2>6.3.1. Introduction &amp; Background<a class="headerlink" href="#introduction-background" title="Permalink to this headline">¶</a></h2>
 <p>Nodes are the basic units of a network, and are connected by edges. Among the many nodes that form the whole-brain network (also known as the functional connectome), some play a crucial role and may be considered central within the network. These central nodes can be identified by applying various graph-theory based network analysis techniques which provide a measure of the centrality or functional importance of each node (Koschutzki et al. 2005). Different centrality measures capture different aspects of connectivity (Joyce et al., 2010; Zuo et al., 2011). CPAC is able to calculate three commonly used centrality indices: Degree Centrality (DC), Eigenvector Centrality (EC), and local Functional Connectivity Density (lFCD). Unlike traditional functional connectivity analyses, centrality measures capture the complexity of the entire functional connectome, and do not require the selection of any <strong>a priori</strong> regions of interest.</p>
 <p><strong>Degree centrality</strong> is a measure of local network connectivity and identifies the most connected nodes by counting the number of direct connections (edges) to all other nodes. As such, a node with high DC will have direct connections to many other nodes in the network. Degree centrality analysis tends to emphasize higher order cortical association areas while showing reduced sensitivity for paralimbic and subcortical regions (Zuo et al., 2012).</p>
 <p><strong>Eigenvector centrality</strong> is a measure of global network connectivity. The EC of a given node reflects the number of direct connections it has with other nodes that have high centrality. Thus, the EC of a given node depends not only on its own centrality, but the centrality of the nodes it connects to. A node with high EC has connections to many other nodes that are themselves highly connected and central within the network. In contrast to DC, EC is more sensitive to paralimbic and subcortical regions (Zuo et al., 2012).</p>
@@ -57,12 +57,12 @@
 <p><strong>Local Functional Connectivity Density</strong> is another measure of local network connectivity. A given seed must be a voxel-based mask, unlike DC and EC which can be calculated for ROIs. lFCD mapping finds the given seed’s neighbors and neighbor’s neighbors until edges become weaker than the given threshold value. This measure was first implemented as FCDM by Tomasi and Volkow (2010)</p>
 </div>
 <div class="section" id="computation-and-analysis-considerations">
-<h2>Computation and Analysis Considerations<a class="headerlink" href="#computation-and-analysis-considerations" title="Permalink to this headline">¶</a></h2>
+<h2>6.3.2. Computation and Analysis Considerations<a class="headerlink" href="#computation-and-analysis-considerations" title="Permalink to this headline">¶</a></h2>
 <p>For each subject, the timeseries for each node is extracted and used to calculate a temporal correlation matrix which represents the connectivity between all nodes. A threshold is then applied to the correlation matrix to create an adjacency matrix which describes all nodes that have survived thresholding. In CPAC, users can choose to apply a threshold based on either sparsity, significance, or correlation strength. Threshold values should be chosen carefully, as they can strongly influence the results of centrality analysis (Zuo et al., 2012).</p>
 <p>Of the three centrality measures computed by CPAC, Degree Centrality is the simplest, and is computed by counting the number of significant correlations between the timeseries of a given node and that of all other nodes in the adjacency matrix. Local Functional Connectivity Density should be faster because it only calculates neighboring connections which have weights above the threshold. On the other hand, Eigenvector Centrality is computed by identifying the first eigenvector of the adjacency matrix, which corresponds to the largest eigenvalue. Since EC is a recursive measure that takes into account the properties of connected nodes, the EC of a given node is proportional to the sum of the EC of all directly neighboring nodes. After computing the centrality measures, centrality maps are generated and standardized using Z-scores for use in group analysis (Zuo et al., 2012). For more detail on how CPAC computes these steps, please see the <a class="reference external" href="http://fcp-indi.github.com/docs/developer/workflows/network_centrality.html">Network Centrality Page of the developer documentation</a>.</p>
 </div>
 <div class="section" id="applications-and-recommendations">
-<h2>Applications and Recommendations<a class="headerlink" href="#applications-and-recommendations" title="Permalink to this headline">¶</a></h2>
+<h2>6.3.3. Applications and Recommendations<a class="headerlink" href="#applications-and-recommendations" title="Permalink to this headline">¶</a></h2>
 <p>Degree centrality has been widely used to identify “functional hubs” and examine node characteristics of intrinsic connectivity networks (Buckner et al. 2009; Bullmore and Sporns 2009; He et al. 2009; Wang et al. 2010; Fransson et al. 2011). Centrality measures have also been used to show that the topology of these hub structures changes with age. Specifically, cortical hubs are largely confined to primary sensory and motor areas in infants (Fransson et al. 2011), but are localized to heteromodal higher-order association regions in adults (Buckner et al. 2009).</p>
 <div class="figure">
 <img alt="_images/centrality_zuo_cover.png" src="_images/centrality_zuo_cover.png" />
@@ -70,7 +70,7 @@
 <p>Beyond detecting functional hubs, both DC and EC have been used as a way of characterizing information flow through the functional connectome at the voxel level. These voxel-wise centrality analyses (depicted in the figure above, taken from Zuo et al., 2012) showed both short and long-term test-retest reliability, and appear to be modulated by age and sex (Zuo et al., 2012). Additionally, EC has been shown to be modulated by subjects’ states of hunger or satiety (Lohmann et al. 2010).</p>
 </div>
 <div class="section" id="configuring-c-pac-to-run-network-centrality">
-<h2>Configuring C-PAC to Run Network Centrality<a class="headerlink" href="#configuring-c-pac-to-run-network-centrality" title="Permalink to this headline">¶</a></h2>
+<h2>6.3.4. Configuring C-PAC to Run Network Centrality<a class="headerlink" href="#configuring-c-pac-to-run-network-centrality" title="Permalink to this headline">¶</a></h2>
 <div class="figure">
 <img alt="_images/centrality_gui.png" src="_images/centrality_gui.png" />
 </div>
@@ -89,7 +89,7 @@
 </ol>
 <p>Note that only centrality measures that have binarized/weighted checked on this screen will be run.</p>
 <div class="section" id="configuration-without-the-gui">
-<h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
+<h3>6.3.4.1. Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run anatomical preprocessing:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -153,7 +153,7 @@
 </div>
 </div>
 <div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<h2>6.3.5. References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p>Buckner RL, Sepulcre J, Talukdar T, Krienen FM, Liu H, Hedden T, Andrews-Hanna JR, Sperling RA, Johnson KA. 2009. <a class="reference external" href="http://www.jneurosci.org/content/29/6/1860.long">Cortical hubs revealed by intrinsic functional connectivity: mapping, assessment of stability, and relation to Alzheimer’s disease</a>. J Neurosci. 29:1860–1873.</p>
 <p>Bullmore E, Sporns O. 2009. <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/19190637">Complex brain networks: graph theoretical analysis of structural and functional systems</a>. Nat Rev Neurosci. 10:186–198.</p>
 <p>Fransson P, Aden U, Blennow M, Lagercrantz H. 2011. <a class="reference external" href="http://cercor.oxfordjournals.org/content/21/1/145.abstract">The functional architecture of the infant brain as revealed by resting-state fMRI</a>. Cereb Cortex. 21:145–154.</p>
@@ -178,25 +178,26 @@
             </a></p>
 <h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline_config">3. Select Your Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="derivatives">5. Compute Derivatives</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="alff">ALFF and f/ALFF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reho">ReHo</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Network Centrality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sca">SCA/Dual Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vmhc">VMHC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pypeer">PyPEER Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_case_wizard/index">1. Use Case Wizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick">2. C-PAC Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_list_config">3. Specify Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_config">4. Select Your Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing">5. Pre-Process Your Data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="derivatives">6. Compute Derivatives</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="alff">6.1. ALFF and f/ALFF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reho">6.2. ReHo</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. Network Centrality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sca">6.4. SCA/Dual Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vmhc">6.5. VMHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypeer">6.6. PyPEER Integration</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="running">6. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="group_analysis">7. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output_dir">8. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help">9. Troubleshoot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running">7. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_analysis">8. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_dir">9. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help">10. Troubleshoot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">11. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix">12. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -222,13 +223,13 @@
           <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="sca" title="Seed-based Correlation Analysis (SCA) and Dual Regression"
+          <a href="sca" title="6.4. Seed-based Correlation Analysis (SCA) and Dual Regression"
              >next</a> |</li>
         <li class="right" >
-          <a href="reho" title="Regional Homogeneity"
+          <a href="reho" title="6.2. Regional Homogeneity"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="derivatives" >Computable Derivatives</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="derivatives" >6. Computable Derivatives</a> &#187;</li> 
       </ul>
     </div>
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Functional Preprocessing &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>5.2. Functional Preprocessing &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -18,8 +18,8 @@
     
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
-    <link rel="next" title="Nuisance Signal Regression" href="nuisance" />
-    <link rel="prev" title="Anatomical Preprocessing" href="anat" /> 
+    <link rel="next" title="5.3. Nuisance Signal Regression" href="nuisance" />
+    <link rel="prev" title="5.1. Anatomical Preprocessing" href="anat" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,13 +28,13 @@
           <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="nuisance" title="Nuisance Signal Regression"
+          <a href="nuisance" title="5.3. Nuisance Signal Regression"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="anat" title="Anatomical Preprocessing"
+          <a href="anat" title="5.1. Anatomical Preprocessing"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="preprocessing" accesskey="U">Pre-Processing Steps</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="preprocessing" accesskey="U">5. Pre-Processing Steps</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -44,9 +44,9 @@
           <div class="body" role="main">
             
   <div class="section" id="functional-preprocessing">
-<h1>Functional Preprocessing<a class="headerlink" href="#functional-preprocessing" title="Permalink to this headline">¶</a></h1>
+<h1>5.2. Functional Preprocessing<a class="headerlink" href="#functional-preprocessing" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="initial-preprocessing">
-<h2>Initial Preprocessing<a class="headerlink" href="#initial-preprocessing" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.1. Initial Preprocessing<a class="headerlink" href="#initial-preprocessing" title="Permalink to this headline">¶</a></h2>
 <div class="figure">
 <img alt="_images/func_init_options.png" src="_images/func_init_options.png" />
 </div>
@@ -59,7 +59,7 @@
 </ol>
 </div>
 <div class="section" id="slice-timing-correction">
-<h2>Slice Timing Correction<a class="headerlink" href="#slice-timing-correction" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.2. Slice Timing Correction<a class="headerlink" href="#slice-timing-correction" title="Permalink to this headline">¶</a></h2>
 <p>Most fMRI images are created by combining multiple 2D slices into a single 3D volume. Slices are acquired one after another, either sequentially in ascending or descending order, or in an interleaved manner, such that every other slice is acquired in a first pass, and the remaining slices are acquired in a second pass. The time elapsed between the acquisition of the first and last slice is equivalent to the repetition time (TR) used. Slice timing correction acts to adjust the timecourse of voxels in each slice to account for these differences. This is done by interpolating the data in each slice to match the timing of a reference slice. Slice timing correction is necessary because many statistical models used for fMRI analysis assume that all voxels are measured simultaneously. As such, differences in acquisition time between slices can cause confounds.</p>
 <p>You can configure your slice time correction settings through the C-PAC pipeline configuration editor, under the <em>Time Series Options</em> tab in the <em>Functional Preprocessing</em> section. Here you can select whether or not to run Slice Time Correction, as well as which slice acquisition pattern to enter.</p>
 <div class="figure">
@@ -74,7 +74,7 @@
 </ol>
 <p>Note that if a scan parameters file was used to construct the participant list, the parameters defined in this file will override the settings used here.</p>
 <div class="section" id="configuration-without-the-gui">
-<h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.2.1. Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run slice timing correction and drop TRs:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -121,7 +121,7 @@
 </div>
 </div>
 <div class="section" id="through-the-data-configuration">
-<h3>Through the Data Configuration<a class="headerlink" href="#through-the-data-configuration" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.2.2. Through the Data Configuration<a class="headerlink" href="#through-the-data-configuration" title="Permalink to this headline">¶</a></h3>
 <p>You can also specify slice timing parameters within the subject list.  If you wish to specify slice timing correction parameters in this way, scan parameters must be supplied to C-PAC in a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, and the path to this file provided when <a class="reference internal" href="subject_list_config"><span class="doc">setting up a new subject list</span></a>.</p>
 <div class="line-block">
 <div class="line"><strong>If all subjects within a site have the same acquisition order:</strong></div>
@@ -173,7 +173,7 @@
 </div>
 </div>
 <div class="section" id="field-map-based-distortion-correction">
-<h2>Field Map-Based Distortion Correction<a class="headerlink" href="#field-map-based-distortion-correction" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.3. Field Map-Based Distortion Correction<a class="headerlink" href="#field-map-based-distortion-correction" title="Permalink to this headline">¶</a></h2>
 <p>Distortion correction is a method that aims to reduce distortion in EPI (fMRI) images caused by inhomogeneities in the magnetic field (which often stem from differences in tissue across tissue boundaries in the head). C-PAC has the option of including field map-based distortion correction into your pre-processing pipeline, and two methods, <strong>Phase Difference (PhaseDiff)</strong> or <strong>Phase-Encoding Polarity (Blip-up/Blip-down)</strong> to perform distortion correction.</p>
 <p>Performing PhaseDiff distortion correction requires the acquisition of a phase difference image and two magnitude images. The “best of the two” magnitude images is chosen, and a final input of one phase difference file and one magnitude file are then used by the pre-processing pipeline.
 Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-encoding direction-specific EPI field maps to correct for distortion in the direction of the phase-encoding. It uses AFNI 3dQWarp to calculate the distortion unwarp for EPI field maps of opposite/same phase encoding direction.</p>
@@ -194,7 +194,7 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><strong>Phase encoding direction - [string]:</strong> This is the position of the voxels in the input image, and can have values of x/y/z or -x/-y/-z.</li>
 </ol>
 <div class="section" id="id1">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.3.1. Configuration Without the GUI<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run distortion correction:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -252,7 +252,7 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 </div>
 </div>
 <div class="section" id="functional-to-anatomical-registration">
-<h2>Functional to Anatomical Registration<a class="headerlink" href="#functional-to-anatomical-registration" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.4. Functional to Anatomical Registration<a class="headerlink" href="#functional-to-anatomical-registration" title="Permalink to this headline">¶</a></h2>
 <div class="figure">
 <img alt="_images/func_to_anat_reg.png" src="_images/func_to_anat_reg.png" />
 </div>
@@ -265,7 +265,7 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><strong>Functional Masking - [AFNI, FSL, FSL_AFNI, Anatomical_Refined]:</strong> Choose which tool to be used in functional masking - AFNI (3dAutoMask), FSL (BET), FSL_AFNI (BET+3dAutoMask) or Anatomical_Refined (generate functional mask by registering anatomical mask to functional space). Default is AFNI.</li>
 </ol>
 <div class="section" id="configuring-fsl-bet-options">
-<h3>Configuring FSL BET options:<a class="headerlink" href="#configuring-fsl-bet-options" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.4.1. Configuring FSL BET options:<a class="headerlink" href="#configuring-fsl-bet-options" title="Permalink to this headline">¶</a></h3>
 <p><strong>Note:</strong> These options are pre-set for FSL BET’s default values. These do not need to be modified unless you are looking to optimize the results of skull-stripping for your particular dataset.</p>
 <div class="figure">
 <img alt="_images/func_masking_fsl.png" src="_images/func_masking_fsl.png" />
@@ -288,7 +288,7 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 </ol>
 </div>
 <div class="section" id="id2">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.4.2. Configuration Without the GUI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run functional to anatomical registration:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -341,7 +341,7 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 </div>
 </div>
 <div class="section" id="functional-to-mni-registration">
-<h2>Functional to MNI Registration<a class="headerlink" href="#functional-to-mni-registration" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.5. Functional to MNI Registration<a class="headerlink" href="#functional-to-mni-registration" title="Permalink to this headline">¶</a></h2>
 <div class="figure">
 <img alt="_images/func_to_mni_reg.png" src="_images/func_to_mni_reg.png" />
 </div>
@@ -356,7 +356,7 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><strong>Resolutions to Resample to - [1 An integer indicating three same dimensions (e.g., 1mm, 2mm, 3mm, 4mm); 2 A float number indicating three same dimensions (e.g., 3.5mm etc.); 3 Three numbers connected by ‘x’ indicating three different dimensions (e.g., 2.67mmx2.67mmx3mm etc.)]:</strong> The resolution (in mm) to which functional images are transformed during registration.  Note that selecting a 1 mm or 2 mm resolution will substantially increase your RAM needs.  For most cases, 3 mm or 4 mm resolutions are suggested.</li>
 </ol>
 <div class="section" id="id3">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.5.1. Configuration Without the GUI<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run functional to anatomical registration:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -409,7 +409,7 @@ resolution_for_func_derivative : 2mm
 </div>
 </div>
 <div class="section" id="functional-to-epi-registration">
-<h2>Functional to EPI Registration<a class="headerlink" href="#functional-to-epi-registration" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.6. Functional to EPI Registration<a class="headerlink" href="#functional-to-epi-registration" title="Permalink to this headline">¶</a></h2>
 <div class="figure">
 <img alt="_images/func_to_epi_reg.png" src="_images/func_to_epi_reg.png" />
 </div>
@@ -418,7 +418,7 @@ resolution_for_func_derivative : 2mm
 <li><strong>Standard Brain Template - [path]:</strong> Used as a reference image for functional EPI registration.</li>
 </ol>
 <div class="section" id="id4">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>5.2.6.1. Configuration Without the GUI<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run functional to anatomical registration:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -463,26 +463,27 @@ resolution_for_func_derivative : 2mm
             </a></p>
 <h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline_config">3. Select Your Pipeline</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="anat">Anatomical Preprocessing</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Functional Preprocessing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nuisance">Nuisance Corrections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="aroma_ica">ICA Denoising</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tse">Timeseries Extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tse#configuring-roi-time-series-extraction">Configuring ROI Time Series Extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="after_warp">After Warp Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_case_wizard/index">1. Use Case Wizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick">2. C-PAC Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_list_config">3. Specify Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_config">4. Select Your Pipeline</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="preprocessing">5. Pre-Process Your Data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="anat">5.1. Anatomical Preprocessing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. Functional Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nuisance">5.3. Nuisance Corrections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aroma_ica">5.4. ICA Denoising</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tse">5.5. Timeseries Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tse#configuring-roi-time-series-extraction">5.6. Configuring ROI Time Series Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="after_warp">5.7. After Warp Settings</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="derivatives">5. Compute Derivatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running">6. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="group_analysis">7. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output_dir">8. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help">9. Troubleshoot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives">6. Compute Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running">7. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_analysis">8. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_dir">9. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help">10. Troubleshoot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">11. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix">12. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -508,13 +509,13 @@ resolution_for_func_derivative : 2mm
           <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="nuisance" title="Nuisance Signal Regression"
+          <a href="nuisance" title="5.3. Nuisance Signal Regression"
              >next</a> |</li>
         <li class="right" >
-          <a href="anat" title="Anatomical Preprocessing"
+          <a href="anat" title="5.1. Anatomical Preprocessing"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="preprocessing" >Pre-Processing Steps</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="preprocessing" >5. Pre-Processing Steps</a> &#187;</li> 
       </ul>
     </div>
 

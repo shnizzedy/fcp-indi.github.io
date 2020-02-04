@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Setting Up A Data Configuration File (Participant/Subject List) &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>3. Setting Up A Data Configuration File (Participant/Subject List) &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -18,8 +18,8 @@
     
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
-    <link rel="next" title="Setting Up A Pipeline Configuration" href="pipeline_config" />
-    <link rel="prev" title="C-PAC Quickstart" href="quick" /> 
+    <link rel="next" title="4. Setting Up A Pipeline Configuration" href="pipeline_config" />
+    <link rel="prev" title="2. C-PAC Quickstart" href="quick" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,10 +28,10 @@
           <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="pipeline_config" title="Setting Up A Pipeline Configuration"
+          <a href="pipeline_config" title="4. Setting Up A Pipeline Configuration"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="quick" title="C-PAC Quickstart"
+          <a href="quick" title="2. C-PAC Quickstart"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
       </ul>
@@ -43,9 +43,9 @@
           <div class="body" role="main">
             
   <div class="section" id="setting-up-a-data-configuration-file-participant-subject-list">
-<h1>Setting Up A Data Configuration File (Participant/Subject List)<a class="headerlink" href="#setting-up-a-data-configuration-file-participant-subject-list" title="Permalink to this headline">¶</a></h1>
+<h1>3. Setting Up A Data Configuration File (Participant/Subject List)<a class="headerlink" href="#setting-up-a-data-configuration-file-participant-subject-list" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2>3.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p><strong>C-PAC’s Configuration YAML Files</strong></p>
 <p>C-PAC requires at least one pipeline configuration file and one data configuration file (also known as the participant list/subject list) in order to run an analysis. These configuration files are in the YAML file format, which matches contents in a key: value relationship much like a dictionary. This section will focus on the data configuration file setup.</p>
 <p><strong>The Data Configuration (Participant List)</strong></p>
@@ -55,9 +55,9 @@ The data configuration file layout has changed significantly from older versions
 <p>If you have already-existing data configuration files and wish to update these for the new version, you can simply use your already-existing data settings preset files to regenerate the data configuration files using your new/upgraded install of C-PAC v1.1.0. If you have any questions, please feel free to reach us at our <a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">support forum</a>.</p>
 </div>
 <div class="section" id="from-terminal">
-<h2>From Terminal<a class="headerlink" href="#from-terminal" title="Permalink to this headline">¶</a></h2>
+<h2>3.2. From Terminal<a class="headerlink" href="#from-terminal" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="create-data-settings-yml-template-file">
-<h3>Create data_settings.yml template file<a class="headerlink" href="#create-data-settings-yml-template-file" title="Permalink to this headline">¶</a></h3>
+<h3>3.2.1. Create data_settings.yml template file<a class="headerlink" href="#create-data-settings-yml-template-file" title="Permalink to this headline">¶</a></h3>
 <p>You can configure the settings explained below in the <strong>data settings</strong> YAML file, then use the C-PAC command-line interface to generate your <strong>data configuration</strong> file.</p>
 <p>If you don’t already have a data settings YAML file, you can generate one in your current directory by running:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> <span class="n">bids_dir</span> <span class="n">outputs_dir</span> <span class="n">cli</span> <span class="o">--</span> <span class="n">utils</span> <span class="n">data_config</span> <span class="n">new_settings_template</span>
@@ -77,7 +77,7 @@ The data configuration file layout has changed significantly from older versions
 </ul>
 </div>
 <div class="section" id="generate-configuration-files-for-individual-level-and-group-level-analyses">
-<h3>Generate configuration files for individual-level and group-level analyses<a class="headerlink" href="#generate-configuration-files-for-individual-level-and-group-level-analyses" title="Permalink to this headline">¶</a></h3>
+<h3>3.2.2. Generate configuration files for individual-level and group-level analyses<a class="headerlink" href="#generate-configuration-files-for-individual-level-and-group-level-analyses" title="Permalink to this headline">¶</a></h3>
 <p>Once you have a template, you can then configure the file as needed. You will need to use a text editor to fill in at least <code class="docutils literal notranslate"><span class="pre">dataFormat</span></code>, <code class="docutils literal notranslate"><span class="pre">bidsBaseDir</span></code> (if using BIDS data), <code class="docutils literal notranslate"><span class="pre">outputSubjectListLocation</span></code>, and <code class="docutils literal notranslate"><span class="pre">subjectListName</span></code> in your settings file before you build.</p>
 <p>Once your <code class="docutils literal notranslate"><span class="pre">data_settings.yml</span></code> file is ready, you can generate your data configuration file by running:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> <span class="n">bids_dir</span> <span class="n">outputs_dir</span> <span class="n">cli</span> <span class="o">--</span> <span class="n">utils</span> <span class="n">data_config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
@@ -91,7 +91,7 @@ The data configuration file layout has changed significantly from older versions
 </div>
 </div>
 <div class="section" id="data-settings-yml-contents">
-<h2>data_settings.yml contents<a class="headerlink" href="#data-settings-yml-contents" title="Permalink to this headline">¶</a></h2>
+<h2>3.3. data_settings.yml contents<a class="headerlink" href="#data-settings-yml-contents" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><strong>Data format - [BIDS, Custom]:</strong> Whether or not the data is organized in accordance with the BIDS specification. More details below.</li>
 <li><strong>BIDS Base Directory - [path]:</strong> The base directory of the BIDS-organized data, if you are using BIDS.</li>
@@ -117,7 +117,7 @@ The data configuration file layout has changed significantly from older versions
 <p>Continue below for some example use cases.</p>
 </div>
 <div class="section" id="data-bids-format">
-<h2>Data: BIDS Format<a class="headerlink" href="#data-bids-format" title="Permalink to this headline">¶</a></h2>
+<h2>3.4. Data: BIDS Format<a class="headerlink" href="#data-bids-format" title="Permalink to this headline">¶</a></h2>
 <p>A full description of the BIDS data organization specification can be found at <a class="reference external" href="http://bids.neuroimaging.io/">bids.neuroimaging.io</a>.</p>
 <p>This is the simplest option. As the data is in BIDS format, the C-PAC data configuration builder will know where to find all of the input files, the scan parameters (if available), site information, and field map files (if applicable). The inclusion and exclusion options for the different data levels (participant, site, etc.) work as usual.</p>
 <p><strong>Using the cpac_data_config_setup.py script</strong></p>
@@ -139,7 +139,7 @@ The data configuration file layout has changed significantly from older versions
 </div>
 </div>
 <div class="section" id="data-custom-layout">
-<h2>Data: Custom Layout<a class="headerlink" href="#data-custom-layout" title="Permalink to this headline">¶</a></h2>
+<h2>3.5. Data: Custom Layout<a class="headerlink" href="#data-custom-layout" title="Permalink to this headline">¶</a></h2>
 <p>The C-PAC Data Configuration builder can handle a wide range of different directory organization layouts, but can only do it seamlessly for you if all of your data is organized in that same layout. If you have input files arranged in different ways, simply generate two different data configuration files, and then manually add one to the end of the other, in a text editor.</p>
 <p><strong>Using the C-PAC command-line interface (CLI)</strong></p>
 <p>Your template paths should look something like this, for the corresponding directory layouts:</p>
@@ -169,7 +169,7 @@ The data configuration file layout has changed significantly from older versions
 </div>
 </div>
 <div class="section" id="custom-path-templates">
-<h2>Custom Path Templates<a class="headerlink" href="#custom-path-templates" title="Permalink to this headline">¶</a></h2>
+<h2>3.6. Custom Path Templates<a class="headerlink" href="#custom-path-templates" title="Permalink to this headline">¶</a></h2>
 <p>Here are the file path templates used for the <a class="reference external" href="http://fcon_1000.projects.nitrc.org/fcpClassic/FcpTable.html">1000 Functional Connectomes</a> data release, as well as an illustration of the directory structure used for the release:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Anatomical</span> <span class="n">Template</span><span class="p">:</span>  <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="p">{</span><span class="n">site</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">participant</span><span class="p">}</span><span class="o">/</span><span class="n">anat</span><span class="o">/</span><span class="n">mprage_anonymized</span><span class="o">.</span><span class="n">nii</span><span class="o">.</span><span class="n">gz</span>
 <span class="n">Functional</span> <span class="n">Template</span><span class="p">:</span>  <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="p">{</span><span class="n">site</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">participant</span><span class="p">}</span><span class="o">/</span><span class="n">func</span><span class="o">/</span><span class="n">rest</span><span class="o">.</span><span class="n">nii</span><span class="o">.</span><span class="n">gz</span>
@@ -197,7 +197,7 @@ The data configuration file layout has changed significantly from older versions
 <p>Users experiencing difficulties defining file path templates may want to re-organize their data to match one of the examples above. If you manually define a file path template and encounter an error when attempting to generate participant lists, please <a class="reference internal" href="help"><span class="doc">contact us</span></a> and we will be happy to help.</p>
 </div>
 <div class="section" id="data-yaml-fields">
-<h2>Data YAML Fields<a class="headerlink" href="#data-yaml-fields" title="Permalink to this headline">¶</a></h2>
+<h2>3.7. Data YAML Fields<a class="headerlink" href="#data-yaml-fields" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">cpac_data_config_setup.py</span></code> command line utility will produce a YAML file containing all of the participants and various properties associated with that participant, such as its ID, session number, the location of its resting-state/functional and anatomical scans. Before each participant definition there is a single line with a dash, which indicates that start of the property definitions. Participant properties are indented under this dash. To illustrate, see the sample participant definition below:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># example of data stored locally</span>
 <span class="p p-Indicator">-</span>
@@ -280,26 +280,27 @@ The data configuration file layout has changed significantly from older versions
             </a></p>
 <h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Specify Your Data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#from-terminal">From Terminal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-settings-yml-contents">data_settings.yml contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-bids-format">Data: BIDS Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-custom-layout">Data: Custom Layout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#custom-path-templates">Custom Path Templates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-yaml-fields">Data YAML Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_case_wizard/index">1. Use Case Wizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick">2. C-PAC Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Specify Your Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">3.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#from-terminal">3.2. From Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-settings-yml-contents">3.3. data_settings.yml contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-bids-format">3.4. Data: BIDS Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-custom-layout">3.5. Data: Custom Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-path-templates">3.6. Custom Path Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-yaml-fields">3.7. Data YAML Fields</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline_config">3. Select Your Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="derivatives">5. Compute Derivatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running">6. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="group_analysis">7. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output_dir">8. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help">9. Troubleshoot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_config">4. Select Your Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing">5. Pre-Process Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives">6. Compute Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running">7. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_analysis">8. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_dir">9. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help">10. Troubleshoot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">11. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix">12. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -325,10 +326,10 @@ The data configuration file layout has changed significantly from older versions
           <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="pipeline_config" title="Setting Up A Pipeline Configuration"
+          <a href="pipeline_config" title="4. Setting Up A Pipeline Configuration"
              >next</a> |</li>
         <li class="right" >
-          <a href="quick" title="C-PAC Quickstart"
+          <a href="quick" title="2. C-PAC Quickstart"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
       </ul>
