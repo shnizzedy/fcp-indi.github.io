@@ -159,11 +159,12 @@
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <p>Where are your data?</p>
 <blockquote>
-<div><p>Are they in BIDS format?</p>
+<div><ul>
+<li><p class="first">Are they in BIDS format?</p>
 <ul>
 <li><p class="first">Yes</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<ul>
+<li><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -171,60 +172,32 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>What is the path to the BIDS directory?</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li>[populate -v/-B mappings with this to /data etc., add to run command]</li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
-</div></blockquote>
 </li>
 <li><p class="first">No</p>
-<blockquote>
-<div><p>:orphan;</p>
-<ul class="simple">
-<li>…</li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-<p>Are they in BIDS format?</p>
 <ul>
-<li><dl class="first docutils">
-<dt>Yes</dt>
-<dd><table class="first docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">oprhan:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<ul class="last simple">
-<li><dl class="first docutils">
-<dt>What is the path to the BIDS directory?</dt>
-<dd><ul class="first last">
-<li>[add s3://etc. to run command for data input]</li>
-</ul>
-</dd>
-</dl>
+<li><p class="first">:orphan;</p>
+<p>…</p>
 </li>
 </ul>
-</dd>
-</dl>
 </li>
-<li><dl class="first docutils">
-<dt>No</dt>
-<dd><p class="first">:orphan;</p>
-<ul class="last simple">
-<li>…</li>
 </ul>
-</dd>
-</dl>
+</li>
+<li><p class="first">Are they in BIDS format?</p>
+<ul class="simple">
+<li>Yes
+- .. include:: /use_case_wizard/data/BIDS_S3.txt</li>
+<li>No
+- .. include:: /use_case_wizard/data/custom_structure.txt</li>
+</ul>
 </li>
 </ul>
 </div></blockquote>
@@ -239,16 +212,13 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>I want to get running right now: run the default pipeline</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li>(nothing changes)</li>
 </ul>
 </dd>
 </dl>
-</li>
-</ul>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -257,10 +227,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>I want to run one of the pre-configured pipelines</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li><dl class="first docutils">
 <dt>Anat only (maybe make the simple ones their own level, above)</dt>
 <dd><ul class="first last">
@@ -282,8 +251,6 @@
 </ul>
 </dd>
 </dl>
-</li>
-</ul>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -292,10 +259,10 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>I want to build my own pipeline</dt>
-<dd><table class="first docutils field-list" frame="void" rules="none">
+<dd><ul class="first last">
+<li><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -303,10 +270,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><a class="reference external" href="https://fcp-indi.github.io/C-PAC_GUI/#/">CPAC online GUI</a></li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
+<p><a class="reference external" href="https://fcp-indi.github.io/C-PAC_GUI/#/">CPAC online GUI</a></p>
+</li>
+<li><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -314,10 +280,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li>Download YAML file</li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
+<p>Download YAML file</p>
+</li>
+<li><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -325,10 +290,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="last simple">
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>What is the path to the pipeline configuration YAML (<em>.yml/</em>.yaml) file?</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li>[map via -v/-B, populate this into –pipeline_file]</li>
 </ul>
 </dd>
@@ -337,8 +301,6 @@
 </ul>
 </dd>
 </dl>
-</li>
-</ul>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -347,10 +309,10 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>I want to load an existing pipeline I made earlier, or got from someone else, and edit it, then run it (make this more concise)</dt>
-<dd><table class="first docutils field-list" frame="void" rules="none">
+<dd><ul class="first last">
+<li><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -358,11 +320,11 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><a class="reference external" href="https://fcp-indi.github.io/C-PAC_GUI/#/">CPAC online GUI</a></li>
-<li>Load/upload YAML file</li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
+<p><a class="reference external" href="https://fcp-indi.github.io/C-PAC_GUI/#/">CPAC online GUI</a></p>
+</li>
+<li><p class="first">Load/upload YAML file</p>
+</li>
+<li><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -370,10 +332,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li>Download YAML file</li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
+<p>Download YAML file</p>
+</li>
+<li><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -381,10 +342,9 @@
 </tr>
 </tbody>
 </table>
-<ul class="last simple">
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>What is the path to the pipeline configuration YAML (<em>.yml/</em>.yaml) file?</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li>[map via -v/-B, populate this into –pipeline_file]</li>
 </ul>
 </dd>
@@ -393,8 +353,6 @@
 </ul>
 </dd>
 </dl>
-</li>
-</ul>
 </div>
 <div class="section" id="optimize">
 <h2>Optimize<a class="headerlink" href="#optimize" title="Permalink to this headline">¶</a></h2>

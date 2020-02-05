@@ -47,11 +47,12 @@
 <h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
 <p>Where are your data?</p>
 <blockquote>
-<div><p>Are they in BIDS format?</p>
+<div><ul>
+<li><p class="first">Are they in BIDS format?</p>
 <ul>
 <li><p class="first">Yes</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<ul>
+<li><table class="first docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -59,60 +60,32 @@
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>What is the path to the BIDS directory?</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li>[populate -v/-B mappings with this to /data etc., add to run command]</li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
-</div></blockquote>
 </li>
 <li><p class="first">No</p>
-<blockquote>
-<div><p>:orphan;</p>
-<ul class="simple">
-<li>…</li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-<p>Are they in BIDS format?</p>
 <ul>
-<li><dl class="first docutils">
-<dt>Yes</dt>
-<dd><table class="first docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">oprhan:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<ul class="last simple">
-<li><dl class="first docutils">
-<dt>What is the path to the BIDS directory?</dt>
-<dd><ul class="first last">
-<li>[add s3://etc. to run command for data input]</li>
-</ul>
-</dd>
-</dl>
+<li><p class="first">:orphan;</p>
+<p>…</p>
 </li>
 </ul>
-</dd>
-</dl>
 </li>
-<li><dl class="first docutils">
-<dt>No</dt>
-<dd><p class="first">:orphan;</p>
-<ul class="last simple">
-<li>…</li>
 </ul>
-</dd>
-</dl>
+</li>
+<li><p class="first">Are they in BIDS format?</p>
+<ul class="simple">
+<li>Yes
+- .. include:: /use_case_wizard/data/BIDS_S3.txt</li>
+<li>No
+- .. include:: /use_case_wizard/data/custom_structure.txt</li>
+</ul>
 </li>
 </ul>
 </div></blockquote>
