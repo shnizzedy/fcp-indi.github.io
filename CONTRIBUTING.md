@@ -6,7 +6,7 @@ Please, always change `source` branch. `master` branch will be overriden by the 
 
 - Only write a document once, and liberally use the [reStructured Text `.. include::` directive](https://docutils.sourceforge.io/docs/ref/rst/directives.html#include) to include that document where appropriate.
 - Use absolute paths for `.. include::`s. That way the path will resolve correctly regardless of differences in nesting levels.
-- Include any source documents that you want built in at least one [`toctree`](https://www.sphinx-doc.org/en/1.8/usage/restructuredtext/directives.html#directive-toctree), or set the [':orphan:'](http://www.sphinx-doc.org/en/master/usage/restructuredtext/field-lists.html#file-wide-metadata). Use the `:hidden:` option in the `toctree` if you don't want it linked in an actual table of contents in the document with the `toctree`.
+- Set the [':orphan:'](http://www.sphinx-doc.org/en/master/usage/restructuredtext/field-lists.html#file-wide-metadata) flag at the top of any document to build but not include in any sourcetrees. Include any other source documents that you want built in at least one [`toctree`](https://www.sphinx-doc.org/en/1.8/usage/restructuredtext/directives.html#directive-toctree). Use the `:hidden:` option in the `toctree` if you don't want it linked in an actual table of contents in the document with the `toctree`.
 - Use consistent section title indicators throughout a sourcetree. [fcp-indi.github.com/docs/user](https://fcp-indi.github.com/docs/user) currently has the following hierarchy (top to bottom):
   ```
   =
