@@ -36,30 +36,20 @@
             
   <div class="section" id="cpac-version-0-3-8-alpha-dec-3-2014">
 <h1>CPAC Version 0.3.8 Alpha (Dec 3, 2014)<a class="headerlink" href="#cpac-version-0-3-8-alpha-dec-3-2014" title="Permalink to this headline">¶</a></h1>
-<ul>
-<li><p class="first">Fixed a bug in which ANTS registration transforms were applied in the wrong order.</p>
-</li>
-<li><p class="first">“Treatment” coding has been enabled as an option in the Group Analysis Model Builder.</p>
-</li>
-<li><p class="first">Resolved several errors effecting warping Dual Regression outputs to standard space.</p>
-</li>
-<li><p class="first">SCA correlation maps now written out into 4D file instead of being stored into a 5D file (with the 4-dimension being a singleton).</p>
-</li>
-<li><p class="first">Fixed a bug in compCor nuisance regression in which WM and CSF time-series were not variance normalized, as implemented by the original paper.</p>
-</li>
-<li><p class="first">Updated the cpac_run.py script available in the scripts directory in order to reflect changes in how CPAC is run, update documentation, and enable users to invoke custom installs of Nipype and CPAC.</p>
-</li>
-<li><p class="first">Several GUI error fixes and improvements:</p>
 <ul class="simple">
+<li>Fixed a bug in which ANTS registration transforms were applied in the wrong order.</li>
+<li>“Treatment” coding has been enabled as an option in the Group Analysis Model Builder.</li>
+<li>Resolved several errors effecting warping Dual Regression outputs to standard space.</li>
+<li>SCA correlation maps now written out into 4D file instead of being stored into a 5D file (with the 4-dimension being a singleton).</li>
+<li>Fixed a bug in compCor nuisance regression in which WM and CSF time-series were not variance normalized, as implemented by the original paper.</li>
+<li>Updated the cpac_run.py script available in the scripts directory in order to reflect changes in how CPAC is run, update documentation, and enable users to invoke custom installs of Nipype and CPAC.</li>
+<li>Several GUI error fixes and improvements:<ul>
 <li>Introduced more descriptive error messages if the subject list is formatted or entered incorrectly.</li>
 <li>Fixed an issue with input checking in the pipeline configuration editor.</li>
 <li>Fixed an issue where saving an edited pipeline configuration file would require the user to re-load the file onto the pipeline list.</li>
 </ul>
 </li>
-<li><p class="first">Developer tools: Created a unit test created for the Network Centrality workflow.</p>
-<blockquote>
-<div></div></blockquote>
-</li>
+<li>Developer tools: Created a unit test created for the Network Centrality workflow.</li>
 </ul>
 </div>
 
