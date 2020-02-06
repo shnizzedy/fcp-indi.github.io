@@ -54,17 +54,31 @@
 <div class="section" id="docker">
 <h5>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h5>
 <p>Is Docker installed?</p>
+<p><a class="reference external" href="https://docs.docker.com/install/">Install Docker</a></p>
 </div>
 <div class="section" id="singularity">
 <h5>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h5>
 <p>Is Singularity installed?</p>
+<p><a class="reference external" href="https://sylabs.io/guides/3.4/user-guide/quick_start.html#quick-installation-steps">Install Singularity</a></p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
 </div>
-<div class="section" id="which-version-of-c-pac">
-<h4>Which version of C-PAC?<a class="headerlink" href="#which-version-of-c-pac" title="Permalink to this headline">¶</a></h4>
-<p>v1.6.0, v1.5.0, v1.4.3, v1.4.2, v1.4.1, development (not stable)</p>
+<div class="section" id="how-to-pull-c-pac-image">
+<h4>How to pull C-PAC image?<a class="headerlink" href="#how-to-pull-c-pac-image" title="Permalink to this headline">¶</a></h4>
+<p><strong>C-PAC Versions</strong></p>
+<p>Current available versions: v1.6.0, v1.5.0, v1.4.3, v1.4.2, v1.4.1, development (not stable)</p>
+<p><strong>Docker</strong></p>
+<p>To pull the latest version of C-PAC from Docker Hub:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker pull fcpindi/c-pac:latest
+</pre></div>
+</div>
+<p>To pull a different version, please specify the image tag. E.g. fcpindi/c-pac:release-v1.5.0 is for C-PAC version 1.5.0; fcpindi/c-pac:nightly is C-PAC development version (not stable).</p>
+<p><strong>Singularity</strong></p>
+<p>To pull the latest version of C-PAC from Singularity Hub:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity pull --name C-PAC.sif shub://FCP-INDI/C-PAC
+</pre></div>
+</div>
 </div>
 <div class="section" id="where-do-you-want-the-outputs-stored">
 <h4>Where do you want the outputs stored?<a class="headerlink" href="#where-do-you-want-the-outputs-stored" title="Permalink to this headline">¶</a></h4>
