@@ -134,6 +134,11 @@ Power and colleagues (2011) proposed two measures to identify volumes contaminat
 </div>
 <div class="section" id="configuring-nuisance-signal-regression-options">
 <h2>Configuring Nuisance Signal Regression Options<a class="headerlink" href="#configuring-nuisance-signal-regression-options" title="Permalink to this headline">¶</a></h2>
+<div class="admonition error">
+<p class="first admonition-title">Error</p>
+<p>Unable to execute python code at exec.py:31:</p>
+<p class="last">No module named wx</p>
+</div>
 <div class="figure">
 <img alt="_images/nuisance.png" src="_images/nuisance.png" />
 </div>
@@ -325,196 +330,159 @@ Bandpass:
 </pre></div>
 </div>
 <p>The box below contains an example of what these parameters might look like when defined in the YAML.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">runNuisance </span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]</span>
-<span class="nt">lateral_ventricles_mask </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/atlases/HarvardOxford/HarvardOxford-lateral-ventricles-thr25-2mm.nii.gz</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    aCompCor: {
+        summary: {
+            filter: &#39;cosine&#39;, Principal components are estimated after using a discrete cosine filter with 128s cut-off,
+                Leave filter field blank, if selected aCompcor method is &#39;DetrendPC&#39;
+            method: &#39;DetrendPC&#39;, aCompCor will extract the principal components from
+                detrended tissues signal,
+            components: number of components to retain,
+        },
+        tissues: list of tissues to extract regressors.
+            Valid values are: &#39;WhiteMatter&#39;, &#39;CerebrospinalFluid&#39;,
+        extraction_resolution: None | floating point value indicating isotropic
+            resolution (ex. 2 for 2mm x 2mm x 2mm that data should be extracted at,
+            the corresponding tissue mask will be resampled to this resolution. The
+            functional data will also be resampled to this resolution, and the
+            extraction will occur at this new resolution. The goal is to avoid
+            contamination from undesired tissue components when extracting nuisance
+            regressors,
+        erode_mask: True | False, whether or not the mask should be eroded to
+            further avoid a mask overlapping with a different tissue class,
+        include_delayed: True | False, whether or not to include a one-frame delay regressor,
+            default to False,
+        include_squared: True | False, whether or not to include a squared regressor,
+            default to False,
+        include_delayed_squared: True | False, whether or not to include a squared one-frame
+            delay regressor, default to False,
+        include_backdiff: True | False, whether or not to include a one-lag difference,
+            default to False,
+        include_backdiff_squared: True | False, whether or not to include a squared one-frame
+            delay regressor, default to False,
+    },
+    tCompCor: {
+        summary: {
+            filter: &#39;cosine&#39;, Principal components are estimated after using a discrete cosine filter with 128s cut-off,
+                Leave filter field blank, if selected tCompcor method is &#39;DetrendPC&#39;
+            method: &#39;DetrendPC&#39;, tCompCor will extract the principal components from
+                detrended tissues signal,
+            components: number of components to retain,
+        },
+        threshold:
+            floating point number = cutoff as raw variance value,
+            floating point number followed by SD (ex. 1.5SD) = mean + a multiple of the SD,
+            floating point number followed by PCT (ex. 2PCT) = percentile from the top (ex is top 2%),
+        by_slice: True | False, whether or not the threshold criterion should be applied
+            by slice or across the entire volume, makes most sense for thresholds
+            using SD or PCT,
+        include_delayed: True | False (same as for aCompCor),
+        include_squared: True | False (same as for aCompCor),
+        include_delayed_squared: True | False (same as for aCompCor),
+        include_backdiff: True | False (same as for aCompCor),
+        include_backdiff_squared: True | False (same as for aCompCor),
+    },
+    WhiteMatter: {
+        summary: {
+            method: &#39;PC&#39;, &#39;DetrendPC&#39;, &#39;Mean&#39;, &#39;NormMean&#39; or &#39;DetrendNormMean&#39;,
+            components: number of components to retain, if PC,
+        },
+        extraction_resolution: None | floating point value (same as for aCompCor),
+        erode_mask: True | False (same as for aCompCor),
+        include_delayed: True | False (same as for aCompCor),
+        include_squared: True | False (same as for aCompCor),
+        include_delayed_squared: True | False (same as for aCompCor),
+        include_backdiff: True | False (same as for aCompCor),
+        include_backdiff_squared: True | False (same as for aCompCor),
+    },
+    CerebrospinalFluid: {
+        summary: {
+            method: &#39;PC&#39;, &#39;DetrendPC&#39;, &#39;Mean&#39;, &#39;NormMean&#39; or &#39;DetrendNormMean&#39;,
+            components: number of components to retain, if PC,
+        },
+        extraction_resolution: None | floating point value (same as for aCompCor),
+        erode_mask: True | False (same as for aCompCor),
+        include_delayed: True | False (same as for aCompCor),
+        include_squared: True | False (same as for aCompCor),
+        include_delayed_squared: True | False (same as for aCompCor),
+        include_backdiff: True | False (same as for aCompCor),
+        include_backdiff_squared: True | False (same as for aCompCor),
+    },
+    GreyMatter: {
+        summary: {
+            method: &#39;PC&#39;, &#39;DetrendPC&#39;, &#39;Mean&#39;, &#39;NormMean&#39; or &#39;DetrendNormMean&#39;,
+            components: number of components to retain, if PC,
+        },
+        extraction_resolution: None | floating point value (same as for aCompCor),
+        erode_mask: True | False (same as for aCompCor),
+        include_delayed: True | False (same as for aCompCor),
+        include_squared: True | False (same as for aCompCor),
+        include_delayed_squared: True | False (same as for aCompCor),
+        include_backdiff: True | False (same as for aCompCor),
+        include_backdiff_squared: True | False (same as for aCompCor),
+    },
+    GlobalSignal: {
+        summary: {
+            method: &#39;PC&#39;, &#39;DetrendPC&#39;, &#39;Mean&#39;, &#39;NormMean&#39; or &#39;DetrendNormMean&#39;,
+            components: number of components to retain, if PC,
+        },
+        include_delayed: True | False (same as for aCompCor),
+        include_squared: True | False (same as for aCompCor),
+        include_delayed_squared: True | False (same as for aCompCor),
+        include_backdiff: True | False (same as for aCompCor),
+        include_backdiff_squared: True | False (same as for aCompCor),
+    },
+    Motion: None | {
+        include_delayed: True | False (same as for aCompCor),
+        include_squared: True | False (same as for aCompCor),
+        include_delayed_squared: True | False (same as for aCompCor),
+        include_backdiff: True | False (same as for aCompCor),
+        include_backdiff_squared: True | False (same as for aCompCor),
+    },
+    Censor: {
+        method: &#39;Kill&#39;, &#39;Zero&#39;, &#39;Interpolate&#39;, &#39;SpikeRegression&#39;,
+        thresholds: list of dictionary, {
+            type: &#39;FD_J&#39;, &#39;FD_P&#39;, &#39;DVARS&#39;,
+            value: threshold value to be applied to metric
+        },
+        number_of_previous_trs_to_censor: integer, number of previous
+            TRs to censor (remove or regress, if spike regression)
+        number_of_subsequent_trs_to_censor: integer, number of
+            subsequent TRs to censor (remove or regress, if spike
+            regression)
+    },
+    PolyOrt: {
+        degree: integer, polynomial degree up to which will be removed,
+            e.g. 2 means constant + linear + quadratic, practically
+            that is probably, the most that will be need especially
+            if band pass filtering
+    },
+    Bandpass: {
+        bottom_frequency: floating point value, frequency in hertz of
+            the highpass part of the pass band, frequencies below this
+            will be removed,
+        top_frequency: floating point value, frequency in hertz of the
+            lowpass part of the pass band, frequencies above this
+            will be removed
+    },
+    Custom: [
+        {
+            file: file containing the regressors. It can be a CSV file,
+                with one regressor per column, or a Nifti image, with
+                one regressor per voxel.
+            convolve: perform the convolution operation of the given
+                regressor with the timeseries.
+        }
+    ]
 
-<span class="nt">Regressors </span><span class="p">:</span>
-
-  <span class="p p-Indicator">-</span> <span class="nt">Motion</span><span class="p">:</span>
-      <span class="nt">include_delayed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-    <span class="nt">aCompCor</span><span class="p">:</span>
-      <span class="nt">summary</span><span class="p">:</span>
-        <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DetrendPC</span>
-        <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-      <span class="nt">tissues</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">WhiteMatter</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CerebrospinalFluid</span>
-      <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-
-    <span class="nt">tCompCor</span><span class="p">:</span>
-      <span class="nt">summary</span><span class="p">:</span>
-        <span class="nt">filter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cosine</span>
-        <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PC</span>
-        <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-      <span class="nt">threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.5SD</span>
-      <span class="nt">by_slice</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-      <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-
-    <span class="nt">CerebrospinalFluid</span><span class="p">:</span>
-      <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-      <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-      <span class="nt">erode_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-
-    <span class="nt">GlobalSignal</span><span class="p">:</span>
-      <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-
-    <span class="nt">Custom</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">custom_signal.nii.gz</span>
-        <span class="nt">convolve</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-
-    <span class="nt">PolyOrt</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-
-    <span class="nt">Censor</span><span class="p">:</span>
-      <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Interpolate</span>
-      <span class="nt">thresholds</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FD_J</span>
-          <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.3</span>
-        <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DVARS</span>
-          <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
-      <span class="nt">number_of_previous_trs_to_censor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-      <span class="nt">number_of_subsequent_trs_to_censor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-
-  <span class="p p-Indicator">-</span> <span class="nt">Motion</span><span class="p">:</span>  <span class="c1"># Empty motion to include just the 6 motion parameters</span>
-
-    <span class="nt">aCompCor</span><span class="p">:</span>
-      <span class="nt">summary</span><span class="p">:</span>
-        <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PC</span>
-        <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-      <span class="nt">tissues</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">WhiteMatter</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CerebrospinalFluid</span>
-      <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-
-    <span class="nt">CerebrospinalFluid</span><span class="p">:</span>
-      <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-      <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-      <span class="nt">erode_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-
-    <span class="nt">PolyOrt</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+}
+/usr/local/bin/python: No module named nuisance_regressors_docstring.py
 </pre></div>
 </div>
 </div>
 <div class="section" id="translating-from-old-c-pac-configuration">
 <h3>Translating from old C-PAC configuration<a class="headerlink" href="#translating-from-old-c-pac-configuration" title="Permalink to this headline">¶</a></h3>
 <p>In order to provide flexibility for the nuisance regression strategies, we changed how their definition are written in the YAML config file. Each regressor can be translated as follows:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="13%" />
-<col width="87%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>Old Configuration</td>
-<td>New Configuration</td>
-</tr>
-<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compcor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">aCompCor</span><span class="p">:</span>
-  <span class="nt">summary</span><span class="p">:</span>
-    <span class="nt">filter</span><span class="p">:</span>
-    <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DetrendPC</span>
-    <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-  <span class="nt">tissues</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">WhiteMatter</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CerebrospinalFluid</span>
-  <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-</pre></div>
-</div>
-<p class="last">where components is the number of principal components parametrized by the parameter <code class="docutils literal notranslate"><span class="pre">nComponents</span></code></p>
-</td>
-</tr>
-<tr class="row-odd"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">wm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">WhiteMatter</span><span class="p">:</span>
-  <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-  <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-  <span class="nt">erode_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-</td>
-</tr>
-<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">csf</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">CerebrospinalFluid</span><span class="p">:</span>
-  <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-  <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-</pre></div>
-</div>
-</td>
-</tr>
-<tr class="row-odd"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">GreyMatter</span><span class="p">:</span>
-  <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-  <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-  <span class="nt">erode_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-</td>
-</tr>
-<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">global</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">GlobalSignal</span><span class="p">:</span>
-  <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-</pre></div>
-</div>
-</td>
-</tr>
-<tr class="row-odd"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pc1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">GlobalSignal</span><span class="p">:</span>
-  <span class="nt">summary</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PC</span>
-    <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-</tr>
-<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">motion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Motion</span><span class="p">:</span>
-  <span class="nt">include_delayed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="nt">include_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="nt">include_delayed_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-<p class="last">the delayed, squared and squared delayed derivatives were included when the Friston 24-parameters model was enabled (<code class="docutils literal notranslate"><span class="pre">runFristonModel:</span> <span class="pre">[1]</span></code>)</p>
-</td>
-</tr>
-<tr class="row-odd"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linear</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">PolyOrt</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-</tr>
-<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">quadratic</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</td>
-<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">PolyOrt</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-</pre></div>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="section" id="an-example-of-nuisance-regressors">
