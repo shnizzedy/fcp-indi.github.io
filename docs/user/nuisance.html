@@ -482,6 +482,123 @@ Bandpass:
 <div class="section" id="translating-from-old-c-pac-configuration">
 <h3>Translating from old C-PAC configuration<a class="headerlink" href="#translating-from-old-c-pac-configuration" title="Permalink to this headline">¶</a></h3>
 <p>In order to provide flexibility for the nuisance regression strategies, we changed how their definition are written in the YAML config file. Each regressor can be translated as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Old Configuration</td>
+<td>New Configuration</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compcor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">aCompCor</span><span class="p">:</span>
+  <span class="nt">summary</span><span class="p">:</span>
+    <span class="nt">filter</span><span class="p">:</span>
+    <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DetrendPC</span>
+    <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+  <span class="nt">tissues</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">WhiteMatter</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CerebrospinalFluid</span>
+  <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+</pre></div>
+</div>
+<p class="last">where components is the number of principal components parametrized by the parameter <code class="docutils literal notranslate"><span class="pre">nComponents</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">wm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">WhiteMatter</span><span class="p">:</span>
+  <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
+  <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+  <span class="nt">erode_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">csf</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">CerebrospinalFluid</span><span class="p">:</span>
+  <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
+  <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">GreyMatter</span><span class="p">:</span>
+  <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
+  <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+  <span class="nt">erode_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">global</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">GlobalSignal</span><span class="p">:</span>
+  <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pc1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">GlobalSignal</span><span class="p">:</span>
+  <span class="nt">summary</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PC</span>
+    <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">motion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Motion</span><span class="p">:</span>
+  <span class="nt">include_delayed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">include_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">include_delayed_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p class="last">the delayed, squared and squared delayed derivatives were included when the Friston 24-parameters model was enabled (<code class="docutils literal notranslate"><span class="pre">runFristonModel:</span> <span class="pre">[1]</span></code>)</p>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linear</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">PolyOrt</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">quadratic</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">PolyOrt</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section" id="an-example-of-nuisance-regressors">
