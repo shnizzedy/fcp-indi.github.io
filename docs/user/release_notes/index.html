@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="../genindex" />
     <link rel="search" title="Search" href="../search" />
     <link rel="next" title="Appendix" href="../appendix" />
-    <link rel="prev" title="Release Notes" href="../rnotes" /> 
+    <link rel="prev" title="Latest Release: C-PAC v1.6.0 (Jan 3, 2020)" href="v1.6.0" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,7 +31,7 @@
           <a href="../appendix" title="Appendix"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../rnotes" title="Release Notes"
+          <a href="v1.6.0" title="Latest Release: C-PAC v1.6.0 (Jan 3, 2020)"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../rnotes" accesskey="U">Release Notes</a> &#187;</li> 
@@ -338,26 +338,6 @@
 <li>Fixed a bug in the data configuration (subject list) builder where some fields would not get populated when re-loading the settings in the GUI.</li>
 <li>Added better error-catching and messages in nuisance regression which warn the user if nuisance parameters are too stringent for the regression to complete properly.</li>
 </ol>
-</div>
-<div class="section" id="cpac-version-1-0-1b-beta-sep-4-2017">
-<h1>CPAC Version 1.0.1b Beta (Sep 4, 2017)<a class="headerlink" href="#cpac-version-1-0-1b-beta-sep-4-2017" title="Permalink to this headline">¶</a></h1>
-<p>The updates to CPAC in this new version include:</p>
-<ul class="simple">
-<li>CPAC is now compatible with Nipype version 0.13.</li>
-<li>AWS S3 bucket support for BIDS data format participant list builder.</li>
-<li>The pipeline configuration editor ’ s  “ Test Configuration ”  feature now works with participant lists that contain AWS S3 paths.</li>
-<li>The cpac_install.sh and cpac_setup.py scripts have been fixed to be compatible with recent changes.</li>
-<li>Fixed a bug in the group-level analysis model builder that would prevent the user from running group analysis on outputs from Seed-Based Correlation Analysis.</li>
-<li>Fixed a bug in the group-level analysis pipeline where AFNI 3ddot would fail when performing a check on the merged 4D derivative file.</li>
-<li>Fixed an issue where crash files would be generated at the beginning of the pipeline for the  ‘ check_for_s3 ’  nodes even when not pulling data from an S3 bucket.</li>
-<li>Added more checks for file permissions and scan names at the beginning of the pipeline run.</li>
-</ul>
-<p>Updated user documentation for this release can be found here:
-<a class="reference external" href="http://fcp-indi.github.io/docs/user/index.html">http://fcp-indi.github.io/docs/user/index.html</a></p>
-<p>And as always, you can contact us here for user support and discussion:
-<a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">https://groups.google.com/forum/#!forum/cpax_forum</a></p>
-<p>Regards,
-The CPAC development team.</p>
 </div>
 <div class="section" id="version-1-0-1b-beta-2017-09-07">
 <h1>Version 1.0.1b Beta - 2017.09.07<a class="headerlink" href="#version-1-0-1b-beta-2017-09-07" title="Permalink to this headline">¶</a></h1>
@@ -746,6 +726,20 @@ The CPAC development team.</p>
 <li>Added extract_parameters.py script to consolidate motion parameters</li>
 </ol>
 </div>
+<div class="section" id="version-0-1-1-alpha-2012-10-15">
+<h1>Version 0.1.1 Alpha - 2012.10.15<a class="headerlink" href="#version-0-1-1-alpha-2012-10-15" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><strong>Scrubbing:</strong> Users can now specify the number of TRs that should be removed before and after an offending TR.</li>
+<li><strong>Scrubbing:</strong> C-PAC now prints a warning specifying the number of time points left after scrubbing. If no time points are left, C-PAC will crash and print an error.</li>
+<li><strong>Slice Timing:</strong> Users can now specify which sites are run with slice timing correction.</li>
+<li><strong>Slice Timing:</strong> Slice timing correction is now able to read slice timing information directly from an image file, and works on Multiband sequences.</li>
+<li><strong>Timeseries:</strong> Users can now specify a different number of initial TRs to be removed for each site.</li>
+<li><strong>Data Config:</strong> Data extraction now works for the NKI-TRT data set, and automatically extracts scan parameters for each subject from the image file.</li>
+<li><strong>Fix:</strong> C-PAC no longer crashes if dot is not installed. Instead, it prints an error and contines running.</li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
 
 
           </div>
@@ -769,6 +763,7 @@ The CPAC development team.</p>
 <li class="toctree-l1"><a class="reference internal" href="../output_dir">9. Check Your Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help">10. Troubleshoot</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../rnotes">11. Release Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="v1.6.0">Latest Release: C-PAC v1.6.0 (Jan 3, 2020)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Latest Release: C-PAC v1.6.0 (Jan 3, 2020)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-v1-5-0-beta-2019-10-09">Version v1.5.0 Beta - 2019.10.09</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-4-3-beta-2019-05-24">Version 1.4.3 Beta - 2019.05.24</a></li>
@@ -780,7 +775,6 @@ The CPAC development team.</p>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-1-0-beta-2018-05-15">Version 1.1.0 Beta - 2018.05.15</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-0-3-beta-2018-01-26">Version 1.0.3 Beta - 2018.01.26</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-0-2-beta-2017-11-03">Version 1.0.2 Beta - 2017.11.03</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cpac-version-1-0-1b-beta-sep-4-2017">CPAC Version 1.0.1b Beta (Sep 4, 2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-0-1b-beta-2017-09-07">Version 1.0.1b Beta - 2017.09.07</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cpac-version-1-0-1-beta-dec-5-2016">CPAC Version 1.0.1 Beta (Dec 5, 2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-0-1-beta-2016-12-09">Version 1.0.1 Beta - 2016.12.09</a></li>
@@ -800,6 +794,7 @@ The CPAC development team.</p>
 <li class="toctree-l2"><a class="reference internal" href="#version-0-1-8-alpha-2013-2-20">Version 0.1.8 Alpha - 2013.2.20</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-0-1-7-alpha-2013-02-05">Version 0.1.7 Alpha - 2013.02.05</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-0-1-6-alpha-2013-01-21">Version 0.1.6 Alpha - 2013.01.21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-0-1-1-alpha-2012-10-15">Version 0.1.1 Alpha - 2012.10.15</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix">12. Appendix</a></li>
@@ -831,7 +826,7 @@ The CPAC development team.</p>
           <a href="../appendix" title="Appendix"
              >next</a> |</li>
         <li class="right" >
-          <a href="../rnotes" title="Release Notes"
+          <a href="v1.6.0" title="Latest Release: C-PAC v1.6.0 (Jan 3, 2020)"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../rnotes" >Release Notes</a> &#187;</li> 
