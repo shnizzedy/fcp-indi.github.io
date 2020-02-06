@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Version 0.3.8 Alpha - 2014.12.10 &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>Version 0.3.1 Alpha - 2013.09.13 &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -34,35 +34,17 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="version-0-3-8-alpha-2014-12-10">
-<h1>Version 0.3.8 Alpha - 2014.12.10<a class="headerlink" href="#version-0-3-8-alpha-2014-12-10" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="version-0-3-1-alpha-2013-09-13">
+<h1>Version 0.3.1 Alpha - 2013.09.13<a class="headerlink" href="#version-0-3-1-alpha-2013-09-13" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic simple">
-<li>Fixed a bug in which ANTS registration transforms were applied in the wrong order.</li>
-<li>“Treatment” coding has been enabled as an option in the Group Analysis Model Builder.</li>
-<li>Resolved several errors effecting warping Dual Regression outputs to standard space.</li>
-<li>SCA correlation maps now written out into 4D file instead of being stored into a 5D file (with the 4-dimension being a singleton).</li>
-<li>Fixed a bug in compCor nuisance regression in which WM and CSF time-series were not variance normalized, as implemented by the original paper.</li>
-<li>Updated the cpac_run.py script available in the scripts directory in order to reflect changes in how CPAC is run, update documentation, and enable users to invoke custom installs of Nipype and CPAC.</li>
-<li><dl class="first docutils">
-<dt>Several GUI error fixes and improvements:</dt>
-<dd><ul class="first last">
-<li>Introduced more descriptive error messages if the subject list is formatted or entered incorrectly.</li>
-<li>Fixed an issue with input checking in the pipeline configuration editor.</li>
-<li>Fixed an issue where saving an edited pipeline configuration file would require the user to re-load the file onto the pipeline list.</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li>Developer tools: Created a unit test created for the Network Centrality workflow.</li>
+<li>A range of improvements to the GUI and its operation.</li>
+<li>Extended improvements to group analysis operation.</li>
+<li>Error fix: custom FSL-FNIRT configuration files can now successfully be provided to CPAC.</li>
+<li>Error fix: CPAC setup.py would not fully overwrite old files - setup.py now works correctly and also creates a backup folder with the old CPAC install directory.</li>
+<li>Addition of some more informative and user-friendly error messages and user warnings.</li>
+<li>CPAC pipeline configuration file renamed from config.yml to pipeline_config.yml.</li>
+<li>Group analysis function update: the ability to classify EVs as either categorical or continuous has been temporarily removed as we continue our ongoing process of refining CPAC’s group analysis model builder. The user must now provide a phenotypic file (.csv format) with categorical EVs broken out into dummy variables.</li>
 </ol>
-<div class="section" id="instructions-for-updating-to-0-3-8">
-<h2>Instructions for Updating to 0.3.8<a class="headerlink" href="#instructions-for-updating-to-0-3-8" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Download and install the Nipype version 0.10.0, tested to work with CPAC 0.3.8, from <a class="reference external" href="https://github.com/nipy/nipype/releases/tag/0.10.0">Github</a>.</li>
-<li>Download the new version from <a class="reference external" href="https://github.com/FCP-INDI/C-PAC">Github</a> or the <a class="reference external" href="http://fcp-indi.github.io.">CPAC homepage</a>.</li>
-<li>Replace the old CPAC directory with the new files and then run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code>.</li>
-</ol>
-</div>
 </div>
 
 

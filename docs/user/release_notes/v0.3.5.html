@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>CPAC Version 0.3.5 Alpha (Sep 1, 2014) &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>Version 0.3.5 Alpha - 2014.09.22 &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -34,8 +34,38 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="cpac-version-0-3-5-alpha-sep-1-2014">
-<h1>CPAC Version 0.3.5 Alpha (Sep 1, 2014)<a class="headerlink" href="#cpac-version-0-3-5-alpha-sep-1-2014" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="version-0-3-5-alpha-2014-09-22">
+<h1>Version 0.3.5 Alpha - 2014.09.22<a class="headerlink" href="#version-0-3-5-alpha-2014-09-22" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Upgraded to the newer version of ANTS for anatomical and functional registration, introducing the new tools available and making the installation process more straightforward.</li>
+<li><dl class="first docutils">
+<dt>New group analysis model builder:</dt>
+<dd><ul class="first last">
+<li>New user-friendly GUI for setting up your group-level analysis model, with an easier interface for configuring your EVs.</li>
+<li>Design matrices are now generated using the Patsy software package; you can specify your model with a design formula.</li>
+<li>The ability to include the mean of your output as a regressor has been introduced (mean regression).</li>
+<li>New interface for specifying contrasts using simple operators (EV1a &gt; EV1b, etc.).</li>
+<li>Users can now specify a separate output directory for group analysis, so several runs can be completed without having to move previous group-level analysis runs into backup folders.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Improved memory usage during network centrality with sparsity thresholding.</li>
+<li>Allowed users to provide their own lateral ventricles mask for CSF nuisance regression and corrected a source of inflexibility regarding how CPAC extracts signal from the ventricles.</li>
+<li>Resolved an issue where functional images and derivatives would be written into a resolution other than what the user specified, an issue where f/ALFF outputs would be written into data types more space-consuming than necessary, an issue with an incorrect registration in nuisance correction, and assorted other bug fixes and improved error messages.</li>
+<li>Several GUI improvements to user-friendliness in the pipeline configuration editor.</li>
+</ol>
+<ul class="simple">
+<li>View a complete guide to the new model builder at the <a class="reference external" href="http://fcp-indi.github.io/docs/user/group_analysis.html">Group Analysis page of our User Guide</a>.</li>
+</ul>
+<div class="section" id="instructions-for-updating-to-0-3-5">
+<h2>Instructions for Updating to 0.3.5<a class="headerlink" href="#instructions-for-updating-to-0-3-5" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Download and install the new custom version of Nipype designed to work with CPAC 0.3.5 from <a class="reference external" href="https://github.com/FCP-INDI/nipype/releases/tag/v0.9.2_cpac_tested">Github</a>.</li>
+<li>Upgrade your ANTS installation to the newest version - instructions available on the <a class="reference external" href="http://fcp-indi.github.io/docs/user/install.html">installation page of the CPAC User Guide</a>.</li>
+<li>Re-download the CPAC Image Resources to ensure you have the new binarized lateral ventricle masks required for CSF nuisance regression, available <a class="reference external" href="http://fcon_1000.projects.nitrc.org/indi/cpac_resources.tgz">here</a>, and follow the instructions available in the <a class="reference external" href="http://fcp-indi.github.io/docs/user/install.html">User Guide</a> under the section called “Install CPAC Image Resources”.</li>
+</ol>
+</div>
 </div>
 
 

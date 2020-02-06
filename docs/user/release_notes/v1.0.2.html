@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>CPAC Version 1.0.2 Beta (Nov 5, 2017) &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>Version 1.0.2 Beta - 2017.11.03 &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -34,25 +34,17 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="cpac-version-1-0-2-beta-nov-5-2017">
-<h1>CPAC Version 1.0.2 Beta (Nov 5, 2017)<a class="headerlink" href="#cpac-version-1-0-2-beta-nov-5-2017" title="Permalink to this headline">¶</a></h1>
-<p>The updates to CPAC in this new version include:</p>
-<ul class="simple">
+  <div class="section" id="version-1-0-2-beta-2017-11-03">
+<h1>Version 1.0.2 Beta - 2017.11.03<a class="headerlink" href="#version-1-0-2-beta-2017-11-03" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
 <li>CPAC now offers De-Spiking as an option in nuisance regression, which regresses out the impact of motion-induced artifacts from the functional timeseries from volumes exhibiting motion greater than a specified threshold, without removing those volumes.</li>
 <li>Users can now select which Framewise Displacement (FD) calculation to use (Jenkinson’s or Power’s) when applying the motion threshold for either Scrubbing or De-Spiking.</li>
-<li>CPAC can now automatically select a Framewise Displacement (FD) threshold based on a percentage value provided in the pipeline configuration. For example, if provided 5%, CPAC will select a cut-off derived from the top 5% of highest-motion volumes. See the <a class="reference external" href="http://fcp-indi.github.io/docs/user/nuisance.html#configuring-nuisance-signal-regression-options">User Guide</a> for more information.</li>
 <li>Scrubbing has been moved to the Nuisance Regression tab in the GUI’s pipeline configuration editor. The pipeline configuration YAML keys have changed for scrubbing settings. See the <a class="reference external" href="http://fcp-indi.github.io/docs/user/nuisance.html#configuration-without-the-gui">User Guide Nuisance Regression page</a> and the <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/master/configs/pipeline_config.yml#L335">sample pipeline configuration file</a> for more details.</li>
 <li>Re-introduced the ability to stop pipeline runs easily from the GUI.</li>
 <li>Fixed a bug in the data configuration (subject list) builder that would cause non-NIfTI files to be included if the user did not explicitly define the file extension in the file template.</li>
 <li>Fixed a bug in the data configuration (subject list) builder where some fields would not get populated when re-loading the settings in the GUI.</li>
 <li>Added better error-catching and messages in nuisance regression which warn the user if nuisance parameters are too stringent for the regression to complete properly.</li>
-</ul>
-<p>Updated user documentation for this release can be found here:
-<a class="reference external" href="http://fcp-indi.github.io/docs/user/index.html">http://fcp-indi.github.io/docs/user/index.html</a></p>
-<p>And as always, you can contact us here for user support and discussion:
-<a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">https://groups.google.com/forum/#!forum/cpax_forum</a></p>
-<p>Regards,
-The CPAC development team.</p>
+</ol>
 </div>
 
 

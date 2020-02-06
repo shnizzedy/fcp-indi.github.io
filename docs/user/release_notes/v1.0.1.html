@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>CPAC Version 1.0.1 Beta (Dec 5, 2016) &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>Version 1.0.1 Beta - 2016.12.09 &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -34,37 +34,30 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="cpac-version-1-0-1-beta-dec-5-2016">
-<h1>CPAC Version 1.0.1 Beta (Dec 5, 2016)<a class="headerlink" href="#cpac-version-1-0-1-beta-dec-5-2016" title="Permalink to this headline">¶</a></h1>
-<p>The updates to CPAC in this new version include:</p>
+  <div class="section" id="version-1-0-1-beta-2016-12-09">
+<h1>Version 1.0.1 Beta - 2016.12.09<a class="headerlink" href="#version-1-0-1-beta-2016-12-09" title="Permalink to this headline">¶</a></h1>
 <p>Participant list builder fixes:</p>
-<ul class="simple">
+<ol class="arabic simple">
 <li>The {participant}, {session}, etc. tags once again work properly, and are now more flexible for custom filepath formats. For example, multiple tags on one directory level, combinations of tags and custom string prefixes/suffixes, and multiple instances of the same tag in one path template are now all supported.</li>
 <li>When providing a participant inclusion list (under Subjects to Include) and a site inclusion list (under Sites to Include) at the same time, the builder used to ignore the Sites to Include input. This is no longer the case and will generate an intersection of the Sites and Participant inclusion lists provided.</li>
 <li>Including a scan parameters CSV containing information for multiple sites during participant list generation will no longer include scan parameters for sites not included in your data.</li>
 <li>Addition of informative messages while constructing the participant list- will warn the user when a participant included in Subjects to Include does not exist or could not be found in the data, and will list these missing participant IDs.</li>
 <li>When the input data does not have a session level, the participant list builder will now provide the default session “ses-1” instead of requiring a session level to be included. This is the case for both BIDS and custom data formats.</li>
-</ul>
+</ol>
 <p>Installation script updates:</p>
-<ul class="simple">
+<ol class="arabic simple">
 <li>Now more robust to package name differences between different versions of Ubuntu.</li>
 <li>Now uses the Neurodebian ants package for all versions of Ubuntu except for 14.04.</li>
 <li>Compiles libxp for Ubuntu &gt;= 16.04 for AFNI.</li>
-</ul>
+</ol>
 <p>Other updates:</p>
-<ul class="simple">
+<ol class="arabic simple">
 <li>The nuisance regressors are now written out to a 1D file found under “functional_nuisance_regressors” in the output directory.</li>
 <li>Fixed a bug where locally-stored input files would  potentially deleted if the user would use the “Test Configuration” feature with a participant list that contained both S3 links and local filepath file templates.</li>
 <li>A few redundant and unnecessary directories in the individual-level analysis output directory have been removed. These were re-writes of the ANTS-based anatomical registration warp files.</li>
 <li>The pipeline configuration file editor now includes the CPAC version number in the configuration YAML file.</li>
 <li>More informative error messages for when there is a problem in the pipeline configuration, such as the presence of unreferenced variable names in file paths.</li>
-</ul>
-<p>Updated user documentation for this release can be found here:
-<a class="reference external" href="http://fcp-indi.github.io/docs/user/index.html">http://fcp-indi.github.io/docs/user/index.html</a></p>
-<p>And as always, you can contact us here for user support and discussion:
-<a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">https://groups.google.com/forum/#!forum/cpax_forum</a></p>
-<p>Regards,
-The CPAC development team.</p>
+</ol>
 </div>
 
 
