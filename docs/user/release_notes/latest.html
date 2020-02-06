@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>&lt;no title&gt; &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <title>Latest Release: C-PAC v1.6.0 (Jan 3, 2020) &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -34,7 +34,39 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  
+  <div class="section" id="latest-release-c-pac-v1-6-0-jan-3-2020">
+<h1>Latest Release: C-PAC v1.6.0 (Jan 3, 2020)<a class="headerlink" href="#latest-release-c-pac-v1-6-0-jan-3-2020" title="Permalink to this headline">¶</a></h1>
+<p><strong>NEW FEATURES</strong></p>
+<ul class="simple">
+<li><strong>Anatomical-Refined BOLD Mask Generation.</strong> A new method for creating the BOLD mask is available, which uses the T1 brain mask to refine the boundaries of the generated BOLD mask.</li>
+<li><strong>Carpet plots.</strong> The Quality Control interface now includes carpet plots, which are useful for rapid visual inspection for motion and other artifacts.</li>
+</ul>
+<p><strong>NEW FEATURES - Options that enhance reproducibility with fMRIPrep</strong></p>
+<ul class="simple">
+<li><strong>Cosine Filtering for CompCor.</strong> Users can now configure nuisance correction to perform cosine filtering on the time series data prior to CompCor calculation.</li>
+<li><strong>Motion Estimation Before Slice Timing Correction.</strong> Users now have the option to calculate motion parameter estimation before slice timing correction, with actual motion correction still occurring after slice timing correction. The motion parameters go on to be used in nuisance regression and statistics reporting.</li>
+<li><strong>N4 Correction for EPI.</strong> Users can now apply N4 Bias correction to the mean EPI image. This may help enhance coregistration quality.</li>
+</ul>
+<p><strong>NEW FEATURES - Options that facilitate nonhuman data processing</strong></p>
+<ul class="simple">
+<li><strong>EPI-Based Registration.</strong> Users can now register their BOLD data directly to an EPI template, foregoing structural-to-template registration, if desired.</li>
+<li><strong>Template-Based Segmentation.</strong> Optimal for use with functional-only pipelines commonly used for rodent data, users can now employ a template-based tissue segmentation approach that applies inverse registration transforms to template-space tissue priors.</li>
+<li><strong>Rodent Data compatibility.</strong> The pipeline now has an option to size-scale rodent brains to a larger size as an initial preprocessing step to prepare rodent data for processing tools.</li>
+<li><strong>U-Net Brain Extraction Model.</strong> U-Net is a Fully Convolutional Network (FCN) that does image segmentation. Users can now select this option for brain extraction, especially optimal for non-human primate data.</li>
+</ul>
+<p><strong>IMPROVEMENTS</strong></p>
+<ul class="simple">
+<li><strong>Dramatically reducing working directory size.</strong> When running aCompCor: the space requirements of the working directory has been reduced to a sustainable size. A change in the previous version resulted in too-large intermediate files for aCompCor calculation.</li>
+</ul>
+<p>Some redundancies in the pipeline during time series extraction have been removed, and the pipeline now consumes less memory and disk space during processing.</p>
+<p><strong>BUG FIXES - Quality Control Interface</strong></p>
+<ul class="simple">
+<li>The Quality Control interface is fully functional once again. We apologize for the instability in recent versions, in which QC images and metrics would be generated, but the HTML portal would not generate properly.</li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
 
           </div>
         </div>
