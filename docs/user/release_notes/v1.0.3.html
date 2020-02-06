@@ -1,0 +1,141 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>CPAC Version 1.0.3 Beta (Jan 6, 2018) &#8212; C-PAC 1.6.0 Beta documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex" />
+    <link rel="search" title="Search" href="../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cpac-version-1-0-3-beta-jan-6-2018">
+<h1>CPAC Version 1.0.3 Beta (Jan 6, 2018)<a class="headerlink" href="#cpac-version-1-0-3-beta-jan-6-2018" title="Permalink to this headline">¶</a></h1>
+<p>Dear Colleagues,</p>
+<p>We are happy to inform you that we recently released CPAC Version 1.0.3 Beta. You can update your existing installations of CPAC using instructions <a class="reference external" href="http://fcp-indi.github.io/docs/user/install.html">here</a>. Please let us know if you have any questions or feedback by posting to the <a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">forum</a>.</p>
+<p>General Remarks</p>
+<ul class="simple">
+<li>The Subject/Participant list YAML file has been renamed the “Data Configuration” file. What used to be named the “data config”, which contains the presets used to generate the participant list, has been renamed the “Data Settings” file. This also makes the main CPAC interface consistent with the CPAC BIDS-App. See the <a class="reference external" href="http://fcp-indi.github.io/docs/user/subject_list_config.html">User Guide section about building a data configuration file</a> for more information.</li>
+</ul>
+<p>New Features</p>
+<ul class="simple">
+<li>Field map distortion correction via FSL FUGUE has been introduced as a pre-processing option. Users can provide the phase difference and magnitude files required to generate the field map (if applicable) through the data configuration (participant list) builder. See the <a class="reference external" href="http://fcp-indi.github.io/docs/user/func.html#field-map-based-distortion-correction">User Guide section about distortion correction</a> for more information.</li>
+<li>A new script called cpac_data_config_setup.py has been introduced, which allows users to quickly and easily create a data settings template for modification, and then use this data settings file to generate their data configuration. This script does the same thing that the data configuration builder GUI does, except without needing to be able to open the GUI (for example, when SSHing into a server). Information on its usage is available <a class="reference external" href="http://fcp-indi.github.io/docs/user/subject_list_config.html#creating-the-data-configuration-file-from-terminal">here</a>.</li>
+<li>When building your data configuration (participant list), input data can now be filtered by site, session, and series.</li>
+<li>For building your data configuration (participant list), support for BIDS-protocol scan parameter reading from JSON files has been introduced.</li>
+<li>Logging can now be disabled by entering “run_logging: False” in your pipeline configuration YAML file.</li>
+</ul>
+<p>Improvements</p>
+<ul class="simple">
+<li>The layout and naming of fields in the data configuration builder GUI are now clearer.</li>
+<li>More informative status messages have been introduced detailing the data configuration building process (progress, amount of input data found, etc.).</li>
+<li>Data configuration files (participant lists) are now ordered by site, and then participant ID, for easier searching and navigation when manually viewing or editing the YAML file.</li>
+</ul>
+<p>Error Fixes</p>
+<ul class="simple">
+<li>The bug in the group-level analysis model builder GUI reported earlier, where the ordering of the contrasts in the contrast matrix provided to FSL FLAME did not always match the order in which they were specified in the group model builder GUI, has been fixed.</li>
+<li>An error introduced in v1.0.2 that was causing the CompCor nuisance regression strategy to not run even if it was selected in some cases, has been fixed.</li>
+<li>When generating a data configuration file (participant list), a bug sometimes causing some scans to not be included in a participant entry has been fixed.</li>
+<li>Fixed a bug where sometimes de-spiking could cause a crash if no volumes are marked for excessive motion.</li>
+<li>The formatting of the motion parameters CSV file has been fixed.</li>
+</ul>
+<p>Updated user documentation for this release can be found here:
+<a class="reference external" href="http://fcp-indi.github.io/docs/user/index.html">http://fcp-indi.github.io/docs/user/index.html</a></p>
+<p>And as always, you can contact us here for user support and discussion:
+<a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">https://groups.google.com/forum/#!forum/cpax_forum</a></p>
+<p>Regards,
+The CPAC development team.</p>
+<blockquote>
+<div></div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index">
+              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+<h3><a href="../index">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use_case_wizard/index">1. Use Case Wizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick">2. C-PAC Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_list_config">3. Specify Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline_config">4. Select Your Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing">5. Pre-Process Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives">6. Compute Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running">7. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../group_analysis">8. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output_dir">9. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help">10. Troubleshoot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rnotes">11. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix">12. Appendix</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, C-PAC Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+
+  </body>
+</html>
