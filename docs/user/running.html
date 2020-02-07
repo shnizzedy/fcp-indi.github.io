@@ -107,6 +107,8 @@
 </div>
 <p>Note: we are still providing <code class="docutils literal notranslate"><span class="pre">/bids_dataset</span></code> to the <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> input parameter. However, we have mapped this to any directory on your machine, as C-PAC will not look for data in this directory when you provide a data configuration YAML with the <code class="docutils literal notranslate"><span class="pre">--data_config_file</span></code> flag. In addition, if the dataset in your data configuration file is not in BIDS format, just make sure to add the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag at the end of your command to bypass the BIDS validation process.</p>
 <p>The full list of parameters and options that can be passed to the Docker container are shown below:</p>
+<div class="section" id="cpac-run-help">
+<h3>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
               [--data_config_file DATA_CONFIG_FILE]
               [--pipeline_override PIPELINE_OVERRIDE]
@@ -248,6 +250,7 @@ optional arguments:
 <div class="toctree-wrapper compound">
 </div>
 </div>
+</div>
 <div class="section" id="run-on-singularity">
 <h2>Run on Singularity<a class="headerlink" href="#run-on-singularity" title="Permalink to this headline">¶</a></h2>
 <p>For those who wish to avoid the administrator rights requirements often associated with Docker usage (or the security hazards when used on a shared computing system), <a class="reference external" href="https://singularityhub.github.io/singularityhub-docs/">Singularity</a> is a good option. Singularity is a container solution just like Docker, except it is designed specifically to offer secure deployment on shared cluster environments.</p>
@@ -286,8 +289,6 @@ optional arguments:
 <li><strong>EC2 Instance Store</strong> - A form of temporary storage that comes included with some instance types.  Instance store volumes must be added manually before launching an instance, and all files stored on them will be lost when the instance is terminated.  The instance store is typically mounted at <code class="docutils literal notranslate"><span class="pre">/mnt</span></code>.</li>
 </ul>
 <p>Lastly, it would be important to review any terms related to <a class="reference internal" href="compute_config"><span class="doc">the Sun Grid Engine job scheduler</span></a>.</p>
-<div class="section" id="creating-aws-access-and-network-keys">
-<h3>Creating AWS Access and Network Keys<a class="headerlink" href="#creating-aws-access-and-network-keys" title="Permalink to this headline">¶</a></h3>
 <p>Before you can create a single C-PAC machine or a C-PAC HPC cluster, you must first generate credentials that will allow you to log into any AWS instance that you create.  The following steps will walk you through the process of creating all the necessary credentials and encryption keys that you will need.</p>
 <ol class="arabic simple">
 <li>Go to <a class="reference external" href="http://aws.amazon.com/console/">http://aws.amazon.com/console/</a></li>
@@ -300,9 +301,6 @@ optional arguments:
 <li>Click on the blue <cite>Create Key Pair</cite> button. Give your key an appropriate name and click on the blue <cite>Create</cite> button.  A .pem file will now save to disk.  Move this file to a safe and memorable location on your hard drive.</li>
 <li>On your local drive, open a terminal and run the following command: <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">400</span> <span class="pre">/path/to/pem/file</span></code></li>
 </ol>
-</div>
-<div class="section" id="starting-a-single-c-pac-instance-via-the-aws-console">
-<h3>Starting a Single C-PAC Instance via the AWS Console<a class="headerlink" href="#starting-a-single-c-pac-instance-via-the-aws-console" title="Permalink to this headline">¶</a></h3>
 <p>Now that you have generated the access keys and a pem file, you may launch a single instance via Amazon’s web interface by following the steps below.  If you are planning on processing many subjects or obtaining computationally-intensive derivatives (such as network centrality), you should use Starcluster instead.</p>
 <ol class="arabic simple">
 <li>In the left-hand column under the <cite>INSTANCES</cite> header in the AWS console, click <cite>Instances</cite>. This is a dashboard of all instances you currently have running in the AWS cloud. Click the blue <cite>Launch Instance</cite> button.</li>
@@ -318,9 +316,6 @@ optional arguments:
 <li>You can click the <cite>View Instances</cite> blue button on the lower right of the page after to watch your new instance start up in the instance console.</li>
 <li>When the <cite>Instance State</cite> column reads <cite>running</cite> and the <cite>Status Checks</cite> column reads <cite>2/2</cite>, the instance should be active. Click on the row for the new instance.  In the bottom pane, take note of the values for the <cite>Instance ID</cite>, <cite>Public DNS</cite>, and <cite>Availability zone</cite> fields under the <cite>Description</cite> tab.</li>
 </ol>
-</div>
-<div class="section" id="attaching-persistent-ebs-storage-to-an-instance">
-<h3>Attaching Persistent EBS Storage to an Instance<a class="headerlink" href="#attaching-persistent-ebs-storage-to-an-instance" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li>Once your instance is up and running, you can create a persistent storage volume for your data and results.  In the left-hand column under the <cite>ELASTIC BLOCK STORE</cite> header in the AWS console, click <cite>Volumes</cite>. This is a dashboard of all volumes that you currently have stored in EBS. Click the blue <cite>Create Volume</cite> button.</li>
 <li>Change the size field in the proceeding dialogue to have enough space to encompass the amount of data you expect to store.  A single volume can be as small as 1 GB or as large as 16 TB.  Change the availability zone to match the zone from your instance’s <cite>Description</cite> tab.</li>
@@ -335,19 +330,11 @@ optional arguments:
 </pre></div>
 </div>
 <p>Note that the creation of a persistent volume is heavily automated in Starcluster, so if you will be creating many different persistent volumes you should use Starcluster instead.</p>
-</div>
-<div class="section" id="accessing-your-instance">
-<h3>Accessing Your Instance<a class="headerlink" href="#accessing-your-instance" title="Permalink to this headline">¶</a></h3>
 <p>There are now two different means of accessing the instance.  Either through X2Go (a desktop GUI-based session) or through ssh (a command line session).</p>
-<div class="section" id="ssh">
-<h4>ssh<a class="headerlink" href="#ssh" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li>Open a terminal and type <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-i</span> <span class="pre">/path/to/pem/file</span> <span class="pre">ubuntu&#64;&lt;Public</span> <span class="pre">Domain</span> <span class="pre">Name&gt;</span></code>.</li>
 <li>Type <cite>yes</cite> when asked if you trust the source.</li>
 </ol>
-</div>
-<div class="section" id="x2go">
-<h4>X2Go<a class="headerlink" href="#x2go" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li>Install the X2Go client using the instructions <a class="reference external" href="http://wiki.x2go.org/doku.php/doc:installation:x2goclient">here</a>.</li>
 <li>Open X2go and create a new session.</li>
@@ -362,30 +349,18 @@ optional arguments:
 <img alt="_images/cloud_x2go.png" src="_images/cloud_x2go.png" />
 </div>
 <p>Note: If X2Go does not work on your computer, you can also access the C-PAC GUI by adding the <code class="docutils literal notranslate"><span class="pre">-X</span></code> flag to the ssh command to enable X11 port forwarding (i.e., the ssh command would be <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-X</span> <span class="pre">-i</span> <span class="pre">/path/to/pem/file</span> <span class="pre">ubuntu&#64;&lt;Public</span> <span class="pre">Domain</span> <span class="pre">Name&gt;</span></code>).  X11 port forwarding is very slow compared to X2Go, however, so it is recommended that you troubleshoot X2Go further before turning to this option.</p>
-</div>
-</div>
-<div class="section" id="uploading-data-to-your-instance">
-<h3>Uploading Data to Your Instance<a class="headerlink" href="#uploading-data-to-your-instance" title="Permalink to this headline">¶</a></h3>
 <p>To upload data to your newly-created AWS instance, you can run the following command on the computer containing your data:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">scp -r -i /path/to/pem/key /path/to/data ubuntu@&lt;Public Domain Name&gt;:/path/to/server/directory</span>
 </pre></div>
 </div>
 <p>If you have configured persistent storage, you will want to ensure that <cite>/path/to/server/directory</cite> is pointing to the mount point for the persistent storage.  If you followed the instructions above or the instructions in the Starcluster section below, the mount point should be <cite>/media/ebs</cite>.</p>
-</div>
-<div class="section" id="starting-a-c-pac-hpc-cluster-via-starcluster">
-<h3>Starting a C-PAC HPC Cluster via Starcluster<a class="headerlink" href="#starting-a-c-pac-hpc-cluster-via-starcluster" title="Permalink to this headline">¶</a></h3>
 <p>Starcluster is suggested for more sophisticated C-PAC runs.  Using Starcluster, you can parallelize your analyses by distributing subjects across multiple nodes in an HPC cluster.  The following section describes how to install and configure Starcluster to work with C-PAC, dynamically add nodes to your cluster and leverage C-PAC’s grid functionality.</p>
-<div class="section" id="installing-starcluster">
-<h4>Installing Starcluster<a class="headerlink" href="#installing-starcluster" title="Permalink to this headline">¶</a></h4>
 <p>If you have pip installed, Starcluster can be installed via:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install starcluster</span>
 </pre></div>
 </div>
 <p>Note that if you are using a *nix-based OS and you are not using an environment such as Miniconda, you will need to run the above command with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p>
 <p>If you do not have pip installed, see the <a class="reference external" href="http://star.mit.edu/cluster/docs/latest/installation.html">Official Starcluster Installation Instructions</a> for alternative installation methods.</p>
-</div>
-<div class="section" id="installing-the-c-pac-starcluster-plug-ins">
-<h4>Installing the C-PAC Starcluster Plug-ins<a class="headerlink" href="#installing-the-c-pac-starcluster-plug-ins" title="Permalink to this headline">¶</a></h4>
 <p>The C-PAC Starcluster plug-ins configure the SGE environment that C-PAC uses and ensure that storage space is writable.  From the terminal, download the C-PAC Starcluster plug-ins and install them by running the following commands:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd /tmp</span>
 <span class="go">git clone https://github.com/FCP-INDI/CPAC_CLOUD</span>
@@ -393,9 +368,6 @@ optional arguments:
 <span class="go">mv *.py ~/.starcluster/plugins</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="creating-and-editing-your-configuration-file">
-<h4>Creating and Editing Your Configuration File<a class="headerlink" href="#creating-and-editing-your-configuration-file" title="Permalink to this headline">¶</a></h4>
 <p>Now you will need to create a Starcluster configuration file so that Starcluster can use your keys and know which instance types you would like to use.  To begin, type <code class="docutils literal notranslate"><span class="pre">starcluster</span> <span class="pre">help</span></code> and select option 2.</p>
 <p>Fill in the AWS access keys from the CVS file that you created in the <cite>Creating AWS Access and Network Keys</cite> section:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">aws</span> <span class="n">info</span><span class="p">]</span>
@@ -434,9 +406,6 @@ optional arguments:
 <span class="n">setup_class</span> <span class="o">=</span> <span class="n">mnt_perm</span><span class="o">.</span><span class="n">MntPermissions</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="attaching-persistent-storage-to-your-cluster">
-<h4>Attaching Persistent Storage to Your Cluster<a class="headerlink" href="#attaching-persistent-storage-to-your-cluster" title="Permalink to this headline">¶</a></h4>
 <p>By default, the cluster will have an EBS-backed root volume and, if available, an instance store volume mounted at <code class="docutils literal notranslate"><span class="pre">/mnt</span></code>.  Neither of these volumes are persistent and they will be destroyed when the cluster terminates. A shared directory mounted at <cite>/home</cite> on the head node can be used across nodes. If you need more storage than what is available on the head node or if you want to keep your data after the cluster is terminated, you will need to create a new volume that can be attached to all nodes in the cluster.  To do so, begin by creating an EBS-backed volume:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">starcluster createvolume --shutdown-volume-host &lt;volume_size_in_gigabytes&gt; &lt;region&gt; -I t2.micro -i &lt;Image ID&gt;</span>
 </pre></div>
@@ -452,23 +421,14 @@ optional arguments:
 </pre></div>
 </div>
 <p>The <a class="reference external" href="http://star.mit.edu/cluster/docs/latest/manual/volumes.html">Starcluster documentation</a> explains how to perform other operations such as resizing and removing volumes.</p>
-</div>
-<div class="section" id="starting-the-c-pac-head-node">
-<h4>Starting the C-PAC Head Node<a class="headerlink" href="#starting-the-c-pac-head-node" title="Permalink to this headline">¶</a></h4>
 <p>To start up the head node on your C-PAC HPC cluster, use the following Starcluster command (with substitutions where necessary):</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">starcluster start -c cpac_cluster &lt;cluster_name&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="adding-additional-nodes">
-<h4>Adding Additional Nodes<a class="headerlink" href="#adding-additional-nodes" title="Permalink to this headline">¶</a></h4>
 <p>To add additional nodes to your C-PAC HPC cluster, use the following Starcluster command (with substitutions where necessary):</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">starcluster addnode -n &lt;number_of_nodes_to_add&gt; &lt;cluster_name&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="accessing-the-head-node">
-<h4>Accessing the Head Node<a class="headerlink" href="#accessing-the-head-node" title="Permalink to this headline">¶</a></h4>
 <p>If you wish to use the C-PAC GUI while accessing the head node, type the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">starcluster sshmaster -X -u ubuntu &lt;cluster_name&gt;</span>
 </pre></div>
@@ -478,9 +438,6 @@ optional arguments:
 </pre></div>
 </div>
 <p>You may also use the instructions for X2Go from the <cite>Starting a Single C-PAC Instance via the AWS Console</cite> section to access the head node via a graphical shell.  To do so, obtain the public DNS for the head node by typing <code class="docutils literal notranslate"><span class="pre">starcluster</span> <span class="pre">listclusters</span></code>.  The public DNS will be in the last column of the row labeled <cite>master</cite>.</p>
-</div>
-<div class="section" id="using-c-pac-to-submit-an-sge-job">
-<h4>Using C-PAC to Submit an SGE Job<a class="headerlink" href="#using-c-pac-to-submit-an-sge-job" title="Permalink to this headline">¶</a></h4>
 <p>C-PAC performs the heavy lifting of creating an SGE job submission script and submitting it to the SGE job scheduler seamlessly.</p>
 <p><strong>Via the shell:</strong></p>
 <ol class="arabic simple">
@@ -493,9 +450,6 @@ optional arguments:
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac_run.py /path/to/pipeline_config.yml /path/to/CPAC_subject_list.yml</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="checking-on-sge-jobs">
-<h4>Checking on SGE Jobs<a class="headerlink" href="#checking-on-sge-jobs" title="Permalink to this headline">¶</a></h4>
 <p>Once you are done submitting the job, you can check its status by typing <code class="docutils literal notranslate"><span class="pre">qstat</span></code>.  This command will produce output that looks similar to the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">-</span><span class="n">ID</span>  <span class="n">prior</span>   <span class="n">name</span>       <span class="n">user</span>         <span class="n">state</span> <span class="n">submit</span><span class="o">/</span><span class="n">start</span> <span class="n">at</span>     <span class="n">queue</span>                          <span class="n">slots</span> <span class="n">ja</span><span class="o">-</span><span class="n">task</span><span class="o">-</span><span class="n">ID</span>
 <span class="o">-----------------------------------------------------------------------------------------------------------------</span>
@@ -507,9 +461,6 @@ optional arguments:
 </div>
 <p>The <cite>job-ID</cite> is a number assigned to your job when it is submitted to the scheduler.  The <cite>state</cite> of the job can be represented by one of several values: <cite>r</cite> means that the job is running, <cite>qw</cite> means that the job is queued and waiting, and <cite>E</cite> means that an error has occurred. The <cite>queue</cite> column indicates on which nodes of your cluster the C-PAC job is being executed.</p>
 <p>If an error has occurred on any of the nodes while your pipeline executes, you should check the <cite>cluster_temp_files</cite> directory that was created in the directory from which you ran C-PAC.  This will contain copies of the job submission scripts that C-PAC generated to start your job.  It will also contain files containing the standard out and error messages for a given job.  You should check these first to determine what may have caused the error.  If these files do not help you determine what may have caused the error, feel free to ask for <a class="reference internal" href="help"><span class="doc">help</span></a> on the C-PAC forum.</p>
-</div>
-<div class="section" id="terminating-a-starcluster-instance">
-<h4>Terminating a Starcluster Instance<a class="headerlink" href="#terminating-a-starcluster-instance" title="Permalink to this headline">¶</a></h4>
 <p>When you are done and have exited from your cluster, the following command will terminate the cluster:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">starcluster terminate &lt;cluster_name&gt;</span>
 </pre></div>
@@ -519,15 +470,10 @@ optional arguments:
 </pre></div>
 </div>
 <p><strong>Warning:</strong> If you are not using persistent storage (see <cite>Attaching Persistent Storage to Your Cluster</cite>) then all of your data will be lost upon termination of the cluster.  You will need to copy your data to another drive if you wish to keep it.</p>
-</div>
-</div>
-<div class="section" id="additional-links">
-<h3>Additional Links<a class="headerlink" href="#additional-links" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="http://star.mit.edu/cluster/docs/latest/manual/index.html">The StarCluster User Manual</a></li>
 <li><a class="reference external" href="http://docs.aws.amazon.com/gettingstarted/latest/awsgsg-intro/gsg-aws-intro.html">Getting Started with AWS</a></li>
 </ul>
-</div>
 </div>
 <div class="section" id="with-openneuro">
 <h2>With OpenNeuro<a class="headerlink" href="#with-openneuro" title="Permalink to this headline">¶</a></h2>

@@ -18,7 +18,7 @@
     
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
-    <link rel="next" title="&lt;no title&gt;" href="run/help" />
+    <link rel="next" title="cpac run –help" href="run/help" />
     <link rel="prev" title="Optimize" href="use_case_wizard/optimize/index" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,7 +28,7 @@
           <a href="genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="run/help" title="&lt;no title&gt;"
+          <a href="run/help" title="cpac run –help"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="use_case_wizard/optimize/index" title="Optimize"
@@ -92,6 +92,8 @@
 </div>
 <p>Note: we are still providing <code class="docutils literal notranslate"><span class="pre">/bids_dataset</span></code> to the <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> input parameter. However, we have mapped this to any directory on your machine, as C-PAC will not look for data in this directory when you provide a data configuration YAML with the <code class="docutils literal notranslate"><span class="pre">--data_config_file</span></code> flag. In addition, if the dataset in your data configuration file is not in BIDS format, just make sure to add the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag at the end of your command to bypass the BIDS validation process.</p>
 <p>The full list of parameters and options that can be passed to the Docker container are shown below:</p>
+<div class="section" id="cpac-run-help">
+<h3>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
               [--data_config_file DATA_CONFIG_FILE]
               [--pipeline_override PIPELINE_OVERRIDE]
@@ -231,6 +233,7 @@ optional arguments:
 <li>The <code class="docutils literal notranslate"><span class="pre">participant_label</span></code> and <code class="docutils literal notranslate"><span class="pre">participant_ndx</span></code> arguments allow the user to specify which of the many datasets should be processed, which is useful when parallelizing the run of multiple participants.</li>
 </ul>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 <div class="section" id="run-on-singularity">
@@ -418,7 +421,7 @@ optional arguments:
           <a href="genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="run/help" title="&lt;no title&gt;"
+          <a href="run/help" title="cpac run –help"
              >next</a> |</li>
         <li class="right" >
           <a href="use_case_wizard/optimize/index" title="Optimize"

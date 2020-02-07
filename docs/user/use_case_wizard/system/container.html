@@ -18,8 +18,8 @@
     
     <link rel="index" title="Index" href="../../genindex" />
     <link rel="search" title="Search" href="../../search" />
-    <link rel="next" title="How to pull C-PAC image?" href="version" />
-    <link rel="prev" title="Use Case Wizard" href="../index" /> 
+    <link rel="next" title="Where do you want the outputs stored?" href="outputs" />
+    <link rel="prev" title="Singularity" href="singularity/pull" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,10 +28,10 @@
           <a href="../../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="version" title="How to pull C-PAC image?"
+          <a href="outputs" title="Where do you want the outputs stored?"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../index" title="Use Case Wizard"
+          <a href="singularity/pull" title="Singularity"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index" accesskey="U">Use Case Wizard</a> &#187;</li> 
@@ -45,10 +45,34 @@
             
   <div class="section" id="how-to-install-container-docker-or-singularity">
 <h1>How to install container (Docker or Singularity)?<a class="headerlink" href="#how-to-install-container-docker-or-singularity" title="Permalink to this headline">¶</a></h1>
-<p><strong>Docker</strong></p>
+<div class="section" id="docker">
+<h2>docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://docs.docker.com/install/">Install Docker</a></p>
-<p><strong>Singularity</strong></p>
+</div>
+<div class="section" id="singularity">
+<h2>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://sylabs.io/guides/3.4/user-guide/quick_start.html#quick-installation-steps">Install Singularity</a></p>
+</div>
+</div>
+<div class="section" id="how-to-pull-c-pac-image">
+<h1>How to pull C-PAC image?<a class="headerlink" href="#how-to-pull-c-pac-image" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Docker<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>To pull the latest version of C-PAC from Docker Hub:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker pull fcpindi/c-pac:latest
+</pre></div>
+</div>
+<p>To pull a different version, please specify the image tag. For example, you can pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:release-v1.5.0</span></code> to use C-PAC version 1.5.0; pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:nightly</span></code> to use C-PAC development version (under development, not stable).</p>
+</div>
+<div class="section" id="id2">
+<h2>Singularity<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>To pull the latest version of C-PAC from Singularity Hub:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity pull --name C-PAC.sif shub://FCP-INDI/C-PAC
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
 </div>
 
 
@@ -105,10 +129,10 @@
           <a href="../../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="version" title="How to pull C-PAC image?"
+          <a href="outputs" title="Where do you want the outputs stored?"
              >next</a> |</li>
         <li class="right" >
-          <a href="../index" title="Use Case Wizard"
+          <a href="singularity/pull" title="Singularity"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index" >Use Case Wizard</a> &#187;</li> 

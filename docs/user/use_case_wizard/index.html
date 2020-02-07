@@ -18,7 +18,7 @@
     
     <link rel="index" title="Index" href="../genindex" />
     <link rel="search" title="Search" href="../search" />
-    <link rel="next" title="How to install container (Docker or Singularity)?" href="system/container" />
+    <link rel="next" title="docker" href="system/docker/install" />
     <link rel="prev" title="Latest Release: C-PAC v1.6.0 (Jan 3, 2020)" href="../release_notes/v1.6.0" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,7 +28,7 @@
           <a href="../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="system/container" title="How to install container (Docker or Singularity)?"
+          <a href="system/docker/install" title="docker"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../release_notes/v1.6.0" title="Latest Release: C-PAC v1.6.0 (Jan 3, 2020)"
@@ -50,23 +50,33 @@
 <h3>On My Local Computer<a class="headerlink" href="#on-my-local-computer" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="how-to-install-container-docker-or-singularity">
 <h4>How to install container (Docker or Singularity)?<a class="headerlink" href="#how-to-install-container-docker-or-singularity" title="Permalink to this headline">¶</a></h4>
-<p><strong>Docker</strong></p>
+<div class="section" id="docker">
+<h5>docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h5>
 <p><a class="reference external" href="https://docs.docker.com/install/">Install Docker</a></p>
-<p><strong>Singularity</strong></p>
+</div>
+<div class="section" id="singularity">
+<h5>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h5>
 <p><a class="reference external" href="https://sylabs.io/guides/3.4/user-guide/quick_start.html#quick-installation-steps">Install Singularity</a></p>
+</div>
 </div>
 <div class="section" id="how-to-pull-c-pac-image">
 <h4>How to pull C-PAC image?<a class="headerlink" href="#how-to-pull-c-pac-image" title="Permalink to this headline">¶</a></h4>
-<p><strong>Docker</strong></p>
+<div class="section" id="id1">
+<h5>Docker<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
 <p>To pull the latest version of C-PAC from Docker Hub:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker pull fcpindi/c-pac:latest
 </pre></div>
 </div>
 <p>To pull a different version, please specify the image tag. For example, you can pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:release-v1.5.0</span></code> to use C-PAC version 1.5.0; pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:nightly</span></code> to use C-PAC development version (under development, not stable).</p>
-<p><strong>Singularity</strong></p>
+</div>
+<div class="section" id="id2">
+<h5>Singularity<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
 <p>To pull the latest version of C-PAC from Singularity Hub:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity pull --name C-PAC.sif shub://FCP-INDI/C-PAC
 </pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 <div class="section" id="where-do-you-want-the-outputs-stored">
@@ -96,8 +106,8 @@
 <div class="section" id="how-many-cpus-and-how-much-memort-gb-is-available-to-you">
 <h4>How many CPUs and how much memort (GB) is available to you?<a class="headerlink" href="#how-many-cpus-and-how-much-memort-gb-is-available-to-you" title="Permalink to this headline">¶</a></h4>
 </div>
-<div class="section" id="id1">
-<h4>Where do you want the outputs stored?<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id3">
+<h4>Where do you want the outputs stored?<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <p>[populate output dir (and -v/-B mappings) with this path]</p>
 <div class="toctree-wrapper compound">
 </div>
@@ -273,12 +283,17 @@
 <dt>I want to load an existing pipeline I made earlier, or got from someone else, and edit it, then run it (make this more concise)</dt>
 <dd><ul class="first simple">
 <li><a class="reference external" href="https://fcp-indi.github.io/C-PAC_GUI/#/">CPAC online GUI</a></li>
+</ul>
+<ul class="simple">
 <li>Load/upload YAML file</li>
 </ul>
 <ul class="simple">
 <li>Download YAML file</li>
 </ul>
-<ul class="last simple">
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>I want to run an existing pipeline I made earlier, or got from someone else</dt>
+<dd><ul class="first last">
 <li><dl class="first docutils">
 <dt>What is the path to the pipeline configuration YAML (<em>.yml/</em>.yaml) file?</dt>
 <dd><ul class="first last">
@@ -288,6 +303,12 @@
 </dl>
 </li>
 </ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="toctree-wrapper last compound">
+</div>
 </dd>
 </dl>
 </li>
@@ -358,7 +379,7 @@
           <a href="../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="system/container" title="How to install container (Docker or Singularity)?"
+          <a href="system/docker/install" title="docker"
              >next</a> |</li>
         <li class="right" >
           <a href="../release_notes/v1.6.0" title="Latest Release: C-PAC v1.6.0 (Jan 3, 2020)"
