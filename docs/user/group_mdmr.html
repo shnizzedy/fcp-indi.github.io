@@ -1,11 +1,9 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Multivariate Distance Matrix Regression (MDMR) &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,6 +14,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
     <link rel="next" title="Inter-subject Correlation (ISC) &amp; Inter-subject Functional Correlation (ISFC)" href="group_isc" />
@@ -53,10 +52,10 @@
 <h2>Computation and Analysis Considerations<a class="headerlink" href="#computation-and-analysis-considerations" title="Permalink to this headline">¶</a></h2>
 <p>Computation steps for CWAS are listed below as described by Shehzad and colleagues (2014).</p>
 <ol class="arabic simple">
-<li>For each subject, C-PAC computes the correlation of BOLD signals between every possible pair of gray matter voxels, resulting in a V x V correlation matrix for each subject (where V is the number of gray matter voxels).</li>
-<li>To determine individual differences, patterns of whole-brain connectivity for each voxel are compared to the connectivity pattern for the same voxel between all possible pairs of subjects. A distance matrix is then computed which represents the dissimilarity between whole-brain connectivity patterns for any pair of subjects.</li>
-<li>MDMR is then used to test whether, for each voxel, whole-brain connectivity patterns tend to be more similar for individuals with like phenotypes (within-group) than individuals with unlike phenotypes (between-group). This quantifies how well phenotypic variables explain the distances between participants in the distance matrix.</li>
-<li>The significance of these similarities and differences is assessed with a permutation test. This identifies brain regions whose whole-brain pattern of connectivity is significantly predicted by a particular phenotypic variable.</li>
+<li><p>For each subject, C-PAC computes the correlation of BOLD signals between every possible pair of gray matter voxels, resulting in a V x V correlation matrix for each subject (where V is the number of gray matter voxels).</p></li>
+<li><p>To determine individual differences, patterns of whole-brain connectivity for each voxel are compared to the connectivity pattern for the same voxel between all possible pairs of subjects. A distance matrix is then computed which represents the dissimilarity between whole-brain connectivity patterns for any pair of subjects.</p></li>
+<li><p>MDMR is then used to test whether, for each voxel, whole-brain connectivity patterns tend to be more similar for individuals with like phenotypes (within-group) than individuals with unlike phenotypes (between-group). This quantifies how well phenotypic variables explain the distances between participants in the distance matrix.</p></li>
+<li><p>The significance of these similarities and differences is assessed with a permutation test. This identifies brain regions whose whole-brain pattern of connectivity is significantly predicted by a particular phenotypic variable.</p></li>
 </ol>
 <p>The figure below (taken from Shehzad et al., 2010) outlines these steps. For more detail on how C-PAC handles these computations, please see the <a class="reference external" href="http://fcp-indi.github.com/docs/developer/workflows/cwas.html">CWAS section of the developer documentation</a>.</p>
 <div class="figure">
@@ -80,13 +79,13 @@
 <img alt="_images/cwas.png" src="_images/cwas.png" />
 </div>
 <ol class="arabic simple">
-<li><strong>Run CWAS - [Off, On]:</strong> Used to determine if CWAS will be added to the pipeline or not.</li>
-<li><strong>Mask ROI File - [path]:</strong> Path to a mask file. Voxels outside of the mask will be excluded from CWAS.</li>
-<li><strong>Regressor File - [path]:</strong> Path to a text file containing the phenotypic regressor.</li>
-<li><strong>Regressor Participant Column Name - [string]:</strong> Name of the participants column in your regressor file.</li>
-<li><strong>Regressor of Interest columns - [string]:</strong> Columns of the regressor of interest in your regressor file.</li>
-<li><strong>Permutations - [integer]:</strong> Number of permutation tests to run on the Pseudo-F statistics.</li>
-<li><strong>Parallel Nodes - [integer]:</strong> Number of Nipype nodes created while computing CWAS.  Dependent upon computing resources.</li>
+<li><p><strong>Run CWAS - [Off, On]:</strong> Used to determine if CWAS will be added to the pipeline or not.</p></li>
+<li><p><strong>Mask ROI File - [path]:</strong> Path to a mask file. Voxels outside of the mask will be excluded from CWAS.</p></li>
+<li><p><strong>Regressor File - [path]:</strong> Path to a text file containing the phenotypic regressor.</p></li>
+<li><p><strong>Regressor Participant Column Name - [string]:</strong> Name of the participants column in your regressor file.</p></li>
+<li><p><strong>Regressor of Interest columns - [string]:</strong> Columns of the regressor of interest in your regressor file.</p></li>
+<li><p><strong>Permutations - [integer]:</strong> Number of permutation tests to run on the Pseudo-F statistics.</p></li>
+<li><p><strong>Parallel Nodes - [integer]:</strong> Number of Nipype nodes created while computing CWAS.  Dependent upon computing resources.</p></li>
 </ol>
 </div>
 <div class="section" id="configuration-using-a-yaml-file">

@@ -1,11 +1,9 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Online, in an AWS bucket &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,10 +14,11 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/language_data.js"></script>
     
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex" />
     <link rel="search" title="Search" href="../../search" />
-    <link rel="next" title="GUI" href="../pipeline/online_gui" />
-    <link rel="prev" title="On a local drive" href="local" /> 
+    <link rel="next" title="BIDS" href="BIDS_S3" />
+    <link rel="prev" title="Custom" href="custom_structure" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,10 +27,10 @@
           <a href="../../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../pipeline/online_gui" title="GUI"
+          <a href="BIDS_S3" title="BIDS"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="local" title="On a local drive"
+          <a href="custom_structure" title="Custom"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index" accesskey="U">Use Case Wizard</a> &#187;</li> 
@@ -46,44 +45,9 @@
   <div class="section" id="online-in-an-aws-bucket">
 <h1>Online, in an AWS bucket<a class="headerlink" href="#online-in-an-aws-bucket" title="Permalink to this headline">¶</a></h1>
 <p>Are they in BIDS format?</p>
-<ul>
-<li><p class="first">Yes</p>
-<blockquote>
-<div><ul class="simple">
-<li><dl class="first docutils">
-<dt>What is the path to the BIDS directory?</dt>
-<dd><ul class="first last">
-<li>[add s3://etc. to run command for data input]</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">No</p>
-<blockquote>
-<div><ul class="simple">
-<li>How to generate a data configuration?</li>
-</ul>
-<ol class="arabic simple">
-<li>Use the CLI to generate a template file</li>
-<li><dl class="first docutils">
-<dt>Fill in the template</dt>
-<dd><ol class="first last loweralpha">
-<li>Set <cite>dataFormat</cite> to <cite>Custom</cite></li>
-<li>Fill in <cite>anatomicalTempate</cite> and <cite>functionalTemplate</cite> with the absolute path (/path/to/data_dir), following the examples in the template comments to specify the directory structure</li>
-<li>Fill in <cite>outputSubjectListLocation</cite> and <cite>subjectListName</cite></li>
-<li>Fill in any other relevant keys in the template file</li>
-</ol>
-</dd>
-</dl>
-</li>
-<li>Use the CLI to generate configuration files</li>
-<li>In the container run command, include the flag <cite>–data_config_file /path/to/data_config.yml</cite> (replacing “/path/to/data_config.yml` to the absolute path to your configuration file generated in the previous step). <cite>bids_dir</cite> is still required but not used; the configuration file includes the absolute data paths</li>
-</ol>
-</div></blockquote>
-</li>
+<ul class="simple">
+<li><p><a class="reference internal" href="BIDS_S3"><span class="doc">Yes</span></a></p></li>
+<li><p><a class="reference internal" href="custom_structure"><span class="doc">No</span></a></p></li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
@@ -143,10 +107,10 @@
           <a href="../../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../pipeline/online_gui" title="GUI"
+          <a href="BIDS_S3" title="BIDS"
              >next</a> |</li>
         <li class="right" >
-          <a href="local" title="On a local drive"
+          <a href="custom_structure" title="Custom"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index" >Use Case Wizard</a> &#187;</li> 

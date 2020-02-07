@@ -1,11 +1,9 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Inter-subject Correlation (ISC) &amp; Inter-subject Functional Correlation (ISFC) &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,6 +14,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
     <link rel="next" title="Quasi-Periodic Patterns (QPP)" href="group_qpp" />
@@ -95,12 +94,12 @@
 <img alt="_images/isfc.png" src="_images/isfc.png" />
 </div>
 <ol class="arabic simple">
-<li><strong>Run ISC - [Off, On]:</strong> Used to determine if Inter-subject Correlation (ISC) will be added to the pipeline or not.</li>
-<li><strong>Run ISFC - [Off, On]:</strong> Used to determine if Inter-subject Functional Correlation (ISFC) will be added to the pipeline or not.</li>
-<li><strong>ROI analysis - [Off, On]:</strong> Used to determine if the ISC and ISFC will run in the ROI level.</li>
-<li><strong>Voxel-wise analysis - [Off, On]:</strong> Used to determine if the ISC and ISFC will run in the voxel level. Depending on the image resolution, it may take several hours and consume a great amount of available memory.</li>
-<li><strong>Voxel-wise analysis: Standard Deviation filter - [number]:</strong> Filter out voxels that, in the correlation distribution, is greater then the informed standard deviation. Zero value will disable the filter.</li>
-<li><strong>Permutations - [integer]:</strong> Number of permutation tests to run on the Pseudo-F statistics.</li>
+<li><p><strong>Run ISC - [Off, On]:</strong> Used to determine if Inter-subject Correlation (ISC) will be added to the pipeline or not.</p></li>
+<li><p><strong>Run ISFC - [Off, On]:</strong> Used to determine if Inter-subject Functional Correlation (ISFC) will be added to the pipeline or not.</p></li>
+<li><p><strong>ROI analysis - [Off, On]:</strong> Used to determine if the ISC and ISFC will run in the ROI level.</p></li>
+<li><p><strong>Voxel-wise analysis - [Off, On]:</strong> Used to determine if the ISC and ISFC will run in the voxel level. Depending on the image resolution, it may take several hours and consume a great amount of available memory.</p></li>
+<li><p><strong>Voxel-wise analysis: Standard Deviation filter - [number]:</strong> Filter out voxels that, in the correlation distribution, is greater then the informed standard deviation. Zero value will disable the filter.</p></li>
+<li><p><strong>Permutations - [integer]:</strong> Number of permutation tests to run on the Pseudo-F statistics.</p></li>
 </ol>
 </div>
 <div class="section" id="configuration-using-a-yaml-file">
@@ -119,15 +118,15 @@
 <h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h3>
 <p>The ISC analysis outputs three files:</p>
 <ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">correlations.csv</span></code> or <code class="code docutils literal notranslate"><span class="pre">correlations.nii.gz</span></code>: inter-subject correlations for each subject. The CSV file is generated for the ROI analysis. Each row is a subject, and each column is one of the regions. For the voxel analysis, it generates a 4-D Nifti file, in which the fourth dimension is the subject.</li>
-<li><code class="code docutils literal notranslate"><span class="pre">significance.csv</span></code> or <code class="code docutils literal notranslate"><span class="pre">significance.nii.gz</span></code>: p-values of the permutation test for each subject.</li>
-<li><code class="code docutils literal notranslate"><span class="pre">subject_ids.txt</span></code>: in order to keep track which index is for each subject, we provide the ordered subject id.</li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">correlations.csv</span></code> or <code class="code docutils literal notranslate"><span class="pre">correlations.nii.gz</span></code>: inter-subject correlations for each subject. The CSV file is generated for the ROI analysis. Each row is a subject, and each column is one of the regions. For the voxel analysis, it generates a 4-D Nifti file, in which the fourth dimension is the subject.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">significance.csv</span></code> or <code class="code docutils literal notranslate"><span class="pre">significance.nii.gz</span></code>: p-values of the permutation test for each subject.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">subject_ids.txt</span></code>: in order to keep track which index is for each subject, we provide the ordered subject id.</p></li>
 </ul>
 <p>The ISFC analysis outputs three files:</p>
 <ul class="simple">
-<li><code class="code docutils literal notranslate"><span class="pre">correlations.npy</span></code>: numpy array with the inter-subject correlations for each subject, with shape <code class="code docutils literal notranslate"><span class="pre">(subject,</span> <span class="pre">region,</span> <span class="pre">region)</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">significance.npy</span></code>: numpy array with the p-values of the permutation test for each subject, with shape <code class="code docutils literal notranslate"><span class="pre">(subject,</span> <span class="pre">region,</span> <span class="pre">region)</span></code></li>
-<li><code class="code docutils literal notranslate"><span class="pre">subject_ids.txt</span></code>: in order to keep track which index is for each subject, we provide the ordered subject id.</li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">correlations.npy</span></code>: numpy array with the inter-subject correlations for each subject, with shape <code class="code docutils literal notranslate"><span class="pre">(subject,</span> <span class="pre">region,</span> <span class="pre">region)</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">significance.npy</span></code>: numpy array with the p-values of the permutation test for each subject, with shape <code class="code docutils literal notranslate"><span class="pre">(subject,</span> <span class="pre">region,</span> <span class="pre">region)</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">subject_ids.txt</span></code>: in order to keep track which index is for each subject, we provide the ordered subject id.</p></li>
 </ul>
 </div>
 </div>
