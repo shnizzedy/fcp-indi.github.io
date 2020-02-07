@@ -45,35 +45,23 @@
             
   <div class="section" id="system-initial-setup">
 <h1>System / Initial Setup<a class="headerlink" href="#system-initial-setup" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="where-are-you-running">
-<h2>Where are you running?<a class="headerlink" href="#where-are-you-running" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="on-my-computer">
-<h3>On My Computer<a class="headerlink" href="#on-my-computer" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="docker-or-singularity">
-<h4>Docker or Singularity?<a class="headerlink" href="#docker-or-singularity" title="Permalink to this headline">¶</a></h4>
-<div class="section" id="docker">
-<h5>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h5>
-<p>Is Docker installed?</p>
+<div class="section" id="on-my-local-computer">
+<h2>On My Local Computer<a class="headerlink" href="#on-my-local-computer" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-install-container-docker-or-singularity">
+<h3>How to install container (Docker or Singularity)?<a class="headerlink" href="#how-to-install-container-docker-or-singularity" title="Permalink to this headline">¶</a></h3>
+<p><strong>Docker</strong></p>
 <p><a class="reference external" href="https://docs.docker.com/install/">Install Docker</a></p>
-</div>
-<div class="section" id="singularity">
-<h5>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h5>
-<p>Is Singularity installed?</p>
+<p><strong>Singularity</strong></p>
 <p><a class="reference external" href="https://sylabs.io/guides/3.4/user-guide/quick_start.html#quick-installation-steps">Install Singularity</a></p>
-<div class="toctree-wrapper compound">
-</div>
-</div>
 </div>
 <div class="section" id="how-to-pull-c-pac-image">
-<h4>How to pull C-PAC image?<a class="headerlink" href="#how-to-pull-c-pac-image" title="Permalink to this headline">¶</a></h4>
-<p><strong>C-PAC Versions</strong></p>
-<p>Current available versions: v1.6.0, v1.5.0, v1.4.3, v1.4.2, v1.4.1, development (not stable)</p>
+<h3>How to pull C-PAC image?<a class="headerlink" href="#how-to-pull-c-pac-image" title="Permalink to this headline">¶</a></h3>
 <p><strong>Docker</strong></p>
 <p>To pull the latest version of C-PAC from Docker Hub:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker pull fcpindi/c-pac:latest
 </pre></div>
 </div>
-<p>To pull a different version, please specify the image tag. E.g. fcpindi/c-pac:release-v1.5.0 is for C-PAC version 1.5.0; fcpindi/c-pac:nightly is C-PAC development version (not stable).</p>
+<p>To pull a different version, please specify the image tag. For example, you can pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:release-v1.5.0</span></code> to use C-PAC version 1.5.0; pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:nightly</span></code> to use C-PAC development version (under development, not stable).</p>
 <p><strong>Singularity</strong></p>
 <p>To pull the latest version of C-PAC from Singularity Hub:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>singularity pull --name C-PAC.sif shub://FCP-INDI/C-PAC
@@ -81,11 +69,11 @@
 </div>
 </div>
 <div class="section" id="where-do-you-want-the-outputs-stored">
-<h4>Where do you want the outputs stored?<a class="headerlink" href="#where-do-you-want-the-outputs-stored" title="Permalink to this headline">¶</a></h4>
+<h3>Where do you want the outputs stored?<a class="headerlink" href="#where-do-you-want-the-outputs-stored" title="Permalink to this headline">¶</a></h3>
 <p>[populate output dir (and -v/-B mappings) with this path]</p>
 </div>
 <div class="section" id="do-you-want-to-retain-all-intermediate-files">
-<h4>Do you want to retain all intermediate files?<a class="headerlink" href="#do-you-want-to-retain-all-intermediate-files" title="Permalink to this headline">¶</a></h4>
+<h3>Do you want to retain all intermediate files?<a class="headerlink" href="#do-you-want-to-retain-all-intermediate-files" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>(little blurb about pros/cons)</li>
 <li><dl class="first docutils">
@@ -103,18 +91,20 @@
 </div>
 </div>
 <div class="section" id="on-a-server">
-<h3>On A Server<a class="headerlink" href="#on-a-server" title="Permalink to this headline">¶</a></h3>
+<h2>On A Server<a class="headerlink" href="#on-a-server" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="how-many-cpus-and-how-much-memort-gb-is-available-to-you">
-<h4>How many CPUs and how much memort (GB) is available to you?<a class="headerlink" href="#how-many-cpus-and-how-much-memort-gb-is-available-to-you" title="Permalink to this headline">¶</a></h4>
+<h3>How many CPUs and how much memort (GB) is available to you?<a class="headerlink" href="#how-many-cpus-and-how-much-memort-gb-is-available-to-you" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="id1">
-<h4>Where do you want the outputs stored?<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<h3>Where do you want the outputs stored?<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>[populate output dir (and -v/-B mappings) with this path]</p>
 <div class="toctree-wrapper compound">
 </div>
+</div>
+</div>
+<div class="section" id="on-aws">
+<h2>On AWS<a class="headerlink" href="#on-aws" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
-</div>
-</div>
 </div>
 </div>
 </div>

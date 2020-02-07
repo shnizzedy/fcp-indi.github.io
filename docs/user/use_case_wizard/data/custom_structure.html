@@ -44,8 +44,24 @@
           <div class="body" role="main">
             
   <ul class="simple">
-<li>…</li>
+<li>How to generate a data configuration?</li>
 </ul>
+<ol class="arabic simple">
+<li>Use the CLI to generate a template file</li>
+<li><dl class="first docutils">
+<dt>Fill in the template</dt>
+<dd><ol class="first last loweralpha">
+<li>Set <cite>dataFormat</cite> to <cite>Custom</cite></li>
+<li>Fill in <cite>anatomicalTempate</cite> and <cite>functionalTemplate</cite> with the absolute path (/path/to/data_dir), following the examples in the template comments to specify the directory structure</li>
+<li>Fill in <cite>outputSubjectListLocation</cite> and <cite>subjectListName</cite></li>
+<li>Fill in any other relevant keys in the template file</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li>Use the CLI to generate configuration files</li>
+<li>In the container run command, include the flag <cite>–data_config_file /path/to/data_config.yml</cite> (replacing “/path/to/data_config.yml` to the absolute path to your configuration file generated in the previous step). <cite>bids_dir</cite> is still required but not used; the configuration file includes the absolute data paths</li>
+</ol>
 
 
           </div>
