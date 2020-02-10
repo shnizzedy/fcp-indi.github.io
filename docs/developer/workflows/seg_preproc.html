@@ -16,28 +16,28 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="../genindex" />
-    <link rel="search" title="Search" href="../search" />
-    <link rel="next" title="Seed Based Correlation Analysis" href="sca" />
-    <link rel="prev" title="Functional Preprocessing" href="func_preproc" /> 
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seed Based Correlation Analysis" href="sca.html" />
+    <link rel="prev" title="Functional Preprocessing" href="func_preproc.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex" title="General Index"
+          <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex" title="Python Module Index"
+          <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sca" title="Seed Based Correlation Analysis"
+          <a href="sca.html" title="Seed Based Correlation Analysis"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="func_preproc" title="Functional Preprocessing"
+          <a href="func_preproc.html" title="Functional Preprocessing"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index" accesskey="U">Workflows</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Workflows</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -50,7 +50,7 @@
 <span id="segmentation-workflow"></span><h1>Segmentation Workflow<a class="headerlink" href="#module-CPAC.seg_preproc" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="CPAC.seg_preproc.create_seg_preproc">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">create_seg_preproc</code><span class="sig-paren">(</span><em>use_ants</em>, <em>use_priors</em>, <em>use_threshold</em>, <em>use_erosion</em>, <em>erosion_prop</em>, <em>wf_name='seg_preproc'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/seg_preproc#create_seg_preproc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.create_seg_preproc" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">create_seg_preproc</code><span class="sig-paren">(</span><em>use_ants</em>, <em>use_priors</em>, <em>use_threshold</em>, <em>use_erosion</em>, <em>erosion_prop</em>, <em>wf_name='seg_preproc'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/seg_preproc.html#create_seg_preproc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.create_seg_preproc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Segment the subject’s anatomical brain into cerebral spinal fluids,
 white matter and gray matter and refine them using template-space tissue
 priors, if selected to do so.</p>
@@ -268,7 +268,7 @@ priors, if selected to do so.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.process_segment_map">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">process_segment_map</code><span class="sig-paren">(</span><em>wf_name</em>, <em>use_ants</em>, <em>use_priors</em>, <em>use_threshold</em>, <em>use_erosion</em>, <em>erosion_prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/seg_preproc#process_segment_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.process_segment_map" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">process_segment_map</code><span class="sig-paren">(</span><em>wf_name</em>, <em>use_ants</em>, <em>use_priors</em>, <em>use_threshold</em>, <em>use_erosion</em>, <em>erosion_prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/seg_preproc.html#process_segment_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.process_segment_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a sub workflow used inside segmentation workflow to process
 probability maps obtained in segmentation. Steps include overlapping 
 of the prior tissue with probability maps, thresholding and binarizing 
@@ -362,7 +362,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.check_if_file_is_empty">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">check_if_file_is_empty</code><span class="sig-paren">(</span><em>in_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#check_if_file_is_empty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.check_if_file_is_empty" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">check_if_file_is_empty</code><span class="sig-paren">(</span><em>in_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#check_if_file_is_empty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.check_if_file_is_empty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raise exception if regressor fie is empty.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -388,7 +388,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.pick_wm_prob_0">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_prob_0</code><span class="sig-paren">(</span><em>probability_maps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#pick_wm_prob_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_prob_0" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_prob_0</code><span class="sig-paren">(</span><em>probability_maps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#pick_wm_prob_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_prob_0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the csf probability map from the list of segmented probability maps</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -414,7 +414,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.pick_wm_prob_1">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_prob_1</code><span class="sig-paren">(</span><em>probability_maps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#pick_wm_prob_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_prob_1" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_prob_1</code><span class="sig-paren">(</span><em>probability_maps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#pick_wm_prob_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_prob_1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the gray matter probability map from the list of segmented probability maps</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -440,7 +440,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.pick_wm_prob_2">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_prob_2</code><span class="sig-paren">(</span><em>probability_maps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#pick_wm_prob_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_prob_2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_prob_2</code><span class="sig-paren">(</span><em>probability_maps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#pick_wm_prob_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_prob_2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the white matter probability map from the list of segmented probability maps</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -466,7 +466,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.pick_wm_class_0">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_class_0</code><span class="sig-paren">(</span><em>tissue_class_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#pick_wm_class_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_class_0" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_class_0</code><span class="sig-paren">(</span><em>tissue_class_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#pick_wm_class_0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_class_0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the csf tissu class file from the list of segmented tissue class files</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -492,7 +492,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.pick_wm_class_1">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_class_1</code><span class="sig-paren">(</span><em>tissue_class_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#pick_wm_class_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_class_1" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_class_1</code><span class="sig-paren">(</span><em>tissue_class_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#pick_wm_class_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_class_1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the gray matter tissue class file from the list of segmented tissue class files</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -518,7 +518,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.pick_wm_class_2">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_class_2</code><span class="sig-paren">(</span><em>tissue_class_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#pick_wm_class_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_class_2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">pick_wm_class_2</code><span class="sig-paren">(</span><em>tissue_class_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#pick_wm_class_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.pick_wm_class_2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the white matter tissue class file from the list of segmented tissue class files</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -544,7 +544,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.mask_erosion">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">mask_erosion</code><span class="sig-paren">(</span><em>roi_mask</em>, <em>skullstrip_mask</em>, <em>mask_erosion_prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#mask_erosion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.mask_erosion" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">mask_erosion</code><span class="sig-paren">(</span><em>roi_mask</em>, <em>skullstrip_mask</em>, <em>mask_erosion_prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#mask_erosion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.mask_erosion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns eroded segment mask and skull-stripped brain mask</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -579,7 +579,7 @@ the resulting segmentation tissue masks.</p>
 
 <dl class="function">
 <dt id="CPAC.seg_preproc.erosion">
-<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">erosion</code><span class="sig-paren">(</span><em>roi_mask</em>, <em>erosion_prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils#erosion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.erosion" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.seg_preproc.</code><code class="descname">erosion</code><span class="sig-paren">(</span><em>roi_mask</em>, <em>erosion_prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/seg_preproc/utils.html#erosion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.seg_preproc.erosion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns eroded tissue segment mask</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -614,14 +614,14 @@ the resulting segmentation tissue masks.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index">
+            <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="func_preproc"
+  <p class="topless"><a href="func_preproc.html"
                         title="previous chapter">Functional Preprocessing</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="sca"
+  <p class="topless"><a href="sca.html"
                         title="next chapter">Seed Based Correlation Analysis</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -633,7 +633,7 @@ the resulting segmentation tissue masks.</p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../search" method="get">
+    <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -650,24 +650,24 @@ the resulting segmentation tissue masks.</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex" title="General Index"
+          <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex" title="Python Module Index"
+          <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sca" title="Seed Based Correlation Analysis"
+          <a href="sca.html" title="Seed Based Correlation Analysis"
              >next</a> |</li>
         <li class="right" >
-          <a href="func_preproc" title="Functional Preprocessing"
+          <a href="func_preproc.html" title="Functional Preprocessing"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index" >Workflows</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Workflows</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, C-PAC Team.
+        &#169; Copyright 2018, C-PAC Team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>

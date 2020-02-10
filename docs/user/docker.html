@@ -1,9 +1,11 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Run on Docker &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +16,6 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
     <link rel="next" title="Run on Singularity" href="singularity" />
@@ -224,11 +225,11 @@ optional arguments:
 <p>Note that any of the optional arguments above will over-ride any pipeline settings in the default pipeline or in the pipeline configuration file you provide via the <code class="docutils literal notranslate"><span class="pre">--pipeline_file</span></code> parameter.</p>
 <p><strong>Further usage notes:</strong></p>
 <ul class="simple">
-<li><p>You can run only anatomical preprocessing easily, without modifying your data or pipeline configuration files, by providing the <code class="docutils literal notranslate"><span class="pre">--anat_only</span></code> flag.</p></li>
-<li><p>A GUI can be invoked to assist in pipeline customization by specifying the <code class="docutils literal notranslate"><span class="pre">GUI</span></code> command line argument, as opposed to <code class="docutils literal notranslate"><span class="pre">participant</span></code> (this currently only works for Singularity containers).</p></li>
-<li><p>As stated, the default behavior is to read data that is organized in the BIDS format. This includes data that is in Amazon AWS S3 by using the format <code class="docutils literal notranslate"><span class="pre">s3://&lt;bucket_name&gt;/&lt;bids_dir&gt;</span></code> for the <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> command line argument. Outputs can be written to S3 using the same format for the <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>. Credentials for accessing these buckets can be specified on the command line (using <code class="docutils literal notranslate"><span class="pre">--aws_input_creds</span></code> or <code class="docutils literal notranslate"><span class="pre">--aws_output_creds</span></code>).</p></li>
-<li><p>When the app is run, a data configuration file is written to the working directory. This file can be passed into subsequent runs, which avoids the overhead of re-parsing the BIDS input directory on each run (i.e. for cluster or cloud runs). These files can be generated without executing the C-PAC pipeline using the test_run command line argument.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">participant_label</span></code> and <code class="docutils literal notranslate"><span class="pre">participant_ndx</span></code> arguments allow the user to specify which of the many datasets should be processed, which is useful when parallelizing the run of multiple participants.</p></li>
+<li>You can run only anatomical preprocessing easily, without modifying your data or pipeline configuration files, by providing the <code class="docutils literal notranslate"><span class="pre">--anat_only</span></code> flag.</li>
+<li>A GUI can be invoked to assist in pipeline customization by specifying the <code class="docutils literal notranslate"><span class="pre">GUI</span></code> command line argument, as opposed to <code class="docutils literal notranslate"><span class="pre">participant</span></code> (this currently only works for Singularity containers).</li>
+<li>As stated, the default behavior is to read data that is organized in the BIDS format. This includes data that is in Amazon AWS S3 by using the format <code class="docutils literal notranslate"><span class="pre">s3://&lt;bucket_name&gt;/&lt;bids_dir&gt;</span></code> for the <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> command line argument. Outputs can be written to S3 using the same format for the <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>. Credentials for accessing these buckets can be specified on the command line (using <code class="docutils literal notranslate"><span class="pre">--aws_input_creds</span></code> or <code class="docutils literal notranslate"><span class="pre">--aws_output_creds</span></code>).</li>
+<li>When the app is run, a data configuration file is written to the working directory. This file can be passed into subsequent runs, which avoids the overhead of re-parsing the BIDS input directory on each run (i.e. for cluster or cloud runs). These files can be generated without executing the C-PAC pipeline using the test_run command line argument.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">participant_label</span></code> and <code class="docutils literal notranslate"><span class="pre">participant_ndx</span></code> arguments allow the user to specify which of the many datasets should be processed, which is useful when parallelizing the run of multiple participants.</li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
@@ -246,8 +247,7 @@ optional arguments:
             </a></p>
 <h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="use_case_wizard/index">1. Use Case Wizard</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="quick">2. C-PAC Quickstart</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="quick">1. C-PAC Quickstart</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quick#run-on-docker">Run on Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#run-on-singularity">Run on Singularity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#default-pipeline">Default Pipeline</a></li>
@@ -256,16 +256,16 @@ optional arguments:
 <li class="toctree-l2 current"><a class="reference internal" href="quick#references">References</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="subject_list_config">3. Specify Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline_config">4. Select Your Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing">5. Pre-Process Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="derivatives">6. Compute Derivatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running">7. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="group_analysis">8. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output_dir">9. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help">10. Troubleshoot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes">11. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix">12. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_config">3. Select Your Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="derivatives">5. Compute Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running">6. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_analysis">7. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_dir">8. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help">9. Troubleshoot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">

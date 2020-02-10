@@ -1,9 +1,11 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Version 1.4.3 Beta - 2019.05.24 &#8212; C-PAC 1.6.0 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +16,6 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/language_data.js"></script>
     
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex" />
     <link rel="search" title="Search" href="../search" />
     <link rel="next" title="Version 1.4.2 Beta - 2019.04.29" href="v1.4.2" />
@@ -46,26 +47,26 @@
 <h1>Version 1.4.3 Beta - 2019.05.24<a class="headerlink" href="#version-1-4-3-beta-2019-05-24" title="Permalink to this headline">¶</a></h1>
 <p><strong>NEW FEATURES</strong></p>
 <ul class="simple">
-<li><p><strong>Quasi-Periodic Pattern (QPP) template generation.</strong> QPPs are spatial patterns of dynamic connectivity that may be useful in illustrating differences present in neurological or psychiatric disorders. C-PAC can now easily calculate a QPP template derived from a set of functional data.</p></li>
+<li><strong>Quasi-Periodic Pattern (QPP) template generation.</strong> QPPs are spatial patterns of dynamic connectivity that may be useful in illustrating differences present in neurological or psychiatric disorders. C-PAC can now easily calculate a QPP template derived from a set of functional data.</li>
 </ul>
 <p>Spatiotemporal dynamics of low frequency BOLD fluctuations in rats and humans. Majeed W, Magnuson M, Hasenkamp W, Schwarb H, Schumacher EH, Barsalou L, Keilholz SD. Neuroimage. 2011 Jan 15;54(2):1140-50.</p>
 <p>Quasi-periodic patterns (QPP): large-scale dynamics in resting state fMRI that correlate with local infraslow electrical activity. Thompson GJ, Pan WJ, Magnuson ME, Jaeger D, Keilholz SD. Neuroimage. 2014 Jan 1;84:1018-31.</p>
 <p>Quasi-periodic patterns of intrinsic brain activity in individuals and their relationship to global signal. Yousefi B, Shin J, Schumacher EH, Keilholz SD. Neuroimage. 2018 Feb 15;167:297-308.</p>
 <ul class="simple">
-<li><p><strong>Custom regressors for nuisance regression.</strong> Users can now provide custom regressors to C-PAC’s nuisance regression suite. This could allow a user to regress out any time series from the data, such as physiological noise regressors, task regressors, or QPP time series prior to individual-level analysis. Refer to the updated User Guide for more information.</p></li>
-<li><p><strong>Lesion masking for anatomical registration.</strong> For ANTs registration pipelines, users can now provide a lesion mask to improve anatomical registration quality in participant data containing lesions. Refer to the updated User Guide for more information. [<a class="reference external" href="http://stnava.github.io/ANTs/">http://stnava.github.io/ANTs/</a>]</p></li>
+<li><strong>Custom regressors for nuisance regression.</strong> Users can now provide custom regressors to C-PAC’s nuisance regression suite. This could allow a user to regress out any time series from the data, such as physiological noise regressors, task regressors, or QPP time series prior to individual-level analysis. Refer to the updated User Guide for more information.</li>
+<li><strong>Lesion masking for anatomical registration.</strong> For ANTs registration pipelines, users can now provide a lesion mask to improve anatomical registration quality in participant data containing lesions. Refer to the updated User Guide for more information. [<a class="reference external" href="http://stnava.github.io/ANTs/">http://stnava.github.io/ANTs/</a>]</li>
 </ul>
 <p><strong>ERROR FIXES</strong></p>
 <ul class="simple">
-<li><p>Fixed a bug where the working directory would not be deleted (when configured to do so) if the pipeline did not complete successfully.</p></li>
-<li><p>Fixed a bug where, in some cases, working directory settings in a custom pipeline would be over-ridden by defaults.</p></li>
+<li>Fixed a bug where the working directory would not be deleted (when configured to do so) if the pipeline did not complete successfully.</li>
+<li>Fixed a bug where, in some cases, working directory settings in a custom pipeline would be over-ridden by defaults.</li>
 </ul>
 <p><strong>COMING SOON (v1.4.4/v1.5.0 - Summer 2019)</strong></p>
 <ul class="simple">
-<li><p>New Group-Level Model Builder GUI</p></li>
-<li><p>Predictive Eye Estimation Regression (PEER)</p></li>
-<li><p>Non-human primate pipeline optimization</p></li>
-<li><p>Easy integration &amp; analysis of other preprocessing pipeline results</p></li>
+<li>New Group-Level Model Builder GUI</li>
+<li>Predictive Eye Estimation Regression (PEER)</li>
+<li>Non-human primate pipeline optimization</li>
+<li>Easy integration &amp; analysis of other preprocessing pipeline results</li>
 </ul>
 </div>
 
@@ -80,17 +81,16 @@
             </a></p>
 <h3><a href="../index">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../use_case_wizard/index">1. Use Case Wizard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quick">2. C-PAC Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_list_config">3. Specify Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pipeline_config">4. Select Your Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocessing">5. Pre-Process Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../derivatives">6. Compute Derivatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../running">7. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../group_analysis">8. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../output_dir">9. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../help">10. Troubleshoot</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../rnotes">11. Release Notes</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quick">1. C-PAC Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_list_config">2. Specify Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline_config">3. Select Your Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing">4. Pre-Process Your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../derivatives">5. Compute Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running">6. All Run Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../group_analysis">7. Run Group Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output_dir">8. Check Your Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help">9. Troubleshoot</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../rnotes">10. Release Notes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../rnotes#latest-release-c-pac-v1-6-0-jan-3-2020">Latest Release: C-PAC v1.6.0 (Jan 3, 2020)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rnotes#version-v1-5-0-beta-2019-10-09">Version v1.5.0 Beta - 2019.10.09</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rnotes#version-1-4-3-beta-2019-05-24">Version 1.4.3 Beta - 2019.05.24</a></li>
@@ -124,7 +124,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../rnotes#version-0-1-1-alpha-2012-10-15">Version 0.1.1 Alpha - 2012.10.15</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix">12. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix">11. Appendix</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">

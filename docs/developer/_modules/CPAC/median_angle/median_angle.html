@@ -16,20 +16,20 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../../_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="../../../genindex" />
-    <link rel="search" title="Search" href="../../../search" /> 
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex" title="General Index"
+          <a href="../../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../py-modindex" title="Python Module Index"
+          <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -44,7 +44,7 @@
 
 
 
-<div class="viewcode-block" id="median_angle_correct"><a class="viewcode-back" href="../../../workflows/median_angle#CPAC.median_angle.median_angle_correct">[docs]</a><span class="k">def</span> <span class="nf">median_angle_correct</span><span class="p">(</span><span class="n">target_angle_deg</span><span class="p">,</span> <span class="n">realigned_file</span><span class="p">):</span>
+<div class="viewcode-block" id="median_angle_correct"><a class="viewcode-back" href="../../../workflows/median_angle.html#CPAC.median_angle.median_angle_correct">[docs]</a><span class="k">def</span> <span class="nf">median_angle_correct</span><span class="p">(</span><span class="n">target_angle_deg</span><span class="p">,</span> <span class="n">realigned_file</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs median angle correction on fMRI data.  Median angle correction algorithm</span>
 <span class="sd">    based on [1]_.</span>
@@ -129,7 +129,7 @@
 
     <span class="k">return</span> <span class="n">corrected_file</span><span class="p">,</span> <span class="n">angles_file</span></div>
 
-<div class="viewcode-block" id="calc_median_angle_params"><a class="viewcode-back" href="../../../workflows/median_angle#CPAC.median_angle.calc_median_angle_params">[docs]</a><span class="k">def</span> <span class="nf">calc_median_angle_params</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_median_angle_params"><a class="viewcode-back" href="../../../workflows/median_angle.html#CPAC.median_angle.calc_median_angle_params">[docs]</a><span class="k">def</span> <span class="nf">calc_median_angle_params</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates median angle parameters of a subject</span>
 <span class="sd">    </span>
@@ -171,7 +171,7 @@
     
     <span class="k">return</span> <span class="n">mean_bold</span><span class="p">,</span> <span class="n">median_angle</span></div>
 
-<div class="viewcode-block" id="calc_target_angle"><a class="viewcode-back" href="../../../workflows/median_angle#CPAC.median_angle.calc_target_angle">[docs]</a><span class="k">def</span> <span class="nf">calc_target_angle</span><span class="p">(</span><span class="n">mean_bolds</span><span class="p">,</span> <span class="n">median_angles</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_target_angle"><a class="viewcode-back" href="../../../workflows/median_angle.html#CPAC.median_angle.calc_target_angle">[docs]</a><span class="k">def</span> <span class="nf">calc_target_angle</span><span class="p">(</span><span class="n">mean_bolds</span><span class="p">,</span> <span class="n">median_angles</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates a target angle based on median angle parameters of</span>
 <span class="sd">    the group.</span>
@@ -204,7 +204,7 @@
     
     <span class="k">return</span> <span class="n">target_angle</span></div>
 
-<div class="viewcode-block" id="create_median_angle_correction"><a class="viewcode-back" href="../../../workflows/median_angle#CPAC.median_angle.create_median_angle_correction">[docs]</a><span class="k">def</span> <span class="nf">create_median_angle_correction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;median_angle_correction&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_median_angle_correction"><a class="viewcode-back" href="../../../workflows/median_angle.html#CPAC.median_angle.create_median_angle_correction">[docs]</a><span class="k">def</span> <span class="nf">create_median_angle_correction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;median_angle_correction&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Median Angle Correction</span>
 <span class="sd">    </span>
@@ -279,7 +279,7 @@
     
     <span class="k">return</span> <span class="n">median_angle_correction</span></div>
 
-<div class="viewcode-block" id="create_target_angle"><a class="viewcode-back" href="../../../workflows/median_angle#CPAC.median_angle.create_target_angle">[docs]</a><span class="k">def</span> <span class="nf">create_target_angle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;target_angle&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_target_angle"><a class="viewcode-back" href="../../../workflows/median_angle.html#CPAC.median_angle.create_target_angle">[docs]</a><span class="k">def</span> <span class="nf">create_target_angle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;target_angle&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Target Angle Calculation</span>
 <span class="sd">    </span>
@@ -362,13 +362,13 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../../../index">
+            <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../../../search" method="get">
+    <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -385,18 +385,18 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex" title="General Index"
+          <a href="../../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../../py-modindex" title="Python Module Index"
+          <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">C-PAC 1.6.0 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, C-PAC Team.
+        &#169; Copyright 2018, C-PAC Team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
