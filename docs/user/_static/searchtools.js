@@ -425,8 +425,8 @@ var Search = {
         } else {
           // normal html builders
           listItem.append($('<a/>').attr('href',
-            item[0] + DOCUMENTATION_OPTIONS.FILE_SUFFIX +
-            highlightstring + item[2].replace('.txt', '')).html(item[1]));
+            item[0].replace('.txt', '') + DOCUMENTATION_OPTIONS.FILE_SUFFIX +
+            highlightstring + item[2]).html(item[1]));
         }
         if (item[3]) {
           listItem.append($('<span> (' + item[3] + ')</span>'));
