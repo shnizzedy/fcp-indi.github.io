@@ -426,7 +426,7 @@ var Search = {
           // normal html builders
           listItem.append($('<a/>').attr('href',
             item[0] + DOCUMENTATION_OPTIONS.FILE_SUFFIX +
-            highlightstring + item[2]).html(item[1]));
+            highlightstring + item[2].replace('.txt', '')).html(item[1]));
         }
         if (item[3]) {
           listItem.append($('<span> (' + item[3] + ')</span>'));
@@ -435,7 +435,7 @@ var Search = {
             displayNextItem();
           });
         } else if (DOCUMENTATION_OPTIONS.HAS_SOURCE) {
-          $.ajax({url: DOCUMENTATION_OPTIONS.URL_ROOT + '_sources/' + item[0],
+          $.ajax({url: DOCUMENTATION_OPTIONS.URL_ROOT + '_sources/' + item[0] + '.txt',
                   dataType: "text",
                   complete: function(jqxhr, textstatus) {
                     var data = jqxhr.responseText;
