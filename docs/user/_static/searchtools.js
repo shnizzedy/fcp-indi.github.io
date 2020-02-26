@@ -426,7 +426,7 @@ var Search = {
           // normal html builders
           listItem.append($('<a/>').attr('href',
             item[0].replace('.txt', '') +
-            highlightstring + item[2]).html(item[1]).replace('.html', ''));
+            highlightstring + item[2]).html(item[1]));
         }
         if (item[3]) {
           listItem.append($('<span> (' + item[3] + ')</span>'));
