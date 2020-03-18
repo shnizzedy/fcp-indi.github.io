@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Run on Docker &#8212; C-PAC 1.6.1 Beta documentation</title>
+    <title>Run on Docker &#8212; C-PAC 1.6.1.a Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="run/help" title="cpac run –help"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.1 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.1.a Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="quick" accesskey="U">C-PAC Quickstart</a> &#187;</li> 
       </ul>
     </div>  
@@ -70,7 +70,15 @@
 <span class="go">        fcpindi/c-pac:latest s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant</span>
 </pre></div>
 </div>
-<p>To run the C-PAC Docker container with a pipeline configuration file other than the container’s default pipeline, assuming the configuration file is in the <code class="docutils literal notranslate"><span class="pre">/Users/You/Documents</span></code> directory:</p>
+<p>In addition to the default pipeline, C-PAC comes packaged with a growing library of pre-configured pipelines that are ready to use. To run the C-PAC Docker container with one of the pre-packaged pre-configured pipelines, simply invoke the <code class="docutils literal notranslate"><span class="pre">--preconfig</span></code> flag, shown below. See the full selection of pre-configured pipelines <a class="reference internal" href="preconfig"><span class="doc">here</span></a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run -i --rm \</span>
+<span class="go">        -v /Users/You/local_bids_data:/bids_dataset \</span>
+<span class="go">        -v /Users/You/some_folder:/outputs \</span>
+<span class="go">        -v /tmp:/tmp \</span>
+<span class="go">        fcpindi/c-pac:latest /bids_dataset /outputs --preconfig anat-only</span>
+</pre></div>
+</div>
+<p>To run the C-PAC Docker container with a pipeline configuration file other than one of the pre-configured pipelines, assuming the configuration file is in the <code class="docutils literal notranslate"><span class="pre">/Users/You/Documents</span></code> directory:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run -i --rm \</span>
 <span class="go">        -v /Users/You/local_bids_data:/bids_dataset \</span>
 <span class="go">        -v /Users/You/some_folder:/outputs \</span>
@@ -248,10 +256,11 @@ optional arguments:
 <h3><a href="index">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="quick">1. C-PAC Quickstart</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick#let-s-go">Let’s Go!</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#run-on-docker">Run on Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#run-on-singularity">Run on Singularity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#default-pipeline">Default Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick#design-a-pipeline">Design A Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick#pre-configured-pipelines">Pre-configured Pipelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#acknowledgments">Acknowledgments</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="quick#references">References</a></li>
 </ul>
@@ -296,7 +305,7 @@ optional arguments:
         <li class="right" >
           <a href="run/help" title="cpac run –help"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.1 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.1.a Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="quick" >C-PAC Quickstart</a> &#187;</li> 
       </ul>
     </div>

@@ -438,8 +438,8 @@ var Search = {
           $.ajax({url: DOCUMENTATION_OPTIONS.URL_ROOT + '_sources/' + item[0] + '.txt',
                   dataType: "text",
                   complete: function(jqxhr, textstatus) {
-                    var data = jqxhr.responseXml;
-                    if (data !== null) {
+                    var data = jqxhr.responseText;
+                    if (data !== '') {
                       listItem.append(Search.makeSearchSummary(data, searchterms, hlterms));
                     }
                     Search.output.append(listItem);
@@ -598,7 +598,6 @@ var Search = {
    * latter for highlighting it.
    */
   makeSearchSummary : function(text, keywords, hlwords) {
-    text = text.getElementsByClassName('section')[0].innerHTML;
     var textLower = text.toLowerCase();
     var start = 0;
     $.each(keywords, function() {
