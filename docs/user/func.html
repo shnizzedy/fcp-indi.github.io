@@ -64,6 +64,53 @@
 <div class="section" id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run initial functional preprocessing:</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="10%" />
+<col width="60%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Description</th>
+<th class="head">Potential Values</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>n4_correct_mean_EPI</td>
+<td>Run ANTs’ N4 Bias Field Correction on the input BOLD average (mean EPI).</td>
+<td>A boolean (‘True’ or ‘False’).</td>
+</tr>
+<tr class="row-odd"><td>runDespike</td>
+<td>Run AFNI 3dDespike</td>
+<td>A list where ‘1’ represents ‘yes’ and ‘0’ represents ‘no’ (e.g., ‘[0]’).</td>
+</tr>
+<tr class="row-even"><td>runScaling</td>
+<td>Scale functional raw data, which is usually used in rodent pipeline.</td>
+<td>A boolean (‘True’ or ‘False’).</td>
+</tr>
+<tr class="row-odd"><td>scaling_factor</td>
+<td>Scale the size of the dataset voxels by the factor if runScaling is set to be True.</td>
+<td>An integer. Default is 10.</td>
+</tr>
+<tr class="row-even"><td>runMotionStatisticsFirst</td>
+<td>Run motion statistics before slice timing correction</td>
+<td>A list where ‘1’ represents ‘yes’ and ‘0’ represents ‘no’ (e.g., ‘[0]’).</td>
+</tr>
+<tr class="row-odd"><td>motion_correction</td>
+<td>Choose motion correction method.</td>
+<td>A list where ‘3dvolreg’ represents ‘AFNI 3dvolreg’ and ‘mcflirt’ represents ‘FSL mcflirt’ (e.g., ‘[‘3dvolreg’]’).</td>
+</tr>
+<tr class="row-even"><td>motion_correction_reference</td>
+<td>Choose motion correction reference.</td>
+<td>A list where ‘mean’ represents the mean volume of functional time-series, ‘median’ represents median volume of functional time-series and ‘selected volume’ represents a specific volume (e.g., ‘[‘mean’]’).</td>
+</tr>
+<tr class="row-odd"><td>motion_correction_reference_volume</td>
+<td>Choose motion correction reference volume if choosing ‘selected volume’ as motion correction reference.</td>
+<td>An integer.</td>
+</tr>
+</tbody>
+</table>
 <p>The box below contains an example of what these parameters might look like when defined in the YAML:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n4_correct_mean_EPI</span> <span class="p">:</span> <span class="kc">False</span>
 <span class="n">runDespike</span> <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
