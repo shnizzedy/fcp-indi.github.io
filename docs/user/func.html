@@ -53,11 +53,29 @@
 </div>
 <ol class="arabic simple">
 <li><strong>ANT’s N4BiasFieldCorrection - [On, Off]:</strong> Choose On to perform N4 Bias Field Correction on mean EPI image, may help enhance coregistration quality. Default is Off.</li>
-<li><strong>Motion Statistics before Slice Timing Correction - [On, Off, On/Off]:</strong> Choose On to calculate motion parameter estimation before slice timing correction, with actual motion correction still occurring after slice timing correction. The motion parameters go on to be used in nuisance regression and statistics reporting. Default is Off.</li>
-<li><strong>Despike - [On, Off]:</strong> Choose On to perform AFNI 3dDespike. Default is Off.</li>
+<li><strong>Despike - [On, Off, On/Off]:</strong> Choose On to perform AFNI 3dDespike. Default is Off.</li>
 <li><strong>Scaling - [On, Off]:</strong> Choose On to scale the brain to a different size, especially optimal for rodent data.</li>
 <li><strong>Scaling Factor - [integer]:</strong>  The scaling factor of the brain. Default is 10.</li>
+<li><strong>Motion Statistics before Slice Timing Correction - [On, Off, On/Off]:</strong> Choose On to calculate motion parameter estimation before slice timing correction, with actual motion correction still occurring after slice timing correction. The motion parameters go on to be used in nuisance regression and statistics reporting. Default is Off.</li>
+<li><strong>Motion Correction Tool - [3dvolreg, mcflirt]:</strong> Choose motion correction method. Options: AFNI volreg, FSL mcflirt. Default is AFNI volreg.</li>
+<li><strong>Motion Correction Reference - [mean, median, selected volume]:</strong> Choose motion correction reference. Options: mean, median, selected volume. Default is mean.</li>
+<li><strong>Motion Correction Reference Volume - [integer]:</strong> Choose an integer as the motion correction reference volume if choosing “selected volume” as motion correction reference.</li>
 </ol>
+<div class="section" id="configuration-without-the-gui">
+<h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
+<p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run initial functional preprocessing:</p>
+<p>The box below contains an example of what these parameters might look like when defined in the YAML:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n4_correct_mean_EPI</span> <span class="p">:</span> <span class="kc">False</span>
+<span class="n">runDespike</span> <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">runScaling</span> <span class="p">:</span> <span class="kc">False</span>
+<span class="n">scaling_factor</span> <span class="p">:</span> <span class="mi">10</span>
+<span class="n">runMotionStatisticsFirst</span> <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">motion_correction</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">]</span>
+<span class="n">motion_correction_reference</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span>
+<span class="n">motion_correction_reference_volume</span> <span class="p">:</span>  <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="slice-timing-correction">
 <h2>Slice Timing Correction<a class="headerlink" href="#slice-timing-correction" title="Permalink to this headline">¶</a></h2>
@@ -74,8 +92,8 @@
 <li><strong>Slice Acquisition Pattern - [Use NifTI Header, alt+z, alt+z2, alt-z, alt-z2, seq+z, seq-z]:</strong> The order of slice acquisition for the scans.</li>
 </ol>
 <p>Note that if a scan parameters file was used to construct the participant list, the parameters defined in this file will override the settings used here.</p>
-<div class="section" id="configuration-without-the-gui">
-<h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run slice timing correction and drop TRs:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -194,8 +212,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><strong>Dwell to asymmetric ratio - [float]:</strong> This is the ratio between the Dwell time, as referenced above, and the asymmetric time. Here, the default value is 0.93902439.</li>
 <li><strong>Phase encoding direction - [string]:</strong> This is the position of the voxels in the input image, and can have values of x/y/z or -x/-y/-z.</li>
 </ol>
-<div class="section" id="id1">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run distortion correction:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -288,8 +306,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><strong>Robust brain center - [Off, On]:</strong> Robust brain center estimation. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</li>
 </ol>
 </div>
-<div class="section" id="id2">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run functional to anatomical registration:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -356,8 +374,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><strong>Standard Identity Matrix - [path]:</strong> Matrix containing all 1’s. Used as an identity matrix during registration. It is not necessary to change this path unless you intend to use non-standard MNI registration.</li>
 <li><strong>Resolutions to Resample to - [1 An integer indicating three same dimensions (e.g., 1mm, 2mm, 3mm, 4mm); 2 A float number indicating three same dimensions (e.g., 3.5mm etc.); 3 Three numbers connected by ‘x’ indicating three different dimensions (e.g., 2.67mmx2.67mmx3mm etc.)]:</strong> The resolution (in mm) to which functional images are transformed during registration.  Note that selecting a 1 mm or 2 mm resolution will substantially increase your RAM needs.  For most cases, 3 mm or 4 mm resolutions are suggested.</li>
 </ol>
-<div class="section" id="id3">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run functional to anatomical registration:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -418,8 +436,8 @@ resolution_for_func_derivative : 2mm
 <li><strong>Run Functional to EPI Registration - [On, Off]:</strong> Register functional images to a standard EPI template.</li>
 <li><strong>Standard Brain Template - [path]:</strong> Used as a reference image for functional EPI registration.</li>
 </ol>
-<div class="section" id="id4">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>The following key/value pairs must be defined in your <a class="reference internal" href="pipeline_config"><span class="doc">pipeline configuration YAML</span></a> for C-PAC to run functional to anatomical registration:</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
