@@ -45,7 +45,7 @@ class Configuration(object):
                 pattern_map = {}
                 keep_tags_map = {}
                 for pattern in patterns:
-                    for val in [_f for _f in pattern if _f]:
+                    for val in filter(None, pattern):
                         if val:
                             if not pattern_map.get(val):
                                 if tags is not None and val not in tags:

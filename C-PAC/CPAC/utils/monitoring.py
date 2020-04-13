@@ -4,7 +4,7 @@ import json
 import logging
 import datetime
 import threading
-import socketserver
+import SocketServer
 
 import networkx as nx
 import nipype.pipeline.engine as pe
@@ -77,7 +77,7 @@ def log_nodes_cb(node, status):
     logger.debug(json.dumps(status_dict))
 
 
-class LoggingRequestHandler(socketserver.BaseRequestHandler):
+class LoggingRequestHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
 
@@ -94,7 +94,7 @@ class LoggingRequestHandler(socketserver.BaseRequestHandler):
         for log in logs:
             subject = log.split('/')[-1]
             tree[subject] = {}
-
+            
             callback_file = os.path.join(log, "callback.log")
 
             if not os.path.exists(callback_file):
@@ -135,8 +135,8 @@ class LoggingRequestHandler(socketserver.BaseRequestHandler):
         self.request.sendall(headers + json.dumps(tree) + "\n")
 
 
-class LoggingHTTPServer(socketserver.ThreadingTCPServer, object):
-
+class LoggingHTTPServer(SocketServer.ThreadingTCPServer, object):
+    
     def __init__(self, pipeline_name, logging_dir='', host='', port=8080, request=LoggingRequestHandler):
         super(LoggingHTTPServer, self).__init__((host, port), request)
 

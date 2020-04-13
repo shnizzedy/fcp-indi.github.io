@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-import os
-import pkg_resources as p
 import click
 
 # CLI tree
@@ -53,9 +51,11 @@ def gui():
 @click.option('--num_cores')
 @click.option('--ndmg_mode', is_flag=True)
 @click.option('--debug', is_flag=True)
-def run(data_config, pipe_config=None, num_cores=None, ndmg_mode=False,
+def run(data_config, pipe_config=None, num_cores=None, ndmg_mode=False, 
         debug=False):
     if not pipe_config:
+        import os
+        import pkg_resources as p
         pipe_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
@@ -63,6 +63,8 @@ def run(data_config, pipe_config=None, num_cores=None, ndmg_mode=False,
                                              "pipeline_config_template.yml"))
 
     if pipe_config == 'benchmark-ants':
+        import os
+        import pkg_resources as p
         pipe_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
@@ -70,6 +72,8 @@ def run(data_config, pipe_config=None, num_cores=None, ndmg_mode=False,
                                              "pipeline_config_benchmark-ANTS.yml"))
 
     if pipe_config == 'benchmark-fnirt':
+        import os
+        import pkg_resources as p
         pipe_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
@@ -77,6 +81,8 @@ def run(data_config, pipe_config=None, num_cores=None, ndmg_mode=False,
                                              "pipeline_config_benchmark-FNIRT.yml"))
 
     if pipe_config == 'anat-only':
+        import os
+        import pkg_resources as p
         pipe_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
@@ -84,6 +90,8 @@ def run(data_config, pipe_config=None, num_cores=None, ndmg_mode=False,
                                              "pipeline_config_anat-only.yml"))
 
     if data_config == 'benchmark-data':
+        import os
+        import pkg_resources as p
         data_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
@@ -91,24 +99,32 @@ def run(data_config, pipe_config=None, num_cores=None, ndmg_mode=False,
                                              "data_config_cpac_benchmark.yml"))
 
     if data_config == 'ADHD200':
+        import os
+        import pkg_resources as p
         data_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
                                              "configs",
                                              "data_config_S3-BIDS-ADHD200.yml"))
     if data_config == 'ADHD200_2':
+        import os
+        import pkg_resources as p
         data_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
                                              "configs",
                                              "data_config_S3-BIDS-ADHD200_only2.yml"))
     if data_config == 'ABIDE':
+        import os
+        import pkg_resources as p
         data_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
                                              "configs",
                                              "data_config_S3-BIDS-ABIDE.yml"))
     if data_config == 'NKI-RS':
+        import os
+        import pkg_resources as p
         data_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
@@ -116,6 +132,8 @@ def run(data_config, pipe_config=None, num_cores=None, ndmg_mode=False,
                                              "data_config_S3-BIDS-NKI-RocklandSample.yml"))
 
     if ndmg_mode:
+        import os
+        import pkg_resources as p
         pipe_config = \
             p.resource_filename("CPAC",
                                 os.path.join("resources",
@@ -175,6 +193,7 @@ def single_grp_avg(pipeline_dir, z_thresh, p_thresh, model_name,
                    output_dir=None, group_participants=None):
     from CPAC.utils import create_fsl_flame_preset
     if not output_dir:
+        import os
         output_dir = os.path.join(os.getcwd(), 'cpac_group_analysis')
     create_fsl_flame_preset.run(pipeline_dir, 'all', z_thresh, p_thresh,
                                 'single_grp', group_participants,
@@ -196,6 +215,7 @@ def single_grp_cov(pipeline_dir, z_thresh, p_thresh, pheno_file,
                    group_participants=None):
     from CPAC.utils import create_fsl_flame_preset
     if not output_dir:
+        import os
         output_dir = os.path.join(os.getcwd(), 'cpac_group_analysis')
     create_fsl_flame_preset.run(pipeline_dir, 'all', z_thresh, p_thresh,
                                 'single_grp_cov', group_participants,
@@ -219,6 +239,7 @@ def unpaired_two(pipeline_dir, z_thresh, p_thresh, pheno_file,
                  group_participants=None):
     from CPAC.utils import create_fsl_flame_preset
     if not output_dir:
+        import os
         output_dir = os.path.join(os.getcwd(), 'cpac_group_analysis')
     create_fsl_flame_preset.run(pipeline_dir, 'all', z_thresh, p_thresh,
                                 'unpaired_two', group_participants,
@@ -241,6 +262,7 @@ def paired_two(pipeline_dir, z_thresh, p_thresh, conditions,
                group_participants=None):
     from CPAC.utils import create_fsl_flame_preset
     if not output_dir:
+        import os
         output_dir = os.path.join(os.getcwd(), 'cpac_group_analysis')
     create_fsl_flame_preset.run(pipeline_dir, 'all', z_thresh, p_thresh,
                                 'paired_two', group_participants,
@@ -263,6 +285,7 @@ def tripled_two(pipeline_dir, z_thresh, p_thresh, conditions,
                 group_participants=None):
     from CPAC.utils import create_fsl_flame_preset
     if not output_dir:
+        import os
         output_dir = os.path.join(os.getcwd(), 'cpac_group_analysis')
     create_fsl_flame_preset.run(pipeline_dir, 'all', z_thresh, p_thresh,
                                 'tripled_two', group_participants,
@@ -309,13 +332,13 @@ def utils():
 @utils.command()
 @click.argument('crash_file')
 def crash(crash_file):
-
+    
     import mock
 
     def accept_all(object, name, value):
         return value
 
-    with mock.patch('nipype.interfaces.base.traits_extension.File.validate', side_effect=accept_all):
+    with mock.patch('nipype.interfaces.base.traits_extension.File.validate', side_effect=accept_all) as abc_urandom_function:
         from nipype.scripts.crash_files import display_crash_file
         display_crash_file(crash_file, False, False, None)
 
@@ -408,6 +431,8 @@ def test():
 @click.option('--list', '-l', 'show_list', is_flag=True)
 @click.option('--filter', '-f', 'pipeline_filter', default='')
 def run_suite(show_list=False, pipeline_filter=''):
+    import os
+    import pkg_resources as p
     import CPAC.pipeline.cpac_runner as cpac_runner
 
     test_config_dir = \
@@ -456,7 +481,7 @@ def run_suite(show_list=False, pipeline_filter=''):
                 no_params = True
             else:
                 data = data_test
-
+                
             # run
             cpac_runner.run(data, pipe)
 

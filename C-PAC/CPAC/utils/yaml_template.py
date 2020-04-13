@@ -1,8 +1,7 @@
-
+from __future__ import absolute_import
 
 import re
 import yaml
-import yamlordereddictloader
 
 noalias_dumper = yaml.dumper.SafeDumper
 noalias_dumper.ignore_aliases = lambda self, data: True
@@ -19,7 +18,8 @@ def create_yaml_from_template(d, template):
 
     output = ""
 
-    d_default = yaml.safe_load(open(template, 'r'))
+    with open(template, 'r') as dtf:
+        d_default = yaml.load(dtf)
 
     empty_lines = 0
     with open(template, 'r') as f:
@@ -50,7 +50,7 @@ def create_yaml_from_template(d, template):
                 else:
                     output += key + ":\n"
                     continue
-
+                    
                 empty_lines = 0
                 default_flow_style = False
 
@@ -68,5 +68,6 @@ def create_yaml_from_template(d, template):
                     default_flow_style=default_flow_style,
                     Dumper=noalias_dumper
                 ).strip("{}\n\r") + "\n"
+                
 
     return output
