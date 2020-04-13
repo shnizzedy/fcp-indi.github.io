@@ -71,7 +71,9 @@
 </div></blockquote>
 </li>
 </ol>
-<ol class="arabic">
+<blockquote>
+<div></div></blockquote>
+<ol class="arabic" id="working-dir-crashes">
 <li><p class="first">I’m re-running a pipeline, but I am receiving many crashes.  Most of these crashes tell me that a file that has been moved or no longer exists is being used as an input for a step in the C-PAC pipeline.  What is going on and how can I tell C-PAC to use the correct inputs?</p>
 <blockquote>
 <div><p>One of the features of Nipype (which C-PAC is built upon) is that steps that have been run before are not re-run when you re-start a pipeline.  Nipype accomplishes this by associating a value with a step based on the properties of that step (i.e., hashing).  Nipype has two potential values that it can associate with a step: a value based on the size and date of the files created by the step, and a value based upon the data present within the files themselves.  The first value is what C-PAC uses with its pipelines, since it is much more computationally practical.  Since this value only looks at the size and date of files to determine whether or not a step has been run, it will not see that the file’s path has changed, and it will assume that all paths are consistent with the path structure from when the pipeline was run before.</p>
@@ -113,11 +115,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix">Appendix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix#prerequisites">Prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix#downloading-the-precomputed-c-pac-outputs-from-the-fcp-indi-s3-bucket">Downloading the Precomputed C-PAC Outputs from the FCP-INDI S3 Bucket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix#configuring-c-pac">Configuring C-PAC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix#running-an-individual-level-analysis">Running An Individual-Level Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix#comparing-outputs">Comparing Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix#benchmark-package">Benchmark Package</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
