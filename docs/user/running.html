@@ -60,6 +60,10 @@
 </ul>
 <p>More details of these options are available below.</p>
 <p>If you re-run C-PAC with an output directory containing a working directory (from the runtime flag <code class="docutils literal notranslate"><span class="pre">--save_working_dir</span></code>), C-PAC will use that working directories contents in the re-run. If you try to re-run on an output directory with a saved working directory from a different version of C-PAC than the one that you’re currently running, differences in the working directory could cause problems.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a href="#id1"><span class="problematic" id="id2">|pickles2to3|</span></a></p>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="help#working-dir-crashes"><span class="std std-ref">Common Issue: I’m re-running a pipeline, but I am receiving many crashes</span></a></p>
@@ -508,6 +512,12 @@ optional arguments:
 <div class="section" id="with-openneuro">
 <h2>With OpenNeuro<a class="headerlink" href="#with-openneuro" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://openneuro.org">OpenNeuro</a> project is an initiative to provide easy access to public neuroimaging datasets and the ability to quickly run analysis pipelines on these datasets directly through a web interface. C-PAC is available as an app on OpenNeuro, and more information on running apps on the platform is available <a class="reference external" href="https://openneuro.org/faq">here</a>.</p>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">singularity</span> <span class="n">run</span> <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">bids_dir</span> <span class="o">/</span><span class="n">outputs</span> <span class="n">cli</span> <span class="o">--</span> <span class="n">utils</span> <span class="n">repickle</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">working_dir</span>
+
+<span class="n">before</span> <span class="n">running</span> <span class="n">C</span><span class="o">-</span><span class="n">PAC</span> <span class="o">&gt;=</span><span class="n">v1</span><span class="o">.</span><span class="mf">6.2</span>
+</pre></div>
+</div>
 </div>
 </div>
 
