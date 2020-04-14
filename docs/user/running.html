@@ -63,7 +63,7 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>C-PAC migrated from Python 2 to Python 3 in v1.6.2 (see <a class="reference external" href="rnotes">release notes</a>). If your working directory contains Python 2 pickles from an older version of C-PAC and you want to continue to use this working directory, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -i --rm --user $(id -u):$(id -g) -v /path/to/working_dir:/working /bids_dir /outputs -- utils repickle /working
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -i --rm --user $(id -u):$(id -g) -v /path/to/working_dir:/working fcpindi/c-pac:latest /bids_dir /outputs cli -- utils repickle /working
 </pre></div>
 </div>
 <p>or:</p>
