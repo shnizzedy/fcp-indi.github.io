@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Version 1.0.1b Beta - 2017.09.07 &#8212; C-PAC 1.6.2 Beta documentation</title>
+    <title>Latest Release: Version 1.6.2 Beta (Apr 5, 2020) &#8212; C-PAC 1.6.2 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -17,8 +17,8 @@
     
     <link rel="index" title="Index" href="../genindex" />
     <link rel="search" title="Search" href="../search" />
-    <link rel="next" title="Version 1.0.1 Beta (Dec 5, 2016)" href="v1.0.1a" />
-    <link rel="prev" title="Version 1.0.2 Beta - 2017.11.03" href="v1.0.2" /> 
+    <link rel="next" title="C-PAC Quickstart" href="../quick" />
+    <link rel="prev" title="Welcome to C-PAC’s Documentation!" href="../index" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,13 +27,12 @@
           <a href="../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="v1.0.1a" title="Version 1.0.1 Beta (Dec 5, 2016)"
+          <a href="../quick" title="C-PAC Quickstart"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="v1.0.2" title="Version 1.0.2 Beta - 2017.11.03"
+          <a href="../index" title="Welcome to C-PAC’s Documentation!"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../rnotes" accesskey="U">Release Notes</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -42,18 +41,32 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="version-1-0-1b-beta-2017-09-07">
-<h1>Version 1.0.1b Beta - 2017.09.07<a class="headerlink" href="#version-1-0-1b-beta-2017-09-07" title="Permalink to this headline">¶</a></h1>
-<ol class="arabic simple">
-<li><p>CPAC is now compatible with Nipype version 0.13.</p></li>
-<li><p>AWS S3 bucket support for BIDS data format participant list builder.</p></li>
-<li><p>The pipeline configuration editor’s “Test Configuration” feature now works with participant lists that contain AWS S3 paths.</p></li>
-<li><p>The cpac_install.sh and cpac_setup.py scripts have been fixed to be compatible with recent changes.</p></li>
-<li><p>Fixed a bug in the group-level analysis model builder that would prevent the user from running group analysis on outputs from Seed-Based Correlation Analysis.</p></li>
-<li><p>Fixed a bug in the group-level analysis pipeline where AFNI 3ddot would fail when performing a check on the merged 4D derivative file.</p></li>
-<li><p>Fixed an issue where crash files would be generated at the beginning of the pipeline for the ‘check_for_s3’ nodes even when not pulling data from an S3 bucket.</p></li>
-<li><p>Added more checks for file permissions and scan names at the beginning of the pipeline run.</p></li>
-</ol>
+  <div class="section" id="latest-release-version-1-6-2-beta-apr-5-2020">
+<h1>Latest Release: Version 1.6.2 Beta (Apr 5, 2020)<a class="headerlink" href="#latest-release-version-1-6-2-beta-apr-5-2020" title="Permalink to this headline">¶</a></h1>
+<p><strong>New Features</strong></p>
+<ul class="simple">
+<li><p>ANTs registration transformation levels and parameters are now fully customizable in the pipeline configuration.</p></li>
+<li><p>Expanded Registration Forking Capability. C-PAC can now fork and simultaneously run both T1-template-based and EPI-template-based registration.</p></li>
+<li><p>Expanded Motion Correction Options. FSL MCFLIRT is now available as a tool selection for motion estimation and correction, alongside AFNI 3dvolreg.</p></li>
+</ul>
+<p><strong>Improvements &amp; Upgrades</strong></p>
+<ul class="simple">
+<li><p>C-PAC now runs on Python 3. During this transition, some underlying software packages, such as AFNI and ANTs, have been upgraded. Based on our release testing, performance is mostly unchanged. However, small changes can occur due to improvements made to the tools.</p></li>
+<li><p>Motion estimation configurability. More motion estimation and correction parameters have been opened for configurability.</p></li>
+<li><p>Increased memory efficiency and speed: C-PAC’s new default behavior for preparing time-series extraction is to realign the ROI atlases to the functional time series, instead of the other way around. This can be toggled back if desired. This change aims to cut down on memory limit errors that occur during execution with the combination of larger datasets and pipeline parallelization.</p></li>
+<li><p>Increased speed: Redundant realignments of ROI atlases and the time series have also been removed.</p></li>
+<li><p>The ingress of phase-difference field maps for distortion correction has been streamlined.</p></li>
+</ul>
+<p><strong>Error Fixes</strong></p>
+<ul class="simple">
+<li><p>In the QC Interface, some of the template underlays would default to the MNI152 template, even if the pipeline was configured to use a custom template. This has been resolved.</p></li>
+<li><p>Resolved an issue that would prevent the pipeline from starting if ICA-AROMA and blip-up/down distortion correction were both enabled, for ANTs registration-based pipelines.</p></li>
+<li><p>Resolved an issue that was preventing Neurodata ndmg-f connectome graphs from being completed in some cases.</p></li>
+<li><p>Resolved the “Range parameter must be finite” QC image generation crash.</p></li>
+</ul>
+<p>In addition, the C-PAC Docker and Singularity images, as well as the AWS AMI, have all been updated. These provide a <a class="reference external" href="http://fcp-indi.github.io/docs/user/quick.html">quick way to get started</a>.</p>
+<p>And as always, you can contact us here for user support and discussion:
+<a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">https://groups.google.com/forum/#!forum/cpax_forum</a></p>
 </div>
 
 
@@ -138,13 +151,12 @@
           <a href="../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="v1.0.1a" title="Version 1.0.1 Beta (Dec 5, 2016)"
+          <a href="../quick" title="C-PAC Quickstart"
              >next</a> |</li>
         <li class="right" >
-          <a href="v1.0.2" title="Version 1.0.2 Beta - 2017.11.03"
+          <a href="../index" title="Welcome to C-PAC’s Documentation!"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../rnotes" >Release Notes</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li> 
       </ul>
     </div>
 

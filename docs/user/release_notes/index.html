@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Latest Release: Version 1.6.1a Beta (Mar 6, 2020) &#8212; C-PAC 1.6.2 Beta documentation</title>
+    <title>Latest Release: Version 1.6.2 Beta (Apr 5, 2020) &#8212; C-PAC 1.6.2 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -42,8 +42,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="latest-release-version-1-6-1a-beta-mar-6-2020">
-<h1>Latest Release: Version 1.6.1a Beta (Mar 6, 2020)<a class="headerlink" href="#latest-release-version-1-6-1a-beta-mar-6-2020" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="latest-release-version-1-6-2-beta-apr-5-2020">
+<h1>Latest Release: Version 1.6.2 Beta (Apr 5, 2020)<a class="headerlink" href="#latest-release-version-1-6-2-beta-apr-5-2020" title="Permalink to this headline">¶</a></h1>
+<p><strong>New Features</strong></p>
+<ul class="simple">
+<li><p>ANTs registration transformation levels and parameters are now fully customizable in the pipeline configuration.</p></li>
+<li><p>Expanded Registration Forking Capability. C-PAC can now fork and simultaneously run both T1-template-based and EPI-template-based registration.</p></li>
+<li><p>Expanded Motion Correction Options. FSL MCFLIRT is now available as a tool selection for motion estimation and correction, alongside AFNI 3dvolreg.</p></li>
+</ul>
+<p><strong>Improvements &amp; Upgrades</strong></p>
+<ul class="simple">
+<li><p>C-PAC now runs on Python 3. During this transition, some underlying software packages, such as AFNI and ANTs, have been upgraded. Based on our release testing, performance is mostly unchanged. However, small changes can occur due to improvements made to the tools.</p></li>
+<li><p>Motion estimation configurability. More motion estimation and correction parameters have been opened for configurability.</p></li>
+<li><p>Increased memory efficiency and speed: C-PAC’s new default behavior for preparing time-series extraction is to realign the ROI atlases to the functional time series, instead of the other way around. This can be toggled back if desired. This change aims to cut down on memory limit errors that occur during execution with the combination of larger datasets and pipeline parallelization.</p></li>
+<li><p>Increased speed: Redundant realignments of ROI atlases and the time series have also been removed.</p></li>
+<li><p>The ingress of phase-difference field maps for distortion correction has been streamlined.</p></li>
+</ul>
+<p><strong>Error Fixes</strong></p>
+<ul class="simple">
+<li><p>In the QC Interface, some of the template underlays would default to the MNI152 template, even if the pipeline was configured to use a custom template. This has been resolved.</p></li>
+<li><p>Resolved an issue that would prevent the pipeline from starting if ICA-AROMA and blip-up/down distortion correction were both enabled, for ANTs registration-based pipelines.</p></li>
+<li><p>Resolved an issue that was preventing Neurodata ndmg-f connectome graphs from being completed in some cases.</p></li>
+<li><p>Resolved the “Range parameter must be finite” QC image generation crash.</p></li>
+</ul>
+<p>In addition, the C-PAC Docker and Singularity images, as well as the AWS AMI, have all been updated. These provide a <a class="reference external" href="http://fcp-indi.github.io/docs/user/quick.html">quick way to get started</a>.</p>
+<p>And as always, you can contact us here for user support and discussion:
+<a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">https://groups.google.com/forum/#!forum/cpax_forum</a></p>
+</div>
+<div class="section" id="version-1-6-1a-beta-mar-6-2020">
+<h1>Version 1.6.1a Beta (Mar 6, 2020)<a class="headerlink" href="#version-1-6-1a-beta-mar-6-2020" title="Permalink to this headline">¶</a></h1>
 <p><strong>FIXES</strong></p>
 <ul class="simple">
 <li><p>A hotfix has been made to correct an issue where a refined/processed version of the white matter segmentation mask was being sent to boundary-based functional-to-anatomical coregistration, instead of the raw white matter mask as intended.</p></li>
@@ -784,7 +811,8 @@ The CPAC development team.</p>
 <li class="toctree-l1"><a class="reference internal" href="../output_dir">8. Check Your Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../help">9. Troubleshoot</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../rnotes">10. Release Notes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../rnotes#latest-release-version-1-6-1a-beta-mar-6-2020">Latest Release: Version 1.6.1a Beta (Mar 6, 2020)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rnotes#latest-release-version-1-6-2-beta-apr-5-2020">Latest Release: Version 1.6.2 Beta (Apr 5, 2020)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rnotes#version-1-6-1a-beta-mar-6-2020">Version 1.6.1a Beta (Mar 6, 2020)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rnotes#version-1-6-1-beta-feb-2-2020">Version 1.6.1 Beta (Feb 2, 2020)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rnotes#c-pac-v1-6-0-jan-3-2020">C-PAC v1.6.0 (Jan 3, 2020)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rnotes#version-v1-5-0-beta-2019-10-09">Version v1.5.0 Beta - 2019.10.09</a></li>
