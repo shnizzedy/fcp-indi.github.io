@@ -1,20 +1,22 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Troubleshooting and Help &#8212; C-PAC 1.6.2 Beta documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
@@ -62,7 +64,7 @@
 <div class="section" id="common-issues">
 <h2>Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p>My run is crashing with the crash files indicating a memory error.  What is going on?</p>
+<li><p class="first">My run is crashing with the crash files indicating a memory error.  What is going on?</p>
 <blockquote>
 <div><blockquote>
 <div><p>This issue often occurs when scans are resampled to a higher resolution.  This is because functional images, the template that you are resampling to, and the resulting generated image are all loaded into memory at various points in the C-PAC pipeline.  Typically these images are compressed, but they will be uncompressed when loaded.  If the amount of memory required to load the images exceeds the amount of memory available, C-PAC will crash.</p>
@@ -71,13 +73,13 @@
 </div></blockquote>
 </div></blockquote>
 </li>
-<li id="working-dir-crashes"><p>I’m re-running a pipeline, but I am receiving many crashes.  Most of these crashes tell me that a file that has been moved or no longer exists is being used as an input for a step in the C-PAC pipeline.  What is going on and how can I tell C-PAC to use the correct inputs?</p>
+<li id="working-dir-crashes"><p class="first">I’m re-running a pipeline, but I am receiving many crashes.  Most of these crashes tell me that a file that has been moved or no longer exists is being used as an input for a step in the C-PAC pipeline.  What is going on and how can I tell C-PAC to use the correct inputs?</p>
 <blockquote>
 <div><p>One of the features of Nipype (which C-PAC is built upon) is that steps that have been run before are not re-run when you re-start a pipeline.  Nipype accomplishes this by associating a value with a step based on the properties of that step (i.e., hashing).  Nipype has two potential values that it can associate with a step: a value based on the size and date of the files created by the step, and a value based upon the data present within the files themselves.  The first value is what C-PAC uses with its pipelines, since it is much more computationally practical.  Since this value only looks at the size and date of files to determine whether or not a step has been run, it will not see that the file’s path has changed, and it will assume that all paths are consistent with the path structure from when the pipeline was run before.</p>
 <p>To work around this error, you will need to delete the working directory associated with the previous run and create a new directory to replace it for the new run.</p>
 </div></blockquote>
 </li>
-<li><p>How should I cite C-PAC in my paper?</p>
+<li><p class="first">How should I cite C-PAC in my paper?</p>
 <blockquote>
 <div><p>Please cite the abstract located <a class="reference external" href="http://www.frontiersin.org/10.3389/conf.fninf.2013.09.00042/event_abstract">here</a>.</p>
 </div></blockquote>
@@ -116,15 +118,17 @@
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
+  <h3>Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -147,7 +151,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>

@@ -1,20 +1,22 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Latest Release: Version 1.6.2 Beta (Apr 5, 2020) &#8212; C-PAC 1.6.2 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex" />
     <link rel="search" title="Search" href="../search" /> 
@@ -38,24 +40,24 @@
 <h1>Latest Release: Version 1.6.2 Beta (Apr 5, 2020)<a class="headerlink" href="#latest-release-version-1-6-2-beta-apr-5-2020" title="Permalink to this headline">¶</a></h1>
 <p><strong>New Features</strong></p>
 <ul class="simple">
-<li><p>ANTs registration transformation levels and parameters are now fully customizable in the pipeline configuration.</p></li>
-<li><p>Expanded Registration Forking Capability. C-PAC can now fork and simultaneously run both T1-template-based and EPI-template-based registration.</p></li>
-<li><p>Expanded Motion Correction Options. FSL MCFLIRT is now available as a tool selection for motion estimation and correction, alongside AFNI 3dvolreg.</p></li>
+<li>ANTs registration transformation levels and parameters are now fully customizable in the pipeline configuration.</li>
+<li>Expanded Registration Forking Capability. C-PAC can now fork and simultaneously run both T1-template-based and EPI-template-based registration.</li>
+<li>Expanded Motion Correction Options. FSL MCFLIRT is now available as a tool selection for motion estimation and correction, alongside AFNI 3dvolreg.</li>
 </ul>
 <p><strong>Improvements &amp; Upgrades</strong></p>
 <ul class="simple">
-<li><p>C-PAC now runs on Python 3. During this transition, some underlying software packages, such as AFNI and ANTs, have been upgraded. Based on our release testing, performance is mostly unchanged. However, small changes can occur due to improvements made to the tools.</p></li>
-<li><p>Motion estimation configurability. More motion estimation and correction parameters have been opened for configurability.</p></li>
-<li><p>Increased memory efficiency and speed: C-PAC’s new default behavior for preparing time-series extraction is to realign the ROI atlases to the functional time series, instead of the other way around. This can be toggled back if desired. This change aims to cut down on memory limit errors that occur during execution with the combination of larger datasets and pipeline parallelization.</p></li>
-<li><p>Increased speed: Redundant realignments of ROI atlases and the time series have also been removed.</p></li>
-<li><p>The ingress of phase-difference field maps for distortion correction has been streamlined.</p></li>
+<li>C-PAC now runs on Python 3. During this transition, some underlying software packages, such as AFNI and ANTs, have been upgraded. Based on our release testing, performance is mostly unchanged. However, small changes can occur due to improvements made to the tools.</li>
+<li>Motion estimation configurability. More motion estimation and correction parameters have been opened for configurability.</li>
+<li>Increased memory efficiency and speed: C-PAC’s new default behavior for preparing time-series extraction is to realign the ROI atlases to the functional time series, instead of the other way around. This can be toggled back if desired. This change aims to cut down on memory limit errors that occur during execution with the combination of larger datasets and pipeline parallelization.</li>
+<li>Increased speed: Redundant realignments of ROI atlases and the time series have also been removed.</li>
+<li>The ingress of phase-difference field maps for distortion correction has been streamlined.</li>
 </ul>
 <p><strong>Error Fixes</strong></p>
 <ul class="simple">
-<li><p>In the QC Interface, some of the template underlays would default to the MNI152 template, even if the pipeline was configured to use a custom template. This has been resolved.</p></li>
-<li><p>Resolved an issue that would prevent the pipeline from starting if ICA-AROMA and blip-up/down distortion correction were both enabled, for ANTs registration-based pipelines.</p></li>
-<li><p>Resolved an issue that was preventing Neurodata ndmg-f connectome graphs from being completed in some cases.</p></li>
-<li><p>Resolved the “Range parameter must be finite” QC image generation crash.</p></li>
+<li>In the QC Interface, some of the template underlays would default to the MNI152 template, even if the pipeline was configured to use a custom template. This has been resolved.</li>
+<li>Resolved an issue that would prevent the pipeline from starting if ICA-AROMA and blip-up/down distortion correction were both enabled, for ANTs registration-based pipelines.</li>
+<li>Resolved an issue that was preventing Neurodata ndmg-f connectome graphs from being completed in some cases.</li>
+<li>Resolved the “Range parameter must be finite” QC image generation crash.</li>
 </ul>
 <p>In addition, the C-PAC Docker and Singularity images, as well as the AWS AMI, have all been updated. These provide a <a class="reference external" href="http://fcp-indi.github.io/docs/user/quick.html">quick way to get started</a>.</p>
 <p>And as always, you can contact us here for user support and discussion:
@@ -90,15 +92,17 @@
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
+  <h3>Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -115,7 +119,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>
