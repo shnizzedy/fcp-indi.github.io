@@ -168,6 +168,7 @@
 <li><p><strong>Anatomical to Template Registration Method - [ANTS, FSL, ANTS &amp; FSL]:</strong> Registration method(s) to be used. Options are <a class="reference external" href="http://stnava.github.io/ANTs/">ANTS</a>, <a class="reference external" href="http://fsl.fmrib.ox.ac.uk/fslcourse/lectures/practicals/reg/">FSL</a>, or both.</p></li>
 <li><p><strong>ANTS skull-on transform - [Off, On]:</strong> Register skull-on anatomical image to template. Calculating the transform with skull-stripped images is reported to be better, but it requires very high-quality skull-stripping. If skull-stripping is imprecise, registration with skull is preferred. Note: This option only affects ANTS due to the fact that FNIRT already uses skull-on images for calculating warps.</p></li>
 <li><p><strong>Interpolation Method - [Linear, BSpline, LanczosWindowedSinc]:</strong> Interpolation method for writing out transformed anatomical images. ANTS registration tools only. Options are Linear, BSpline, or LanczosWindowedSinc.</p></li>
+<li><p><strong>ANTs Registration Parameters :</strong> Clicking on the setting icon will bring up a dialog where you can set ‘antsRegistration’ parameters.</p></li>
 <li><p><strong>FNIRT Configuration - [path]:</strong> Configuration file specifying settings used during registration. Required if FSL is selected as the registration method. This file can be found in the <code class="file docutils literal notranslate"><span class="pre">/etc/flirtsch</span></code> directory of your FSL install.</p></li>
 <li><p><strong>FNIRT Reference Mask - [path]:</strong> A reference mask to be used by FNIRT.</p></li>
 <li><p><strong>Perform linear registration only - [Off, On]:</strong> Whether or not perform only FLIRT.</p></li>
@@ -223,6 +224,10 @@
 <td><p>Disables skull-stripping on the anatomical inputs if they are already skull-stripped.</p></td>
 <td><p>A list where ‘1’ represents ‘yes’ and ‘0’ represents ‘no’ (e.g., ‘[1]’).</p></td>
 </tr>
+<tr class="row-even"><td><p>ANTs_para_T1_registration</p></td>
+<td><p>Parameters setting for antsRegistration.The user can specify any number of ‘stages’ where a stage consists of a transform; an image metric; and iterations, shrink factors, and smoothing sigmas for each level. Note that explicitly setting the dimensionality, metric, transform, output, convergence, shrink-factors, and smoothing-sigmas parameters is mandatory.</p></td>
+<td><p>See below for a full specification of parameters.</p></td>
+</tr>
 </tbody>
 </table>
 <p>The box below contains an example of what these parameters might look like when defined in the YAML:</p>
@@ -234,6 +239,60 @@ fnirtConfig : T1_2_MNI152_2mm
 ref_mask : $FSLDIR/data/standard/MNI152_T1_${resolution_for_anat}_brain_mask_symmetric_dil.nii.gz
 regWithSkull : [0]
 already_skullstripped : [0]
+ANTs_para_T1_registration:
+    - collapse-output-transforms: 0
+    - dimensionality: 3
+    - initial-moving-transform :
+        initializationFeature: 0
+    - transforms:
+        - Rigid:
+            gradientStep : 0.1
+            metric :
+                type : MI
+                metricWeight: 1
+                numberOfBins : 32
+                samplingStrategy : Regular
+                samplingPercentage : 0.25
+            convergence:
+                iteration : 1000x500x250x100
+                convergenceThreshold : 1e-08
+                convergenceWindowSize : 10
+            smoothing-sigmas : 3.0x2.0x1.0x0.0
+            shrink-factors : 8x4x2x1
+            use-histogram-matching : True
+        - Affine:
+            gradientStep : 0.1
+            metric :
+                type : MI
+                metricWeight: 1
+                numberOfBins : 32
+                samplingStrategy : Regular
+                samplingPercentage : 0.25
+            convergence:
+                iteration : 1000x500x250x100
+                convergenceThreshold : 1e-08
+                convergenceWindowSize : 10
+            smoothing-sigmas : 3.0x2.0x1.0x0.0
+            shrink-factors : 8x4x2x1
+            use-histogram-matching : True
+        - SyN:
+            gradientStep : 0.1
+            updateFieldVarianceInVoxelSpace : 3.0
+            totalFieldVarianceInVoxelSpace : 0.0
+            metric:
+                type : CC
+                metricWeight: 1
+                radius : 4
+            convergence:
+                iteration : 100x100x70x20
+                convergenceThreshold : 1e-09
+                convergenceWindowSize : 15
+            smoothing-sigmas : 3.0x2.0x1.0x0.0
+            shrink-factors : 6x4x2x1
+            use-histogram-matching : True
+            winsorize-image-intensities :
+                lowerQuantile : 0.01
+                upperQuantile : 0.99
 </pre></div>
 </div>
 </div>
