@@ -48,7 +48,7 @@
 <div class="section" id="let-s-go">
 <h2>Let’s Go!<a class="headerlink" href="#let-s-go" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>The recommended way to run C-PAC is through the use of a container such as Docker or Singularity.</li>
+<li>The recommended way to run C-PAC is through the use of a container such as Docker or Singularity. Using these containers can be facilitated by the C-PAC Python package.</li>
 <li>Containers are completely pre-built environments that help ensure reproducibility (same exact library versions, behavior, etc.).</li>
 <li>Docker is the more common option, but may require administrative rights on your system. This is a good option for personal machines.</li>
 <li>Singularity is the preferred option for shared resources like servers and clusters with many users. Either you or a system administrator can pull a C-PAC Singularity container for global use across your lab or organization.</li>
@@ -57,6 +57,72 @@
 <li>C-PAC can also pull input data from the cloud (AWS S3 buckets), so you can pull public data from any of the open-data releases immediately.</li>
 <li>More information regarding all of these points are available below, and throughout the rest of the User Guide.</li>
 </ol>
+</div>
+<div class="section" id="cpac-python-package">
+<h2>cpac Python Package<a class="headerlink" href="#cpac-python-package" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference external" href="https://pypi.org/project/cpac-py/">C-PAC Python package</a> is available so that you can easily run analyses without needing interact with the container platform that allows you to run C-PAC without installing all of the underlying software.</p>
+<p>Currently the C-PAC Python package supports Singularity (version ≥ 2.5 ≤ 3.0) and Docker.</p>
+<p>The C-PAC Python package requires Python 3.6 or greater. To get the C-PAC Python package, simply</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install cpac-py</span>
+</pre></div>
+</div>
+<p>As a quick example, in order to run C-PAC in participant mode, for one participant, using a BIDS dataset stored on your machine or server, and using the container image’s default pipeline configuration:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac run /Users/You/local_bids_data /Users/You/some_folder_for_outputs participant</span>
+</pre></div>
+</div>
+<p>By default, the C-PAC Python package will try Docker first and fall back to Singularity if Docker fails. If both fail, an exception is raised.</p>
+<p>You can specify a platform with the <code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">docker</span></code> or <code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">singularity</span></code>. If you specify a platform without specifying an image, these are the defaults, using the first successfully found image:</p>
+<div class="section" id="docker">
+<h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Look for <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> locally.</li>
+<li>Pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> from Docker Hub.</li>
+</ul>
+</div>
+<div class="section" id="singularity">
+<h3>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Look in the present working directory for any Singularity images. If more than one is found, use the most recently modified.</li>
+<li>Pull <code class="docutils literal notranslate"><span class="pre">FCP-INDI/C-PAC</span></code> from Singularity Hub.</li>
+<li>Pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> from Docker Hub and convert to a Singularity image.</li>
+</ul>
+<p>You can also specify a container image with an <code class="docutils literal notranslate"><span class="pre">--image</span></code> argument, passing an image name (e.g., <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac</span></code>) for a Docker image or a filepath (e.g. <code class="docutils literal notranslate"><span class="pre">~/singularity_images/C-PAC.sif</span></code>) for a Singularity image. You can also specify a <code class="docutils literal notranslate"><span class="pre">--tag</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">latest</span></code> or <code class="docutils literal notranslate"><span class="pre">nightly</span></code>).</p>
+<p>You can also provide a link to an AWS S3 bucket containing a BIDS directory as the data source:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac run s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /Users/You/some_folder_for_outputs participant</span>
+</pre></div>
+</div>
+<p>In addition to the default pipeline, C-PAC comes packaged with a growing library of pre-configured pipelines that are ready to use. To run C-PAC with one of the pre-packaged pre-configured pipelines, simply invoke the <code class="docutils literal notranslate"><span class="pre">--preconfig</span></code> flag, shown below. See the full selection of pre-configured pipelines <a class="reference internal" href="preconfig"><span class="doc">here</span></a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac run /Users/You/local_bids_data /Users/You/some_folder_for_outputs --preconfig anat-only</span>
+</pre></div>
+</div>
+<p>To run C-PAC with a pipeline configuration file other than one of the pre-configured pipelines, assuming the configuration file is in the <code class="docutils literal notranslate"><span class="pre">/Users/You/Documents</span></code> directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac run /Users/You/local_bids_data /Users/You/some_folder_for_outputs participant --pipeline_file /Users/You/Documents/pipeline_config.yml</span>
+</pre></div>
+</div>
+<p>Finally, to run C-PAC with a specific data configuration file (instead of providing a BIDS data directory):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac run /Users/You/any_directory /Users/You/some_folder_for_outputs participant --data_config_file /Users/You/Documents/data_config.yml</span>
+</pre></div>
+</div>
+<p>Note: we are still providing the postionally-required <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> input parameter. However C-PAC will not look for data in this directory when you provide a data configuration YAML with the <code class="docutils literal notranslate"><span class="pre">--data_config_file</span></code> flag. Providing <code class="docutils literal notranslate"><span class="pre">.</span></code> or <code class="docutils literal notranslate"><span class="pre">$PWD</span></code> will simply pass the present working directory. In addition, if the dataset in your data configuration file is not in BIDS format, just make sure to add the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag at the end of your command to bypass the BIDS validation process.</p>
+<p>The full list of parameters and options that can be passed to the Docker container are shown below:</p>
+<div class="section" id="cpac-run-help">
+<h4>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/local/bin/python: No module named /build/C-PAC/dev/docker_data/run
+</pre></div>
+</div>
+<p>Note that any of the optional arguments above will over-ride any pipeline settings in the default pipeline or in the pipeline configuration file you provide via the <code class="docutils literal notranslate"><span class="pre">--pipeline_file</span></code> parameter.</p>
+<p><strong>Further usage notes:</strong></p>
+<ul class="simple">
+<li>You can run only anatomical preprocessing easily, without modifying your data or pipeline configuration files, by providing the <code class="docutils literal notranslate"><span class="pre">--anat_only</span></code> flag.</li>
+<li>As stated, the default behavior is to read data that is organized in the BIDS format. This includes data that is in Amazon AWS S3 by using the format <code class="docutils literal notranslate"><span class="pre">s3://&lt;bucket_name&gt;/&lt;bids_dir&gt;</span></code> for the <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> command line argument. Outputs can be written to S3 using the same format for the <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>. Credentials for accessing these buckets can be specified on the command line (using <code class="docutils literal notranslate"><span class="pre">--aws_input_creds</span></code> or <code class="docutils literal notranslate"><span class="pre">--aws_output_creds</span></code>).</li>
+<li>When the app is run, a data configuration file is written to the working directory. This directory can be specified with <code class="docutils literal notranslate"><span class="pre">--working_dir</span></code> or the directory from which you run <code class="docutils literal notranslate"><span class="pre">cpac</span></code> will be used. This file can be passed into subsequent runs, which avoids the overhead of re-parsing the BIDS input directory on each run (i.e. for cluster or cloud runs). These files can be generated without executing the C-PAC pipeline using the <code class="docutils literal notranslate"><span class="pre">test_run</span></code> command line argument.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">participant_label</span></code> and <code class="docutils literal notranslate"><span class="pre">participant_ndx</span></code> arguments allow the user to specify which of the many datasets should be processed, which is useful when parallelizing the run of multiple participants.</li>
+<li>If you want to pass runtime options to your container plaform (Docker or Singularity), you can pass them with <code class="docutils literal notranslate"><span class="pre">-o</span></code> or <code class="docutils literal notranslate"><span class="pre">--container_options</span></code>.</li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="run-on-docker">
 <h2>Run on Docker<a class="headerlink" href="#run-on-docker" title="Permalink to this headline">¶</a></h2>
@@ -114,8 +180,6 @@
 </div>
 <p>Note: we are still providing <code class="docutils literal notranslate"><span class="pre">/bids_dataset</span></code> to the <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> input parameter. However, we have mapped this to any directory on your machine, as C-PAC will not look for data in this directory when you provide a data configuration YAML with the <code class="docutils literal notranslate"><span class="pre">--data_config_file</span></code> flag. In addition, if the dataset in your data configuration file is not in BIDS format, just make sure to add the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag at the end of your command to bypass the BIDS validation process.</p>
 <p>The full list of parameters and options that can be passed to the Docker container are shown below:</p>
-<div class="section" id="cpac-run-help">
-<h3>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/local/bin/python: No module named /build/C-PAC/dev/docker_data/run
 </pre></div>
 </div>
@@ -129,7 +193,6 @@
 <li>The <code class="docutils literal notranslate"><span class="pre">participant_label</span></code> and <code class="docutils literal notranslate"><span class="pre">participant_ndx</span></code> arguments allow the user to specify which of the many datasets should be processed, which is useful when parallelizing the run of multiple participants.</li>
 </ul>
 <div class="toctree-wrapper compound">
-</div>
 </div>
 </div>
 <div class="section" id="run-on-singularity">
@@ -269,6 +332,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. C-PAC Quickstart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#let-s-go">Let’s Go!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpac-python-package">cpac Python Package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-on-docker">Run on Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-on-singularity">Run on Singularity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#default-pipeline">Default Pipeline</a></li>
