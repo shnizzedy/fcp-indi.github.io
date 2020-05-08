@@ -135,7 +135,137 @@
 <p>The full list of parameters and options that can be passed to the Docker container are shown below:</p>
 <div class="section" id="cpac-run-help">
 <h3>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/local/bin/python: No module named /build/C-PAC/dev/docker_data/run
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Loading 🐳 Docker
+Loading Ⓢ Singularity
+singularity pull --name C-PAC.simg shub://FCP-INDI/C-PAC
+singularity pull --name c-pac:latest.simg docker://fcpindi/c-pac:latest
+Traceback (most recent call last):
+  File &quot;/root/.local/lib/python3.7/site-packages/urllib3/connectionpool.py&quot;, line 600, in urlopen
+    chunked=chunked)
+  File &quot;/root/.local/lib/python3.7/site-packages/urllib3/connectionpool.py&quot;, line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 1252, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 1298, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 1247, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 1026, in _send_output
+    self.send(msg)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 966, in send
+    self.connect()
+  File &quot;/usr/local/lib/python3.7/site-packages/docker/transport/unixconn.py&quot;, line 43, in connect
+    sock.connect(self.unix_socket)
+FileNotFoundError: [Errno 2] No such file or directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/root/.local/lib/python3.7/site-packages/requests/adapters.py&quot;, line 449, in send
+    timeout=timeout
+  File &quot;/root/.local/lib/python3.7/site-packages/urllib3/connectionpool.py&quot;, line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File &quot;/root/.local/lib/python3.7/site-packages/urllib3/util/retry.py&quot;, line 368, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File &quot;/root/.local/lib/python3.7/site-packages/urllib3/packages/six.py&quot;, line 685, in reraise
+    raise value.with_traceback(tb)
+  File &quot;/root/.local/lib/python3.7/site-packages/urllib3/connectionpool.py&quot;, line 600, in urlopen
+    chunked=chunked)
+  File &quot;/root/.local/lib/python3.7/site-packages/urllib3/connectionpool.py&quot;, line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 1252, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 1298, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 1247, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 1026, in _send_output
+    self.send(msg)
+  File &quot;/usr/local/lib/python3.7/http/client.py&quot;, line 966, in send
+    self.connect()
+  File &quot;/usr/local/lib/python3.7/site-packages/docker/transport/unixconn.py&quot;, line 43, in connect
+    sock.connect(self.unix_socket)
+urllib3.exceptions.ProtocolError: (&#39;Connection aborted.&#39;, FileNotFoundError(2, &#39;No such file or directory&#39;))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/__main__.py&quot;, line 177, in main
+    *original_args[1:]
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/__main__.py&quot;, line 241, in main
+    Backends(**arg_vars).run(
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/backends/__init__.py&quot;, line 27, in Backends
+    }[platform](**kwargs)
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/backends/docker.py&quot;, line 11, in __init__
+    self.client.ping()
+  File &quot;/usr/local/lib/python3.7/site-packages/docker/client.py&quot;, line 187, in ping
+    return self.api.ping(*args, **kwargs)
+  File &quot;/usr/local/lib/python3.7/site-packages/docker/api/daemon.py&quot;, line 166, in ping
+    return self._result(self._get(self._url(&#39;/_ping&#39;))) == &#39;OK&#39;
+  File &quot;/usr/local/lib/python3.7/site-packages/docker/utils/decorators.py&quot;, line 46, in inner
+    return f(self, *args, **kwargs)
+  File &quot;/usr/local/lib/python3.7/site-packages/docker/api/client.py&quot;, line 230, in _get
+    return self.get(url, **self._set_request_timeout(kwargs))
+  File &quot;/root/.local/lib/python3.7/site-packages/requests/sessions.py&quot;, line 546, in get
+    return self.request(&#39;GET&#39;, url, **kwargs)
+  File &quot;/root/.local/lib/python3.7/site-packages/requests/sessions.py&quot;, line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File &quot;/root/.local/lib/python3.7/site-packages/requests/sessions.py&quot;, line 646, in send
+    r = adapter.send(request, **kwargs)
+  File &quot;/root/.local/lib/python3.7/site-packages/requests/adapters.py&quot;, line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: (&#39;Connection aborted.&#39;, FileNotFoundError(2, &#39;No such file or directory&#39;))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/backends/singularity.py&quot;, line 32, in __init__
+    pull_folder=os.getcwd()
+  File &quot;/usr/local/lib/python3.7/site-packages/spython/main/pull.py&quot;, line 94, in pull
+    self._run_command(cmd, capture=capture, quiet=quiet)
+  File &quot;/usr/local/lib/python3.7/site-packages/spython/main/base/command.py&quot;, line 133, in run_command
+    cmd, sudo=sudo, capture=capture, quiet=quiet, sudo_options=sudo_options
+  File &quot;/usr/local/lib/python3.7/site-packages/spython/utils/terminal.py&quot;, line 179, in run_command
+    process = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=stdout)
+  File &quot;/usr/local/lib/python3.7/subprocess.py&quot;, line 800, in __init__
+    restore_signals, start_new_session)
+  File &quot;/usr/local/lib/python3.7/subprocess.py&quot;, line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: &#39;singularity&#39;: &#39;singularity&#39;
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/backends/singularity.py&quot;, line 38, in __init__
+    pull_folder=os.getcwd()
+  File &quot;/usr/local/lib/python3.7/site-packages/spython/main/pull.py&quot;, line 94, in pull
+    self._run_command(cmd, capture=capture, quiet=quiet)
+  File &quot;/usr/local/lib/python3.7/site-packages/spython/main/base/command.py&quot;, line 133, in run_command
+    cmd, sudo=sudo, capture=capture, quiet=quiet, sudo_options=sudo_options
+  File &quot;/usr/local/lib/python3.7/site-packages/spython/utils/terminal.py&quot;, line 179, in run_command
+    process = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=stdout)
+  File &quot;/usr/local/lib/python3.7/subprocess.py&quot;, line 800, in __init__
+    restore_signals, start_new_session)
+  File &quot;/usr/local/lib/python3.7/subprocess.py&quot;, line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: &#39;singularity&#39;: &#39;singularity&#39;
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/local/bin/cpac&quot;, line 8, in &lt;module&gt;
+    sys.exit(run())
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/__main__.py&quot;, line 254, in run
+    main(sys.argv)
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/__main__.py&quot;, line 184, in main
+    *original_args[1:]
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/__main__.py&quot;, line 241, in main
+    Backends(**arg_vars).run(
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/backends/__init__.py&quot;, line 27, in Backends
+    }[platform](**kwargs)
+  File &quot;/usr/local/lib/python3.7/site-packages/cpac/backends/singularity.py&quot;, line 41, in __init__
+    raise OSError(&quot;Could not connect to Singularity&quot;)
+OSError: Could not connect to Singularity
 </pre></div>
 </div>
 <p>Note that any of the optional arguments above will over-ride any pipeline settings in the default pipeline or in the pipeline configuration file you provide via the <code class="docutils literal notranslate"><span class="pre">--pipeline_file</span></code> parameter.</p>
