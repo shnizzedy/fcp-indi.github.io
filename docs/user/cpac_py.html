@@ -83,15 +83,15 @@ optional arguments:
                         Singularity
 </pre></div>
 </div>
-<div class="section" id="docker">
-<h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="platform-docker">
+<h3>–platform docker<a class="headerlink" href="#platform-docker" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Look for <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> locally.</li>
 <li>Pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> from Docker Hub.</li>
 </ul>
 </div>
-<div class="section" id="singularity">
-<h3>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="platform-singularity">
+<h3>–platform singularity<a class="headerlink" href="#platform-singularity" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Look in the present working directory for any Singularity images. If more than one is found, use the most recently modified.</li>
 <li>Pull <code class="docutils literal notranslate"><span class="pre">FCP-INDI/C-PAC</span></code> from Singularity Hub.</li>
@@ -118,10 +118,11 @@ optional arguments:
 <p>The full list of parameters and options that can be passed to C-PAC are shown below:</p>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Usage<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="usage-cpac-run">
+<h2>Usage: cpac run<a class="headerlink" href="#usage-cpac-run" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cpac run --help
 ...
+usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
               [--data_config_file DATA_CONFIG_FILE] [--preconfig PRECONFIG]
               [--pipeline_override PIPELINE_OVERRIDE]
               [--aws_input_creds AWS_INPUT_CREDS]
@@ -250,10 +251,11 @@ optional arguments:
 </pre></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h2>Usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="usage-cpac-utils">
+<h2>Usage: cpac utils<a class="headerlink" href="#usage-cpac-utils" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cpac utils --help
 ...
+Usage: run.py utils [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --help  Show this message and exit.
