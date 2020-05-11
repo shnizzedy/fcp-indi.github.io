@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Usage &#8212; C-PAC 1.6.2 Beta documentation</title>
+    <title>cpac run –help &#8212; C-PAC 1.6.2 Beta documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -44,9 +44,19 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
+  <div class="section" id="cpac-run-help">
+<h1>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cpac run --help | tail --lines=+10
+Loading 🐳 Docker
+Loading 🐳 fcpindi/c-pac:latest with these directory bindings:
+  local                              Docker                             mode
+  ---------------------------------  ---------------------------------  ------
+  /tmp                               /tmp                               rw
+  /build/docs/user/_sources/outputs  /build/docs/user/_sources/outputs  rw
+  /build/docs/user/_sources          /build/docs/user/_sources          rw
+Logging messages will refer to the Docker paths.
+
+usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
               [--data_config_file DATA_CONFIG_FILE] [--preconfig PRECONFIG]
               [--pipeline_override PIPELINE_OVERRIDE]
               [--aws_input_creds AWS_INPUT_CREDS]

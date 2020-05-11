@@ -133,9 +133,19 @@
 </div>
 <p>Note: we are still providing <code class="docutils literal notranslate"><span class="pre">/bids_dataset</span></code> to the <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> input parameter. However, we have mapped this to any directory on your machine, as C-PAC will not look for data in this directory when you provide a data configuration YAML with the <code class="docutils literal notranslate"><span class="pre">--data_config_file</span></code> flag. In addition, if the dataset in your data configuration file is not in BIDS format, just make sure to add the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag at the end of your command to bypass the BIDS validation process.</p>
 <p>The full list of parameters and options that can be passed to the Docker container are shown below:</p>
-<div class="section" id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
+<div class="section" id="cpac-run-help">
+<h3>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cpac run --help | tail --lines=+10
+Loading 🐳 Docker
+Loading 🐳 fcpindi/c-pac:latest with these directory bindings:
+  local                              Docker                             mode
+  ---------------------------------  ---------------------------------  ------
+  /tmp                               /tmp                               rw
+  /build/docs/user/_sources/outputs  /build/docs/user/_sources/outputs  rw
+  /build/docs/user/_sources          /build/docs/user/_sources          rw
+Logging messages will refer to the Docker paths.
+
+usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
               [--data_config_file DATA_CONFIG_FILE] [--preconfig PRECONFIG]
               [--pipeline_override PIPELINE_OVERRIDE]
               [--aws_input_creds AWS_INPUT_CREDS]

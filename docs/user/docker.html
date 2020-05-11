@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex" />
     <link rel="search" title="Search" href="search" />
     <link rel="next" title="Run on Singularity" href="singularity" />
-    <link rel="prev" title="Usage" href="run/help" /> 
+    <link rel="prev" title="cpac run –help" href="run/help" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,7 +32,7 @@
           <a href="singularity" title="Run on Singularity"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="run/help" title="Usage"
+          <a href="run/help" title="cpac run –help"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="quick" accesskey="U">C-PAC Quickstart</a> &#187;</li> 
@@ -100,9 +100,19 @@
 </div>
 <p>Note: we are still providing <code class="docutils literal notranslate"><span class="pre">/bids_dataset</span></code> to the <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> input parameter. However, we have mapped this to any directory on your machine, as C-PAC will not look for data in this directory when you provide a data configuration YAML with the <code class="docutils literal notranslate"><span class="pre">--data_config_file</span></code> flag. In addition, if the dataset in your data configuration file is not in BIDS format, just make sure to add the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag at the end of your command to bypass the BIDS validation process.</p>
 <p>The full list of parameters and options that can be passed to the Docker container are shown below:</p>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
+<div class="section" id="cpac-run-help">
+<h2>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cpac run --help | tail --lines=+10
+Loading 🐳 Docker
+Loading 🐳 fcpindi/c-pac:latest with these directory bindings:
+  local                              Docker                             mode
+  ---------------------------------  ---------------------------------  ------
+  /tmp                               /tmp                               rw
+  /build/docs/user/_sources/outputs  /build/docs/user/_sources/outputs  rw
+  /build/docs/user/_sources          /build/docs/user/_sources          rw
+Logging messages will refer to the Docker paths.
+
+usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
               [--data_config_file DATA_CONFIG_FILE] [--preconfig PRECONFIG]
               [--pipeline_override PIPELINE_OVERRIDE]
               [--aws_input_creds AWS_INPUT_CREDS]
@@ -257,6 +267,7 @@ optional arguments:
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="quick">1. C-PAC Quickstart</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quick#let-s-go">Let’s Go!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick#cpac-python-package">cpac Python Package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#run-on-docker">Run on Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#run-on-singularity">Run on Singularity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#default-pipeline">Default Pipeline</a></li>
@@ -304,7 +315,7 @@ optional arguments:
           <a href="singularity" title="Run on Singularity"
              >next</a> |</li>
         <li class="right" >
-          <a href="run/help" title="Usage"
+          <a href="run/help" title="cpac run –help"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="quick" >C-PAC Quickstart</a> &#187;</li> 
