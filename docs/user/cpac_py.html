@@ -49,15 +49,49 @@
 </div>
 <p>By default, the C-PAC Python package will try Docker first and fall back to Singularity if Docker fails. If both fail, an exception is raised.</p>
 <p>You can specify a platform with the <code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">docker</span></code> or <code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">singularity</span></code>. If you specify a platform without specifying an image, these are the defaults, using the first successfully found image:</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cpac --help
+usage: cpac [-h] [--platform {docker,singularity}] [--image IMAGE] [--tag TAG]
+            [--version] [-v] [-vv] [--working_dir PATH] [--temp_dir PATH]
+            [--output_dir PATH] [-o OPT [OPT ...]]
+            {run,utils} ...
+
+cpac: a Python package that simplifies using C-PAC &lt;http://fcp-indi.github.io&gt;
+containerized images. If no platform nor image is specified, cpac will try
+Docker first, then try Singularity if Docker fails.
+
+positional arguments:
+  {run,utils}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --platform {docker,singularity}
+  --image IMAGE         path to Singularity image file OR name of Docker image
+                        (eg, &quot;fcpindi/c-pac&quot;). Will attempt to pull from
+                        Singularity Hub or Docker Hub if not provided.
+  --tag TAG             tag of the Docker image to use (eg, &quot;latest&quot; or
+                        &quot;nightly&quot;).
+  --version             show program&#39;s version number and exit
+  -v, --verbose         set loglevel to INFO
+  -vv, --very-verbose   set loglevel to DEBUG
+  --working_dir PATH    working directory
+  --temp_dir PATH       directory for temporary files
+  --output_dir PATH     directory where output files should be stored
+  -o OPT [OPT ...], --container_options OPT [OPT ...]
+                        parameters and flags to pass through to Docker or
+                        Singularity
+</pre></div>
+</div>
 <div class="section" id="docker">
-<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Look for <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> locally.</li>
 <li>Pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> from Docker Hub.</li>
 </ul>
 </div>
 <div class="section" id="singularity">
-<h2>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h2>
+<h3>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Look in the present working directory for any Singularity images. If more than one is found, use the most recently modified.</li>
 <li>Pull <code class="docutils literal notranslate"><span class="pre">FCP-INDI/C-PAC</span></code> from Singularity Hub.</li>
@@ -81,19 +115,13 @@
 </pre></div>
 </div>
 <p>Note: we are still providing the postionally-required <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> input parameter. However C-PAC will not look for data in this directory when you provide a data configuration YAML with the <code class="docutils literal notranslate"><span class="pre">--data_config_file</span></code> flag. Providing <code class="docutils literal notranslate"><span class="pre">.</span></code> or <code class="docutils literal notranslate"><span class="pre">$PWD</span></code> will simply pass the present working directory. In addition, if the dataset in your data configuration file is not in BIDS format, just make sure to add the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag at the end of your command to bypass the BIDS validation process.</p>
-<p>The full list of parameters and options that can be passed to the Docker container are shown below:</p>
-<div class="section" id="cpac-run-help">
-<h3>cpac run –help<a class="headerlink" href="#cpac-run-help" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Loading 🐳 Docker
-Loading 🐳 fcpindi/c-pac:latest with these directory bindings:
-  local                              Docker                             mode
-  ---------------------------------  ---------------------------------  ------
-  /tmp                               /tmp                               rw
-  /build/docs/user/_sources/outputs  /build/docs/user/_sources/outputs  rw
-  /build/docs/user/_sources          /build/docs/user/_sources          rw
-Logging messages will refer to the Docker paths.
-
-usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]
+<p>The full list of parameters and options that can be passed to C-PAC are shown below:</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Usage<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cpac run --help
+...
               [--data_config_file DATA_CONFIG_FILE] [--preconfig PRECONFIG]
               [--pipeline_override PIPELINE_OVERRIDE]
               [--aws_input_creds AWS_INPUT_CREDS]
@@ -221,6 +249,26 @@ optional arguments:
                         bind the port using the Docker flag &quot;-p&quot;.
 </pre></div>
 </div>
+</div>
+<div class="section" id="id2">
+<h2>Usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cpac utils --help
+...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  crash
+  data_config
+  group_config
+  pipe_config
+  repickle
+  test
+  tools
+  workflows
+</pre></div>
+</div>
 <p>Note that any of the optional arguments above will over-ride any pipeline settings in the default pipeline or in the pipeline configuration file you provide via the <code class="docutils literal notranslate"><span class="pre">--pipeline_file</span></code> parameter.</p>
 <p><strong>Further usage notes:</strong></p>
 <ul class="simple">
@@ -231,7 +279,6 @@ optional arguments:
 <li>If you want to pass runtime options to your container plaform (Docker or Singularity), you can pass them with <code class="docutils literal notranslate"><span class="pre">-o</span></code> or <code class="docutils literal notranslate"><span class="pre">--container_options</span></code>.</li>
 </ul>
 <div class="toctree-wrapper compound">
-</div>
 </div>
 </div>
 </div>
