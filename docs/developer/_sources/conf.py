@@ -26,10 +26,15 @@ sys.path.insert(0, os.path.abspath('.'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.mathjax',
-              'sphinx.ext.ifconfig', 'sphinx.ext.viewcode',
-              'numpydoc',
-              'exec']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.mathjax', 'sphinx.ext.extlinks',
+              'sphinx.ext.ifconfig', 'sphinx.ext.viewcode', 'numpydoc', 'exec']
+
+extlinks = {
+    'cpac_user': (
+        'https://fcp-indi.github.io/docs/user/%s',
+        'User documentation: '
+    )
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
