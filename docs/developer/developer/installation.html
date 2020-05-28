@@ -62,33 +62,54 @@
 </div>
 <div class="section" id="building-a-c-pac-container-image">
 <h1>Building a C-PAC container image<a class="headerlink" href="#building-a-c-pac-container-image" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="docker">
-<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
-<p>Docker images are abstracted away and stored with Docker’s program data. To build a Docker image with the tag <code class="docutils literal notranslate"><span class="pre">$DOCKER_TAG</span></code>, just run the following code from the directory containing <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/master/Dockerfile">Dockerfile</a>.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker build -t fcpindi/c-pac:<span class="nv">$DOCKER_TAG</span> <span class="o">[</span>--no-cache<span class="o">]</span> .
+<p>To build an image, you’ll need <a class="reference external" href="https://www.docker.com">Docker</a> and/or <a class="reference external" href="https://sylabs.io/guides/3.1/user-guide/">Singularity</a>. You’ll also need adequate permissions on your machine (membership in the <code class="docutils literal notranslate"><span class="pre">docker</span></code> and/or <code class="docutils literal notranslate"><span class="pre">sudo</span></code> usergroups).</p>
+<div class="section" id="id1">
+<h2>Docker<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Docker images are abstracted away and stored with Docker’s program data. To build a Docker image with the tag <code class="docutils literal notranslate"><span class="pre">$DOCKER_TAG</span></code>, just run the following code from the directory containing <code class="docutils literal notranslate"><span class="pre">`Dockerfile</span></code> &lt;<a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/master/Dockerfile">https://github.com/FCP-INDI/C-PAC/blob/master/Dockerfile</a>&gt;`_.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker build -t <span class="nv">$DOCKER_IMAGE</span>:<span class="nv">$DOCKER_TAG</span> <span class="o">[</span>--no-cache<span class="o">]</span> .
+</pre></div>
+</div>
+<p>For example, to build an image <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac</span></code> with the tag <code class="docutils literal notranslate"><span class="pre">example</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker build -t fcpindi/c-pac:example <span class="o">[</span>--no-cache<span class="o">]</span> .
 </pre></div>
 </div>
 </div>
-<div class="section" id="singularity">
-<h2>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline">¶</a></h2>
-<p>Singularity images are stored have an extension <code class="docutils literal notranslate"><span class="pre">.simg</span></code> in v2, <code class="docutils literal notranslate"><span class="pre">.sif</span></code> in v3.</p>
+<div class="section" id="id2">
+<h2>Singularity<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Singularity images are stored in local files with an extension <code class="docutils literal notranslate"><span class="pre">.simg</span></code> in v2, <code class="docutils literal notranslate"><span class="pre">.sif</span></code> in v3. They can be built from Docker images or from Docker files.</p>
 <div class="section" id="from-docker-image">
 <h3>From Docker image<a class="headerlink" href="#from-docker-image" title="Permalink to this headline">¶</a></h3>
+<p>Singularity can build a Singularity image from a Docker image in a Docker registry. If you’re not using an existing registry (e.g., Docker Hub), you can <a class="reference external" href="https://docs.docker.com/registry/deploying/#run-a-local-registry">run a local registry</a>. To set a registry up</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run -d -p <span class="nv">$DOCKER_REGISTRY_PORT</span>:<span class="nv">$DOCKER_REGISTRY_PORT</span> --restart<span class="o">=</span>always --name registry registry:2
 </pre></div>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run registry
+<p>Then tag and push your Docker image to your registry</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker tag fcpindi/c-pac:<span class="nv">$DOCKER_TAG</span> <span class="nv">$DOCKER_REGISTRY_HOST</span>:<span class="nv">$DOCKER_REGISTRY_PORT</span>/fcpindi/c-pac:<span class="nv">$DOCKER_TAG</span>
+docker push <span class="nv">$DOCKER_REGISTRY_HOST</span>:<span class="nv">$DOCKER_REGISTRY_PORT</span>/<span class="nv">$DOCKER_IMAGE</span>:<span class="nv">$DOCKER_TAG</span>
 </pre></div>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">SINGULARITY_NOHTTPS</span><span class="o">=</span><span class="m">1</span> singularity build <span class="nv">$SINGULARITY_IMAGE</span> docker://localhost:<span class="nv">$DOCKER_REGISTRY_PORT</span>/fcpindi/c-pac:<span class="nv">$DOCKER_TAG</span>
+<p>Finally, you can build a Singularity image from your registered Docker image.  If you’re using Docker Hub or some other HTTPS registry, you can omit <code class="docutils literal notranslate"><span class="pre">SINGULARITY_NOHTTPS=1</span></code> and <code class="docutils literal notranslate"><span class="pre">$DOCKER_REGISTRY_HOST:$DOCKER_REGISTRY_PORT/</span></code> when building</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">SINGULARITY_NOHTTPS</span><span class="o">=</span><span class="m">1</span> singularity build <span class="nv">$SINGULARITY_IMAGE</span> docker://<span class="nv">$DOCKER_REGISTRY_HOST</span>:<span class="nv">$DOCKER_REGISTRY_PORT</span>/<span class="nv">$DOCKER_IMAGE</span>:<span class="nv">$DOCKER_TAG</span>
+</pre></div>
+</div>
+<p>For example, to build a Singularity image called <code class="docutils literal notranslate"><span class="pre">C-PAC-example.simg</span></code> from the Docker image <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:example</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run -d -p <span class="m">5000</span>:5000 --restart<span class="o">=</span>always --name registry registry:2
+docker tag fcpindi/c-pac:example localhost:5000/fcpindi/c-pac:example
+docker push localhost:5000/fcpindi/c-pac:example
+<span class="nv">SINGULARITY_NOHTTPS</span><span class="o">=</span><span class="m">1</span> singularity build C-PAC-example.simg docker://localhost:5000/fcpindi/c-pac:example
 </pre></div>
 </div>
 </div>
 <div class="section" id="from-dockerfile">
 <h3>From Dockerfile<a class="headerlink" href="#from-dockerfile" title="Permalink to this headline">¶</a></h3>
-<p>[Singularity Python](<a class="reference external" href="https://singularityhub.github.io/singularity-cli/">https://singularityhub.github.io/singularity-cli/</a>) includes [a tool to convert a Dockerfile into a Singularity recipe](<a class="reference external" href="https://singularityhub.github.io//recipes#auto-detection">https://singularityhub.github.io//recipes#auto-detection</a>). Then you can build a Singularity image with that recipe.</p>
+<p><a class="reference external" href="https://singularityhub.github.io/singularity-cli/">Singularity Python</a> includes <a class="reference external" href="https://singularityhub.github.io//recipes#auto-detection">a tool to convert a Dockerfile into a Singularity recipe</a>. Then you can build a Singularity image with that recipe. You’ll need <code class="docutils literal notranslate"><span class="pre">sudo</span></code> permissions to build from a recipe. If your Singularity is installed somewhere outside of root’s <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, you’ll have to give the full path to the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> executable file.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>spython recipe Dockerfile Singularity.snowflake
-singularity build <span class="nv">$SINGULARITY_IMAGE</span> Singularity.snowflake
+sudo <span class="nv">$SINGULARITY_PATH</span>/singularity build <span class="nv">$SINGULARITY_IMAGE</span> Singularity.snowflake
+</pre></div>
+</div>
+<p>For example, to build a Singularity image called <code class="docutils literal notranslate"><span class="pre">C-PAC-example.simg</span></code> from the Dockerfile:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>spython recipe Dockerfile Singularity.snowflake
+sudo ~/opt/singularity/singularity-2.5.2/bin/singularity build C-PAC-example.simg Singularity.snowflake
 </pre></div>
 </div>
 </div>
@@ -111,8 +132,8 @@ singularity build <span class="nv">$SINGULARITY_IMAGE</span> Singularity.snowfla
 </ul>
 </li>
 <li><a class="reference internal" href="#building-a-c-pac-container-image">Building a C-PAC container image</a><ul>
-<li><a class="reference internal" href="#docker">Docker</a></li>
-<li><a class="reference internal" href="#singularity">Singularity</a><ul>
+<li><a class="reference internal" href="#id1">Docker</a></li>
+<li><a class="reference internal" href="#id2">Singularity</a><ul>
 <li><a class="reference internal" href="#from-docker-image">From Docker image</a></li>
 <li><a class="reference internal" href="#from-dockerfile">From Dockerfile</a></li>
 </ul>
