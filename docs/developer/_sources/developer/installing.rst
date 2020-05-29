@@ -212,7 +212,7 @@ If you open a new shell and type `afni` the AFNI console should now appear.  If 
 
 **Note:** Regarding the Neurodebian repository: We have encountered compatibility issues in the past with the Neurodebian binary for AFNI.  For this reason, it is suggested that you follow the installation instructions above or the instructions from the AFNI homepage.
 
-**Note:** On some Ubuntu systems, AFNI can have trouble locating the libgsl.so.0 software library required for some of their tools (3dSkullStrip, and 3dHist). If you experience an error trying to run any of these tools, first attempt to re-install AFNI via the instructions on the AFNI homepage. If this does not resolve the issue, another solution involves locating your system's GSL library and re-configuring:
+**Note:** On some Ubuntu systems, AFNI can have trouble locating the libgsl.so.0 software library required for some of their tools (viz. 3dSkullStrip). If you experience an error trying to run any AFNI tools, first attempt to re-install AFNI via the instructions on the AFNI homepage. If this does not resolve the issue, another solution involves locating your system's GSL library and re-configuring:
 
 .. code-block:: console
 

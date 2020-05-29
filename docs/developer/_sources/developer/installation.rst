@@ -5,6 +5,8 @@ Installing CPAC
 
 C-PAC is a containerized software package, running in `Docker <https://www.docker.com>`_ or `Singularity <https://sylabs.io/guides/3.1/user-guide/>`_. Releases and development Docker images are published on Docker Hub as ``fcpindi/c-pac:latest`` and ``fcpindi/c-pac:nightly``, respectively. Releases are also published on Singularity Hub as ``FCP-INDI/C-PAC``.
 
+.. include:: installing.txt
+
 Downloading the latest version of CPAC
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
