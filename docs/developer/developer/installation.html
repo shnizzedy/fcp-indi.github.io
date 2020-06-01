@@ -100,24 +100,6 @@ docker push localhost:5000/fcpindi/c-pac:example
 <span class="nv">SINGULARITY_NOHTTPS</span><span class="o">=</span><span class="m">1</span> singularity build C-PAC-example.simg docker://localhost:5000/fcpindi/c-pac:example
 </pre></div>
 </div>
-<p># From Dockerfile
-# —————
-# # This process seems to not be quite foolproof yet.
-#
-# <a class="reference external" href="https://singularityhub.github.io/singularity-cli/">Singularity Python</a> includes <a class="reference external" href="https://singularityhub.github.io//recipes#auto-detection">a tool to convert a Dockerfile into a Singularity recipe</a>. Then you can build a Singularity image with that recipe. You’ll need <code class="docutils literal notranslate"><span class="pre">sudo</span></code> permissions to build from a recipe. If your Singularity is installed somewhere outside of root’s <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, you’ll have to give the full path to the <code class="docutils literal notranslate"><span class="pre">singularity</span></code> executable file.
-#
-# .. code-block:: shell
-#
-#     spython recipe Dockerfile Singularity.snowflake
-#     sudo $SINGULARITY_PATH/singularity build $SINGULARITY_IMAGE Singularity.snowflake
-#
-#
-# For example, to build a Singularity image called <code class="docutils literal notranslate"><span class="pre">C-PAC-example.simg</span></code> from the Dockerfile:
-#
-# .. code-block:: shell
-#
-#     spython recipe Dockerfile Singularity.snowflake
-#     sudo ~/opt/singularity/singularity-2.5.2/bin/singularity build C-PAC-example.simg Singularity.snowflake</p>
 </div>
 </div>
 </div>
