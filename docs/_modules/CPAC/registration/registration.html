@@ -98,7 +98,7 @@
     <span class="k">return</span> <span class="n">linear_register</span>
 
 
-<div class="viewcode-block" id="create_fsl_fnirt_nonlinear_reg"><a class="viewcode-back" href="../../../developer/workflows/registration.rst#CPAC.registration.create_fsl_fnirt_nonlinear_reg">[docs]</a><span class="k">def</span> <span class="nf">create_fsl_fnirt_nonlinear_reg</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;fsl_fnirt_nonlinear_reg&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_fsl_fnirt_nonlinear_reg"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_fsl_fnirt_nonlinear_reg">[docs]</a><span class="k">def</span> <span class="nf">create_fsl_fnirt_nonlinear_reg</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;fsl_fnirt_nonlinear_reg&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs non-linear registration of an input file to a reference file</span>
 <span class="sd">    using FSL FNIRT.</span>
@@ -211,7 +211,7 @@
     <span class="k">return</span> <span class="n">nonlinear_register</span></div>
 
 
-<div class="viewcode-block" id="create_register_func_to_mni"><a class="viewcode-back" href="../../../developer/workflows/registration.rst#CPAC.registration.create_register_func_to_mni">[docs]</a><span class="k">def</span> <span class="nf">create_register_func_to_mni</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;register_func_to_mni&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_register_func_to_mni"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_register_func_to_mni">[docs]</a><span class="k">def</span> <span class="nf">create_register_func_to_mni</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;register_func_to_mni&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Registers a functional scan in native space to MNI standard space.  This is meant to be used </span>
 <span class="sd">    after create_nonlinear_register() has been run and relies on some of it&#39;s outputs.</span>
@@ -330,7 +330,7 @@
     <span class="k">return</span> <span class="n">register_func_to_mni</span></div>
 
 
-<div class="viewcode-block" id="create_register_func_to_anat"><a class="viewcode-back" href="../../../developer/workflows/registration.rst#CPAC.registration.create_register_func_to_anat">[docs]</a><span class="k">def</span> <span class="nf">create_register_func_to_anat</span><span class="p">(</span><span class="n">phase_diff_distcor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="create_register_func_to_anat"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_register_func_to_anat">[docs]</a><span class="k">def</span> <span class="nf">create_register_func_to_anat</span><span class="p">(</span><span class="n">phase_diff_distcor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;register_func_to_anat&#39;</span><span class="p">):</span>
     
     <span class="sd">&quot;&quot;&quot;</span>
@@ -438,7 +438,7 @@
     <span class="k">return</span> <span class="n">register_func_to_anat</span></div>
 
 
-<div class="viewcode-block" id="create_bbregister_func_to_anat"><a class="viewcode-back" href="../../../developer/workflows/registration.rst#CPAC.registration.create_bbregister_func_to_anat">[docs]</a><span class="k">def</span> <span class="nf">create_bbregister_func_to_anat</span><span class="p">(</span><span class="n">phase_diff_distcor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="create_bbregister_func_to_anat"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_bbregister_func_to_anat">[docs]</a><span class="k">def</span> <span class="nf">create_bbregister_func_to_anat</span><span class="p">(</span><span class="n">phase_diff_distcor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bbregister_func_to_anat&#39;</span><span class="p">):</span>
   
     <span class="sd">&quot;&quot;&quot;</span>
@@ -702,7 +702,7 @@
 
 
 <span class="c1"># TODO: refactor - change anatomical brain/skull to input brain/skull</span>
-<div class="viewcode-block" id="create_wf_calculate_ants_warp"><a class="viewcode-back" href="../../../developer/workflows/registration.rst#CPAC.registration.create_wf_calculate_ants_warp">[docs]</a><span class="k">def</span> <span class="nf">create_wf_calculate_ants_warp</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;create_wf_calculate_ants_warp&#39;</span><span class="p">,</span> <span class="n">num_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reg_ants_skull</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="create_wf_calculate_ants_warp"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_wf_calculate_ants_warp">[docs]</a><span class="k">def</span> <span class="nf">create_wf_calculate_ants_warp</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;create_wf_calculate_ants_warp&#39;</span><span class="p">,</span> <span class="n">num_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reg_ants_skull</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculates the nonlinear ANTS registration transform. This workflow</span>
@@ -981,6 +981,8 @@
             </a></p>
 <h3><a href="../../../index">Table of Contents</a></h3>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Welcome to CPAC’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../user/index">Welcome to C-PAC’s Documentation!</a></li>
 </ul>
 

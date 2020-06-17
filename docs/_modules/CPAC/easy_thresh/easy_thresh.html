@@ -46,7 +46,7 @@
 <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
 
 
-<div class="viewcode-block" id="easy_thresh"><a class="viewcode-back" href="../../../developer/workflows/easy_thresh.rst#CPAC.easy_thresh.easy_thresh">[docs]</a><span class="k">def</span> <span class="nf">easy_thresh</span><span class="p">(</span><span class="n">wf_name</span><span class="p">):</span>
+<div class="viewcode-block" id="easy_thresh"><a class="viewcode-back" href="../../../developer/workflows/easy_thresh#CPAC.easy_thresh.easy_thresh">[docs]</a><span class="k">def</span> <span class="nf">easy_thresh</span><span class="p">(</span><span class="n">wf_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow for carrying out cluster-based thresholding </span>
 <span class="sd">    and colour activation overlaying</span>
@@ -422,7 +422,7 @@
     <span class="k">return</span> <span class="n">index_file</span><span class="p">,</span> <span class="n">threshold_file</span><span class="p">,</span> <span class="n">localmax_txt_file</span>
     
  
-<div class="viewcode-block" id="copy_geom"><a class="viewcode-back" href="../../../developer/workflows/easy_thresh.rst#CPAC.easy_thresh.copy_geom">[docs]</a><span class="k">def</span> <span class="nf">copy_geom</span><span class="p">(</span><span class="n">infile_a</span><span class="p">,</span> <span class="n">infile_b</span><span class="p">):</span>
+<div class="viewcode-block" id="copy_geom"><a class="viewcode-back" href="../../../developer/workflows/easy_thresh#CPAC.easy_thresh.copy_geom">[docs]</a><span class="k">def</span> <span class="nf">copy_geom</span><span class="p">(</span><span class="n">infile_a</span><span class="p">,</span> <span class="n">infile_b</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to call fsl fslcpgeom command to copy </span>
 <span class="sd">    certain parts of the header information (image dimensions, </span>
@@ -459,7 +459,7 @@
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error while using fslcpgeom to copy geometry&quot;</span><span class="p">)</span></div>
     
 
-<div class="viewcode-block" id="get_standard_background_img"><a class="viewcode-back" href="../../../developer/workflows/easy_thresh.rst#CPAC.easy_thresh.get_standard_background_img">[docs]</a><span class="k">def</span> <span class="nf">get_standard_background_img</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">file_parameters</span><span class="p">):</span>
+<div class="viewcode-block" id="get_standard_background_img"><a class="viewcode-back" href="../../../developer/workflows/easy_thresh#CPAC.easy_thresh.get_standard_background_img">[docs]</a><span class="k">def</span> <span class="nf">get_standard_background_img</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">file_parameters</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to get the standard brain image from FSL </span>
 <span class="sd">    standard data directory</span>
@@ -498,7 +498,7 @@
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error while loading background image&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_tuple"><a class="viewcode-back" href="../../../developer/workflows/easy_thresh.rst#CPAC.easy_thresh.get_tuple">[docs]</a><span class="k">def</span> <span class="nf">get_tuple</span><span class="p">(</span><span class="n">infile_a</span><span class="p">,</span> <span class="n">infile_b</span><span class="p">):</span>
+<div class="viewcode-block" id="get_tuple"><a class="viewcode-back" href="../../../developer/workflows/easy_thresh#CPAC.easy_thresh.get_tuple">[docs]</a><span class="k">def</span> <span class="nf">get_tuple</span><span class="p">(</span><span class="n">infile_a</span><span class="p">,</span> <span class="n">infile_b</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simple method to return tuple of z_threhsold</span>
@@ -536,6 +536,8 @@
             </a></p>
 <h3><a href="../../../index">Table of Contents</a></h3>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Welcome to CPAC’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../user/index">Welcome to C-PAC’s Documentation!</a></li>
 </ul>
 

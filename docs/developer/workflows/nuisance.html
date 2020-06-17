@@ -7,38 +7,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Nuisance Signal Removal &#8212; C-PAC 1.6.2 Beta documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF" href="alff.html" />
-    <link rel="prev" title="Bootstrap Analysis of Stable Clusters" href="basc.html" /> 
+    <link rel="index" title="Index" href="../../genindex" />
+    <link rel="search" title="Search" href="../../search" />
+    <link rel="next" title="Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF" href="alff" />
+    <link rel="prev" title="Bootstrap Analysis of Stable Clusters" href="basc" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="../../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
+          <a href="../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="alff.html" title="Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF"
+          <a href="alff" title="Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="basc.html" title="Bootstrap Analysis of Stable Clusters"
+          <a href="basc" title="Bootstrap Analysis of Stable Clusters"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Workflows</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index" >Welcome to CPAC’s documentation!</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index" accesskey="U">Workflows</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -51,7 +52,7 @@
 <span id="nuisance-signal-removal"></span><h1>Nuisance Signal Removal<a class="headerlink" href="#module-CPAC.nuisance" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="CPAC.nuisance.find_offending_time_points">
-<code class="descclassname">CPAC.nuisance.</code><code class="descname">find_offending_time_points</code><span class="sig-paren">(</span><em>fd_j_file_path=None</em>, <em>fd_p_file_path=None</em>, <em>dvars_file_path=None</em>, <em>fd_j_threshold=None</em>, <em>fd_p_threshold=None</em>, <em>dvars_threshold=None</em>, <em>number_of_previous_trs_to_censor=0</em>, <em>number_of_subsequent_trs_to_censor=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/nuisance/utils.html#find_offending_time_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.nuisance.find_offending_time_points" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.nuisance.</code><code class="descname">find_offending_time_points</code><span class="sig-paren">(</span><em>fd_j_file_path=None</em>, <em>fd_p_file_path=None</em>, <em>dvars_file_path=None</em>, <em>fd_j_threshold=None</em>, <em>fd_p_threshold=None</em>, <em>dvars_threshold=None</em>, <em>number_of_previous_trs_to_censor=0</em>, <em>number_of_subsequent_trs_to_censor=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/nuisance/utils#find_offending_time_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.nuisance.find_offending_time_points" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies criterion in method to find time points whose FD or DVARS (or both)
 are above threshold.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -90,7 +91,7 @@ the censor.</li>
 
 <dl class="function">
 <dt id="CPAC.nuisance.generate_summarize_tissue_mask">
-<code class="descclassname">CPAC.nuisance.</code><code class="descname">generate_summarize_tissue_mask</code><span class="sig-paren">(</span><em>nuisance_wf</em>, <em>pipeline_resource_pool</em>, <em>regressor_descriptor</em>, <em>regressor_selector</em>, <em>use_ants=True</em>, <em>ventricle_mask_exist=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/nuisance/utils.html#generate_summarize_tissue_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.nuisance.generate_summarize_tissue_mask" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.nuisance.</code><code class="descname">generate_summarize_tissue_mask</code><span class="sig-paren">(</span><em>nuisance_wf</em>, <em>pipeline_resource_pool</em>, <em>regressor_descriptor</em>, <em>regressor_selector</em>, <em>use_ants=True</em>, <em>ventricle_mask_exist=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/nuisance/utils#generate_summarize_tissue_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.nuisance.generate_summarize_tissue_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add tissue mask generation into pipeline according to the selector.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -115,7 +116,7 @@ this operation.</p>
 
 <dl class="function">
 <dt id="CPAC.nuisance.bandpass_voxels">
-<code class="descclassname">CPAC.nuisance.</code><code class="descname">bandpass_voxels</code><span class="sig-paren">(</span><em>realigned_file</em>, <em>regressor_file</em>, <em>bandpass_freqs</em>, <em>sample_period=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/nuisance/bandpass.html#bandpass_voxels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.nuisance.bandpass_voxels" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.nuisance.</code><code class="descname">bandpass_voxels</code><span class="sig-paren">(</span><em>realigned_file</em>, <em>regressor_file</em>, <em>bandpass_freqs</em>, <em>sample_period=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/nuisance/bandpass#bandpass_voxels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.nuisance.bandpass_voxels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs ideal bandpass filtering on each voxel time-series.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -148,7 +149,7 @@ this value is read from the nifti file provided.</p>
 
 <dl class="function">
 <dt id="CPAC.nuisance.cosine_filter">
-<code class="descclassname">CPAC.nuisance.</code><code class="descname">cosine_filter</code><span class="sig-paren">(</span><em>input_image_path</em>, <em>timestep</em>, <em>period_cut=128</em>, <em>remove_mean=True</em>, <em>axis=-1</em>, <em>failure_mode='error'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/nuisance/utils/compcor.html#cosine_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.nuisance.cosine_filter" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.nuisance.</code><code class="descname">cosine_filter</code><span class="sig-paren">(</span><em>input_image_path</em>, <em>timestep</em>, <em>period_cut=128</em>, <em>remove_mean=True</em>, <em>axis=-1</em>, <em>failure_mode='error'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/nuisance/utils/compcor#cosine_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.nuisance.cosine_filter" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>input_image_path: string</dt>
 <dd>Bold image to be filtered.</dd>
@@ -167,26 +168,27 @@ this value is read from the nifti file provided.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            <p class="logo"><a href="../../index">
+              <img class="logo" src="../../_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="basc.html"
-                        title="previous chapter">Bootstrap Analysis of Stable Clusters</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="alff.html"
-                        title="next chapter">Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/workflows/nuisance.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+<h3><a href="../../index">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index">Welcome to CPAC’s documentation!</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../installation">Installing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow_documentation">Workflow Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing">Testing CPAC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index">Welcome to C-PAC’s Documentation!</a></li>
+</ul>
+
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
+    <form class="search" action="../../search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -203,24 +205,25 @@ this value is read from the nifti file provided.</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="../../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
+          <a href="../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="alff.html" title="Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF"
+          <a href="alff" title="Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF"
              >next</a> |</li>
         <li class="right" >
-          <a href="basc.html" title="Bootstrap Analysis of Stable Clusters"
+          <a href="basc" title="Bootstrap Analysis of Stable Clusters"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Workflows</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index" >Welcome to CPAC’s documentation!</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index" >Workflows</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2018‒2020, C-PAC Team.
+        &#169; Copyright 2020, C-PAC Team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>

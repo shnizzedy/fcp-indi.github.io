@@ -45,7 +45,7 @@
 
 
 
-<div class="viewcode-block" id="median_angle_correct"><a class="viewcode-back" href="../../../developer/workflows/median_angle.rst#CPAC.median_angle.median_angle_correct">[docs]</a><span class="k">def</span> <span class="nf">median_angle_correct</span><span class="p">(</span><span class="n">target_angle_deg</span><span class="p">,</span> <span class="n">realigned_file</span><span class="p">):</span>
+<div class="viewcode-block" id="median_angle_correct"><a class="viewcode-back" href="../../../developer/workflows/median_angle#CPAC.median_angle.median_angle_correct">[docs]</a><span class="k">def</span> <span class="nf">median_angle_correct</span><span class="p">(</span><span class="n">target_angle_deg</span><span class="p">,</span> <span class="n">realigned_file</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs median angle correction on fMRI data.  Median angle correction algorithm</span>
 <span class="sd">    based on [1]_.</span>
@@ -130,7 +130,7 @@
 
     <span class="k">return</span> <span class="n">corrected_file</span><span class="p">,</span> <span class="n">angles_file</span></div>
 
-<div class="viewcode-block" id="calc_median_angle_params"><a class="viewcode-back" href="../../../developer/workflows/median_angle.rst#CPAC.median_angle.calc_median_angle_params">[docs]</a><span class="k">def</span> <span class="nf">calc_median_angle_params</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_median_angle_params"><a class="viewcode-back" href="../../../developer/workflows/median_angle#CPAC.median_angle.calc_median_angle_params">[docs]</a><span class="k">def</span> <span class="nf">calc_median_angle_params</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates median angle parameters of a subject</span>
 <span class="sd">    </span>
@@ -172,7 +172,7 @@
     
     <span class="k">return</span> <span class="n">mean_bold</span><span class="p">,</span> <span class="n">median_angle</span></div>
 
-<div class="viewcode-block" id="calc_target_angle"><a class="viewcode-back" href="../../../developer/workflows/median_angle.rst#CPAC.median_angle.calc_target_angle">[docs]</a><span class="k">def</span> <span class="nf">calc_target_angle</span><span class="p">(</span><span class="n">mean_bolds</span><span class="p">,</span> <span class="n">median_angles</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_target_angle"><a class="viewcode-back" href="../../../developer/workflows/median_angle#CPAC.median_angle.calc_target_angle">[docs]</a><span class="k">def</span> <span class="nf">calc_target_angle</span><span class="p">(</span><span class="n">mean_bolds</span><span class="p">,</span> <span class="n">median_angles</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates a target angle based on median angle parameters of</span>
 <span class="sd">    the group.</span>
@@ -205,7 +205,7 @@
     
     <span class="k">return</span> <span class="n">target_angle</span></div>
 
-<div class="viewcode-block" id="create_median_angle_correction"><a class="viewcode-back" href="../../../developer/workflows/median_angle.rst#CPAC.median_angle.create_median_angle_correction">[docs]</a><span class="k">def</span> <span class="nf">create_median_angle_correction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;median_angle_correction&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_median_angle_correction"><a class="viewcode-back" href="../../../developer/workflows/median_angle#CPAC.median_angle.create_median_angle_correction">[docs]</a><span class="k">def</span> <span class="nf">create_median_angle_correction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;median_angle_correction&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Median Angle Correction</span>
 <span class="sd">    </span>
@@ -280,7 +280,7 @@
     
     <span class="k">return</span> <span class="n">median_angle_correction</span></div>
 
-<div class="viewcode-block" id="create_target_angle"><a class="viewcode-back" href="../../../developer/workflows/median_angle.rst#CPAC.median_angle.create_target_angle">[docs]</a><span class="k">def</span> <span class="nf">create_target_angle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;target_angle&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_target_angle"><a class="viewcode-back" href="../../../developer/workflows/median_angle#CPAC.median_angle.create_target_angle">[docs]</a><span class="k">def</span> <span class="nf">create_target_angle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;target_angle&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Target Angle Calculation</span>
 <span class="sd">    </span>
@@ -368,6 +368,8 @@
             </a></p>
 <h3><a href="../../../index">Table of Contents</a></h3>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Welcome to CPAC’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../user/index">Welcome to C-PAC’s Documentation!</a></li>
 </ul>
 

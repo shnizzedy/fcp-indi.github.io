@@ -48,7 +48,7 @@
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="k">import</span> <span class="n">Function</span>
 
 
-<div class="viewcode-block" id="motion_power_statistics"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics.rst#CPAC.generate_motion_statistics.motion_power_statistics">[docs]</a><span class="k">def</span> <span class="nf">motion_power_statistics</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;motion_stats&#39;</span><span class="p">,</span> <span class="n">motion_correct_tool</span><span class="o">=</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="motion_power_statistics"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.motion_power_statistics">[docs]</a><span class="k">def</span> <span class="nf">motion_power_statistics</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;motion_stats&#39;</span><span class="p">,</span> <span class="n">motion_correct_tool</span><span class="o">=</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The main purpose of this workflow is to get various statistical measures</span>
@@ -331,7 +331,7 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-<div class="viewcode-block" id="calculate_FD_P"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics.rst#CPAC.generate_motion_statistics.calculate_FD_P">[docs]</a><span class="k">def</span> <span class="nf">calculate_FD_P</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
+<div class="viewcode-block" id="calculate_FD_P"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.calculate_FD_P">[docs]</a><span class="k">def</span> <span class="nf">calculate_FD_P</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to calculate Framewise Displacement (FD)  as per Power et al., 2012</span>
 
@@ -364,7 +364,7 @@
     <span class="k">return</span> <span class="n">out_file</span></div>
 
 
-<div class="viewcode-block" id="calculate_FD_J"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics.rst#CPAC.generate_motion_statistics.calculate_FD_J">[docs]</a><span class="k">def</span> <span class="nf">calculate_FD_J</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">motion_correct_tool</span><span class="o">=</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="calculate_FD_J"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.calculate_FD_J">[docs]</a><span class="k">def</span> <span class="nf">calculate_FD_J</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">motion_correct_tool</span><span class="o">=</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to calculate framewise displacement as per Jenkinson et al. 2002</span>
 
@@ -417,7 +417,7 @@
     <span class="k">return</span> <span class="n">out_file</span></div>
 
 
-<div class="viewcode-block" id="gen_motion_parameters"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics.rst#CPAC.generate_motion_statistics.gen_motion_parameters">[docs]</a><span class="k">def</span> <span class="nf">gen_motion_parameters</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">,</span> <span class="n">movement_parameters</span><span class="p">,</span>
+<div class="viewcode-block" id="gen_motion_parameters"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.gen_motion_parameters">[docs]</a><span class="k">def</span> <span class="nf">gen_motion_parameters</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">,</span> <span class="n">movement_parameters</span><span class="p">,</span>
                           <span class="n">max_displacement</span><span class="p">,</span> <span class="n">motion_correct_tool</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to calculate all the movement parameters</span>
@@ -507,7 +507,7 @@
     <span class="k">return</span> <span class="n">out_file</span></div>
 
 
-<div class="viewcode-block" id="gen_power_parameters"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics.rst#CPAC.generate_motion_statistics.gen_power_parameters">[docs]</a><span class="k">def</span> <span class="nf">gen_power_parameters</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">,</span> <span class="n">fdp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fdj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dvars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">motion_correct_tool</span><span class="o">=</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="gen_power_parameters"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.gen_power_parameters">[docs]</a><span class="k">def</span> <span class="nf">gen_power_parameters</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">,</span> <span class="n">fdp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fdj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dvars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">motion_correct_tool</span><span class="o">=</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to generate Power parameters for scrubbing</span>
@@ -587,7 +587,7 @@
     <span class="k">return</span> <span class="n">out_file</span></div>
 
 
-<div class="viewcode-block" id="calculate_DVARS"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics.rst#CPAC.generate_motion_statistics.calculate_DVARS">[docs]</a><span class="k">def</span> <span class="nf">calculate_DVARS</span><span class="p">(</span><span class="n">rest</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+<div class="viewcode-block" id="calculate_DVARS"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.calculate_DVARS">[docs]</a><span class="k">def</span> <span class="nf">calculate_DVARS</span><span class="p">(</span><span class="n">rest</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to calculate DVARS as per power&#39;s method</span>
 
@@ -631,6 +631,8 @@
             </a></p>
 <h3><a href="../../../index">Table of Contents</a></h3>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Welcome to CPAC’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../user/index">Welcome to C-PAC’s Documentation!</a></li>
 </ul>
 

@@ -7,38 +7,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Seed Based Correlation Analysis &#8212; C-PAC 1.6.2 Beta documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Bootstrap Analysis of Stable Clusters" href="basc.html" />
-    <link rel="prev" title="Segmentation Workflow" href="seg_preproc.html" /> 
+    <link rel="index" title="Index" href="../../genindex" />
+    <link rel="search" title="Search" href="../../search" />
+    <link rel="next" title="Bootstrap Analysis of Stable Clusters" href="basc" />
+    <link rel="prev" title="Segmentation Workflow" href="seg_preproc" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="../../genindex" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
+          <a href="../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="basc.html" title="Bootstrap Analysis of Stable Clusters"
+          <a href="basc" title="Bootstrap Analysis of Stable Clusters"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="seg_preproc.html" title="Segmentation Workflow"
+          <a href="seg_preproc" title="Segmentation Workflow"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Workflows</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index" >Welcome to CPAC’s documentation!</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index" accesskey="U">Workflows</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -51,7 +52,7 @@
 <span id="seed-based-correlation-analysis"></span><h1>Seed Based Correlation Analysis<a class="headerlink" href="#module-CPAC.sca" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="CPAC.sca.create_sca">
-<code class="descclassname">CPAC.sca.</code><code class="descname">create_sca</code><span class="sig-paren">(</span><em>name_sca='sca'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/sca/sca.html#create_sca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.sca.create_sca" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.sca.</code><code class="descname">create_sca</code><span class="sig-paren">(</span><em>name_sca='sca'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_sca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.sca.create_sca" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map of the correlations of the Region of Interest(Seed in native or MNI space) with the rest of brain voxels.
 The map is normalized to contain Z-scores, mapped in standard space and treated with spatial smoothing.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -106,9 +107,9 @@ a single Z score file is returned, otherwise z-scores for all ROIs are returned 
 nifti files</li>
 </ol>
 <p>Workflow:</p>
-<a class="reference internal image-reference" href="workflows/../images/sca_graph.dot.png"><img alt="workflows/../images/sca_graph.dot.png" src="workflows/../images/sca_graph.dot.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="developer/workflows/../images/sca_graph.dot.png"><img alt="developer/workflows/../images/sca_graph.dot.png" src="developer/workflows/../images/sca_graph.dot.png" style="width: 500px;" /></a>
 <p>Detailed Workflow:</p>
-<a class="reference internal image-reference" href="workflows/../images/sca_detailed_graph.dot.png"><img alt="workflows/../images/sca_detailed_graph.dot.png" src="workflows/../images/sca_detailed_graph.dot.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="developer/workflows/../images/sca_detailed_graph.dot.png"><img alt="developer/workflows/../images/sca_detailed_graph.dot.png" src="developer/workflows/../images/sca_detailed_graph.dot.png" style="width: 500px;" /></a>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sca_w</span> <span class="o">=</span> <span class="n">create_sca</span><span class="p">(</span><span class="s2">&quot;sca_wf&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sca_w</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">functional_file</span> <span class="o">=</span> <span class="s1">&#39;/home/data/subject/func/rest_bandpassed.nii.gz&#39;</span>
@@ -120,7 +121,7 @@ nifti files</li>
 
 <dl class="function">
 <dt id="CPAC.sca.compute_fisher_z_score">
-<code class="descclassname">CPAC.sca.</code><code class="descname">compute_fisher_z_score</code><span class="sig-paren">(</span><em>correlation_file</em>, <em>timeseries_one_d</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/sca/utils.html#compute_fisher_z_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.sca.compute_fisher_z_score" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.sca.</code><code class="descname">compute_fisher_z_score</code><span class="sig-paren">(</span><em>correlation_file</em>, <em>timeseries_one_d</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#compute_fisher_z_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.sca.compute_fisher_z_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the fisher z transform of the input correlation map
 If the correlation map contains data for multiple ROIs then
 the function returns z score for each ROI as a seperate nifti
@@ -149,7 +150,7 @@ file</p>
 
 <dl class="function">
 <dt id="CPAC.sca.create_temporal_reg">
-<code class="descclassname">CPAC.sca.</code><code class="descname">create_temporal_reg</code><span class="sig-paren">(</span><em>wflow_name='temporal_reg'</em>, <em>which='SR'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/sca/sca.html#create_temporal_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.sca.create_temporal_reg" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.sca.</code><code class="descname">create_temporal_reg</code><span class="sig-paren">(</span><em>wflow_name='temporal_reg'</em>, <em>which='SR'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_temporal_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.sca.create_temporal_reg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Temporal multiple regression workflow
 Provides a spatial map of parameter estimates corresponding to each
 provided timeseries in a timeseries.txt file as regressors</p>
@@ -217,9 +218,9 @@ containing the names of the timeseries.</p>
 timeseries to the subjects functional file to get spatial maps of voxels
 showing activation patterns related to those in the timeseries.</p>
 <p>Workflow:</p>
-<a class="reference internal image-reference" href="workflows/../images/create_temporal_regression.png"><img alt="workflows/../images/create_temporal_regression.png" src="workflows/../images/create_temporal_regression.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="developer/workflows/../images/create_temporal_regression.png"><img alt="developer/workflows/../images/create_temporal_regression.png" src="developer/workflows/../images/create_temporal_regression.png" style="width: 500px;" /></a>
 <p>Detailed Workflow:</p>
-<a class="reference internal image-reference" href="workflows/../images/detailed_graph_create_temporal_regression.png"><img alt="workflows/../images/detailed_graph_create_temporal_regression.png" src="workflows/../images/detailed_graph_create_temporal_regression.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="developer/workflows/../images/detailed_graph_create_temporal_regression.png"><img alt="developer/workflows/../images/detailed_graph_create_temporal_regression.png" src="developer/workflows/../images/detailed_graph_create_temporal_regression.png" style="width: 500px;" /></a>
 <p class="rubric">References</p>
 <p><a class="reference external" href="http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/DualRegression/UserGuide">http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/DualRegression/UserGuide</a></p>
 <p class="rubric">Examples</p>
@@ -236,7 +237,7 @@ showing activation patterns related to those in the timeseries.</p>
 
 <dl class="function">
 <dt id="CPAC.sca.map_to_roi">
-<code class="descclassname">CPAC.sca.</code><code class="descname">map_to_roi</code><span class="sig-paren">(</span><em>timeseries</em>, <em>maps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/sca/utils.html#map_to_roi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.sca.map_to_roi" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CPAC.sca.</code><code class="descname">map_to_roi</code><span class="sig-paren">(</span><em>timeseries</em>, <em>maps</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#map_to_roi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CPAC.sca.map_to_roi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renames the outputs of the temporal multiple regression workflow for sca
 according to the header information of the timeseries.txt file that was
 passed</p>
@@ -285,26 +286,27 @@ containing the names of the timeseries</dd>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            <p class="logo"><a href="../../index">
+              <img class="logo" src="../../_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="seg_preproc.html"
-                        title="previous chapter">Segmentation Workflow</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="basc.html"
-                        title="next chapter">Bootstrap Analysis of Stable Clusters</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/workflows/sca.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+<h3><a href="../../index">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index">Welcome to CPAC’s documentation!</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../installation">Installing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow_documentation">Workflow Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing">Testing CPAC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index">Welcome to C-PAC’s Documentation!</a></li>
+</ul>
+
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
+    <form class="search" action="../../search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -321,24 +323,25 @@ containing the names of the timeseries</dd>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="../../genindex" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
+          <a href="../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="basc.html" title="Bootstrap Analysis of Stable Clusters"
+          <a href="basc" title="Bootstrap Analysis of Stable Clusters"
              >next</a> |</li>
         <li class="right" >
-          <a href="seg_preproc.html" title="Segmentation Workflow"
+          <a href="seg_preproc" title="Segmentation Workflow"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Workflows</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index" >Welcome to CPAC’s documentation!</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index" >Workflows</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2018‒2020, C-PAC Team.
+        &#169; Copyright 2020, C-PAC Team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>

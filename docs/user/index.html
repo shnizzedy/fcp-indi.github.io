@@ -19,8 +19,8 @@
     
     <link rel="index" title="Index" href="../genindex" />
     <link rel="search" title="Search" href="../search" />
-    <link rel="next" title="Latest Release: Version 1.6.2 Beta (Apr 5, 2020)" href="../release_notes/v1.6.2" />
-    <link rel="prev" title="Welcome to CPAC’s documentation!" href="../index" /> 
+    <link rel="next" title="C-PAC Quickstart" href="quick" />
+    <link rel="prev" title="Testing CPAC" href="../developer/testing" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,10 +32,10 @@
           <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../release_notes/v1.6.2" title="Latest Release: Version 1.6.2 Beta (Apr 5, 2020)"
+          <a href="quick" title="C-PAC Quickstart"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../index" title="Welcome to CPAC’s documentation!"
+          <a href="../developer/testing" title="Testing CPAC"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li> 
       </ul>
@@ -78,33 +78,6 @@
 <li><a class="reference external" href="http://www.slideshare.net/CameronCraddock/open-science-resources-for-big-data-analyses-of-the-human-connectome">Open science resources for ‘Big Data’ Analyses of the human connectome</a></li>
 <li><a class="reference external" href="http://www.slideshare.net/CameronCraddock/computational-approaches-for-mapping-the-human-connectome">Computational approaches for mapping the human connectome</a></li>
 </ul>
-</div>
-<div class="section" id="latest-release-version-1-6-2-beta-apr-5-2020">
-<h2>Latest Release: Version 1.6.2 Beta (Apr 5, 2020)<a class="headerlink" href="#latest-release-version-1-6-2-beta-apr-5-2020" title="Permalink to this headline">¶</a></h2>
-<p><strong>New Features</strong></p>
-<ul class="simple">
-<li>ANTs registration transformation levels and parameters are now fully customizable in the pipeline configuration.</li>
-<li>Expanded Registration Forking Capability. C-PAC can now fork and simultaneously run both T1-template-based and EPI-template-based registration.</li>
-<li>Expanded Motion Correction Options. FSL MCFLIRT is now available as a tool selection for motion estimation and correction, alongside AFNI 3dvolreg.</li>
-</ul>
-<p><strong>Improvements &amp; Upgrades</strong></p>
-<ul class="simple">
-<li>C-PAC now runs on Python 3. During this transition, some underlying software packages, such as AFNI and ANTs, have been upgraded. Based on our release testing, performance is mostly unchanged. However, small changes can occur due to improvements made to the tools.</li>
-<li>Motion estimation configurability. More motion estimation and correction parameters have been opened for configurability.</li>
-<li>Increased memory efficiency and speed: C-PAC’s new default behavior for preparing time-series extraction is to realign the ROI atlases to the functional time series, instead of the other way around. This can be toggled back if desired. This change aims to cut down on memory limit errors that occur during execution with the combination of larger datasets and pipeline parallelization.</li>
-<li>Increased speed: Redundant realignments of ROI atlases and the time series have also been removed.</li>
-<li>The ingress of phase-difference field maps for distortion correction has been streamlined.</li>
-</ul>
-<p><strong>Error Fixes</strong></p>
-<ul class="simple">
-<li>In the QC Interface, some of the template underlays would default to the MNI152 template, even if the pipeline was configured to use a custom template. This has been resolved.</li>
-<li>Resolved an issue that would prevent the pipeline from starting if ICA-AROMA and blip-up/down distortion correction were both enabled, for ANTs registration-based pipelines.</li>
-<li>Resolved an issue that was preventing Neurodata ndmg-f connectome graphs from being completed in some cases.</li>
-<li>Resolved the “Range parameter must be finite” QC image generation crash.</li>
-</ul>
-<p>In addition, the C-PAC Docker and Singularity images, as well as the AWS AMI, have all been updated. These provide a <a class="reference external" href="http://fcp-indi.github.io/docs/user/quick.html">quick way to get started</a>.</p>
-<p>And as always, you can contact us here for user support and discussion:
-<a class="reference external" href="https://groups.google.com/forum/#!forum/cpax_forum">https://groups.google.com/forum/#!forum/cpax_forum</a></p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -158,9 +131,6 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quick">1. C-PAC Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quick#let-s-go">Let’s Go!</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick#run-on-docker">Run on Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick#run-on-singularity">Run on Singularity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#default-pipeline">Default Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#pre-configured-pipelines">Pre-configured Pipelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick#acknowledgments">Acknowledgments</a></li>
@@ -179,7 +149,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline_config">3. Select Your Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pipeline_config#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline_config#design-a-pipeline">Design A Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline_config#using-a-text-editor">Using a Text Editor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline_config#configurable-settings">Configurable Settings</a></li>
 </ul>
@@ -205,8 +174,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running">6. All Run Options</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="running#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running#run-on-docker">Run on Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running#run-on-singularity">Run on Singularity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="running#on-the-aws-cloud">On the AWS Cloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="running#with-openneuro">With OpenNeuro</a></li>
 </ul>
@@ -232,44 +199,11 @@
 <li class="toctree-l2"><a class="reference internal" href="help#common-issues">Common Issues</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#latest-release-version-1-6-2-beta-apr-5-2020">Latest Release: Version 1.6.2 Beta (Apr 5, 2020)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-6-1a-beta-mar-6-2020">Version 1.6.1a Beta (Mar 6, 2020)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-6-1-beta-feb-2-2020">Version 1.6.1 Beta (Feb 2, 2020)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-6-0-beta-jan-2-2020">Version 1.6.0 Beta (Jan 2, 2020)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-5-0-beta-oct-4-2019">Version 1.5.0 Beta (Oct 4, 2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-4-3-beta-jun-6-2019">Version 1.4.3 Beta (Jun 6, 2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-4-2-beta-jun-6-2019">Version 1.4.2 Beta (Jun 6, 2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-4-1-beta-mar-1-2019">Version 1.4.1 Beta (Mar 1, 2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-4-0-beta-feb-3-2019">Version 1.4.0 Beta (Feb 3, 2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-3-0-beta-oct-4-2018">Version 1.3.0 Beta (Oct 4, 2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-2-0-beta-aug-5-2018">Version 1.2.0 Beta (Aug 5, 2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-1-0-beta-may-4-2018">Version 1.1.0 Beta (May 4, 2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-0-3-beta-jan-6-2018">Version 1.0.3 Beta (Jan 6, 2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-0-2-beta-nov-5-2017">Version 1.0.2 Beta (Nov 5, 2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-0-1b-beta-sep-4-2017">Version 1.0.1b Beta (Sep 4, 2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-0-1-beta-dec-5-2016">Version 1.0.1 Beta (Dec 5, 2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#id9">Version 1.0.1 Beta (Dec 5, 2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-1-0-0-beta-nov-4-2016">Version 1.0.0 Beta (Nov 4, 2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-0-3-9-alpha-apr-4-2015">Version 0.3.9 Alpha (Apr 4, 2015)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-0-3-8-1-alpha-jan-6-2015">Version 0.3.8.1 Alpha (Jan 6, 2015)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-0-3-8-alpha-dec-3-2014">Version 0.3.8 Alpha (Dec 3, 2014)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-0-3-7-alpha-oct-3-2014">Version 0.3.7 Alpha (Oct 3, 2014)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-0-3-6-alpha-oct-2-2014">Version 0.3.6 Alpha (Oct 2, 2014)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-0-3-5-alpha-sep-1-2014">Version 0.3.5 Alpha (Sep 1, 2014)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rnotes#version-0-3-2-jul-2-2014">version 0.3.2 (Jul 2, 2014)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnotes">10. Release Notes</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="appendix">Appendix</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix">11. Appendix</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="appendix#installing-c-pac">Installing C-PAC</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="appendix#benchmark-package">Benchmark Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="appendix#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="appendix#downloading-the-precomputed-c-pac-outputs-from-the-fcp-indi-s3-bucket">Downloading the Precomputed C-PAC Outputs from the FCP-INDI S3 Bucket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="appendix#configuring-c-pac">Configuring C-PAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="appendix#running-an-individual-level-analysis">Running An Individual-Level Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="appendix#comparing-outputs">Comparing Outputs</a></li>
 </ul>
 </li>
 </ul>
@@ -289,9 +223,10 @@
             </a></p>
 <h3><a href="../index">Table of Contents</a></h3>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer/index">Welcome to CPAC’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Welcome to C-PAC’s Documentation!</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-c-pac-mission">The C-PAC Mission</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#latest-release-version-1-6-2-beta-apr-5-2020">Latest Release: Version 1.6.2 Beta (Apr 5, 2020)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-c-pac-team">The C-PAC Team</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#funding-acknowledgements">Funding Acknowledgements</a></li>
 </ul>
@@ -324,10 +259,10 @@
           <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../release_notes/v1.6.2" title="Latest Release: Version 1.6.2 Beta (Apr 5, 2020)"
+          <a href="quick" title="C-PAC Quickstart"
              >next</a> |</li>
         <li class="right" >
-          <a href="../index" title="Welcome to CPAC’s documentation!"
+          <a href="../developer/testing" title="Testing CPAC"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li> 
       </ul>
