@@ -1,0 +1,47 @@
+Version 1.2.0 Beta (Aug 5, 2018)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Dear Colleagues,
+
+We are happy to inform you that we recently released CPAC Version 1.2.0 Beta. You can update your existing installations of CPAC using instructions `here <http://fcp-indi.github.io/docs/user/install.html>`_. Please let us know if you have any questions or feedback by posting to the `forum <https://groups.google.com/forum/#!forum/cpax_forum>`_.
+
+**New Features**
+
+
+* **Multivariate Distance Matrix Regression (MDMR).** Exploratory, connectome-wide group-level analysis that allows researchers to explore relationships between patterns of functional connectivity and phenotypic variables. Compared to traditional univariate techniques which require rigorous correction for multiple comparisons, this multivariate approach significantly reduces the number of connectivity-phenotype comparisons needed for connectome-wide associations studies. See: `A multivariate distance-based analytic framework for connectome-wide association studies <https://www.ncbi.nlm.nih.gov/pubmed/24583255>`_.
+
+**Improvements**
+
+
+* **Improved Command-Line Interface.** C-PAC is now much easier to use through the command-line interface using the "cpac" CLI tool. Users can kick off individual and group-level analyses using a nested menu, generate new pipeline and data configuration files, and set up FSL FEAT model presets, all without using the Graphical User Interface. More details available `here <http://fcp-indi.github.io/docs/user/running.html>`_.
+* **Increased Skull-Stripping Configurability.** You can now modify the full range of parameters for both AFNI's 3dSkullStrip and FSL's BET for anatomical skull-stripping during preprocessing.
+* **Default pipeline configuration.** For those who don |u2019| t want the options, C-PAC can run as a turnkey system using parameter selections recommended by our team. More details available `here <http://fcp-indi.github.io/docs/user/running.html>`_.
+* **Group-level Analysis Usability.** Group-level analyses now also accept tab-separated (.tsv) files for phenotypic information. This allows users to seamlessly pull in the participants.tsv files which often accompany BIDS datasets.
+
+**Error Fixes**
+
+
+* An error in v1.1.0 that was causing the QC pages to crash on SNR image generation in some pipeline runs has been fixed.
+
+**Coming Soon (Release 1.3 early Fall)**
+
+
+* Bootstrap Analysis for Stable Clusters (BASC)
+* Inter-subject Correlation (ISC)
+* Independent Components Analysis (ICA)-based Denoising
+* More FSL Group-Level Analysis presets
+* Supervised learning
+
+In addition, the `C-PAC Docker image and AWS AMI <http://fcp-indi.github.io/docs/user/running.html>`_ have both been updated. These provide a quick way to get started without needing to go through the install process.
+
+Updated user documentation for this release can be found here:
+http://fcp-indi.github.io/docs/user/index.html
+
+And as always, you can contact us here for user support and discussion:
+https://groups.google.com/forum/#!forum/cpax_forum
+
+Regards,
+The CPAC development team.
+
+
+.. |u2019| unicode:: \u2019

@@ -6,26 +6,30 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Bootstrap Analysis of Stable Clusters (BASC) &#8212; C-PAC 1.6.0 Beta documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <title>Bootstrap Analysis of Stable Clusters (BASC) &#8212; C-PAC 1.6.2 Beta documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     
-    <link rel="index" title="Index" href="../genindex" />
-    <link rel="search" title="Search" href="../search" /> 
+    <link rel="index" title="Index" href="../../genindex" />
+    <link rel="search" title="Search" href="../../search" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex" title="General Index"
+          <a href="../../genindex" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -39,7 +43,7 @@
 <div class="section" id="introduction-background">
 <h2>Introduction &amp; Background<a class="headerlink" href="#introduction-background" title="Permalink to this headline">¶</a></h2>
 <p>Bootstrap Analysis of Stable Clusters (BASC) is a statistical framework that quantifies the stability of Resting State Networks (RSNs) by comparing the results of cluster analysis across replications (Bellec et al. 2010) As it is often impossible or impractical to repeat data collection for an experiment multiple times, BASC utilizes bootstrapping to generate a large number of samples from the existing data. BASC can be used to characterize stable RSNs at both the individual and group levels.</p>
-<p><strong>Important Note: BASC is currently not fully implemented in C-PAC.  This page is a reference for how to use it in future releases.  An interface is available in the C-PAC GUI, but it is not functional.</strong></p>
+<p><strong>Important Note: BASC is currently not fully implemented in C-PAC.  This page is a reference for how to use it in future releases.</strong></p>
 </div>
 <div class="section" id="computation-and-analysis-considerations">
 <h2>Computation and Analysis Considerations<a class="headerlink" href="#computation-and-analysis-considerations" title="Permalink to this headline">¶</a></h2>
@@ -59,7 +63,7 @@
 </ol>
 <p>The figure below (taken from Garcia-Garcia et al.) shows a visual representation of these steps. For more detail on how CPAC computes these steps, please see the <a class="reference external" href="http://fcp-indi.github.com/docs/developer/workflows/basc.html">BASC Page of the developer documentation</a>.</p>
 <div class="figure">
-<img alt="../_images/basc_manu_schematic.png" src="../_images/basc_manu_schematic.png" />
+<img alt="../../_images/basc_manu_schematic.png" src="../../_images/basc_manu_schematic.png" />
 </div>
 <p>Note that clusters do not by themselves convey any quantitative information regarding stability. Based on a stability matrix, it is possible to construct a stability map for each cluster that will depict the stability of each voxel’s membership to that cluster. This can be done at both the individual and group level.</p>
 </div>
@@ -71,7 +75,7 @@
 <div class="section" id="configuring-cpac-to-run-basc">
 <h2>Configuring CPAC to Run BASC<a class="headerlink" href="#configuring-cpac-to-run-basc" title="Permalink to this headline">¶</a></h2>
 <div class="figure">
-<img alt="../_images/basc_gui.png" src="../_images/basc_gui.png" />
+<img alt="../../_images/basc_gui.png" src="../../_images/basc_gui.png" />
 </div>
 <ol class="arabic simple">
 <li><strong>Run BASC - [Off, On]:</strong> Run Bootstrap Analysis of Stable Clusters.</li>
@@ -108,29 +112,18 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index">
-              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            <p class="logo"><a href="../../index">
+              <img class="logo" src="../../_static/cpac_logo_vertical.png" alt="Logo"/>
             </a></p>
-<h3><a href="../index">Table of Contents</a></h3>
+<h3><a href="../../index">Table of Contents</a></h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../use_case_wizard/index">1. Use Case Wizard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quick">2. C-PAC Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_list_config">3. Specify Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pipeline_config">4. Select Your Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocessing">5. Pre-Process Your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../derivatives">6. Compute Derivatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../running">7. All Run Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../group_analysis">8. Run Group Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../output_dir">9. Check Your Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../help">10. Troubleshoot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rnotes">11. Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix">12. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index">Welcome to C-PAC’s Documentation!</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../search" method="get">
+    <form class="search" action="../../search" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -147,15 +140,18 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex" title="General Index"
+          <a href="../../genindex" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.6.0 Beta documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.6.2 Beta documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>
