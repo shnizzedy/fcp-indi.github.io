@@ -9,10 +9,11 @@ Welcome to CPAC's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   developer/index
-   user/index
+   User Guide <user>
+   Developer Documentation <developer>
+   
 
 Indices and tables
 ==================
