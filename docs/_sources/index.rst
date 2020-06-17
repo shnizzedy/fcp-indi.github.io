@@ -11,8 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   User Guide <user>
-   Developer Documentation <developer>
+   User Guide <user/index>
+   Developer Documentation <developer/index>
    
 
 Indices and tables
