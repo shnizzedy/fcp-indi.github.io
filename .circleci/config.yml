@@ -79,7 +79,7 @@ jobs:
           name: Tagging with version number
           command: |
             LATEST_VERSION=$(curl --silent "https://api.github.com/repos/FCP-INDI/C-PAC/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
-            cp /build/docs/latest /build/docs/$LATEST_VERSION
+            cp -r /build/docs/latest /build/docs/$LATEST_VERSION
       - run:
           name: Storing commit message
           command: git log origin/source -1 --oneline --pretty=%s > /root/GITMESSAGE.txt
