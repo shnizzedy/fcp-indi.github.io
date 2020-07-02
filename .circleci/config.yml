@@ -97,19 +97,19 @@ jobs:
             - root/.ssh
             - root/GITMESSAGE.txt
 
-    deploy-develop:
-      working_directory: /
-      docker:
-        - image: python:3.7
-      steps:
-        - deploy
+  deploy-develop:
+    working_directory: /
+    docker:
+      - image: python:3.7
+    steps:
+      - deploy
 
-    deploy-latest:
-      working_directory: /
-      docker:
-        - image: python:3.7
-      steps:
-        - deploy
+  deploy-latest:
+    working_directory: /
+    docker:
+      - image: python:3.7
+    steps:
+      - deploy
 
 workflows:
   version: 2.1
