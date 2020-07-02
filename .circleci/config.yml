@@ -12,6 +12,32 @@ commands:
             cd /build/C-PAC
             git checkout develop
             cd /build
+  deploy:
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /
+      - install-dependencies
+      - run:
+          name: 🔧 Configuring git user
+          command: |
+            git config --global user.email "ci-build@fcp-indi.github.com"
+            git config --global user.name "ci-build"
+      - run:
+          name: 🚀 Deploying docs
+          command: |
+            cd /build
+            git clone --single-branch --branch gh-pages git@github.com:${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git /tmp/repo || git clone --single-branch --branch master git@github.com:${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git /tmp/repo
+            rsync -rtv ./ /tmp/repo/ --exclude '.git'
+            cd /tmp/repo
+            git rm -f .gitignore || rm -f .gitignore || true
+            git add .
+            git rm -fr docs/**/_sources || rm -f docs/**/_sources || true
+            git rm -fr docs/**/.doctrees || rm -f docs/**/.doctrees || true
+            git commit -m "$(cat /root/GITMESSAGE.txt)" --allow-empty
+            git push origin HEAD:gh-pages -f
+            cd -
+
 jobs:
   build-develop:
     working_directory: /build
@@ -39,34 +65,51 @@ jobs:
             - root/.ssh
             - root/GITMESSAGE.txt
 
-  deploy:
-    working_directory: /
+  build-latest:
+    working_directory: /build
     docker:
       - image: python:3.7
     steps:
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: /
+      - checkout
       - install-dependencies
       - run:
-          name: 🔧 Configuring git user
-          command: |
-            git config --global user.email "ci-build@fcp-indi.github.com"
-            git config --global user.name "ci-build"
+          name: 🏗️ Building latest branch docs
+          command: ./bin/build latest
       - run:
-          name: 🚀 Deploying docs
+          name: Tagging with version number
           command: |
-            cd /build
-            git clone --single-branch --branch gh-pages git@github.com:${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git /tmp/repo || git clone --single-branch --branch master git@github.com:${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git /tmp/repo
-            rsync -rtv ./ /tmp/repo/ --exclude '.git'
-            cd /tmp/repo
-            git rm -f .gitignore || rm -f .gitignore || true
-            git add .
-            git rm -fr docs/**/_sources || rm -f docs/**/_sources || true
-            git rm -fr docs/**/.doctrees || rm -f docs/**/.doctrees || true
-            git commit -m "$(cat /root/GITMESSAGE.txt)" --allow-empty
-            git push origin HEAD:gh-pages -f
-            cd -
+            LATEST_VERSION=$(curl --silent "https://api.github.com/repos/FCP-INDI/C-PAC/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+            cp /build/docs/latest /build/docs/$LATEST_VERSION
+      - run:
+          name: Storing commit message
+          command: git log origin/source -1 --oneline --pretty=%s > /root/GITMESSAGE.txt
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: /
+          # Must be relative path from root
+          paths:
+            - build/docs/latest
+            - build/docs/v*
+            - build/404.html
+            - build/javascripts
+            - build/stylesheets
+            - root/.ssh
+            - root/GITMESSAGE.txt
+
+    deploy-develop:
+      working_directory: /
+      docker:
+        - image: python:3.7
+      steps:
+        - deploy
+
+    deploy-latest:
+      working_directory: /
+      docker:
+        - image: python:3.7
+      steps:
+        - deploy
 
 workflows:
   version: 2.1
@@ -77,16 +120,22 @@ workflows:
             branches:
               only:
                 - source
-      # - build-latest:
-      #     filters:
-      #       branches:
-      #         only:
-      #           - source
-      - deploy:
+      - build-latest:
+          filters:
+            branches:
+              only:
+                - build-latest
+      - deploy-develop:
           filters:
             branches:
               only:
                 - source
           requires:
             - build-develop
-            # - build-latests
+      - depoly-latest:
+          filters:
+            branches:
+              only:
+                - build-latest
+          requires:
+            - build-latest
