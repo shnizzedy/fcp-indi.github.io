@@ -1,0 +1,32 @@
+Version 1.0.1b Beta (Sep 4, 2017)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The updates to CPAC in this new version include:
+
+
+* CPAC is now compatible with Nipype version 0.13.
+* AWS S3 bucket support for BIDS data format participant list builder.
+* The pipeline configuration editor |u2019| s  |u201c| Test Configuration |u201d|  feature now works with participant lists that contain AWS S3 paths.
+* The cpac_install.sh and cpac_setup.py scripts have been fixed to be compatible with recent changes.
+* Fixed a bug in the group-level analysis model builder that would prevent the user from running group analysis on outputs from Seed-Based Correlation Analysis.
+* Fixed a bug in the group-level analysis pipeline where AFNI 3ddot would fail when performing a check on the merged 4D derivative file.
+* Fixed an issue where crash files would be generated at the beginning of the pipeline for the  |u2018| check_for_s3 |u2019|  nodes even when not pulling data from an S3 bucket.
+* Added more checks for file permissions and scan names at the beginning of the pipeline run.
+
+Updated user documentation for this release can be found here:
+http://fcp-indi.github.io/docs/user/index.html
+
+And as always, you can contact us here for user support and discussion:
+https://groups.google.com/forum/#!forum/cpax_forum
+
+Regards,
+The CPAC development team.
+
+
+.. |u2019| unicode:: \u2019
+
+.. |u201c| unicode:: \u201c
+
+.. |u201d| unicode:: \u201d
+
+.. |u2018| unicode:: \u2018
