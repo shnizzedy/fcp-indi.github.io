@@ -23,7 +23,7 @@ function redirectVersion(here, version) {
   suffix = '/' + suffix.slice(1,suffix.length).join('\/');
   const selectedLocation = here.slice(0, indexInString) + version + suffix;
   if (selectedLocation !== here) {
-    window.location.assign(selectedLocation);
+    window.location.replace(selectedLocation);
   }
 }
 
