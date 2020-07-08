@@ -23,7 +23,7 @@ function createDropdown(here) {
 
 function versionDropdown() {
   const here = window.location.href;
-  const dochome = "https://" + here.split('/').slice(2, 5).join('/');
+  const dochome = "https://" + here.split('/').slice(2, 6).join('/'); // make this 5 for top-level domain
   const navTitles = document.getElementsByClassName("nav-item-0");
   createDropdown(here).then(dropdown => {
     for (let item of navTitles) {
