@@ -3,7 +3,7 @@ Design A Pipeline
 
 C-PAC offers a graphical interface you can use to quickly and easily modify the default pipeline or create your own from scratch:
 
-`https://fcp-indi.github.io/C-PAC_GUI/versions/latest/browser/#/ <https://fcp-indi.github.io/C-PAC_GUI/versions/latest/browser/#/>`_
+`https://shnizzedy.github.io/fcp-indi.github.com/C-PAC_GUI/versions/latest/browser/#/ <https://shnizzedy.github.io/fcp-indi.github.com/C-PAC_GUI/versions/latest/browser/#/>`_
 
 .. figure:: /_images/gui_home1.png
 
