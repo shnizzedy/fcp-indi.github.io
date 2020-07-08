@@ -116,6 +116,7 @@ def resolve_aws_credential(source):
             .format(source)
         )
 
+
 parser = argparse.ArgumentParser(description='C-PAC Pipeline Runner')
 parser.add_argument('bids_dir', help='The directory with the input dataset '
                                      'formatted according to the BIDS standard. '
@@ -182,12 +183,9 @@ parser.add_argument('--aws_output_creds', help='Credentials for writing to S3.'
                     ' use the string "env" to indicate that output credentials should'
                     ' read from the environment. (E.g. when using AWS iam roles).',
                     default=None)
-# TODO: restore <default=3> for <--n_cpus> once we remove
-#       <maxCoresPerParticipant> from config file
-#       <https://github.com/FCP-INDI/C-PAC/pull/1264#issuecomment-631643708>
-parser.add_argument('--n_cpus', type=int, default=0,
-                    help='Number of execution resources per participant '
-                         ' available for the pipeline.')
+parser.add_argument('--n_cpus', type=int, default=1,
+                    help='Number of execution '
+                         ' resources available for the pipeline.')
 parser.add_argument('--mem_mb', type=float,
                     help='Amount of RAM available to the pipeline in megabytes.'
                          ' Included for compatibility with BIDS-Apps standard, but mem_gb is preferred')
@@ -316,6 +314,7 @@ elif args.analysis_level == "group":
         sys.exit(0)
 
 elif args.analysis_level in ["test_config", "participant"]:
+
     # check to make sure that the input directory exists
     if not args.data_config_file and \
         not args.bids_dir.lower().startswith("s3://") and \
@@ -393,25 +392,14 @@ elif args.analysis_level in ["test_config", "participant"]:
     else:
         c['maximumMemoryPerParticipant'] = 6.0
 
-    # Preference: n_cpus if given, override if present, else from config if
-    # present, else n_cpus=3
-    if args.n_cpus == 0:
-        c['maxCoresPerParticipant'] = int(c.get('maxCoresPerParticipant', 3))
-        args.n_cpus = 3
-    else:
-        c['maxCoresPerParticipant'] = args.n_cpus
-    c['numParticipantsAtOnce'] = int(c.get('numParticipantsAtOnce', 1))
-    # Reduce cores per participant if cores times particiapants is more than
-    # available CPUS. n_cpus is a hard upper limit.
-    if (c['maxCoresPerParticipant'] * c['numParticipantsAtOnce']) > int(
-        args.n_cpus
-    ):
-        c['maxCoresPerParticipant'] = int(
-            args.n_cpus
-        ) // c['numParticipantsAtOnce']
-    c['num_ants_threads'] = min(
-        c['maxCoresPerParticipant'], int(c['num_ants_threads'])
+    c['maxCoresPerParticipant'] = int(args.n_cpus)
+    c['numParticipantsAtOnce'] = (
+        int(overrides['numParticipantsAtOnce'])
+        if 'numParticipantsAtOnce' in overrides
+        else 1
     )
+
+    c['num_ants_threads'] = min(int(args.n_cpus), int(c['num_ants_threads']))
 
     c['disable_log'] = args.disable_file_logging
 
@@ -428,7 +416,7 @@ elif args.analysis_level in ["test_config", "participant"]:
                 ' Either change the output directory to something'
                 ' local or turn off the --save_working_dir flag')
 
-
+    print()
     if args.participant_label:
         print(
             "#### Running C-PAC for {0}"
@@ -480,8 +468,6 @@ elif args.analysis_level in ["test_config", "participant"]:
 
         from bids_utils import collect_bids_files_configs, bids_gen_cpac_sublist
 
-        print("Parsing {0}..".format(args.bids_dir))
-
         (file_paths, config) = collect_bids_files_configs(
             args.bids_dir, args.aws_input_creds)
 
@@ -501,14 +487,11 @@ elif args.analysis_level in ["test_config", "participant"]:
             ))
             sys.exit(1)
 
-        raise_error = not args.skip_bids_validator
-
         sub_list = bids_gen_cpac_sublist(
             args.bids_dir,
             file_paths,
             config,
-            args.aws_input_creds,
-            raise_error=raise_error
+            args.aws_input_creds
         )
 
         if not sub_list:
@@ -575,6 +558,7 @@ elif args.analysis_level in ["test_config", "participant"]:
         noalias_dumper = yaml.dumper.SafeDumper
         noalias_dumper.ignore_aliases = lambda self, data: True
         yaml.dump(sub_list, f, default_flow_style=False, Dumper=noalias_dumper)
+
 
     if args.analysis_level in ["participant", "test_config"]:
         # build pipeline easy way

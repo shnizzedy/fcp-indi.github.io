@@ -2,7 +2,7 @@ const versionPattern = /(?<=.*fcp-indi\.github\..*\/docs\/)(.*)(?=\/.*)/;
 
 function createDropdown(here) {
   let promisedDropdown = function(resolve, reject) {
-    fetch("https://shnizzedy.github.io/fcp-indi.github.com/docs/versions.txt").then(response => response.text().then(version_list => {
+    fetch("https://fcp-indi.github.io/docs/versions.txt").then(response => response.text().then(version_list => {
       const versions = version_list.split('\n');
       let dropdownElement = document.createElement('select');
       versions.forEach(version => {
@@ -23,7 +23,7 @@ function createDropdown(here) {
 
 function versionDropdown() {
   const here = window.location.href;
-  const dochome = "https://" + here.split('/').slice(2, 6).join('/'); // make this 5 for top-level domain
+  const dochome = "https://" + here.split('/').slice(2, 5).join('/');
   const navTitles = document.getElementsByClassName("nav-item-0");
   createDropdown(here).then(dropdown => {
     for (let item of navTitles) {
