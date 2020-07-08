@@ -1,4 +1,4 @@
-const oldPattern = /.*fcp-indi\.github\..*\/docs\/(user|developer)/;
+const oldPattern = /.*fcp-indi\.github\..*\/docs(\/user|\/developer|\/$|$)/;
 const oldPatternDelim = /fcp-indi\.github\..*\/docs\//;
 const latestString = "/latest/";
 
