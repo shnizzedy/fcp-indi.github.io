@@ -43,7 +43,7 @@ function createDropdown(here) {
       }
     });
     return(dropdownElement);
-  ));
+  }));
 }
 
 versionDropdown();
