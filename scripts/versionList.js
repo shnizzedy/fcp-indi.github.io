@@ -4,28 +4,29 @@ function versionDropdown() {
   const here = window.location.href;
   const dochome = "https://" + here.split('/').slice(2, 5).join('/');
   const navTitles = document.getElementsByClassName("nav-item-0");
-  const dropdown = createDropdown(here);
-  for (let item of navTitles) {
-    let newTitle = document.createElement("div");
-    let newTitlePrefix = document.createElement("a");
-    newTitlePrefix.setAttribute("href", dochome);
-    console.log(newTitle);
-    newTitlePrefix.appendChild(document.createTextNode("C-PAC "));
-    newTitle.appendChild(newTitlePrefix);
-    console.log(newTitle);
-    newTitle.appendChild(dropdown);
-    console.log(newTitle);
-    let newTitleSuffix = document.createElement("a");
-    newTitleSuffix.setAttribute("href", dochome);
-    newTitleSuffix.appendChild(document.createTextNode(" documentation"));
-    newTitle.appendChild(newTitleSuffix);
-    newTitle.appendChild(document.createTextNode(" »"));
-    console.log(newTitle);
-    item.innerHTML = newTitle.innerHTML;
-    item.addEventListener('change', (event) => {
-      redirectVersion(here, event.target.value);
-    });
-  }
+  createDropdown(here).then(dropdown => {
+    for (let item of navTitles) {
+      let newTitle = document.createElement("div");
+      let newTitlePrefix = document.createElement("a");
+      newTitlePrefix.setAttribute("href", dochome);
+      console.log(newTitle);
+      newTitlePrefix.appendChild(document.createTextNode("C-PAC "));
+      newTitle.appendChild(newTitlePrefix);
+      console.log(newTitle);
+      newTitle.appendChild(dropdown);
+      console.log(newTitle);
+      let newTitleSuffix = document.createElement("a");
+      newTitleSuffix.setAttribute("href", dochome);
+      newTitleSuffix.appendChild(document.createTextNode(" documentation"));
+      newTitle.appendChild(newTitleSuffix);
+      newTitle.appendChild(document.createTextNode(" »"));
+      console.log(newTitle);
+      item.innerHTML = newTitle.innerHTML;
+      item.addEventListener('change', (event) => {
+        redirectVersion(here, event.target.value);
+      });
+    }
+  });
 }
 
 
