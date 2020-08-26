@@ -30,6 +30,12 @@ Definitions
 * Derivative
     .. include:: /glossary/derivative.rst
         :start-line: 3
+* Atlas
+    .. include:: /glossary/atlas.rst
+        :start-line: 3
+* Template
+    .. include:: /glossary/template.rst
+        :start-line: 3
 
 .. include:: design_a_pipeline.rst
 
