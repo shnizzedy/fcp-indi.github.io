@@ -68,7 +68,7 @@ class CPAC_DocsStyle(Style):
 
 class LabelStyle(BaseLabelStyle):
     def format_label(self, entry):
-        label = '({})'.format(', '.join([
+        label = '{}'.format(', '.join([
             self.format_label_names(entry.persons['author']),
             str(entry.fields['year'])
         ]))
