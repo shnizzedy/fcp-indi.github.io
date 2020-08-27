@@ -39,6 +39,7 @@ Definitions
 .. rubric:: Reference
 
 .. bibliography:: /references/glossary.bib
+   :cited:
    :style: cpac_docs_style
 
 .. include:: design_a_pipeline.rst
@@ -110,4 +111,3 @@ Derivatives
 * :doc:`Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (fALFF) </user/alff>` - Measure the power of slow fluctuations in brain activity.
 * :doc:`Regional Homogeneity (ReHo) </user/reho>` - Measure the similarity of activity patterns across neighboring voxels.
 * :doc:`Network Centrality </user/centrality>` - Analyze the structure of functional networks.
-
