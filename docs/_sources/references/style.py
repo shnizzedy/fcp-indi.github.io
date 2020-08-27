@@ -1,6 +1,7 @@
 from pybtex.style.formatting import toplevel
 from pybtex.style.formatting.plain import Style
 from pybtex.style.names.lastfirst import NameStyle as LastFirst
+from pybtex.style.sorting.none import SortingStyle as NoSort
 from pybtex.style.template import field, href, join, optional, \
                                   optional_field, sentence, tag, words
 
@@ -10,7 +11,7 @@ date = words [ field('year'), optional_field('month') ]
 
 class CPAC_DocsStyle(Style):
     def __init__(self, *args, **kwargs):
-        super().__init__(abbreviate_names=True, name_style=LastFirst)
+        super().__init__(abbreviate_names=True, name_style=LastFirst, sorting_style=NoSort)
 
 
     def get_book_template(self, entry):
