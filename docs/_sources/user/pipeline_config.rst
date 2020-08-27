@@ -36,6 +36,10 @@ Definitions
 * Template
     .. include:: /glossary/template.rst
         :start-line: 3
+.. rubric:: Reference
+
+.. bibliography:: /references/glossary.bib
+   :style: cpac_docs_style
 
 .. include:: design_a_pipeline.rst
 
