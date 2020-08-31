@@ -39,7 +39,7 @@ Definitions
 .. rubric:: Reference
 
 .. bibliography:: /references/glossary.bib
-   :cited:
+   :all:
    :style: cpac_docs_style
 
 .. include:: design_a_pipeline.rst
