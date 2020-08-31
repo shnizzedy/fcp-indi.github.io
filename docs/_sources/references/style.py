@@ -70,7 +70,8 @@ class LabelStyle(BaseLabelStyle):
     def format_label(self, entry):
         label = '{}'.format(', '.join([
             self.format_label_names(entry.persons['author']),
-            str(entry.fields['year'])
+            str(entry.fields['year']),
+            f'({entry.key})'
         ]))
         return label
 
