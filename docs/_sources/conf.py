@@ -18,7 +18,8 @@ import re
 import semver
 import sys
 
-from CPAC import __version__
+# from CPAC import __version__
+__version__ = 't'
 from dateutil import parser as dparser
 from github import Github
 from github.GithubException import RateLimitExceededException, \

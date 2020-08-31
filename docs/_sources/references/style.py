@@ -75,7 +75,6 @@ class LabelStyle(BaseLabelStyle):
         return label
 
     def format_label_names(self, persons):
-        print(persons)
         numnames = len(persons)
         if numnames > 2:
             result = f'{_strip_nonalnum(persons[0].last_names)}, et al.'
