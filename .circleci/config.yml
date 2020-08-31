@@ -108,7 +108,7 @@ jobs:
           path: /home/circleci/build
       - install-build-dependencies:
           version: develop
-      - run-cpac-commands
+      # - run-cpac-commands
       - run:
           name: 🏗️ Building nightly branch docs
           command: ./bin/build nightly
@@ -124,7 +124,7 @@ jobs:
       - get-version
       - install-build-dependencies:
           version: ${BUILD_VERSION}
-      - run-cpac-commands
+      # - run-cpac-commands
       - run:
           name: 🏗️ Building version branch docs
           command: ./bin/build ${BUILD_VERSION}
