@@ -89,14 +89,14 @@ commands:
     steps:
       - persist_to_workspace:
           root: /
-          paths: 
+          paths:
             - build/404.html
             - build/docs
             - build/index.html
             - build/scripts
             - root/.ssh
             - root/GITMESSAGE.txt
-              
+
 jobs:
   build-nightly:
     working_directory: /build
@@ -106,13 +106,13 @@ jobs:
       - checkout
       - install-build-dependencies:
           version: develop
-      - run-cpac-commands
+      # - run-cpac-commands
       - run:
           name: 🏗️ Building nightly branch docs
           command: ./bin/build nightly
       - store-commit-message
       - persist-new-build
-            
+
   build-version:
     working_directory: /build
     docker:
@@ -128,7 +128,7 @@ jobs:
           command: ./bin/build ${BUILD_VERSION}
       - store-commit-message
       - persist-new-build
-          
+
   deploy-nightly:
     working_directory: /
     docker:
@@ -138,7 +138,7 @@ jobs:
           at: /
       - prep-deploy
       - deploy
-      
+
   deploy-version:
     working_directory: /
     docker:
