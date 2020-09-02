@@ -17,8 +17,7 @@ class CPAC_DocsStyle(Style):
         super().__init__(
             abbreviate_names=True,
             name_style=LastFirst,
-            sorting_style=NoSort,
-            label_style=LabelStyle
+            sorting_style=NoSort
         )
 
     def get_book_template(self, entry):
