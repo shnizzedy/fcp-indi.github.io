@@ -41,6 +41,7 @@ Definitions
 .. bibliography:: /references/glossary.bib
    :style: cpac_docs_style
    :cited:
+   :keyprefix: glossary-
 
 .. include:: design_a_pipeline.rst
 
