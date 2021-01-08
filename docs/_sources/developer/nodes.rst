@@ -14,6 +14,6 @@ Nodes
    
    When a developer creates or modifies a Node in C-PAC, a ``mem_gb`` argument should be provided unless the default of 0.2 is expected to be sufficient. When testing, the ``mem_gb`` argument should be adjusted if the observed memory exceeds the estimate.
 
-.. autofunction:: CPAC.utils.monitoring.log_nodes_cb
+.. autofunction:: CPAC.utils.montioring.log_nodes_cb
 
 .. autofunction:: nipype.utils.draw_gantt_chart.log_to_dict
