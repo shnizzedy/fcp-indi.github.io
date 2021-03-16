@@ -24,10 +24,7 @@ from github import Github
 from github.GithubException import RateLimitExceededException, \
     UnknownObjectException
 from pybtex.plugin import register_plugin
-
-sys.path.append(os.path.dirname(__file__))
-
-from references import CPAC_DocsStyle
+from .references import CPAC_DocsStyle
 
 register_plugin('pybtex.style.formatting', 'cpac_docs_style', CPAC_DocsStyle)
 
