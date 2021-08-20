@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>C-PAC Quickstart &#8212; C-PAC 1.8.0 Beta documentation</title>
+    <title>C-PAC Quickstart &#8212; C-PAC 1.8.1 Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="release_notes/v1.8.0" title="Latest Release: Version 1.8.0 Beta (Mar 13, 2021)"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.0 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" accesskey="U">Welcome to C-PAC’s user guide!</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">C-PAC Quickstart</a></li> 
       </ul>
@@ -379,8 +379,8 @@
 <span class="go">  /home/circleci/build/outputs  /output               rw</span>
 <span class="go">Logging messages will refer to the Docker paths.</span>
 
-<span class="go">mkdir: cannot create directory ‘//matlab’: Permission denied</span>
 <span class="go">INFO: //matlab/startup.m does not exist ... creating</span>
+<span class="go">mkdir: cannot create directory ‘//matlab’: Permission denied</span>
 <span class="go">touch: cannot touch &#39;//matlab/startup.m&#39;: No such file or directory</span>
 <span class="go">/usr/lib/freesurfer/FreeSurferEnv.sh: line 231: //matlab/startup.m: No such file or directory</span>
 <span class="go">/usr/lib/freesurfer/FreeSurferEnv.sh: line 232: //matlab/startup.m: No such file or directory</span>
@@ -467,8 +467,8 @@
 </section>
 <section id="design-a-pipeline">
 <h2>Design A Pipeline<a class="headerlink" href="#design-a-pipeline" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>The C-PAC pipeline configuration was changed to a nested format with import capabilities in v1.8.0.</p>
 <p>With this change, the following configuration keys are deprecated:</p>
 <ul class="simple">
@@ -482,7 +482,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">targetAngleDeg</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">runSymbolicLinks</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">configFileTwomm</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ref_mask_2mm</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ref_mask_res-2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">template_skull_for_anat_2mm</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">surface_reconstruction</span></code></p></li>
 </ul>
@@ -657,7 +657,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -682,7 +682,7 @@
         <li class="right" >
           <a href="release_notes/v1.8.0" title="Latest Release: Version 1.8.0 Beta (Mar 13, 2021)"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.0 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">C-PAC Quickstart</a></li> 
       </ul>
@@ -690,7 +690,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>

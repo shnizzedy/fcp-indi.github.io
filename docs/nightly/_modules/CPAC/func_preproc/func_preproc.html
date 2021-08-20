@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CPAC.func_preproc.func_preproc &#8212; C-PAC 1.8.0 Beta documentation</title>
+    <title>CPAC.func_preproc.func_preproc &#8212; C-PAC 1.8.1 Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.0 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.func_preproc.func_preproc</a></li> 
       </ul>
@@ -67,6 +67,7 @@
 
 
 <span class="k">def</span> <span class="nf">anat_refined_mask</span><span class="p">(</span><span class="n">init_bold_mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;init_bold_mask&#39;</span><span class="p">):</span>
+
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
 
     <span class="n">input_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;func&#39;</span><span class="p">,</span>
@@ -82,6 +83,7 @@
     <span class="n">func_single_volume</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni</span><span class="o">.</span><span class="n">Calc</span><span class="p">(),</span>
                                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_single_volume&#39;</span><span class="p">)</span>
 
+    <span class="c1"># TODO add an option to select volume</span>
     <span class="n">func_single_volume</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
         <span class="n">expr</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
         <span class="n">single_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -446,7 +448,7 @@
     <span class="k">return</span> <span class="n">preproc</span>
 
 
-<span class="k">def</span> <span class="nf">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;slice_timing&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;slice_timing&#39;</span><span class="p">,</span> <span class="n">tpattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tzero</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># allocate a workflow object</span>
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
@@ -470,6 +472,9 @@
                                                   <span class="s1">&#39;in_file&#39;</span><span class="p">))</span>
     <span class="n">func_slice_timing_correction</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
 
+    <span class="k">if</span> <span class="n">tzero</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">func_slice_timing_correction</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">tzero</span> <span class="o">=</span> <span class="n">tzero</span>
+
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>
         <span class="p">(</span>
             <span class="n">inputNode</span><span class="p">,</span>
@@ -479,14 +484,14 @@
                     <span class="s1">&#39;func_ts&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;in_file&#39;</span>
                 <span class="p">),</span>
-                <span class="p">(</span>
-                    <span class="c1"># add the @ prefix to the tpattern file going into</span>
-                    <span class="c1"># AFNI 3dTshift - needed this so the tpattern file</span>
-                    <span class="c1"># output from get_scan_params would be tied downstream</span>
-                    <span class="c1"># via a connection (to avoid poofing)</span>
-                    <span class="p">(</span><span class="s1">&#39;tpattern&#39;</span><span class="p">,</span> <span class="n">nullify</span><span class="p">,</span> <span class="n">add_afni_prefix</span><span class="p">),</span>
-                    <span class="s1">&#39;tpattern&#39;</span>
-                <span class="p">),</span>
+                <span class="c1"># (</span>
+                <span class="c1">#     # add the @ prefix to the tpattern file going into</span>
+                <span class="c1">#     # AFNI 3dTshift - needed this so the tpattern file</span>
+                <span class="c1">#     # output from get_scan_params would be tied downstream</span>
+                <span class="c1">#     # via a connection (to avoid poofing)</span>
+                <span class="c1">#     (&#39;tpattern&#39;, nullify, add_afni_prefix),</span>
+                <span class="c1">#     &#39;tpattern&#39;</span>
+                <span class="c1"># ),</span>
                 <span class="p">(</span>
                     <span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">,</span> <span class="n">nullify</span><span class="p">),</span>
                     <span class="s1">&#39;tr&#39;</span>
@@ -494,6 +499,12 @@
             <span class="p">]</span>
         <span class="p">),</span>
     <span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">tpattern</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">func_slice_timing_correction</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">tpattern</span> <span class="o">=</span> <span class="n">tpattern</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;tpattern&#39;</span><span class="p">,</span> <span class="n">nullify</span><span class="p">,</span> <span class="n">add_afni_prefix</span><span class="p">),</span>
+               <span class="n">func_slice_timing_correction</span><span class="p">,</span> <span class="s1">&#39;tpattern&#39;</span><span class="p">)</span>
 
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_slice_timing_correction</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
                <span class="n">outputNode</span><span class="p">,</span> <span class="s1">&#39;slice_time_corrected&#39;</span><span class="p">)</span>
@@ -571,14 +582,19 @@
                    <span class="s1">&#39;max_cores_per_participant&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">chunk_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import nibabel as nb&#39;</span><span class="p">]</span>
             <span class="n">chunk</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;func_file&#39;</span><span class="p">,</span>
-                                                  <span class="s1">&#39;n_cpus&#39;</span><span class="p">],</span>
+                                                  <span class="s1">&#39;n_chunks&#39;</span><span class="p">,</span>
+                                                  <span class="s1">&#39;chunk_size&#39;</span><span class="p">],</span>
                                      <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;TR_ranges&#39;</span><span class="p">],</span>
                                      <span class="n">function</span><span class="o">=</span><span class="n">chunk_ts</span><span class="p">,</span>
                                      <span class="n">imports</span><span class="o">=</span><span class="n">chunk_imports</span><span class="p">),</span>
                             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;chunk_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-            <span class="n">chunk</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_cpus</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s1">&#39;system_config&#39;</span><span class="p">][</span>
-                                          <span class="s1">&#39;max_cores_per_participant&#39;</span><span class="p">])</span>
+            <span class="c1">#chunk.inputs.n_chunks = int(cfg.pipeline_setup[&#39;system_config&#39;][</span>
+            <span class="c1">#                              &#39;max_cores_per_participant&#39;])</span>
+            
+            <span class="c1"># 10-TR sized chunks</span>
+            <span class="n">chunk</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">10</span>
+            
             <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
             <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="s1">&#39;func_file&#39;</span><span class="p">)</span>
 
@@ -810,6 +826,7 @@
                        <span class="n">out_oned_matrix</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
 
         <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">out_motion_A</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
             <span class="s1">&#39;desc-motion_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">out_motion_A</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
             <span class="s1">&#39;max-displacement&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">out_md1d</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
             <span class="s1">&#39;movement-parameters&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">out_oned</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
@@ -849,16 +866,18 @@
                    <span class="n">get_rms_abs</span><span class="p">,</span> <span class="s1">&#39;rms_files&#39;</span><span class="p">)</span>
 
         <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_motion_correct_A</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
             <span class="s1">&#39;desc-motion_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_motion_correct_A</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
             <span class="s1">&#39;max-displacement&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">get_rms_abs</span><span class="p">,</span> <span class="s1">&#39;abs_file&#39;</span><span class="p">),</span>
             <span class="s1">&#39;rels-displacement&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">get_rms_abs</span><span class="p">,</span> <span class="s1">&#39;rels_file&#39;</span><span class="p">),</span>
             <span class="s1">&#39;movement-parameters&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">normalize_motion_params</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;coordinate-transformation&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_motion_correct_A</span><span class="p">,</span> <span class="s1">&#39;mat_file&#39;</span><span class="p">)</span>
         <span class="p">}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">func_scaling</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">func_scaling</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    {&quot;name&quot;: &quot;func_scaling&quot;,</span>
 <span class="sd">     &quot;config&quot;: [&quot;functional_preproc&quot;, &quot;scaling&quot;],</span>
@@ -871,7 +890,7 @@
 
     <span class="n">scale_func_wf</span> <span class="o">=</span> <span class="n">create_scale_func_wf</span><span class="p">(</span>
         <span class="n">scaling_factor</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">scaling_factor</span><span class="p">,</span>
-        <span class="n">wf_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;scale_func_</span><span class="si">{</span><span class="n">pipe_idx</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">wf_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;scale_func_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="p">)</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
@@ -892,7 +911,11 @@
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: {</span>
+<span class="sd">         &quot;desc-preproc_bold&quot;: {</span>
+<span class="sd">             &quot;Description&quot;: &quot;Truncated functional time-series BOLD data.&quot;</span>
+<span class="sd">         }}</span>
+<span class="sd">    }</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># if cfg.functional_preproc[&#39;truncation&#39;][&#39;start_tr&#39;] == 0 and \</span>
@@ -928,7 +951,11 @@
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: {</span>
+<span class="sd">         &quot;desc-preproc_bold&quot;: {</span>
+<span class="sd">             &quot;Description&quot;: &quot;De-spiked BOLD time-series via AFNI 3dDespike.&quot;</span>
+<span class="sd">         }}</span>
+<span class="sd">    }</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">despike</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Despike</span><span class="p">(),</span>
@@ -958,11 +985,21 @@
 <span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
 <span class="sd">                &quot;TR&quot;,</span>
 <span class="sd">                &quot;tpattern&quot;],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: {</span>
+<span class="sd">         &quot;desc-preproc_bold&quot;: {</span>
+<span class="sd">             &quot;Description&quot;: &quot;Slice-time corrected BOLD time-series via AFNI 3dTShift.&quot;</span>
+<span class="sd">         },</span>
+<span class="sd">         &quot;desc-stc_bold&quot;: {</span>
+<span class="sd">             &quot;Description&quot;: &quot;Slice-time corrected BOLD time-series via AFNI 3dTShift.&quot;}}</span>
+<span class="sd">    }</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">slice_time</span> <span class="o">=</span> <span class="n">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_slice_timing_correction_&#39;</span>
-                                      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                                 <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                                 <span class="n">tpattern</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span>
+                                 <span class="s1">&#39;slice_timing_correction&#39;</span><span class="p">][</span><span class="s1">&#39;tpattern&#39;</span><span class="p">],</span>
+                                 <span class="n">tzero</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span>
+                                 <span class="s1">&#39;slice_timing_correction&#39;</span><span class="p">][</span><span class="s1">&#39;tzero&#39;</span><span class="p">])</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">slice_time</span><span class="p">,</span> <span class="s1">&#39;inputspec.func_ts&#39;</span><span class="p">)</span>
@@ -974,7 +1011,8 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">slice_time</span><span class="p">,</span> <span class="s1">&#39;inputspec.tpattern&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">slice_time</span><span class="p">,</span> <span class="s1">&#39;outputspec.slice_time_corrected&#39;</span><span class="p">)</span>
+        <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">slice_time</span><span class="p">,</span> <span class="s1">&#39;outputspec.slice_time_corrected&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;desc-stc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">slice_time</span><span class="p">,</span> <span class="s1">&#39;outputspec.slice_time_corrected&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
@@ -988,7 +1026,7 @@
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;, &quot;desc-reorient_bold&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">func_deoblique</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">Refit</span><span class="p">(),</span>
@@ -1015,7 +1053,8 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_deoblique</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">func_reorient</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_reorient</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
+        <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_reorient</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;desc-reorient_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_reorient</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
@@ -1094,7 +1133,8 @@
 <span class="sd">     &quot;option_val&quot;: [&quot;3dvolreg&quot;, &quot;mcflirt&quot;],</span>
 <span class="sd">     &quot;inputs&quot;: [([&quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
 <span class="sd">                 &quot;motion-basefile&quot;)],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-motion_bold&quot;,</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;,</span>
+<span class="sd">                 &quot;desc-motion_bold&quot;,</span>
 <span class="sd">                 &quot;max-displacement&quot;,</span>
 <span class="sd">                 &quot;rels-displacement&quot;,</span>
 <span class="sd">                 &quot;movement-parameters&quot;,</span>
@@ -1151,7 +1191,8 @@
 <span class="sd">     &quot;option_val&quot;: [&quot;3dvolreg&quot;, &quot;mcflirt&quot;],</span>
 <span class="sd">     &quot;inputs&quot;: [([&quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
 <span class="sd">                 &quot;motion-basefile&quot;)],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-motion_bold&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;,</span>
+<span class="sd">                 &quot;desc-motion_bold&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">wf</span><span class="p">,</span> <span class="n">wf_outputs</span> <span class="o">=</span> <span class="n">motion_correct_connections</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span>
@@ -1241,7 +1282,9 @@
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    {&quot;name&quot;: &quot;calc_motion_stats&quot;,</span>
 <span class="sd">     &quot;config&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;switch&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;switch&quot;: [[&quot;functional_preproc&quot;, &quot;run&quot;], </span>
+<span class="sd">                [&quot;functional_preproc&quot;, &quot;motion_estimates_and_correction&quot;, </span>
+<span class="sd">                &quot;motion_estimates&quot;, &quot;calculate_motion_after&quot;]],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;inputs&quot;: [(&quot;desc-motion_bold&quot;,</span>
@@ -1324,15 +1367,19 @@
 <span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: [&quot;func_masking&quot;, &quot;using&quot;],</span>
 <span class="sd">     &quot;option_val&quot;: &quot;AFNI&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [[&quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;space-bold_desc-brain_mask&quot;]}</span>
+<span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
+<span class="sd">     &quot;outputs&quot;: {</span>
+<span class="sd">         &quot;space-bold_desc-brain_mask&quot;: {</span>
+<span class="sd">             &quot;Description&quot;: &quot;Binary brain mask of the BOLD functional time-series</span>
+<span class="sd">                             created by AFNI 3dAutomask.&quot;}}</span>
+<span class="sd">    }</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">func_get_brain_mask</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Automask</span><span class="p">(),</span>
                                   <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;func_get_brain_mask_AFNI_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">func_get_brain_mask</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
                                      <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_get_brain_mask</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
@@ -1350,7 +1397,7 @@
 <span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: [&quot;func_masking&quot;, &quot;using&quot;],</span>
 <span class="sd">     &quot;option_val&quot;: &quot;FSL&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [[&quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
+<span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;space-bold_desc-brain_mask&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -1422,8 +1469,7 @@
         <span class="n">func_skull_mean</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="s1">&#39;-mean&#39;</span>
         <span class="n">func_skull_mean</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
 
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_skull_mean</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_skull_mean</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
                    <span class="n">func_get_brain_mask</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
@@ -1431,8 +1477,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">func_get_brain_mask</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">functional</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_get_brain_mask</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
     <span class="c1"># erode one voxel of functional brian mask</span>
@@ -1459,7 +1504,7 @@
 <span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: [&quot;func_masking&quot;, &quot;using&quot;],</span>
 <span class="sd">     &quot;option_val&quot;: &quot;FSL_AFNI&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [[&quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
+<span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;space-bold_desc-brain_mask&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -1487,7 +1532,7 @@
     <span class="n">combine_masks</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">fsl</span><span class="o">.</span><span class="n">BinaryMaths</span><span class="p">(</span><span class="n">operation</span><span class="o">=</span><span class="s1">&#39;mul&#39;</span><span class="p">),</span>
                             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;combine_masks_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
                                      <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_skull_mean</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
@@ -1519,13 +1564,13 @@
 <span class="sd">     &quot;option_key&quot;: [&quot;func_masking&quot;, &quot;using&quot;],</span>
 <span class="sd">     &quot;option_val&quot;: &quot;Anatomical_Refined&quot;,</span>
 <span class="sd">     &quot;inputs&quot;: [&quot;bold&quot;,</span>
-<span class="sd">                [&quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
+<span class="sd">                [&quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
 <span class="sd">                &quot;desc-brain_T1w&quot;,</span>
 <span class="sd">                &quot;space-T1w_desc-brain_mask&quot;],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;space-bold_desc-brain_mask&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="c1"># binarize anat mask, in case of it is not a binary mask.</span>
+    <span class="c1"># binarize anat mask, in case it is not a binary mask.</span>
     <span class="n">anat_brain_mask_bin</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ImageMaths</span><span class="p">(),</span>
                                   <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;anat_brain_mask_bin_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">anat_brain_mask_bin</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">op_string</span> <span class="o">=</span> <span class="s1">&#39;-bin&#39;</span>
@@ -1584,7 +1629,7 @@
                                           <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;refined_bold_mask&#39;</span>
                                                   <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
                                      <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">refined_bold_mask</span><span class="p">,</span> <span class="s1">&#39;inputspec.func&#39;</span><span class="p">)</span>
 
@@ -1594,7 +1639,7 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_tmp_brain_mask</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
                <span class="n">refined_bold_mask</span><span class="p">,</span> <span class="s1">&#39;inputspec.init_func_brain_mask&#39;</span><span class="p">)</span>
 
-    <span class="c1"># Dialate anatomical mask</span>
+    <span class="c1"># dilate anatomical mask</span>
     <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span><span class="s1">&#39;func_masking&#39;</span><span class="p">][</span><span class="s1">&#39;Anatomical_Refined&#39;</span><span class="p">][</span>
         <span class="s1">&#39;anatomical_mask_dilation&#39;</span><span class="p">]:</span>
         <span class="n">anat_mask_dilate</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni</span><span class="o">.</span><span class="n">MaskTool</span><span class="p">(),</span>
@@ -1640,7 +1685,7 @@
 <span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: [&quot;func_masking&quot;, &quot;using&quot;],</span>
 <span class="sd">     &quot;option_val&quot;: &quot;Anatomical_Based&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [[&quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
+<span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
 <span class="sd">                &quot;desc-brain_T1w&quot;,</span>
 <span class="sd">                [&quot;desc-preproc_T1w&quot;, &quot;desc-reorient_T1w&quot;, &quot;T1w&quot;]],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;space-bold_desc-brain_mask&quot;]}</span>
@@ -1656,7 +1701,7 @@
         <span class="n">outputtype</span><span class="o">=</span><span class="s1">&#39;NIFTI_GZ&#39;</span>
     <span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
                                      <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_single_volume</span><span class="p">,</span> <span class="s1">&#39;in_file_a&#39;</span><span class="p">)</span>
 
@@ -1694,7 +1739,7 @@
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-brain_T1w&quot;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reg_anat_brain_to_func</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
                                      <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reg_anat_brain_to_func</span><span class="p">,</span> <span class="s1">&#39;ref_file&#39;</span><span class="p">)</span>
 
@@ -1725,16 +1770,222 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
+<span class="k">def</span> <span class="nf">bold_mask_anatomical_resampled</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Resample anatomical brain mask in standard space to get BOLD brain mask in standard space</span>
+<span class="sd">    Adapted from DCAN Lab&#39;s BOLD mask method from the ABCD pipeline.</span>
+<span class="sd">        https://github.com/DCAN-Labs/DCAN-HCP/blob/master/fMRIVolume/scripts/OneStepResampling.sh#L121-L132</span>
+
+<span class="sd">    Node Block:</span>
+<span class="sd">    {&quot;name&quot;: &quot;bold_mask_anatomical_resampled&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;functional_preproc&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: [&quot;func_masking&quot;, &quot;using&quot;],</span>
+<span class="sd">     &quot;option_val&quot;: &quot;Anatomical_Resampled&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;T1w-template-funcreg&quot;,</span>
+<span class="sd">                &quot;space-template_desc-brain_T1w&quot;,</span>
+<span class="sd">                &quot;space-template_desc-T1w_mask&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-template_res-bold_desc-brain_T1w&quot;,</span>
+<span class="sd">                 &quot;space-template_desc-bold_mask&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># applywarp --rel --interp=spline -i ${T1wImage} -r ${ResampRefIm} --premat=$FSLDIR/etc/flirtsch/ident.mat -o ${WD}/${T1wImageFile}.${FinalfMRIResolution}</span>
+    <span class="n">anat_brain_to_func_res</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ApplyWarp</span><span class="p">(),</span> 
+                                     <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;resample_anat_brain_in_standard_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">anat_brain_to_func_res</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">interp</span> <span class="o">=</span> <span class="s1">&#39;spline&#39;</span>
+    <span class="n">anat_brain_to_func_res</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">premat</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span>
+        <span class="s1">&#39;anatomical_registration&#39;</span><span class="p">][</span><span class="s1">&#39;registration&#39;</span><span class="p">][</span><span class="s1">&#39;FSL-FNIRT&#39;</span><span class="p">][</span><span class="s1">&#39;identity_matrix&#39;</span><span class="p">]</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">anat_brain_to_func_res</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;T1w-template-funcreg&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">anat_brain_to_func_res</span><span class="p">,</span> <span class="s1">&#39;ref_file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Create brain masks in this space from the FreeSurfer output (changing resolution)</span>
+    <span class="c1"># applywarp --rel --interp=nn -i ${FreeSurferBrainMask}.nii.gz -r ${WD}/${T1wImageFile}.${FinalfMRIResolution} --premat=$FSLDIR/etc/flirtsch/ident.mat -o ${WD}/${FreeSurferBrainMaskFile}.${FinalfMRIResolution}.nii.gz</span>
+    <span class="n">anat_brain_mask_to_func_res</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ApplyWarp</span><span class="p">(),</span>
+                                          <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;resample_anat_brain_mask_in_standard_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">anat_brain_mask_to_func_res</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">interp</span> <span class="o">=</span> <span class="s1">&#39;nn&#39;</span>
+    <span class="n">anat_brain_mask_to_func_res</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">premat</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span>
+        <span class="s1">&#39;anatomical_registration&#39;</span><span class="p">][</span><span class="s1">&#39;registration&#39;</span><span class="p">][</span><span class="s1">&#39;FSL-FNIRT&#39;</span><span class="p">][</span><span class="s1">&#39;identity_matrix&#39;</span><span class="p">]</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_desc-T1w_mask&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">anat_brain_mask_to_func_res</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">anat_brain_to_func_res</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+        <span class="n">anat_brain_mask_to_func_res</span><span class="p">,</span> <span class="s1">&#39;ref_file&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;space-template_res-bold_desc-brain_T1w&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">anat_brain_to_func_res</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;space-template_desc-bold_mask&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">anat_brain_mask_to_func_res</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">bold_mask_ccs</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Generate the BOLD mask by basing it off of the anatomical brain.</span>
+<span class="sd">    Adapted from the BOLD mask method from the CCS pipeline.</span>
+<span class="sd">        https://github.com/TingsterX/CCS/blob/master/ccs_01_funcpreproc.sh#L89-L110</span>
+<span class="sd">    Node Block:</span>
+<span class="sd">    {&quot;name&quot;: &quot;bold_mask_ccs&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;functional_preproc&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: [&quot;func_masking&quot;, &quot;using&quot;],</span>
+<span class="sd">     &quot;option_val&quot;: &quot;CCS_Anatomical_Refined&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [[&quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
+<span class="sd">                &quot;desc-brain_T1w&quot;,</span>
+<span class="sd">                [&quot;desc-preproc_T1w&quot;, &quot;desc-reorient_T1w&quot;, &quot;T1w&quot;]],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-bold_desc-brain_mask&quot;,</span>
+<span class="sd">                &quot;desc-ROIbrain_bold&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Run 3dAutomask to generate func initial mask</span>
+    <span class="n">func_tmp_brain_mask</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Automask</span><span class="p">(),</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;func_tmp_brain_mask_AFNI_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">func_tmp_brain_mask</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">dilate</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">func_tmp_brain_mask</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> 
+                                    <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_tmp_brain_mask</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Extract 8th volume as func ROI</span>
+    <span class="n">func_roi</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ExtractROI</span><span class="p">(),</span>
+                       <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;extract_func_roi_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">func_roi</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">t_min</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">func_roi</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">t_size</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> 
+                                    <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_roi</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Apply func initial mask on func ROI volume</span>
+    <span class="n">func_tmp_brain</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">maths</span><span class="o">.</span><span class="n">ApplyMask</span><span class="p">(),</span>
+                             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;get_func_tmp_brain_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_roi</span><span class="p">,</span> <span class="s1">&#39;roi_file&#39;</span><span class="p">,</span>
+               <span class="n">func_tmp_brain</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_tmp_brain_mask</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">func_tmp_brain</span><span class="p">,</span> <span class="s1">&#39;mask_file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Register func tmp brain to anat brain to get func2anat matrix</span>
+    <span class="n">reg_func_to_anat</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">FLIRT</span><span class="p">(),</span>
+                               <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;func_to_anat_linear_reg_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">reg_func_to_anat</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">interp</span> <span class="o">=</span> <span class="s1">&#39;trilinear&#39;</span>
+    <span class="n">reg_func_to_anat</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cost</span> <span class="o">=</span> <span class="s1">&#39;corratio&#39;</span>
+    <span class="n">reg_func_to_anat</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">dof</span> <span class="o">=</span> <span class="mi">6</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_tmp_brain</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">reg_func_to_anat</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-brain_T1w&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reg_func_to_anat</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Inverse func2anat matrix</span>
+    <span class="n">inv_func_to_anat_affine</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ConvertXFM</span><span class="p">(),</span>
+                                      <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;inv_func2anat_affine_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">inv_func_to_anat_affine</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">invert_xfm</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">reg_func_to_anat</span><span class="p">,</span> <span class="s1">&#39;out_matrix_file&#39;</span><span class="p">,</span>
+               <span class="n">inv_func_to_anat_affine</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Transform anat brain to func space</span>
+    <span class="n">reg_anat_brain_to_func</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">FLIRT</span><span class="p">(),</span>
+                                     <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;reg_anat_brain_to_func_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">reg_anat_brain_to_func</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">apply_xfm</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">reg_anat_brain_to_func</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">interp</span> <span class="o">=</span> <span class="s1">&#39;trilinear&#39;</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-brain_T1w&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reg_anat_brain_to_func</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_roi</span><span class="p">,</span> <span class="s1">&#39;roi_file&#39;</span><span class="p">,</span>
+               <span class="n">reg_anat_brain_to_func</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inv_func_to_anat_affine</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">reg_anat_brain_to_func</span><span class="p">,</span> <span class="s1">&#39;in_matrix_file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Binarize and dilate anat brain in func space</span>
+    <span class="n">bin_anat_brain_in_func</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ImageMaths</span><span class="p">(),</span>
+                                     <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;bin_anat_brain_in_func_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">bin_anat_brain_in_func</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">op_string</span> <span class="o">=</span> <span class="s1">&#39;-bin -dilM&#39;</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">reg_anat_brain_to_func</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> 
+               <span class="n">bin_anat_brain_in_func</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Binarize detectable func signals</span>
+    <span class="n">bin_func</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ImageMaths</span><span class="p">(),</span>
+                                     <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;bin_func_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">bin_func</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">op_string</span> <span class="o">=</span> <span class="s1">&#39;-Tstd -bin&#39;</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> 
+                                     <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">bin_func</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Take intersection of masks</span>
+    <span class="n">merge_func_mask</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">Merge</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> 
+                              <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;merge_func_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_tmp_brain_mask</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">merge_func_mask</span><span class="p">,</span> <span class="s1">&#39;in1&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">bin_anat_brain_in_func</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">merge_func_mask</span><span class="p">,</span> <span class="s1">&#39;in2&#39;</span><span class="p">)</span>
+
+    <span class="n">intersect_mask</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">MultiImageMaths</span><span class="p">(),</span>
+                             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;intersect_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">intersect_mask</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">op_string</span> <span class="o">=</span> <span class="s1">&#39;-mul </span><span class="si">%s</span><span class="s1"> -mul </span><span class="si">%s</span><span class="s1">&#39;</span>
+    <span class="n">intersect_mask</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">output_datatype</span> <span class="o">=</span> <span class="s1">&#39;char&#39;</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">bin_func</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> 
+               <span class="n">intersect_mask</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">merge_func_mask</span><span class="p">,</span> <span class="s1">&#39;out&#39;</span><span class="p">,</span> 
+               <span class="n">intersect_mask</span><span class="p">,</span> <span class="s1">&#39;operand_files&#39;</span><span class="p">)</span>
+
+    <span class="c1"># this is the func input for coreg in ccs</span>
+    <span class="c1"># TODO evaluate if it&#39;s necessary to use this brain</span>
+    <span class="n">example_func_brain</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">maths</span><span class="o">.</span><span class="n">ApplyMask</span><span class="p">(),</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;get_example_func_brain_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_roi</span><span class="p">,</span> <span class="s1">&#39;roi_file&#39;</span><span class="p">,</span>
+               <span class="n">example_func_brain</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">intersect_mask</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">example_func_brain</span><span class="p">,</span> <span class="s1">&#39;mask_file&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;space-bold_desc-brain_mask&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">intersect_mask</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;desc-ROIbrain_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">example_func_brain</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+
+
 <span class="k">def</span> <span class="nf">bold_masking</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    {&quot;name&quot;: &quot;bold_masking&quot;,</span>
-<span class="sd">     &quot;config&quot;: [&quot;functional_preproc&quot;],</span>
-<span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
+<span class="sd">     &quot;config&quot;: None,</span>
+<span class="sd">     &quot;switch&quot;: [[&quot;functional_preproc&quot;, &quot;run&quot;],</span>
+<span class="sd">                [&quot;functional_preproc&quot;, &quot;func_masking&quot;, &quot;apply_func_mask_in_native_space&quot;]],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [([&quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
+<span class="sd">     &quot;inputs&quot;: [([&quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
 <span class="sd">                 &quot;space-bold_desc-brain_mask&quot;)],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-brain_bold&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: {</span>
+<span class="sd">         &quot;desc-preproc_bold&quot;: {</span>
+<span class="sd">             &quot;Description&quot;: &quot;The skull-stripped BOLD time-series.&quot;,</span>
+<span class="sd">             &quot;SkullStripped&quot;: True},</span>
+<span class="sd">         &quot;desc-brain_bold&quot;: {</span>
+<span class="sd">             &quot;Description&quot;: &quot;The skull-stripped BOLD time-series.&quot;,</span>
+<span class="sd">             &quot;SkullStripped&quot;: True}}</span>
+<span class="sd">    }</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">func_edge_detect</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">Calc</span><span class="p">(),</span>
@@ -1743,7 +1994,7 @@
     <span class="n">func_edge_detect</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="s1">&#39;a*b&#39;</span>
     <span class="n">func_edge_detect</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
                                      <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_edge_detect</span><span class="p">,</span> <span class="s1">&#39;in_file_a&#39;</span><span class="p">)</span>
 
@@ -1751,6 +2002,7 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_edge_detect</span><span class="p">,</span> <span class="s1">&#39;in_file_b&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_edge_detect</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
         <span class="s1">&#39;desc-brain_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_edge_detect</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
@@ -1760,12 +2012,14 @@
 <span class="k">def</span> <span class="nf">func_mean</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    {&quot;name&quot;: &quot;func_mean&quot;,</span>
-<span class="sd">     &quot;config&quot;: [&quot;functional_preproc&quot;],</span>
-<span class="sd">     &quot;switch&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;config&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;switch&quot;: [[&quot;functional_preproc&quot;, &quot;run&quot;],</span>
+<span class="sd">                [&quot;functional_preproc&quot;, &quot;generate_func_mean&quot;, &quot;run&quot;]],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [&quot;desc-brain_bold&quot;],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-mean_bold&quot;]}</span>
+<span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;desc-mean_bold&quot;]</span>
+<span class="sd">    }</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">func_mean</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span>
@@ -1774,7 +2028,7 @@
     <span class="n">func_mean</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="s1">&#39;-mean&#39;</span>
     <span class="n">func_mean</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-brain_bold&quot;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_mean</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
@@ -1787,14 +2041,13 @@
 <span class="k">def</span> <span class="nf">func_normalize</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    {&quot;name&quot;: &quot;func_normalize&quot;,</span>
-<span class="sd">     &quot;config&quot;: [&quot;functional_preproc&quot;],</span>
-<span class="sd">     &quot;switch&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;config&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;switch&quot;: [[&quot;functional_preproc&quot;, &quot;run&quot;],</span>
+<span class="sd">                [&quot;functional_preproc&quot;, &quot;normalize_func&quot;, &quot;run&quot;]],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [(&quot;desc-brain_bold&quot;,</span>
-<span class="sd">                 &quot;space-bold_desc-brain_mask&quot;)],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-brain_bold&quot;,</span>
-<span class="sd">                 &quot;space-bold_desc-brain_mask&quot;]}</span>
+<span class="sd">     &quot;inputs&quot;: [[&quot;desc-preproc_bold&quot;, &quot;bold&quot;]],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">func_normalize</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ImageMaths</span><span class="p">(),</span>
@@ -1805,8 +2058,27 @@
     <span class="n">func_normalize</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">op_string</span> <span class="o">=</span> <span class="s1">&#39;-ing 10000&#39;</span>
     <span class="n">func_normalize</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_data_type</span> <span class="o">=</span> <span class="s1">&#39;float&#39;</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_bold&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_normalize</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_normalize</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+    
+    
+<span class="k">def</span> <span class="nf">func_mask_normalize</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;func_mask_normalize&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;functional_preproc&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [([&quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
+<span class="sd">                 &quot;space-bold_desc-brain_mask&quot;)],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-bold_desc-brain_mask&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">func_mask_normalize</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ImageMaths</span><span class="p">(),</span>
                                   <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;func_mask_normalize_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
@@ -1816,10 +2088,10 @@
     <span class="n">func_mask_normalize</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">op_string</span> <span class="o">=</span> <span class="s1">&#39;-Tmin -bin&#39;</span>
     <span class="n">func_mask_normalize</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_data_type</span> <span class="o">=</span> <span class="s1">&#39;char&#39;</span>
 
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_normalize</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">func_mask_normalize</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_mask_normalize</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;desc-brain_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_normalize</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
         <span class="s1">&#39;space-bold_desc-brain_mask&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_mask_normalize</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
@@ -1847,7 +2119,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -1866,7 +2138,7 @@
         <li class="right" >
           <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.0 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.func_preproc.func_preproc</a></li> 
       </ul>
@@ -1874,7 +2146,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>

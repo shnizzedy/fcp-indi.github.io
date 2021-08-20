@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>After Warping Options &#8212; C-PAC 1.8.0 Beta documentation</title>
+    <title>After Warping Options &#8212; C-PAC 1.8.1 Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="tse" title="Timeseries Extraction"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.0 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="preprocessing" accesskey="U">Pre-Processing Steps</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">After Warping Options</a></li> 
@@ -85,36 +85,37 @@
 <section id="configuration-using-a-yaml-file">
 <h3>Configuration Using a YAML File<a class="headerlink" href="#configuration-using-a-yaml-file" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>        <span class="c1"># Erode binarized White Matter mask in millimeter</span>
-        <span class="nt">gm_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>    <span class="nt">create_regressors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
 
+    <span class="c1"># Select which nuisance signal corrections to apply</span>
+    <span class="nt">Regressors</span><span class="p">:</span>
 
-<span class="c1"># OUTPUTS AND DERIVATIVES</span>
-<span class="c1"># -----------------------</span>
-<span class="nt">post_processing</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span>  <span class="nt">Name</span><span class="p">:</span> <span class="s">&#39;default&#39;</span>
 
-  <span class="nt">spatial_smoothing</span><span class="p">:</span>
+         <span class="nt">Motion</span><span class="p">:</span>
+           <span class="nt">include_delayed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+           <span class="nt">include_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+           <span class="nt">include_delayed_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
-    <span class="c1"># Smooth the derivative outputs.</span>
-    <span class="c1"># Set as [&#39;nonsmoothed&#39;] to disable smoothing. Set as both to get both.</span>
-    <span class="c1">#</span>
-    <span class="c1"># Options:</span>
-    <span class="c1">#     [&#39;smoothed&#39;, &#39;nonsmoothed&#39;]</span>
-    <span class="nt">output</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;smoothed&#39;</span><span class="p p-Indicator">]</span>
+         <span class="nt">aCompCor</span><span class="p">:</span>
+           <span class="nt">summary</span><span class="p">:</span>
+             <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DetrendPC</span>
+             <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+           <span class="nt">tissues</span><span class="p">:</span>
+             <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">WhiteMatter</span>
+             <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CerebrospinalFluid</span>
+           <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
 
-    <span class="c1"># Tool to use for smoothing.</span>
-    <span class="c1"># &#39;FSL&#39; for FSL MultiImageMaths for FWHM provided</span>
-    <span class="c1"># &#39;AFNI&#39; for AFNI 3dBlurToFWHM for FWHM provided</span>
-    <span class="nt">smoothing_method</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;FSL&#39;</span><span class="p p-Indicator">]</span>
+         <span class="nt">CerebrospinalFluid</span><span class="p">:</span>
+           <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
+           <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+           <span class="nt">erode_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
-    <span class="c1"># Full Width at Half Maximum of the Gaussian kernel used during spatial smoothing.</span>
-    <span class="c1"># this is a fork point</span>
-    <span class="c1">#   i.e. multiple kernels - fwhm: [4,6,8]</span>
-    <span class="nt">fwhm</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">4</span><span class="p p-Indicator">]</span>
+         <span class="nt">GlobalSignal</span><span class="p">:</span>
+           <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
 
-  <span class="nt">z-scoring</span><span class="p">:</span>
-
-    <span class="c1"># z-score standardize the derivatives. This may be needed for group-level analysis.</span>
+         <span class="nt">PolyOrt</span><span class="p">:</span>
+          <span class="nt">degree</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
 </pre></div>
 </div>
 </section>
@@ -199,7 +200,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -224,7 +225,7 @@
         <li class="right" >
           <a href="tse" title="Timeseries Extraction"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.0 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="preprocessing" >Pre-Processing Steps</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">After Warping Options</a></li> 
@@ -233,7 +234,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>

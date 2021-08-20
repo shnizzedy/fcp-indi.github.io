@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Voxel-Mirrored Homotopic Connectivity (VMHC) &#8212; C-PAC 1.8.0 Beta documentation</title>
+    <title>Voxel-Mirrored Homotopic Connectivity (VMHC) &#8212; C-PAC 1.8.1 Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="sca" title="Seed-based Correlation Analysis (SCA) and Dual Regression"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.0 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="derivatives" accesskey="U">Computable Derivatives</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Voxel-Mirrored Homotopic Connectivity (VMHC)</a></li> 
@@ -91,35 +91,35 @@
 </section>
 <section id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
-<p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="c1"># 19 (Faces + Edges)</span>
-  <span class="c1"># 27 (Faces + Edges + Corners)</span>
-  <span class="nt">cluster_size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">27</span>
+<p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+        <span class="c1"># Erosion proportion, if use erosion.</span>
+        <span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span>
+        <span class="nt">gm_erosion_prop </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.6</span>
+
+        <span class="c1"># Erode brain mask in millimeter, default of csf is 30 mm</span>
+        <span class="nt">gm_mask_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
+
+        <span class="c1"># Erode binarized White Matter mask in millimeter</span>
+        <span class="nt">gm_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
 
 
-<span class="nt">voxel_mirrored_homotopic_connectivity</span><span class="p">:</span>
+<span class="c1"># OUTPUTS AND DERIVATIVES</span>
+<span class="c1"># -----------------------</span>
+<span class="nt">post_processing</span><span class="p">:</span>
 
-  <span class="c1"># VMHC</span>
-  <span class="c1"># Calculate Voxel-mirrored Homotopic Connectivity (VMHC) for all voxels.</span>
-  <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
+  <span class="nt">spatial_smoothing</span><span class="p">:</span>
 
-  <span class="nt">symmetric_registration</span><span class="p">:</span>
+    <span class="c1"># Smooth the derivative outputs.</span>
+    <span class="c1"># Set as [&#39;nonsmoothed&#39;] to disable smoothing. Set as both to get both.</span>
+    <span class="c1">#</span>
+    <span class="c1"># Options:</span>
+    <span class="c1">#     [&#39;smoothed&#39;, &#39;nonsmoothed&#39;]</span>
+    <span class="nt">output</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;smoothed&#39;</span><span class="p p-Indicator">]</span>
 
-    <span class="c1"># Included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
-    <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard symmetric template.</span>
-    <span class="nt">T1w_brain_template_symmetric</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_${resolution_for_anat}_brain_symmetric.nii.gz</span>
-
-    <span class="c1"># A reference symmetric brain template for resampling</span>
-    <span class="nt">T1w_brain_template_symmetric_for_resample</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_1mm_brain_symmetric.nii.gz</span>
-
-    <span class="c1"># Included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
-    <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard symmetric template.</span>
-    <span class="nt">T1w_template_symmetric</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_${resolution_for_anat}_symmetric.nii.gz</span>
-
-    <span class="c1"># A reference symmetric skull template for resampling</span>
-    <span class="nt">T1w_template_symmetric_for_resample</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_1mm_symmetric.nii.gz</span>
-
-    <span class="c1"># Included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
+    <span class="c1"># Tool to use for smoothing.</span>
+    <span class="c1"># &#39;FSL&#39; for FSL MultiImageMaths for FWHM provided</span>
 </pre></div>
 </div>
 </section>
@@ -194,7 +194,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -219,7 +219,7 @@
         <li class="right" >
           <a href="sca" title="Seed-based Correlation Analysis (SCA) and Dual Regression"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.0 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="derivatives" >Computable Derivatives</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Voxel-Mirrored Homotopic Connectivity (VMHC)</a></li> 
@@ -228,7 +228,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>
