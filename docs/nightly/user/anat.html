@@ -50,34 +50,7 @@
             
   <section id="anatomical-preprocessing">
 <h1>Anatomical Preprocessing<a class="headerlink" href="#anatomical-preprocessing" title="Permalink to this headline">¶</a></h1>
-<div class="flowchart-container"><object data="../_static/flowcharts/anatomical.svg" type="image/svg+xml"></object></div><section id="surface-analysis">
-<h2>Surface Analysis<a class="headerlink" href="#surface-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Surface analysis runs FreeSurfer recon-all and generates CSF, WM, GM masks, pial surface mesh, smoothed surface mesh, spherical surface mesh, white matter surface mesh, sulcal depth surface maps, cortical thickness surface maps and cortical volume surface maps.</p>
-<section id="configuring-cpac-to-run-surface-analysis">
-<h3>Configuring CPAC to run surface analysis:<a class="headerlink" href="#configuring-cpac-to-run-surface-analysis" title="Permalink to this headline">¶</a></h3>
-<figure class="align-default">
-<img alt="../_images/anat_surface.png" src="../_images/anat_surface.png" />
-</figure>
-<ol class="arabic simple">
-<li><p><strong>FreeSurfer - [On,Off]:</strong> FreeSurfer recon-all. Default is Off.</p></li>
-</ol>
-</section>
-<section id="configuration-without-the-gui">
-<h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
-<p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="c1"># PREPROCESSING</span>
-<span class="c1"># -------------</span>
-<span class="nt">surface_analysis</span><span class="p">:</span>
-
-  <span class="c1"># Will run Freesurfer for surface-based analysis. Will output traditional Freesurfer derivatives.</span>
-  <span class="c1"># If you wish to employ Freesurfer outputs for brain masking or tissue segmentation in the voxel-based pipeline,</span>
-  <span class="c1"># select those &#39;Freesurfer-&#39; labeled options further below in anatomical_preproc.</span>
-  <span class="nt">run_freesurfer</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="initial-preprocessing">
+<div class="flowchart-container"><object data="../_static/flowcharts/anatomical.svg" type="image/svg+xml"></object></div><section id="initial-preprocessing">
 <h2>Initial Preprocessing<a class="headerlink" href="#initial-preprocessing" title="Permalink to this headline">¶</a></h2>
 <p>Initial preprocessing offers methods like <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2013.04.127">ACPC Alignment</a> , <a class="reference external" href="https://www.iro.umontreal.ca/~mignotte/IFT6150/Articles/Buades-NonLocal.pdf">non-local means filtering</a> and <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3071855/">N4 bias field correction</a> to preprocess anatomical images.</p>
 <p>C-PAC provides options for configuring initial preprocessing - users can select:</p>
@@ -97,24 +70,9 @@
 <li><p><strong>N4 Bias Field Correction - [On,Off]:</strong> ANTs N4BiasFieldCorrection - a variant of the popular N3 (nonparametric nonuniform normalization) retrospective bias correction algorithm. Default is Off.</p></li>
 </ol>
 </section>
-<section id="id2">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<section id="configuration-without-the-gui">
+<h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">convergence_threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-
-
-<span class="nt">anatomical_preproc</span><span class="p">:</span>
-
-  <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
-
-  <span class="nt">run_t2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-  <span class="c1"># Non-local means filtering via ANTs DenoiseImage</span>
-  <span class="nt">non_local_means_filtering</span><span class="p">:</span> 
-
-    <span class="c1"># this is a fork option</span>
-</pre></div>
-</div>
 </section>
 <section id="configuring-acpc-alignment-options">
 <h3>Configuring ACPC Alignment options:<a class="headerlink" href="#configuring-acpc-alignment-options" title="Permalink to this headline">¶</a></h3>
@@ -128,32 +86,9 @@
 <li><p><strong>ACPC Aligned Brain Template - [path]:</strong> Brain template to be used for ACPC alignment. For human data, it can be ‘None’. It is not necessary to change this path unless you intend to use a non-standard template.</p></li>
 </ol>
 </section>
-<section id="id3">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<section id="id2">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">convergence_threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-
-  <span class="nt">non_local_means_filtering</span><span class="p">:</span> 
-
-    <span class="c1"># this is a fork option</span>
-    <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">Off</span><span class="p p-Indicator">]</span>
-
-    <span class="c1"># options: &#39;Gaussian&#39; or &#39;Rician&#39;</span>
-    <span class="nt">noise_model</span><span class="p">:</span> <span class="s">&#39;Gaussian&#39;</span>
-
-  <span class="c1"># N4 bias field correction via ANTs</span>
-  <span class="nt">n4_bias_field_correction</span><span class="p">:</span>
-
-    <span class="c1"># this is a fork option</span>
-    <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">Off</span><span class="p p-Indicator">]</span>
-
-    <span class="c1"># An integer to resample the input image to save computation time. Shrink factors &lt;= 4 are commonly used.</span>
-    <span class="nt">shrink_factor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-
-  <span class="c1"># Bias field correction based on square root of T1w * T2w</span>
-  <span class="nt">t1t2_bias_field_correction</span><span class="p">:</span> 
-</pre></div>
-</div>
 </section>
 </section>
 <section id="skull-stripping">
@@ -178,17 +113,9 @@
 <li><p><strong>Which tool for skull-stripping - [FSL, AFNI, niworkflows-ants]:</strong> Choose if you’d like to use FSL BET, AFNI 3dSkullStrip, or run all options in parallel.</p></li>
 </ol>
 </section>
-<section id="id4">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<section id="id3">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">convergence_threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-
-    
-    <span class="l l-Scalar l-Scalar-Plain">BiasFieldSmoothingSigma</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-    
-  <span class="nt">acpc_alignment</span><span class="p">:</span>
-</pre></div>
-</div>
 </section>
 <section id="configuring-afni-3dskullstrip-options">
 <h3>Configuring AFNI 3dSkullStrip options:<a class="headerlink" href="#configuring-afni-3dskullstrip-options" title="Permalink to this headline">¶</a></h3>
@@ -217,80 +144,9 @@
 <li><p><strong>blur_fwhm - [2]:</strong> Blur datasets after spatial normalization. Default value is 2.</p></li>
 </ol>
 </section>
-<section id="id5">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<section id="id4">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">convergence_threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-
-    
-    <span class="l l-Scalar l-Scalar-Plain">BiasFieldSmoothingSigma</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-
-    <span class="l l-Scalar l-Scalar-Plain"># Run ACPC alignment before non-local means filtering or N4 bias</span>
-    <span class="l l-Scalar l-Scalar-Plain"># correction</span>
-    <span class="l l-Scalar l-Scalar-Plain">run_before_preproc</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-    <span class="l l-Scalar l-Scalar-Plain"># ACPC size of brain in z-dimension in mm.</span>
-    <span class="l l-Scalar l-Scalar-Plain"># Default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">150mm for human data.</span>
-    <span class="l l-Scalar l-Scalar-Plain">brain_size</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">150</span>
-
-    <span class="l l-Scalar l-Scalar-Plain"># Choose a tool to crop the FOV in ACPC alignment.</span> 
-    <span class="l l-Scalar l-Scalar-Plain"># Using FSL&#39;s robustfov or flirt command.</span> 
-    <span class="l l-Scalar l-Scalar-Plain"># Default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">robustfov for human data, flirt for monkey data.</span> 
-    <span class="l l-Scalar l-Scalar-Plain">FOV_crop</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">robustfov</span>
-    
-    <span class="l l-Scalar l-Scalar-Plain"># ACPC Target</span>
-    <span class="l l-Scalar l-Scalar-Plain"># options</span><span class="p p-Indicator">:</span> <span class="s">&#39;brain&#39;</span> <span class="l l-Scalar l-Scalar-Plain">or &#39;whole-head&#39;</span>
-    <span class="l l-Scalar l-Scalar-Plain">#   note</span><span class="p p-Indicator">:</span> <span class="s">&#39;brain&#39;</span> <span class="l l-Scalar l-Scalar-Plain">requires T1w_brain_ACPC_template below to be populated</span>
-    <span class="l l-Scalar l-Scalar-Plain">acpc_target</span><span class="p p-Indicator">:</span> <span class="s">&#39;whole-head&#39;</span>
-
-    <span class="c1"># ACPC aligned template</span>
-    <span class="nt">T1w_ACPC_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_1mm.nii.gz</span>
-
-    <span class="nt">T1w_brain_ACPC_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
-    <span class="nt">T2w_ACPC_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
-    <span class="nt">T2w_brain_ACPC_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
-
-  <span class="nt">brain_extraction</span><span class="p">:</span>
-  
-    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
-
-    <span class="c1"># using: [&#39;3dSkullStrip&#39;, &#39;BET&#39;, &#39;UNet&#39;, &#39;niworkflows-ants&#39;, &#39;FreeSurfer-ABCD&#39;, &#39;FreeSurfer-BET-Tight&#39;, &#39;FreeSurfer-BET-Loose&#39;]</span>
-    <span class="c1"># this is a fork option</span>
-    <span class="nt">using</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;3dSkullStrip&#39;</span><span class="p p-Indicator">]</span>
-
-    <span class="c1"># option parameters</span>
-    <span class="nt">AFNI-3dSkullStrip</span><span class="p">:</span>
-
-      <span class="c1"># Output a mask volume instead of a skull-stripped volume. The mask volume containes 0 to 6, which represents voxel&#39;s postion. If set to True, C-PAC will use this output to generate anatomical brain mask for further analysis.</span>
-      <span class="nt">mask_vol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-
-      <span class="c1"># Set the threshold value controlling the brain vs non-brain voxels. Default is 0.6.</span>
-      <span class="nt">shrink_factor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.6</span>
-
-      <span class="c1"># Vary the shrink factor at every iteration of the algorithm. This prevents the likelihood of surface getting stuck in large pools of CSF before reaching the outer surface of the brain. Default is On.</span>
-      <span class="nt">var_shrink_fac</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-      <span class="c1"># The shrink factor bottom limit sets the lower threshold when varying the shrink factor. Default is 0.4, for when edge detection is used (which is On by default), otherwise the default value is 0.65.</span>
-      <span class="nt">shrink_factor_bot_lim</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.4</span>
-
-      <span class="c1"># Avoids ventricles while skullstripping.</span>
-      <span class="nt">avoid_vent</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-      <span class="c1"># Set the number of iterations. Default is 250.The number of iterations should depend upon the density of your mesh.</span>
-      <span class="nt">n_iterations</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">250</span>
-
-      <span class="c1"># While expanding, consider the voxels above and not only the voxels below</span>
-      <span class="nt">pushout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-      <span class="c1"># Perform touchup operations at the end to include areas not covered by surface expansion.</span>
-      <span class="nt">touchup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-      <span class="c1"># Give the maximum number of pixels on either side of the hole that can be filled. The default is 10 only if &#39;Touchup&#39; is On - otherwise, the default is 0.</span>
-      <span class="nt">fill_hole</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-
-      <span class="c1"># Perform nearest neighbor coordinate interpolation every few iterations. Default is 72.</span>
-</pre></div>
-</div>
 </section>
 <section id="configuring-fsl-bet-options">
 <h3>Configuring FSL BET options:<a class="headerlink" href="#configuring-fsl-bet-options" title="Permalink to this headline">¶</a></h3>
@@ -314,55 +170,9 @@
 <li><p><strong>Robust brain center - [Off, On]:</strong> Robust brain center estimation. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</p></li>
 </ol>
 </section>
-<section id="id6">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<section id="id5">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">convergence_threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-
-    
-    <span class="l l-Scalar l-Scalar-Plain">BiasFieldSmoothingSigma</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Perform final surface smoothing after all iterations. Default is 20.</span>
-      <span class="l l-Scalar l-Scalar-Plain">smooth_final</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Avoid eyes while skull stripping. Default is On.</span>
-      <span class="l l-Scalar l-Scalar-Plain">avoid_eyes</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Use edge detection to reduce leakage into meninges and eyes. Default is On.</span>
-      <span class="l l-Scalar l-Scalar-Plain">use_edge</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Speed of expansion.</span>
-      <span class="l l-Scalar l-Scalar-Plain">exp_frac</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Perform aggressive push to edge. This might cause leakage. Default is Off.</span>
-      <span class="l l-Scalar l-Scalar-Plain">push_to_edge</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Use outer skull to limit expansion of surface into the skull in case of very strong shading artifacts. Use this only if you have leakage into the skull.</span>
-      <span class="l l-Scalar l-Scalar-Plain">use_skull</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Percentage of segments allowed to intersect surface. It is typically a number between 0 and 0.1, but can include negative values (which implies no testing for intersection).</span>
-      <span class="l l-Scalar l-Scalar-Plain">perc_int</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Number of iterations to remove intersection problems. With each iteration, the program automatically increases the amount of smoothing to get rid of intersections. Default is 4.</span>
-      <span class="l l-Scalar l-Scalar-Plain">max_inter_iter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Multiply input dataset by FAC if range of values is too small.</span>
-      <span class="l l-Scalar l-Scalar-Plain">fac</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Blur dataset after spatial normalization. Recommended when you have lots of CSF in brain and when you have protruding gyri (finger like). If so, recommended value range is 2-4. Otherwise, leave at 0.</span>
-      <span class="l l-Scalar l-Scalar-Plain">blur_fwhm</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Set it as True if processing monkey data with AFNI</span>
-      <span class="l l-Scalar l-Scalar-Plain">monkey</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-
-    <span class="l l-Scalar l-Scalar-Plain">FSL-BET</span><span class="p p-Indicator">:</span>
-
-      <span class="c1"># Set the threshold value controling the brain vs non-brain voxels, default is 0.5</span>
-      <span class="nt">frac</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
-
-      <span class="c1"># Mask created along with skull stripping. It should be `On`, if selected functionalMasking :  [&#39;Anatomical_Refined&#39;] and `FSL` as skull-stripping method.</span>
-</pre></div>
-</div>
 </section>
 <section id="configuring-niworkflows-ants-options">
 <h3>Configuring niworkflows-ants options:<a class="headerlink" href="#configuring-niworkflows-ants-options" title="Permalink to this headline">¶</a></h3>
@@ -376,28 +186,9 @@
 <li><p><strong>niworkflows_ants_regmask_path:</strong> Set the brain extraction registration mask, used for registration to limit the metric computation to a specific region. e.g. OASIStemplate/T_template0_BrainCerebellumRegistrationMask.nii.gz</p></li>
 </ol>
 </section>
-<section id="id7">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<section id="id6">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">convergence_threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-
-    
-    <span class="l l-Scalar l-Scalar-Plain">BiasFieldSmoothingSigma</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-      <span class="l l-Scalar l-Scalar-Plain">outline</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Add padding to the end of the image, improving BET.Mutually exclusive with functional,reduce_bias,robust,padding,remove_eyes,surfaces</span>
-      <span class="l l-Scalar l-Scalar-Plain">padding</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Integer value of head radius</span>
-      <span class="l l-Scalar l-Scalar-Plain">radius</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Reduce bias and cleanup neck. Mutually exclusive with functional,reduce_bias,robust,padding,remove_eyes,surfaces</span>
-      <span class="l l-Scalar l-Scalar-Plain">reduce_bias</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-      <span class="l l-Scalar l-Scalar-Plain"># Eyes and optic nerve cleanup. Mutually exclusive with functional,reduce_bias,robust,padding,remove_eyes,surfaces</span>
-      <span class="l l-Scalar l-Scalar-Plain">remove_eyes</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-</pre></div>
-</div>
 </section>
 </section>
 <section id="anatomical-registration">
@@ -428,130 +219,9 @@
 <li><p><strong>Interpolation Method - [trilinear, sinc, spline]:</strong> Interpolation method for writing out transformed anatomical images. FSL registration tools only. Options are trilinear, sinc, or spline.</p></li>
 </ol>
 </section>
-<section id="id8">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<section id="id7">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>      <span class="c1"># The atlas image assumed to be used in ANTs Prior-based Segmentation.</span>
-      <span class="nt">template_brain_list </span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/monkey_seg/templates/JointLabelCouncil/MacaqueYerkes19_T1w_0.5mm/T1w_brain.nii.gz</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/monkey_seg/templates/JointLabelCouncil/J_Macaque_11mo_atlas_nACQ_194x252x160space_0.5mm/T1w_brain.nii.gz</span>
-
-      <span class="c1"># The atlas segmentation images.</span>
-      <span class="c1"># For performing ANTs Prior-based segmentation method</span>
-      <span class="c1"># the number of specified segmentations should be identical to the number of atlas brain image sets.</span>
-      <span class="c1"># eg.</span>
-      <span class="c1"># ANTs_prior_seg_template_brain_list :</span>
-      <span class="c1">#   - atlas1.nii.gz</span>
-      <span class="c1">#   - atlas2.nii.gz</span>
-      <span class="c1"># ANTs_prior_seg_template_segmentation_list:</span>
-      <span class="c1">#   - segmentation1.nii.gz</span>
-      <span class="c1">#   - segmentation1.nii.gz</span>
-      <span class="nt">template_segmentation_list</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/monkey_seg/templates/JointLabelCouncil/MacaqueYerkes19_T1w_0.5mm/Segmentation.nii.gz</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/monkey_seg/templates/JointLabelCouncil/J_Macaque_11mo_atlas_nACQ_194x252x160space_0.5mm/Segmentation.nii.gz</span>
-
-      <span class="c1"># Label values corresponding to CSF/GM/WM in atlas file</span>
-      <span class="c1"># It is not necessary to change this values unless your CSF/GM/WM label values are different from Freesurfer Color Lookup Table.</span>
-      <span class="c1"># https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/AnatomicalROI/FreeSurferColorLUT</span>
-
-      <span class="c1"># Label values corresponding to CSF in multiatlas file</span>
-      <span class="nt">CSF_label </span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">24</span><span class="p p-Indicator">]</span>
-
-      <span class="c1"># Label values corresponding to Gray Matter in multiatlas file</span>
-      <span class="nt">GM_label </span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">3</span><span class="p p-Indicator">,</span> <span class="nv">42</span><span class="p p-Indicator">]</span>
-
-      <span class="c1"># Label values corresponding to White Matter in multiatlas file</span>
-      <span class="nt">WM_label </span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">,</span> <span class="nv">41</span><span class="p p-Indicator">]</span>
-
-   <span class=" -Error"> </span><span class="nt">FreeSurfer</span><span class="p">:</span>
-
-      <span class="c1"># Use mri_binarize --erode option to erode segmentation masks</span>
-      <span class="nt">erode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-
-      <span class="c1"># Label values corresponding to CSF in FreeSurfer aseg segmentation file</span>
-      <span class="nt">CSF_label </span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">24</span><span class="p p-Indicator">]</span>
-
-      <span class="c1"># Label values corresponding to Gray Matter in FreeSurfer aseg segmentation file</span>
-      <span class="nt">GM_label </span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">3</span><span class="p p-Indicator">,</span> <span class="nv">42</span><span class="p p-Indicator">]</span>
-
-      <span class="c1"># Label values corresponding to White Matter in FreeSurfer aseg segmentation file</span>
-      <span class="nt">WM_label </span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">,</span> <span class="nv">41</span><span class="p p-Indicator">]</span>
-
-
-<span class="nt">registration_workflows</span><span class="p">:</span>
-
-  <span class="nt">anatomical_registration</span><span class="p">:</span>
-
-    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
-
-    <span class="c1"># The resolution to which anatomical images should be transformed during registration.</span>
-    <span class="c1"># This is the resolution at which processed anatomical files will be output.</span>
-    <span class="nt">resolution_for_anat</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2mm</span>
-
-    <span class="c1"># Template to be used during registration.</span>
-    <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
-    <span class="nt">T1w_brain_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_${resolution_for_anat}_brain.nii.gz</span>
-
-    <span class="c1"># Template to be used during registration.</span>
-    <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
-    <span class="nt">T1w_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_${resolution_for_anat}.nii.gz</span>
-
-    <span class="c1"># Template to be used during registration.</span>
-    <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
-    <span class="nt">T1w_brain_template_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_${resolution_for_anat}_brain_mask.nii.gz</span>
-
-    <span class="c1"># Register skull-on anatomical image to a template.</span>
-    <span class="nt">reg_with_skull</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-    <span class="nt">registration</span><span class="p">:</span>
-
-      <span class="c1"># using: [&#39;ANTS&#39;, &#39;FSL&#39;, &#39;FSL-linear&#39;]</span>
-      <span class="c1"># this is a fork point</span>
-      <span class="c1">#   selecting both [&#39;ANTS&#39;, &#39;FSL&#39;] will run both and fork the pipeline</span>
-      <span class="nt">using</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ANTS&#39;</span><span class="p p-Indicator">]</span>
-
-      <span class="c1"># option parameters</span>
-      <span class="nt">ANTs</span><span class="p">:</span>
-
-        <span class="c1"># If a lesion mask is available for a T1w image, use it to improve the ANTs&#39; registration</span>
-        <span class="c1"># ANTS registration only.</span>
-        <span class="nt">use_lesion_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-
-        <span class="c1"># ANTs parameters for T1-template-based registration</span>
-        <span class="nt">T1_registration</span><span class="p">:</span>
-
-          <span class="p p-Indicator">-</span> <span class="nt">collapse-output-transforms</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-          <span class="p p-Indicator">-</span> <span class="nt">dimensionality</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-          <span class="p p-Indicator">-</span> <span class="nt">initial-moving-transform </span><span class="p">:</span>
-             <span class="nt">initializationFeature</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-
-          <span class="p p-Indicator">-</span> <span class="nt">transforms</span><span class="p">:</span>
-             <span class="p p-Indicator">-</span> <span class="nt">Rigid</span><span class="p">:</span>
-                 <span class="nt">gradientStep </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>
-                 <span class="nt">metric </span><span class="p">:</span>
-                   <span class="nt">type </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MI</span>
-                   <span class="nt">metricWeight</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-                   <span class="nt">numberOfBins </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">32</span>
-                   <span class="nt">samplingStrategy </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Regular</span>
-                   <span class="nt">samplingPercentage </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.25</span>
-                 <span class="nt">convergence</span><span class="p">:</span>
-                   <span class="nt">iteration </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000x500x250x100</span>
-                   <span class="nt">convergenceThreshold </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1e-08</span>
-                   <span class="nt">convergenceWindowSize </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-                 <span class="nt">smoothing-sigmas </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.0x2.0x1.0x0.0</span>
-                 <span class="nt">shrink-factors </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8x4x2x1</span>
-                 <span class="nt">use-histogram-matching </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-
-             <span class="p p-Indicator">-</span> <span class="nt">Affine</span><span class="p">:</span>
-                 <span class="nt">gradientStep </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>
-                 <span class="nt">metric </span><span class="p">:</span>
-                   <span class="nt">type </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MI</span>
-                   <span class="nt">metricWeight</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-                   <span class="nt">numberOfBins </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">32</span>
-                   <span class="nt">samplingStrategy </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Regular</span>
-                   <span class="nt">samplingPercentage </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.25</span>
-</pre></div>
-</div>
 </section>
 </section>
 <section id="anatomical-tissue-segmentation">
@@ -622,130 +292,9 @@ fslmaths avg152T1_${tissue}.nii.gz -thr $threshold -bin avg152T1_${tissue}_2mm_b
 <li><p><strong>Right White Matter Label Value - [integer]:</strong> Label value corresponding to Right White Matter in multiatlas file. It is not necessary to change this values unless your CSF/GM/WM label values are different from <a class="reference external" href="https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/AnatomicalROI/FreeSurferColorLUT">Freesurfer Color Lookup Table.</a></p></li>
 </ol>
 </section>
-<section id="id13">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<section id="id12">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>      <span class="nt">robust</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-      <span class="c1"># Create a skull image</span>
-      <span class="nt">skull</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-      <span class="c1"># Gets additional skull and scalp surfaces by running bet2 and betsurf. This is mutually exclusive with reduce_bias, robust, padding, remove_eyes</span>
-      <span class="nt">surfaces</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-      <span class="c1"># Apply thresholding to segmented brain image and mask</span>
-      <span class="nt">threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-      <span class="c1"># Vertical gradient in fractional intensity threshold (-1,1)</span>
-      <span class="nt">vertical_gradient </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
-
-   <span class=" -Error"> </span><span class="nt">UNet</span><span class="p">:</span>
-
-      <span class="c1"># UNet model</span>
-      <span class="nt">unet_model </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3://fcp-indi/resources/cpac/resources/Site-All-T-epoch_36.model</span>
-
-    <span class="nt">niworkflows-ants</span><span class="p">:</span>
-
-      <span class="c1"># Template to be used during niworkflows-ants.</span>
-      <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
-
-      <span class="c1"># niworkflows-ants Brain extraction template</span>
-      <span class="nt">template_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/ants_template/oasis/T_template0.nii.gz</span>
-
-      <span class="c1"># niworkflows-ants probability mask</span>
-      <span class="nt">mask_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/ants_template/oasis/T_template0_BrainCerebellumProbabilityMask.nii.gz</span>
-
-      <span class="c1"># niworkflows-ants registration mask (can be optional)</span>
-      <span class="nt">regmask_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/ants_template/oasis/T_template0_BrainCerebellumRegistrationMask.nii.gz</span>
-
-    <span class="nt">FreeSurfer-BET</span><span class="p">:</span>
-
-      <span class="c1"># Template to be used for FreeSurfer-BET brain extraction in CCS-options pipeline</span>
-      <span class="nt">T1w_brain_template_mask_ccs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/ccs_template/MNI152_T1_1mm_first_brain_mask.nii.gz</span>
-
-
-<span class="nt">segmentation</span><span class="p">:</span>
-
-  <span class="c1"># Automatically segment anatomical images into white matter, gray matter,</span>
-  <span class="c1"># and CSF based on prior probability maps.</span>
-  <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
-
-  <span class="nt">tissue_segmentation</span><span class="p">:</span>
-
-    <span class="c1"># using: [&#39;FSL-FAST&#39;, &#39;Template_Based&#39;, &#39;ANTs_Prior_Based&#39;, &#39;FreeSurfer&#39;]</span>
-    <span class="c1"># this is a fork point</span>
-    <span class="nt">using</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;FSL-FAST&#39;</span><span class="p p-Indicator">]</span>
-
-    <span class="c1"># option parameters</span>
-    <span class="nt">FSL-FAST</span><span class="p">:</span>
-
-      <span class="nt">thresholding</span><span class="p">:</span>
-
-        <span class="c1"># thresholding of the tissue segmentation probability maps</span>
-        <span class="c1"># options: &#39;Auto&#39;, &#39;Custom&#39;</span>
-        <span class="nt">use</span><span class="p">:</span> <span class="s">&#39;Auto&#39;</span>
-
-        <span class="nt">Custom</span><span class="p">:</span>
-          <span class="c1"># Set the threshold value for the segmentation probability masks (CSF, White Matter, and Gray Matter)</span>
-          <span class="c1"># The values remaining will become the binary tissue masks.</span>
-          <span class="c1"># A good starting point is 0.95.</span>
-
-          <span class="c1"># CSF (cerebrospinal fluid) threshold.</span>
-          <span class="nt">CSF_threshold_value </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.95</span>
-
-          <span class="c1"># White matter threshold.</span>
-          <span class="nt">WM_threshold_value </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.95</span>
-
-          <span class="c1"># Gray matter threshold.</span>
-          <span class="nt">GM_threshold_value </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.95</span>
-
-      <span class="nt">use_priors</span><span class="p">:</span>
-
-        <span class="c1"># Use template-space tissue priors to refine the binary tissue masks generated by segmentation.</span>
-        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
-
-        <span class="c1"># Full path to a directory containing binarized prior probability maps.</span>
-        <span class="c1"># These maps are included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
-        <span class="c1"># It is not necessary to change this path unless you intend to use non-standard priors.</span>
-        <span class="nt">priors_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/tissuepriors/2mm</span>
-
-        <span class="c1"># Full path to a binarized White Matter prior probability map.</span>
-        <span class="c1"># It is not necessary to change this path unless you intend to use non-standard priors.</span>
-        <span class="nt">WM_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$priors_path/avg152T1_white_bin.nii.gz</span>
-
-        <span class="c1"># Full path to a binarized Gray Matter prior probability map.</span>
-        <span class="c1"># It is not necessary to change this path unless you intend to use non-standard priors.</span>
-        <span class="nt">GM_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$priors_path/avg152T1_gray_bin.nii.gz</span>
-
-        <span class="c1"># Full path to a binarized CSF prior probability map.</span>
-        <span class="c1"># It is not necessary to change this path unless you intend to use non-standard priors.</span>
-        <span class="nt">CSF_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$priors_path/avg152T1_csf_bin.nii.gz</span>
-
-    <span class="nt">Template_Based</span><span class="p">:</span>
-
-      <span class="c1"># These masks should be in the same space of your registration template, e.g. if</span>
-      <span class="c1"># you choose &#39;EPI Template&#39; , below tissue masks should also be EPI template tissue masks.</span>
-      <span class="c1">#</span>
-      <span class="c1"># Options: [&#39;T1_Template&#39;, &#39;EPI_Template&#39;]</span>
-      <span class="nt">template_for_segmentation</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;T1_Template&#39;</span><span class="p p-Indicator">]</span>
-
-      <span class="c1"># These masks are included as part of the &#39;Image Resource Files&#39; package available</span>
-      <span class="c1"># on the Install page of the User Guide.</span>
-
-      <span class="c1"># Full path to a binarized White Matter mask.</span>
-      <span class="nt">WHITE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/tissuepriors/2mm/avg152T1_white_bin.nii.gz</span>
-
-      <span class="c1"># Full path to a binarized Gray Matter mask.</span>
-      <span class="nt">GRAY</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/tissuepriors/2mm/avg152T1_gray_bin.nii.gz</span>
-
-      <span class="c1"># Full path to a binarized CSF mask.</span>
-      <span class="nt">CSF</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/tissuepriors/2mm/avg152T1_csf_bin.nii.gz</span>
-
-    <span class="nt">ANTs_Prior_Based</span><span class="p">:</span>
-
-      <span class="c1"># Generate white matter, gray matter, CSF masks based on antsJointLabelFusion</span>
-</pre></div>
-</div>
 </section>
 </section>
 <section id="references">
@@ -781,37 +330,32 @@ fslmaths avg152T1_${tissue}.nii.gz -thr $threshold -bin avg152T1_${tissue}_2mm_b
 <li class="toctree-l3"><a class="reference internal" href="pipelines/pipeline_config">3. Select Your Pipeline</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Anatomical Preprocessing</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#surface-analysis">Surface Analysis</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#configuring-cpac-to-run-surface-analysis">Configuring CPAC to run surface analysis:</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#configuration-without-the-gui">Configuration Without the GUI</a></li>
-</ul>
-</li>
 <li class="toctree-l5"><a class="reference internal" href="#initial-preprocessing">Initial Preprocessing</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#configuring-cpac-to-run-initial-preprocessing">Configuring CPAC to run initial preprocessing:</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#id2">Configuration Without the GUI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#configuration-without-the-gui">Configuration Without the GUI</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#configuring-acpc-alignment-options">Configuring ACPC Alignment options:</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#id3">Configuration Without the GUI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id2">Configuration Without the GUI</a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#skull-stripping">Skull-Stripping</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#configuring-cpac-to-run-skull-stripping">Configuring CPAC to run Skull-Stripping:</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#id4">Configuration Without the GUI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id3">Configuration Without the GUI</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#configuring-afni-3dskullstrip-options">Configuring AFNI 3dSkullStrip options:</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#id5">Configuration Without the GUI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id4">Configuration Without the GUI</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#configuring-fsl-bet-options">Configuring FSL BET options:</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#id6">Configuration Without the GUI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id5">Configuration Without the GUI</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#configuring-niworkflows-ants-options">Configuring niworkflows-ants options:</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#id7">Configuration Without the GUI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id6">Configuration Without the GUI</a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#anatomical-registration">Anatomical Registration</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#configuring-cpac-to-run-anatomical-registration">Configuring CPAC to Run Anatomical Registration</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#id8">Configuration Without the GUI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id7">Configuration Without the GUI</a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#anatomical-tissue-segmentation">Anatomical Tissue Segmentation</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#configuring-cpac-to-run-anatomical-tissue-segmentation">Configuring CPAC to Run Anatomical Tissue Segmentation</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#id13">Configuration Without the GUI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id12">Configuration Without the GUI</a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#references">References</a></li>
@@ -880,7 +424,7 @@ fslmaths avg152T1_${tissue}.nii.gz -thr $threshold -bin avg152T1_${tissue}_2mm_b
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>
