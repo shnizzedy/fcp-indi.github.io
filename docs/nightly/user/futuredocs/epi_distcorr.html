@@ -54,34 +54,34 @@ The parameters provided in the GUI are described below:</p>
 <section id="configuration-without-the-gui">
 <h1>Configuration without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h1>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="../pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>      <span class="nt">ANTs_pipelines</span><span class="p">:</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">distortion_correction</span><span class="p">:</span>
 
-        <span class="c1"># Interpolation method for writing out transformed functional images.</span>
-        <span class="c1"># Possible values: Linear, BSpline, LanczosWindowedSinc</span>
-        <span class="nt">interpolation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">LanczosWindowedSinc</span>
+    <span class="c1"># this is a fork point</span>
+    <span class="c1">#   run: [On, Off] - this will run both and fork the pipeline</span>
+    <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">On</span><span class="p p-Indicator">]</span>
 
-      <span class="nt">FNIRT_pipelines</span><span class="p">:</span>
+    <span class="c1"># using: [&#39;PhaseDiff&#39;, &#39;Blip&#39;]</span>
+    <span class="c1">#   PhaseDiff - Perform field map correction using a single phase difference image, a subtraction of the two phase images from each echo. Default scanner for this method is SIEMENS.</span>
+    <span class="c1">#   Blip - Uses AFNI 3dQWarp to calculate the distortion unwarp for EPI field maps of opposite/same phase encoding direction.</span>
+    <span class="c1">#   NOTE:</span>
+    <span class="c1">#     this is NOT a fork point - instead, the technique used will depend on what type of distortion correction field data accompanies the dataset</span>
+    <span class="c1">#     for example, phase-difference field maps will lead to phase-difference distortion correction, and phase-encoding direction field maps will lead to blip-up/blip-down</span>
+    <span class="nt">using</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;PhaseDiff&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;Blip&#39;</span><span class="p p-Indicator">]</span>
 
-        <span class="c1"># Interpolation method for writing out transformed functional images.</span>
-        <span class="c1"># Possible values: trilinear, sinc, spline</span>
-        <span class="nt">interpolation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sinc</span>
+    <span class="c1"># option parameters</span>
+    <span class="nt">PhaseDiff</span><span class="p">:</span>
 
-        <span class="c1"># Identity matrix used during FSL-based resampling of functional-space data throughout the pipeline.</span>
-        <span class="c1"># It is not necessary to change this path unless you intend to use a different template.</span>
-        <span class="nt">identity_matrix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/etc/flirtsch/ident.mat</span>
+      <span class="c1"># Since the quality of the distortion heavily relies on the skull-stripping step, we provide a choice of method (&#39;AFNI&#39; for AFNI 3dSkullStrip or &#39;BET&#39; for FSL BET).</span>
+      <span class="c1"># Options: &#39;BET&#39; or &#39;AFNI&#39;</span>
+      <span class="nt">fmap_skullstrip_option</span><span class="p">:</span> <span class="s">&#39;BET&#39;</span>
 
-      <span class="nt">apply_transform</span><span class="p">:</span>
+      <span class="c1"># Set the fraction value for the skull-stripping of the magnitude file. Depending on the data, a tighter extraction may be necessary in order to prevent noisy voxels from interfering with preparing the field map.</span>
+      <span class="c1"># The default value is 0.5.</span>
+      <span class="nt">fmap_skullstrip_BET_frac</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
 
-        <span class="c1"># options: &#39;default&#39;, &#39;abcd&#39;, &#39;single_step_resampling&#39;, &#39;dcan_nhp&#39;</span>
-        <span class="c1"># &#39;default&#39;: apply func-to-anat and anat-to-template transforms on motion corrected functional image.</span>
-        <span class="c1"># &#39;abcd&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of raw functional volume using FSL applywarp based on ABCD-HCP pipeline.</span>
-        <span class="c1"># &#39;single_step_resampling&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of raw functional volume using ANTs antsApplyTransform based on fMRIPrep pipeline.</span>
-        <span class="nt">using</span><span class="p">:</span> <span class="s">&#39;default&#39;</span>
-
-
-<span class="nt">functional_preproc</span><span class="p">:</span>
-
-  <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
+      <span class="c1"># Set the threshold value for the skull-stripping of the magnitude file. Depending on the data, a tighter extraction may be necessary in order to prevent noisy voxels from interfering with preparing the field map.</span>
+      <span class="c1"># The default value is 0.6.</span>
+      <span class="nt">fmap_skullstrip_AFNI_threshold</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">0.6</span>
 </pre></div>
 </div>
 </section>

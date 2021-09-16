@@ -99,29 +99,29 @@
 <section id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>         <span class="nt">Bandpass</span><span class="p">:</span>
-           <span class="nt">bottom_frequency</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.01</span>
-           <span class="nt">top_frequency</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>
-           <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">seed_based_correlation_analysis</span><span class="p">:</span>
 
-     <span class=" -Error"> </span><span class="p p-Indicator">-</span>  <span class="nt">Name</span><span class="p">:</span> <span class="s">&#39;defaultNoGSR&#39;</span>
+  <span class="c1"># SCA - Seed-Based Correlation Analysis</span>
+  <span class="c1"># For each extracted ROI Average time series, CPAC will generate a whole-brain correlation map.</span>
+  <span class="c1"># It should be noted that for a given seed/ROI, SCA maps for ROI Average time series will be the same.</span>
+  <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
 
-         <span class="nt">Motion</span><span class="p">:</span>
-           <span class="nt">include_delayed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-           <span class="nt">include_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-           <span class="nt">include_delayed_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="c1"># Enter paths to region-of-interest (ROI) NIFTI files (.nii or .nii.gz) to be used for seed-based correlation analysis, and then select which types of analyses to run.</span>
+  <span class="c1"># Denote which analyses to run for each ROI path by listing the names below. For example, if you wish to run Avg and MultReg, you would enter: &#39;/path/to/ROI.nii.gz&#39;: Avg, MultReg</span>
+  <span class="c1"># available analyses:</span>
+  <span class="c1">#   /path/to/atlas.nii.gz: Avg, DualReg, MultReg</span>
+  <span class="nt">sca_roi_paths</span><span class="p">:</span>
+    <span class="nt">/cpac_templates/PNAS_Smith09_rsn10.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DualReg</span>
+    <span class="nt">/cpac_templates/CC400.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg, MultReg</span>
+    <span class="nt">/cpac_templates/ez_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg, MultReg</span>
+    <span class="nt">/cpac_templates/aal_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg, MultReg</span>
+    <span class="nt">/cpac_templates/CC200.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg, MultReg</span>
+    <span class="nt">/cpac_templates/tt_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg, MultReg</span>
+    <span class="nt">/cpac_templates/ho_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg, MultReg</span>
+    <span class="nt">/cpac_templates/rois_3mm.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg, MultReg</span>
 
-         <span class="nt">aCompCor</span><span class="p">:</span>
-           <span class="nt">summary</span><span class="p">:</span>
-             <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DetrendPC</span>
-             <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-           <span class="nt">tissues</span><span class="p">:</span>
-             <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">WhiteMatter</span>
-             <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CerebrospinalFluid</span>
-           <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-
-         <span class="nt">CerebrospinalFluid</span><span class="p">:</span>
-           <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
+  <span class="c1"># Normalize each time series before running Dual Regression SCA.</span>
+  <span class="nt">norm_timeseries_for_DR</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
 </pre></div>
 </div>
 </section>

@@ -83,52 +83,52 @@
 <section id="configuration-without-the-gui">
 <h2>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h2>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># this is a fork point</span>
-    <span class="c1">#   run: [On, Off] - this will run both and fork the pipeline</span>
-    <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">Off</span><span class="p p-Indicator">]</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">timeseries_extraction</span><span class="p">:</span>
 
-    <span class="c1"># Types of denoising strategy:</span>
-    <span class="c1">#   nonaggr: nonaggressive-partial component regression</span>
-    <span class="c1">#   aggr:    aggressive denoising</span>
-    <span class="nt">denoising_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nonaggr</span>
+  <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
 
- <span class=" -Error"> </span><span class="nt">2-nuisance_regression</span><span class="p">:</span>
+  <span class="c1"># Enter paths to region-of-interest (ROI) NIFTI files (.nii or .nii.gz) to be used for time-series extraction, and then select which types of analyses to run.</span>
+  <span class="c1"># Denote which analyses to run for each ROI path by listing the names below. For example, if you wish to run Avg and SpatialReg, you would enter: &#39;/path/to/ROI.nii.gz&#39;: Avg, SpatialReg</span>
+  <span class="c1"># available analyses:</span>
+  <span class="c1">#   /path/to/atlas.nii.gz: Avg, Voxel, SpatialReg, PearsonCorr, PartialCorr</span>
+  <span class="nt">tse_roi_paths</span><span class="p">:</span>
+    <span class="nt">/cpac_templates/CC400.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/cpac_templates/aal_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/cpac_templates/CC200.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/cpac_templates/tt_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/cpac_templates/PNAS_Smith09_rsn10.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">SpatialReg</span>
+    <span class="nt">/cpac_templates/ho_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/cpac_templates/rois_3mm.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/AAL_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/CAPRSC_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/DKT_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/DesikanKlein_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/HarvardOxfordcort-maxprob-thr25_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/HarvardOxfordsub-maxprob-thr25_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Juelich_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/MICCAI_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Schaefer1000_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Schaefer200_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Schaefer300_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Schaefer400_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Talairach_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Brodmann_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Desikan_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Glasser_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Slab907_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Yeo-17-liberal_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Yeo-17_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Yeo-7-liberal_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+    <span class="nt">/ndmg_atlases/label/Human/Yeo-7_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
 
-    <span class="c1"># this is a fork point</span>
-    <span class="c1">#   run: [On, Off] - this will run both and fork the pipeline</span>
-    <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">On</span><span class="p p-Indicator">]</span>
-
-    <span class="c1"># switch to Off if nuisance regression is off and you don&#39;t want to write out the regressors</span>
-    <span class="nt">create_regressors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
-
-    <span class="c1"># Select which nuisance signal corrections to apply</span>
-    <span class="nt">Regressors</span><span class="p">:</span>
-
-      <span class="p p-Indicator">-</span>  <span class="nt">Name</span><span class="p">:</span> <span class="s">&#39;default&#39;</span>
-
-         <span class="nt">Motion</span><span class="p">:</span>
-           <span class="nt">include_delayed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-           <span class="nt">include_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-           <span class="nt">include_delayed_squared</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-
-         <span class="nt">aCompCor</span><span class="p">:</span>
-           <span class="nt">summary</span><span class="p">:</span>
-             <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DetrendPC</span>
-             <span class="nt">components</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-           <span class="nt">tissues</span><span class="p">:</span>
-             <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">WhiteMatter</span>
-             <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CerebrospinalFluid</span>
-           <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-
-         <span class="nt">CerebrospinalFluid</span><span class="p">:</span>
-           <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-           <span class="nt">extraction_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-           <span class="nt">erode_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-
-         <span class="nt">GlobalSignal</span><span class="p">:</span>
-           <span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mean</span>
-
-         <span class="nt">PolyOrt</span><span class="p">:</span>
+  <span class="c1"># Functional time-series and ROI realignment method: [&#39;ROI_to_func&#39;] or [&#39;func_to_ROI&#39;]</span>
+  <span class="c1"># &#39;ROI_to_func&#39; will realign the atlas/ROI to functional space (fast)</span>
+  <span class="c1"># &#39;func_to_ROI&#39; will realign the functional time series to the atlas/ROI space</span>
+  <span class="c1">#</span>
+  <span class="c1">#     NOTE: in rare cases, realigning the ROI to the functional space may</span>
+  <span class="c1">#           result in small misalignments for very small ROIs - please double</span>
+  <span class="c1">#           check your data if you see issues</span>
+  <span class="nt">realignment</span><span class="p">:</span> <span class="s">&#39;ROI_to_func&#39;</span>
 </pre></div>
 </div>
 </section>

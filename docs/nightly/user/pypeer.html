@@ -69,42 +69,40 @@
 <section id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="c1"># Denote which analyses to run for each ROI path by listing the names below. For example, if you wish to run Avg and SpatialReg, you would enter: &#39;/path/to/ROI.nii.gz&#39;: Avg, SpatialReg</span>
-  <span class="c1"># available analyses:</span>
-  <span class="c1">#   /path/to/atlas.nii.gz: Avg, Voxel, SpatialReg, PearsonCorr, PartialCorr</span>
-  <span class="nt">tse_roi_paths</span><span class="p">:</span>
-    <span class="nt">/cpac_templates/CC400.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/cpac_templates/aal_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/cpac_templates/CC200.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/cpac_templates/tt_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/cpac_templates/PNAS_Smith09_rsn10.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">SpatialReg</span>
-    <span class="nt">/cpac_templates/ho_mask_pad.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/cpac_templates/rois_3mm.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/AAL_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/CAPRSC_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/DKT_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/DesikanKlein_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/HarvardOxfordcort-maxprob-thr25_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/HarvardOxfordsub-maxprob-thr25_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Juelich_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/MICCAI_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Schaefer1000_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Schaefer200_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Schaefer300_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Schaefer400_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Talairach_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Brodmann_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Desikan_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Glasser_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Slab907_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Yeo-17-liberal_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Yeo-17_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Yeo-7-liberal_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
-    <span class="nt">/ndmg_atlases/label/Human/Yeo-7_space-MNI152NLin6_res-1x1x1.nii.gz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Avg</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">PyPEER</span><span class="p">:</span>
 
-  <span class="c1"># Functional time-series and ROI realignment method: [&#39;ROI_to_func&#39;] or [&#39;func_to_ROI&#39;]</span>
-  <span class="c1"># &#39;ROI_to_func&#39; will realign the atlas/ROI to functional space (fast)</span>
-  <span class="c1"># &#39;func_to_ROI&#39; will realign the functional time series to the atlas/ROI space</span>
+  <span class="c1"># Training of eye-estimation models. Commonly used for movies data/naturalistic viewing.</span>
+  <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+  <span class="c1"># PEER scan names to use for training</span>
+  <span class="c1"># Example: [&#39;peer_run-1&#39;, &#39;peer_run-2&#39;]</span>
+  <span class="nt">eye_scan_names</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+
+  <span class="c1"># Naturalistic viewing data scan names to use for eye estimation</span>
+  <span class="c1"># Example: [&#39;movieDM&#39;]</span>
+  <span class="nt">data_scan_names</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+
+  <span class="c1"># Template-space eye mask</span>
+  <span class="nt">eye_mask_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_${func_resolution}_eye_mask.nii.gz</span>
+
+  <span class="c1"># PyPEER Stimulus File Path</span>
+  <span class="c1"># This is a file describing the stimulus locations from the calibration sequence.</span>
+  <span class="nt">stimulus_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+
+  <span class="nt">minimal_nuisance_correction</span><span class="p">:</span>
+
+    <span class="c1"># PyPEER Minimal nuisance regression</span>
+    <span class="c1"># Note: PyPEER employs minimal preprocessing - these choices do not reflect what runs in the main pipeline.</span>
+    <span class="c1">#       PyPEER uses non-nuisance-regressed data from the main pipeline.</span>
+
+    <span class="c1"># Global signal regression (PyPEER only)</span>
+    <span class="nt">peer_gsr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+
+    <span class="c1"># Motion scrubbing (PyPEER only)</span>
+    <span class="nt">peer_scrub</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+
+    <span class="c1"># Motion scrubbing threshold (PyPEER only)</span>
+    <span class="nt">scrub_thresh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.2</span>
 </pre></div>
 </div>
 </section>
