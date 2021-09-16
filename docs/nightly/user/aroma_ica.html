@@ -81,17 +81,17 @@ ICA-AROMA concerns a data-driven method to identify and remove motion-related in
 <section id="configuring-aroma-ica-using-a-yaml-file">
 <h2>CONFIGURING AROMA-ICA USING A YAML FILE:<a class="headerlink" href="#configuring-aroma-ica-using-a-yaml-file" title="Permalink to this headline">¶</a></h2>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>      <span class="c1"># Dataset-wide respiratory rate data from breathing belt.</span>
-      <span class="c1"># Notch filter requires either:</span>
-      <span class="c1">#     &quot;breathing_rate_min&quot; and &quot;breathing_rate_max&quot;</span>
-      <span class="c1"># or</span>
-      <span class="c1">#     &quot;center_frequency&quot; and &quot;filter_bandwitdh&quot;.</span>
-      <span class="c1"># Lowpass filter requires either:</span>
-      <span class="c1">#     &quot;breathing_rate_min&quot;</span>
-      <span class="c1"># or</span>
-      <span class="c1">#     &quot;lowpass_cutoff&quot;.</span>
-      <span class="c1"># If &quot;breathing_rate_min&quot; (for lowpass and notch filter)</span>
-      <span class="c1"># and &quot;breathing_rate_max&quot; (for notch filter) are set,</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>    <span class="nt">motion_correction</span><span class="p">:</span>
+
+      <span class="c1"># using: [&#39;3dvolreg&#39;, &#39;mcflirt&#39;]</span>
+      <span class="c1"># this is a fork point</span>
+      <span class="nt">using</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;3dvolreg&#39;</span><span class="p p-Indicator">]</span>
+
+      <span class="c1"># option parameters</span>
+      <span class="nt">AFNI-3dvolreg</span><span class="p">:</span>
+
+        <span class="c1"># This option is useful when aligning high-resolution datasets that may need more alignment than a few voxels.</span>
+        <span class="nt">functional_volreg_twopass</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
 </pre></div>
 </div>
 </section>

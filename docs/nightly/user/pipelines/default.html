@@ -196,10 +196,35 @@
   <span class="c1"># Will run Freesurfer for surface-based analysis. Will output traditional Freesurfer derivatives.</span>
   <span class="c1"># If you wish to employ Freesurfer outputs for brain masking or tissue segmentation in the voxel-based pipeline,</span>
   <span class="c1"># select those &#39;Freesurfer-&#39; labeled options further below in anatomical_preproc.</span>
-  <span class="nt">run_freesurfer</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+  <span class="nt">freesurfer</span><span class="p">:</span> 
 
-  <span class="c1"># Add extra arguments to recon-all command</span>
-  <span class="nt">reconall_args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+    <span class="c1"># Add extra arguments to recon-all command</span>
+    <span class="nt">reconall_args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+
+  <span class="c1"># Run ABCD-HCP post FreeSurfer and fMRISurface pipeline</span>
+  <span class="nt">post_freesurfer</span><span class="p">:</span> 
+
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+    <span class="nt">subcortical_gray_labels</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/config/FreeSurferSubcorticalLabelTableLut.txt</span>
+
+    <span class="nt">freesurfer_labels</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/config/FreeSurferAllLut.txt</span>
+
+    <span class="nt">surf_atlas_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/standard_mesh_atlases</span>
+
+    <span class="nt">gray_ordinates_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/91282_Greyordinates</span>
+
+    <span class="nt">gray_ordinates_res</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+    <span class="nt">high_res_mesh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">164</span>
+
+    <span class="nt">low_res_mesh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">32</span>
+
+    <span class="nt">fmri_res</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+    <span class="nt">smooth_fwhm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
 
 
 <span class="nt">longitudinal_template_generation</span><span class="p">:</span>
@@ -708,12 +733,13 @@
         <span class="c1"># Template with 2mm resolution to be used during FNIRT-based brain extraction in ABCD-options pipeline.</span>
         <span class="nt">T1w_template_res-2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_2mm.nii.gz</span>
 
-    <span class="nt">apply_transform</span><span class="p">:</span>
+    <span class="nt">overwrite_transform</span><span class="p">:</span>
 
-      <span class="c1"># Choose the tool to apply transform regardless of which tool to calculate transform</span>
-      <span class="c1"># &#39;default&#39; will use the same tool as registration</span>
-      <span class="c1"># using: &#39;default&#39;, &#39;ANTS&#39;, &#39;FSL&#39;</span>
-      <span class="nt">using</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+      <span class="c1"># Choose the tool to overwrite transform, currently only support &#39;FSL&#39; to overwrite &#39;ANTs&#39; transforms in ABCD-options pipeline.</span>
+      <span class="c1"># using: &#39;FSL&#39;</span>
+      <span class="nt">using</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FSL</span>
 
   <span class="nt">functional_registration</span><span class="p">:</span>
 
@@ -750,7 +776,7 @@
         <span class="nt">reg_with_skull</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
 
         <span class="c1"># Choose whether to use the mean of the functional/EPI as the input to functional-to-anatomical registration or one of the volumes from the functional 4D timeseries that you choose.</span>
-        <span class="c1"># input: [&#39;Mean_Functional&#39;, &#39;Selected_Functional_Volume&#39;]</span>
+        <span class="c1"># input: [&#39;Mean_Functional&#39;, &#39;Selected_Functional_Volume&#39;, &#39;fmriprep_reference&#39;]</span>
         <span class="nt">input</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;Mean_Functional&#39;</span><span class="p p-Indicator">]</span>
 
         <span class="nt">Mean Functional</span><span class="p">:</span>
@@ -777,6 +803,13 @@
         <span class="c1"># reference for boundary based registration</span>
         <span class="c1"># options: &#39;whole-head&#39; or &#39;brain&#39;</span>
         <span class="nt">reference</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">whole-head</span>
+
+        <span class="c1"># choose which FAST map to generate BBR WM mask</span>
+        <span class="c1"># options: &#39;probability_map&#39;, &#39;partial_volume_map&#39;</span>
+        <span class="nt">bbr_wm_map</span><span class="p">:</span> <span class="s">&#39;probability_map&#39;</span>
+
+        <span class="c1"># optional FAST arguments to generate BBR WM mask</span>
+        <span class="nt">bbr_wm_mask_args</span><span class="p">:</span> <span class="s">&#39;-thr</span><span class="nv"> </span><span class="s">0.5</span><span class="nv"> </span><span class="s">-bin&#39;</span>
 
     <span class="nt">EPI_registration</span><span class="p">:</span>
 
@@ -908,7 +941,7 @@
 
       <span class="nt">target_template</span><span class="p">:</span>      
         <span class="c1"># choose which template space to transform derivatives towards</span>
-        <span class="c1"># using: [&#39;T1_template&#39;, &#39;EPI_template&#39;, &#39;DCAN_NHP&#39;]</span>
+        <span class="c1"># using: [&#39;T1_template&#39;, &#39;EPI_template&#39;]</span>
         <span class="c1"># this is a fork point</span>
         <span class="c1"># NOTE:</span>
         <span class="c1">#   this will determine which registration transform to use to warp the functional</span>
@@ -962,7 +995,7 @@
 
       <span class="nt">apply_transform</span><span class="p">:</span>
 
-        <span class="c1"># options: &#39;default&#39;, &#39;abcd&#39;, &#39;single_step_resampling&#39;</span>
+        <span class="c1"># options: &#39;default&#39;, &#39;abcd&#39;, &#39;single_step_resampling&#39;, &#39;dcan_nhp&#39;</span>
         <span class="c1"># &#39;default&#39;: apply func-to-anat and anat-to-template transforms on motion corrected functional image.</span>
         <span class="c1"># &#39;abcd&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of raw functional volume using FSL applywarp based on ABCD-HCP pipeline.</span>
         <span class="c1"># &#39;single_step_resampling&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of raw functional volume using ANTs antsApplyTransform based on fMRIPrep pipeline.</span>
@@ -1038,7 +1071,7 @@
         <span class="c1"># This option is useful when aligning high-resolution datasets that may need more alignment than a few voxels.</span>
         <span class="nt">functional_volreg_twopass</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
 
-      <span class="c1"># Choose motion correction reference. Options: mean, median, selected_volume</span>
+      <span class="c1"># Choose motion correction reference. Options: mean, median, selected_volume, fmriprep_reference</span>
       <span class="nt">motion_correction_reference</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;mean&#39;</span><span class="p p-Indicator">]</span>
 
       <span class="c1"># Choose motion correction reference volume</span>
@@ -1146,6 +1179,14 @@
       <span class="c1"># It must be &#39;on&#39; if select &#39;reduce_bias&#39;, &#39;robust&#39;, &#39;padding&#39;, &#39;remove_eyes&#39;, or &#39;bet_surfaces&#39; on</span>
       <span class="nt">functional_mean_boolean</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
 
+      <span class="c1"># Set an intensity threshold to improve skull stripping performances of FSL BET on rodent scans.</span>
+      <span class="nt">functional_mean_thr</span><span class="p">:</span> 
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+        <span class="nt">threshold_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">98</span>
+
+      <span class="c1"># Bias correct the functional mean image to improve skull stripping performances of FSL BET on rodent scans</span>
+      <span class="nt">functional_mean_bias_correction</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
       <span class="c1"># Set the threshold value controling the brain vs non-brain voxels.</span>
       <span class="nt">frac</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.3</span>
 
@@ -1181,6 +1222,14 @@
 
       <span class="c1"># Vertical gradient in fractional intensity threshold (-1,1)</span>
       <span class="nt">vertical_gradient</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
+
+    <span class="nt">FSL_AFNI</span><span class="p">:</span>
+
+      <span class="nt">bold_ref</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/code/CPAC/resources/templates/tpl-MNI152NLin2009cAsym_res-02_desc-fMRIPrep_boldref.nii.gz</span>
+
+      <span class="nt">brain_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/code/CPAC/resources/templates/tpl-MNI152NLin2009cAsym_res-02_desc-brain_mask.nii.gz</span>
+
+      <span class="nt">brain_probseg</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/code/CPAC/resources/templates/tpl-MNI152NLin2009cAsym_res-01_label-brain_probseg.nii.gz</span>
 
     <span class="nt">Anatomical_Refined</span><span class="p">:</span>
 
@@ -1219,7 +1268,7 @@
     <span class="c1"># this is a fork point</span>
     <span class="c1">#   run: [On, Off] - this will run both and fork the pipeline</span>
     <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">On</span><span class="p p-Indicator">]</span>
-    
+
     <span class="c1"># switch to Off if nuisance regression is off and you don&#39;t want to write out the regressors</span>
     <span class="nt">create_regressors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
 

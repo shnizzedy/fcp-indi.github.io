@@ -312,7 +312,8 @@
                                    <span class="n">regressor_descriptor</span><span class="p">,</span>
                                    <span class="n">regressor_selector</span><span class="p">,</span>
                                    <span class="n">use_ants</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                   <span class="n">ventricle_mask_exist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                                   <span class="n">ventricle_mask_exist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">all_bold</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Add tissue mask generation into pipeline according to the selector.</span>
 
@@ -358,6 +359,10 @@
             <span class="k">pass</span>
 
         <span class="k">elif</span> <span class="n">step</span> <span class="o">==</span> <span class="s1">&#39;resolution&#39;</span><span class="p">:</span>
+        
+            <span class="k">if</span> <span class="n">all_bold</span><span class="p">:</span>
+                <span class="k">pass</span>
+        
             <span class="n">mask_to_epi</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">FLIRT</span><span class="p">(),</span>
                                   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_flirt&#39;</span>
                                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_mask_key</span><span class="p">),</span>

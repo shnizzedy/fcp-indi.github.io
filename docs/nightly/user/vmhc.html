@@ -92,34 +92,34 @@
 <section id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>        <span class="c1"># Erosion proportion, if using erosion.</span>
+        <span class="c1"># Default proportion is 0 for anatomical brain mask.</span>
+        <span class="c1"># Recommend that do not use erosion in both proportion and millimeter method.</span>
+        <span class="nt">brain_mask_erosion_prop </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+
+        <span class="c1"># Erode brain mask in millimeter, default of brain is 30 mm</span>
+        <span class="c1"># brain erosion default is using millimeter erosion method when use erosion for brain.</span>
+        <span class="nt">brain_mask_erosion_mm </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
+
+        <span class="c1"># Erode binarized brain mask in millimeter</span>
+        <span class="nt">brain_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+
+     <span class=" -Error"> </span><span class="nt">erode_csf</span><span class="p">:</span>
+
+        <span class="c1"># Erode binarized csf tissue mask.</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
 
         <span class="c1"># Erosion proportion, if use erosion.</span>
+        <span class="c1"># Default proportion is 0 for CSF (cerebrospinal fluid)  mask.</span>
         <span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span>
-        <span class="nt">gm_erosion_prop </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.6</span>
+        <span class="nt">csf_erosion_prop </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
 
         <span class="c1"># Erode brain mask in millimeter, default of csf is 30 mm</span>
-        <span class="nt">gm_mask_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
+        <span class="c1"># CSF erosion default is using millimeter erosion method when use erosion for CSF.</span>
+        <span class="nt">csf_mask_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
 
-        <span class="c1"># Erode binarized White Matter mask in millimeter</span>
-        <span class="nt">gm_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-
-
-<span class="c1"># OUTPUTS AND DERIVATIVES</span>
-<span class="c1"># -----------------------</span>
-<span class="nt">post_processing</span><span class="p">:</span>
-
-  <span class="nt">spatial_smoothing</span><span class="p">:</span>
-
-    <span class="c1"># Smooth the derivative outputs.</span>
-    <span class="c1"># Set as [&#39;nonsmoothed&#39;] to disable smoothing. Set as both to get both.</span>
-    <span class="c1">#</span>
-    <span class="c1"># Options:</span>
-    <span class="c1">#     [&#39;smoothed&#39;, &#39;nonsmoothed&#39;]</span>
-    <span class="nt">output</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;smoothed&#39;</span><span class="p p-Indicator">]</span>
-
-    <span class="c1"># Tool to use for smoothing.</span>
-    <span class="c1"># &#39;FSL&#39; for FSL MultiImageMaths for FWHM provided</span>
+        <span class="c1"># Erode binarized CSF (cerebrospinal fluid)  mask in millimeter</span>
+        <span class="nt">csf_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
 </pre></div>
 </div>
 </section>

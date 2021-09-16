@@ -83,17 +83,17 @@
 <section id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>        <span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span>
-        <span class="c1"># White Matter erosion default is using proportion erosion method when use erosion for White Matter.</span>
-        <span class="nt">wm_erosion_prop </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.6</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Whether to run frequency filtering before or after nuisance regression.</span>
+    <span class="c1"># Options: &#39;After&#39; or &#39;Before&#39;</span>
+    <span class="nt">bandpass_filtering_order</span><span class="p">:</span> <span class="s">&#39;After&#39;</span>
 
-        <span class="c1"># Erode brain mask in millimeter, default of White Matter is 0 mm</span>
-        <span class="nt">wm_mask_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+    <span class="c1"># Process and refine masks used to produce regressors and time series for</span>
+    <span class="c1"># regression.</span>
+    <span class="nt">regressor_masks</span><span class="p">:</span>
 
-        <span class="c1"># Erode binarized White Matter mask in millimeter</span>
-        <span class="nt">wm_erosion_mm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+      <span class="nt">erode_anatomical_brain_mask</span><span class="p">:</span>
 
-     <span class=" -Error"> </span><span class="nt">erode_gm</span><span class="p">:</span>
+        <span class="c1"># Erode binarized anatomical brain mask. If choosing True, please also set seg_csf_use_erosion: True; regOption: niworkflows-ants.</span>
 </pre></div>
 </div>
 </section>

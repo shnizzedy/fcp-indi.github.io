@@ -71,7 +71,31 @@
 <section id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">reconall_args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Add extra arguments to recon-all command</span>
+    <span class="nt">reconall_args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+
+  <span class="c1"># Run ABCD-HCP post FreeSurfer and fMRISurface pipeline</span>
+ <span class=" -Error"> </span><span class="nt">post_freesurfer</span><span class="p">:</span> 
+
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+    <span class="nt">subcortical_gray_labels</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/config/FreeSurferSubcorticalLabelTableLut.txt</span>
+
+    <span class="nt">freesurfer_labels</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/config/FreeSurferAllLut.txt</span>
+
+    <span class="nt">surf_atlas_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/standard_mesh_atlases</span>
+
+    <span class="nt">gray_ordinates_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/91282_Greyordinates</span>
+
+    <span class="nt">gray_ordinates_res</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+    <span class="nt">high_res_mesh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">164</span>
+
+    <span class="nt">low_res_mesh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">32</span>
+
+    <span class="nt">fmri_res</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+    <span class="nt">smooth_fwhm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
 
 
 <span class="nt">longitudinal_template_generation</span><span class="p">:</span>
@@ -79,30 +103,6 @@
   <span class="c1"># If you have multiple T1w&#39;s, you can generate your own run-specific custom</span>
   <span class="c1"># T1w template to serve as an intermediate to the standard template for</span>
   <span class="c1"># anatomical registration.</span>
-
-  <span class="c1"># This runs before the main pipeline as it requires multiple T1w sessions</span>
-  <span class="c1"># at once.</span>
-  <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
-
-  <span class="c1"># Freesurfer longitudinal template algorithm using FSL FLIRT</span>
-  <span class="c1"># Method to average the dataset at each iteration of the template creation</span>
-  <span class="c1"># Options: median, mean or std</span>
-  <span class="nt">average_method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">median</span>
-
-  <span class="c1"># Degree of freedom for FLIRT in the template creation</span>
-  <span class="c1"># Options: 12 (affine), 9 (traditional), 7 (global rescale) or 6 (rigid body)</span>
-  <span class="nt">dof</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">12</span>
-
-  <span class="c1"># Interpolation parameter for FLIRT in the template creation</span>
-  <span class="c1"># Options: trilinear, nearestneighbour, sinc or spline</span>
-  <span class="nt">interp</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">trilinear</span>
-
-  <span class="c1"># Cost function for FLIRT in the template creation</span>
-  <span class="c1"># Options: corratio, mutualinfo, normmi, normcorr, leastsq, labeldiff or bbr</span>
-  <span class="nt">cost</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">corratio</span>
-
-  <span class="c1"># Number of threads used for one run of the template generation algorithm</span>
-  <span class="nt">thread_pool</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
 </pre></div>
 </div>
 </section>

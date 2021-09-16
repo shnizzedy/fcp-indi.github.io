@@ -448,6 +448,149 @@
 <section id="id7">
 <h3>Configuration Without the GUI<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">registration_workflows</span><span class="p">:</span>
+
+  <span class="nt">anatomical_registration</span><span class="p">:</span>
+
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">On</span>
+
+    <span class="c1"># The resolution to which anatomical images should be transformed during registration.</span>
+    <span class="c1"># This is the resolution at which processed anatomical files will be output.</span>
+    <span class="nt">resolution_for_anat</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2mm</span>
+
+    <span class="c1"># Template to be used during registration.</span>
+    <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
+    <span class="nt">T1w_brain_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_${resolution_for_anat}_brain.nii.gz</span>
+
+    <span class="c1"># Template to be used during registration.</span>
+    <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
+    <span class="nt">T1w_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_${resolution_for_anat}.nii.gz</span>
+
+    <span class="c1"># Template to be used during registration.</span>
+    <span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
+    <span class="nt">T1w_brain_template_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_${resolution_for_anat}_brain_mask.nii.gz</span>
+
+    <span class="c1"># Register skull-on anatomical image to a template.</span>
+    <span class="nt">reg_with_skull</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+
+    <span class="nt">registration</span><span class="p">:</span>
+
+      <span class="c1"># using: [&#39;ANTS&#39;, &#39;FSL&#39;, &#39;FSL-linear&#39;]</span>
+      <span class="c1"># this is a fork point</span>
+      <span class="c1">#   selecting both [&#39;ANTS&#39;, &#39;FSL&#39;] will run both and fork the pipeline</span>
+      <span class="nt">using</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ANTS&#39;</span><span class="p p-Indicator">]</span>
+
+      <span class="c1"># option parameters</span>
+      <span class="nt">ANTs</span><span class="p">:</span>
+
+        <span class="c1"># If a lesion mask is available for a T1w image, use it to improve the ANTs&#39; registration</span>
+        <span class="c1"># ANTS registration only.</span>
+        <span class="nt">use_lesion_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+
+        <span class="c1"># ANTs parameters for T1-template-based registration</span>
+        <span class="nt">T1_registration</span><span class="p">:</span>
+
+          <span class="p p-Indicator">-</span> <span class="nt">collapse-output-transforms</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+          <span class="p p-Indicator">-</span> <span class="nt">dimensionality</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+          <span class="p p-Indicator">-</span> <span class="nt">initial-moving-transform </span><span class="p">:</span>
+             <span class="nt">initializationFeature</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+
+          <span class="p p-Indicator">-</span> <span class="nt">transforms</span><span class="p">:</span>
+             <span class="p p-Indicator">-</span> <span class="nt">Rigid</span><span class="p">:</span>
+                 <span class="nt">gradientStep </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>
+                 <span class="nt">metric </span><span class="p">:</span>
+                   <span class="nt">type </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MI</span>
+                   <span class="nt">metricWeight</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+                   <span class="nt">numberOfBins </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">32</span>
+                   <span class="nt">samplingStrategy </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Regular</span>
+                   <span class="nt">samplingPercentage </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.25</span>
+                 <span class="nt">convergence</span><span class="p">:</span>
+                   <span class="nt">iteration </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000x500x250x100</span>
+                   <span class="nt">convergenceThreshold </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1e-08</span>
+                   <span class="nt">convergenceWindowSize </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+                 <span class="nt">smoothing-sigmas </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.0x2.0x1.0x0.0</span>
+                 <span class="nt">shrink-factors </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8x4x2x1</span>
+                 <span class="nt">use-histogram-matching </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+
+             <span class="p p-Indicator">-</span> <span class="nt">Affine</span><span class="p">:</span>
+                 <span class="nt">gradientStep </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>
+                 <span class="nt">metric </span><span class="p">:</span>
+                   <span class="nt">type </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MI</span>
+                   <span class="nt">metricWeight</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+                   <span class="nt">numberOfBins </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">32</span>
+                   <span class="nt">samplingStrategy </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Regular</span>
+                   <span class="nt">samplingPercentage </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.25</span>
+                 <span class="nt">convergence</span><span class="p">:</span>
+                   <span class="nt">iteration </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000x500x250x100</span>
+                   <span class="nt">convergenceThreshold </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1e-08</span>
+                   <span class="nt">convergenceWindowSize </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+                 <span class="nt">smoothing-sigmas </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.0x2.0x1.0x0.0</span>
+                 <span class="nt">shrink-factors </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8x4x2x1</span>
+                 <span class="nt">use-histogram-matching </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+
+             <span class="p p-Indicator">-</span> <span class="nt">SyN</span><span class="p">:</span>
+                 <span class="nt">gradientStep </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>
+                 <span class="nt">updateFieldVarianceInVoxelSpace </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.0</span>
+                 <span class="nt">totalFieldVarianceInVoxelSpace </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
+                 <span class="nt">metric</span><span class="p">:</span>
+                   <span class="nt">type </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CC</span>
+                   <span class="nt">metricWeight</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+                   <span class="nt">radius </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+                 <span class="nt">convergence</span><span class="p">:</span>
+                   <span class="nt">iteration </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100x100x70x20</span>
+                   <span class="nt">convergenceThreshold </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1e-09</span>
+                   <span class="nt">convergenceWindowSize </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">15</span>
+                 <span class="nt">smoothing-sigmas </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.0x2.0x1.0x0.0</span>
+                 <span class="nt">shrink-factors </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">6x4x2x1</span>
+                 <span class="nt">use-histogram-matching </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+                 <span class="nt">winsorize-image-intensities </span><span class="p">:</span>
+                   <span class="nt">lowerQuantile </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.01</span>
+                   <span class="nt">upperQuantile </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.99</span>
+
+        <span class="c1"># Interpolation method for writing out transformed anatomical images.</span>
+        <span class="c1"># Possible values: Linear, BSpline, LanczosWindowedSinc</span>
+        <span class="nt">interpolation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">LanczosWindowedSinc</span>
+
+      <span class="nt">FSL-FNIRT</span><span class="p">:</span>
+
+        <span class="c1"># Configuration file to be used by FSL to set FNIRT parameters.</span>
+        <span class="c1"># It is not necessary to change this path unless you intend to use custom FNIRT parameters or a non-standard template.</span>
+        <span class="nt">fnirt_config</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">T1_2_MNI152_2mm</span>
+
+        <span class="c1"># The resolution to which anatomical images should be transformed during registration.</span>
+        <span class="c1"># This is the resolution at which processed anatomical files will be output. </span>
+        <span class="c1"># specifically for monkey pipeline</span>
+        <span class="nt">ref_resolution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2mm</span>
+
+        <span class="c1"># Reference mask for FSL registration.</span>
+        <span class="nt">ref_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_${resolution_for_anat}_brain_mask_dil.nii.gz</span>
+        
+        <span class="c1"># Template to be used during registration.</span>
+        <span class="c1"># It is for monkey pipeline specifically. </span>
+        <span class="nt">FNIRT_T1w_brain_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+
+        <span class="c1"># Template to be used during registration.</span>
+        <span class="c1"># It is for monkey pipeline specifically. </span>
+        <span class="nt">FNIRT_T1w_template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+        
+        <span class="c1"># Interpolation method for writing out transformed anatomical images.</span>
+        <span class="c1"># Possible values: trilinear, sinc, spline</span>
+        <span class="nt">interpolation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sinc</span>
+
+        <span class="c1"># Identity matrix used during FSL-based resampling of anatomical-space data throughout the pipeline.</span>
+        <span class="c1"># It is not necessary to change this path unless you intend to use a different template.</span>
+        <span class="nt">identity_matrix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/etc/flirtsch/ident.mat</span>
+
+        <span class="c1"># Reference mask for FSL registration.</span>
+        <span class="nt">ref_mask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_${resolution_for_anat}_brain_mask_dil.nii.gz</span>
+
+        <span class="c1"># Reference mask with 2mm resolution to be used during FNIRT-based brain extraction in ABCD-options pipeline.</span>
+        <span class="nt">ref_mask_res-2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_2mm_brain_mask_dil.nii.gz</span>
+
+        <span class="c1"># Template with 2mm resolution to be used during FNIRT-based brain extraction in ABCD-options pipeline.</span>
+        <span class="nt">T1w_template_res-2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/share/fsl/5.0/data/standard/MNI152_T1_2mm.nii.gz</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="anatomical-tissue-segmentation">
