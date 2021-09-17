@@ -65,14 +65,40 @@
 <section id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="c1"># PREPROCESSING</span>
-<span class="c1"># -------------</span>
-<span class="nt">surface_analysis</span><span class="p">:</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">surface_analysis</span><span class="p">:</span>
 
   <span class="c1"># Will run Freesurfer for surface-based analysis. Will output traditional Freesurfer derivatives.</span>
   <span class="c1"># If you wish to employ Freesurfer outputs for brain masking or tissue segmentation in the voxel-based pipeline,</span>
   <span class="c1"># select those &#39;Freesurfer-&#39; labeled options further below in anatomical_preproc.</span>
   <span class="nt">freesurfer</span><span class="p">:</span> 
+
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+    <span class="c1"># Add extra arguments to recon-all command</span>
+    <span class="nt">reconall_args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+
+  <span class="c1"># Run ABCD-HCP post FreeSurfer and fMRISurface pipeline</span>
+  <span class="nt">post_freesurfer</span><span class="p">:</span> 
+
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+    <span class="nt">subcortical_gray_labels</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/config/FreeSurferSubcorticalLabelTableLut.txt</span>
+
+    <span class="nt">freesurfer_labels</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/config/FreeSurferAllLut.txt</span>
+
+    <span class="nt">surf_atlas_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/standard_mesh_atlases</span>
+
+    <span class="nt">gray_ordinates_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/91282_Greyordinates</span>
+
+    <span class="nt">gray_ordinates_res</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+    <span class="nt">high_res_mesh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">164</span>
+
+    <span class="nt">low_res_mesh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">32</span>
+
+    <span class="nt">fmri_res</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+    <span class="nt">smooth_fwhm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
 </pre></div>
 </div>
 </section>
