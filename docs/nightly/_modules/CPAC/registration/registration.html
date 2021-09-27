@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CPAC.registration.registration &#8212; C-PAC 1.8.1 Beta documentation</title>
+    <title>CPAC.registration.registration &#8212; C-PAC 1.8.2..dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.2..dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.registration.registration</a></li> 
       </ul>
@@ -3084,8 +3084,8 @@
 <span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: [&quot;apply_transform&quot;, &quot;using&quot;],</span>
 <span class="sd">     &quot;option_val&quot;: &quot;default&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [([&quot;desc-cleaned_bold&quot;, &quot;desc-brain_bold&quot;,</span>
-<span class="sd">                  &quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
+<span class="sd">     &quot;inputs&quot;: [([&quot;desc-preproc_bold&quot;, &quot;desc-cleaned_bold&quot;,</span>
+<span class="sd">                  &quot;desc-brain_bold&quot;, &quot;desc-motion_bold&quot;, &quot;bold&quot;],</span>
 <span class="sd">                 &quot;from-bold_to-template_mode-image_xfm&quot;),</span>
 <span class="sd">                &quot;T1w-brain-template-funcreg&quot;],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-cleaned_bold&quot;,</span>
@@ -3117,10 +3117,10 @@
             <span class="s1">&#39;functional_registration&#39;</span><span class="p">][</span><span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">][</span>
             <span class="s1">&#39;FNIRT_pipelines&#39;</span><span class="p">][</span><span class="s1">&#39;interpolation&#39;</span><span class="p">]</span>
 
-    <span class="n">connect</span><span class="p">,</span> <span class="n">resource</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-cleaned_bold&quot;</span><span class="p">,</span>
+    <span class="n">connect</span><span class="p">,</span> <span class="n">resource</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+                                             <span class="s2">&quot;desc-cleaned_bold&quot;</span><span class="p">,</span>
                                              <span class="s2">&quot;desc-brain_bold&quot;</span><span class="p">,</span>
                                              <span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span>
-                                             <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
                                              <span class="s2">&quot;bold&quot;</span><span class="p">],</span>
                                             <span class="n">report_fetched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">connect</span>
@@ -3703,9 +3703,7 @@
 <span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: [&quot;apply_transform&quot;, &quot;using&quot;],</span>
 <span class="sd">     &quot;option_val&quot;: &quot;single_step_resampling&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [([&quot;desc-cleaned_bold&quot;, &quot;desc-brain_bold&quot;,</span>
-<span class="sd">                  &quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
-<span class="sd">                 [&#39;desc-reginput_bold&#39;, &#39;desc-mean_bold&#39;],</span>
+<span class="sd">     &quot;inputs&quot;: [([&quot;desc-reginput_bold&quot;, &quot;desc-mean_bold&quot;],</span>
 <span class="sd">                 &quot;desc-stc_bold&quot;,</span>
 <span class="sd">                 &quot;motion-basefile&quot;,</span>
 <span class="sd">                 &quot;space-bold_desc-brain_mask&quot;,</span>
@@ -4270,7 +4268,7 @@
         <li class="right" >
           <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.2..dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.registration.registration</a></li> 
       </ul>

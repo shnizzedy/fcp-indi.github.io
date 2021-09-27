@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Nuisance Signal Regression &#8212; C-PAC 1.8.1 Beta documentation</title>
+    <title>Nuisance Signal Regression &#8212; C-PAC 1.8.2..dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="longitudinal" title="Longitudinal Preprocessing"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.2..dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="preprocessing" accesskey="U">Pre-Processing Steps</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nuisance Signal Regression</a></li> 
@@ -162,10 +162,32 @@ Power and colleagues (2011) proposed two measures to identify volumes contaminat
 </section>
 <section id="configuration-without-the-gui">
 <span id="nuisance-no-gui"></span><h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h3>
-<p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:</p>
+<p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
+<p>An example of a custom regressor with one file:</p>
 <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">nuisance_corrections</span><span class="p">:</span>
+  <span class="nt">2-nuisance_regression</span><span class="p">:</span>
+    <span class="nt">Regressors</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">Name</span><span class="p">:</span> <span class="s">&#39;first_custom_regressor&#39;</span>
+        <span class="nt">Custom</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">custom_signal.1D</span>
+            <span class="nt">convolve</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
+<p>The following nested key/value pairs that will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>:
+.. literalinclude:: /references/default_pipeline.yml</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">language</dt>
+<dd class="field-odd"><p>YAML</p>
+</dd>
+<dt class="field-even">start-at</dt>
+<dd class="field-even"><p>nuisance_corrections:</p>
+</dd>
+<dt class="field-odd">lines</dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+</dl>
+</div></blockquote>
 <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span>  <span class="nt">2-nuisance_regression</span><span class="p">:</span>
 
     <span class="c1"># this is a fork point</span>
@@ -393,7 +415,7 @@ Fox, M.D., Snyder, A.Z., Vincent, J.L., Corbetta, M., Van Essen, D.C., Raichle, 
   <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index">User Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="index#the-c-pac-mission">The C-PAC Mission</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index#latest-release-version-1-8-0-beta-mar-13-2021">Latest Release: Version 1.8.0 Beta (Mar 13, 2021)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index#latest-release-version-1-8-1-beta-sep-17-2021">Latest Release: Version 1.8.1 Beta (Sep 17, 2021)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index#the-c-pac-team">The C-PAC Team</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index#funding-acknowledgements">Funding Acknowledgements</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index#user-guide-index">User Guide Index</a><ul class="current">
@@ -487,7 +509,7 @@ Fox, M.D., Snyder, A.Z., Vincent, J.L., Corbetta, M., Van Essen, D.C., Raichle, 
         <li class="right" >
           <a href="longitudinal" title="Longitudinal Preprocessing"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.2..dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="preprocessing" >Pre-Processing Steps</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nuisance Signal Regression</a></li> 

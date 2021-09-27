@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Setting Up A Pipeline Configuration &#8212; C-PAC 1.8.1 Beta documentation</title>
+    <title>Setting Up A Pipeline Configuration &#8212; C-PAC 1.8.2..dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../subject_list_config" title="Setting Up A Data Configuration File (Participant/Subject List)"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.2..dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index" accesskey="U">Welcome to C-PAC’s user guide!</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Setting Up A Pipeline Configuration</a></li> 
       </ul>
@@ -55,8 +55,8 @@
 <div class="topic" id="ndmg-atlases">
 <p class="topic-title">Neuroparc v1.0: Baseline</p>
 <p>On July 20, 2020, Neuroparc released v1.0. In moving from v0 to v1, the paths to several of the Neuroparc atlases changed. The atlases are used by C-PAC in its default and preconfigured pipelines. C-PAC v1.7.0 includes the Neuroparc v1.0 paths, but <strong>if you are using a pipeline based on C-PAC 1.6.2a or older, you will need to update any Nueroparc v0 paths in your config</strong></p>
-<table class="docutils align-default" id="id6">
-<caption><span class="caption-text">All paths begin with <code class="docutils literal notranslate"><span class="pre">/ndmg_atlases/label/Human/</span></code></span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">All paths begin with <code class="docutils literal notranslate"><span class="pre">/ndmg_atlases/label/Human/</span></code></span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -201,8 +201,8 @@
 </section>
 <section id="design-a-pipeline">
 <h2>Design A Pipeline<a class="headerlink" href="#design-a-pipeline" title="Permalink to this headline">¶</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The C-PAC pipeline configuration was changed to a nested format with import capabilities in v1.8.0.</p>
 <p>With this change, the following configuration keys are deprecated:</p>
 <ul class="simple">
@@ -216,7 +216,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">targetAngleDeg</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">runSymbolicLinks</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">configFileTwomm</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ref_mask_res-2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ref_mask_2mm</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">template_skull_for_anat_2mm</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">surface_reconstruction</span></code></p></li>
 </ul>
@@ -291,7 +291,7 @@
 </pre></div>
 </div>
 <p>Pipeline configuration files, like the data settings and data configuration files discussed in the <a class="reference internal" href="../subject_list_config"><span class="doc">data configuration builder section</span></a>, are stored as YAML files.  Similarly, each of the parameters used by C-PAC to assemble your pipeline can be specified as nested key-value pairs, so a pipeline configuration YAML would have multiple lines of the form <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> like so</p>
-<p>An example of a pipeline configuration YAML file can be found <a class="reference internal" href="default"><span class="doc">here</span></a>.  Tables explaining the keys and their potential values can be found on the individual pages for each of the outputs C-PAC is capable of producing. All pipeline setup configuration files should have the keys in the <a href="#id4"><span class="problematic" id="id5">:doc:`Output Settings &lt;/user/output_config&gt;`_</span></a> table defined.</p>
+<p>An example of a pipeline configuration YAML file can be found <a class="reference internal" href="default"><span class="doc">here</span></a>.  Tables explaining the keys and their potential values can be found on the individual pages for each of the outputs C-PAC is capable of producing. All pipeline setup configuration files should have the keys in the <a class="reference internal" href="../output_config"><span class="doc">Output Settings</span></a> table defined.</p>
 <p>String values can include the simplest form of <cite>POSIX parameter expansion &lt;https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_06_02&gt;</cite> (<code class="docutils literal notranslate"><span class="pre">${parameter}</span></code>). Two special variables are included for these types of parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">resolution_for_anat</span></code> will be populated with the value set in <code class="docutils literal notranslate"><span class="pre">registration_workflows['anatomical_registration']['resolution_for_anat']</span></code>.</p></li>
@@ -306,7 +306,7 @@
 <p>If <code class="docutils literal notranslate"><span class="pre">FROM</span></code> is defined (see above), any undefined keys will be inferred from the pipeline configuration specified; otherwise, any undefined keys will be inferred from the default pipeline.</p>
 <section id="why-a-list">
 <h3>Why a list?<a class="headerlink" href="#why-a-list" title="Permalink to this headline">¶</a></h3>
-<p>You may notice as you learn about the settings for various outputs that many of the values for C-PAC’s configurable settings are stored in lists (i.e., multiple values are separated by commas and surrounded by square brackets).  Such lists containing 1s and 0s (for ‘True’ and ‘False’ respectively) allow you to toggle on multiple options at the same time, and branch a pipeline into two different analysis strategies. See the <a class="reference external" href="http://fcp-indi.github.io/docs/developer/workflows/cpac_pipeline.html">developer documentation</a> for more information about how lists are used in C-PAC.</p>
+<p>You may notice as you learn about the settings for various outputs that many of the values for C-PAC’s configurable settings are stored in lists (i.e., multiple values are separated by commas and surrounded by square brackets).  Such lists containing <code class="docutils literal notranslate"><span class="pre">On``s</span> <span class="pre">and</span> <span class="pre">``Off``s</span> <span class="pre">(for</span> <span class="pre">``True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> respectively) allow you to toggle on multiple options at the same time, and branch a pipeline into two different analysis strategies. See the <a class="reference external" href="http://fcp-indi.github.io/docs/developer/workflows/cpac_pipeline.html">developer documentation</a> for more information about how lists are used in C-PAC.</p>
 </section>
 </section>
 <section id="configurable-settings">
@@ -355,7 +355,7 @@
   <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index">User Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index#the-c-pac-mission">The C-PAC Mission</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index#latest-release-version-1-8-0-beta-mar-13-2021">Latest Release: Version 1.8.0 Beta (Mar 13, 2021)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index#latest-release-version-1-8-1-beta-sep-17-2021">Latest Release: Version 1.8.1 Beta (Sep 17, 2021)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index#the-c-pac-team">The C-PAC Team</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index#funding-acknowledgements">Funding Acknowledgements</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index#user-guide-index">User Guide Index</a><ul class="current">
@@ -425,7 +425,7 @@
         <li class="right" >
           <a href="../subject_list_config" title="Setting Up A Data Configuration File (Participant/Subject List)"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.1 Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.2..dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Setting Up A Pipeline Configuration</a></li> 
       </ul>
