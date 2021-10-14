@@ -65,14 +65,18 @@
 <figure class="align-default">
 <img alt="../_images/tse_gui.png" src="../_images/tse_gui.png" />
 </figure>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p><strong>Time Series Extraction- [On,Off]:</strong>  Extract the average time series of one or more ROIs/seeds. Must be enabled if you wish to run seed-based correlation analysis.</p></li>
-<li><dl class="simple">
+<li><dl>
 <dt><strong>TSE ROI Image - [path]:</strong> Clicking on the <em>+</em> icon to the bottom-right of the box here will bring up a dialog where you can define multiple paths to NifTIs containing ROI masks.  You may add multiple ROIs to the box.  Three columns within the box can be checked on and off to enable specific types of TSE:</dt><dd><ul class="simple">
 <li><p>Avg - For each ROI, output the average of the all the voxel time series within that ROI.</p></li>
 <li><p>Voxel - For each ROI, output the individual voxel time series for all voxels within that ROI.</p></li>
 <li><p>SpatialReg - Use a spatial map as a spatial regressor in a GLM to find the time series associated with the voxels in that map (see <a class="reference internal" href="sca"><span class="doc">dual regression</span></a>).</p></li>
 </ul>
+<p>Additionally, a connectivity matrix can be generated via nilearn <span class="bibtex" id="id1">[cite-Abra14]</span><span class="bibtex" id="id2">[nile21]</span><span class="bibtex" id="id3">[nile21a]</span> for the timeseries output. If one or more of these connectivity matricies are selected and no timeseries analysis is provied or generated, <code class="docutils literal notranslate"><span class="pre">Avg</span></code> will run even if not selected.
+* PearsonCorr
+* PartialCorr
+* TangentEmbed</p>
 </dd>
 </dl>
 </li>
@@ -141,6 +145,7 @@
   <span class="nt">realignment</span><span class="p">:</span> <span class="s">&#39;ROI_to_func&#39;</span>
 </pre></div>
 </div>
+<p id="bibtex-bibliography-user/tse-0"></p>
 </section>
 </section>
 
