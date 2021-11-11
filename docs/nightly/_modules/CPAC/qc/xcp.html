@@ -39,7 +39,7 @@
           <div class="body" role="main">
             
   <h1>Source code for CPAC.qc.xcp</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Generate eXtensible Connectivity Pipeline-style quality control files</span>
+<span></span><span class="sd">&quot;&quot;&quot;`Generate eXtensible Connectivity Pipeline-style quality control files &lt;https://fcp-indi.github.io/docs/user/xcpqc&gt;`_</span>
 
 <span class="sd">Columns</span>
 <span class="sd">-------</span>
@@ -89,13 +89,6 @@
 <span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
 <span class="sd">normCoverage : float</span>
 <span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
-
-<span class="sd">.. rubric References</span>
-
-<span class="sd">.. bibliography:: /references/xcpqc_citation.bib</span>
-<span class="sd">   :style: cpac_docs_style</span>
-<span class="sd">   :cited:</span>
-<span class="sd">   :keyprefix: cite-</span>
 <span class="sd">&quot;&quot;&quot;</span>  <span class="c1"># noqa E501  # pylint: disable=line-too-long</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -206,20 +199,24 @@
     <span class="c1"># ?</span>
 
     <span class="c1"># Overlap</span>
-    <span class="c1">## Coreg</span>
-    <span class="n">images</span> <span class="o">=</span> <span class="p">{</span><span class="n">image</span><span class="p">:</span> <span class="n">image</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">}</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">:</span> <span class="n">image</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span>
+              <span class="n">variable</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
     <span class="n">intersect</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">images</span><span class="p">[</span><span class="s1">&#39;final&#39;</span><span class="p">]</span>
-    <span class="n">vols</span> <span class="o">=</span> <span class="p">{</span><span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">image</span><span class="p">])</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">}</span>
+    <span class="n">vols</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
     <span class="n">vol_intersect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">intersect</span><span class="p">)</span>
     <span class="n">vol_sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">vols</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
     <span class="n">vol_union</span> <span class="o">=</span> <span class="n">vol_sum</span> <span class="o">-</span> <span class="n">vol_intersect</span>
-    <span class="n">overlap_coreg_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">overlap_params</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;coregDice&#39;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">vol_intersect</span> <span class="o">/</span> <span class="n">vol_sum</span><span class="p">,</span>
         <span class="s1">&#39;coregJaccard&#39;</span><span class="p">:</span> <span class="n">vol_intersect</span> <span class="o">/</span> <span class="n">vol_union</span><span class="p">,</span>
         <span class="s1">&#39;coregCrossCorr&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span>
             <span class="n">images</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">],</span>
             <span class="n">images</span><span class="p">[</span><span class="s1">&#39;final&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="s1">&#39;coregCoverage&#39;</span><span class="p">:</span> <span class="n">vol_intersect</span> <span class="o">/</span> <span class="nb">min</span><span class="p">(</span><span class="n">vols</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="s1">&#39;coregCoverage&#39;</span><span class="p">:</span> <span class="n">vol_intersect</span> <span class="o">/</span> <span class="nb">min</span><span class="p">(</span><span class="n">vols</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+        <span class="s1">&#39;normDice&#39;</span><span class="p">:</span> <span class="s1">&#39;N/A: native space&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;normJaccard&#39;</span><span class="p">:</span> <span class="s1">&#39;N/A: native space&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;normCrossCorr&#39;</span><span class="p">:</span> <span class="s1">&#39;N/A: native space&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;normCoverage&#39;</span><span class="p">:</span> <span class="s1">&#39;N/A: native space&#39;</span>
     <span class="p">}</span>
 
     <span class="n">qc_dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -227,7 +224,7 @@
         <span class="o">**</span><span class="n">power_params</span><span class="p">,</span>
         <span class="o">**</span><span class="n">rms_params</span><span class="p">,</span>
         <span class="o">**</span><span class="n">shape_params</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">overlap_coreg_params</span>
+        <span class="o">**</span><span class="n">overlap_params</span>
     <span class="p">}</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">qc_dict</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">qc_filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
