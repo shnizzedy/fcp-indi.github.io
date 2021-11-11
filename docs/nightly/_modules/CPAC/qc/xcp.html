@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPAC.qc.xcp &#8212; C-PAC 1.8.2.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex" />
+    <link rel="search" title="Search" href="../../../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.2.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.qc.xcp</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for CPAC.qc.xcp</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Generate eXtensible Connectivity Pipeline-style quality control files</span>
+
+<span class="sd">Columns</span>
+<span class="sd">-------</span>
+<span class="sd">sub : str</span>
+<span class="sd">    subject label :cite:`cite-BIDS21`</span>
+<span class="sd">ses : str</span>
+<span class="sd">    session label :cite:`cite-BIDS21`</span>
+<span class="sd">task : str</span>
+<span class="sd">    task label :cite:`cite-BIDS21`</span>
+<span class="sd">run : int</span>
+<span class="sd">    run index :cite:`cite-BIDS21`</span>
+<span class="sd">desc : str</span>
+<span class="sd">    description :cite:`cite-BIDS21`</span>
+<span class="sd">space : str</span>
+<span class="sd">    space label :cite:`cite-BIDS21`</span>
+<span class="sd">meanFD : float</span>
+<span class="sd">    mean Jenkinson framewise displacement :cite:`cite-Jenk02` :func:`CPAC.generate_motion_statistics.calculate_FD_J`</span>
+<span class="sd">relMeansRMSMotion : float</span>
+<span class="sd">    # TODO</span>
+<span class="sd">relMaxRMSMotion : float</span>
+<span class="sd">    # TODO</span>
+<span class="sd">meanDVInit : float</span>
+<span class="sd">    # TODO</span>
+<span class="sd">meanDVFinal : float</span>
+<span class="sd">    # TODO</span>
+<span class="sd">nVolCensored : int</span>
+<span class="sd">    # TODO</span>
+<span class="sd">nVolsRemoved : int</span>
+<span class="sd">    # TODO</span>
+<span class="sd">motionDVCorrInit : float</span>
+<span class="sd">    # TODO</span>
+<span class="sd">motionDVCorrFinal : float</span>
+<span class="sd">    # TODO</span>
+<span class="sd">coregDice : float</span>
+<span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
+<span class="sd">coregJaccard : float</span>
+<span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
+<span class="sd">coregCrossCorr : float</span>
+<span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
+<span class="sd">coregCoverag : float</span>
+<span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
+<span class="sd">normDice : float</span>
+<span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
+<span class="sd">normJaccard : float</span>
+<span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
+<span class="sd">normCrossCorr : float</span>
+<span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
+<span class="sd">normCoverage : float</span>
+<span class="sd">    :cite:`cite-Ciri19` :cite:`cite-Penn19`</span>
+
+<span class="sd">.. rubric References</span>
+
+<span class="sd">.. bibliography:: /references/xcpqc_citation.bib</span>
+<span class="sd">   :style: cpac_docs_style</span>
+<span class="sd">   :cited:</span>
+<span class="sd">   :keyprefix: cite-</span>
+<span class="sd">&quot;&quot;&quot;</span>  <span class="c1"># noqa E501  # pylint: disable=line-too-long</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BufferedReader</span>
+
+<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nb</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
+
+
+<span class="c1"># class OverlapInterface(IdentityInterface):</span>
+<span class="c1">#     &quot;&quot;&quot;XCP QC interface for overlap measures :cite:`cite-Ciri19` :cite:`cite-Penn19`.&quot;&quot;&quot;  # noqa E501  # pylint: disable=line-too-long</span>
+<span class="c1">#     def __init__(self, *args, **kwargs):</span>
+<span class="c1">#         super().__init__(*args,</span>
+<span class="c1">#                          fields=[&#39;Dice&#39;, &#39;Jaccard&#39;, &#39;CrossCorr&#39;, &#39;Coverage&#39;],</span>
+<span class="c1">#                          **kwargs)</span>
+
+
+<div class="viewcode-block" id="generate_desc_qc"><a class="viewcode-back" href="../../../user/xcpqc#CPAC.qc.xcp.generate_desc_qc">[docs]</a><span class="k">def</span> <span class="nf">generate_desc_qc</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">final</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function to generate an RBC-style QC CSV</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    original : str</span>
+<span class="sd">        path to original image</span>
+
+<span class="sd">    final : str</span>
+<span class="sd">        path to final image</span>
+
+<span class="sd">    coreg : nipype.interfaces.base.specs.DynamicTraitedSpec</span>
+<span class="sd">        Output of OverlapInterface (with attributes Dice, Jaccard,</span>
+<span class="sd">        CrossCorr, and Coverage)</span>
+
+<span class="sd">    norm : nipype.interfaces.base.specs.DynamicTraitedSpec</span>
+<span class="sd">        Output of OverlapInterface (with attributes Dice, Jaccard,</span>
+<span class="sd">        CrossCorr, and Coverage)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        path to XCP QC TSV</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;sub,ses,task,run,desc,space,meanFD,relMeansRMSMotion,&#39;</span>
+        <span class="s1">&#39;relMaxRMSMotion,meanDVInit,meanDVFinal,nVolCensored,nVolsRemoved,&#39;</span>
+        <span class="s1">&#39;motionDVCorrInit,motionDVCorrFinal,coregDice,coregJaccard,&#39;</span>
+        <span class="s1">&#39;coregCrossCorr,coregCoverage,normDice,normJaccard,normCrossCorr,&#39;</span>
+        <span class="s1">&#39;normCoverage&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">images</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;original&#39;</span><span class="p">:</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">original</span><span class="p">),</span>
+        <span class="s1">&#39;final&#39;</span><span class="p">:</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">final</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># `sub` through `space`</span>
+    <span class="n">final_filename</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">bids_entities</span> <span class="o">=</span> <span class="n">final_filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+    <span class="n">from_bids</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="nb">tuple</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="s1">&#39;-&#39;</span> <span class="ow">in</span> <span class="n">entity</span> <span class="k">else</span>
+        <span class="p">(</span><span class="s1">&#39;suffix&#39;</span><span class="p">,</span> <span class="n">entity</span><span class="p">)</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">bids_entities</span>
+    <span class="p">)</span>
+    <span class="n">from_bids</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">[</span><span class="n">from_bids</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">from_bids</span><span class="p">}</span>
+    <span class="k">if</span> <span class="s1">&#39;space&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">from_bids</span><span class="p">:</span>
+        <span class="n">from_bids</span><span class="p">[</span><span class="s1">&#39;space&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;native&#39;</span><span class="p">]</span>
+
+    <span class="c1"># `nVolCensored` &amp; `nVolsRemoved`</span>
+    <span class="k">if</span> <span class="n">images</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">images</span><span class="p">[</span><span class="s1">&#39;final&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="n">shape_diff</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shape_diff</span> <span class="o">=</span> <span class="s1">&#39;qc log not yet implemented&#39;</span>  <span class="c1"># TODO</span>
+    <span class="n">shape_params</span> <span class="o">=</span> <span class="p">{</span><span class="n">shape_key</span><span class="p">:</span> <span class="p">[</span><span class="n">shape_diff</span><span class="p">]</span> <span class="k">for</span>
+                    <span class="n">shape_key</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;nVolCensored&#39;</span><span class="p">,</span> <span class="s1">&#39;nVolsRemoved&#39;</span><span class="p">}}</span>
+
+    <span class="c1"># `meanFD (Jenkinson)`</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">final</span><span class="p">,</span> <span class="n">BufferedReader</span><span class="p">):</span>
+        <span class="n">final</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">qc_filepath</span> <span class="o">=</span> <span class="n">_generate_filename</span><span class="p">(</span><span class="n">final</span><span class="p">)</span>
+
+    <span class="n">desc_span</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_desc-.*_&#39;</span><span class="p">,</span> <span class="n">final</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">desc_span</span><span class="p">:</span>
+        <span class="n">desc_span</span> <span class="o">=</span> <span class="n">desc_span</span><span class="o">.</span><span class="n">span</span><span class="p">()</span>
+        <span class="n">final</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="n">final</span><span class="p">[:</span><span class="n">desc_span</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+            <span class="n">final</span><span class="p">[</span><span class="n">desc_span</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span>
+        <span class="p">])</span>
+    <span class="k">del</span> <span class="n">desc_span</span>
+    <span class="n">power_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;meanFD&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+        <span class="o">*</span><span class="n">final</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="s1">&#39;framewise-displacement-jenkinson.1D&#39;</span>
+    <span class="p">])))}</span>
+
+    <span class="c1"># `relMeansRMSMotion` &amp; `relMaxRMSMotion`</span>
+    <span class="n">mot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+        <span class="o">*</span><span class="n">final</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="s1">&#39;movement-parameters.1D&#39;</span>
+    <span class="p">]))</span><span class="o">.</span><span class="n">T</span>
+    <span class="c1"># Relative RMS of translation</span>
+    <span class="n">rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mot</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">mot</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">mot</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">rms_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;relMeansRMSMotion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rms</span><span class="p">)],</span>
+        <span class="s1">&#39;relMaxRMSMotion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rms</span><span class="p">)]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># `meanDVinit` &amp; `meanDVFinal`</span>
+    <span class="c1"># ?</span>
+
+    <span class="c1"># Overlap</span>
+    <span class="c1">## Coreg</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">{</span><span class="n">image</span><span class="p">:</span> <span class="n">image</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">}</span>
+    <span class="n">intersect</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">images</span><span class="p">[</span><span class="s1">&#39;final&#39;</span><span class="p">]</span>
+    <span class="n">vols</span> <span class="o">=</span> <span class="p">{</span><span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">image</span><span class="p">])</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">}</span>
+    <span class="n">vol_intersect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">intersect</span><span class="p">)</span>
+    <span class="n">vol_sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">vols</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">vol_union</span> <span class="o">=</span> <span class="n">vol_sum</span> <span class="o">-</span> <span class="n">vol_intersect</span>
+    <span class="n">overlap_coreg_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;coregDice&#39;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">vol_intersect</span> <span class="o">/</span> <span class="n">vol_sum</span><span class="p">,</span>
+        <span class="s1">&#39;coregJaccard&#39;</span><span class="p">:</span> <span class="n">vol_intersect</span> <span class="o">/</span> <span class="n">vol_union</span><span class="p">,</span>
+        <span class="s1">&#39;coregCrossCorr&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span>
+            <span class="n">images</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">],</span>
+            <span class="n">images</span><span class="p">[</span><span class="s1">&#39;final&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="s1">&#39;coregCoverage&#39;</span><span class="p">:</span> <span class="n">vol_intersect</span> <span class="o">/</span> <span class="nb">min</span><span class="p">(</span><span class="n">vols</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="p">}</span>
+
+    <span class="n">qc_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">from_bids</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">power_params</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">rms_params</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">shape_params</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">overlap_coreg_params</span>
+    <span class="p">}</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">qc_dict</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">qc_filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qc_filepath</span></div>
+
+
+<span class="k">def</span> <span class="nf">_generate_filename</span><span class="p">(</span><span class="n">final</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function to generate an XCP QC filename</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    final : str</span>
+<span class="sd">        filepath of input</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        QC filepath</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;_desc-&#39;</span> <span class="ow">in</span> <span class="n">final</span><span class="p">:</span>
+        <span class="n">delimiter</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_desc-.*_&#39;</span><span class="p">,</span> <span class="n">final</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+        <span class="n">desc_parts</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+        <span class="n">desc_parts</span> <span class="o">=</span> <span class="n">desc_parts</span><span class="p">[</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span>
+                     <span class="s1">&#39;_&#39;</span> <span class="ow">in</span> <span class="n">desc_parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">desc_string</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">part</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s1">&#39;desc-</span><span class="si">{</span><span class="n">delimiter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">+xcpqc&#39;</span><span class="p">,</span>
+            <span class="n">desc_parts</span><span class="p">,</span>
+            <span class="s1">&#39;bold.tsv&#39;</span>
+        <span class="p">]</span> <span class="k">if</span> <span class="n">part</span><span class="p">])</span>
+        <span class="k">del</span> <span class="n">delimiter</span><span class="p">,</span> <span class="n">desc_parts</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">desc_string</span> <span class="o">=</span> <span class="s1">&#39;desc-xcpqc_bold.tsv&#39;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+        <span class="o">*</span><span class="p">[</span><span class="n">part</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">final</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;desc&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">part</span><span class="p">],</span>
+        <span class="n">desc_string</span>
+    <span class="p">]))</span>
+
+
+<div class="viewcode-block" id="qc_xcp"><a class="viewcode-back" href="../../../user/xcpqc#CPAC.qc.xcp.qc_xcp">[docs]</a><span class="k">def</span> <span class="nf">qc_xcp</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    {&#39;name&#39;: &#39;qc_xcp&#39;,</span>
+<span class="sd">     &#39;config&#39;: [&#39;pipeline_setup&#39;, &#39;output_directory&#39;, &#39;quality_control&#39;],</span>
+<span class="sd">     &#39;switch&#39;: [&#39;generate_xcpqc_files&#39;],</span>
+<span class="sd">     &#39;option_key&#39;: &#39;None&#39;,</span>
+<span class="sd">     &#39;option_val&#39;: &#39;None&#39;,</span>
+<span class="sd">     &#39;inputs&#39;: [&#39;bold&#39;, &#39;desc-preproc_bold&#39;],</span>
+<span class="sd">     &#39;outputs&#39;: [&#39;xcp-qc&#39;]}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">original</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">original</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">],</span> <span class="n">original</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">final</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">],</span> <span class="n">final</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">)</span>
+
+    <span class="n">qc_file</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">,</span> <span class="s1">&#39;final&#39;</span><span class="p">],</span>
+                               <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;qc_file&#39;</span><span class="p">],</span>
+                               <span class="n">function</span><span class="o">=</span><span class="n">generate_desc_qc</span><span class="p">,</span>
+                               <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                      <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;xcpqc_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">original</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">],</span> <span class="n">original</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">],</span>
+               <span class="n">qc_file</span><span class="p">,</span> <span class="s1">&#39;original&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">final</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">],</span> <span class="n">final</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">],</span>
+               <span class="n">qc_file</span><span class="p">,</span> <span class="s1">&#39;final&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;xcp-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">qc_file</span><span class="p">,</span> <span class="s1">&#39;qc_file&#39;</span><span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index">
+              <img class="logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Welcome to CPAC’s developer documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.2.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.qc.xcp</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, C-PAC Team.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>

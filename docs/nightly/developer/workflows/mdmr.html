@@ -57,16 +57,13 @@
 <p>This workflow performs CWAS on a group of subjects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">string, optional</span></dt><dd><p>Name of the workflow.</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the workflow.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>cwas</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd><p>CWAS workflow.</p>
+<dd class="field-even"><p><strong>cwas</strong> – CWAS workflow.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nipype.pipeline.engine.Workflow</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -108,12 +105,10 @@ inputspec.parallel_nodes : integer
 <p>Detailed Workflow Graph:</p>
 <a class="reference internal image-reference" href="images/generated/cwas_detailed.png"><img alt="images/generated/cwas_detailed.png" src="images/generated/cwas_detailed.png" style="width: 500px;" /></a>
 <p class="rubric">References</p>
-<div role="list" class="citation-list">
-<div class="citation" id="rc1cc86c9c014-1" role="doc-biblioentry">
+<aside class="footnote brackets" id="id1" role="note">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>Shehzad Z, Kelly C, Reiss PT, Emerson JW, McMahon K, Copland DA, Castellanos FX, Milham MP. An Analytic Framework for Connectome-Wide Association Studies. Under Review.</p>
-</div>
-</div>
+</aside>
 </dd></dl>
 
 <dl class="py function">
@@ -123,18 +118,16 @@ inputspec.parallel_nodes : integer
 and a provided mask</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>subjects</strong><span class="classifier">dict of strings</span></dt><dd><p>A length <cite>N</cite> list of file paths of the nifti files of subjects</p>
-</dd>
-<dt><strong>mask_file</strong><span class="classifier">string</span></dt><dd><p>Path to a mask file in nifti format</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subjects</strong> (<em>dict of strings</em>) – A length <cite>N</cite> list of file paths of the nifti files of subjects</p></li>
+<li><p><strong>mask_file</strong> (<em>string</em>) – Path to a mask file in nifti format</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>joint_mask</strong><span class="classifier">string</span></dt><dd><p>Path to joint mask file in nifti format</p>
+<dd class="field-even"><p><strong>joint_mask</strong> – Path to joint mask file in nifti format</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -145,32 +138,24 @@ and a provided mask</p>
 <dd><p>Performs CWAS for a group of subjects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>subjects</strong><span class="classifier">dict of strings:strings</span></dt><dd><p>A length <cite>N</cite> dict of id and file paths of the nifti files of subjects</p>
-</dd>
-<dt><strong>mask_file</strong><span class="classifier">string</span></dt><dd><p>Path to a mask file in nifti format</p>
-</dd>
-<dt><strong>regressor_file</strong><span class="classifier">string</span></dt><dd><p>file path to regressor CSV or TSV file (phenotypic info)</p>
-</dd>
-<dt><strong>columns_string</strong><span class="classifier">string</span></dt><dd><p>comma-separated string of regressor labels</p>
-</dd>
-<dt><strong>permutations</strong><span class="classifier">integer</span></dt><dd><p>Number of pseudo f values to sample using a random permutation test</p>
-</dd>
-<dt><strong>voxel_range</strong><span class="classifier">ndarray</span></dt><dd><p>Indexes from range of voxels (inside the mask) to perform cwas on.
-Index ordering is based on the np.where(mask) command</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subjects</strong> (<em>dict of strings:strings</em>) – A length <cite>N</cite> dict of id and file paths of the nifti files of subjects</p></li>
+<li><p><strong>mask_file</strong> (<em>string</em>) – Path to a mask file in nifti format</p></li>
+<li><p><strong>regressor_file</strong> (<em>string</em>) – file path to regressor CSV or TSV file (phenotypic info)</p></li>
+<li><p><strong>columns_string</strong> (<em>string</em>) – comma-separated string of regressor labels</p></li>
+<li><p><strong>permutations</strong> (<em>integer</em>) – Number of pseudo f values to sample using a random permutation test</p></li>
+<li><p><strong>voxel_range</strong> (<em>ndarray</em>) – Indexes from range of voxels (inside the mask) to perform cwas on.
+Index ordering is based on the np.where(mask) command</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>F_file</strong><span class="classifier">string</span></dt><dd><p>.npy file of pseudo-F statistic calculated for every voxel</p>
-</dd>
-<dt><strong>p_file</strong><span class="classifier">string</span></dt><dd><p>.npy file of significance probabilities of pseudo-F values</p>
-</dd>
-<dt><strong>voxel_range</strong><span class="classifier">tuple</span></dt><dd><p>Passed on by the voxel_range provided in parameters, used to make parallelization
-easier</p>
-</dd>
-</dl>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>F_file</strong> (<em>string</em>) – .npy file of pseudo-F statistic calculated for every voxel</p></li>
+<li><p><strong>p_file</strong> (<em>string</em>) – .npy file of significance probabilities of pseudo-F values</p></li>
+<li><p><strong>voxel_range</strong> (<em>tuple</em>) – Passed on by the voxel_range provided in parameters, used to make parallelization
+easier</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>

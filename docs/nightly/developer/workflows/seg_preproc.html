@@ -56,16 +56,13 @@
 <dd><p>Raise exception if regressor fie is empty.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>in_file</strong><span class="classifier">nii file (string)</span></dt><dd><p>regressor file</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>in_file</strong> (<em>nii file</em><em> (</em><em>string</em><em>)</em>) – regressor file</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>in_file</strong><span class="classifier">string</span></dt><dd><p>return same file</p>
+<dd class="field-even"><p><strong>in_file</strong> – return same file</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -77,16 +74,13 @@
 white matter and gray matter mask based on provided template, if selected to do so.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>wf_name</strong><span class="classifier">string</span></dt><dd><p>name of the workflow</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – name of the workflow</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>seg_preproc_templated_based</strong><span class="classifier">workflow</span></dt><dd><p>Workflow Object for Segmentation Workflow</p>
+<dd class="field-even"><p><strong>seg_preproc_templated_based</strong> – Workflow Object for Segmentation Workflow</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>workflow</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -120,18 +114,16 @@ white matter and gray matter mask based on provided template, if selected to do 
 <dd><p>Returns eroded tissue segment mask</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>roi_mask</strong><span class="classifier">string</span></dt><dd><p>Path to binarized segment (ROI) mask</p>
-</dd>
-<dt><strong>erosion_prop</strong><span class="classifier">float</span></dt><dd><p>Proportion of erosion segment mask</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>roi_mask</strong> (<em>string</em>) – Path to binarized segment (ROI) mask</p></li>
+<li><p><strong>erosion_prop</strong> (<em>float</em>) – Proportion of erosion segment mask</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>eroded_roi_mask</strong><span class="classifier">string</span></dt><dd><p>Path to eroded segment mask</p>
+<dd class="field-even"><p><strong>eroded_roi_mask</strong> – Path to eroded segment mask</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -142,22 +134,19 @@ white matter and gray matter mask based on provided template, if selected to do 
 <dd><p>run antsJointLabelFusion.sh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>anatomical_brain</strong><span class="classifier">string (nifti file)</span></dt><dd><p>Target image to be labeled.</p>
-</dd>
-<dt><strong>anatomical_brain_mask</strong><span class="classifier">string (nifti file)</span></dt><dd><p>Target mask image</p>
-</dd>
-<dt><strong>template_brain_list</strong><span class="classifier">list</span></dt><dd><p>Atlas to be warped to target image.</p>
-</dd>
-<dt><strong>template_segmentation_list</strong><span class="classifier">list</span></dt><dd><p>Labels corresponding to atlas.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>anatomical_brain</strong> (<em>string</em><em> (</em><em>nifti file</em><em>)</em>) – Target image to be labeled.</p></li>
+<li><p><strong>anatomical_brain_mask</strong> (<em>string</em><em> (</em><em>nifti file</em><em>)</em>) – Target mask image</p></li>
+<li><p><strong>template_brain_list</strong> (<em>list</em>) – Atlas to be warped to target image.</p></li>
+<li><p><strong>template_segmentation_list</strong> (<em>list</em>) – Labels corresponding to atlas.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>multiatlas_Intensity</strong><span class="classifier">string (nifti file)</span></dt><dd></dd>
-<dt><strong>multiatlas_Labels</strong><span class="classifier">string (nifti file)</span></dt><dd></dd>
-</dl>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>multiatlas_Intensity</strong> (<em>string (nifti file)</em>)</p></li>
+<li><p><strong>multiatlas_Labels</strong> (<em>string (nifti file)</em>)</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -173,22 +162,18 @@ white matter and gray matter mask based on provided template, if selected to do 
 # We are temporarily maintaining our own copy for more granular control.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>roi_mask</strong><span class="classifier">string</span></dt><dd><p>Path to binarized segment mask</p>
-</dd>
-<dt><strong>skullstrip_mask</strong><span class="classifier">string</span></dt><dd><p>Path to skull-stripped brain mask</p>
-</dd>
-<dt><strong>mask_erosion_prop</strong><span class="classifier">float</span></dt><dd><p>Proportion of erosion skull-stripped brain mask</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>roi_mask</strong> (<em>string</em>) – Path to binarized segment mask</p></li>
+<li><p><strong>skullstrip_mask</strong> (<em>string</em>) – Path to skull-stripped brain mask</p></li>
+<li><p><strong>mask_erosion_prop</strong> (<em>float</em>) – Proportion of erosion skull-stripped brain mask</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>output_roi_mask</strong><span class="classifier">string</span></dt><dd><p>Path to eroded segment mask</p>
-</dd>
-<dt><strong>eroded_skullstrip_mask</strong><span class="classifier">string</span></dt><dd><p>Path to eroded skull-stripped brain mask</p>
-</dd>
-</dl>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>output_roi_mask</strong> (<em>string</em>) – Path to eroded segment mask</p></li>
+<li><p><strong>eroded_skullstrip_mask</strong> (<em>string</em>) – Path to eroded skull-stripped brain mask</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -201,22 +186,20 @@ based off of FreeSurferColorLUT <a class="reference external" href="https://surf
 or user provided label value</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>multiatlas_Labels</strong><span class="classifier">string (nifti file)</span></dt><dd></dd>
-<dt><strong>csf_label</strong><span class="classifier">list</span></dt><dd><p>a list of integer label values corresponding to CSF in multiatlas file</p>
-</dd>
-<dt><strong>gm_label</strong><span class="classifier">list</span></dt><dd><p>a list of integer label value corresponding to Gray Matter in multiatlas file</p>
-</dd>
-<dt><strong>wm_label</strong><span class="classifier">list</span></dt><dd><p>a list of integer label value corresponding to White Matter in multiatlas file</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>multiatlas_Labels</strong> (<em>string</em><em> (</em><em>nifti file</em><em>)</em>) – </p></li>
+<li><p><strong>csf_label</strong> (<em>list</em>) – a list of integer label values corresponding to CSF in multiatlas file</p></li>
+<li><p><strong>gm_label</strong> (<em>list</em>) – a list of integer label value corresponding to Gray Matter in multiatlas file</p></li>
+<li><p><strong>wm_label</strong> (<em>list</em>) – a list of integer label value corresponding to White Matter in multiatlas file</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>csf_mask</strong><span class="classifier">string (nifti file)</span></dt><dd></dd>
-<dt><strong>gm_mask</strong><span class="classifier">string (nifti file)</span></dt><dd></dd>
-<dt><strong>wm_mask</strong><span class="classifier">string (nifti file)</span></dt><dd></dd>
-</dl>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>csf_mask</strong> (<em>string (nifti file)</em>)</p></li>
+<li><p><strong>gm_mask</strong> (<em>string (nifti file)</em>)</p></li>
+<li><p><strong>wm_mask</strong> (<em>string (nifti file)</em>)</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -227,16 +210,13 @@ or user provided label value</p>
 <dd><p>Returns the csf tissue class file from the list of segmented tissue class files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>tissue_class_files</strong><span class="classifier">list (string)</span></dt><dd><p>List of tissue class files</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>tissue_class_files</strong> (<em>list</em><em> (</em><em>string</em><em>)</em>) – List of tissue class files</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>file</strong><span class="classifier">string</span></dt><dd><p>Path to segment_seg_0.nii.gz is returned</p>
+<dd class="field-even"><p><strong>file</strong> – Path to segment_seg_0.nii.gz is returned</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -247,16 +227,13 @@ or user provided label value</p>
 <dd><p>Returns the gray matter tissue class file from the list of segmented tissue class files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>tissue_class_files</strong><span class="classifier">list (string)</span></dt><dd><p>List of tissue class files</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>tissue_class_files</strong> (<em>list</em><em> (</em><em>string</em><em>)</em>) – List of tissue class files</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>file</strong><span class="classifier">string</span></dt><dd><p>Path to segment_seg_1.nii.gz is returned</p>
+<dd class="field-even"><p><strong>file</strong> – Path to segment_seg_1.nii.gz is returned</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -267,16 +244,13 @@ or user provided label value</p>
 <dd><p>Returns the white matter tissue class file from the list of segmented tissue class files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>tissue_class_files</strong><span class="classifier">list (string)</span></dt><dd><p>List of tissue class files</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>tissue_class_files</strong> (<em>list</em><em> (</em><em>string</em><em>)</em>) – List of tissue class files</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>file</strong><span class="classifier">string</span></dt><dd><p>Path to segment_seg_2.nii.gz is returned</p>
+<dd class="field-even"><p><strong>file</strong> – Path to segment_seg_2.nii.gz is returned</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -288,16 +262,13 @@ or user provided label value</p>
 probability maps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>probability_maps</strong><span class="classifier">list (string)</span></dt><dd><p>List of Probability Maps</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>probability_maps</strong> (<em>list</em><em> (</em><em>string</em><em>)</em>) – List of Probability Maps</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>file</strong><span class="classifier">string</span></dt><dd><p>Path to segment_prob_0.nii.gz is returned</p>
+<dd class="field-even"><p><strong>file</strong> – Path to segment_prob_0.nii.gz is returned</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -308,16 +279,13 @@ probability maps</p>
 <dd><p>Returns the gray matter probability map from the list of segmented probability maps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>probability_maps</strong><span class="classifier">list (string)</span></dt><dd><p>List of Probability Maps</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>probability_maps</strong> (<em>list</em><em> (</em><em>string</em><em>)</em>) – List of Probability Maps</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>file</strong><span class="classifier">string</span></dt><dd><p>Path to segment_prob_1.nii.gz is returned</p>
+<dd class="field-even"><p><strong>file</strong> – Path to segment_prob_1.nii.gz is returned</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -328,16 +296,13 @@ probability maps</p>
 <dd><p>Returns the white matter probability map from the list of segmented probability maps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>probability_maps</strong><span class="classifier">list (string)</span></dt><dd><p>List of Probability Maps</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>probability_maps</strong> (<em>list</em><em> (</em><em>string</em><em>)</em>) – List of Probability Maps</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>file</strong><span class="classifier">string</span></dt><dd><p>Path to segment_prob_2.nii.gz is returned</p>
+<dd class="field-even"><p><strong>file</strong> – Path to segment_prob_2.nii.gz is returned</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -351,26 +316,21 @@ of the prior tissue with probability maps, thresholding and binarizing
 it and creating a mask that is used in further analysis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>wf_name</strong><span class="classifier">string</span></dt><dd><p>Workflow Name</p>
-</dd>
-<dt><strong>use_priors</strong><span class="classifier">boolean</span></dt><dd><p>Whether or not to use template-space tissue priors to further refine
-the resulting segmentation tissue masks.</p>
-</dd>
-<dt><strong>use_threshold</strong><span class="classifier">list</span></dt><dd><p>Choose threshold to further refine
-the resulting segmentation tissue masks.</p>
-</dd>
-<dt><strong>use_erosion</strong><span class="classifier">boolean</span></dt><dd><p>Whether or not to erode the resulting segmentation tissue masks.</p>
-</dd>
-<dt><strong>use_ants</strong><span class="classifier">boolean</span></dt><dd><p>Whether or not to use ANTs or FSL for transform application.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wf_name</strong> (<em>string</em>) – Workflow Name</p></li>
+<li><p><strong>use_priors</strong> (<em>boolean</em>) – Whether or not to use template-space tissue priors to further refine
+the resulting segmentation tissue masks.</p></li>
+<li><p><strong>use_threshold</strong> (<em>list</em>) – Choose threshold to further refine
+the resulting segmentation tissue masks.</p></li>
+<li><p><strong>use_erosion</strong> (<em>boolean</em>) – Whether or not to erode the resulting segmentation tissue masks.</p></li>
+<li><p><strong>use_ants</strong> (<em>boolean</em>) – Whether or not to use ANTs or FSL for transform application.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>preproc</strong><span class="classifier">workflow</span></dt><dd><p>Workflow Object for process_segment_map Workflow</p>
+<dd class="field-even"><p><strong>preproc</strong> – Workflow Object for process_segment_map Workflow</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>workflow</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
