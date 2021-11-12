@@ -58,18 +58,21 @@ followed by computing Kendall’s coefficient concordance(KCC) of a
 timeseries with its neighbours</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>in_file</strong> (<em>nifti file</em>) – 4D EPI File</p></li>
-<li><p><strong>mask_file</strong> (<em>nifti file</em>) – Mask of the EPI File(Only Compute ReHo of voxels in the mask)</p></li>
-<li><p><strong>cluster_size</strong> (<em>integer</em>) – for a brain voxel the number of neighbouring brain voxels to use for
-KCC.</p></li>
-</ul>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_file</strong><span class="classifier">nifti file</span></dt><dd><p>4D EPI File</p>
+</dd>
+<dt><strong>mask_file</strong><span class="classifier">nifti file</span></dt><dd><p>Mask of the EPI File(Only Compute ReHo of voxels in the mask)</p>
+</dd>
+<dt><strong>cluster_size</strong><span class="classifier">integer</span></dt><dd><p>for a brain voxel the number of neighbouring brain voxels to use for
+KCC.</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>out_file</strong> – ReHo map of the input EPI image</p>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out_file</strong><span class="classifier">nifti file</span></dt><dd><p>ReHo map of the input EPI image</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nifti file</p>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -81,13 +84,15 @@ KCC.</p></li>
 <p>This workflow computes the ReHo map, z-score on map</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong> – </p>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>reHo</strong> – Regional Homogeneity Workflow</p>
+<dd class="field-even"><dl class="simple">
+<dt><strong>reHo</strong><span class="classifier">workflow</span></dt><dd><p>Regional Homogeneity Workflow</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>workflow</p>
+</dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -125,10 +130,12 @@ KCC.</p></li>
 <p>Detailed Workflow Graph:</p>
 <a class="reference internal image-reference" href="images/generated/reho_detailed.png"><img alt="images/generated/reho_detailed.png" src="images/generated/reho_detailed.png" style="width: 500px;" /></a>
 <p class="rubric">References</p>
-<aside class="footnote brackets" id="id1" role="note">
+<div role="list" class="citation-list">
+<div class="citation" id="ra03941d88f18-1" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>Zang, Y., Jiang, T., Lu, Y., He, Y.,  Tian, L. (2004). Regional homogeneity approach to fMRI data analysis. NeuroImage, 22(1), 394, 400. doi:10.1016/j.neuroimage.2003.12.030</p>
-</aside>
+</div>
+</div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CPAC</span> <span class="kn">import</span> <span class="n">reho</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span> <span class="o">=</span> <span class="n">reho</span><span class="o">.</span><span class="n">create_reho</span><span class="p">(</span><span class="s1">&#39;reho&#39;</span><span class="p">)</span>
@@ -147,13 +154,16 @@ KCC.</p></li>
 time-series in the input matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>timeseries_matrix</strong> (<em>ndarray</em>) – A matrix of ranks of a subset subject’s brain voxels</p>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>timeseries_matrix</strong><span class="classifier">ndarray</span></dt><dd><p>A matrix of ranks of a subset subject’s brain voxels</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>kcc</strong> – Kendall’s coefficient of concordance on the given input matrix</p>
+<dd class="field-even"><dl class="simple">
+<dt><strong>kcc</strong><span class="classifier">float</span></dt><dd><p>Kendall’s coefficient of concordance on the given input matrix</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -165,16 +175,17 @@ time-series in the input matrix</p>
 mean and std deviation to alff workflow nodes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mean</strong> (<em>string</em>) – mean value in string format</p></li>
-<li><p><strong>std_dev</strong> (<em>string</em>) – std deviation value in string format</p></li>
-</ul>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mean</strong><span class="classifier">string</span></dt><dd><p>mean value in string format</p>
+</dd>
+<dt><strong>std_dev</strong><span class="classifier">string</span></dt><dd><p>std deviation value in string format</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>op_string</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-even"><dl class="simple">
+<dt><strong>op_string</strong><span class="classifier">string</span></dt><dd></dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
