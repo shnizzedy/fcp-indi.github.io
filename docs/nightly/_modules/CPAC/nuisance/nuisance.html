@@ -150,37 +150,29 @@
                     <span class="n">custom_file_paths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">censor_file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gathers the various nuisance regressors together into a single tab-</span>
-<span class="sd">    separated values file that is an appropriate for input into</span>
-<span class="sd">    3dTproject</span>
+<span class="sd">    Gathers the various nuisance regressors together into a single tab separated values file that is an appropriate for</span>
+<span class="sd">    input into 3dTproject</span>
 
-<span class="sd">    :param functional_file_path: path to file that the regressors are</span>
-<span class="sd">        being calculated for, is used to calculate the length of the</span>
-<span class="sd">        regressors for error checking and in particular for calculating</span>
-<span class="sd">        spike regressors</span>
-<span class="sd">    :param output_file_path: path to output TSV that will contain the</span>
-<span class="sd">        various nuisance regressors as columns</span>
-<span class="sd">    :param grey_matter_summary_file_path: path to TSV that includes</span>
-<span class="sd">        summary of grey matter time courses, e.g. output of</span>
+<span class="sd">    :param functional_file_path: path to file that the regressors are being calculated for, is used to calculate</span>
+<span class="sd">           the length of the regressors for error checking and in particular for calculating spike regressors</span>
+<span class="sd">    :param output_file_path: path to output TSV that will contain the various nuisance regressors as columns</span>
+<span class="sd">    :param grey_matter_summary_file_path: path to TSV that includes summary of grey matter time courses, e.g. output of</span>
 <span class="sd">        mask_summarize_time_course</span>
-<span class="sd">    :param white_matter_summary_file_path: path to TSV that includes</span>
-<span class="sd">        summary of white matter time courses, e.g. output of</span>
-<span class="sd">        mask_summarize_time_course</span>
-<span class="sd">    :param csf_summary_file_path: path to TSV that includes summary of</span>
-<span class="sd">        csf time courses, e.g. output of mask_summarize_time_course</span>
-<span class="sd">    :param acompcor_file_path: path to TSV that includes acompcor time</span>
-<span class="sd">        courses, e.g. output of mask_summarize_time_course</span>
-<span class="sd">    :param tcompcor_file_path: path to TSV that includes tcompcor time</span>
-<span class="sd">        courses, e.g. output of mask_summarize_time_course</span>
-<span class="sd">    :param global_summary_file_path: path to TSV that includes summary</span>
-<span class="sd">        of global time courses, e.g. output of mask_summarize_time_course</span>
-<span class="sd">    :param motion_parameters_file_path: path to TSV that includes</span>
-<span class="sd">        motion parameters</span>
+<span class="sd">    :param white_matter_summary_file_path: path to TSV that includes summary of white matter time courses, e.g. output</span>
+<span class="sd">        of mask_summarize_time_course</span>
+<span class="sd">    :param csf_summary_file_path: path to TSV that includes summary of csf time courses, e.g. output</span>
+<span class="sd">        of mask_summarize_time_course</span>
+<span class="sd">    :param acompcor_file_path: path to TSV that includes acompcor time courses, e.g. output</span>
+<span class="sd">        of mask_summarize_time_course</span>
+<span class="sd">    :param tcompcor_file_path: path to TSV that includes tcompcor time courses, e.g. output</span>
+<span class="sd">        of mask_summarize_time_course</span>
+<span class="sd">    :param global_summary_file_path: path to TSV that includes summary of global time courses, e.g. output</span>
+<span class="sd">        of mask_summarize_time_course</span>
+<span class="sd">    :param motion_parameters_file_path: path to TSV that includes motion parameters</span>
 <span class="sd">    :param custom_file_paths: path to CSV/TSV files to use as regressors</span>
-<span class="sd">    :param censor_file_path: path to TSV with a single column with &#39;1&#39;s</span>
-<span class="sd">        for indices that should be retained and &#39;0&#39;s for indices that</span>
-<span class="sd">        should be censored</span>
-<span class="sd">    :return: out_file (str), n_vols_censored (int)</span>
+<span class="sd">    :param censor_file_path: path to TSV with a single column with 1&#39;s for indices that should be retained and 0&#39;s</span>
+<span class="sd">              for indices that should be censored</span>
+<span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Basic checks for the functional image</span>
@@ -461,7 +453,7 @@
         <span class="n">nuisance_regressors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nuisance_regressors</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">ofd</span><span class="p">,</span> <span class="n">nuisance_regressors</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">output_file_path</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">censor_indices</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output_file_path</span>
 
 
 <div class="viewcode-block" id="create_regressor_workflow"><a class="viewcode-back" href="../../../developer/workflows/nuisance#CPAC.nuisance.create_regressor_workflow">[docs]</a><span class="k">def</span> <span class="nf">create_regressor_workflow</span><span class="p">(</span><span class="n">nuisance_selectors</span><span class="p">,</span>
@@ -746,8 +738,7 @@
         <span class="s1">&#39;tr&#39;</span><span class="p">,</span>
     <span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;inputspec&#39;</span><span class="p">)</span>
 
-    <span class="n">outputspec</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;regressors_file_path&#39;</span><span class="p">,</span>
-                                                        <span class="s1">&#39;n_vols_censored&#39;</span><span class="p">]),</span>
+    <span class="n">outputspec</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;regressors_file_path&#39;</span><span class="p">]),</span>
                          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;outputspec&#39;</span><span class="p">)</span>
 
     <span class="n">functional_mean</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span>
@@ -1406,7 +1397,7 @@
                      <span class="s1">&#39;motion_parameters_file_path&#39;</span><span class="p">,</span>
                      <span class="s1">&#39;custom_file_paths&#39;</span><span class="p">,</span>
                      <span class="s1">&#39;censor_file_path&#39;</span><span class="p">],</span>
-        <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="s1">&#39;n_vols_censored&#39;</span><span class="p">],</span>
+        <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
         <span class="n">function</span><span class="o">=</span><span class="n">gather_nuisance</span><span class="p">,</span>
         <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;build_nuisance_regressors&quot;</span><span class="p">)</span>
@@ -1479,8 +1470,6 @@
 
     <span class="n">nuisance_wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">build_nuisance_regressors</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
                         <span class="n">outputspec</span><span class="p">,</span> <span class="s1">&#39;regressors_file_path&#39;</span><span class="p">)</span>
-    <span class="n">nuisance_wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">build_nuisance_regressors</span><span class="p">,</span> <span class="s1">&#39;n_vols_censored&#39;</span><span class="p">,</span>
-                        <span class="n">outputspec</span><span class="p">,</span> <span class="s1">&#39;n_vols_censored&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">nuisance_wf</span></div>
 
@@ -2715,7 +2704,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>
