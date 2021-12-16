@@ -37,7 +37,7 @@
           <a href="../subject_list_config" title="Setting Up A Data Configuration File (Participant/Subject List)"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.3.dev Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index" accesskey="U">Welcome to C-PAC’s user guide!</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Setting Up A Pipeline Configuration</a></li> 
       </ul>
     </div>  
@@ -333,43 +333,8 @@
 <section id="why-a-list">
 <h3>Why a list?<a class="headerlink" href="#why-a-list" title="Permalink to this headline">¶</a></h3>
 <p>You may notice as you learn about the settings for various outputs that many of the values for C-PAC’s configurable settings are stored in lists (i.e., multiple values are separated by commas and surrounded by square brackets).  Such lists containing <code class="docutils literal notranslate"><span class="pre">On``s</span> <span class="pre">and</span> <span class="pre">``Off``s</span> <span class="pre">(for</span> <span class="pre">``True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> respectively) allow you to toggle on multiple options at the same time, and branch a pipeline into two different analysis strategies. See the <a class="reference external" href="http://fcp-indi.github.io/docs/developer/workflows/cpac_pipeline.html">developer documentation</a> for more information about how lists are used in C-PAC.</p>
-</section>
-</section>
-<section id="configurable-settings">
-<h2>Configurable Settings<a class="headerlink" href="#configurable-settings" title="Permalink to this headline">¶</a></h2>
-<div class="flowchart-container"><object data="../_static/flowcharts/pipeline-individual.svg" type="image/svg+xml"></object></div><section id="data-management-and-environment-settings">
-<h3>Data Management and Environment Settings<a class="headerlink" href="#data-management-and-environment-settings" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><a class="reference internal" href="../compute_config"><span class="doc">Computer Settings</span></a></p></li>
-<li><p><a class="reference internal" href="../output_config"><span class="doc">Output Settings</span></a></p></li>
-</ul>
-</section>
-<section id="pre-and-post-processing">
-<h3>Pre- and post-processing<a class="headerlink" href="#pre-and-post-processing" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><a class="reference internal" href="../anat"><span class="doc">Anatomical Preprocessing</span></a></p></li>
-<li><p><a class="reference internal" href="../func"><span class="doc">Functional Preprocessing</span></a></p></li>
-<li><p><a class="reference internal" href="../nuisance"><span class="doc">Nuisance Corrections</span></a></p></li>
-<li><p><a class="reference internal" href="../tse"><span class="doc">Time Series Extraction</span></a></p></li>
-<li><p><a class="reference internal" href="../after_warp"><span class="doc">After Warp Settings</span></a></p></li>
-</ul>
-</section>
-<section id="derivatives">
-<h3>Derivatives<a class="headerlink" href="#derivatives" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><a class="reference internal" href="../sca"><span class="doc">Seed-based Correlation Analysis (SCA) and Dual Regression</span></a> - Analyze the connectivity between brain regions.</p></li>
-<li><p><a class="reference internal" href="../vmhc"><span class="doc">Voxel-mirrored Homotopic Connectivity (VMHC)</span></a> - Investigate connectivity between hemispheres.</p></li>
-<li><p><a class="reference internal" href="../alff"><span class="doc">Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (fALFF)</span></a> - Measure the power of slow fluctuations in brain activity.</p></li>
-<li><p><a class="reference internal" href="../reho"><span class="doc">Regional Homogeneity (ReHo)</span></a> - Measure the similarity of activity patterns across neighboring voxels.</p></li>
-<li><p><a class="reference internal" href="../centrality"><span class="doc">Network Centrality</span></a> - Analyze the structure of functional networks.</p></li>
-</ul>
-</section>
-<section id="quality-control">
-<h3>Quality Control<a class="headerlink" href="#quality-control" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><a class="reference internal" href="../qc_interface"><span class="doc">QC Pages</span></a> - Visual Data Quality Control</p></li>
-<li><p><a class="reference internal" href="../xcpqc"><span class="doc">XCP QC files</span></a> - eXtensible Connectivity Pipeline-style quality control files</p></li>
-</ul>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 </section>
 </section>
@@ -387,6 +352,7 @@
   <h3><a href="../../index">Table of Contents</a></h3>
   <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index#welcome-to-c-pac-s-user-guide">Welcome to C-PAC’s user guide!</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index#the-c-pac-mission">The C-PAC Mission</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index#latest-release-version-1-8-2-beta-dec-02-2021">Latest Release: Version 1.8.2 Beta (Dec 02, 2021)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index#added">Added</a></li>
@@ -405,14 +371,9 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#design-a-pipeline">Design A Pipeline</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-a-text-editor">Using a Text Editor</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#why-a-list">Why a list?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#why-a-list">Why a list?</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#configurable-settings">Configurable Settings</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#data-management-and-environment-settings">Data Management and Environment Settings</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#pre-and-post-processing">Pre- and post-processing</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#derivatives">Derivatives</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#quality-control">Quality Control</a></li>
 </ul>
 </li>
 </ul>
@@ -430,8 +391,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../developer/index">Welcome to CPAC’s developer documentation!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../developer/index#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/index">Developer Documentation</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -464,7 +424,7 @@
           <a href="../subject_list_config" title="Setting Up A Data Configuration File (Participant/Subject List)"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.3.dev Beta documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index" >Welcome to C-PAC’s user guide!</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Setting Up A Pipeline Configuration</a></li> 
       </ul>
     </div>
