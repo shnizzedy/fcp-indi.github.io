@@ -62,11 +62,12 @@
 </div></blockquote>
 <p>When a developer creates or modifies a Node in C-PAC, a <code class="docutils literal notranslate"><span class="pre">mem_gb</span></code> and <code class="docutils literal notranslate"><span class="pre">n_procs</span></code> argument should be provided unless the respective defaults of 0.2 and None (number of available system cores) are expected to be sufficient. When testing, the <code class="docutils literal notranslate"><span class="pre">mem_gb</span></code> and <code class="docutils literal notranslate"><span class="pre">n_procs</span></code> arguments should be adjusted if the observed memory and/or thread usage of a Node exceeds the estimate.</p>
 <p>For nodes that will use a varying amount of memory depending on the node’s input data, the optional parameter <code class="docutils literal notranslate"><span class="pre">mem_x</span></code> takes a tuple of <code class="docutils literal notranslate"><span class="pre">(memory</span> <span class="pre">multiplier,</span> <span class="pre">input</span> <span class="pre">file,</span> <span class="pre">multiplier</span> <span class="pre">mode)</span></code> where <code class="docutils literal notranslate"><span class="pre">memory</span> <span class="pre">multiplier</span></code> is a number and <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">file</span></code> is the string name of the Node input to multiply such that the memory estimate returned by the <code class="docutils literal notranslate"><span class="pre">mem_gb</span></code> attribute is the <code class="docutils literal notranslate"><span class="pre">mem_gb</span></code> argument plus <code class="docutils literal notranslate"><span class="pre">memory</span> <span class="pre">multiplier</span></code> times the dimensions of the <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">file</span></code> as specified in the <code class="docutils literal notranslate"><span class="pre">multiplier</span> <span class="pre">mode</span></code> (<code class="docutils literal notranslate"><span class="pre">xyzt</span></code> (spatial × temporal; default), <code class="docutils literal notranslate"><span class="pre">xyz</span></code> (spatial), or just <code class="docutils literal notranslate"><span class="pre">t</span></code> (temporal)).</p>
-<div class="admonition note">
+<blockquote>
+<div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">mem_x</span></code> is a new parameter in C-PAC v1.8.1 and subject to change in future releases as we continue to <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/issues/1509">develop methods for setting data- and operation-dependent memory estimates</a>.</p>
 </aside>
-<p>—</p>
+</div></blockquote>
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node" title="Permalink to this definition">¶</a></dt>
@@ -794,6 +795,10 @@ and methods all Interface objects should have.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://nipype.readthedocs.io/en/1.5.1/devel/interface_specs.html">Nipype: Interface Specifications</a></p>
+</aside>
 <dl class="py method">
 <dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/interfaces/base/core#Interface.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nipype.interfaces.base.core.Interface.__init__" title="Permalink to this definition">¶</a></dt>
@@ -840,11 +845,6 @@ Only applies to interfaces being run within a workflow context.</p>
 
 </dd></dl>
 
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference external" href="https://nipype.readthedocs.io/en/1.5.1/devel/interface_specs.html">Nipype: Interface Specifications</a></p>
-</aside>
-<hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.interfaces.function.</span></span><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function#Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function" title="Permalink to this definition">¶</a></dt>
@@ -1320,9 +1320,7 @@ status info to the callback logger</p>
 </dl>
 </dd></dl>
 
-<section id="module-CPAC.utils.monitoring.draw_gantt_chart">
-<span id="draw-gantt-chart"></span><h2>draw_gantt_chart<a class="headerlink" href="#module-CPAC.utils.monitoring.draw_gantt_chart" title="Permalink to this headline">¶</a></h2>
-<p>Module to draw an html gantt chart from logfile produced by
+<span class="target" id="module-CPAC.utils.monitoring.draw_gantt_chart"></span><p>Module to draw an html gantt chart from logfile produced by
 <code class="docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.log_nodes_cb()</span></code>.</p>
 <p>See <a class="reference external" href="https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.draw_gantt_chart.html">https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.draw_gantt_chart.html</a></p>
 <dl class="py function">
@@ -1493,7 +1491,6 @@ generate an interactive HTML chart.</p>
 </dd></dl>
 
 </section>
-</section>
 
 
             <div class="clearer"></div>
@@ -1512,10 +1509,7 @@ generate an interactive HTML chart.</p>
 <li class="toctree-l1 current"><a class="reference internal" href="index">Welcome to CPAC’s developer documentation!</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installation">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline">Pipeline Development</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Nodes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-CPAC.utils.monitoring.draw_gantt_chart">draw_gantt_chart</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_state">Random State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workflow_documentation">Workflow Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workflows/index">Workflows</a></li>
