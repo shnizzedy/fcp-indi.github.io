@@ -18,7 +18,7 @@
     
     <link rel="index" title="Index" href="../genindex" />
     <link rel="search" title="Search" href="../search" />
-    <link rel="next" title="Workflow Documentation" href="workflow_documentation" />
+    <link rel="next" title="Random State" href="random_state" />
     <link rel="prev" title="Pipeline Development" href="pipeline" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -31,7 +31,7 @@
           <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="workflow_documentation" title="Workflow Documentation"
+          <a href="random_state" title="Random State"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="pipeline" title="Pipeline Development"
@@ -760,6 +760,162 @@ Priority goes to interface.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.interfaces.function.</span></span><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function#Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs arbitrary function as an interface</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="s1">&#39;def func(arg1, arg2=5): return arg1 + arg2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fi</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;arg2&#39;</span><span class="p">],</span> <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fi</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">function_str</span> <span class="o">=</span> <span class="n">func</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">arg1</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">out</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.always_run" title="CPAC.utils.interfaces.function.Function.always_run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">always_run</span></code></a></dt><dd><p>Should the interface be always run even if the inputs were not changed? Only applies to interfaces being run within a workflow context.</p>
+</dd>
+<dt><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.can_resume" title="CPAC.utils.interfaces.function.Function.can_resume"><code class="xref py py-obj docutils literal notranslate"><span class="pre">can_resume</span></code></a></dt><dd><p>Defines if the interface can reuse partial results after interruption.</p>
+</dd>
+<dt><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.version" title="CPAC.utils.interfaces.function.Function.version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">version</span></code></a></dt><dd><p>interfaces should implement a version property</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.aggregate_outputs" title="CPAC.utils.interfaces.function.Function.aggregate_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aggregate_outputs</span></code></a>([runtime, needed_outputs])</p></td>
+<td><p>Collate expected outputs and apply output traits validation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.help" title="CPAC.utils.interfaces.function.Function.help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">help</span></code></a>([returnhelp])</p></td>
+<td><p>Prints class help</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.input_spec" title="CPAC.utils.interfaces.function.Function.input_spec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_spec</span></code></a></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.interfaces.function.FunctionInputSpec</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.load_inputs_from_json" title="CPAC.utils.interfaces.function.Function.load_inputs_from_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_inputs_from_json</span></code></a>(json_file[, overwrite])</p></td>
+<td><p>A convenient way to load pre-set inputs from a JSON file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.output_spec" title="CPAC.utils.interfaces.function.Function.output_spec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_spec</span></code></a></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.interfaces.base.specs.DynamicTraitedSpec</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.run" title="CPAC.utils.interfaces.function.Function.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>([cwd, ignore_exception])</p></td>
+<td><p>Execute this interface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.utils.interfaces.function.Function.save_inputs_to_json" title="CPAC.utils.interfaces.function.Function.save_inputs_to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_inputs_to_json</span></code></a>(json_file)</p></td>
+<td><p>A convenient way to save current inputs to a JSON file.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function#Function.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input_names</strong><span class="classifier">single str or list or None</span></dt><dd><p>names corresponding to function inputs
+if <code class="docutils literal notranslate"><span class="pre">None</span></code>, derive input names from function argument names</p>
+</dd>
+<dt><strong>output_names</strong><span class="classifier">single str or list</span></dt><dd><p>names corresponding to function outputs (default: ‘out’).
+if list of length &gt; 1, has to match the number of outputs</p>
+</dd>
+<dt><strong>function</strong><span class="classifier">callable</span></dt><dd><p>callable python object. must be able to execute in an
+isolated namespace (possibly in concert with the <code class="docutils literal notranslate"><span class="pre">imports</span></code>
+parameter)</p>
+</dd>
+<dt><strong>imports</strong><span class="classifier">list of strings</span></dt><dd><p>list of import statements that allow the function to execute
+in an otherwise empty namespace</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.aggregate_outputs">
+<span class="sig-name descname"><span class="pre">aggregate_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.aggregate_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collate expected outputs and apply output traits validation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.always_run">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">always_run</span></span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.always_run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should the interface be always run even if the inputs were not changed?
+Only applies to interfaces being run within a workflow context.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.can_resume">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_resume</span></span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.can_resume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines if the interface can reuse partial results after interruption.
+Only applies to interfaces being run within a workflow context.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.help">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returnhelp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints class help</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.input_spec">
+<span class="sig-name descname"><span class="pre">input_spec</span></span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.input_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.interfaces.function.FunctionInputSpec</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.load_inputs_from_json">
+<span class="sig-name descname"><span class="pre">load_inputs_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.load_inputs_from_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenient way to load pre-set inputs from a JSON file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.output_spec">
+<span class="sig-name descname"><span class="pre">output_spec</span></span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.output_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.interfaces.base.specs.DynamicTraitedSpec</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_exception</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute this interface.</p>
+<p>This interface will not raise an exception if runtime.returncode is
+non-zero.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cwd</strong><span class="classifier">specify a folder where the interface should be run</span></dt><dd></dd>
+<dt><strong>inputs</strong><span class="classifier">allows the interface settings to be updated</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>results</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nipype.interfaces.base.support.InterfaceResult</span></code></span></dt><dd><p>A copy of the instance that was executed, provenance information and,
+if successful, results</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.save_inputs_to_json">
+<span class="sig-name descname"><span class="pre">save_inputs_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.save_inputs_to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenient way to save current inputs to a JSON file.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.version">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>interfaces should implement a version property</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.</span></span><span class="sig-name descname"><span class="pre">Workflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
@@ -1274,6 +1430,7 @@ generate an interactive HTML chart.</p>
 <li class="toctree-l3"><a class="reference internal" href="#module-CPAC.utils.monitoring.draw_gantt_chart">draw_gantt_chart</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="random_state">Random State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workflow_documentation">Workflow Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workflows/index">Workflows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="workflows/index#indices-and-tables">Indices and tables</a></li>
@@ -1308,7 +1465,7 @@ generate an interactive HTML chart.</p>
           <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="workflow_documentation" title="Workflow Documentation"
+          <a href="random_state" title="Random State"
              >next</a> |</li>
         <li class="right" >
           <a href="pipeline" title="Pipeline Development"
