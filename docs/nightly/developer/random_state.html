@@ -5,9 +5,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<meta content="0; url=./pipelines/default" http-equiv="refresh" />
 
-    <title>Filed under &#39;pipelines&#39; &#8212; C-PAC 1.8.3.dev Beta documentation</title>
+    <title>Random State &#8212; C-PAC 1.8.3.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -30,7 +29,7 @@
           <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.3.dev Beta documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Filed under 'pipelines'</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Random State</a></li> 
       </ul>
     </div>  
 
@@ -39,7 +38,22 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  
+  <section id="random-state">
+<h1>Random State<a class="headerlink" href="#random-state" title="Permalink to this headline">¶</a></h1>
+<p>When performing reproducibility/variability experiments, it is important to isolate sources of variability. One such source is random state.</p>
+<p>Users can fix the random state of C-PAC’s execution by specifying a random seed. When adding a Node that should accept a user-specified random seed, add</p>
+<ul class="simple">
+<li><p>the <code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.interfaces.base.core.Interface</span></code> and the corresponding flags to add/remove to set the random seed, or</p></li>
+<li><p>in the case of a <code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.interfaces.function.Function</span></code> Node, the Function node’s function and a function to apply to that function definition to set the random seed</p></li>
+</ul>
+<p>to <a href="#id1"><span class="problematic" id="id2">:py:function:`CPAC.pipeline.random_state.seed.random_seed_flags`</span></a>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.pipeline.random_state.seed.random_seed_flags">
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.random_state.seed.</span></span><span class="sig-name descname"><span class="pre">random_seed_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.pipeline.random_state.seed.random_seed_flags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
 
             <div class="clearer"></div>
           </div>
@@ -53,9 +67,9 @@
   <div>
     <h3><a href="../index">Table of Contents</a></h3>
     <ul>
-<li class="toctree-l1"><a class="reference internal" href="index">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/index">Welcome to CPAC’s developer documentation!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/index#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index">Welcome to CPAC’s developer documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index#indices-and-tables">Indices and tables</a></li>
 </ul>
 
   </div>
@@ -83,7 +97,7 @@
           <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.3.dev Beta documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Filed under 'pipelines'</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Random State</a></li> 
       </ul>
     </div>
 
