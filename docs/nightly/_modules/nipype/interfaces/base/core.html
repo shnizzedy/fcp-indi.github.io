@@ -96,7 +96,7 @@
 <span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext&quot;</span>
 
 
-<div class="viewcode-block" id="Interface"><a class="viewcode-back" href="../../../../developer/random_state#nipype.interfaces.base.core.Interface">[docs]</a><span class="k">class</span> <span class="nc">Interface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Interface"><a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface">[docs]</a><span class="k">class</span> <span class="nc">Interface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This is an abstract definition for Interface objects.</span>
 
 <span class="sd">    It provides no functionality.  It defines the necessary attributes</span>
@@ -131,7 +131,7 @@
         <span class="sd">&quot;&quot;&quot; Initializes outputs&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-<div class="viewcode-block" id="Interface.help"><a class="viewcode-back" href="../../../../developer/random_state#nipype.interfaces.base.core.Interface.help">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Interface.help"><a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface.help">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">help</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">returnhelp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Prints class help &quot;&quot;&quot;</span>
         <span class="n">allhelp</span> <span class="o">=</span> <span class="n">format_help</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
@@ -140,15 +140,15 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">allhelp</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># R1710</span></div>
 
-<div class="viewcode-block" id="Interface.__init__"><a class="viewcode-back" href="../../../../developer/random_state#nipype.interfaces.base.core.Interface.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Interface.__init__"><a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Subclasses must implement __init__&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Interface.run"><a class="viewcode-back" href="../../../../developer/random_state#nipype.interfaces.base.core.Interface.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Interface.run"><a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Execute the command.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Interface.aggregate_outputs"><a class="viewcode-back" href="../../../../developer/random_state#nipype.interfaces.base.core.Interface.aggregate_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runtime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">needed_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Interface.aggregate_outputs"><a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface.aggregate_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runtime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">needed_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Called to populate outputs&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 

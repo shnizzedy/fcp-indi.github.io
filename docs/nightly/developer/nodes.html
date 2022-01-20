@@ -760,6 +760,90 @@ Priority goes to interface.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nipype.interfaces.base.core.</span></span><span class="sig-name descname"><span class="pre">Interface</span></span><a class="reference internal" href="../_modules/nipype/interfaces/base/core#Interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nipype.interfaces.base.core.Interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is an abstract definition for Interface objects.</p>
+<p>It provides no functionality.  It defines the necessary attributes
+and methods all Interface objects should have.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="#nipype.interfaces.base.core.Interface.always_run" title="nipype.interfaces.base.core.Interface.always_run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">always_run</span></code></a></dt><dd><p>Should the interface be always run even if the inputs were not changed? Only applies to interfaces being run within a workflow context.</p>
+</dd>
+<dt><a class="reference internal" href="#nipype.interfaces.base.core.Interface.can_resume" title="nipype.interfaces.base.core.Interface.can_resume"><code class="xref py py-obj docutils literal notranslate"><span class="pre">can_resume</span></code></a></dt><dd><p>Defines if the interface can reuse partial results after interruption.</p>
+</dd>
+<dt><strong>input_spec</strong></dt><dd></dd>
+<dt><strong>output_spec</strong></dt><dd></dd>
+<dt><a class="reference internal" href="#nipype.interfaces.base.core.Interface.version" title="nipype.interfaces.base.core.Interface.version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">version</span></code></a></dt><dd><p>interfaces should implement a version property</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nipype.interfaces.base.core.Interface.aggregate_outputs" title="nipype.interfaces.base.core.Interface.aggregate_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aggregate_outputs</span></code></a>([runtime, needed_outputs])</p></td>
+<td><p>Called to populate outputs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nipype.interfaces.base.core.Interface.help" title="nipype.interfaces.base.core.Interface.help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">help</span></code></a>([returnhelp])</p></td>
+<td><p>Prints class help</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nipype.interfaces.base.core.Interface.run" title="nipype.interfaces.base.core.Interface.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>()</p></td>
+<td><p>Execute the command.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/interfaces/base/core#Interface.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nipype.interfaces.base.core.Interface.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclasses must implement __init__</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface.aggregate_outputs">
+<span class="sig-name descname"><span class="pre">aggregate_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/interfaces/base/core#Interface.aggregate_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nipype.interfaces.base.core.Interface.aggregate_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called to populate outputs</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface.always_run">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">always_run</span></span><a class="headerlink" href="#nipype.interfaces.base.core.Interface.always_run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should the interface be always run even if the inputs were not changed?
+Only applies to interfaces being run within a workflow context.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface.can_resume">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_resume</span></span><a class="headerlink" href="#nipype.interfaces.base.core.Interface.can_resume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines if the interface can reuse partial results after interruption.
+Only applies to interfaces being run within a workflow context.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface.help">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returnhelp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/interfaces/base/core#Interface.help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nipype.interfaces.base.core.Interface.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints class help</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/interfaces/base/core#Interface.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nipype.interfaces.base.core.Interface.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the command.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nipype.interfaces.base.core.Interface.version">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#nipype.interfaces.base.core.Interface.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>interfaces should implement a version property</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://nipype.readthedocs.io/en/1.5.1/devel/interface_specs.html">Nipype: Interface Specifications</a></p>
+</aside>
+<dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.interfaces.function.</span></span><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function#Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs arbitrary function as an interface</p>
