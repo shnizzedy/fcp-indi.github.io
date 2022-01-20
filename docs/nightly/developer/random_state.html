@@ -52,7 +52,7 @@
 <p>When performing reproducibility/variability experiments, it is important to isolate sources of variability. One such source is random state.</p>
 <p>Users can fix the random state of C-PAC’s execution by specifying a random seed. When adding a Node that should accept a user-specified random seed, add</p>
 <ul class="simple">
-<li><p>the <a class="reference external" href="https://nipype.readthedocs.io/en/1.5.1/devel/interface_specs.html"><cite>nipype.interfaces.base.core.Interface</cite></a> and the corresponding flags to add/remove to set the random seed, or</p></li>
+<li><p>the <a class="reference external" href="https://nipype.readthedocs.io/en/1.5.1/devel/interface_specs.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.interfaces.base.core.Interface</span></code></a> and the corresponding flags to add/remove to set the random seed, or</p></li>
 <li><p>in the case of a <a class="reference internal" href="nodes#CPAC.utils.interfaces.function.Function" title="CPAC.utils.interfaces.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.interfaces.function.Function</span></code></a> Node, the Function node’s function and a function to apply to that function definition to set the random seed</p></li>
 </ul>
 <p>to <a class="reference internal" href="#CPAC.pipeline.random_state.seed.random_seed_flags" title="CPAC.pipeline.random_state.seed.random_seed_flags"><code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.pipeline.random_state.seed.random_seed_flags</span></code></a>.</p>
