@@ -55,41 +55,6 @@
 <span class="w">    </span><span class="nt">random_seed</span><span class="p">:</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">acpc_alignment</span><span class="p">:</span>
-
-    <span class="n">run</span><span class="p">:</span> <span class="n">Off</span>
-
-    <span class="c1"># Run ACPC alignment before non-local means filtering or N4 bias</span>
-    <span class="c1"># correction</span>
-    <span class="n">run_before_preproc</span><span class="p">:</span> <span class="kc">True</span>
-
-    <span class="c1"># ACPC size of brain in z-dimension in mm.</span>
-    <span class="c1"># Default: 150mm for human data.</span>
-    <span class="n">brain_size</span><span class="p">:</span> <span class="mi">150</span>
-
-    <span class="c1"># Choose a tool to crop the FOV in ACPC alignment. </span>
-    <span class="c1"># Using FSL&#39;s robustfov or flirt command. </span>
-    <span class="c1"># Default: robustfov for human data, flirt for monkey data. </span>
-    <span class="n">FOV_crop</span><span class="p">:</span> <span class="n">robustfov</span>
-    
-    <span class="c1"># ACPC Target</span>
-    <span class="c1"># options: &#39;brain&#39; or &#39;whole-head&#39;</span>
-    <span class="c1">#   note: &#39;brain&#39; requires T1w_brain_ACPC_template below to be populated</span>
-    <span class="n">acpc_target</span><span class="p">:</span> <span class="s1">&#39;whole-head&#39;</span>
-
-    <span class="c1"># Run ACPC alignment on brain mask </span>
-    <span class="c1"># If the brain mask is in native space, turn it on</span>
-    <span class="c1"># If the brain mask is ACPC aligned, turn it off</span>
-    <span class="n">align_brain_mask</span><span class="p">:</span> <span class="n">Off</span>
-
-    <span class="c1"># ACPC aligned template</span>
-    <span class="n">T1w_ACPC_template</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">fsl</span><span class="o">/</span><span class="mf">5.0</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">standard</span><span class="o">/</span><span class="n">MNI152_T1_1mm</span><span class="o">.</span><span class="n">nii</span><span class="o">.</span><span class="n">gz</span>
-    <span class="n">T1w_brain_ACPC_template</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">fsl</span><span class="o">/</span><span class="mf">5.0</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">standard</span><span class="o">/</span><span class="n">MNI152_T1_1mm_brain</span><span class="o">.</span><span class="n">nii</span><span class="o">.</span><span class="n">gz</span>
-    <span class="n">T2w_ACPC_template</span><span class="p">:</span> <span class="kc">None</span>
-    <span class="n">T2w_brain_ACPC_template</span><span class="p">:</span> <span class="kc">None</span>
-
-</pre></div>
-</div>
 <p>or on the command line with <code class="docutils literal notranslate"><span class="pre">--random_seed</span> <span class="pre">$SEED</span></code>.</p>
 <p>Valid options are positive integers up to 2,147,483,647 or the word ‘random’ (which will set an integer in that range). If not specified, a seed will not be set, and each relevant process will run with an undocumented random seed.</p>
 <p>When a seed is set, a <code class="docutils literal notranslate"><span class="pre">random.log</span></code> file, including the constant seed and each node the seed was applied to, will be generated in the logging directory.</p>
