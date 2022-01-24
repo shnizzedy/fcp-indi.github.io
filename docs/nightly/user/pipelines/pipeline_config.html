@@ -256,6 +256,7 @@
 </aside>
 <p>C-PAC offers a graphical interface you can use to quickly and easily modify the default pipeline or create your own from scratch: <a class="reference external" href="https://fcp-indi.github.io/C-PAC_GUI/">https://fcp-indi.github.io/C-PAC_GUI/</a></p>
 <blockquote>
+<div><blockquote>
 <div><p>Currently the GUI creates a C-PAC v1.6.0 pipeline configuration file. This syntax persisted through v1.7.2 but is deprecated with the release of v1.8.0.</p>
 <p>If given a pipeline file in the older syntax, C-PAC v1.8 will attempt to convert the pipeline configuration file to the new syntax, saving the converted file in your output directory.</p>
 <p>An update to the GUI to create v1.8.0 syntax configuration files is underway.</p>
@@ -266,6 +267,7 @@
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="1.7-1.8-nesting-mappings"><span class="doc">Details about mapping the older syntax to the new.</span></a></p>
 </aside>
+</div></blockquote>
 <figure class="align-default">
 <img alt="../../_images/gui_home1.png" src="../../_images/gui_home1.png" />
 </figure>
@@ -400,56 +402,6 @@
 <li><p><a class="reference internal" href="../centrality"><span class="doc">Network Centrality</span></a> - Analyze the structure of functional networks.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="preconfig">Pre-configured Pipelines</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#default-the-default-pipeline">default: The Default Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#anat-only-default-with-anatomical-preprocessing-only">anat-only: Default with Anatomical Preprocessing Only</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#preproc-default-without-derivatives">preproc: Default without Derivatives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#ndmg-neurodata-s-ndmg-f-pipeline">ndmg: Neurodata’s ‘ndmg-f’ Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#fmriprep-options-fmriprep-options-pipeline">fmriprep-options: fmriprep-Options Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#rbc-options-reprobrainchart-options-pipeline">rbc-options: ReproBrainChart Options Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#benchmark-ants-c-pac-benchmark-with-ants-registration">benchmark-ANTS: C-PAC Benchmark with ANTs Registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#benchmark-fnirt-c-pac-benchmark-with-fsl-fnirt-registration">benchmark-FNIRT: C-PAC Benchmark with FSL FNIRT Registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preconfig#monkey-default-with-monkey-preprocessing">Monkey: Default with Monkey Preprocessing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="configurable-settings">Configurable Settings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../alff">ALFF and f/ALFF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reho">ReHo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../centrality">Network Centrality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sca">SCA/Dual Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vmhc">VMHC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pypeer">PyPEER Integration</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data-environment">Data Management and Environment Settings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../compute_config">Computer Settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../output_config">Output Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pre-and-post">Pre- and post-processing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../anat">Anatomical Preprocessing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../func">Functional Preprocessing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../nuisance">Nuisance Corrections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tse">Timeseries Extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tse#configuring-roi-time-series-extraction">Configuring ROI Time Series Extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../after_warp">After Warp Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="derivatives">Derivatives</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../sca">Seed-based Correlation Analysis (SCA) and Dual Regression - Analyze the connectivity between brain regions.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vmhc">Voxel-mirrored Homotopic Connectivity (VMHC) - Investigate connectivity between hemispheres.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../alff">Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (fALFF) - Measure the power of slow fluctuations in brain activity.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reho">Regional Homogeneity (ReHo) - Measure the similarity of activity patterns across neighboring voxels.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../centrality">Network Centrality - Analyze the structure of functional networks.</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="quality">Quality Control</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../qc_interface">QC Pages - Visual Data Quality Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../xcpqc">XCP QC files - eXtensible Connectivity Pipeline-style quality control files</a></li>
-</ul>
-</li>
-</ul>
 </div>
 <p class="rubric">Reference</p>
 <p id="bibtex-bibliography-user/pipelines/pipeline_config-1"><div class="citation bibtex" id="glossary-pomn11" role="doc-biblioentry">
