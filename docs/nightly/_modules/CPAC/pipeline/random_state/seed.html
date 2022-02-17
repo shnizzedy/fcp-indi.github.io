@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CPAC.pipeline.random_state.seed &#8212; C-PAC 1.8.3.dev Beta documentation</title>
+    <title>CPAC.pipeline.random_state.seed &#8212; C-PAC 1.8.4.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index">C-PAC 1.8.3.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.pipeline.random_state.seed</a></li> 
       </ul>
@@ -126,7 +126,7 @@
 <span class="sd">    &gt;&gt;&gt; all([isinstance(random_seed_flags()[key], dict) for key in [</span>
 <span class="sd">    ...     &#39;functions&#39;, &#39;interfaces&#39;]])</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; set_up_random_state(&#39;random&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; rs = set_up_random_state(&#39;random&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; list(random_seed_flags().keys())</span>
 <span class="sd">    [&#39;functions&#39;, &#39;interfaces&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; all([isinstance(random_seed_flags()[key], dict) for key in [</span>
@@ -178,38 +178,32 @@
     <span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">set_up_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">log_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Prepare C-PAC for random seed setting and logging</span>
+<span class="k">def</span> <span class="nf">set_up_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Set global random seed</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    seed : int, &#39;random&#39;, or None</span>
 
-<span class="sd">    log_dir : str, optional</span>
-
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    workflow</span>
+<span class="sd">    seed: int or None</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; from CPAC.pipeline.random_state import random_seed</span>
-<span class="sd">    &gt;&gt;&gt; set_up_random_state(&#39;random&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; isinstance(random_seed(), int)</span>
+<span class="sd">    &gt;&gt;&gt; isinstance(set_up_random_state(&#39;random&#39;), int)</span>
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; set_up_random_state(&#39;rando&#39;)</span>
 <span class="sd">    Traceback (most recent call last):</span>
 <span class="sd">    ValueError: Valid random seeds are positive integers up to 2147483647, &quot;random&quot;, or None, not rando</span>
 <span class="sd">    &gt;&gt;&gt; set_up_random_state(100)</span>
-<span class="sd">    &gt;&gt;&gt; random_seed()</span>
 <span class="sd">    100</span>
 <span class="sd">    &gt;&gt;&gt; set_up_random_state(0)</span>
 <span class="sd">    Traceback (most recent call last):</span>
 <span class="sd">    ValueError: Valid random seeds are positive integers up to 2147483647, &quot;random&quot;, or None, not 0</span>
 <span class="sd">    &gt;&gt;&gt; set_up_random_state(None)</span>
-<span class="sd">    &gt;&gt;&gt; random_seed()</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>  <span class="c1"># noqa E501  # pylint: disable=line-too-long</span>
+<span class="sd">    &#39;&#39;&#39;</span>  <span class="c1"># noqa: E501  # pylint: disable=line-too-long</span>
     <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">seed</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">=</span> <span class="n">random_random_seed</span><span class="p">()</span>
@@ -223,8 +217,16 @@
         <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
         <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seed</span>
-    <span class="k">if</span> <span class="n">log_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">log_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">random_seed</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">set_up_random_state_logger</span><span class="p">(</span><span class="n">log_dir</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Prepare C-PAC for logging random seed use.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    log_dir : str</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="n">log_dir</span><span class="o">=</span><span class="n">log_dir</span><span class="p">)</span>
     <span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;seed: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">())</span>
 </pre></div>
@@ -269,7 +271,7 @@
         <li class="right" >
           <a href="../../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index">C-PAC 1.8.3.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.pipeline.random_state.seed</a></li> 
       </ul>
