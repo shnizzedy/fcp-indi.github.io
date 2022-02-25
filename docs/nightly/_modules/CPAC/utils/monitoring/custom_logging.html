@@ -44,9 +44,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">CPAC.utils.docs</span> <span class="kn">import</span> <span class="n">docstring_parameter</span>
-
-
-<span class="n">MOCK_LOGGERS</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring.config</span> <span class="kn">import</span> <span class="n">MOCK_LOGGERS</span>
 
 
 <div class="viewcode-block" id="getLogger"><a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.getLogger">[docs]</a><span class="k">def</span> <span class="nf">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
@@ -91,7 +89,7 @@
 <span class="sd">        built-in level.&quot;&quot;&quot;</span>
         <span class="nd">@docstring_parameter</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
         <span class="k">def</span> <span class="nf">_log</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Log a message if logging level &gt;= {level}&quot;&quot;&quot;</span>
+            <span class="sd">&quot;&quot;&quot;Log a message if logging level &gt;= {level}. See `Logging Levels &lt;https://docs.python.org/3/library/logging.html#levels&gt;`_ for a list of levels.&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">logging</span><span class="p">,</span> <span class="n">level</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
                                                         <span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">):</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handlers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">baseFilename</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">log_file</span><span class="p">:</span>
