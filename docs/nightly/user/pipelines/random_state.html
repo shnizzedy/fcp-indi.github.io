@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Random State &#8212; C-PAC 1.8.4.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
@@ -46,6 +46,13 @@
 </pre></div>
 </div>
 <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">system_config</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1"># Random seed used to fix the state of execution.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># If unset, each process uses its own default.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># If set, a `random.log` file will be generated logging the random seed and each node to which that seed was applied.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># If set to a positive integer (up to 2147483647), that integer will be used to seed each process that accepts a random seed.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># If set to &#39;random&#39;, a random positive integer (up to 2147483647) will be generated and that seed will be used to seed each process that accepts a random seed.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">random_seed</span><span class="p">:</span><span class="w"></span>
 </pre></div>
 </div>
 <p>or on the command line with <code class="docutils literal notranslate"><span class="pre">--random_seed</span> <span class="pre">$SEED</span></code>.</p>

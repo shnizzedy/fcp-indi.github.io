@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Default pipeline configuration YAML file &#8212; C-PAC 1.8.4.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
@@ -87,8 +87,13 @@
 <span class="w">    </span><span class="c1"># Options: default, ndmg</span><span class="w"></span>
 <span class="w">    </span><span class="nt">output_tree</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="c1"># Generate quality control pages containing preprocessing and derivative outputs.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">generate_quality_control_images</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Quality control outputs</span><span class="w"></span>
+<span class="w">    </span><span class="nt">quality_control</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="c1"># Generate quality control pages containing preprocessing and derivative outputs.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">generate_quality_control_images</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+
+<span class="w">      </span><span class="c1"># Generate eXtensible Connectivity Pipeline-style quality control files</span><span class="w"></span>
+<span class="w">      </span><span class="nt">generate_xcpqc_files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 
 <span class="w">  </span><span class="nt">working_directory</span><span class="p">:</span><span class="w"></span>
 
@@ -119,6 +124,13 @@
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/crash</span><span class="w"></span>
 
 <span class="w">  </span><span class="nt">system_config</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1"># Random seed used to fix the state of execution.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># If unset, each process uses its own default.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># If set, a `random.log` file will be generated logging the random seed and each node to which that seed was applied.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># If set to a positive integer (up to 2147483647), that integer will be used to seed each process that accepts a random seed.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># If set to &#39;random&#39;, a random positive integer (up to 2147483647) will be generated and that seed will be used to seed each process that accepts a random seed.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">random_seed</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># Select Off if you intend to run CPAC on a single machine.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># If set to On, CPAC will attempt to submit jobs through the job scheduler / resource manager selected below.</span><span class="w"></span>
@@ -198,6 +210,7 @@
 <span class="w">  </span><span class="c1"># select those &#39;Freesurfer-&#39; labeled options further below in anatomical_preproc.</span><span class="w"></span>
 <span class="w">  </span><span class="nt">freesurfer</span><span class="p">:</span><span class="w"> </span>
 
+<span class="w">    </span><span class="c1"># If anatomical_preproc[&#39;brain_extraction&#39;][&#39;using&#39;] includes FreeSurfer-ABCD and this switch is On, C-PAC will automatically turn this switch Off to avoid running FreeSurfer twice unnecessarily</span><span class="w"></span>
 <span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># Add extra arguments to recon-all command</span><span class="w"></span>
