@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Installing CPAC &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <title>Continuous Integration &#8212; C-PAC 1.8.4.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -18,8 +18,7 @@
     
     <link rel="index" title="Index" href="../genindex" />
     <link rel="search" title="Search" href="../search" />
-    <link rel="next" title="Pipeline Development" href="pipeline" />
-    <link rel="prev" title="Developer Documentation" href="index" /> 
+    <link rel="prev" title="Testing CPAC" href="testing" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,14 +30,11 @@
           <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pipeline" title="Pipeline Development"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index" title="Developer Documentation"
+          <a href="testing" title="Testing CPAC"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" accesskey="U">Developer Documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Installing CPAC</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Continuous Integration</a></li> 
       </ul>
     </div>  
 
@@ -47,13 +43,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="installing-cpac">
-<span id="installation"></span><h1>Installing CPAC<a class="headerlink" href="#installing-cpac" title="Permalink to this headline">¶</a></h1>
-<section id="downloading-the-latest-version-of-cpac">
-<span id="install-cpac"></span><h2>Downloading the latest version of CPAC<a class="headerlink" href="#downloading-the-latest-version-of-cpac" title="Permalink to this headline">¶</a></h2>
-<p>This section describes how to download the latest developer version of CPAC</p>
-</section>
-</section>
+  <section id="continuous-integration">
+<h1>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h1>
+<p>Our continous integration flow relies on GitHub Actions, GitHub Container Registry, CircleCI and Docker Hub. GitHub Actions builds staging images based on changes to Dockerfiles and pushes those images to GitHub Container Registry. On each push, once staging images are built or determined to be up to date, GitHub Actions installs C-PAC into a development image for each variant (standard, lite, fMRIPrep-LTS, and ABCD-HCP). CircleCI runs tests in both Docker and Singularity for each of these images and generates a coverage report if all tests pass. On release, CircleCI also pushes production images to Docker Hub.</p>
+<div class="flowchart-container"><object data="../_static/flowcharts/CI-flow.svg" type="image/svg+xml"></object></div></section>
 
 
             <div class="clearer"></div>
@@ -70,7 +63,7 @@
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../user/index">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index">Developer Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Installing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline">Pipeline Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_state">Random State</a></li>
@@ -80,7 +73,7 @@
 <li class="toctree-l2"><a class="reference internal" href="workflows/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing">Testing CPAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="continuous_integration">Continuous Integration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Continuous Integration</a></li>
 </ul>
 </li>
 </ul>
@@ -110,14 +103,11 @@
           <a href="../py-modindex" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pipeline" title="Pipeline Development"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index" title="Developer Documentation"
+          <a href="testing" title="Testing CPAC"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Developer Documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Installing CPAC</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Continuous Integration</a></li> 
       </ul>
     </div>
 
