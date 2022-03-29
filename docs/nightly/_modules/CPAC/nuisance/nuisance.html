@@ -2045,7 +2045,9 @@
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">mask_erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span>
         <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;regressor_masks&#39;</span><span class="p">][</span>
         <span class="s1">&#39;erode_anatomical_brain_mask&#39;</span><span class="p">][</span><span class="s1">&#39;brain_mask_erosion_mm&#39;</span><span class="p">]</span>
-    <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_prop</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_prop</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span>
+        <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;regressor_masks&#39;</span><span class="p">][</span>
+        <span class="s1">&#39;erode_anatomical_brain_mask&#39;</span><span class="p">][</span><span class="s1">&#39;brain_mask_erosion_prop&#39;</span><span class="p">]</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-T1w_desc-brain_mask&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">erode</span><span class="p">,</span> <span class="s1">&#39;inputspec.brain_mask&#39;</span><span class="p">)</span>
@@ -2452,7 +2454,9 @@
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">mask_erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span>
         <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;regressor_masks&#39;</span><span class="p">][</span>
         <span class="s1">&#39;erode_anatomical_brain_mask&#39;</span><span class="p">][</span><span class="s1">&#39;brain_mask_erosion_mm&#39;</span><span class="p">]</span>
-    <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_prop</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_prop</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span>
+        <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;regressor_masks&#39;</span><span class="p">][</span>
+        <span class="s1">&#39;erode_anatomical_brain_mask&#39;</span><span class="p">][</span><span class="s1">&#39;brain_mask_erosion_prop&#39;</span><span class="p">]</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-bold_desc-brain_mask&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">erode</span><span class="p">,</span> <span class="s1">&#39;inputspec.brain_mask&#39;</span><span class="p">)</span>
@@ -2763,7 +2767,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>

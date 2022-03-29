@@ -587,6 +587,13 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">func_masking</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># using: [&#39;AFNI&#39;, &#39;FSL&#39;, &#39;FSL_AFNI&#39;, &#39;Anatomical_Refined&#39;, &#39;Anatomical_Based&#39;, &#39;Anatomical_Resampled&#39;, &#39;CCS_Anatomical_Refined&#39;]</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1"># FSL_AFNI: fMRIPrep-style BOLD mask. Ref: https://github.com/nipreps/niworkflows/blob/a221f612/niworkflows/func/util.py#L246-L514</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Anatomical_Refined: 1. binarize anat mask, in case it is not a binary mask. 2. fill holes of anat mask 3. init_bold_mask : input raw func → dilate init func brain mask 4. refined_bold_mask : input motion corrected func → dilate anatomical mask 5. get final func mask</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Anatomical_Based: Generate the BOLD mask by basing it off of the anatomical brain mask. Adapted from DCAN Lab&#39;s BOLD mask method from the ABCD pipeline.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Anatomical_Resampled: Resample anatomical brain mask in standard space to get BOLD brain mask in standard space. Adapted from DCAN Lab&#39;s BOLD mask method from the ABCD pipeline. (&quot;Create fMRI resolution standard space files for T1w image, wmparc, and brain mask […] don&#39;t use FLIRT to do spline interpolation with -applyisoxfm for the 2mm and 1mm cases because it doesn&#39;t know the peculiarities of the MNI template FOVs&quot;)</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># CCS_Anatomical_Refined: Generate the BOLD mask by basing it off of the anatomical brain. Adapted from the BOLD mask method from the CCS pipeline.</span><span class="w"></span>
+
 <span class="w">    </span><span class="c1"># this is a fork point</span><span class="w"></span>
 <span class="w">    </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;AFNI&#39;</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
@@ -1438,59 +1445,6 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <span class="w">  </span><span class="nt">func_masking</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># using: [&#39;AFNI&#39;, &#39;FSL&#39;, &#39;FSL_AFNI&#39;, &#39;Anatomical_Refined&#39;, &#39;Anatomical_Based&#39;, &#39;Anatomical_Resampled&#39;, &#39;CCS_Anatomical_Refined&#39;]</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># this is a fork point</span><span class="w"></span>
-<span class="w">    </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;AFNI&#39;</span><span class="p p-Indicator">]</span><span class="w"></span>
-
-<span class="w">    </span><span class="nt">FSL-BET</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Apply to 4D FMRI data, if bold_bet_functional_mean_boolean : Off.</span><span class="w"></span>
-<span class="w">      </span><span class="c1"># Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces</span><span class="w"></span>
-<span class="w">      </span><span class="c1"># It must be &#39;on&#39; if select &#39;reduce_bias&#39;, &#39;robust&#39;, &#39;padding&#39;, &#39;remove_eyes&#39;, or &#39;bet_surfaces&#39; on</span><span class="w"></span>
-<span class="w">      </span><span class="nt">functional_mean_boolean</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Set an intensity threshold to improve skull stripping performances of FSL BET on rodent scans.</span><span class="w"></span>
-<span class="w">      </span><span class="nt">functional_mean_thr</span><span class="p">:</span><span class="w"> </span>
-<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-<span class="w">        </span><span class="nt">threshold_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">98</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Bias correct the functional mean image to improve skull stripping performances of FSL BET on rodent scans</span><span class="w"></span>
-<span class="w">      </span><span class="nt">functional_mean_bias_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Set the threshold value controling the brain vs non-brain voxels.</span><span class="w"></span>
-<span class="w">      </span><span class="nt">frac</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Mesh created along with skull stripping</span><span class="w"></span>
-<span class="w">      </span><span class="nt">mesh_boolean</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Create a surface outline image</span><span class="w"></span>
-<span class="w">      </span><span class="nt">outline</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Add padding to the end of the image, improving BET.Mutually exclusive with functional,reduce_bias,robust,padding,remove_eyes,surfaces</span><span class="w"></span>
-<span class="w">      </span><span class="nt">padding</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Integer value of head radius</span><span class="w"></span>
-<span class="w">      </span><span class="nt">radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Reduce bias and cleanup neck. Mutually exclusive with functional,reduce_bias,robust,padding,remove_eyes,surfaces</span><span class="w"></span>
-<span class="w">      </span><span class="nt">reduce_bias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Eyes and optic nerve cleanup. Mutually exclusive with functional,reduce_bias,robust,padding,remove_eyes,surfaces</span><span class="w"></span>
-<span class="w">      </span><span class="nt">remove_eyes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Robust brain center estimation. Mutually exclusive with functional,reduce_bias,robust,padding,remove_eyes,surfaces</span><span class="w"></span>
-<span class="w">      </span><span class="nt">robust</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Create a skull image</span><span class="w"></span>
-<span class="w">      </span><span class="nt">skull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Gets additional skull and scalp surfaces by running bet2 and betsurf. This is mutually exclusive with reduce_bias, robust, padding, remove_eyes</span><span class="w"></span>
-<span class="w">      </span><span class="nt">surfaces</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Apply thresholding to segmented brain image and mask</span><span class="w"></span>
-<span class="w">      </span><span class="nt">threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1"># Vertical gradient in fractional intensity threshold (-1,1)</span><span class="w"></span>
-<span class="w">      </span><span class="nt">vertical_gradient</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1774,7 +1728,7 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>

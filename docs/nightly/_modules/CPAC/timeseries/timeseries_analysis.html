@@ -873,8 +873,8 @@
     <span class="n">matrix_outputs</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">cm_measure</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;timeseries_extraction&#39;</span><span class="p">,</span> <span class="s1">&#39;connectivity_matrix&#39;</span><span class="p">,</span>
                           <span class="s1">&#39;measure&#39;</span><span class="p">]:</span>
-        <span class="k">for</span> <span class="n">cm_tool</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;timeseries_extraction&#39;</span><span class="p">,</span> <span class="s1">&#39;connectivity_matrix&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;using&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">cm_tool</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tool</span> <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;timeseries_extraction&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;connectivity_matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;using&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">tool</span> <span class="o">!=</span> <span class="s1">&#39;ndmg&#39;</span><span class="p">]:</span>
             <span class="n">implementation</span> <span class="o">=</span> <span class="n">get_connectome_method</span><span class="p">(</span><span class="n">cm_measure</span><span class="p">,</span> <span class="n">cm_tool</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">implementation</span> <span class="ow">is</span> <span class="bp">NotImplemented</span><span class="p">:</span>
                 <span class="k">continue</span>
@@ -908,30 +908,31 @@
             <span class="n">matrix_outputs</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;desc-</span><span class="si">{</span><span class="n">output_desc</span><span class="si">}</span><span class="s1">_correlations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="n">timeseries_correlation</span><span class="p">,</span> <span class="s1">&#39;outputspec.out_file&#39;</span><span class="p">)</span>
 
-    <span class="c1"># - NDMG</span>
-    <span class="kn">from</span> <span class="nn">CPAC.utils.ndmg_utils</span> <span class="kn">import</span> <span class="n">ndmg_create_graphs</span>
-
-    <span class="n">ndmg_graph_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import os&#39;</span><span class="p">,</span>
-                          <span class="s1">&#39;from CPAC.utils.ndmg_utils import graph&#39;</span><span class="p">]</span>
-    <span class="n">ndmg_graph</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span>
-        <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">],</span>
-        <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
-        <span class="n">function</span><span class="o">=</span><span class="n">ndmg_create_graphs</span><span class="p">,</span>
-        <span class="n">imports</span><span class="o">=</span><span class="n">ndmg_graph_imports</span><span class="p">,</span>
-        <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ndmg_graphs_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-       <span class="n">mem_gb</span><span class="o">=</span><span class="mf">0.664</span><span class="p">,</span>
-       <span class="n">mem_x</span><span class="o">=</span><span class="p">(</span><span class="mi">1928411764134803</span> <span class="o">/</span> <span class="mi">302231454903657293676544</span><span class="p">,</span> <span class="s1">&#39;ts&#39;</span><span class="p">))</span>
-
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">roi_timeseries</span><span class="p">,</span> <span class="s1">&#39;outputspec.roi_ts&#39;</span><span class="p">,</span> <span class="n">ndmg_graph</span><span class="p">,</span> <span class="s1">&#39;ts&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">roi_dataflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.out_file&#39;</span><span class="p">,</span> <span class="n">ndmg_graph</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">)</span>
-
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;desc-Mean_timeseries&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">roi_timeseries</span><span class="p">,</span> <span class="s1">&#39;outputspec.roi_csv&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;desc-ndmg_correlations&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">ndmg_graph</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">),</span>
         <span class="s1">&#39;atlas_name&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">roi_dataflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.out_name&#39;</span><span class="p">),</span>
         <span class="o">**</span><span class="n">matrix_outputs</span>
     <span class="p">}</span>
+    <span class="c1"># - NDMG</span>
+    <span class="k">if</span> <span class="s1">&#39;ndmg&#39;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;timeseries_extraction&#39;</span><span class="p">,</span> <span class="s1">&#39;connectivity_matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;using&#39;</span><span class="p">]:</span>
+        <span class="c1"># pylint: disable=import-outside-toplevel</span>
+        <span class="kn">from</span> <span class="nn">CPAC.utils.ndmg_utils</span> <span class="kn">import</span> <span class="n">ndmg_create_graphs</span>
+
+        <span class="n">ndmg_graph_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import os&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;from CPAC.utils.ndmg_utils import graph&#39;</span><span class="p">]</span>
+        <span class="n">ndmg_graph</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span>
+            <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">],</span>
+            <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
+            <span class="n">function</span><span class="o">=</span><span class="n">ndmg_create_graphs</span><span class="p">,</span>
+            <span class="n">imports</span><span class="o">=</span><span class="n">ndmg_graph_imports</span><span class="p">,</span>
+            <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ndmg_graphs_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+           <span class="n">mem_gb</span><span class="o">=</span><span class="mf">0.664</span><span class="p">,</span>
+           <span class="n">mem_x</span><span class="o">=</span><span class="p">(</span><span class="mi">1928411764134803</span> <span class="o">/</span> <span class="mi">302231454903657293676544</span><span class="p">,</span> <span class="s1">&#39;ts&#39;</span><span class="p">))</span>
+
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">roi_timeseries</span><span class="p">,</span> <span class="s1">&#39;outputspec.roi_ts&#39;</span><span class="p">,</span> <span class="n">ndmg_graph</span><span class="p">,</span> <span class="s1">&#39;ts&#39;</span><span class="p">)</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">roi_dataflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.out_file&#39;</span><span class="p">,</span> <span class="n">ndmg_graph</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+        <span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;desc-ndmg_correlations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ndmg_graph</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
@@ -1133,7 +1134,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>
