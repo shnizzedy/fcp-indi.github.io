@@ -365,7 +365,7 @@ RuntimeError: Insufficient resources available for job:
 <ol class="arabic simple">
 <li><p>If we don’t have hard memory limits (we expect our system will allow us to use more memory than we allocate), we can tell C-PAC to ignore the insufficient resources by adjusting our pipeline configuration, like</p></li>
 </ol>
-<p><code class="docutils literal notranslate"><span class="pre">`anat-only-insufficient.yml</span></code> &lt;./configs/pipeline/anat-only-insufficient.yml&gt;`__</p>
+<p><a class="reference external" href="./configs/pipeline/anat-only-insufficient.yml">anat-only-insufficient.yml</a></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">FROM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">anat-only</span><span class="w"></span>
 
 <span class="nt">pipeline_setup</span><span class="p">:</span><span class="w"></span>
@@ -1244,13 +1244,13 @@ cpac_sub-5971050_ses-1
 <p>Here are some box-and-whisker plot comparing the efficiency, estimates, and observed memory usage of the four runs we completed above:</p>
 <p><img alt="Box-and-whisker plot of efficiency" src="../../_images/efficiency.png" /> <img alt="Box-and-whisker plot of estimated memory usage" src="../../_images/estimated.png" /> <img alt="Box-and-whisker plot of observed memory usage" src="../../_images/runtime.png" /></p>
 </section>
-</section>
 <section id="Notes">
-<h1>Notes<a class="headerlink" href="#Notes" title="Permalink to this headline">¶</a></h1>
+<h2>Notes<a class="headerlink" href="#Notes" title="Permalink to this headline">¶</a></h2>
 <section id="Total-memory-usage">
-<h2>Total memory usage<a class="headerlink" href="#Total-memory-usage" title="Permalink to this headline">¶</a></h2>
+<h3>Total memory usage<a class="headerlink" href="#Total-memory-usage" title="Permalink to this headline">¶</a></h3>
 <p>These estimates and observations are per-node. At any given moment, you’ll have up to <code class="docutils literal notranslate"><span class="pre">n_cpus</span></code> nodes running at once, plus C-PAC and Nipype will be using some memory, so a worst-case scenario for memory usage is approximately the heaviest <code class="docutils literal notranslate"><span class="pre">n_cpus</span></code> nodes + <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">GB</span></code> for overhead.</p>
 <p>In this example, we set <code class="docutils literal notranslate"><span class="pre">n_cpus</span></code> to <code class="docutils literal notranslate"><span class="pre">4</span></code>. For the optimized re-run in this example, the four greediest nodes + <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">GB</span></code> for overhead = <code class="docutils literal notranslate"><span class="pre">(1.1376</span> <span class="pre">+</span> <span class="pre">0.9533</span> <span class="pre">+</span> <span class="pre">0.7630</span> <span class="pre">+</span> <span class="pre">0.7189</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">GB</span></code> = <code class="docutils literal notranslate"><span class="pre">4.5728</span> <span class="pre">GB</span></code>, which is well within the specified limit of <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">GB</span></code>. In most cases, the greediest nodes won’t be peaking simultaneously, so we won’t expect an out-of-memory error on an optimized run, but they are possible, even if no individual node is overruning by much.</p>
+</section>
 </section>
 </section>
 
@@ -1278,8 +1278,7 @@ cpac_sub-5971050_ses-1
 <li class="toctree-l2"><a class="reference internal" href="../group_analysis">7. Run Group Analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../output_dir">8. Check Your Outputs</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index">9. Tutorials</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Tutorial: optimizing memory estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Notes">Notes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1. Observed usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../help">10. Troubleshoot</a></li>
