@@ -296,98 +296,98 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%matplotlib inline
-import json
-import os
-import warnings
-import numpy as np
-import pandas as pd
-from matplotlib import pyplot as plt
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
-warnings.filterwarnings(&#39;ignore&#39;, category=np.VisibleDeprecationWarning)
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">VisibleDeprecationWarning</span><span class="p">)</span>
 
-PLOT_TEXT = {
-    &#39;efficiency&#39;: (&#39;Efficiency&#39;, &#39;% of memory estimate used at runtime&#39;),
-    &#39;estimated_memory_gb&#39;: (&#39;Estimated&#39;, &#39;estimated memory usage (GB)&#39;),
-    &#39;runtime_memory_gb&#39;: (&#39;Runtime observed&#39;, &#39;observed memory used at runtime (GB)&#39;)
-}
+<span class="n">PLOT_TEXT</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;efficiency&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Efficiency&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">% o</span><span class="s1">f memory estimate used at runtime&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;estimated_memory_gb&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Estimated&#39;</span><span class="p">,</span> <span class="s1">&#39;estimated memory usage (GB)&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;runtime_memory_gb&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Runtime observed&#39;</span><span class="p">,</span> <span class="s1">&#39;observed memory used at runtime (GB)&#39;</span><span class="p">)</span>
+<span class="p">}</span>
 
-if not os.path.exists(&#39;./images&#39;):
-    os.makedirs(&#39;./images&#39;)
-
-
-class PlotText:
-    &#39;&#39;&#39;Class to hold plot title and axis labels
-
-    Parameters
-    ----------
-    filter_field : str
-        Column of DataFrame to plot.
-    &#39;&#39;&#39;
-    def __init__(self, filter_field):
-        self.title, self.xlabel = PLOT_TEXT.get(filter_field, (filter_field, &#39;&#39;))
-        self.filename = filter_field.split(&#39;_&#39;, 1)[0]
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./images&#39;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;./images&#39;</span><span class="p">)</span>
 
 
-def boxplot(filter_field, xlim=None):
-    &#39;&#39;&#39;Function to generate box-and-whisker plots
+<span class="k">class</span> <span class="nc">PlotText</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;Class to hold plot title and axis labels</span>
 
-    Parameters
-    ----------
-    filter_field : str
-
-    xlim : 2-tuple or None
-
-    Returns
-    -------
-    xlim : 2-tuple
-    &#39;&#39;&#39;
-    fig_text = PlotText(filter_field)
-    fig, ax1 = plt.subplots()
-    box = the_dfs[filter_field].plot.box(vert=False, title=fig_text.title, ax=ax1, color=&#39;#0067a0&#39;)
-    if xlim:
-        plt.xlim(xlim)
-    if filter_field == &#39;efficiency&#39;:
-        ax1.axvline(x=100, color=&#39;#ea234b&#39;, linewidth=0, zorder=-100)
-    box.set_xlabel(fig_text.xlabel)
-    box.set_ylabel(&#39;run&#39;)
-    plt.savefig(f&#39;./images/{fig_text.filename}.png&#39;, dpi=600, bbox_inches=&#39;tight&#39;)
-    return box.get_xlim()
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filter_field : str</span>
+<span class="sd">        Column of DataFrame to plot.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_field</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span> <span class="o">=</span> <span class="n">PLOT_TEXT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">filter_field</span><span class="p">,</span> <span class="p">(</span><span class="n">filter_field</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filter_field</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 
-def efficiency(df):
-    &#39;&#39;&#39;Function to create efficiency column and sort DataFrame by that column
+<span class="k">def</span> <span class="nf">boxplot</span><span class="p">(</span><span class="n">filter_field</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Function to generate box-and-whisker plots</span>
 
-    Parameters
-    ----------
-    df : pd.DataFrame
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filter_field : str</span>
 
-    Returns
-    -------
-    pd.DataFrame
-    &#39;&#39;&#39;
-    df[&#39;efficiency&#39;] = df[&#39;runtime_memory_gb&#39;] / df[&#39;estimated_memory_gb&#39;] * 100
-    df.sort_values(by=&#39;efficiency&#39;)
-    return df
+<span class="sd">    xlim : 2-tuple or None</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    xlim : 2-tuple</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">fig_text</span> <span class="o">=</span> <span class="n">PlotText</span><span class="p">(</span><span class="n">filter_field</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="n">the_dfs</span><span class="p">[</span><span class="n">filter_field</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">fig_text</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#0067a0&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xlim</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">filter_field</span> <span class="o">==</span> <span class="s1">&#39;efficiency&#39;</span><span class="p">:</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ea234b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">box</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">fig_text</span><span class="o">.</span><span class="n">xlabel</span><span class="p">)</span>
+    <span class="n">box</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./images/</span><span class="si">{</span><span class="n">fig_text</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">box</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
 
 
-def load_cbl(cbl):
-    &#39;&#39;&#39;Function to load callback.log into a DataFrame
+<span class="k">def</span> <span class="nf">efficiency</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Function to create efficiency column and sort DataFrame by that column</span>
 
-    Parameters
-    ----------
-    cbl : str
-        path to callback log
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
 
-    Returns
-    -------
-    pd.DataFrame
-    &#39;&#39;&#39;
-    with open(cbl, &#39;r&#39;) as old_file:
-        return pd.DataFrame([
-            json.loads(line) for
-            line in old_file.readlines() if &#39;estimated_memory_gb&#39; in line
-        ])
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;efficiency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;runtime_memory_gb&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;estimated_memory_gb&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;efficiency&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="k">def</span> <span class="nf">load_cbl</span><span class="p">(</span><span class="n">cbl</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Function to load callback.log into a DataFrame</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cbl : str</span>
+<span class="sd">        path to callback log</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cbl</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">old_file</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span>
+            <span class="n">line</span> <span class="ow">in</span> <span class="n">old_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;estimated_memory_gb&#39;</span> <span class="ow">in</span> <span class="n">line</span>
+        <span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -395,16 +395,16 @@ def load_cbl(cbl):
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dfs = {
-    &quot;0010042 with `raise_insufficient: Off`&quot;: load_cbl(&quot;cpac_runs/insufficient/log/pipeline_cpac_anat/sub-0010042_ses-1/callback.log&quot;),
-    &quot;0010042 with `--mem_gb 14.8`&quot;: load_cbl(&quot;cpac_runs/enough/log/pipeline_cpac_anat/sub-0010042_ses-1/callback.log&quot;),
-    &quot;0010042 with `--runtime_usage […]callback.log`&quot;: load_cbl(&quot;cpac_runs/optimized/log/pipeline_cpac_anat/sub-0010042_ses-1/callback.log&quot;),
-    &quot;5971050 with `--runtime_usage […]callback.log`&quot;: load_cbl(&quot;cpac_runs/optimized/log/pipeline_cpac_anat/sub-5971050_ses-1/callback.log&quot;),
-}
-the_dfs = {
-    df_key: pd.DataFrame.from_dict({key: efficiency(dfs[key])[df_key] for key in list(dfs.keys())[::-1]})
-    for df_key in [&#39;efficiency&#39;, &#39;runtime_memory_gb&#39;, &#39;estimated_memory_gb&#39;]
-}
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;0010042 with `raise_insufficient: Off`&quot;</span><span class="p">:</span> <span class="n">load_cbl</span><span class="p">(</span><span class="s2">&quot;cpac_runs/insufficient/log/pipeline_cpac_anat/sub-0010042_ses-1/callback.log&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;0010042 with `--mem_gb 14.8`&quot;</span><span class="p">:</span> <span class="n">load_cbl</span><span class="p">(</span><span class="s2">&quot;cpac_runs/enough/log/pipeline_cpac_anat/sub-0010042_ses-1/callback.log&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;0010042 with `--runtime_usage […]callback.log`&quot;</span><span class="p">:</span> <span class="n">load_cbl</span><span class="p">(</span><span class="s2">&quot;cpac_runs/optimized/log/pipeline_cpac_anat/sub-0010042_ses-1/callback.log&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;5971050 with `--runtime_usage […]callback.log`&quot;</span><span class="p">:</span> <span class="n">load_cbl</span><span class="p">(</span><span class="s2">&quot;cpac_runs/optimized/log/pipeline_cpac_anat/sub-5971050_ses-1/callback.log&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">the_dfs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">df_key</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">efficiency</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="n">key</span><span class="p">])[</span><span class="n">df_key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">dfs</span><span class="o">.</span><span class="n">keys</span><span class="p">())[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">df_key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;efficiency&#39;</span><span class="p">,</span> <span class="s1">&#39;runtime_memory_gb&#39;</span><span class="p">,</span> <span class="s1">&#39;estimated_memory_gb&#39;</span><span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -412,7 +412,7 @@ the_dfs = {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xlim = boxplot(&#39;efficiency&#39;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xlim</span> <span class="o">=</span> <span class="n">boxplot</span><span class="p">(</span><span class="s1">&#39;efficiency&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -427,7 +427,7 @@ the_dfs = {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xlim = boxplot(&#39;estimated_memory_gb&#39;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xlim</span> <span class="o">=</span> <span class="n">boxplot</span><span class="p">(</span><span class="s1">&#39;estimated_memory_gb&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -442,7 +442,7 @@ the_dfs = {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xlim = boxplot(&#39;runtime_memory_gb&#39;, xlim)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xlim</span> <span class="o">=</span> <span class="n">boxplot</span><span class="p">(</span><span class="s1">&#39;runtime_memory_gb&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
