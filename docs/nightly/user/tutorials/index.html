@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Usage: cpac utils &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <title>C-PAC Tutorials &#8212; C-PAC 1.8.4.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
@@ -18,7 +18,9 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <link rel="index" title="Index" href="../../genindex" />
-    <link rel="search" title="Search" href="../../search" /> 
+    <link rel="search" title="Search" href="../../search" />
+    <link rel="next" title="1. Tutorial: optimizing memory estimation" href="observed_usage/index" />
+    <link rel="prev" title="Check Your Outputs" href="../output_dir" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -29,8 +31,15 @@
         <li class="right" >
           <a href="../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="observed_usage/index" title="1. Tutorial: optimizing memory estimation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../output_dir" title="Check Your Outputs"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Usage: cpac utils</a></li> 
+          <li class="nav-item nav-item-1"><a href="../index" accesskey="U">User Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">C-PAC Tutorials</a></li> 
       </ul>
     </div>  
 
@@ -39,35 +48,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="usage-cpac-utils">
-<h1>Usage: cpac utils<a class="headerlink" href="#usage-cpac-utils" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac utils --help
-
-<span class="go">Loading 🐳 Docker</span>
-<span class="go">Loading 🐳 fcpindi/c-pac:latest with these directory bindings:</span>
-<span class="go">  local                         Docker                mode</span>
-<span class="go">  ----------------------------  --------------------  ------</span>
-<span class="go">  /home/circleci/build          /home/circleci/build  rw</span>
-<span class="go">  /home/circleci/build          /tmp                  rw</span>
-<span class="go">  /home/circleci/build/outputs  /output               rw</span>
-<span class="go">  /home/circleci/build/log      /logs                 rw</span>
-<span class="go">Logging messages will refer to the Docker paths.</span>
-
-<span class="go">Usage: run.py utils [OPTIONS] COMMAND [ARGS]...</span>
-
-<span class="go">Options:</span>
-<span class="go">  --help  Show this message and exit.</span>
-
-<span class="go">Commands:</span>
-<span class="go">  crash</span>
-<span class="go">  data_config</span>
-<span class="go">  group_config</span>
-<span class="go">  pipe_config</span>
-<span class="go">  repickle</span>
-<span class="go">  test</span>
-<span class="go">  tools</span>
-<span class="go">  workflows</span>
-</pre></div>
+  <section id="c-pac-tutorials">
+<h1>C-PAC Tutorials<a class="headerlink" href="#c-pac-tutorials" title="Permalink to this headline">¶</a></h1>
+<p>These tutorials can be viewed online here, or downloaded from <a class="reference external" href="https://github.com/FCP-INDI/C-PAC_tutorials">the FCP-INDI/C-PAC_tutorials repository on GitHub</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="observed_usage/index">1. Tutorial: optimizing memory estimation</a></li>
+</ul>
 </div>
 </section>
 
@@ -83,8 +70,27 @@
             </a></p>
   <div>
     <h3><a href="../../index">Table of Contents</a></h3>
-    <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index">User Guide</a></li>
+    <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../release_notes/v1.8.3">Latest Release: Version 1.8.3 Beta (Feb 11, 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quick">1. C-PAC Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subject_list_config">2. Specify Your Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/pipeline_config">3. Select Your Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocessing">4. Pre-Process Your Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../derivatives">5. Compute Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running">6. All Run Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../group_analysis">7. Run Group Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../output_dir">8. Check Your Outputs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9. Tutorials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="observed_usage/index">1. Tutorial: optimizing memory estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../help">10. Troubleshoot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rnotes">11. Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendix#benchmark-package">Benchmark Package</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../developer/index">Developer Documentation</a></li>
 </ul>
 
@@ -112,8 +118,15 @@
         <li class="right" >
           <a href="../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="observed_usage/index" title="1. Tutorial: optimizing memory estimation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../output_dir" title="Check Your Outputs"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Usage: cpac utils</a></li> 
+          <li class="nav-item nav-item-1"><a href="../index" >User Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">C-PAC Tutorials</a></li> 
       </ul>
     </div>
 
