@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -14,6 +14,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
@@ -51,7 +52,7 @@
           <div class="body" role="main">
             
   <section id="timeseries-extraction">
-<h1>Timeseries Extraction<a class="headerlink" href="#timeseries-extraction" title="Permalink to this headline">¶</a></h1>
+<h1>Timeseries Extraction<a class="headerlink" href="#timeseries-extraction" title="Permalink to this heading">¶</a></h1>
 <p>C-PAC lets you easily export BOLD timeseries in a number of different ways. This can be useful for those wishing to undertake advanced analysis not included in C-PAC, but still take advantage of its robust pre-processing features. For instructions on how to use these seeds within C-PAC, please see <a class="reference internal" href="sca"><span class="doc">Seed-based Correlation Analysis</span></a>.</p>
 <p>ROI Timeseries Extraction allows you to export the timeseries for one or more regions of interest (ROIs). This is done by calculating the average timeseries across all voxels within an ROI. As such, C-PAC will output one timeseries for each ROI specified by you.</p>
 <figure class="align-default">
@@ -63,7 +64,7 @@
 </figure>
 </section>
 <section id="configuring-roi-time-series-extraction">
-<h1>Configuring ROI Time Series Extraction<a class="headerlink" href="#configuring-roi-time-series-extraction" title="Permalink to this headline">¶</a></h1>
+<h1>Configuring ROI Time Series Extraction<a class="headerlink" href="#configuring-roi-time-series-extraction" title="Permalink to this heading">¶</a></h1>
 <figure class="align-default">
 <img alt="../_images/tse_gui.png" src="../_images/tse_gui.png" />
 </figure>
@@ -82,7 +83,7 @@
 <li><p><strong>Connectivity Matrix:</strong> A connectivity matrix can be generated via nilearn <a class="bibtex reference internal" href="#cite-abra14" id="id1">[1]</a><a class="bibtex reference internal" href="#cite-nile21" id="id2">[2]</a><a class="bibtex reference internal" href="#cite-nile21a" id="id3">[3]</a>, ndmg <a class="bibtex reference internal" href="#cite-kiar17" id="id4">[4]</a><a class="bibtex reference internal" href="#cite-neur18" id="id5">[5]</a> or AFNI for the <code class="docutils literal notranslate"><span class="pre">Avg</span></code> timeseries output.</p></li>
 </ol>
 <section id="configuration-without-the-gui">
-<h2>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">¶</a></h2>
+<h2>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this heading">¶</a></h2>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 <p>Unlike most lines in a C-PAC pipeline configuration file, the keys under <code class="docutils literal notranslate"><span class="pre">*_roi_paths</span></code> are user-definable.</p>
 <p>If you exclude <code class="docutils literal notranslate"><span class="pre">*_roi_paths</span></code> from your pipeline configuration, the default atlases and analyses will be used.</p>
@@ -220,6 +221,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../developer/index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license">GNU LESSER GENERAL PUBLIC LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license#gnu-general-public-license">GNU GENERAL PUBLIC LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license#preamble">Preamble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license#terms-and-conditions">TERMS AND CONDITIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license#how-to-apply-these-terms-to-your-new-programs">How to Apply These Terms to Your New Programs</a></li>
 </ul>
 
   </div>
@@ -232,7 +238,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -261,8 +267,8 @@
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, C-PAC Team.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under &lt;a href=&#34;https://fcp-indi.github.io/docs/license&#34;&gt;LGPL-3.0-or-later&lt;/a&gt;..
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
     <script>
