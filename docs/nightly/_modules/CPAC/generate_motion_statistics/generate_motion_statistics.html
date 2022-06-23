@@ -243,7 +243,7 @@
                                        <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
                                        <span class="n">function</span><span class="o">=</span><span class="n">DVARS_strip_t0</span><span class="p">,</span>
                                        <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-                        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cal_DVARS_strip&#39;</span><span class="p">)</span>
+                              <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cal_DVARS_strip&#39;</span><span class="p">)</span>
 
     <span class="c1"># calculate mean DVARS</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;motion_correct&#39;</span><span class="p">,</span> <span class="n">cal_DVARS</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
@@ -279,9 +279,11 @@
 
     <span class="n">calc_motion_parameters</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;subject_id&#39;</span><span class="p">,</span>
                                                            <span class="s1">&#39;scan_id&#39;</span><span class="p">,</span>
-                                                           <span class="s1">&#39;movement_parameters&#39;</span><span class="p">,</span>
+                                                           <span class="s1">&#39;movement_&#39;</span>
+                                                           <span class="s1">&#39;parameters&#39;</span><span class="p">,</span>
                                                            <span class="s1">&#39;max_displacement&#39;</span><span class="p">,</span>
-                                                           <span class="s1">&#39;motion_correct_tool&#39;</span><span class="p">],</span>
+                                                           <span class="s1">&#39;motion_correct_&#39;</span>
+                                                           <span class="s1">&#39;tool&#39;</span><span class="p">],</span>
                                               <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
                                               <span class="n">function</span><span class="o">=</span><span class="n">gen_motion_parameters</span><span class="p">,</span>
                                               <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>

@@ -67,7 +67,7 @@
 </dd>
 <dt>space<span class="classifier">str</span></dt><dd><p>space label <a class="bibtex reference internal" href="#cite-bids21" id="id6">[1]</a></p>
 </dd>
-<dt>meanFD<span class="classifier">float</span></dt><dd><p>mean Jenkinson framewise displacement <a class="bibtex reference internal" href="#cite-jenk02" id="id7">[2]</a> <a class="reference internal" href="workflows/generate_motion_statistics#CPAC.generate_motion_statistics.calculate_FD_J" title="CPAC.generate_motion_statistics.calculate_FD_J"><code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.generate_motion_statistics.calculate_FD_J</span></code></a></p>
+<dt>meanFD<span class="classifier">float</span></dt><dd><p>mean Jenkinson framewise displacement <a class="bibtex reference internal" href="#cite-jenk02" id="id7">[2]</a> <a class="reference internal" href="workflows/generate_motion_statistics#CPAC.generate_motion_statistics.calculate_FD_J" title="CPAC.generate_motion_statistics.calculate_FD_J"><code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.generate_motion_statistics.calculate_FD_J</span></code></a> after preprocessing</p>
 </dd>
 <dt>relMeansRMSMotion<span class="classifier">float</span></dt><dd><p>“mean value of RMS motion” <a class="bibtex reference internal" href="#cite-ciri19" id="id8">[3]</a></p>
 </dd>
@@ -111,11 +111,19 @@ functional scan</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.generate_xcp_qc">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">generate_xcp_qc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">censor_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framewise_displacement_jenkinson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars_after</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fdj_after</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#generate_xcp_qc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.generate_xcp_qc" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">generate_xcp_qc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">censor_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framewise_displacement_jenkinson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars_after</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fdj_after</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#generate_xcp_qc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.generate_xcp_qc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to generate an RBC-style QC CSV</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>sub</strong><span class="classifier">str</span></dt><dd><p>subject ID</p>
+</dd>
+<dt><strong>ses</strong><span class="classifier">str</span></dt><dd><p>session ID</p>
+</dd>
+<dt><strong>task</strong><span class="classifier">str</span></dt><dd><p>task ID</p>
+</dd>
+<dt><strong>run</strong><span class="classifier">str or int</span></dt><dd><p>run ID</p>
+</dd>
 <dt><strong>desc</strong><span class="classifier">str</span></dt><dd><p>description string</p>
 </dd>
 <dt><strong>original_func</strong><span class="classifier">str</span></dt><dd><p>path to original ‘bold’ image</p>
@@ -157,6 +165,32 @@ with space-T1w_desc-brain_mask reference</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.xcp.get_bids_info">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">get_bids_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#get_bids_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.get_bids_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to gather BIDS information from a resource in a strat_pool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>strat_pool</strong><span class="classifier">CPAC.pipeline.engine.ResourcePool</span></dt><dd></dd>
+<dt><strong>resource_name</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>subject</strong><span class="classifier">str</span></dt><dd><p>subject ID</p>
+</dd>
+<dt><strong>session</strong><span class="classifier">str</span></dt><dd><p>session ID</p>
+</dd>
+<dt><strong>task</strong><span class="classifier">str</span></dt><dd><p>task ID</p>
+</dd>
+<dt><strong>run</strong><span class="classifier">str or int</span></dt><dd><p>run ID</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.qc_xcp">
 <span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">qc_xcp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#qc_xcp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.qc_xcp" title="Permalink to this definition">¶</a></dt>
 <dd><dl>
@@ -164,55 +198,22 @@ with space-T1w_desc-brain_mask reference</p>
 ‘switch’: [‘generate_xcpqc_files’],
 ‘option_key’: ‘None’,
 ‘option_val’: ‘None’,
-‘inputs’: [‘subject’, ‘scan’, ‘bold’, ‘space-T1w_desc-mean_bold’,</p>
+‘inputs’: [(‘subject’, ‘scan’, ‘unique_id’, ‘bold’,</p>
 <blockquote>
-<div><p>‘space-T1w_desc-brain_mask’, ‘desc-preproc_bold’,
-(‘from-bold_to-T1w_mode-image_desc-linear_xfm’,</p>
-<blockquote>
-<div><p>‘from-template_to-T1w_mode-image_desc-linear_xfm’),</p>
-</div></blockquote>
-<p>‘space-bold_desc-brain_mask’, [‘T1w-brain-template-mask’,
+<div><p>‘space-T1w_desc-mean_bold’, ‘space-T1w_desc-brain_mask’,
+‘desc-preproc_bold’, ‘max-displacement’, ‘rels-displacement’,
+‘from-bold_to-T1w_mode-image_desc-linear_xfm’,
+‘from-template_to-T1w_mode-image_desc-linear_xfm’,
+‘space-bold_desc-brain_mask’, [‘T1w-brain-template-mask’,
 ‘EPI-template-mask’], [‘space-template_desc-bold_mask’,
-‘space-EPItemplate_desc-bold_mask’],
+‘space-EPItemplate_desc-bold_mask’], ‘regressors’,
 [‘T1w-brain-template-funcreg’, ‘EPI-brain-template-funcreg’],
-(‘max-displacement’, ‘rels-displacement’,</p>
-<blockquote>
-<div><p>‘movement-parameters’, ‘coordinate-transformation’), (‘dvars’,
-‘framewise-displacement-jenkinson’)],</p>
-</div></blockquote>
+‘movement-parameters’, ‘coordinate-transformation’, ‘dvars’,
+‘framewise-displacement-jenkinson’, ‘motion-basefile’)],</p>
 </div></blockquote>
 <p>‘outputs’: [‘desc-xcp_quality’]}</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.qc.xcp.strings_from_bids">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">strings_from_bids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">final_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#strings_from_bids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.strings_from_bids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function to gather BIDS entities into a dictionary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>final_func</strong><span class="classifier">str</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fake_path</span> <span class="o">=</span> <span class="p">(</span>
-<span class="gp">... </span>    <span class="s1">&#39;/path/to/sub-fakeSubject_ses-fakeSession_task-peer_run-3_&#39;</span>
-<span class="gp">... </span>    <span class="s1">&#39;atlas-Schaefer400_space-MNI152NLin6_res-1x1x1_&#39;</span>
-<span class="gp">... </span>    <span class="s1">&#39;desc-NilearnPearson_connectome.tsv&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">strings_from_bids</span><span class="p">(</span><span class="n">fake_path</span><span class="p">)[</span><span class="s1">&#39;desc&#39;</span><span class="p">]</span>
-<span class="go">&#39;NilearnPearson&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">strings_from_bids</span><span class="p">(</span><span class="n">fake_path</span><span class="p">)[</span><span class="s1">&#39;space&#39;</span><span class="p">]</span>
-<span class="go">&#39;MNI152NLin6&#39;</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </section>
@@ -256,6 +257,7 @@ with space-T1w_desc-brain_mask reference</p>
 <li class="toctree-l2"><a class="reference internal" href="workflows/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing">Testing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="continuous_integration">Continuous Integration</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>

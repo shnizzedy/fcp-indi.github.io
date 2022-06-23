@@ -126,26 +126,26 @@ re-executed.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.clone" title="CPAC.pipeline.nipype_pipeline_engine.Node.clone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clone</span></code></a>(name)</p></td>
 <td><p>Clone an EngineBase object.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.get_data_size" title="CPAC.pipeline.nipype_pipeline_engine.Node.get_data_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_data_size</span></code></a>(filepath[, mode])</p></td>
-<td><p>Function to return the size of a functional image (x * y * z * t)</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.get_output" title="CPAC.pipeline.nipype_pipeline_engine.Node.get_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output</span></code></a>(parameter)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.get_output" title="CPAC.pipeline.nipype_pipeline_engine.Node.get_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output</span></code></a>(parameter)</p></td>
 <td><p>Retrieve a particular output of the node</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.hash_exists" title="CPAC.pipeline.nipype_pipeline_engine.Node.hash_exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hash_exists</span></code></a>([updatehash])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.hash_exists" title="CPAC.pipeline.nipype_pipeline_engine.Node.hash_exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hash_exists</span></code></a>([updatehash])</p></td>
 <td><p>Decorate the new <cite>is_cached</cite> method with hash updating to maintain backwards compatibility.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.help" title="CPAC.pipeline.nipype_pipeline_engine.Node.help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">help</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.help" title="CPAC.pipeline.nipype_pipeline_engine.Node.help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">help</span></code></a>()</p></td>
 <td><p>Print interface help</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.is_cached" title="CPAC.pipeline.nipype_pipeline_engine.Node.is_cached"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_cached</span></code></a>([rm_outdated])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.is_cached" title="CPAC.pipeline.nipype_pipeline_engine.Node.is_cached"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_cached</span></code></a>([rm_outdated])</p></td>
 <td><p>Check if the interface has been run previously, and whether cached results are up-to-date.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.load" title="CPAC.pipeline.nipype_pipeline_engine.Node.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(filename)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.load" title="CPAC.pipeline.nipype_pipeline_engine.Node.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(filename)</p></td>
 <td><p>Load this workflow element from a file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.output_dir" title="CPAC.pipeline.nipype_pipeline_engine.Node.output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_dir</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.output_dir" title="CPAC.pipeline.nipype_pipeline_engine.Node.output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_dir</span></code></a>()</p></td>
 <td><p>Return the location of the output directory for the node</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.override_mem_gb" title="CPAC.pipeline.nipype_pipeline_engine.Node.override_mem_gb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">override_mem_gb</span></code></a>(new_mem_gb)</p></td>
+<td><p>Override the Node's memory estimate with a new value.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node.run" title="CPAC.pipeline.nipype_pipeline_engine.Node.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>([updatehash])</p></td>
 <td><p>Execute the node in its directory.</p></td>
@@ -288,33 +288,6 @@ an actual path.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node.get_data_size">
-<span class="sig-name descname"><span class="pre">get_data_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xyzt'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Node.get_data_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.get_data_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function to return the size of a functional image (x * y * z * t)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filepath</strong><span class="classifier">str or path</span></dt><dd><p>path to image file
-OR
-4-tuple
-stand-in dimensions (x, y, z, t)</p>
-</dd>
-<dt><strong>mode</strong><span class="classifier">str</span></dt><dd><p>One of:
-* ‘xyzt’ (all dimensions multiplied) (DEFAULT)
-* ‘xyz’ (spatial dimensions multiplied)
-* ‘t’ (number of TRs)</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>int or float</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node.get_output">
 <span class="sig-name descname"><span class="pre">get_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/pipeline/engine/nodes#Node.get_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.get_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a particular output of the node</p>
@@ -400,6 +373,20 @@ temporal only). Returns <code class="docutils literal notranslate"><span class="
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node.outputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.outputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the output fields of the underlying interface</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node.override_mem_gb">
+<span class="sig-name descname"><span class="pre">override_mem_gb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_mem_gb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Node.override_mem_gb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.override_mem_gb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the Node’s memory estimate with a new value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>new_mem_gb</strong><span class="classifier">int or float</span></dt><dd><p>new memory estimate in GB</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -495,32 +482,32 @@ updates the hash without re-running.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.clone" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.clone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clone</span></code></a>(name)</p></td>
 <td><p>Clone an EngineBase object.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.get_data_size" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.get_data_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_data_size</span></code></a>(filepath[, mode])</p></td>
-<td><p>Function to return the size of a functional image (x * y * z * t)</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.get_output" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.get_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output</span></code></a>(parameter)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.get_output" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.get_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output</span></code></a>(parameter)</p></td>
 <td><p>Retrieve a particular output of the node</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.get_subnodes" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.get_subnodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_subnodes</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.get_subnodes" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.get_subnodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_subnodes</span></code></a>()</p></td>
 <td><p>Generate subnodes of a mapnode and write pre-execution report</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.hash_exists" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.hash_exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hash_exists</span></code></a>([updatehash])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.hash_exists" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.hash_exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hash_exists</span></code></a>([updatehash])</p></td>
 <td><p>Decorate the new <cite>is_cached</cite> method with hash updating to maintain backwards compatibility.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.help" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">help</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.help" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">help</span></code></a>()</p></td>
 <td><p>Print interface help</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.is_cached" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.is_cached"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_cached</span></code></a>([rm_outdated])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.is_cached" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.is_cached"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_cached</span></code></a>([rm_outdated])</p></td>
 <td><p>Check if the interface has been run previously, and whether cached results are up-to-date.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.load" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(filename)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.load" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(filename)</p></td>
 <td><p>Load this workflow element from a file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.num_subnodes" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.num_subnodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_subnodes</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.num_subnodes" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.num_subnodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_subnodes</span></code></a>()</p></td>
 <td><p>Get the number of subnodes to iterate in this MapNode</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.output_dir" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_dir</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.output_dir" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_dir</span></code></a>()</p></td>
 <td><p>Return the location of the output directory for the node</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.override_mem_gb" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.override_mem_gb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">override_mem_gb</span></code></a>(new_mem_gb)</p></td>
+<td><p>Override the Node's memory estimate with a new value.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.run" title="CPAC.pipeline.nipype_pipeline_engine.MapNode.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>([updatehash])</p></td>
 <td><p>Execute the node in its directory.</p></td>
@@ -663,33 +650,6 @@ an actual path.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.MapNode.get_data_size">
-<span class="sig-name descname"><span class="pre">get_data_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xyzt'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.get_data_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function to return the size of a functional image (x * y * z * t)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filepath</strong><span class="classifier">str or path</span></dt><dd><p>path to image file
-OR
-4-tuple
-stand-in dimensions (x, y, z, t)</p>
-</dd>
-<dt><strong>mode</strong><span class="classifier">str</span></dt><dd><p>One of:
-* ‘xyzt’ (all dimensions multiplied) (DEFAULT)
-* ‘xyz’ (spatial dimensions multiplied)
-* ‘t’ (number of TRs)</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>int or float</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.MapNode.get_output">
 <span class="sig-name descname"><span class="pre">get_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.get_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a particular output of the node</p>
@@ -787,6 +747,20 @@ temporal only). Returns <code class="docutils literal notranslate"><span class="
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.MapNode.outputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.outputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the output fields of the underlying interface</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.MapNode.override_mem_gb">
+<span class="sig-name descname"><span class="pre">override_mem_gb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_mem_gb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.override_mem_gb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the Node’s memory estimate with a new value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>new_mem_gb</strong><span class="classifier">int or float</span></dt><dd><p>new memory estimate in GB</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -1082,8 +1056,9 @@ if successful, results</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.</span></span><span class="sig-name descname"><span class="pre">Workflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.</span></span><span class="sig-name descname"><span class="pre">Workflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls the setup and execution of a pipeline of processes.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.fullname" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.fullname"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fullname</span></code></a></dt><dd><p>Build the full name down the hierarchy.</p>
@@ -1155,16 +1130,18 @@ if successful, results</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/pipeline/engine/workflows#Workflow.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a workflow object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">alphanumeric string</span></dt><dd><p>unique identifier for the workflow</p>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a workflow object.
+Parameters
+———-
+name : alphanumeric string</p>
+<blockquote>
+<div><p>unique identifier for the workflow</p>
+</div></blockquote>
+<dl class="simple">
+<dt>base_dir<span class="classifier">string, optional</span></dt><dd><p>path to workflow storage</p>
 </dd>
-<dt><strong>base_dir</strong><span class="classifier">string, optional</span></dt><dd><p>path to workflow storage</p>
-</dd>
-</dl>
+<dt>debug<span class="classifier">boolean, optional</span></dt><dd><p>enable verbose debug-level logging</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1604,6 +1581,7 @@ generate an interactive HTML chart.</p>
 <li class="toctree-l2"><a class="reference internal" href="workflows/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing">Testing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="continuous_integration">Continuous Integration</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>

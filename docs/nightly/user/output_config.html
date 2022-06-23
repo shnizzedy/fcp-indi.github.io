@@ -83,9 +83,9 @@
 
 <span class="w">    </span><span class="c1"># Directory where C-PAC should write out processed data, logs, and crash reports.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># - If running in a container (Singularity/Docker), you can simply set this to an arbitrary</span><span class="w"></span>
-<span class="w">    </span><span class="c1">#   name like &#39;/output&#39;, and then map (-B/-v) your desired output directory to that label.</span><span class="w"></span>
+<span class="w">    </span><span class="c1">#   name like &#39;/outputs&#39;, and then map (-B/-v) your desired output directory to that label.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># - If running outside a container, this should be a full path to a directory.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/output</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/outputs/output</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># (Optional) Path to a BIDS-Derivatives directory that already has outputs.</span><span class="w"></span>
 <span class="w">    </span><span class="c1">#   - This option is intended to ingress already-existing resources from an output</span><span class="w"></span>
@@ -132,7 +132,7 @@
 <span class="w">    </span><span class="c1">#   name like &#39;/work&#39;, and then map (-B/-v) your desired output directory to that label.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># - If running outside a container, this should be a full path to a directory.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># - This can be written to &#39;/tmp&#39; if you do not intend to save your working directory.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/outputs/working</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># Deletes the contents of the Working Directory after running.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># This saves disk space, but any additional preprocessing or analysis will have to be completely re-run.</span><span class="w"></span>
@@ -143,12 +143,12 @@
 <span class="w">    </span><span class="c1"># Whether to write log details of the pipeline run to the logging files.</span><span class="w"></span>
 <span class="w">    </span><span class="nt">run_logging</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/logs</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/outputs/logs</span><span class="w"></span>
 
 <span class="w">  </span><span class="nt">crash_log_directory</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># Directory where CPAC should write crash logs.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/crash</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/outputs/crash</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">Amazon-AWS</span><span class="p">:</span><span class="w"></span>

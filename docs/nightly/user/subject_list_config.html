@@ -82,7 +82,7 @@ The data configuration file layout has changed significantly from older versions
 <p>The Singularity command will create <code class="docutils literal notranslate"><span class="pre">data_settings.yml</span></code> in the current working directory you call the command from.</p>
 <p>The Docker command requires a few more parameters than the Singularity command:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--user</span> <span class="pre">$(id</span> <span class="pre">-u)</span></code> is necessary so the generated files will be owned locally by the user running Docker rather than by root (the default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--user</span> <span class="pre">$(id</span> <span class="pre">-u)</span></code> is necessary so the generated files will be owned locally by the user running Docker rather than by <code class="docutils literal notranslate"><span class="pre">c-pac_user</span></code> (the default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">/path/to/data_config:/scratch</span></code> binds your local <code class="docutils literal notranslate"><span class="pre">data_config</span></code> directory to <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> on the Docker image, and</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-w=&quot;/scratch&quot;</span></code> sets the current working directory on the Docker image to <code class="docutils literal notranslate"><span class="pre">/scratch</span></code>.</p></li>
 </ul>

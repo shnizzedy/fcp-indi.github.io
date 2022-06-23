@@ -58,9 +58,9 @@
 
 <span class="w">    </span><span class="c1"># Directory where C-PAC should write out processed data, logs, and crash reports.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># - If running in a container (Singularity/Docker), you can simply set this to an arbitrary</span><span class="w"></span>
-<span class="w">    </span><span class="c1">#   name like &#39;/output&#39;, and then map (-B/-v) your desired output directory to that label.</span><span class="w"></span>
+<span class="w">    </span><span class="c1">#   name like &#39;/outputs&#39;, and then map (-B/-v) your desired output directory to that label.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># - If running outside a container, this should be a full path to a directory.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/output</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/outputs/output</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># (Optional) Path to a BIDS-Derivatives directory that already has outputs.</span><span class="w"></span>
 <span class="w">    </span><span class="c1">#   - This option is intended to ingress already-existing resources from an output</span><span class="w"></span>
@@ -107,7 +107,7 @@
 <span class="w">    </span><span class="c1">#   name like &#39;/work&#39;, and then map (-B/-v) your desired output directory to that label.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># - If running outside a container, this should be a full path to a directory.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># - This can be written to &#39;/tmp&#39; if you do not intend to save your working directory.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/outputs/working</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># Deletes the contents of the Working Directory after running.</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># This saves disk space, but any additional preprocessing or analysis will have to be completely re-run.</span><span class="w"></span>
@@ -118,12 +118,12 @@
 <span class="w">    </span><span class="c1"># Whether to write log details of the pipeline run to the logging files.</span><span class="w"></span>
 <span class="w">    </span><span class="nt">run_logging</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/logs</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/outputs/logs</span><span class="w"></span>
 
 <span class="w">  </span><span class="nt">crash_log_directory</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># Directory where CPAC should write crash logs.</span><span class="w"></span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/crash</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/outputs/crash</span><span class="w"></span>
 
 <span class="w">  </span><span class="nt">system_config</span><span class="p">:</span><span class="w"></span>
 
@@ -161,6 +161,19 @@
 <span class="w">    </span><span class="c1"># - It is recommended that you set this to a value that when multiplied by</span><span class="w"></span>
 <span class="w">    </span><span class="c1">#   &#39;Number of Participants to Run Simultaneously&#39; is as much RAM you can safely allocate.</span><span class="w"></span>
 <span class="w">    </span><span class="nt">maximum_memory_per_participant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1"># Prior to running a pipeline C-PAC makes a rough estimate of a worst-case-scenario maximum concurrent memory usage with high-resoltion data, raising an exception describing the recommended minimum memory allocation for the given configuration.</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Turning this option off will allow pipelines to run without allocating the recommended minimum, allowing for more efficient runs at the risk of out-of-memory crashes (use at your own risk)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">raise_insufficient</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1"># A callback.log file from a previous run can be provided to estimate memory usage based on that run.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">observed_usage</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="c1"># Path to callback log file with previously observed usage.</span><span class="w"></span>
+<span class="w">      </span><span class="c1"># Can be overridden with the commandline flag `--runtime_usage`.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">callback_log</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="c1"># Percent. E.g., `buffer: 10` would estimate 1.1 * the observed memory usage from the callback log provided in &quot;usage&quot;.</span><span class="w"></span>
+<span class="w">      </span><span class="c1"># Can be overridden with the commandline flag `--runtime_buffer`.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">buffer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1"># The maximum amount of cores (on a single machine) or slots on a node (on a cluster/grid)</span><span class="w"></span>
 <span class="w">    </span><span class="c1"># to allocate per participant.</span><span class="w"></span>
@@ -1019,8 +1032,9 @@
 
 <span class="w">        </span><span class="c1"># options: &#39;default&#39;, &#39;abcd&#39;, &#39;single_step_resampling&#39;, &#39;dcan_nhp&#39;</span><span class="w"></span>
 <span class="w">        </span><span class="c1"># &#39;default&#39;: apply func-to-anat and anat-to-template transforms on motion corrected functional image.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># &#39;single_step_resampling&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of PREPROCESSED functional volume using ANTs antsApplyTransform based on fMRIPrep pipeline. </span><span class="w"></span>
 <span class="w">        </span><span class="c1"># &#39;abcd&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of raw functional volume using FSL applywarp based on ABCD-HCP pipeline.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># &#39;single_step_resampling&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of raw functional volume using ANTs antsApplyTransform based on fMRIPrep pipeline.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># &#39;single_step_resampling_from_stc&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of slice-time-corrected functional volume using ANTs antsApplyTransform based on fMRIPrep pipeline.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;default&#39;</span><span class="w"></span>
 
 
@@ -1426,66 +1440,66 @@
 <span class="w">        </span><span class="c1"># Erode binarized anatomical brain mask. If choosing True, please also set regressor_masks[&#39;erode_csf&#39;][&#39;run&#39;]: True; anatomical_preproc[&#39;brain_extraction&#39;][&#39;using&#39;]: niworkflows-ants.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erosion proportion, if using erosion.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Default proportion is 0 for anatomical brain mask.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Recommend that do not use erosion in both proportion and millimeter method.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">brain_mask_erosion_prop </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Default proportion is None for anatomical brain mask.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">brain_mask_erosion_prop</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode brain mask in millimeter, default of brain is 30 mm</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># brain erosion default is using millimeter erosion method when use erosion for brain.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">brain_mask_erosion_mm </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode brain mask in millimeters, default for brain mask is 30 mm</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Brain erosion default is using millimeters.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">brain_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
 
 <span class="w">        </span><span class="c1"># Erode binarized brain mask in millimeter</span><span class="w"></span>
-<span class="w">        </span><span class="nt">brain_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="nt">brain_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">      </span><span class="nt">erode_csf</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="c1"># Erode binarized csf tissue mask.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erosion proportion, if use erosion.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Default proportion is 0 for CSF (cerebrospinal fluid)  mask.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">csf_erosion_prop </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Default proportion is None for cerebrospinal fluid mask.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">csf_erosion_prop</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode brain mask in millimeter, default of csf is 30 mm</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># CSF erosion default is using millimeter erosion method when use erosion for CSF.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode cerebrospinal fluid mask in millimeters, default for cerebrospinal fluid is 30mm</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Cerebrospinal fluid erosion default is using millimeters.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">csf_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode binarized CSF (cerebrospinal fluid)  mask in millimeter</span><span class="w"></span>
-<span class="w">        </span><span class="nt">csf_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode binarized cerebrospinal fluid mask in millimeter</span><span class="w"></span>
+<span class="w">        </span><span class="nt">csf_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">      </span><span class="nt">erode_wm</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="c1"># Erode WM binarized tissue mask.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erosion proportion, if use erosion.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Default proportion is 0.6 for White Matter mask.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># White Matter erosion default is using proportion erosion method when use erosion for White Matter.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">wm_erosion_prop </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Default proportion is 0.6 for white matter mask.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># White matter erosion default is using proportion erosion method when use erosion for white matter.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">wm_erosion_prop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode brain mask in millimeter, default of White Matter is 0 mm</span><span class="w"></span>
-<span class="w">        </span><span class="nt">wm_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode white matter mask in millimeters, default for white matter is None</span><span class="w"></span>
+<span class="w">        </span><span class="nt">wm_mask_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode binarized White Matter mask in millimeter</span><span class="w"></span>
-<span class="w">        </span><span class="nt">wm_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode binarized white matter mask in millimeters</span><span class="w"></span>
+<span class="w">        </span><span class="nt">wm_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">      </span><span class="nt">erode_gm</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode GM binarized tissue mask.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode gray matter binarized tissue mask.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erosion proportion, if use erosion.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">gm_erosion_prop </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">gm_erosion_prop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode brain mask in millimeter, default of csf is 30 mm</span><span class="w"></span>
-<span class="w">        </span><span class="nt">gm_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode gray matter mask in millimeters</span><span class="w"></span>
+<span class="w">        </span><span class="nt">gm_mask_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode binarized White Matter mask in millimeter</span><span class="w"></span>
-<span class="w">        </span><span class="nt">gm_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode binarized gray matter mask in millimeters</span><span class="w"></span>
+<span class="w">        </span><span class="nt">gm_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
 
 <span class="c1"># OUTPUTS AND DERIVATIVES</span><span class="w"></span>

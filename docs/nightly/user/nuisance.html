@@ -259,66 +259,66 @@ Power and colleagues (2011) proposed two measures to identify volumes contaminat
 <span class="w">        </span><span class="c1"># Erode binarized anatomical brain mask. If choosing True, please also set regressor_masks[&#39;erode_csf&#39;][&#39;run&#39;]: True; anatomical_preproc[&#39;brain_extraction&#39;][&#39;using&#39;]: niworkflows-ants.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erosion proportion, if using erosion.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Default proportion is 0 for anatomical brain mask.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Recommend that do not use erosion in both proportion and millimeter method.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">brain_mask_erosion_prop </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Default proportion is None for anatomical brain mask.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">brain_mask_erosion_prop</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode brain mask in millimeter, default of brain is 30 mm</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># brain erosion default is using millimeter erosion method when use erosion for brain.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">brain_mask_erosion_mm </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode brain mask in millimeters, default for brain mask is 30 mm</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Brain erosion default is using millimeters.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">brain_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
 
 <span class="w">        </span><span class="c1"># Erode binarized brain mask in millimeter</span><span class="w"></span>
-<span class="w">        </span><span class="nt">brain_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="nt">brain_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">      </span><span class="nt">erode_csf</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="c1"># Erode binarized csf tissue mask.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erosion proportion, if use erosion.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Default proportion is 0 for CSF (cerebrospinal fluid)  mask.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">csf_erosion_prop </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Default proportion is None for cerebrospinal fluid mask.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">csf_erosion_prop</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode brain mask in millimeter, default of csf is 30 mm</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># CSF erosion default is using millimeter erosion method when use erosion for CSF.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode cerebrospinal fluid mask in millimeters, default for cerebrospinal fluid is 30mm</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Cerebrospinal fluid erosion default is using millimeters.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">csf_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode binarized CSF (cerebrospinal fluid)  mask in millimeter</span><span class="w"></span>
-<span class="w">        </span><span class="nt">csf_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode binarized cerebrospinal fluid mask in millimeter</span><span class="w"></span>
+<span class="w">        </span><span class="nt">csf_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">      </span><span class="nt">erode_wm</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="c1"># Erode WM binarized tissue mask.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erosion proportion, if use erosion.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Default proportion is 0.6 for White Matter mask.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># White Matter erosion default is using proportion erosion method when use erosion for White Matter.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">wm_erosion_prop </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Default proportion is 0.6 for white matter mask.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># White matter erosion default is using proportion erosion method when use erosion for white matter.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">wm_erosion_prop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode brain mask in millimeter, default of White Matter is 0 mm</span><span class="w"></span>
-<span class="w">        </span><span class="nt">wm_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode white matter mask in millimeters, default for white matter is None</span><span class="w"></span>
+<span class="w">        </span><span class="nt">wm_mask_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode binarized White Matter mask in millimeter</span><span class="w"></span>
-<span class="w">        </span><span class="nt">wm_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode binarized white matter mask in millimeters</span><span class="w"></span>
+<span class="w">        </span><span class="nt">wm_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">      </span><span class="nt">erode_gm</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode GM binarized tissue mask.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode gray matter binarized tissue mask.</span><span class="w"></span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erosion proportion, if use erosion.</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># Recommend to do not use erosion in both proportion and millimeter method.</span><span class="w"></span>
-<span class="w">        </span><span class="nt">gm_erosion_prop </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">gm_erosion_prop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode brain mask in millimeter, default of csf is 30 mm</span><span class="w"></span>
-<span class="w">        </span><span class="nt">gm_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode gray matter mask in millimeters</span><span class="w"></span>
+<span class="w">        </span><span class="nt">gm_mask_erosion_mm</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1"># Erode binarized White Matter mask in millimeter</span><span class="w"></span>
-<span class="w">        </span><span class="nt">gm_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Erode binarized gray matter mask in millimeters</span><span class="w"></span>
+<span class="w">        </span><span class="nt">gm_erosion_mm</span><span class="p">:</span><span class="w"></span>
 </pre></div>
 </div>
 <p>An example of a custom regressor with one file:</p>

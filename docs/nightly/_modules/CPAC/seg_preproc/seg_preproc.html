@@ -204,9 +204,6 @@
     <span class="k">def</span> <span class="nf">form_threshold_string</span><span class="p">(</span><span class="n">threshold</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;-thr </span><span class="si">%f</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">form_mask_erosion_prop</span><span class="p">(</span><span class="n">erosion_prop</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">erosion_prop</span> <span class="o">**</span> <span class="mi">3</span>
-
     <span class="k">if</span> <span class="ow">not</span> <span class="n">use_custom_threshold</span><span class="p">:</span>
         <span class="c1"># already binary tissue mask</span>
         <span class="n">input_1</span><span class="p">,</span> <span class="n">value_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="s1">&#39;tissue_class_file&#39;</span><span class="p">)</span>
