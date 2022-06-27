@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Templates and Atlases &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex" />
+    <link rel="search" title="Search" href="../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Templates and Atlases</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="templates-and-atlases">
+<h1>Templates and Atlases<a class="headerlink" href="#templates-and-atlases" title="Permalink to this headline">¶</a></h1>
+<p>Templates and altases included in the C-PAC Docker and Singularity images are maintained in a separate repository: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC_templates">FCP-INDI/C-PAC_templates</a></p>
+<section id="adding-a-template-or-atlas-to-be-packaged-in-c-pac">
+<h2>Adding a template or atlas to be packaged in C-PAC<a class="headerlink" href="#adding-a-template-or-atlas-to-be-packaged-in-c-pac" title="Permalink to this headline">¶</a></h2>
+<p>In a branch:</p>
+<ol class="arabic simple">
+<li><p>For the new file(s), fill in as much of the appropriate table(s) in <a class="reference external" href="https://github.com/FCP-INDI/C-PAC_templates/blob/main/README.md">README.md</a> as you can. If no appropriate table exists in the README, add one.</p></li>
+<li><p>Rename your file(s) to begin with the “Atlas name” you used in the README table, and use BIDS standard template identifiers <span id="id1">[<a class="reference internal" href="#id4" title="BIDS-contributors. 2022. Appendix VIII: Coordinate systems §standard template identifiers. The Brain Imaging Data Structure (BIDS) Specification, 1.7.0">1</a>]</span> to identify the atlas/template’s space if possible</p></li>
+<li><p>Add your file(s) to the appropriate subdirectory of <a class="reference external" href="https://github.com/FCP-INDI/C-PAC_templates/tree/main/atlases/label">atlases/label</a>, adding a new subdirectory if you had to add a new table to the README.</p></li>
+</ol>
+<section id="testing-your-updates">
+<h3>Testing your updates<a class="headerlink" href="#testing-your-updates" title="Permalink to this headline">¶</a></h3>
+<p>You can use <a class="reference external" href="https://github.com/FCP-INDI/C-PAC_templates/blob/main/.github/Dockerfiles/cpac_templates.Dockerfile">.github/Dockerfiles/cpac_templates.Dockerfile</a> to build a custom <code class="docutils literal notranslate"><span class="pre">cpac_templates</span></code> staging image.</p>
+<p>For example</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>docker build -t cpac_templates:custom -f .github/Dockerfiles/cpac_templates.Dockerfile .  <span class="c1"># &lt;-- run in your modified fork or branch of FCP-INDI/C-PAC_templates</span>
+docker run --rm -dit --name<span class="o">=</span>CPACTemplates -v cpac_templates:/cpac_templates ghcr.io/fcp-indi/c-pac_templates:latest  <span class="c1"># &lt;-- Start a daemon image with your custom templates</span>
+docker run --rm -it -v --volumes-from CPACTemplates fcpindi/c-pac:nightly <span class="nv">$BIDS_DIR</span> <span class="nv">$OUTPUTS_DIR</span> participant  <span class="c1"># &lt;-- Use C-PAC as usual, but bind the custom /cpac_templates</span>
+docker attach CPACTemplates  <span class="c1"># &lt;-- Clean up when you&#39;re done</span>
+<span class="nb">exit</span>                         <span class="c1"># &lt;-- Clean up when you&#39;re done</span>
+</pre></div>
+</div>
+<p>Once your changes have been merged to <code class="docutils literal notranslate"><span class="pre">main</span></code>, C-PAC will include them in each subsequent build.</p>
+<p class="rubric">References</p>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id4"><span class="brackets">1</span></dt>
+<dd><p>BIDS-contributors. 2022. <a class="reference external" href="https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/08-coordinate-systems.html#standard-template-identifiers">Appendix VIII: Coordinate systems §standard template identifiers.</a> <em>The Brain Imaging Data Structure (BIDS) Specification, 1.7.0</em></p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index">
+              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Templates and Atlases</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>
