@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Contributing to this documentation &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex" />
+    <link rel="search" title="Search" href="../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Contributing to this documentation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="contributing-to-this-documentation">
+<h1>Contributing to this documentation<a class="headerlink" href="#contributing-to-this-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This document is <a class="reference internal" href="#"><span class="doc">./CONTRIBUTING.rst</span></a> (in the root of <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io">this repository</a>). The other source files (outside of the code itself) are in <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io">this repository</a> under <a class="reference external" href="./docs/_sources"><code class="docutils literal notranslate"><span class="pre">./docs/_sources</span></code></a>.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#branches" id="id2">Branches</a></p>
+<ul>
+<li><p><a class="reference internal" href="#versions" id="id3">Versions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nightly" id="id4"><code class="docutils literal notranslate"><span class="pre">nightly</span></code></a></p></li>
+<li><p><a class="reference internal" href="#c-pac-release-tags" id="id5">C-PAC release tags</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#guidelines" id="id6">Guidelines</a></p>
+<ul>
+<li><p><a class="reference internal" href="#building" id="id7">Building</a></p>
+<ul>
+<li><p><a class="reference internal" href="#let-circleci-build-your-drafts-works-in-progress" id="id8">Let CircleCI build your drafts / works-in-progress</a></p></li>
+<li><p><a class="reference internal" href="#build-locally-c-pac-v1-8-0" id="id9">Build locally (C-PAC ≥ v1.8.0)</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#flowcharts" id="id10">Flowcharts</a></p></li>
+<li><p><a class="reference internal" href="#tutorials" id="id11">Tutorials</a></p></li>
+<li><p><a class="reference internal" href="#references-and-citations" id="id12">References and citations</a></p>
+<ul>
+<li><p><a class="reference internal" href="#local-bibliography" id="id13">Local bibliography</a></p></li>
+<li><p><a class="reference internal" href="#central-bibliography" id="id14">Central bibliography</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#environment-notes" id="id15">Environment notes</a></p></li>
+<li><p><a class="reference internal" href="#more-information" id="id16">More information</a></p></li>
+</ul>
+</div>
+<section id="branches">
+<h2><a class="toc-backref" href="#id2">Branches</a><a class="headerlink" href="#branches" title="Permalink to this headline">¶</a></h2>
+<p>Please, always base changes on the <code class="docutils literal notranslate"><span class="pre">source</span></code> branch. <code class="docutils literal notranslate"><span class="pre">main</span></code> branch will be overwritten by the CI deployment.</p>
+<section id="versions">
+<h3><a class="toc-backref" href="#id3">Versions</a><a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h3>
+<section id="nightly">
+<h4><a class="toc-backref" href="#id4"><code class="docutils literal notranslate"><span class="pre">nightly</span></code></a><a class="headerlink" href="#nightly" title="Permalink to this headline">¶</a></h4>
+<p>Pushes to <code class="docutils literal notranslate"><span class="pre">source</span></code> will rebuild docs at <a class="reference external" href="https://fcp-indi.github.io/docs/nightly/nightly">https://fcp-indi.github.io/docs/nightly/nightly</a></p>
+</section>
+<section id="c-pac-release-tags">
+<h4><a class="toc-backref" href="#id5">C-PAC release tags</a><a class="headerlink" href="#c-pac-release-tags" title="Permalink to this headline">¶</a></h4>
+<p>Tags in the format <code class="docutils literal notranslate"><span class="pre">v.*-source</span></code> will build docs for the given version.</p>
+<p>If a matching version tag doesn’t exist in <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/tags">https://github.com/FCP-INDI/C-PAC/tags</a>, the build should fail.</p>
+<p>Steps to build a release:</p>
+<ol class="arabic simple">
+<li><p>Checkout a commit from the <code class="docutils literal notranslate"><span class="pre">source</span></code> from a time appropriate for documentation for the branch being built/rebuilt.</p></li>
+<li><p>If you need to make changes, create a branch (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span></code> ).</p></li>
+<li><p>Make any changes you need for the specific version.</p></li>
+<li><p>Tag the commit that’s ready to build (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span> <span class="pre">v</span></code> version<code class="docutils literal notranslate"><span class="pre">-source</span></code> )</p></li>
+<li><p>(Force) push to the remote tag (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">v</span></code> version<code class="docutils literal notranslate"><span class="pre">-source</span></code> ).</p></li>
+<li><p>CircleCI should deploy the versioned documentation. If the version tag is the newest, it should also overwrite <code class="docutils literal notranslate"><span class="pre">latest</span></code> with these documents.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="guidelines">
+<h2><a class="toc-backref" href="#id6">Guidelines</a><a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Only write a document once, and liberally use the <a class="reference external" href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#include">reStructured Text <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">include::</span></code> directive</a> to include that document where appropriate.</p></li>
+<li><p>Use absolute paths for <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">include::</span></code> s. That way the path will resolve correctly regardless of differences in nesting levels.</p></li>
+<li><p>Include any source documents that you want built in at least one <a class="reference external" href="https://www.sphinx-doc.org/en/1.8/usage/restructuredtext/directives.html#directive-toctree"><code class="docutils literal notranslate"><span class="pre">toctree</span></code></a>. Use the <code class="docutils literal notranslate"><span class="pre">:hidden:</span></code> option if you don’t want it linked in an actual table of contents in the document with the <code class="docutils literal notranslate"><span class="pre">toctree</span></code>.</p></li>
+<li><p>Use consistent section title indicators throughout a sourcetree. <a class="reference external" href="https://fcp-indi.github.io/docs/nightly/user">fcp-indi.github.io/docs/nightly/user</a> currently has the following hierarchy (top to bottom):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>=
+^
+-
+*
+#
+`
+&#39;
+&quot;
+</pre></div>
+</div>
+</li>
+</ul>
+<section id="building">
+<h3><a class="toc-backref" href="#id7">Building</a><a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h3>
+<section id="let-circleci-build-your-drafts-works-in-progress">
+<h4><a class="toc-backref" href="#id8">Let CircleCI build your drafts / works-in-progress</a><a class="headerlink" href="#let-circleci-build-your-drafts-works-in-progress" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Build environment will match actual docs build environment</p></li>
+<li><p>CircleCI takes ~2 minutes to build</p></li>
+</ul>
+<ol class="arabic">
+<li><p>Fork <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io">https://github.com/FCP-INDI/fcp-indi.github.io</a></p></li>
+<li><p>In your fork’s settings, set the GitHub Pages <code class="docutils literal notranslate"><span class="pre">source</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code> branch</p>
+<a class="reference external image-reference" href="https://github.com/FCP-INDI/fcp-indi.github.io/raw/source/images/github-pages-settings-example.png"><img alt="GitHub Pages settings example screenshot" src="https://github.com/FCP-INDI/fcp-indi.github.io/raw/source/images/github-pages-settings-example.png" /></a>
+</li>
+<li><p>Add your project on CircleCI</p></li>
+<li><p>Merge your draft / work-in-progress into your fork’s <code class="docutils literal notranslate"><span class="pre">source</span></code> branch. Make sure you push to your fork and not the main repository’s <code class="docutils literal notranslate"><span class="pre">source</span></code> branch.</p></li>
+<li><p>Your fork will publish at <code class="docutils literal notranslate"><span class="pre">https://[your_GitHub_username].github.io/fcp-indi.github.io/</span></code>.</p></li>
+</ol>
+</section>
+<section id="build-locally-c-pac-v1-8-0">
+<h4><a class="toc-backref" href="#id9">Build locally (C-PAC ≥ v1.8.0)</a><a class="headerlink" href="#build-locally-c-pac-v1-8-0" title="Permalink to this headline">¶</a></h4>
+<p>This documentation aspires to rely on a <a class="reference external" href="https://en.wikipedia.org/wiki/Single_source_of_truth">single source of truth</a> where possible.  To this end, building this documentation requires an installation of the version of <a class="reference external" href="https://github.com/FCP-INDI/C-PAC">C-PAC</a> that is being documented.</p>
+<p>Steps to build this documentation locally:</p>
+<ol class="arabic">
+<li><p>Clone <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io">this repository</a>.</p></li>
+<li><dl class="simple">
+<dt><em>(optional)</em> Locally replicate the step “👊 Running cpac commands” from <code class="docutils literal notranslate"><span class="pre">.circleci/config</span></code> to generate <a class="reference external" href="https://pypi.org/project/cpac/">cpac</a> usage strings.</dt><dd><p>Either perform this “👊 Running cpac commands” step in a separate Python environment or uninstall cpac after generating the usage string(s).</p>
+</dd>
+</dl>
+<ol class="arabic">
+<li><p><em>(optional)</em> Create an environment for cpac and activate this environment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cpac</span></code></p></li>
+<li><p>If you don’t have a local container for the version of C-PAC you’re documenting, <code class="docutils literal notranslate"><span class="pre">cpac</span> <span class="pre">pull</span></code> to download the latest or <code class="docutils literal notranslate"><span class="pre">cpac</span> <span class="pre">pull</span> <span class="pre">--tag</span> <span class="pre">$TAG</span></code> to pull a specific version.</p></li>
+<li><p>Generate ReStructuredText documents with cpac usage strings:</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>mkdir -p docs/_sources/user/cpac
+<span class="nb">printf</span> <span class="s2">&quot;.. code-block:: console\n\n   </span>$<span class="s2"> cpac --help\n\n&quot;</span> &gt; docs/_sources/user/cpac/help.rst
+cpac --help <span class="p">|</span> sed -e <span class="s2">&quot;s/.*/   &amp;/&quot;</span> &gt;&gt; docs/_sources/user/cpac/help.rst
+mkdir -p docs/_sources/user/run
+<span class="nb">printf</span> <span class="s2">&quot;Usage: cpac run\n\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\n.. code-block:: console\n\n   </span>$<span class="s2"> cpac run --help\n\n&quot;</span> &gt; docs/_sources/user/run/help.rst
+cpac run --help <span class="p">|</span> sed -e <span class="s2">&quot;s/.*/   &amp;/&quot;</span> &gt;&gt; docs/_sources/user/run/help.rst
+mkdir -p docs/_sources/user/utils
+<span class="nb">printf</span> <span class="s2">&quot;Usage: cpac utils\n\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\n.. code-block:: console\n\n   </span>$<span class="s2"> cpac utils --help\n\n&quot;</span> &gt; docs/_sources/user/utils/help.rst
+cpac utils --help <span class="p">|</span> sed -e <span class="s2">&quot;s/.*/   &amp;/&quot;</span> &gt;&gt; docs/_sources/user/utils/help.rst
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deactivate</span></code> your cpac environment if you used a separate environment or <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">cpac</span></code>.</p></li>
+</ol>
+</li>
+<li><p>Locally install <a class="reference external" href="https://github.com/FCP-INDI/C-PAC">C-PAC</a> from source.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">./bin/build</span> <span class="pre">$VERSION</span></code> where <code class="docutils literal notranslate"><span class="pre">$VERSION</span></code> is the version to build (<code class="docutils literal notranslate"><span class="pre">nightly</span></code> , <code class="docutils literal notranslate"><span class="pre">latest</span></code> , or <span title='Semantic Versioning'><a href="https://semver.org/">semver</a></span> for production, but this string can be anything you want locally).</p>
+<a class="reference external image-reference" href="https://github.com/FCP-INDI/fcp-indi.github.io/raw/source/images/example_version.png"><img alt="example version" src="https://github.com/FCP-INDI/fcp-indi.github.io/raw/source/images/example_version.png" /></a>
+</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="flowcharts">
+<h2><a class="toc-backref" href="#id10">Flowcharts</a><a class="headerlink" href="#flowcharts" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>SVGs exported from Lucidchart have scaling coded in in <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code> XML attributes. Add the XML attributes <code class="docutils literal notranslate"><span class="pre">preserveAspectRatio=&quot;xMinYMin</span> <span class="pre">meet&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">viewBox</span></code> to the SVG element in the actual SVG files:</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;svg</span> <span class="na">preserveAspectRatio=</span><span class="s">&quot;xMinYMin meet&quot;</span> <span class="na">viewBox=</span><span class="s">&quot;0 0 {width} {height}&quot;</span><span class="nt">&gt;&lt;/svg&gt;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">{width}</span></code> and <code class="docutils literal notranslate"><span class="pre">{height}</span></code> are the values already present in the existing <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code> XML attributes.</p>
+<ul class="simple">
+<li><p>Load SVGs in HTML <code class="docutils literal notranslate"><span class="pre">object</span></code> elements with the <code class="docutils literal notranslate"><span class="pre">raw::</span> <span class="pre">html</span></code> directive to preserve hyperlinks and scaling:</p></li>
+</ul>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">raw</span><span class="p">::</span> html
+
+    &lt;object data=&quot;../_static/path/to/chart.svg&quot; type=&quot;image/svg+xml&quot;&gt;&lt;/object&gt;
+</pre></div>
+</div>
+</section>
+<section id="tutorials">
+<h2><a class="toc-backref" href="#id11">Tutorials</a><a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://github.com/FCP-INDI/C-PAC_tutorials/blob/main/CONTRIBUTING.md">FCP-INDI/C-PAC_tutorials/CONTRIBUTING.md</a> for how to contribute tutorials. Add them to the TOC tree in that repository or in any TOC tree in <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io">this repository</a> with a relative path beginning <code class="docutils literal notranslate"><span class="pre">/user/tutorials/</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">/user/tutorials/observed_usage</span></code> for <a class="reference external" href="https://github.com/FCP-INDI/C-PAC_tutorials/blob/main/observed_usage.ipynb"><code class="docutils literal notranslate"><span class="pre">observed_usage.ipynb</span></code></a>).</p>
+</section>
+<section id="references-and-citations">
+<h2><a class="toc-backref" href="#id12">References and citations</a><a class="headerlink" href="#references-and-citations" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://sphinxcontrib-bibtex.readthedocs.io/">sphinxcontrib-bibtex</a> is installed and configured. This extension creates links between the citations and the reference in the reference list and formats citations in referenced BibTeX files using built-in or <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io/blob/source/docs/_sources/references/style.py">custom styles</a>. To use this Sphinx extension,</p>
+<ol class="arabic simple">
+<li><p>Include your references in a BibTeX file. Unless you have a speficic reason to use a separate file, that BibTeX file should be <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io/blob/source/docs/_sources/references/references.bib"><code class="docutils literal notranslate"><span class="pre">docs/_sources/references/references.bib</span></code></a>.</p></li>
+<li><p>If the entry type (e.g., <code class="docutils literal notranslate"><span class="pre">book</span></code> , <code class="docutils literal notranslate"><span class="pre">article</span></code> , <code class="docutils literal notranslate"><span class="pre">misc</span></code> ) of any of the entries in your BibTeX file(s) is not included in <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io/blob/source/docs/_sources/references/style.py">docs/_sources/references/style.py</a>, add a <code class="docutils literal notranslate"><span class="pre">get_{entry_type}_template</span></code> <a class="reference external" href="https://pybtex.org">Pybtex</a> method to <code class="docutils literal notranslate"><span class="pre">CPAC_DocsStyle</span></code>.</p></li>
+<li><p>If you want to include a header over a reference list, either follow the heirarchy under <a class="reference external" href="#guidelines">the Guidelines section of this document</a> or use the <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">rubric::</span></code> directive above its <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">bibliography</span></code> directive.</p></li>
+</ol>
+<section id="local-bibliography">
+<h3><a class="toc-backref" href="#id13">Local bibliography</a><a class="headerlink" href="#local-bibliography" title="Permalink to this headline">¶</a></h3>
+<p>For a bibliography of just the citations on the current page. This is the bibliography style you probably want, unless you have a specific reason for the central bibliography style.</p>
+<ol class="arabic">
+<li><p>Using the key (the text between the opening <code class="docutils literal notranslate"><span class="pre">{</span></code> and the first <code class="docutils literal notranslate"><span class="pre">,</span></code> in a BibTeX entry) use the ReStructuredText syntax <code>:footcite:`key`</code> to cite your reference in a ReStructuredText file.</p></li>
+<li><p>Somewhere below your citations in the same page, place <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">footbibliography::</span></code>. You can use this directive multiple times.</p>
+<blockquote class="epigraph">
+<div><p>If specified multiple times in the same document, footnotes are only created for references that do not yet have a footnote earlier in the document.</p>
+<p class="attribution">—<a class="reference external" href="https://sphinxcontrib-bibtex.readthedocs.io/en/2.4.2/usage.html#directive-footbibliography">https://sphinxcontrib-bibtex.readthedocs.io/en/2.4.2/usage.html#directive-footbibliography</a></p>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="central-bibliography">
+<h3><a class="toc-backref" href="#id14">Central bibliography</a><a class="headerlink" href="#central-bibliography" title="Permalink to this headline">¶</a></h3>
+<p>For a bibliography that includes references from multiple pages,</p>
+<ol class="arabic simple">
+<li><p>Include a <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">bibliography::</span></code> directive somewhere on any page that you want to use this extension to format references and create two-way links between the references and citations. You can list uncited references by listing their BibTeX keys explicilty.</p></li>
+<li><p>If you will (or might) use more than one <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">bibliography::</span></code> directive (including via <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">include::</span></code> directives), choose a prefix for the keys and include that prefix in both the <code class="docutils literal notranslate"><span class="pre">:cite:</span></code> role (like <code>:cite:`prefix-key`</code> ) and the bibliography directive (like <code class="docutils literal notranslate"><span class="pre">:keyprefix:</span> <span class="pre">prefix-</span></code> ).</p></li>
+</ol>
+<p>For example, if you have a BibTeX file called <code class="docutils literal notranslate"><span class="pre">cpac_citation.bib</span></code> that contains</p>
+<div class="highlight-BibTeX notranslate"><div class="highlight"><pre><span></span><span class="nc">@ARTICLE</span><span class="p">{</span><span class="nl">cpac2013</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">AUTHOR</span><span class="p">=</span><span class="s">{Craddock, Cameron  and  Sikka, Sharad  and  Cheung, Brian  and  Khanuja, Ranjeet  and  Ghosh, Satrajit S</span>
+<span class="s">        and Yan, Chaogan  and  Li, Qingyang  and  Lurie, Daniel  and  Vogelstein, Joshua  and  Burns, Randal  and</span>
+<span class="s">        Colcombe, Stanley  and  Mennes, Maarten  and  Kelly, Clare  and  Di Martino, Adriana  and  Castellanos,</span>
+<span class="s">        Francisco Xavier  and  Milham, Michael}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">TITLE</span><span class="p">=</span><span class="s">{Towards Automated Analysis of Connectomes: The {Configurable Pipeline for the Analysis of Connectomes (C-PAC)}}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">JOURNAL</span><span class="p">=</span><span class="s">{Frontiers in Neuroinformatics}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">YEAR</span><span class="p">=</span><span class="s">{2013}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">NUMBER</span><span class="p">=</span><span class="s">{42}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">URL</span><span class="p">=</span><span class="s">{http://www.frontiersin.org/neuroinformatics/10.3389/conf.fninf.2013.09.00042/full}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">DOI</span><span class="p">=</span><span class="s">{10.3389/conf.fninf.2013.09.00042}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">ISSN</span><span class="p">=</span><span class="s">{1662-5196}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>…and you include</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>To cite C-PAC, use <span class="na">:cite:</span><span class="nv">`cite-example-cpac2013`</span>.
+
+<span class="cp">.. rubric Cite C-PAC</span>
+
+<span class="p">..</span> <span class="ow">bibliography</span><span class="p">::</span>
+   <span class="nc">:cited:</span>
+   <span class="nc">:keyprefix:</span> cite-example-
+</pre></div>
+</div>
+<p>…the rendered file should look something like</p>
+<blockquote class="highlights">
+<div><p>To cite C-PAC, use <a name="backref1" href="#ref1">[1]</a>.</p>
+
+<div><p><b>Cite C-PAC</b></p>
+
+<p><a name="ref1" href="#backref1">[1]</a> Craddock, C., Sikka, S., Cheung, B., Khanuja, R., Ghosh, S. S., Yan, C., Li, Q., Lurie, D., Vogelstein, J., Burns, R., Colcombe, S., Mennes, M., Kelly, C., Di Martino, A., Castellanos, F. X., and Milham, M. 2013. <a href="http://www.frontiersin.org/neuroinformatics/10.3389/conf.fninf.2013.09.00042/full">Towards automated analysis of connectomes: the Configurable Pipeline for the Analysis of Connectomes (C-PAC)</a>. <i>Frontiers in neuroinformatics</i> 42. <a href="https://dx.doi.org/10.3389/conf.fninf.2013.09.00042">doi:10.3389/conf.fninf.2013.09.00042</a></p></div></div></blockquote>
+<p>The local bibliography method to generate the same rendered output:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>To cite C-PAC, use <span class="na">:footcite:</span><span class="nv">`cpac2013`</span>.
+
+<span class="cp">.. rubric Cite C-PAC</span>
+
+<span class="p">..</span> <span class="ow">footbibliography</span><span class="p">::</span>
+</pre></div>
+</div>
+<p>If you want to generate that bibliography entry without the citation:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">bibliography</span><span class="p">::</span>
+   <span class="nc">:cited:</span>
+
+   cpac2013
+</pre></div>
+</div>
+</section>
+</section>
+<section id="environment-notes">
+<h2><a class="toc-backref" href="#id15">Environment notes</a><a class="headerlink" href="#environment-notes" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Because <a class="reference external" href="https://github.com/FCP-INDI/C-PAC">C-PAC</a> and <a class="reference external" href="https://pypi.org/project/cpac/">cpac</a> have conflicting commandline commands, we first run any <code class="docutils literal notranslate"><span class="pre">cpac</span></code> commands in a virtual environment and spoof the <code class="docutils literal notranslate"><span class="pre">command-output</span></code> directive with <code class="docutils literal notranslate"><span class="pre">code-block</span></code> like</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">code-block</span><span class="p">::</span> <span class="k">console</span>
+
+    <span class="go">cpac run --help</span>
+
+<span class="p">..</span> <span class="ow">program-output</span><span class="p">::</span> cpac_py run --help
+   <span class="nc">:shell:</span>
+   <span class="nc">:ellipsis:</span> 0,9
+</pre></div>
+</div>
+</li>
+<li><p>➕ Check <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io/blob/source/.circleci/config.yml"><code class="docutils literal notranslate"><span class="pre">.circleci/config.yml</span></code></a> of the branch you’re working from for build dependencies.</p></li>
+<li><p><a class="reference internal" href="https://github.githubassets.com/images/icons/emoji/octocat.png"><img alt="Octocat" src="https://github.githubassets.com/images/icons/emoji/octocat.png" style="width: 20px;" /></a> Set an environment variable <code class="docutils literal notranslate"><span class="pre">GITHUBTOKEN</span></code> to a <a class="reference external" href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line">personal access token</a> to increase <a class="reference external" href="https://developer.github.com/v3/#rate-limiting">your API rate limit</a> from 60 to 5000 requests per hour (for getting <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/releases">release notes from GitHub</a>).</p></li>
+</ul>
+</section>
+<section id="more-information">
+<h2><a class="toc-backref" href="#id16">More information</a><a class="headerlink" href="#more-information" title="Permalink to this headline">¶</a></h2>
+<p>For full developer documentation about documentation, see <a class="reference external" href="https://fcp-indi.github.io/docs/nightly/developer/documentation">Documentation</a></p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index">
+              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Contributing to this documentation</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>
