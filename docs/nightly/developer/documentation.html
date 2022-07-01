@@ -294,7 +294,7 @@ cpac utils --help <span class="p">|</span> sed -e <span class="s2">&quot;s/.*/  
 <section id="environment-notes">
 <h3><a class="toc-backref" href="#id16">Environment notes</a><a class="headerlink" href="#environment-notes" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p>:construction_worker: Because <a class="reference external" href="https://github.com/FCP-INDI/C-PAC">C-PAC</a> and <a class="reference external" href="https://pypi.org/project/cpac/">cpac</a> have conflicting commandline commands, we first run any <code class="docutils literal notranslate"><span class="pre">cpac</span></code> commands in a virtual environment and spoof the <code class="docutils literal notranslate"><span class="pre">command-output</span></code> directive with <code class="docutils literal notranslate"><span class="pre">code-block</span></code> like</p>
+<li><p>👷 Because <a class="reference external" href="https://github.com/FCP-INDI/C-PAC">C-PAC</a> and <a class="reference external" href="https://pypi.org/project/cpac/">cpac</a> have conflicting commandline commands, we first run any <code class="docutils literal notranslate"><span class="pre">cpac</span></code> commands in a virtual environment and spoof the <code class="docutils literal notranslate"><span class="pre">command-output</span></code> directive with <code class="docutils literal notranslate"><span class="pre">code-block</span></code> like</p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">code-block</span><span class="p">::</span> <span class="k">console</span>
 
     <span class="go">cpac run --help</span>
@@ -305,8 +305,8 @@ cpac utils --help <span class="p">|</span> sed -e <span class="s2">&quot;s/.*/  
 </pre></div>
 </div>
 </li>
-<li><p>:heavy_plus_sign: Check <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io/blob/source/.circleci/config.yml"><code class="docutils literal notranslate"><span class="pre">.circleci/config.yml</span></code></a> of the branch you’re working from for build dependencies.</p></li>
-<li><p>:octocat: Set an environment variable <code class="docutils literal notranslate"><span class="pre">GITHUBTOKEN</span></code> to a <a class="reference external" href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line">personal access token</a> to increase <a class="reference external" href="https://developer.github.com/v3/#rate-limiting">your API rate limit</a> from 60 to 5000 requests per hour (for getting <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/releases">release notes from GitHub</a>).</p></li>
+<li><p>➕ Check <a class="reference external" href="https://github.com/FCP-INDI/fcp-indi.github.io/blob/source/.circleci/config.yml"><code class="docutils literal notranslate"><span class="pre">.circleci/config.yml</span></code></a> of the branch you’re working from for build dependencies.</p></li>
+<li><p><a class="reference internal" href="https://github.githubassets.com/images/icons/emoji/octocat.png"><img alt="Octocat" src="https://github.githubassets.com/images/icons/emoji/octocat.png" style="width: 20px;" /></a> Set an environment variable <code class="docutils literal notranslate"><span class="pre">GITHUBTOKEN</span></code> to a <a class="reference external" href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line">personal access token</a> to increase <a class="reference external" href="https://developer.github.com/v3/#rate-limiting">your API rate limit</a> from 60 to 5000 requests per hour (for getting <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/releases">release notes from GitHub</a>).</p></li>
 </ul>
 </section>
 </section>
