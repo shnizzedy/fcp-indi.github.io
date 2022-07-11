@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Deprecating a version of C-PAC &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex" />
+    <link rel="search" title="Search" href="../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Deprecating a version of C-PAC</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="deprecating-a-version-of-c-pac">
+<h1>Deprecating a version of C-PAC<a class="headerlink" href="#deprecating-a-version-of-c-pac" title="Permalink to this headline">¶</a></h1>
+<p>In the rare occasion that a version of C-PAC needs to be deprecated, we add <code class="docutils literal notranslate"><span class="pre">CRITICAL_ALERT.rst</span></code> as a runtime warning and rename the deprecated image tag to <code class="docutils literal notranslate"><span class="pre">${DEPRECATED_TAG}-DEPRECATED</span></code> and replace the original tag for the deprecated image with an image that only displays <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/main/deprecate/CRITICAL_ALERT.rst"><code class="docutils literal notranslate"><span class="pre">CRITICAL_ALERT.rst</span></code></a>. For example, <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:release-v1.8.1-DEPRECATED</span></code> is the tag that would be needed to run v1.8.1 after v1.8.1 was deprecated.</p>
+<p>To semiautomatically deprecate a published version of C-PAC, follow these steps:</p>
+<ol class="arabic">
+<li><p>Write a <code class="docutils literal notranslate"><span class="pre">CRITICAL</span> <span class="pre">ALERT</span></code> (e.g., <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/028e792/deprecate/CRITICAL_ALERT.rst#critical-alert-for-fmriprep-options-in-c-pac-v181---v183">“Critical Alert for fMRIPrep-Options in C-PAC v1.8.1 - v1.8.3”</a>) describing the need for the deprecation, the affected versions, and any recommendations.</p></li>
+<li><p>Include that <code class="docutils literal notranslate"><span class="pre">CRITICAL</span> <span class="pre">ALERT</span></code> in the GitHub release notes for new version (e.g., <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/releases/tag/v1.8.4"><code class="docutils literal notranslate"><span class="pre">C-PAC/releases/v.1.8.4</span></code> “C-PAC Version 1.8.4 Beta”</a>).</p></li>
+<li><p>Use <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/tree/028e7929188df99241e8eea78d20d0fd27dbe509/deprecate"><code class="docutils literal notranslate"><span class="pre">CPAC-Development/deprecate</span></code></a> to deprecate the affected version images on Docker Hub. This process requires adequate permissions in the <a class="reference external" href="https://hub.docker.com/orgs/fcpindi">fcp-indi organization on Docker Hub</a> to <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">push</span></code>.</p>
+<ol class="arabic">
+<li><p>If you aren’t already logged into Docker Hub, <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span></code>.</p>
+<p>In a local clone or copy of <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development"><code class="docutils literal notranslate"><span class="pre">CPAC-Development</span></code></a>:</p>
+</li>
+<li><p>Replace the critical alert in <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/main/deprecate/CRITICAL_ALERT.rst"><code class="docutils literal notranslate"><span class="pre">CRITICAL_ALERT.rst</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">CRITICAL_ALERT</span></code> from step one, above.</p></li>
+<li><p>From the <code class="docutils literal notranslate"><span class="pre">deprecate</span></code> subdirectory, run</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>./build_and_deprecate <span class="si">${</span><span class="nv">DEPRECATED_TAG</span><span class="si">}</span> <span class="si">${</span><span class="nv">RECOMMENDED_MINIMUM_VERSION</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>for each tag (as <code class="docutils literal notranslate"><span class="pre">${DEPRECATED_TAG}</span></code>) that needs to be deprecated. This script will build the replacement images and push them to Docker Hub, overwriting the original image. See <a class="reference external" href="https://hub.docker.com/repository/docker/fcpindi/c-pac/tags">fcpindi/c-pac Tags | Docker Hub</a> for all C-PAC tags currently published on Docker Hub. <code class="docutils literal notranslate"><span class="pre">${RECOMMENDED_MINIMUM_VERSION}</span></code> is the <span title="semantic version">semver</span> without any leading <code class="docutils literal notranslate"><span class="pre">v</span></code>. For example</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> each TAG <span class="k">in</span> <span class="s2">&quot;&quot;</span> -lite -ABCD-HCP -fMRIPrep-LTS
+<span class="k">do</span>
+  ./build_and_deprecate release-v1.8.1<span class="nv">$TAG</span> <span class="m">1</span>.8.4
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>to deprecate all variants of C-PAC v1.8.1 with recommended mimumum version v1.8.4.</p>
+<p>If the version to be deprecated is already deprecated but the critical alert needs to be updated, that can be done with the same syntax with <code class="docutils literal notranslate"><span class="pre">./rebuild_and_deprecate</span></code> (e.g.,</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>./rebuild_and_deprecate release-v1.8.1-lite <span class="m">1</span>.8.4
+</pre></div>
+</div>
+<p>to update the critical alert for <code class="docutils literal notranslate"><span class="pre">release-v1.8.1-lite</span></code> and <code class="docutils literal notranslate"><span class="pre">release-v1.8.1-DEPRECATED</span></code>).</p>
+</li>
+</ol>
+</li>
+<li><p>Add the critical alert to the release notes of each newly deprecated version, or update the critical alert if one already exists for that version (e.g., <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/releases/tag/v1.8.1"><code class="docutils literal notranslate"><span class="pre">C-PAC/releases/v.1.8.1</span></code> “C-PAC Version 1.8.1 Beta”</a>).</p></li>
+<li><p>Trigger a rebuild of this documentation for the new version of C-PAC.</p></li>
+</ol>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index">
+              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Deprecating a version of C-PAC</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>
