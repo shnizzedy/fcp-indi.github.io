@@ -53,6 +53,75 @@
 <p>In a local clone or copy of <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development"><code class="docutils literal notranslate"><span class="pre">CPAC-Development</span></code></a>:</p>
 </li>
 <li><p>Replace the critical alert in <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/main/deprecate/CRITICAL_ALERT.rst"><code class="docutils literal notranslate"><span class="pre">CRITICAL_ALERT.rst</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">CRITICAL_ALERT</span></code> from step one, above.</p></li>
+<li><p>Update <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/DEPRECATE/deprecate/cpac_pipeline.py"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py</span></code></a> and <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/DEPRECATE/deprecate/run.py"><code class="docutils literal notranslate"><span class="pre">run.py</span></code></a>:
+#. Overwrite the current versions in the <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/tree/028e7929188df99241e8eea78d20d0fd27dbe509/deprecate"><code class="docutils literal notranslate"><span class="pre">CPAC-Development/deprecate</span></code></a> with the versions from the source code of the version of C-PAC to deprecate.
+#. Add</p>
+<blockquote>
+<div><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="s1">&#39;/CRITICAL_ALERT.rst&#39;</span><span class="p">,</span>
+   <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;CRITICAL_ALERT.rst&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>to <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/DEPRECATE/deprecate/cpac_pipeline.py"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py</span></code></a> after</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">log_dir</span><span class="p">):</span>
+   <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>(e.g., <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/bc6081c/deprecate/cpac_pipeline.py#L264-L265"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py#L264-L265&#64;bc6081c</span></code></a>) and make sure <code class="docutils literal notranslate"><span class="pre">shutil</span></code> is imported before calling that library.</p>
+</div></blockquote>
+<ol class="arabic">
+<li><p>Also in <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/DEPRECATE/deprecate/cpac_pipeline.py"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py</span></code></a>, update the variable <code class="docutils literal notranslate"><span class="pre">execution_info</span></code> to include <code class="docutils literal notranslate"><span class="pre">{critical_alert}</span></code> at the end, like <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/bc6081c/deprecate/cpac_pipeline.py#L370"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py#L370&#64;bc6081c</span></code></a>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">execution_info</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">   End of subject workflow </span><span class="si">{workflow}</span><span class="s2"></span>
+
+<span class="s2">   CPAC run complete:</span>
+
+<span class="s2">      Pipeline configuration: </span><span class="si">{pipeline}</span><span class="s2"></span>
+<span class="s2">      Subject workflow: </span><span class="si">{workflow}</span><span class="s2"></span>
+<span class="s2">      Elapsed run time (minutes): </span><span class="si">{elapsed}</span><span class="s2"></span>
+<span class="s2">      Timing information saved in </span><span class="si">{log_dir}</span><span class="s2">/cpac_individual_timing_</span><span class="si">{pipeline}</span><span class="s2">.csv</span>
+<span class="s2">      System time of start:      </span><span class="si">{run_start}</span><span class="s2"></span>
+<span class="s2">      System time of completion: </span><span class="si">{run_finish}</span><span class="s2"></span>
+
+<span class="si">{critical_alert}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are probably at least two definitions of <code class="docutils literal notranslate"><span class="pre">execution_info</span></code> that need <code class="docutils literal notranslate"><span class="pre">{critical_alert}</span></code> appended to them (e.g., <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/bc6081c/deprecate/cpac_pipeline.py#L705"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py#L705&#64;bc6081c</span></code></a>).</p>
+</div>
+</li>
+<li><p>Also in <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/DEPRECATE/deprecate/cpac_pipeline.py"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py</span></code></a>, define <code class="docutils literal notranslate"><span class="pre">critical_alert</span></code> based on the <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/main/deprecate/CRITICAL_ALERT.rst"><code class="docutils literal notranslate"><span class="pre">CRITICAL_ALERT.rst</span></code></a> file you already updated (e.g., <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/bc6081c/deprecate/cpac_pipeline.py#L373-L375"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py#L373-L375&#64;bc6081c</span></code></a>):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/CRITICAL_ALERT.rst&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">critical_alert_file</span><span class="p">:</span>
+   <span class="n">critical_alert</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+         <span class="sa">f</span><span class="s1">&#39;    </span><span class="si">{</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">critical_alert_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()])</span>
+</pre></div>
+</div>
+</li>
+<li><p>Also in <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/DEPRECATE/deprecate/cpac_pipeline.py"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py</span></code></a>, update any calls to <code class="docutils literal notranslate"><span class="pre">execution_info.format()</span></code> to populate the string variable <code class="docutils literal notranslate"><span class="pre">{critical_alert}</span></code> with the <code class="docutils literal notranslate"><span class="pre">critical_alert</span></code> you defined above (e.g., <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/bc6081c/deprecate/cpac_pipeline.py#L722"><code class="docutils literal notranslate"><span class="pre">cpac_pipeline.py#L722&#64;bc6081c</span></code></a>):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">execution_info</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+   <span class="n">workflow</span><span class="o">=</span><span class="n">workflow</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+   <span class="n">pipeline</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s1">&#39;pipeline_name&#39;</span><span class="p">],</span>
+   <span class="n">log_dir</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s1">&#39;log_directory&#39;</span><span class="p">][</span><span class="s1">&#39;path&#39;</span><span class="p">],</span>
+   <span class="n">elapsed</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pipeline_start_time</span><span class="p">)</span> <span class="o">/</span> <span class="mi">60</span><span class="p">,</span>
+   <span class="n">run_start</span><span class="o">=</span><span class="n">pipeline_start_datetime</span><span class="p">,</span>
+   <span class="n">run_finish</span><span class="o">=</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">),</span>
+   <span class="n">critical_alert</span><span class="o">=</span><span class="n">critical_alert</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p>In <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/DEPRECATE/deprecate/run.py"><code class="docutils literal notranslate"><span class="pre">run.py</span></code></a>, print the contents of <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/main/deprecate/CRITICAL_ALERT.rst"><code class="docutils literal notranslate"><span class="pre">CRITICAL_ALERT.rst</span></code></a>, e.g. <a class="reference external" href="https://github.com/FCP-INDI/CPAC-Development/blob/bc6081c/deprecate/run.py#L216-L219"><code class="docutils literal notranslate"><span class="pre">run.py#L216-L219&#64;bc6081c</span></code></a>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/CRITICAL_ALERT.rst&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">critical_alert_file</span><span class="p">:</span>
+   <span class="n">critical_alert</span> <span class="o">=</span> <span class="n">critical_alert_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">critical_alert</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
 <li><p>From the <code class="docutils literal notranslate"><span class="pre">deprecate</span></code> subdirectory, run</p>
 <div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>./build_and_deprecate <span class="si">${</span><span class="nv">DEPRECATED_TAG</span><span class="si">}</span> <span class="si">${</span><span class="nv">RECOMMENDED_MINIMUM_VERSION</span><span class="si">}</span>
 </pre></div>
