@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Nodes &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <title>Nodes &#8212; C-PAC 1.8.5.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="pipeline" title="Pipeline Development"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" accesskey="U">Developer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nodes</a></li> 
       </ul>
@@ -1088,20 +1088,26 @@ if successful, results</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.connect" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Connect nodes in the pipeline.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.disconnect" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.disconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnect</span></code></a>(*args)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.connect_retries" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.connect_retries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect_retries</span></code></a>(nodes, connections)</p></td>
+<td><p>Method to generalize making the same connections to try and retry nodes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.disconnect" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.disconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnect</span></code></a>(*args)</p></td>
 <td><p>Disconnect nodes See the docstring for connect for format.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.export" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.export"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export</span></code></a>([filename, prefix, format, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.export" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.export"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export</span></code></a>([filename, prefix, format, …])</p></td>
 <td><p>Export object into a different format</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.get_node" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.get_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node</span></code></a>(name)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.get_node" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.get_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node</span></code></a>(name)</p></td>
 <td><p>Return an internal node by name</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.list_node_names" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.list_node_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_node_names</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.list_node_names" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.list_node_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_node_names</span></code></a>()</p></td>
 <td><p>List names of all nodes in a workflow</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.load" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(filename)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.load" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(filename)</p></td>
 <td><p>Load this workflow element from a file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.nodes_and_guardrails" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.nodes_and_guardrails"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_and_guardrails</span></code></a>(*nodes, registered[, …])</p></td>
+<td><p>Returns a two tuples of Nodes: (try, retry) and their respective guardrails</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.remove_nodes" title="CPAC.pipeline.nipype_pipeline_engine.Workflow.remove_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_nodes</span></code></a>(nodes)</p></td>
 <td><p>Remove nodes from a workflow</p></td>
@@ -1231,6 +1237,24 @@ destinput : string (must be in dest.inputs)</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow.connect_retries">
+<span class="sig-name descname"><span class="pre">connect_retries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connections</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow.connect_retries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.connect_retries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to generalize making the same connections to try and
+retry nodes.</p>
+<p>For each 3-tuple (<code class="docutils literal notranslate"><span class="pre">conn</span></code>) in <code class="docutils literal notranslate"><span class="pre">connections</span></code>, will do
+<code class="docutils literal notranslate"><span class="pre">wf.connect(conn[0],</span> <span class="pre">conn[1],</span> <span class="pre">node,</span> <span class="pre">conn[2])</span></code> for each <code class="docutils literal notranslate"><span class="pre">node</span></code>
+in <code class="docutils literal notranslate"><span class="pre">nodes</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>nodes</strong><span class="classifier">iterable of Nodes</span></dt><dd></dd>
+<dt><strong>connections</strong><span class="classifier">iterable of 3-tuples of (Node, str or tuple, str)</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow.disconnect">
 <span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/pipeline/engine/workflows#Workflow.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.disconnect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disconnect nodes
@@ -1294,6 +1318,26 @@ See the docstring for connect for format.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow.nodes_and_guardrails">
+<span class="sig-name descname"><span class="pre">nodes_and_guardrails</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_clones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow.nodes_and_guardrails"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.nodes_and_guardrails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a two tuples of Nodes: (try, retry) and their
+respective guardrails</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>nodes</strong><span class="classifier">any number of Nodes</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>nodes</strong><span class="classifier">tuple of Nodes</span></dt><dd></dd>
+<dt><strong>guardrails</strong><span class="classifier">tuple of Nodes</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow.remove_nodes">
 <span class="sig-name descname"><span class="pre">remove_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/pipeline/engine/workflows#Workflow.remove_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.remove_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove nodes from a workflow</p>
@@ -1332,7 +1376,7 @@ execution.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow.write_graph">
-<span class="sig-name descname"><span class="pre">write_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dotfilename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'graph.dot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph2use</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hierarchical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simple_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nipype/pipeline/engine/workflows#Workflow.write_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.write_graph" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">write_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dotfilename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'graph.dot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph2use</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hierarchical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simple_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow.write_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.write_graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a graphviz dot file and a png file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1615,7 +1659,7 @@ generate an interactive HTML chart.</p>
         <li class="right" >
           <a href="pipeline" title="Pipeline Development"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >Developer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nodes</a></li> 
       </ul>

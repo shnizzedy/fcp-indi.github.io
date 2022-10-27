@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CPAC.pipeline.random_state.seed &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <title>CPAC.pipeline.random_state.seed &#8212; C-PAC 1.8.5.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
@@ -29,7 +29,7 @@
         <li class="right" >
           <a href="../../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.pipeline.random_state.seed</a></li> 
       </ul>
@@ -41,8 +41,23 @@
           <div class="body" role="main">
             
   <h1>Source code for CPAC.pipeline.random_state.seed</h1><div class="highlight"><pre>
-<span></span><span class="sd">&#39;&#39;&#39;Functions to set, check, and log random seed&#39;&#39;&#39;</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="c1"># Copyright (C) 2022  C-PAC Developers</span>
+
+<span class="c1"># This file is part of C-PAC.</span>
+
+<span class="c1"># C-PAC is free software: you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the</span>
+<span class="c1"># Free Software Foundation, either version 3 of the License, or (at your</span>
+<span class="c1"># option) any later version.</span>
+
+<span class="c1"># C-PAC is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<span class="c1"># License for more details.</span>
+
+<span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
+<span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&quot;&quot;&quot;Functions to set, check, and log random seed&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">getLogger</span>
 
@@ -53,11 +68,27 @@
 <span class="kn">from</span> <span class="nn">nipype.interfaces.fsl.maths</span> <span class="kn">import</span> <span class="n">MathsCommand</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces.fsl.utils</span> <span class="kn">import</span> <span class="n">ImageMaths</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.registration.utils</span> <span class="kn">import</span> <span class="n">hardcoded_reg</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.ants</span> <span class="kn">import</span> <span class="n">AI</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.monitoring.custom_logging</span> <span class="kn">import</span> <span class="n">set_up_logger</span>
 
+<span class="n">MAX_SEED</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
 <span class="n">_seed</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">increment_seed</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="s1">&#39;Node&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Node&#39;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Increment the random seed for a given node</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    node : Node</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    node : Node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">seed</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed_plus_1</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">node</span>
 
 
 <span class="k">def</span> <span class="nf">random_random_seed</span><span class="p">():</span>
@@ -73,10 +104,10 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; 0 &lt; random_random_seed() &lt;= np.iinfo(np.int32).max</span>
+<span class="sd">    &gt;&gt;&gt; 0 &lt; random_random_seed() &lt;= MAX_SEED</span>
 <span class="sd">    True</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">MAX_SEED</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">random_seed</span><span class="p">():</span>
@@ -90,7 +121,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    seed : int or None</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">if</span> <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
         <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">random_random_seed</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span>
 
@@ -135,6 +166,7 @@
 <span class="sd">    ...     &#39;functions&#39;, &#39;interfaces&#39;]])</span>
 <span class="sd">    True</span>
 <span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">CPAC.registration.utils</span> <span class="kn">import</span> <span class="n">hardcoded_reg</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="n">random_seed</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;functions&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;interfaces&#39;</span><span class="p">:</span> <span class="p">{}}</span>
@@ -180,6 +212,24 @@
     <span class="p">}</span>
 
 
+<span class="k">def</span> <span class="nf">seed_plus_1</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Increment seed, looping back to 1 at MAX_SEED</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    seed : int, optional</span>
+<span class="sd">        Uses configured seed if not specified</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="n">random_seed</span><span class="p">()</span> <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">seed</span> <span class="o">&lt;</span> <span class="n">MAX_SEED</span><span class="p">:</span>  <span class="c1"># increment random seed</span>
+        <span class="k">return</span> <span class="n">seed</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># loop back to 1</span>
+
+
 <span class="k">def</span> <span class="nf">set_up_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Set global random seed</span>
 
@@ -209,16 +259,15 @@
     <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">seed</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">=</span> <span class="n">random_random_seed</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">seed</span> <span class="o">!=</span> <span class="s1">&#39;random&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span>
-            <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span>
-            <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
-        <span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Valid random seeds are positive integers up to &#39;</span>
-                             <span class="sa">f</span><span class="s1">&#39;2147483647, &quot;random&quot;, or None, not </span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-        <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">seed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">seed</span> <span class="o">&lt;=</span> <span class="n">MAX_SEED</span>
+            <span class="k">except</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AssertionError</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Valid random seeds are positive integers up to &#39;</span>
+                                 <span class="sa">f</span><span class="s1">&#39;2147483647, &quot;random&quot;, or None, not </span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">_seed</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seed</span>
     <span class="k">return</span> <span class="n">random_seed</span><span class="p">()</span>
 
 
@@ -229,8 +278,9 @@
 <span class="sd">    ----------</span>
 <span class="sd">    log_dir : str</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="n">log_dir</span><span class="o">=</span><span class="n">log_dir</span><span class="p">)</span>
-    <span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;seed: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">())</span>
+    <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;random.tsv&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;info&#39;</span><span class="p">,</span>
+                  <span class="n">log_dir</span><span class="o">=</span><span class="n">log_dir</span><span class="p">)</span>
+    <span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;seed</span><span class="se">\t</span><span class="s1">node&#39;</span><span class="p">)</span>
 </pre></div>
 
             <div class="clearer"></div>
@@ -272,7 +322,7 @@
         <li class="right" >
           <a href="../../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.pipeline.random_state.seed</a></li> 
       </ul>

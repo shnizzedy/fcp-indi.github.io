@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CPAC.func_preproc.func_preproc &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <title>CPAC.func_preproc.func_preproc &#8212; C-PAC 1.8.5.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
@@ -29,7 +29,7 @@
         <li class="right" >
           <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.func_preproc.func_preproc</a></li> 
       </ul>
@@ -617,7 +617,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">startidx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">start_idx</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">stop_idx</span> <span class="o">==</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">stop_idx</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">nvols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">stop_idx</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;End&quot;</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">stop_idx</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">nvols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
         <span class="n">stopidx</span> <span class="o">=</span> <span class="n">nvols</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">stopidx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">stop_idx</span><span class="p">)</span>
@@ -1043,19 +1043,21 @@
 <span class="sd">                &quot;tpattern&quot;],</span>
 <span class="sd">     &quot;outputs&quot;: {</span>
 <span class="sd">         &quot;desc-preproc_bold&quot;: {</span>
-<span class="sd">             &quot;Description&quot;: &quot;Slice-time corrected BOLD time-series via AFNI 3dTShift.&quot;</span>
+<span class="sd">             &quot;Description&quot;: &quot;Slice-time corrected BOLD time-series via&quot;</span>
+<span class="sd">                            &quot; AFNI 3dTShift.&quot;</span>
 <span class="sd">         },</span>
 <span class="sd">         &quot;desc-stc_bold&quot;: {</span>
-<span class="sd">             &quot;Description&quot;: &quot;Slice-time corrected BOLD time-series via AFNI 3dTShift.&quot;}}</span>
+<span class="sd">             &quot;Description&quot;: &quot;Slice-time corrected BOLD time-series via&quot;</span>
+<span class="sd">                            &quot; AFNI 3dTShift.&quot;}}</span>
 <span class="sd">    }</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">slice_time</span> <span class="o">=</span> <span class="n">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_slice_timing_correction_&#39;</span>
-                                 <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                                      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
                                  <span class="n">tpattern</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span>
-                                 <span class="s1">&#39;slice_timing_correction&#39;</span><span class="p">][</span><span class="s1">&#39;tpattern&#39;</span><span class="p">],</span>
+                                     <span class="s1">&#39;slice_timing_correction&#39;</span><span class="p">][</span><span class="s1">&#39;tpattern&#39;</span><span class="p">],</span>
                                  <span class="n">tzero</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span>
-                                 <span class="s1">&#39;slice_timing_correction&#39;</span><span class="p">][</span><span class="s1">&#39;tzero&#39;</span><span class="p">])</span>
+                                     <span class="s1">&#39;slice_timing_correction&#39;</span><span class="p">][</span><span class="s1">&#39;tzero&#39;</span><span class="p">])</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">slice_time</span><span class="p">,</span> <span class="s1">&#39;inputspec.func_ts&#39;</span><span class="p">)</span>
@@ -1620,7 +1622,8 @@
 <span class="sd">     &quot;option_key&quot;: [&quot;func_masking&quot;, &quot;using&quot;],</span>
 <span class="sd">     &quot;option_val&quot;: &quot;FSL_AFNI&quot;,</span>
 <span class="sd">     &quot;inputs&quot;: [[&quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;, &quot;bold&quot;],</span>
-<span class="sd">                 &quot;motion-basefile&quot;],</span>
+<span class="sd">                &quot;motion-basefile&quot;, &quot;FSL-AFNI-bold-ref&quot;, &quot;FSL-AFNI-brain-mask&quot;,</span>
+<span class="sd">                &quot;FSL-AFNI-brain-probseg&quot;],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;space-bold_desc-brain_mask&quot;,</span>
 <span class="sd">                 &quot;desc-ref_bold&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -1641,12 +1644,11 @@
         <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;init_aff_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">n_procs</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s1">&#39;system_config&#39;</span><span class="p">][</span><span class="s1">&#39;num_OMP_threads&#39;</span><span class="p">],</span>
     <span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;FSL-AFNI-bold-ref&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">init_aff</span><span class="p">,</span> <span class="s1">&#39;fixed_image&#39;</span><span class="p">)</span>
 
-    <span class="n">init_aff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">fixed_image</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span>
-        <span class="s1">&#39;func_masking&#39;</span><span class="p">][</span><span class="s1">&#39;FSL_AFNI&#39;</span><span class="p">][</span><span class="s1">&#39;bold_ref&#39;</span><span class="p">]</span>
-
-    <span class="n">init_aff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">fixed_image_mask</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span>
-        <span class="s1">&#39;func_masking&#39;</span><span class="p">][</span><span class="s1">&#39;FSL_AFNI&#39;</span><span class="p">][</span><span class="s1">&#39;brain_mask&#39;</span><span class="p">]</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;FSL-AFNI-brain-mask&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">init_aff</span><span class="p">,</span> <span class="s1">&#39;fixed_image_mask&#39;</span><span class="p">)</span>
 
     <span class="n">init_aff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">search_grid</span> <span class="o">=</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
 
@@ -1676,8 +1678,8 @@
         <span class="n">n_procs</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s1">&#39;system_config&#39;</span><span class="p">][</span><span class="s1">&#39;num_OMP_threads&#39;</span><span class="p">],</span>
     <span class="p">)</span>
 
-    <span class="n">norm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">fixed_image</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span>
-        <span class="s1">&#39;func_masking&#39;</span><span class="p">][</span><span class="s1">&#39;FSL_AFNI&#39;</span><span class="p">][</span><span class="s1">&#39;bold_ref&#39;</span><span class="p">]</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;FSL-AFNI-bold-ref&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="s1">&#39;fixed_image&#39;</span><span class="p">)</span>
 
     <span class="n">map_brainmask</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">ants</span><span class="o">.</span><span class="n">ApplyTransforms</span><span class="p">(</span>
@@ -1686,10 +1688,10 @@
         <span class="p">),</span>
         <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;map_brainmask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    
+
     <span class="c1"># Use the higher resolution and probseg for numerical stability in rounding</span>
-    <span class="n">map_brainmask</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_image</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span>
-        <span class="s1">&#39;func_masking&#39;</span><span class="p">][</span><span class="s1">&#39;FSL_AFNI&#39;</span><span class="p">][</span><span class="s1">&#39;brain_probseg&#39;</span><span class="p">]</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;FSL-AFNI-brain-probseg&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">map_brainmask</span><span class="p">,</span> <span class="s1">&#39;input_image&#39;</span><span class="p">)</span>
 
     <span class="n">binarize_mask</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">maths</span><span class="o">.</span><span class="n">MathsCommand</span><span class="p">(),</span>
                             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;binarize_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -2398,7 +2400,7 @@
         <li class="right" >
           <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.func_preproc.func_preproc</a></li> 
       </ul>

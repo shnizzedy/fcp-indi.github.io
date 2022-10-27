@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Multivariate Distance Matrix Regression (MDMR) &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <title>Multivariate Distance Matrix Regression (MDMR) &#8212; C-PAC 1.8.5.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="easy_thresh" title="Easy thresh"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index" >Developer Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="index" accesskey="U">Workflows</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Multivariate Distance Matrix Regression (MDMR)</a></li> 
@@ -92,6 +92,8 @@ inputspec.parallel_nodes : integer
     <span class="n">Pseudo</span> <span class="n">F</span> <span class="n">values</span> <span class="n">of</span> <span class="n">CWAS</span>
 <span class="n">outputspec</span><span class="o">.</span><span class="n">p_map</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
     <span class="n">Significance</span> <span class="n">p</span> <span class="n">values</span> <span class="n">calculated</span> <span class="kn">from</span> <span class="nn">permutation</span> <span class="n">tests</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">z_map</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Significance</span> <span class="n">p</span> <span class="n">values</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">z</span><span class="o">-</span><span class="n">scores</span> 
 </pre></div>
 </div>
 <p>CWAS Procedure:</p>
@@ -102,9 +104,6 @@ inputspec.parallel_nodes : integer
 <li><p>Calculate MDMR statistics for the voxel</p></li>
 <li><p>Determine significance of MDMR statistics with permutation tests</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 <p>Workflow Graph:</p>
 <a class="reference internal image-reference" href="images/generated/cwas.png"><img alt="images/generated/cwas.png" src="images/generated/cwas.png" style="width: 500px;" /></a>
 <p>Detailed Workflow Graph:</p>
@@ -112,7 +111,7 @@ inputspec.parallel_nodes : integer
 <p class="rubric">References</p>
 <dl class="citation">
 <dt class="label" id="rc1cc86c9c014-1"><span class="brackets">1</span></dt>
-<dd><p>Shehzad Z, Kelly C, Reiss PT, Emerson JW, McMahon K, Copland DA, Castellanos FX, Milham MP. An Analytic Framework for Connectome-Wide Association Studies. Under Review.</p>
+<dd><p>Shehzad Z, Kelly C, Reiss PT, Cameron Craddock R, Emerson JW, McMahon K, Copland DA, Castellanos FX, Milham MP. A multivariate distance-based analytic framework for connectome-wide association studies. Neuroimage. 2014 Jun;93 Pt 1(0 1):74-94. doi: 10.1016/j.neuroimage.2014.02.024. Epub 2014 Feb 28. PMID: 24583255; PMCID: PMC4138049.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -258,7 +257,7 @@ easier</p>
         <li class="right" >
           <a href="easy_thresh" title="Easy thresh"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index" >Developer Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="index" >Workflows</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Multivariate Distance Matrix Regression (MDMR)</a></li> 

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CPAC.nuisance.nuisance &#8212; C-PAC 1.8.4.dev Beta documentation</title>
+    <title>CPAC.nuisance.nuisance &#8212; C-PAC 1.8.5.dev Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
@@ -29,7 +29,7 @@
         <li class="right" >
           <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.nuisance.nuisance</a></li> 
       </ul>
@@ -45,17 +45,18 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nb</span>
+<span class="c1"># pylint: disable=wrong-import-order</span>
 <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
 <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
 <span class="kn">import</span> <span class="nn">CPAC</span>
 
+<span class="kn">from</span> <span class="nn">nipype</span> <span class="kn">import</span> <span class="n">logging</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">fsl</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">ants</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">c3</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces.afni</span> <span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
 <span class="kn">from</span> <span class="nn">scipy.fftpack</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
-<span class="kn">from</span> <span class="nn">CPAC</span> <span class="kn">import</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.masktool</span> <span class="kn">import</span> <span class="n">MaskTool</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.pc</span> <span class="kn">import</span> <span class="n">PC</span>
@@ -78,6 +79,7 @@
 <span class="kn">from</span> <span class="nn">CPAC.utils.datasource</span> <span class="kn">import</span> <span class="n">check_for_s3</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">check_prov_for_regtool</span>
 <span class="kn">from</span> <span class="nn">.bandpass</span> <span class="kn">import</span> <span class="p">(</span><span class="n">bandpass_voxels</span><span class="p">,</span> <span class="n">afni_1dBandpass</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;nipype.workflow&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">choose_nuisance_blocks</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">generate_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -99,21 +101,25 @@
     <span class="n">nuisance</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">to_template_cfg</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span><span class="s1">&#39;functional_registration&#39;</span><span class="p">][</span>
         <span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">]</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">]),</span>
-           <span class="s1">&#39;abcd&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">),</span>
-           <span class="s1">&#39;single_step_resampling&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
-                                      <span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">]),</span>
-           <span class="s1">&#39;single_step_resampling_from_stc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
-                                               <span class="s2">&quot;desc-stc_bold&quot;</span><span class="p">)</span>
-           <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">to_template_cfg</span><span class="p">[</span><span class="s1">&#39;apply_transform&#39;</span><span class="p">][</span><span class="s1">&#39;using&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">apply_transform_using</span> <span class="o">=</span> <span class="n">to_template_cfg</span><span class="p">[</span><span class="s1">&#39;apply_transform&#39;</span><span class="p">][</span><span class="s1">&#39;using&#39;</span><span class="p">]</span>
+    <span class="n">input_interface</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">,</span> <span class="s1">&#39;bold&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;abcd&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">,</span> <span class="s1">&#39;bold&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;single_step_resampling_from_stc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+                                            <span class="s2">&quot;desc-stc_bold&quot;</span><span class="p">)</span>
+    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">apply_transform_using</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">input_interface</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="s1">&#39;T1_template&#39;</span> <span class="ow">in</span> <span class="n">to_template_cfg</span><span class="p">[</span><span class="s1">&#39;target_template&#39;</span><span class="p">][</span><span class="s1">&#39;using&#39;</span><span class="p">]:</span>
-            <span class="n">nuisance</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nuisance_regressors_generation</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+            <span class="n">nuisance</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nuisance_regressors_generation_T1w</span><span class="p">,</span>
+                             <span class="n">input_interface</span><span class="p">))</span>
         <span class="k">if</span> <span class="s1">&#39;EPI_template&#39;</span> <span class="ow">in</span> <span class="n">to_template_cfg</span><span class="p">[</span><span class="s1">&#39;target_template&#39;</span><span class="p">][</span><span class="s1">&#39;using&#39;</span><span class="p">]:</span>
-            <span class="n">nuisance</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nuisance_regressors_generation_EPItemplate</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+            <span class="n">nuisance</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nuisance_regressors_generation_EPItemplate</span><span class="p">,</span>
+                             <span class="n">input_interface</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">generate_only</span><span class="p">:</span>
-            <span class="n">nuisance</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nuisance_regression</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">generate_only</span> <span class="ow">and</span> <span class="s1">&#39;native&#39;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">,</span>
+                                                 <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">,</span>
+                                                 <span class="s1">&#39;space&#39;</span><span class="p">]:</span>
+            <span class="n">nuisance</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nuisance_regression_native</span><span class="p">,</span> <span class="n">input_interface</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">nuisance</span>
 
@@ -2196,7 +2202,45 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">nuisance_regressors_generation</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">nuisance_regressors_generation_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span>
+                                               <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Node Block:</span>
+<span class="sd">    {&quot;name&quot;: &quot;nuisance_regressors_generation_EPItemplate&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;nuisance_corrections&quot;, &quot;2-nuisance_regression&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;create_regressors&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;Regressors&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;USER-DEFINED&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-preproc_bold&quot;,</span>
+<span class="sd">                 &quot;desc-brain_bold&quot;,</span>
+<span class="sd">                 &quot;space-bold_desc-brain_mask&quot;,</span>
+<span class="sd">                 &quot;movement-parameters&quot;,</span>
+<span class="sd">                 &quot;framewise-displacement-jenkinson&quot;,</span>
+<span class="sd">                 &quot;framewise-displacement-power&quot;,</span>
+<span class="sd">                 &quot;dvars&quot;,</span>
+<span class="sd">                 [&quot;space-bold_desc-eroded_mask&quot;, &quot;space-bold_desc-brain_mask&quot;],</span>
+<span class="sd">                 [&quot;space-bold_label-CSF_desc-eroded_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-CSF_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-CSF_mask&quot;],</span>
+<span class="sd">                 [&quot;space-bold_label-WM_desc-eroded_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-WM_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-WM_mask&quot;],</span>
+<span class="sd">                 [&quot;space-bold_label-GM_desc-eroded_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-GM_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-GM_mask&quot;],</span>
+<span class="sd">                 &quot;from-EPItemplate_to-bold_mode-image_desc-linear_xfm&quot;,</span>
+<span class="sd">                 &quot;from-bold_to-EPItemplate_mode-image_desc-linear_xfm&quot;),</span>
+<span class="sd">                &quot;lateral-ventricles-mask&quot;,</span>
+<span class="sd">                &quot;TR&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;regressors&quot;, &quot;censor-indices&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">nuisance_regressors_generation</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span>
+                                          <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">nuisance_regressors_generation_T1w</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span>
+                                       <span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Node Block:</span>
 <span class="sd">    {&quot;name&quot;: &quot;nuisance_regressors_generation&quot;,</span>
@@ -2222,22 +2266,53 @@
 <span class="sd">                &quot;TR&quot;],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;regressors&quot;, &quot;censor-indices&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">nuisance_regressors_generation</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span>
+                                          <span class="s1">&#39;T1w&#39;</span><span class="p">)</span>
 
-    <span class="n">use_ants</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span>
-        <span class="s1">&#39;from-template_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">nuisance_regressors_generation</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">space</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wf, cfg, strat_pool, pipe_num, opt</span>
+<span class="sd">        pass through from Node Block</span>
+
+<span class="sd">    space : str</span>
+<span class="sd">        T1w or bold</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    wf : nipype.pipeline.engine.workflows.Workflow</span>
+
+<span class="sd">    outputs : dict</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">prefixes</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;space-</span><span class="si">{</span><span class="n">space</span><span class="si">}</span><span class="s1">_&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">reg_tool</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;T1w&#39;</span><span class="p">:</span>
+        <span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span>
+            <span class="s1">&#39;from-template_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
+            <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span>
+                <span class="s1">&#39;from-template_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
+            <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;bold&#39;</span><span class="p">:</span>
         <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span>
-            <span class="s1">&#39;from-template_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
+            <span class="s1">&#39;from-EPItemplate_to-bold_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
         <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">reg_tool</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">use_ants</span> <span class="o">=</span> <span class="n">reg_tool</span> <span class="o">==</span> <span class="s1">&#39;ants&#39;</span>
 
     <span class="n">ventricle</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;lateral-ventricles-mask&#39;</span><span class="p">)</span>
-    <span class="n">csf_mask</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;label-CSF_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                        <span class="s2">&quot;label-CSF_desc-preproc_mask&quot;</span><span class="p">,</span>
-                                        <span class="s2">&quot;label-CSF_mask&quot;</span><span class="p">])</span>
+    <span class="n">csf_mask</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_&#39;</span>
+                                       <span class="s1">&#39;desc-eroded_mask&#39;</span><span class="p">,</span>
+                                       <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_&#39;</span>
+                                       <span class="s1">&#39;desc-preproc_mask&#39;</span><span class="p">,</span>
+                                       <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_mask&#39;</span><span class="p">])</span>
 
     <span class="n">regressors</span> <span class="o">=</span> <span class="n">create_regressor_workflow</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="n">use_ants</span><span class="p">,</span>
                                            <span class="n">ventricle_mask_exist</span><span class="o">=</span><span class="n">ventricle</span><span class="p">,</span>
+                                           <span class="n">all_bold</span><span class="o">=</span><span class="n">space</span><span class="o">==</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
                                            <span class="n">csf_mask_exist</span> <span class="o">=</span> <span class="n">csf_mask</span><span class="p">,</span>
                                            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nuisance_regressors_&#39;</span>
                                                 <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">opt</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -2246,73 +2321,126 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_file_path&#39;</span><span class="p">)</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-bold_desc-brain_mask&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_brain_mask_file_path&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+               <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_brain_mask_file_path&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;desc-brain_</span><span class="si">{</span><span class="n">space</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;desc-brain_</span><span class="si">{</span><span class="n">space</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_file_path&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;space-T1w_desc-eroded_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;space-T1w_desc-brain_mask&quot;</span><span class="p">]):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-T1w_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;space-T1w_desc-brain_mask&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">desc-eroded_mask&#39;</span><span class="p">,</span>
+                               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">desc-brain_mask&#39;</span><span class="p">]):</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">desc-eroded_mask&#39;</span><span class="p">,</span>
+                                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">desc-brain_mask&#39;</span><span class="p">])</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span>
                    <span class="s1">&#39;inputspec.anatomical_eroded_brain_mask_file_path&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No </span><span class="si">%s</span><span class="s1">-space brain mask found in resource pool.&#39;</span><span class="p">,</span> <span class="n">space</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;label-CSF_desc-eroded_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;label-CSF_desc-preproc_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;label-CSF_mask&quot;</span><span class="p">]):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;label-CSF_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;label-CSF_desc-preproc_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;label-CSF_mask&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_desc-eroded_mask&#39;</span><span class="p">,</span>
+                               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_desc-preproc_mask&#39;</span><span class="p">,</span>
+                               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_mask&#39;</span><span class="p">]):</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_&#39;</span>
+                                         <span class="s1">&#39;desc-eroded_mask&#39;</span><span class="p">,</span>
+                                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_&#39;</span>
+                                         <span class="s1">&#39;desc-preproc_mask&#39;</span><span class="p">,</span>
+                                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-CSF_mask&#39;</span><span class="p">])</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.csf_mask_file_path&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No </span><span class="si">%s</span><span class="s1">-space CSF mask found in resource pool.&#39;</span><span class="p">,</span> <span class="n">space</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;label-WM_desc-eroded_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;label-WM_desc-preproc_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;label-WM_mask&quot;</span><span class="p">]):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;label-WM_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;label-WM_desc-preproc_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;label-WM_mask&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-WM_desc-eroded_mask&#39;</span><span class="p">,</span>
+                               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-WM_desc-preproc_mask&#39;</span><span class="p">,</span>
+                               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-WM_mask&#39;</span><span class="p">]):</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-WM_&#39;</span>
+                                         <span class="s1">&#39;desc-eroded_mask&#39;</span><span class="p">,</span>
+                                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-WM_&#39;</span>
+                                         <span class="s1">&#39;desc-preproc_mask&#39;</span><span class="p">,</span>
+                                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-WM_mask&#39;</span><span class="p">])</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.wm_mask_file_path&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No </span><span class="si">%s</span><span class="s1">-space WM mask found in resource pool.&#39;</span><span class="p">,</span> <span class="n">space</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;label-GM_desc-eroded_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;label-GM_desc-preproc_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;label-GM_mask&quot;</span><span class="p">]):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;label-GM_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;label-GM_desc-preproc_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;label-GM_mask&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-GM_desc-eroded_mask&#39;</span><span class="p">,</span>
+                               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-GM_desc-preproc_mask&#39;</span><span class="p">,</span>
+                               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-GM_mask&#39;</span><span class="p">]):</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-GM_&#39;</span>
+                                         <span class="s1">&#39;desc-eroded_mask&#39;</span><span class="p">,</span>
+                                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-GM_&#39;</span>
+                                         <span class="s1">&#39;desc-preproc_mask&#39;</span><span class="p">,</span>
+                                         <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefixes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">label-GM_mask&#39;</span><span class="p">])</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.gm_mask_file_path&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No </span><span class="si">%s</span><span class="s1">-space GM mask found in resource pool.&#39;</span><span class="p">,</span> <span class="n">space</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">ventricle</span><span class="p">:</span>
         <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;lateral-ventricles-mask&#39;</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
                    <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.lat_ventricles_mask_file_path&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;from-bold_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;from-bold_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.func_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;T1w&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span>
+                <span class="s1">&#39;from-bold_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+                <span class="s1">&#39;from-bold_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+                       <span class="n">regressors</span><span class="p">,</span>
+                       <span class="s1">&#39;inputspec.func_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
 
-        <span class="c1"># invert func2anat matrix to get anat2func_linear_xfm</span>
-        <span class="n">anat2func_linear_xfm</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ConvertXFM</span><span class="p">(),</span>
-                                       <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;anat_to_func_linear_xfm_&#39;</span>
-                                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">opt</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">anat2func_linear_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">invert_xfm</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">anat2func_linear_xfm</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+            <span class="c1"># invert func2anat matrix to get anat2func_linear_xfm</span>
+            <span class="n">anat2func_linear_xfm</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ConvertXFM</span><span class="p">(),</span>
+                                           <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;anat_to_func_linear_xfm_&#39;</span>
+                                                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">opt</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">anat2func_linear_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">invert_xfm</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">anat2func_linear_xfm</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">anat2func_linear_xfm</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
-                   <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.anat_to_func_linear_xfm_file_path&#39;</span><span class="p">)</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">anat2func_linear_xfm</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+                       <span class="n">regressors</span><span class="p">,</span>
+                       <span class="s1">&#39;inputspec.anat_to_func_linear_xfm_file_path&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;from-template_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;from-template_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.mni_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span>
+                <span class="s1">&#39;from-template_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+                <span class="s1">&#39;from-template_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+                       <span class="n">regressors</span><span class="p">,</span>
+                       <span class="s1">&#39;inputspec.mni_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;from-T1w_to-template_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;from-T1w_to-template_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.anat_to_mni_linear_xfm_file_path&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span>
+            <span class="s1">&#39;from-T1w_to-template_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+                <span class="s1">&#39;from-T1w_to-template_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+                       <span class="n">regressors</span><span class="p">,</span>
+                       <span class="s1">&#39;inputspec.anat_to_mni_linear_xfm_file_path&#39;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;bold&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span>
+                <span class="s1">&#39;from-EPItemplate_to-bold_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+                <span class="s1">&#39;from-EPItemplate_to-bold_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+                       <span class="n">regressors</span><span class="p">,</span>
+                       <span class="s1">&#39;inputspec.mni_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+                       <span class="n">regressors</span><span class="p">,</span>
+                       <span class="s1">&#39;inputspec.anat_to_func_linear_xfm_file_path&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span>
+                <span class="s1">&#39;from-bold_to-EPItemplate_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+                <span class="s1">&#39;from-bold_to-EPItemplate_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+                       <span class="n">regressors</span><span class="p">,</span>
+                       <span class="s1">&#39;inputspec.anat_to_mni_linear_xfm_file_path&#39;</span><span class="p">)</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+                       <span class="n">regressors</span><span class="p">,</span>
+                       <span class="s1">&#39;inputspec.func_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;movement-parameters&#39;</span><span class="p">):</span>
         <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;movement-parameters&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.motion_parameters_file_path&#39;</span><span class="p">)</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+                   <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.motion_parameters_file_path&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-jenkinson&#39;</span><span class="p">):</span>
         <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-jenkinson&#39;</span><span class="p">)</span>
@@ -2337,26 +2465,23 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Node Block:</span>
-<span class="sd">    {&quot;name&quot;: &quot;nuisance_regression&quot;,</span>
-<span class="sd">     &quot;config&quot;: [&quot;nuisance_corrections&quot;, &quot;2-nuisance_regression&quot;],</span>
-<span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
-<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [(&quot;desc-preproc_bold&quot;,</span>
-<span class="sd">                 &quot;regressors&quot;,</span>
-<span class="sd">                 &quot;space-bold_desc-brain_mask&quot;,</span>
-<span class="sd">                 &quot;framewise-displacement-jenkinson&quot;,</span>
-<span class="sd">                 &quot;framewise-displacement-power&quot;,</span>
-<span class="sd">                 &quot;dvars&quot;),</span>
-<span class="sd">                &quot;TR&quot;],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;desc-preproc_bold&quot;,</span>
-<span class="sd">                 &quot;desc-cleaned_bold&quot;,</span>
-<span class="sd">                 &quot;regressors&quot;]}</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">space</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Nuisance regression in native (BOLD) or template space</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wf, cfg, strat_pool, pipe_num, opt</span>
+<span class="sd">        pass through from Node Block</span>
+
+<span class="sd">    space : str</span>
+<span class="sd">        native or template</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    wf : nipype.pipeline.engine.workflows.Workflow</span>
+
+<span class="sd">    outputs : dict</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">regressor_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s1">&#39;regressors&#39;</span><span class="p">)</span>
     <span class="n">regressor_strat_name</span> <span class="o">=</span> <span class="n">regressor_prov</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
@@ -2367,81 +2492,156 @@
             <span class="k">break</span>
 
     <span class="n">nuis</span> <span class="o">=</span> <span class="n">create_nuisance_regression_workflow</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nuisance_regression&#39;</span>
-                                               <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">opt</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                                               <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">space</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">opt</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+                                               <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">)</span>
+    <span class="n">desc_keys</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">,</span> <span class="s1">&#39;desc-cleaned_bold&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;desc-denoisedNofilt_bold&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">space</span> <span class="o">!=</span> <span class="s1">&#39;native&#39;</span><span class="p">:</span>
+        <span class="n">desc_keys</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;space-</span><span class="si">{</span><span class="n">space</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">desc_keys</span><span class="p">)</span>
+
+    <span class="n">brain_mask</span> <span class="o">=</span> <span class="s1">&#39;FSL-AFNI-brain-mask&#39;</span> <span class="k">if</span> <span class="p">(</span>
+        <span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;template&#39;</span>
+    <span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;space-bold_desc-brain_mask&#39;</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_brain_mask_file_path&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;regressors&quot;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;regressors&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;inputspec.regressor_file&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-jenkinson&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;framewise-displacement-jenkinson&quot;</span><span class="p">)</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-jenkinson&#39;</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;inputspec.fd_j_file_path&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-power&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;framewise-displacement-power&quot;</span><span class="p">)</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-power&#39;</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;inputspec.fd_p_file_path&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;dvars&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;dvars&quot;</span><span class="p">)</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;dvars&#39;</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;inputspec.dvars_file_path&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="s1">&#39;Bandpass&#39;</span> <span class="ow">in</span> <span class="n">opt</span><span class="p">:</span>
         <span class="n">filt</span> <span class="o">=</span> <span class="n">filtering_bold_and_regressors</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;filtering_bold_and_&#39;</span>
-                                             <span class="sa">f</span><span class="s1">&#39;regressors_</span><span class="si">{</span><span class="n">opt</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                                             <span class="sa">f</span><span class="s1">&#39;regressors_</span><span class="si">{</span><span class="n">opt</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+                                             <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">filt</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">nuisance_selectors</span> <span class="o">=</span> <span class="n">opt</span>
 
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;regressors&quot;</span><span class="p">)</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;regressors&#39;</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;inputspec.regressors_file_path&#39;</span><span class="p">)</span>
 
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-bold_desc-brain_mask&#39;</span><span class="p">)</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
                    <span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_brain_mask_file_path&#39;</span><span class="p">)</span>
 
         <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;inputspec.tr&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span>
-            <span class="s1">&#39;bandpass_filtering_order&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;After&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">,</span> <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;bandpass_filtering_order&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;After&#39;</span><span class="p">:</span>
 
-            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">)</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">desc_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_file_path&#39;</span><span class="p">)</span>
 
             <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">,</span>
                        <span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_file_path&#39;</span><span class="p">)</span>
 
             <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
-                <span class="s1">&#39;desc-cleaned_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
+                <span class="n">desc_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
+                <span class="n">desc_keys</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
+                <span class="n">desc_keys</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
                 <span class="s1">&#39;regressors&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_regressor&#39;</span><span class="p">)</span>
             <span class="p">}</span>
 
         <span class="k">elif</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span>
-            <span class="s1">&#39;bandpass_filtering_order&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Before&#39;</span><span class="p">:</span>
+                <span class="s1">&#39;bandpass_filtering_order&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Before&#39;</span><span class="p">:</span>
 
-            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">)</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">desc_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_file_path&#39;</span><span class="p">)</span>
 
             <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">,</span>
                        <span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_file_path&#39;</span><span class="p">)</span>
 
             <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
-                <span class="s1">&#39;desc-cleaned_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
-                <span class="s1">&#39;regressors&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_regressor&#39;</span><span class="p">)</span>
-            <span class="p">}</span>
+                <span class="n">desc_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
+                <span class="n">desc_keys</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;regressors&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_regressor&#39;</span><span class="p">)}</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">)</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">desc_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_file_path&#39;</span><span class="p">)</span>
 
         <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
-            <span class="s1">&#39;desc-cleaned_bold&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
+            <span class="n">desc_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
+            <span class="n">desc_keys</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">),</span>
+            <span class="n">desc_keys</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">(</span><span class="n">nuis</span><span class="p">,</span> <span class="s1">&#39;outputspec.residual_file_path&#39;</span><span class="p">)</span>
         <span class="p">}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">nuisance_regression_native</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Apply nuisance regression to native-space image</span>
+
+<span class="sd">    Node Block:</span>
+<span class="sd">    {&quot;name&quot;: &quot;nuisance_regression_native&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;nuisance_corrections&quot;, &quot;2-nuisance_regression&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;space&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;native&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-preproc_bold&quot;,</span>
+<span class="sd">                 &quot;regressors&quot;,</span>
+<span class="sd">                 &quot;space-bold_desc-brain_mask&quot;,</span>
+<span class="sd">                 &quot;framewise-displacement-jenkinson&quot;,</span>
+<span class="sd">                 &quot;framewise-displacement-power&quot;,</span>
+<span class="sd">                 &quot;dvars&quot;),</span>
+<span class="sd">                &quot;TR&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: {&quot;desc-preproc_bold&quot;: {</span>
+<span class="sd">        &quot;Description&quot;: &quot;Preprocessed BOLD image that was nuisance-&quot;</span>
+<span class="sd">                       &quot;regressed in native space&quot;},</span>
+<span class="sd">                 &quot;desc-cleaned_bold&quot;: {</span>
+<span class="sd">        &quot;Description&quot;: &quot;Preprocessed BOLD image that was nuisance-&quot;</span>
+<span class="sd">                       &quot;regressed in native space&quot;},</span>
+<span class="sd">                 &quot;desc-denoisedNofilt_bold&quot;: {</span>
+<span class="sd">        &quot;Description&quot;: &quot;Preprocessed BOLD image that was nuisance-&quot;</span>
+<span class="sd">                       &quot;regressed in native space&quot;},</span>
+<span class="sd">                 &quot;regressors&quot;: {</span>
+<span class="sd">        &quot;Description&quot;: &quot;Regressors that were applied in native space&quot;}}}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="s1">&#39;native&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">nuisance_regression_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Apply nuisance regression to template-space image</span>
+
+<span class="sd">    Node Block:</span>
+<span class="sd">    {&quot;name&quot;: &quot;nuisance_regression_template&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;nuisance_corrections&quot;, &quot;2-nuisance_regression&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;run&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;space&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;template&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-stc_bold&quot;,</span>
+<span class="sd">                 &quot;space-template_desc-preproc_bold&quot;,</span>
+<span class="sd">                 &quot;regressors&quot;,</span>
+<span class="sd">                 &quot;FSL-AFNI-brain-mask&quot;,</span>
+<span class="sd">                 &quot;framewise-displacement-jenkinson&quot;,</span>
+<span class="sd">                 &quot;framewise-displacement-power&quot;,</span>
+<span class="sd">                 &quot;dvars&quot;),</span>
+<span class="sd">                &quot;TR&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: {&quot;space-template_desc-preproc_bold&quot;: {</span>
+<span class="sd">        &quot;Description&quot;: &quot;Preprocessed BOLD image that was nuisance-&quot;</span>
+<span class="sd">                       &quot;regressed in template space&quot;},</span>
+<span class="sd">                 &quot;space-template_desc-cleaned_bold&quot;: {</span>
+<span class="sd">        &quot;Description&quot;: &quot;Preprocessed BOLD image that was nuisance-&quot;</span>
+<span class="sd">                       &quot;regressed in template space&quot;},</span>
+<span class="sd">                 &quot;space-template_desc-denoisedNofilt_bold&quot;: {</span>
+<span class="sd">        &quot;Description&quot;: &quot;Preprocessed BOLD image that was nuisance-&quot;</span>
+<span class="sd">                       &quot;regressed in template space&quot;},</span>
+<span class="sd">                 &quot;regressors&quot;: {</span>
+<span class="sd">        &quot;Description&quot;: &quot;Regressors that were applied in template space&quot;}}}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">erode_mask_bold</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -2599,132 +2799,8 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">erode</span><span class="p">,</span> <span class="s1">&#39;inputspec.brain_mask&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;space-bold_label-WM_desc-eroded_mask&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">erode</span><span class="p">,</span> <span class="s1">&#39;outputspec.eroded_mask&#39;</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">nuisance_regressors_generation_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Node Block:</span>
-<span class="sd">    {&quot;name&quot;: &quot;nuisance_regressors_generation_EPItemplate&quot;,</span>
-<span class="sd">     &quot;config&quot;: [&quot;nuisance_corrections&quot;, &quot;2-nuisance_regression&quot;],</span>
-<span class="sd">     &quot;switch&quot;: [&quot;create_regressors&quot;],</span>
-<span class="sd">     &quot;option_key&quot;: &quot;Regressors&quot;,</span>
-<span class="sd">     &quot;option_val&quot;: &quot;USER-DEFINED&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [(&quot;desc-preproc_bold&quot;,</span>
-<span class="sd">                 &quot;desc-brain_bold&quot;,</span>
-<span class="sd">                 &quot;space-bold_desc-brain_mask&quot;,</span>
-<span class="sd">                 &quot;movement-parameters&quot;,</span>
-<span class="sd">                 &quot;framewise-displacement-jenkinson&quot;,</span>
-<span class="sd">                 &quot;framewise-displacement-power&quot;,</span>
-<span class="sd">                 &quot;dvars&quot;,</span>
-<span class="sd">                 [&quot;space-bold_desc-eroded_mask&quot;, &quot;space-bold_desc-brain_mask&quot;],</span>
-<span class="sd">                 [&quot;space-bold_label-CSF_desc-eroded_mask&quot;, &quot;space-bold_label-CSF_desc-preproc_mask&quot;,</span>
-<span class="sd">                  &quot;space-bold_label-CSF_mask&quot;],</span>
-<span class="sd">                 [&quot;space-bold_label-WM_desc-eroded_mask&quot;, &quot;space-bold_label-WM_desc-preproc_mask&quot;,</span>
-<span class="sd">                  &quot;space-bold_label-WM_mask&quot;],</span>
-<span class="sd">                 [&quot;space-bold_label-GM_desc-eroded_mask&quot;, &quot;space-bold_label-GM_desc-preproc_mask&quot;,</span>
-<span class="sd">                  &quot;space-bold_label-GM_mask&quot;],</span>
-<span class="sd">                 &quot;from-EPItemplate_to-bold_mode-image_desc-linear_xfm&quot;,</span>
-<span class="sd">                 &quot;from-bold_to-EPItemplate_mode-image_desc-linear_xfm&quot;),</span>
-<span class="sd">                &quot;lateral-ventricles-mask&quot;,</span>
-<span class="sd">                &quot;TR&quot;],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;regressors&quot;, &quot;censor-indices&quot;]}</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span>
-        <span class="s1">&#39;from-EPItemplate_to-bold_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
-    <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
-
-    <span class="n">use_ants</span> <span class="o">=</span> <span class="n">reg_tool</span> <span class="o">==</span> <span class="s1">&#39;ants&#39;</span>
-    <span class="n">ventricle</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;lateral-ventricles-mask&#39;</span><span class="p">)</span>
-    <span class="n">csf_mask</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;space-bold_label-CSF_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                        <span class="s2">&quot;space-bold_label-CSF_desc-preproc_mask&quot;</span><span class="p">,</span>
-                                        <span class="s2">&quot;space-bold_label-CSF_mask&quot;</span><span class="p">])</span>
-
-    <span class="n">regressors</span> <span class="o">=</span> <span class="n">create_regressor_workflow</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="n">use_ants</span><span class="p">,</span>
-                                           <span class="n">ventricle_mask_exist</span><span class="o">=</span><span class="n">ventricle</span><span class="p">,</span>
-                                           <span class="n">all_bold</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                            <span class="n">csf_mask_exist</span> <span class="o">=</span> <span class="n">csf_mask</span><span class="p">,</span>
-                                           <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nuisance_regressors_&#39;</span>
-                                                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">opt</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_file_path&#39;</span><span class="p">)</span>
-
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-bold_desc-brain_mask&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_brain_mask_file_path&#39;</span><span class="p">)</span>
-
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_bold&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_file_path&#39;</span><span class="p">)</span>
-
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-bold_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">])</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_eroded_brain_mask_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;space-bold_label-CSF_desc-eroded_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;space-bold_label-CSF_desc-preproc_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;space-bold_label-CSF_mask&quot;</span><span class="p">]):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-bold_label-CSF_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;space-bold_label-CSF_desc-preproc_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;space-bold_label-CSF_mask&quot;</span><span class="p">])</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.csf_mask_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;space-bold_label-WM_desc-eroded_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;space-bold_label-WM_desc-preproc_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;space-bold_label-WM_mask&quot;</span><span class="p">]):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-bold_label-WM_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;space-bold_label-WM_desc-preproc_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;space-bold_label-WM_mask&quot;</span><span class="p">])</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.wm_mask_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">([</span><span class="s2">&quot;space-bold_label-GM_desc-eroded_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;space-bold_label-GM_desc-preproc_mask&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;space-bold_label-GM_mask&quot;</span><span class="p">]):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-bold_label-GM_desc-eroded_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;space-bold_label-GM_desc-preproc_mask&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;space-bold_label-GM_mask&quot;</span><span class="p">])</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.gm_mask_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">ventricle</span><span class="p">:</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;lateral-ventricles-mask&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
-                   <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.lat_ventricles_mask_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;from-EPItemplate_to-bold_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;from-EPItemplate_to-bold_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.mni_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.anat_to_func_linear_xfm_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;from-bold_to-EPItemplate_mode-image_desc-linear_xfm&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;from-bold_to-EPItemplate_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.anat_to_mni_linear_xfm_file_path&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.func_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;movement-parameters&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;movement-parameters&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.motion_parameters_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-jenkinson&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-jenkinson&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.fd_j_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-power&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-power&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.fd_p_file_path&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;dvars&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;dvars&#39;</span><span class="p">)</span>
-        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.dvars_file_path&#39;</span><span class="p">)</span>
-
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.tr&#39;</span><span class="p">)</span>
-
-    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;regressors&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;outputspec.regressors_file_path&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;censor-indices&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;outputspec.censor_indices&#39;</span><span class="p">)</span>
+        <span class="s1">&#39;space-bold_label-WM_desc-eroded_mask&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">erode</span><span class="p">,</span>
+                                                 <span class="s1">&#39;outputspec.eroded_mask&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
@@ -2769,7 +2845,7 @@
         <li class="right" >
           <a href="../../../py-modindex" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.4.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CPAC.nuisance.nuisance</a></li> 
       </ul>
