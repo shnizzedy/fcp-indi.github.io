@@ -52,252 +52,6 @@
             
   <section id="module-CPAC.registration">
 <span id="registration"></span><h1>Registration<a class="headerlink" href="#module-CPAC.registration" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-CPAC.registration.exceptions"></span><p>Custom registration exceptions</p>
-<dl class="py exception">
-<dt class="sig sig-object py" id="CPAC.registration.exceptions.BadRegistrationError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">CPAC.registration.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadRegistrationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/exceptions#BadRegistrationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.exceptions.BadRegistrationError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exception for when a QC measure for a registration falls below a
-specified threshold</p>
-</dd></dl>
-
-<span class="target" id="module-CPAC.registration.guardrails"></span><p>Guardrails to protect against bad registrations</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.guardrail_selection">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">guardrail_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="CPAC.pipeline.nipype_pipeline_engine.engine.Workflow"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Workflow</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'registered'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guardrail_node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#guardrail_selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.guardrail_selection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate requisite Nodes for choosing a path through the graph
-with retries</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>wf</strong><span class="classifier">Workflow</span></dt><dd></dd>
-<dt><strong>node1, node2</strong><span class="classifier">Node</span></dt><dd><p>first try, retry</p>
-</dd>
-<dt><strong>output_key</strong><span class="classifier">str</span></dt><dd><p>field to choose</p>
-</dd>
-<dt><strong>guardrail_node</strong><span class="classifier">Node</span></dt><dd><p>guardrail to collect ‘failed_qc’ from if not node1</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>select</strong><span class="classifier">Node</span></dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check QC metrics post-registration and throw an exception if
-metrics are below given thresholds.</p>
-<p>If inputs point to images that are not masks, images will be
-binarized before being compared.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><code class="xref py py-mod docutils literal notranslate"><span class="pre">CPAC.qc.qcmetrics</span></code></dt><dd><p>Documentation of the <code class="xref py py-mod docutils literal notranslate"><span class="pre">CPAC.qc.qcmetrics</span></code> module.</p>
-</dd>
-</dl>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>registered, reference</strong><span class="classifier">str</span></dt><dd><p>path to mask</p>
-</dd>
-<dt><strong>retry</strong><span class="classifier">bool, optional</span></dt><dd><p>can retry?</p>
-</dd>
-<dt><strong>retry_num</strong><span class="classifier">int, optional</span></dt><dd><p>how many previous tries?</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>registered_mask</strong><span class="classifier">str</span></dt><dd><p>path to mask</p>
-</dd>
-<dt><strong>failed_qc</strong><span class="classifier">int</span></dt><dd><p>metrics met specified thresholds?, used as index for selecting
-outputs</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail_node">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail_node" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience method to get a new registration_guardrail Node</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">str, optional</span></dt><dd></dd>
-<dt><strong>retry_num</strong><span class="classifier">int, optional</span></dt><dd><p>how many previous tries?</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>Node</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail_workflow">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_workflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail_workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail_workflow" title="Permalink to this definition">¶</a></dt>
-<dd><p>A workflow to handle hitting a registration guardrail</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">str</span></dt><dd></dd>
-<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
-<dt><strong>retry</strong><span class="classifier">bool, optional</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>Workflow</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_clone">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_clone" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function to clone a node, name the clone, and increment its
-random seed</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>node</strong><span class="classifier">Node</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>Node</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_hardcoded_reg">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_hardcoded_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moving_brain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_brain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving_skull</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_skull</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ants_para</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_image_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_with_skull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_hardcoded_reg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_hardcoded_reg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retries the following after a failed QC check:
-CPAC.registration.utils.hardcoded_reg</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_registration">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registered</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_registration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_registration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function conditionally retry registration if previous attempt failed</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>wf</strong><span class="classifier">Workflow</span></dt><dd></dd>
-<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
-<dt><strong>registered</strong><span class="classifier">str</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>Workflow</dt><dd></dd>
-<dt>Node</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_registration_node">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_registration_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_registration_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_registration_node" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retry registration if previous attempt failed</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>registered</strong><span class="classifier">str</span></dt><dd></dd>
-<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>Node</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.guardrails.spec_key">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">spec_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guardrail_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#spec_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.spec_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function to get the canonical key to connect to a guardrail</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>interface</strong><span class="classifier">Interface or Node</span></dt><dd></dd>
-<dt><strong>guardrail_key</strong><span class="classifier">str</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>str</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<span class="target" id="module-CPAC.registration.output_func_to_standard"></span><dl class="py function">
-<dt class="sig sig-object py" id="CPAC.registration.output_func_to_standard.fsl_apply_transform_func_to_mni">
-<span class="sig-prename descclassname"><span class="pre">CPAC.registration.output_func_to_standard.</span></span><span class="sig-name descname"><span class="pre">fsl_apply_transform_func_to_mni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_strat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distcor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_ts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/output_func_to_standard#fsl_apply_transform_func_to_mni"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.output_func_to_standard.fsl_apply_transform_func_to_mni" title="Permalink to this definition">¶</a></dt>
-<dd><p>Applies previously calculated FSL registration transforms to input
-images. This workflow employs the FSL applywarp tool:</p>
-<p><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fslcourse/lectures/practicals/registration/index.html">https://fsl.fmrib.ox.ac.uk/fslcourse/lectures/practicals/registration/index.html</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>workflow</strong><span class="classifier">Nipype workflow object</span></dt><dd><p>the workflow containing the resources involved</p>
-</dd>
-<dt><strong>output_name</strong><span class="classifier">str</span></dt><dd><p>what the name of the warped functional should be when written to the
-resource pool</p>
-</dd>
-<dt><strong>func_key</strong><span class="classifier">string</span></dt><dd><p>resource pool key correspoding to the node containing the 3D or 4D
-functional file to be written into MNI space, use ‘leaf’ for a
-leaf node</p>
-</dd>
-<dt><strong>ref_key</strong><span class="classifier">string</span></dt><dd><p>resource pool key correspoding to the file path to the template brain
-used for functional-to-template registration</p>
-</dd>
-<dt><strong>num_strat</strong><span class="classifier">int</span></dt><dd><p>the number of strategy objects</p>
-</dd>
-<dt><strong>strat</strong><span class="classifier">C-PAC Strategy object</span></dt><dd><p>a strategy with one or more resource pools</p>
-</dd>
-<dt><strong>interpolation_method</strong><span class="classifier">str</span></dt><dd><p>which interpolation to use when applying the warps</p>
-</dd>
-<dt><strong>distcor</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether a distortion correction transformation should be
-added to the transforms, this of course requires that a distortion
-correction map exist in the resource pool</p>
-</dd>
-<dt><strong>map_node</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether a mapnode should be used, if TRUE func_key is
-expected to correspond to a list of resources that should each
-be written into standard space with the other parameters</p>
-</dd>
-<dt><strong>func_ts</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether the input image is a 4D time series</p>
-</dd>
-<dt><strong>num_cpus</strong><span class="classifier">int</span></dt><dd><p>the number of CPUs dedicated to each participant workflow - this
-is used to determine how to parallelize the warp application step</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>workflow</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <span class="target" id="module-CPAC.registration.registration"></span><p>Registration functions</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.registration.registration.convert_pedir">
@@ -494,16 +248,9 @@ transformation (affine only) from the space of the reference
 file to the input file.</p></li>
 </ol>
 <p>Workflow Graph:</p>
-<a class="reference internal image-reference" href="images/nonlinear_register.png"><img alt="images/nonlinear_register.png" src="images/nonlinear_register.png" style="width: 500px;" /></a>
-<p>Detailed Workflow Graph:
-.. image:: ../../images/nonlinear_register_detailed.png</p>
-<blockquote>
-<div><dl class="field-list simple">
-<dt class="field-odd">width</dt>
-<dd class="field-odd"><p>500</p>
-</dd>
-</dl>
-</div></blockquote>
+<a class="reference internal image-reference" href="images/generated/nonlinear_register.png"><img alt="images/generated/nonlinear_register.png" src="images/generated/nonlinear_register.png" style="width: 500px;" /></a>
+<p>Detailed Workflow Graph:</p>
+<a class="reference internal image-reference" href="images/generated/nonlinear_register_detailed.png"><img alt="images/generated/nonlinear_register_detailed.png" src="images/generated/nonlinear_register_detailed.png" style="width: 500px;" /></a>
 </dd></dl>
 
 <dl class="py function">
@@ -554,16 +301,9 @@ transformation (affine only) from the space of the reference
 file to the input file.</p></li>
 </ol>
 <p>Workflow Graph:</p>
-<a class="reference internal image-reference" href="images/nonlinear_register_nhp.png"><img alt="images/nonlinear_register_nhp.png" src="images/nonlinear_register_nhp.png" style="width: 500px;" /></a>
-<p>Detailed Workflow Graph:
-.. image:: ../../images/nonlinear_register_nhp_detailed.png</p>
-<blockquote>
-<div><dl class="field-list simple">
-<dt class="field-odd">width</dt>
-<dd class="field-odd"><p>500</p>
-</dd>
-</dl>
-</div></blockquote>
+<a class="reference internal image-reference" href="images/generated/nonlinear_register_nhp.png"><img alt="images/generated/nonlinear_register_nhp.png" src="images/generated/nonlinear_register_nhp.png" style="width: 500px;" /></a>
+<p>Detailed Workflow Graph:</p>
+<a class="reference internal image-reference" href="images/generated/nonlinear_register_nhp_detailed.png"><img alt="images/generated/nonlinear_register_nhp_detailed.png" src="images/generated/nonlinear_register_nhp_detailed.png" style="width: 500px;" /></a>
 </dd></dl>
 
 <dl class="py function">
@@ -1644,7 +1384,264 @@ connected</p>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-CPAC.registration.utils"></span><dl class="py function">
+<section id="module-CPAC.registration.exceptions">
+<span id="exceptions"></span><h2>Exceptions<a class="headerlink" href="#module-CPAC.registration.exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Custom registration exceptions</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="CPAC.registration.exceptions.BadRegistrationError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">CPAC.registration.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadRegistrationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/exceptions#BadRegistrationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.exceptions.BadRegistrationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception for when a QC measure for a registration falls below a
+specified threshold</p>
+</dd></dl>
+
+</section>
+<section id="module-CPAC.registration.guardrails">
+<span id="guardrails"></span><h2>Guardrails<a class="headerlink" href="#module-CPAC.registration.guardrails" title="Permalink to this headline">¶</a></h2>
+<p>Guardrails to protect against bad registrations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.guardrail_selection">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">guardrail_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="CPAC.pipeline.nipype_pipeline_engine.engine.Workflow"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Workflow</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'registered'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guardrail_node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#guardrail_selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.guardrail_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate requisite Nodes for choosing a path through the graph
+with retries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wf</strong><span class="classifier">Workflow</span></dt><dd></dd>
+<dt><strong>node1, node2</strong><span class="classifier">Node</span></dt><dd><p>first try, retry</p>
+</dd>
+<dt><strong>output_key</strong><span class="classifier">str</span></dt><dd><p>field to choose</p>
+</dd>
+<dt><strong>guardrail_node</strong><span class="classifier">Node</span></dt><dd><p>guardrail to collect ‘failed_qc’ from if not node1</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>select</strong><span class="classifier">Node</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check QC metrics post-registration and throw an exception if
+metrics are below given thresholds.</p>
+<p>If inputs point to images that are not masks, images will be
+binarized before being compared.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-mod docutils literal notranslate"><span class="pre">CPAC.qc.qcmetrics</span></code></dt><dd><p>Documentation of the <code class="xref py py-mod docutils literal notranslate"><span class="pre">CPAC.qc.qcmetrics</span></code> module.</p>
+</dd>
+</dl>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>registered, reference</strong><span class="classifier">str</span></dt><dd><p>path to mask</p>
+</dd>
+<dt><strong>retry</strong><span class="classifier">bool, optional</span></dt><dd><p>can retry?</p>
+</dd>
+<dt><strong>retry_num</strong><span class="classifier">int, optional</span></dt><dd><p>how many previous tries?</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>registered_mask</strong><span class="classifier">str</span></dt><dd><p>path to mask</p>
+</dd>
+<dt><strong>failed_qc</strong><span class="classifier">int</span></dt><dd><p>metrics met specified thresholds?, used as index for selecting
+outputs</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail_node">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience method to get a new registration_guardrail Node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str, optional</span></dt><dd></dd>
+<dt><strong>retry_num</strong><span class="classifier">int, optional</span></dt><dd><p>how many previous tries?</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Node</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail_workflow">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_workflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail_workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>A workflow to handle hitting a registration guardrail</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd></dd>
+<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
+<dt><strong>retry</strong><span class="classifier">bool, optional</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Workflow</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_clone">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_clone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to clone a node, name the clone, and increment its
+random seed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>node</strong><span class="classifier">Node</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Node</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_hardcoded_reg">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_hardcoded_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moving_brain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_brain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving_skull</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_skull</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ants_para</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_image_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_with_skull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_hardcoded_reg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_hardcoded_reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retries the following after a failed QC check:
+CPAC.registration.utils.hardcoded_reg</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_registration">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registered</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_registration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_registration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function conditionally retry registration if previous attempt failed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wf</strong><span class="classifier">Workflow</span></dt><dd></dd>
+<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
+<dt><strong>registered</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Workflow</dt><dd></dd>
+<dt>Node</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_registration_node">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_registration_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_registration_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_registration_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retry registration if previous attempt failed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>registered</strong><span class="classifier">str</span></dt><dd></dd>
+<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Node</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.spec_key">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">spec_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guardrail_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#spec_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.spec_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the canonical key to connect to a guardrail</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>interface</strong><span class="classifier">Interface or Node</span></dt><dd></dd>
+<dt><strong>guardrail_key</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-CPAC.registration.output_func_to_standard">
+<span id="output-func-to-standard"></span><h2>Output_func_to_standard<a class="headerlink" href="#module-CPAC.registration.output_func_to_standard" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.output_func_to_standard.fsl_apply_transform_func_to_mni">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.output_func_to_standard.</span></span><span class="sig-name descname"><span class="pre">fsl_apply_transform_func_to_mni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_strat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distcor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_ts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/output_func_to_standard#fsl_apply_transform_func_to_mni"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.output_func_to_standard.fsl_apply_transform_func_to_mni" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies previously calculated FSL registration transforms to input
+images. This workflow employs the FSL applywarp tool:</p>
+<p><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fslcourse/lectures/practicals/registration/index.html">https://fsl.fmrib.ox.ac.uk/fslcourse/lectures/practicals/registration/index.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>workflow</strong><span class="classifier">Nipype workflow object</span></dt><dd><p>the workflow containing the resources involved</p>
+</dd>
+<dt><strong>output_name</strong><span class="classifier">str</span></dt><dd><p>what the name of the warped functional should be when written to the
+resource pool</p>
+</dd>
+<dt><strong>func_key</strong><span class="classifier">string</span></dt><dd><p>resource pool key correspoding to the node containing the 3D or 4D
+functional file to be written into MNI space, use ‘leaf’ for a
+leaf node</p>
+</dd>
+<dt><strong>ref_key</strong><span class="classifier">string</span></dt><dd><p>resource pool key correspoding to the file path to the template brain
+used for functional-to-template registration</p>
+</dd>
+<dt><strong>num_strat</strong><span class="classifier">int</span></dt><dd><p>the number of strategy objects</p>
+</dd>
+<dt><strong>strat</strong><span class="classifier">C-PAC Strategy object</span></dt><dd><p>a strategy with one or more resource pools</p>
+</dd>
+<dt><strong>interpolation_method</strong><span class="classifier">str</span></dt><dd><p>which interpolation to use when applying the warps</p>
+</dd>
+<dt><strong>distcor</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether a distortion correction transformation should be
+added to the transforms, this of course requires that a distortion
+correction map exist in the resource pool</p>
+</dd>
+<dt><strong>map_node</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether a mapnode should be used, if TRUE func_key is
+expected to correspond to a list of resources that should each
+be written into standard space with the other parameters</p>
+</dd>
+<dt><strong>func_ts</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether the input image is a 4D time series</p>
+</dd>
+<dt><strong>num_cpus</strong><span class="classifier">int</span></dt><dd><p>the number of CPUs dedicated to each participant workflow - this
+is used to determine how to parallelize the warp application step</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>workflow</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-CPAC.registration.utils">
+<span id="utils"></span><h2>Utils<a class="headerlink" href="#module-CPAC.registration.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
 <dt class="sig sig-object py" id="CPAC.registration.utils.change_itk_transform_type">
 <span class="sig-prename descclassname"><span class="pre">CPAC.registration.utils.</span></span><span class="sig-name descname"><span class="pre">change_itk_transform_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_affine_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/utils#change_itk_transform_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.utils.change_itk_transform_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>this function takes in the affine.txt produced by the c3d_affine_tool
@@ -1687,6 +1684,7 @@ directory.</p>
 <dd><p>Apply a transform using ANTs transforms.</p>
 </dd></dl>
 
+</section>
 </section>
 
 
