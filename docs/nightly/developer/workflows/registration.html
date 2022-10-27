@@ -52,6 +52,1648 @@
             
   <section id="module-CPAC.registration">
 <span id="registration"></span><h1>Registration<a class="headerlink" href="#module-CPAC.registration" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-CPAC.registration.exceptions"></span><p>Custom registration exceptions</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="CPAC.registration.exceptions.BadRegistrationError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">CPAC.registration.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadRegistrationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/exceptions#BadRegistrationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.exceptions.BadRegistrationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception for when a QC measure for a registration falls below a
+specified threshold</p>
+</dd></dl>
+
+<span class="target" id="module-CPAC.registration.guardrails"></span><p>Guardrails to protect against bad registrations</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.guardrail_selection">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">guardrail_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="CPAC.pipeline.nipype_pipeline_engine.engine.Workflow"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Workflow</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'registered'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guardrail_node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#guardrail_selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.guardrail_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate requisite Nodes for choosing a path through the graph
+with retries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wf</strong><span class="classifier">Workflow</span></dt><dd></dd>
+<dt><strong>node1, node2</strong><span class="classifier">Node</span></dt><dd><p>first try, retry</p>
+</dd>
+<dt><strong>output_key</strong><span class="classifier">str</span></dt><dd><p>field to choose</p>
+</dd>
+<dt><strong>guardrail_node</strong><span class="classifier">Node</span></dt><dd><p>guardrail to collect ‘failed_qc’ from if not node1</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>select</strong><span class="classifier">Node</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check QC metrics post-registration and throw an exception if
+metrics are below given thresholds.</p>
+<p>If inputs point to images that are not masks, images will be
+binarized before being compared.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-mod docutils literal notranslate"><span class="pre">CPAC.qc.qcmetrics</span></code></dt><dd><p>Documentation of the <code class="xref py py-mod docutils literal notranslate"><span class="pre">CPAC.qc.qcmetrics</span></code> module.</p>
+</dd>
+</dl>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>registered, reference</strong><span class="classifier">str</span></dt><dd><p>path to mask</p>
+</dd>
+<dt><strong>retry</strong><span class="classifier">bool, optional</span></dt><dd><p>can retry?</p>
+</dd>
+<dt><strong>retry_num</strong><span class="classifier">int, optional</span></dt><dd><p>how many previous tries?</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>registered_mask</strong><span class="classifier">str</span></dt><dd><p>path to mask</p>
+</dd>
+<dt><strong>failed_qc</strong><span class="classifier">int</span></dt><dd><p>metrics met specified thresholds?, used as index for selecting
+outputs</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail_node">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience method to get a new registration_guardrail Node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str, optional</span></dt><dd></dd>
+<dt><strong>retry_num</strong><span class="classifier">int, optional</span></dt><dd><p>how many previous tries?</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Node</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.registration_guardrail_workflow">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_workflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#registration_guardrail_workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.registration_guardrail_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>A workflow to handle hitting a registration guardrail</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd></dd>
+<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
+<dt><strong>retry</strong><span class="classifier">bool, optional</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Workflow</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_clone">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_clone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to clone a node, name the clone, and increment its
+random seed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>node</strong><span class="classifier">Node</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Node</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_hardcoded_reg">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_hardcoded_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moving_brain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_brain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving_skull</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_skull</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ants_para</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_image_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_with_skull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_hardcoded_reg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_hardcoded_reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retries the following after a failed QC check:
+CPAC.registration.utils.hardcoded_reg</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_registration">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registered</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_registration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_registration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function conditionally retry registration if previous attempt failed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wf</strong><span class="classifier">Workflow</span></dt><dd></dd>
+<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
+<dt><strong>registered</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Workflow</dt><dd></dd>
+<dt>Node</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.retry_registration_node">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">retry_registration_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registration_node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#retry_registration_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.retry_registration_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retry registration if previous attempt failed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>registered</strong><span class="classifier">str</span></dt><dd></dd>
+<dt><strong>registration_node</strong><span class="classifier">Node</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Node</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.guardrails.spec_key">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.guardrails.</span></span><span class="sig-name descname"><span class="pre">spec_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guardrail_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/guardrails#spec_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.guardrails.spec_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the canonical key to connect to a guardrail</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>interface</strong><span class="classifier">Interface or Node</span></dt><dd></dd>
+<dt><strong>guardrail_key</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-CPAC.registration.output_func_to_standard"></span><dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.output_func_to_standard.fsl_apply_transform_func_to_mni">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.output_func_to_standard.</span></span><span class="sig-name descname"><span class="pre">fsl_apply_transform_func_to_mni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_strat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distcor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_ts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/output_func_to_standard#fsl_apply_transform_func_to_mni"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.output_func_to_standard.fsl_apply_transform_func_to_mni" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies previously calculated FSL registration transforms to input
+images. This workflow employs the FSL applywarp tool:</p>
+<p><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fslcourse/lectures/practicals/registration/index.html">https://fsl.fmrib.ox.ac.uk/fslcourse/lectures/practicals/registration/index.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>workflow</strong><span class="classifier">Nipype workflow object</span></dt><dd><p>the workflow containing the resources involved</p>
+</dd>
+<dt><strong>output_name</strong><span class="classifier">str</span></dt><dd><p>what the name of the warped functional should be when written to the
+resource pool</p>
+</dd>
+<dt><strong>func_key</strong><span class="classifier">string</span></dt><dd><p>resource pool key correspoding to the node containing the 3D or 4D
+functional file to be written into MNI space, use ‘leaf’ for a
+leaf node</p>
+</dd>
+<dt><strong>ref_key</strong><span class="classifier">string</span></dt><dd><p>resource pool key correspoding to the file path to the template brain
+used for functional-to-template registration</p>
+</dd>
+<dt><strong>num_strat</strong><span class="classifier">int</span></dt><dd><p>the number of strategy objects</p>
+</dd>
+<dt><strong>strat</strong><span class="classifier">C-PAC Strategy object</span></dt><dd><p>a strategy with one or more resource pools</p>
+</dd>
+<dt><strong>interpolation_method</strong><span class="classifier">str</span></dt><dd><p>which interpolation to use when applying the warps</p>
+</dd>
+<dt><strong>distcor</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether a distortion correction transformation should be
+added to the transforms, this of course requires that a distortion
+correction map exist in the resource pool</p>
+</dd>
+<dt><strong>map_node</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether a mapnode should be used, if TRUE func_key is
+expected to correspond to a list of resources that should each
+be written into standard space with the other parameters</p>
+</dd>
+<dt><strong>func_ts</strong><span class="classifier">boolean</span></dt><dd><p>indicates whether the input image is a 4D time series</p>
+</dd>
+<dt><strong>num_cpus</strong><span class="classifier">int</span></dt><dd><p>the number of CPUs dedicated to each participant workflow - this
+is used to determine how to parallelize the warp application step</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>workflow</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-CPAC.registration.registration"></span><p>Registration functions</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.convert_pedir">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">convert_pedir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pedir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#convert_pedir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.convert_pedir" title="Permalink to this definition">¶</a></dt>
+<dd><p>FSL Flirt requires pedir input encoded as an int</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.coregistration">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">coregistration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#coregistration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.coregistration" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “coregistration”,</dt><dd><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“coregistration”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“boundary_based_registration”, “run”],
+“option_val”: [True, False, “fallback”],
+“inputs”: [(“desc-reginput_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“desc-motion_bold”,
+“space-bold_label-WM_mask”,
+“despiked-fieldmap”,
+“fieldmap-mask”,
+“effectiveEchoSpacing”,
+“diffphase-pedir”),</p>
+</div></blockquote>
+<dl class="simple">
+<dt>(“desc-brain_T1w”,</dt><dd><p>“desc-restore-brain_T1w”,
+“desc-preproc_T2w”,
+“desc-brain_T2w”,
+“T2w”,
+[“label-WM_probseg”, “label-WM_mask”],
+[“label-WM_pveseg”, “label-WM_mask”],
+“T1w”)],</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-T1w_desc-mean_bold”,</dt><dd><p>“from-bold_to-T1w_mode-image_desc-linear_xfm”,
+“from-bold_to-T1w_mode-image_desc-linear_warp”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.coregistration_prep_fmriprep">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">coregistration_prep_fmriprep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#coregistration_prep_fmriprep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.coregistration_prep_fmriprep" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “coregistration_prep_fmriprep”,</dt><dd><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“coregistration”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“func_input_prep”, “input”],
+“option_val”: “fmriprep_reference”,
+“inputs”: [“desc-ref_bold”],
+“outputs”: [“desc-reginput_bold”]}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.coregistration_prep_mean">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">coregistration_prep_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#coregistration_prep_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.coregistration_prep_mean" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “coregistration_prep_mean”,</dt><dd><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“coregistration”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“func_input_prep”, “input”],
+“option_val”: “Mean_Functional”,
+“inputs”: [“desc-mean_bold”],
+“outputs”: [“desc-reginput_bold”]}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.coregistration_prep_vol">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">coregistration_prep_vol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#coregistration_prep_vol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.coregistration_prep_vol" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “coregistration_prep_vol”,</dt><dd><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“coregistration”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“func_input_prep”, “input”],
+“option_val”: “Selected_Functional_Volume”,
+“inputs”: [(“desc-brain_bold”,</p>
+<blockquote>
+<div><p>[“desc-motion_bold”, “bold”],
+“desc-reginput_bold”)],</p>
+</div></blockquote>
+<p>“outputs”: [“desc-reginput_bold”]}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.create_bbregister_func_to_anat">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">create_bbregister_func_to_anat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phase_diff_distcor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bbregister_func_to_anat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#create_bbregister_func_to_anat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.create_bbregister_func_to_anat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a functional scan in native space to structural.  This is
+meant to be used after create_nonlinear_register() has been run and
+relies on some of its outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>fieldmap_distortion</strong><span class="classifier">bool, optional</span></dt><dd><p>If field map-based distortion correction is being run, FLIRT should
+take in the appropriate field map-related inputs.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">string, optional</span></dt><dd><p>Name of the workflow.</p>
+</dd>
+<dt><strong>retry</strong><span class="classifier">bool</span></dt><dd><p>Is this a second attempt?</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>register_func_to_anat</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">func</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Input</span> <span class="n">functional</span> <span class="n">scan</span> <span class="n">to</span> <span class="n">be</span> <span class="n">registered</span> <span class="n">to</span> <span class="n">MNI</span> <span class="n">space</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">anat</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Corresponding</span> <span class="n">full</span><span class="o">-</span><span class="n">head</span> <span class="ow">or</span> <span class="n">brain</span> <span class="n">scan</span> <span class="n">of</span> <span class="n">subject</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">linear_reg_matrix</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Affine</span> <span class="n">matrix</span> <span class="kn">from</span> <span class="nn">linear</span> <span class="n">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">registration</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">anat_wm_segmentation</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">White</span> <span class="n">matter</span> <span class="n">segmentation</span> <span class="n">probability</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">anatomical</span> <span class="n">space</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">bbr_schedule</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="o">.</span><span class="n">sch</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Boundary</span> <span class="n">based</span> <span class="n">registration</span> <span class="n">schedule</span> <span class="n">file</span> <span class="k">for</span> <span class="n">flirt</span> <span class="n">command</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">func_to_anat_linear_xfm</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span> <span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">anat_func</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Functional</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">anatomical</span> <span class="n">space</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.create_fsl_fnirt_nonlinear_reg">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">create_fsl_fnirt_nonlinear_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fsl_fnirt_nonlinear_reg'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#create_fsl_fnirt_nonlinear_reg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.create_fsl_fnirt_nonlinear_reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs non-linear registration of an input file to a reference file
+using FSL FNIRT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">string, optional</span></dt><dd><p>Name of the workflow.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>nonlinear_register</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">input_skull</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">File</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">brain</span> <span class="k">with</span> <span class="n">skull</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">reference_skull</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Target</span> <span class="n">brain</span> <span class="k">with</span> <span class="n">skull</span> <span class="n">to</span> <span class="n">normalize</span> <span class="n">to</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">fnirt_config</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">fsl</span> <span class="n">fnirt</span> <span class="n">config</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Configuration</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">parameters</span> <span class="n">that</span> <span class="n">can</span> <span class="n">be</span>
+    <span class="n">specified</span> <span class="ow">in</span> <span class="n">fnirt</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">output_brain</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Normalizion</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">brain</span> <span class="n">file</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">nonlinear_xfm</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">Nonlinear</span> <span class="n">field</span> <span class="n">coefficients</span> <span class="n">file</span> <span class="n">of</span> <span class="n">nonlinear</span> <span class="n">transformation</span>
+</pre></div>
+</div>
+<p>Registration Procedure:</p>
+<ol class="arabic simple">
+<li><p>Perform a nonlinear registration on an input file to the
+reference file utilizing affine transformation from the previous
+step as a starting point.</p></li>
+<li><p>Invert the affine transformation to provide the user a
+transformation (affine only) from the space of the reference
+file to the input file.</p></li>
+</ol>
+<p>Workflow Graph:</p>
+<a class="reference internal image-reference" href="images/nonlinear_register.png"><img alt="images/nonlinear_register.png" src="images/nonlinear_register.png" style="width: 500px;" /></a>
+<p>Detailed Workflow Graph:
+.. image:: ../../images/nonlinear_register_detailed.png</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">width</dt>
+<dd class="field-odd"><p>500</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.create_fsl_fnirt_nonlinear_reg_nhp">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">create_fsl_fnirt_nonlinear_reg_nhp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fsl_fnirt_nonlinear_reg_nhp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#create_fsl_fnirt_nonlinear_reg_nhp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.create_fsl_fnirt_nonlinear_reg_nhp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs non-linear registration of an input file to a reference file
+using FSL FNIRT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">string, optional</span></dt><dd><p>Name of the workflow.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>nonlinear_register</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">input_skull</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">File</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">brain</span> <span class="k">with</span> <span class="n">skull</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">reference_skull</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Target</span> <span class="n">brain</span> <span class="k">with</span> <span class="n">skull</span> <span class="n">to</span> <span class="n">normalize</span> <span class="n">to</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">fnirt_config</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">fsl</span> <span class="n">fnirt</span> <span class="n">config</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Configuration</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">parameters</span> <span class="n">that</span> <span class="n">can</span> <span class="n">be</span>
+    <span class="n">specified</span> <span class="ow">in</span> <span class="n">fnirt</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">output_brain</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Normalizion</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">brain</span> <span class="n">file</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">nonlinear_xfm</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">Nonlinear</span> <span class="n">field</span> <span class="n">coefficients</span> <span class="n">file</span> <span class="n">of</span> <span class="n">nonlinear</span> <span class="n">transformation</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">nonlinear_warp</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">Nonlinear</span> <span class="n">output</span> <span class="n">file</span> <span class="k">with</span> <span class="n">warp</span> <span class="n">field</span>
+</pre></div>
+</div>
+<p>Registration Procedure:</p>
+<ol class="arabic simple">
+<li><p>Perform a nonlinear registration on an input file to the
+reference file utilizing affine transformation from the previous
+step as a starting point.</p></li>
+<li><p>Invert the affine transformation to provide the user a
+transformation (affine only) from the space of the reference
+file to the input file.</p></li>
+</ol>
+<p>Workflow Graph:</p>
+<a class="reference internal image-reference" href="images/nonlinear_register_nhp.png"><img alt="images/nonlinear_register_nhp.png" src="images/nonlinear_register_nhp.png" style="width: 500px;" /></a>
+<p>Detailed Workflow Graph:
+.. image:: ../../images/nonlinear_register_nhp_detailed.png</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">width</dt>
+<dd class="field-odd"><p>500</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.create_func_to_T1template_symmetric_xfm">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">create_func_to_T1template_symmetric_xfm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#create_func_to_T1template_symmetric_xfm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.create_func_to_T1template_symmetric_xfm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condense the BOLD-to-T1 coregistration transform and the T1-to-
+symmetric-template transform into one transform matrix.</p>
+<p>Node Block:
+{“name”: “create_func_to_T1template_symmetric_xfm”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“target_template”, “using”],
+“option_val”: “T1_template”,
+“inputs”: [(“from-T1w_to-symtemplate_mode-image_xfm”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-symtemplate_to-T1w_mode-image_xfm”,
+“desc-brain_T1w”),</p>
+</div></blockquote>
+<dl class="simple">
+<dt>(“from-bold_to-T1w_mode-image_desc-linear_xfm”,</dt><dd><p>“desc-mean_bold”),</p>
+</dd>
+</dl>
+<p>“T1w-brain-template-symmetric-deriv”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“from-bold_to-symtemplate_mode-image_xfm”,</dt><dd><p>“from-symtemplate_to-bold_mode-image_xfm”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.create_func_to_T1template_xfm">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">create_func_to_T1template_xfm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#create_func_to_T1template_xfm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.create_func_to_T1template_xfm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condense the BOLD-to-T1 coregistration transform and the T1-to-template
+transform into one transform matrix.</p>
+<p>Node Block:
+{“name”: “create_func_to_T1template_xfm”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“target_template”, “using”],
+“option_val”: “T1_template”,
+“inputs”: [(“desc-reginput_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-bold_to-T1w_mode-image_desc-linear_xfm”),</p>
+</div></blockquote>
+<dl class="simple">
+<dt>(“from-T1w_to-template_mode-image_xfm”,</dt><dd><p>“from-template_to-T1w_mode-image_xfm”,
+“desc-brain_T1w”),</p>
+</dd>
+</dl>
+<p>“T1w-brain-template-funcreg”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“from-bold_to-template_mode-image_xfm”,</dt><dd><p>“from-template_to-bold_mode-image_xfm”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.create_register_func_to_anat">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">create_register_func_to_anat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_diff_distcor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'register_func_to_anat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#create_register_func_to_anat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.create_register_func_to_anat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a functional scan in native space to anatomical space using a
+linear transform and does not include bbregister.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>config</strong><span class="classifier">configuration, mandatory</span></dt><dd><p>Pipeline configuration.</p>
+</dd>
+<dt><strong>fieldmap_distortion</strong><span class="classifier">bool, optional</span></dt><dd><p>If field map-based distortion correction is being run, FLIRT should
+take in the appropriate field map-related inputs.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">string, optional</span></dt><dd><p>Name of the workflow.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>create_register_func_to_anat</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">func</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Input</span> <span class="n">functional</span> <span class="n">scan</span> <span class="n">to</span> <span class="n">be</span> <span class="n">registered</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">space</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">anat</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Corresponding</span> <span class="n">anatomical</span> <span class="n">scan</span> <span class="n">of</span> <span class="n">subject</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">interp</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">Type</span> <span class="n">of</span> <span class="n">interpolation</span> <span class="n">to</span> <span class="n">use</span>
+    <span class="p">(</span><span class="s1">&#39;trilinear&#39;</span> <span class="ow">or</span> <span class="s1">&#39;nearestneighbour&#39;</span> <span class="ow">or</span> <span class="s1">&#39;sinc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">func_to_anat_linear_xfm_nobbreg</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span> <span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">anat_func_nobbreg</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Functional</span> <span class="n">scan</span> <span class="n">registered</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">space</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.create_register_func_to_anat_use_T2">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">create_register_func_to_anat_use_T2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'register_func_to_anat_use_T2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#create_register_func_to_anat_use_T2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.create_register_func_to_anat_use_T2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a functional scan in native space to anatomical space using a
+linear transform and does not include bbregister, use T1 and T2 image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">string, optional</span></dt><dd><p>Name of the workflow.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>create_register_func_to_anat_use_T2</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">func</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Input</span> <span class="n">functional</span> <span class="n">scan</span> <span class="n">to</span> <span class="n">be</span> <span class="n">registered</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">space</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">anat</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Corresponding</span> <span class="n">anatomical</span> <span class="n">scan</span> <span class="n">of</span> <span class="n">subject</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">func_to_anat_linear_xfm_nobbreg</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span> <span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">anat_func_nobbreg</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Functional</span> <span class="n">scan</span> <span class="n">registered</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">space</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.create_wf_calculate_ants_warp">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">create_wf_calculate_ants_warp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'create_wf_calculate_ants_warp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_ants_skull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#create_wf_calculate_ants_warp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.create_wf_calculate_ants_warp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the nonlinear ANTS registration transform. This workflow
+employs the antsRegistration tool:</p>
+<p><a class="reference external" href="http://stnava.github.io/ANTs/">http://stnava.github.io/ANTs/</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">string, optional</span></dt><dd><p>Name of the workflow.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>calc_ants_warp_wf</strong><span class="classifier">nipype.pipeline.engine.Workflow</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Some of the inputs listed below are lists or lists of lists. This is
+because antsRegistration can perform multiple stages of calculations
+depending on how the user configures their registration.</p>
+<p>For example, if one wants to employ a different metric (with different
+parameters) at each stage, the lists would be configured like this:</p>
+<p>warp_wf.inputs.inputspec.transforms = [‘Rigid’,’Affine’,’SyN’]
+warp_wf.inputs.inputspec.transform_parameters = [[0.1],[0.1],[0.1,3,0]]</p>
+<p>..where each element in the first list is a metric to be used at each
+stage, ‘Rigid’ being for stage 1, ‘Affine’ for stage 2, etc. The lists
+within the list for transform_parameters would then correspond to each
+stage’s metric, with [0.1] applying to ‘Rigid’ and ‘Affine’ (stages 1 and
+2), and [0.1,3,0] applying to ‘SyN’ of stage 3.</p>
+<p>In some cases, when a parameter is not needed for a stage, ‘None’ must be
+entered in its place if there are other parameters for other stages.</p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">moving_brain</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">File</span> <span class="n">of</span> <span class="n">brain</span> <span class="n">to</span> <span class="n">be</span> <span class="n">normalized</span> <span class="p">(</span><span class="n">registered</span><span class="p">)</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">reference_brain</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Target</span> <span class="n">brain</span> <span class="n">file</span> <span class="n">to</span> <span class="n">normalize</span> <span class="n">to</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">dimension</span> <span class="p">:</span> <span class="n">integer</span>
+    <span class="n">Dimension</span> <span class="n">of</span> <span class="n">the</span> <span class="n">image</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">use_histogram_matching</span> <span class="p">:</span> <span class="n">boolean</span>
+    <span class="n">Histogram</span> <span class="n">match</span> <span class="n">the</span> <span class="n">images</span> <span class="n">before</span> <span class="n">registration</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">winsorize_lower_quantile</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="n">Winsorize</span> <span class="n">data</span> <span class="n">based</span> <span class="n">on</span> <span class="n">quantiles</span> <span class="p">(</span><span class="n">lower</span> <span class="nb">range</span><span class="p">)</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">winsorize_higher_quantile</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="n">Winsorize</span> <span class="n">data</span> <span class="n">based</span> <span class="n">on</span> <span class="n">quantiles</span> <span class="p">(</span><span class="n">higher</span> <span class="nb">range</span><span class="p">)</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">metric</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">strings</span>
+    <span class="n">Image</span> <span class="n">metric</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">be</span> <span class="n">used</span> <span class="n">at</span> <span class="n">each</span> <span class="n">stage</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">metric_weight</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">floats</span>
+    <span class="n">Modulate</span> <span class="n">the</span> <span class="n">per</span><span class="o">-</span><span class="n">stage</span> <span class="n">weighting</span> <span class="n">of</span> <span class="n">the</span> <span class="n">corresponding</span> <span class="n">metric</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">radius_or_number_of_bins</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">integers</span>
+    <span class="n">Number</span> <span class="n">of</span> <span class="n">bins</span> <span class="ow">in</span> <span class="n">each</span> <span class="n">stage</span> <span class="k">for</span> <span class="n">the</span> <span class="n">MI</span> <span class="ow">and</span> <span class="n">Mattes</span> <span class="n">metric</span><span class="p">,</span> <span class="n">the</span>
+    <span class="n">radius</span> <span class="k">for</span> <span class="n">other</span> <span class="n">metrics</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">sampling_strategy</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">strings</span>
+    <span class="n">Sampling</span> <span class="n">strategy</span> <span class="p">(</span><span class="ow">or</span> <span class="n">strategies</span><span class="p">)</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">the</span> <span class="n">metrics</span>
+    <span class="p">{</span><span class="kc">None</span><span class="p">,</span> <span class="n">Regular</span><span class="p">,</span> <span class="ow">or</span> <span class="n">Random</span><span class="p">}</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">sampling_percentage</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">floats</span>
+    <span class="n">Defines</span> <span class="n">the</span> <span class="n">sampling</span> <span class="n">strategy</span>
+    <span class="p">{</span><span class="nb">float</span> <span class="n">value</span><span class="p">,</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">}</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">number_of_iterations</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">lists</span> <span class="n">of</span> <span class="n">integers</span>
+    <span class="n">Determines</span> <span class="n">the</span> <span class="n">convergence</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">convergence_threshold</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">floats</span>
+    <span class="n">Threshold</span> <span class="n">compared</span> <span class="n">to</span> <span class="n">the</span> <span class="n">slope</span> <span class="n">of</span> <span class="n">the</span> <span class="n">line</span> <span class="n">fitted</span> <span class="ow">in</span> <span class="n">convergence</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">convergence_window_size</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">integers</span>
+    <span class="n">Window</span> <span class="n">size</span> <span class="n">of</span> <span class="n">convergence</span> <span class="n">calculations</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">transforms</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">strings</span>
+    <span class="n">Selection</span> <span class="n">of</span> <span class="n">transform</span> <span class="n">options</span><span class="o">.</span> <span class="n">See</span> <span class="n">antsRegistration</span> <span class="n">documentation</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="n">full</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">their</span> <span class="n">descriptions</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">transform_parameters</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">lists</span> <span class="n">of</span> <span class="n">floats</span>
+    <span class="n">Fine</span><span class="o">-</span><span class="n">tuning</span> <span class="k">for</span> <span class="n">the</span> <span class="n">different</span> <span class="n">transform</span> <span class="n">options</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">shrink_factors</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">lists</span> <span class="n">of</span> <span class="n">integers</span>
+    <span class="n">Specify</span> <span class="n">the</span> <span class="n">shrink</span> <span class="n">factor</span> <span class="k">for</span> <span class="n">the</span> <span class="n">virtual</span> <span class="n">domain</span> <span class="p">(</span><span class="n">typically</span> <span class="n">the</span>
+    <span class="n">fixed</span> <span class="n">image</span><span class="p">)</span> <span class="n">at</span> <span class="n">each</span> <span class="n">level</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">smoothing_sigmas</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">lists</span> <span class="n">of</span> <span class="n">floats</span>
+    <span class="n">Specify</span> <span class="n">the</span> <span class="n">sigma</span> <span class="n">of</span> <span class="n">gaussian</span> <span class="n">smoothing</span> <span class="n">at</span> <span class="n">each</span> <span class="n">level</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">fixed_image_mask</span><span class="p">:</span> <span class="p">(</span><span class="n">an</span> <span class="n">existing</span> <span class="n">file</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">Mask</span> <span class="n">used</span> <span class="n">to</span> <span class="n">limit</span> <span class="n">metric</span> <span class="n">sampling</span> <span class="n">region</span> <span class="n">of</span> <span class="n">the</span> <span class="n">fixed</span> <span class="n">imagein</span> <span class="nb">all</span>
+    <span class="n">stages</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">interp</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">Type</span> <span class="n">of</span> <span class="n">interpolation</span> <span class="n">to</span> <span class="n">use</span>
+    <span class="p">(</span><span class="s1">&#39;Linear&#39;</span> <span class="ow">or</span> <span class="s1">&#39;BSpline&#39;</span> <span class="ow">or</span> <span class="s1">&#39;LanczosWindowedSinc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">warp_field</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Output</span> <span class="n">warp</span> <span class="n">field</span> <span class="n">of</span> <span class="n">registration</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">inverse_warp_field</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Inverse</span> <span class="n">of</span> <span class="n">the</span> <span class="n">warp</span> <span class="n">field</span> <span class="n">of</span> <span class="n">the</span> <span class="n">registration</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">ants_affine_xfm</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="o">.</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">The</span> <span class="n">affine</span> <span class="n">matrix</span> <span class="n">of</span> <span class="n">the</span> <span class="n">registration</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">ants_inverse_affine_xfm</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="o">.</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">The</span> <span class="n">affine</span> <span class="n">matrix</span> <span class="n">of</span> <span class="n">the</span> <span class="n">reverse</span> <span class="n">registration</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">composite_transform</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">The</span> <span class="n">combined</span> <span class="n">transform</span> <span class="n">including</span> <span class="n">the</span> <span class="n">warp</span> <span class="n">field</span> <span class="ow">and</span> <span class="n">rigid</span> <span class="o">&amp;</span> <span class="n">affine</span>
+    <span class="n">linear</span> <span class="n">warps</span>
+<span class="n">outputspec</span><span class="o">.</span><span class="n">normalized_output_brain</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Template</span><span class="o">-</span><span class="n">registered</span> <span class="n">version</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">brain</span>
+</pre></div>
+</div>
+<p>Registration Procedure:</p>
+<ol class="arabic simple">
+<li><p>Calculates a nonlinear anatomical-to-template registration.</p></li>
+</ol>
+<p>Workflow Graph:
+.. image:: ../../images/generated/calculate_ants_warp.png</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">width</dt>
+<dd class="field-odd"><p>500</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Detailed Workflow Graph:</p>
+<a class="reference internal image-reference" href="images/generated/calculate_ants_warp_detailed.png"><img alt="images/generated/calculate_ants_warp_detailed.png" src="images/generated/calculate_ants_warp_detailed.png" style="width: 500px;" /></a>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.overwrite_transform_anat_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">overwrite_transform_anat_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#overwrite_transform_anat_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.overwrite_transform_anat_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “overwrite_transform_anat_to_template”,</dt><dd><p>“config”: “None”,
+“switch”: [[“registration_workflows”, “anatomical_registration”, “run”],</p>
+<blockquote>
+<div><dl class="simple">
+<dt>[“registration_workflows”, “anatomical_registration”,</dt><dd><p>“overwrite_transform”, “run”]],</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>“option_key”: [“registration_workflows”, “anatomical_registration”,</dt><dd><p>“overwrite_transform”, “using”],</p>
+</dd>
+</dl>
+<p>“option_val”: “FSL”,
+“inputs”: [(“desc-restore-brain_T1w”,</p>
+<blockquote>
+<div><p>[“desc-brain_T1w”, “space-longitudinal_desc-brain_T1w”],
+[“desc-restore_T1w”, “desc-preproc_T1w”, “desc-reorient_T1w”,</p>
+<blockquote>
+<div><p>“T1w”],</p>
+</div></blockquote>
+<p>[“desc-preproc_T1w”, “desc-reorient_T1w”, “T1w”],
+“space-T1w_desc-brain_mask”,
+“T1w-template”,
+“from-T1w_to-template_mode-image_xfm”,
+“from-template_to-T1w_mode-image_xfm”,
+“space-template_desc-brain_T1w”)],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-brain_T1w”,</dt><dd><p>“space-template_desc-head_T1w”,
+“space-template_desc-T1w_mask”,
+“from-T1w_to-template_mode-image_xfm”,
+“from-template_to-T1w_mode-image_xfm”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.register_ANTs_EPI_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">register_ANTs_EPI_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#register_ANTs_EPI_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.register_ANTs_EPI_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directly register the mean functional to an EPI template. No T1w
+involved.</p>
+<p>Node Block:
+{“name”: “register_ANTs_EPI_to_template”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“EPI_registration”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: “using”,
+“option_val”: “ANTS”,
+“inputs”: [([“desc-reginput_bold”, “desc-mean_bold”],</p>
+<blockquote>
+<div><blockquote>
+<div><p>“space-bold_desc-brain_mask”),</p>
+</div></blockquote>
+<p>“EPI-template”,
+“EPI-template-mask”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-EPItemplate_desc-brain_bold”,</dt><dd><p>“from-bold_to-EPItemplate_mode-image_desc-linear_xfm”,
+“from-EPItemplate_to-bold_mode-image_desc-linear_xfm”,
+“from-bold_to-EPItemplate_mode-image_desc-nonlinear_xfm”,
+“from-EPItemplate_to-bold_mode-image_desc-nonlinear_xfm”,
+“from-bold_to-EPItemplate_mode-image_xfm”,
+“from-EPItemplate_to-bold_mode-image_xfm”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.register_ANTs_anat_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">register_ANTs_anat_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#register_ANTs_anat_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.register_ANTs_anat_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “register_ANTs_anat_to_template”,</p>
+<blockquote>
+<div><p>“config”: [“registration_workflows”, “anatomical_registration”],
+“switch”: [“run”],
+“option_key”: [“registration”, “using”],
+“option_val”: “ANTS”,
+“inputs”: [([“desc-brain_T1w”, “space-longitudinal_desc-brain_T1w”],</p>
+<blockquote>
+<div><blockquote>
+<div><dl class="simple">
+<dt>[“space-T1w_desc-brain_mask”,</dt><dd><p>“space-longitudinal_desc-brain_mask”,
+“space-T1w_desc-acpcbrain_mask”],</p>
+</dd>
+<dt>[“desc-restore_T1w”, “desc-preproc_T1w”, “desc-reorient_T1w”, “T1w”,</dt><dd><p>“space-longitudinal_desc-reorient_T1w”]),</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>“T1w-template”,
+“T1w-brain-template”,
+“T1w-brain-template-mask”,
+“label-lesion_mask”],</p>
+</div></blockquote>
+<dl>
+<dt>“outputs”: {“space-template_desc-brain_T1w”: {</dt><dd><blockquote>
+<div><dl class="simple">
+<dt>“Description”: “The preprocessed T1w brain transformed “</dt><dd><p>“to template space.”,</p>
+</dd>
+</dl>
+<p>“Template”: “T1w-template”},</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“from-T1w_to-template_mode-image_desc-linear_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Linear (affine) transform from T1w native”</dt><dd><p>” space to T1w-template space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-template_to-T1w_mode-image_desc-linear_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Linear (affine) transform from T1w-”</dt><dd><p>“template space to T1w native space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-T1w_to-template_mode-image_desc-nonlinear_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Nonlinear (warp field) transform from “</dt><dd><p>“T1w native space to T1w-template space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-template_to-T1w_mode-image_desc-nonlinear_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Nonlinear (warp field) transform from “</dt><dd><p>“T1w-template space to T1w native space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-T1w_to-template_mode-image_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Composite (affine + warp field) “</dt><dd><p>“transform from T1w native space to T1w-”
+“template space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-template_to-T1w_mode-image_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Composite (affine + warp field) “</dt><dd><p>“transform from T1w-template space to T1w ”
+“native space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-longitudinal_to-template_mode-image_desc-linear_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Linear (affine) transform from “</dt><dd><p>“longitudinal-template space to T1w-”
+“template space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-template_to-longitudinal_mode-image_desc-linear_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Linear (affine) transform from T1w-”</dt><dd><p>“template space to longitudinal-template ”
+“space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-longitudinal_to-template_mode-image_desc-nonlinear_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Nonlinear (warp field) transform from “</dt><dd><p>“longitudinal-template space to T1w-”
+“template space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-template_to-longitudinal_mode-image_desc-nonlinear_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Nonlinear (warp field) transform from “</dt><dd><p>“T1w-template space to longitudinal-”
+“template space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-longitudinal_to-template_mode-image_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Composite (affine + warp field) “</dt><dd><p>“transform from longitudinal-template ”
+“space to T1w-template space.”},</p>
+</dd>
+</dl>
+</dd>
+<dt>“from-template_to-longitudinal_mode-image_xfm”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Composite (affine + warp field) “</dt><dd><p>“transform from T1w-template space to ”
+“longitudinal-template space.”}}}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.register_FSL_EPI_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">register_FSL_EPI_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#register_FSL_EPI_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.register_FSL_EPI_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directly register the mean functional to an EPI template. No T1w
+involved.</p>
+<p>Node Block:
+{“name”: “register_FSL_EPI_to_template”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“EPI_registration”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: “using”,
+“option_val”: [“FSL”, “FSL-linear”],
+“inputs”: [([“desc-reginput_bold”, “desc-mean_bold”],</p>
+<blockquote>
+<div><blockquote>
+<div><p>“space-bold_desc-brain_mask”),</p>
+</div></blockquote>
+<p>“EPI-template”,
+“EPI-template-mask”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-EPItemplate_desc-brain_bold”,</dt><dd><p>“from-bold_to-EPItemplate_mode-image_desc-linear_xfm”,
+“from-EPItemplate_to-bold_mode-image_desc-linear_xfm”,
+“from-bold_to-EPItemplate_mode-image_xfm”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.register_FSL_anat_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">register_FSL_anat_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#register_FSL_anat_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.register_FSL_anat_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “register_FSL_anat_to_template”,</dt><dd><p>“config”: [“registration_workflows”, “anatomical_registration”],
+“switch”: [“run”],
+“option_key”: [“registration”, “using”],
+“option_val”: [“FSL”, “FSL-linear”],
+“inputs”: [([“desc-preproc_T1w”, “desc-reorient_T1w”, “T1w”,</p>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>“space-longitudinal_desc-reorient_T1w”],</p>
+</div></blockquote>
+<p>[“desc-brain_T1w”, “space-longitudinal_desc-brain_T1w”]),</p>
+</div></blockquote>
+<p>“T1w-template”,
+“T1w-brain-template”,
+“FNIRT-T1w-template”,
+“FNIRT-T1w-brain-template”,
+“template-ref-mask”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-brain_T1w”,</dt><dd><p>“space-template_desc-head_T1w”,
+“space-template_desc-T1w_mask”,
+“space-template_desc-T1wT2w_biasfield”,
+“from-T1w_to-template_mode-image_desc-linear_xfm”,
+“from-template_to-T1w_mode-image_desc-linear_xfm”,
+“from-T1w_to-template_mode-image_xfm”,
+“from-T1w_to-template_mode-image_warp”,
+“from-longitudinal_to-template_mode-image_desc-linear_xfm”,
+“from-template_to-longitudinal_mode-image_desc-linear_xfm”,
+“from-longitudinal_to-template_mode-image_xfm”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.register_symmetric_ANTs_anat_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">register_symmetric_ANTs_anat_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#register_symmetric_ANTs_anat_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.register_symmetric_ANTs_anat_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “register_symmetric_ANTs_anat_to_template”,</dt><dd><p>“config”: [“registration_workflows”, “anatomical_registration”],
+“switch”: [“run”],
+“option_key”: [“registration”, “using”],
+“option_val”: “ANTS”,
+“inputs”: [([“desc-brain_T1w”, “space-longitudinal_desc-brain_T1w”],</p>
+<blockquote>
+<div><blockquote>
+<div><dl class="simple">
+<dt>[“space-T1w_desc-brain_mask”,</dt><dd><p>“space-longitudinal_desc-brain_mask”],</p>
+</dd>
+<dt>[“desc-preproc_T1w”, “desc-reorient_T1w”, “T1w”,</dt><dd><p>“space-longitudinal_desc-reorient_T1w”]),</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>“T1w-template-symmetric”,
+“T1w-brain-template-symmetric”,
+“dilated-symmetric-brain-mask”,
+“label-lesion_mask”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-symtemplate_desc-brain_T1w”,</dt><dd><p>“from-T1w_to-symtemplate_mode-image_desc-linear_xfm”,
+“from-symtemplate_to-T1w_mode-image_desc-linear_xfm”,
+“from-T1w_to-symtemplate_mode-image_desc-nonlinear_xfm”,
+“from-symtemplate_to-T1w_mode-image_desc-nonlinear_xfm”,
+“from-T1w_to-symtemplate_mode-image_xfm”,
+“from-symtemplate_to-T1w_mode-image_xfm”,
+“from-longitudinal_to-symtemplate_mode-image_desc-linear_xfm”,
+“from-symtemplate_to-longitudinal_mode-image_desc-linear_xfm”,
+“from-longitudinal_to-symtemplate_mode-image_desc-nonlinear_xfm”,
+“from-symtemplate_to-longitudinal_mode-image_desc-nonlinear_xfm”,
+“from-longitudinal_to-symtemplate_mode-image_xfm”,
+“from-symtemplate_to-longitudinal_mode-image_xfm”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.register_symmetric_FSL_anat_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">register_symmetric_FSL_anat_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#register_symmetric_FSL_anat_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.register_symmetric_FSL_anat_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “register_symmetric_FSL_anat_to_template”,</dt><dd><p>“config”: [“registration_workflows”, “anatomical_registration”],
+“switch”: [“run”],
+“option_key”: [“registration”, “using”],
+“option_val”: [“FSL”, “FSL-linear”],
+“inputs”: [([“desc-preproc_T1w”, “desc-reorient_T1w”, “T1w”,</p>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>“space-longitudinal_desc-reorient_T1w”],</p>
+</div></blockquote>
+<p>[“desc-brain_T1w”, “space-longitudinal_desc-brain_T1w”]),</p>
+</div></blockquote>
+<p>“T1w-template-symmetric”,
+“T1w-brain-template-symmetric”,
+“dilated-symmetric-brain-mask”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-symtemplate_desc-brain_T1w”,</dt><dd><p>“from-T1w_to-symtemplate_mode-image_desc-linear_xfm”,
+“from-symtemplate_to-T1w_mode-image_desc-linear_xfm”,
+“from-T1w_to-symtemplate_mode-image_xfm”,
+“from-longitudinal_to-symtemplate_mode-image_desc-linear_xfm”,
+“from-symtemplate_to-longitudinal_mode-image_desc-linear_xfm”,
+“from-longitudinal_to-symtemplate_mode-image_xfm”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.single_step_resample_timeseries_to_T1template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">single_step_resample_timeseries_to_T1template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#single_step_resample_timeseries_to_T1template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.single_step_resample_timeseries_to_T1template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply motion correction, coreg, anat-to-template transforms on
+slice-time corrected functional timeseries based on fMRIPrep
+pipeline</p>
+<p>Copyright (c) 2015-2018, the CRN developers team.
+All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:</p>
+<ul class="simple">
+<li><p>Redistributions of source code must retain the above copyright</p></li>
+</ul>
+<p>notice, this list of conditions and the following disclaimer.</p>
+<ul class="simple">
+<li><p>Redistributions in binary form must reproduce the above copyright</p></li>
+</ul>
+<p>notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.</p>
+<ul class="simple">
+<li><p>Neither the name of fmriprep nor the names of its contributors</p></li>
+</ul>
+<p>may be used to endorse or promote products derived from this
+software without specific prior written permission.</p>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+“AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+<p>Ref: <a class="reference external" href="https://github.com/nipreps/fmriprep/blob/84a6005b/fmriprep/workflows/bold/resampling.py#L159-L419">https://github.com/nipreps/fmriprep/blob/84a6005b/fmriprep/workflows/bold/resampling.py#L159-L419</a></p>
+<p>Node Block:
+{“name”: “single_step_resample_stc_timeseries_to_T1template”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“apply_transform”, “using”],
+“option_val”: “single_step_resampling_from_stc”,
+“inputs”: [([“desc-reginput_bold”, “desc-mean_bold”],</p>
+<blockquote>
+<div><p>“desc-stc_bold”,
+“motion-basefile”,
+“space-bold_desc-brain_mask”,
+“coordinate-transformation”,
+“from-T1w_to-template_mode-image_xfm”,
+“from-bold_to-T1w_mode-image_desc-linear_xfm”,
+“from-bold_to-template_mode-image_xfm”,
+“T1w”,
+“desc-brain_T1w”,
+“T1w-brain-template-funcreg”)],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-preproc_bold”,</dt><dd><p>“space-template_desc-brain_bold”,
+“space-template_desc-bold_mask”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.transform_derivative">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">transform_derivative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_tool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cpus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_ants_cores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ants_interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fsl_interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#transform_derivative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.transform_derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform output derivatives to template space.</p>
+<p>This function is designed for use with the NodeBlock connection engine.
+This function is not guardrailed.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_bold_mask_to_EPItemplate">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_bold_mask_to_EPItemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_bold_mask_to_EPItemplate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_bold_mask_to_EPItemplate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “transform_bold_mask_to_EPItemplate”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run_EPI”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“space-bold_desc-brain_mask”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-bold_to-EPItemplate_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“EPI-template”],</p>
+</div></blockquote>
+<p>“outputs”: [“space-EPItemplate_desc-bold_mask”]}</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_bold_mask_to_T1template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_bold_mask_to_T1template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_bold_mask_to_T1template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_bold_mask_to_T1template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “transform_bold_mask_to_T1template”,</p>
+<blockquote>
+<div><p>“config”: “None”,
+“switch”: [[“registration_workflows”, “functional_registration”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“func_registration_to_template”, “run”],</p>
+</div></blockquote>
+<p>[“registration_workflows”, “anatomical_registration”, “run”]],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“option_key”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”, “apply_transform”,
+“using”],</p>
+</dd>
+</dl>
+<p>“option_val”: “default”,
+“inputs”: [(“space-bold_desc-brain_mask”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-bold_to-template_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“T1w-brain-template-funcreg”],</p>
+</div></blockquote>
+<p>“outputs”: [“space-template_desc-bold_mask”]}</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_bold_mean_to_EPItemplate">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_bold_mean_to_EPItemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_bold_mean_to_EPItemplate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_bold_mean_to_EPItemplate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “transform_bold_mean_to_EPItemplate”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run_EPI”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“desc-mean_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-bold_to-EPItemplate_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“EPI-template”],</p>
+</div></blockquote>
+<p>“outputs”: [“space-EPItemplate_desc-mean_bold”]}</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_bold_mean_to_T1template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_bold_mean_to_T1template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_bold_mean_to_T1template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_bold_mean_to_T1template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “transform_bold_mean_to_T1template”,</p>
+<blockquote>
+<div><p>“config”: “None”,
+“switch”: [[“registration_workflows”, “functional_registration”,</p>
+<blockquote>
+<div><p>“func_registration_to_template”, “run”],
+[“functional_preproc”, “generate_func_mean”, “run”]],</p>
+</div></blockquote>
+<p>“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“desc-mean_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-bold_to-template_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“T1w-brain-template-funcreg”],</p>
+</div></blockquote>
+<dl>
+<dt>“outputs”: {</dt><dd><dl>
+<dt>“space-template_desc-mean_bold”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Single-volume mean of the BOLD time-series “</dt><dd><p>“transformed to template space.”,</p>
+</dd>
+</dl>
+<p>“Template”: “T1w-brain-template-funcreg”}}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<p>}</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_deriv_mask_to_EPItemplate">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_deriv_mask_to_EPItemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_deriv_mask_to_EPItemplate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_deriv_mask_to_EPItemplate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the BOLD mask to template space and to the resolution set for
+the derivative outputs.</p>
+<p>Node Block:
+{“name”: “transform_deriv_mask_to_EPItemplate”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run_EPI”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“space-bold_desc-brain_mask”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-bold_to-EPItemplate_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“EPI-template”],</p>
+</div></blockquote>
+<p>“outputs”: [“space-EPItemplate_res-derivative_desc-bold_mask”]}</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_deriv_mask_to_T1template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_deriv_mask_to_T1template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_deriv_mask_to_T1template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_deriv_mask_to_T1template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the BOLD mask to template space and to the resolution set for
+the derivative outputs.</p>
+<p>Node Block:
+{“name”: “transform_deriv_mask_to_T1template”,</p>
+<blockquote>
+<div><p>“config”: “None”,
+“switch”: [[“registration_workflows”, “functional_registration”,</p>
+<blockquote>
+<div><p>“func_registration_to_template”, “run”],
+[“registration_workflows”, “anatomical_registration”, “run”]],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“option_key”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”, “apply_transform”,
+“using”],</p>
+</dd>
+</dl>
+<p>“option_val”: “default”,
+“inputs”: [(“space-bold_desc-brain_mask”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-bold_to-template_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“T1w-brain-template-deriv”],</p>
+</div></blockquote>
+<p>“outputs”: [“space-template_res-derivative_desc-bold_mask”]}</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_resource_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_resource_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="CPAC.pipeline.nipype_pipeline_engine.engine.Workflow"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Workflow</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_resource</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xfm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_series</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="CPAC.pipeline.nipype_pipeline_engine.engine.Workflow"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Workflow</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="CPAC.pipeline.nipype_pipeline_engine.engine.Workflow"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Workflow</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_resource_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_resource_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to warp a resource into a template space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wf</strong><span class="classifier">pe.Workflow</span></dt><dd></dd>
+<dt><strong>cfg</strong><span class="classifier">CPAC.utils.configuration.Configuration</span></dt><dd></dd>
+<dt><strong>strat_pool</strong><span class="classifier">CPAC.pipeline.engine.ResourcePool</span></dt><dd></dd>
+<dt><strong>pipe_num</strong><span class="classifier">int</span></dt><dd></dd>
+<dt><strong>input_resource</strong><span class="classifier">str or list</span></dt><dd><p>key for the resource to warp to template</p>
+</dd>
+<dt><strong>xfm</strong><span class="classifier">str</span></dt><dd><p>key for the transform to apply</p>
+</dd>
+<dt><strong>reference</strong><span class="classifier">str, optional</span></dt><dd><p>key for reference if not using f’{template_space}-template’</p>
+</dd>
+<dt><strong>time_series</strong><span class="classifier">boolean, optional</span></dt><dd><p>resource to transform is 4D?</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>wf</strong><span class="classifier">pe.Workflow</span></dt><dd><p>original workflow with subworkflow to warp resource to template
+connected</p>
+</dd>
+<dt><strong>apply_xfm</strong><span class="classifier">pe.Workflow</span></dt><dd><p>subworkflow added to warp resource to template</p>
+</dd>
+<dt><strong>resource</strong><span class="classifier">str</span></dt><dd><p>key of input resource in strat_pool</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_timeseries_to_EPItemplate">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_timeseries_to_EPItemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_timeseries_to_EPItemplate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_timeseries_to_EPItemplate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “transform_timeseries_to_EPItemplate”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run_EPI”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [([“desc-preproc_bold”, “bold”],</p>
+<blockquote>
+<div><blockquote>
+<div><p>“from-bold_to-EPItemplate_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“EPI-template”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-EPItemplate_desc-cleaned_bold”,</dt><dd><p>“space-EPItemplate_desc-brain_bold”,
+“space-EPItemplate_desc-preproc_bold”,
+“space-EPItemplate_bold”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_timeseries_to_T1template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_timeseries_to_T1template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_timeseries_to_T1template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_timeseries_to_T1template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “transform_timeseries_to_T1template”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“apply_transform”, “using”],
+“option_val”: “default”,
+“inputs”: [([“desc-preproc_bold”, “desc-cleaned_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>“desc-brain_bold”, “desc-motion_bold”, “bold”],</p>
+</div></blockquote>
+<p>“from-bold_to-template_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“T1w-brain-template-funcreg”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-cleaned_bold”,</dt><dd><p>“space-template_desc-brain_bold”,
+“space-template_desc-preproc_bold”,
+“space-template_desc-motion_bold”,
+“space-template_bold”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_timeseries_to_T1template_abcd">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_timeseries_to_T1template_abcd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_timeseries_to_T1template_abcd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_timeseries_to_T1template_abcd" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “transform_timeseries_to_T1template_abcd”,</dt><dd><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“apply_transform”, “using”],
+“option_val”: “abcd”,
+“inputs”: [[“desc-cleaned_bold”, “desc-brain_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“desc-motion_bold”, “desc-preproc_bold”, “bold”],</p>
+</div></blockquote>
+<p>“bold”,
+“motion-basefile”,
+“coordinate-transformation”,
+“from-T1w_to-template_mode-image_xfm”,
+“from-bold_to-T1w_mode-image_desc-linear_xfm”,
+“from-bold_to-template_mode-image_xfm”,
+“blip-warp”,
+“desc-preproc_T1w”,
+“space-template_res-bold_desc-brain_T1w”,
+“space-template_desc-bold_mask”,
+“T1w-brain-template-funcreg”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-brain_bold”,</dt><dd><p>“space-template_desc-scout_bold”,
+“space-template_desc-head_bold”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_timeseries_to_T1template_dcan_nhp">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_timeseries_to_T1template_dcan_nhp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_timeseries_to_T1template_dcan_nhp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_timeseries_to_T1template_dcan_nhp" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “transform_timeseries_to_T1template_dcan_nhp”,</dt><dd><dl class="simple">
+<dt>“config”: [“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: [“apply_transform”, “using”],
+“option_val”: “dcan_nhp”,
+“inputs”: [([“desc-reorient_bold”, “bold”],</p>
+<blockquote>
+<div><p>“coordinate-transformation”,
+“from-T1w_to-template_mode-image_warp”,
+“from-bold_to-T1w_mode-image_desc-linear_warp”,
+“space-template_desc-head_T1w”,
+“space-template_desc-T1w_mask”,
+“space-template_desc-T1wT2w_biasfield”)],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-brain_bold”,</dt><dd><p>“space-template_desc-bold_mask”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_tissuemask_to_EPItemplate">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_tissuemask_to_EPItemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_tissuemask_to_EPItemplate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_tissuemask_to_EPItemplate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “warp_tissuemask_to_EPItemplate”,</p>
+<blockquote>
+<div><p>“config”: “None”,
+“switch”: [“registration_workflows”, “functional_registration”,</p>
+<blockquote>
+<div><p>“EPI_registration”, “run”],</p>
+</div></blockquote>
+<p>“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“label-CSF_mask”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“label-WM_mask”,
+“label-GM_mask”,
+“from-bold_to-EPItemplate_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“EPI-template”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-EPItemplate_label-CSF_mask”,</dt><dd><p>“space-EPItemplate_label-WM_mask”,
+“space-EPItemplate_label-GM_mask”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_tissuemask_to_T1template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_tissuemask_to_T1template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_tissuemask_to_T1template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_tissuemask_to_T1template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Block:
+{“name”: “warp_tissuemask_to_T1template”,</p>
+<blockquote>
+<div><p>“config”: “None”,
+“switch”: [“registration_workflows”, “anatomical_registration”, “run”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“label-CSF_mask”,</p>
+<blockquote>
+<div><p>“label-WM_mask”,
+“label-GM_mask”,
+“from-T1w_to-template_mode-image_xfm”),
+“T1w-template”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_label-CSF_mask”,</dt><dd><p>“space-template_label-WM_mask”,
+“space-template_label-GM_mask”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.registration.warp_tissuemask_to_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.registration.</span></span><span class="sig-name descname"><span class="pre">warp_tissuemask_to_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xfm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_space</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/registration#warp_tissuemask_to_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.registration.warp_tissuemask_to_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to apply transforms to tissue masks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wf, cfg, strat_pool, pipe_num</strong></dt><dd><p>passed through from Node Block</p>
+</dd>
+<dt><strong>xfm</strong><span class="classifier">str</span></dt><dd><p>transform</p>
+</dd>
+<dt><strong>template_space</strong><span class="classifier">str</span></dt><dd><p>T1 or EPI</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>wf</strong><span class="classifier">nipype.pipeline.engine.workflows.Workflow</span></dt><dd></dd>
+<dt><strong>outputs</strong><span class="classifier">dict</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-CPAC.registration.utils"></span><dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.utils.change_itk_transform_type">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.utils.</span></span><span class="sig-name descname"><span class="pre">change_itk_transform_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_affine_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/utils#change_itk_transform_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.utils.change_itk_transform_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>this function takes in the affine.txt produced by the c3d_affine_tool
+(which converted an FSL FLIRT affine.mat into the affine.txt)</p>
+<p>it then modifies the ‘Transform Type’ of this affine.txt so that it is
+compatible with the antsApplyTransforms tool and produces a new affine
+file titled ‘updated_affine.txt’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.utils.cpac_ants_apply_nonlinear_inverse_warp">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.utils.</span></span><span class="sig-name descname"><span class="pre">cpac_ants_apply_nonlinear_inverse_warp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpac_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Linear'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/utils#cpac_ants_apply_nonlinear_inverse_warp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.utils.cpac_ants_apply_nonlinear_inverse_warp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run antsApplyTransforms for inverse warping when given a C-PAC output
+directory.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.utils.one_d_to_mat">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.utils.</span></span><span class="sig-name descname"><span class="pre">one_d_to_mat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">one_d_filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/utils#one_d_to_mat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.utils.one_d_to_mat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a .1D file to a .mat directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>one_d_filename</strong><span class="classifier">str</span></dt><dd><p>The filename of the .1D file to convert</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>mat_filenames</strong><span class="classifier">list of str</span></dt><dd><p>The of paths in the .mat directory created</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.registration.utils.run_ants_apply_warp">
+<span class="sig-prename descclassname"><span class="pre">CPAC.registration.utils.</span></span><span class="sig-name descname"><span class="pre">run_ants_apply_warp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moving_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rigid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonlinear</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_to_anat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anatomical_brain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/registration/utils#run_ants_apply_warp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.registration.utils.run_ants_apply_warp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a transform using ANTs transforms.</p>
+</dd></dl>
+
 </section>
 
 

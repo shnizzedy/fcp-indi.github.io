@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPAC.registration.guardrails &#8212; C-PAC 1.8.5.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex" />
+    <link rel="search" title="Search" href="../../../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.registration.guardrails</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for CPAC.registration.guardrails</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2022  C-PAC Developers</span>
+
+<span class="c1"># This file is part of C-PAC.</span>
+
+<span class="c1"># C-PAC is free software: you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the</span>
+<span class="c1"># Free Software Foundation, either version 3 of the License, or (at your</span>
+<span class="c1"># option) any later version.</span>
+
+<span class="c1"># C-PAC is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<span class="c1"># License for more details.</span>
+
+<span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
+<span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&quot;&quot;&quot;Guardrails to protect against bad registrations&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">nipype.interfaces.ants</span> <span class="kn">import</span> <span class="n">Registration</span>
+<span class="kn">from</span> <span class="nn">nipype.interfaces.fsl</span> <span class="kn">import</span> <span class="n">FLIRT</span>
+<span class="kn">from</span> <span class="nn">nipype.interfaces.utility</span> <span class="kn">import</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Merge</span><span class="p">,</span> <span class="n">Select</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.nipype_pipeline_engine</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.random_state.seed</span> <span class="kn">import</span> <span class="n">increment_seed</span>
+<span class="kn">from</span> <span class="nn">CPAC.qc</span> <span class="kn">import</span> <span class="n">qc_masks</span><span class="p">,</span> <span class="n">registration_guardrail_thresholds</span>
+<span class="kn">from</span> <span class="nn">CPAC.registration.exceptions</span> <span class="kn">import</span> <span class="n">BadRegistrationError</span>
+<span class="kn">from</span> <span class="nn">CPAC.registration.utils</span> <span class="kn">import</span> <span class="n">hardcoded_reg</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.docs</span> <span class="kn">import</span> <span class="n">retry_docstring</span>
+
+<span class="n">_SPEC_KEYS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">FLIRT</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">:</span> <span class="s1">&#39;out_file&#39;</span><span class="p">},</span>
+    <span class="n">Registration</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">:</span> <span class="s1">&#39;out_file&#39;</span><span class="p">}}</span>
+
+
+<div class="viewcode-block" id="guardrail_selection"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.guardrail_selection">[docs]</a><span class="k">def</span> <span class="nf">guardrail_selection</span><span class="p">(</span><span class="n">wf</span><span class="p">:</span> <span class="s1">&#39;Workflow&#39;</span><span class="p">,</span> <span class="n">node1</span><span class="p">:</span> <span class="s1">&#39;Node&#39;</span><span class="p">,</span> <span class="n">node2</span><span class="p">:</span> <span class="s1">&#39;Node&#39;</span><span class="p">,</span>
+                        <span class="n">output_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;registered&#39;</span><span class="p">,</span>
+                        <span class="n">guardrail_node</span><span class="p">:</span> <span class="s1">&#39;Node&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generate requisite Nodes for choosing a path through the graph</span>
+<span class="sd">    with retries</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wf : Workflow</span>
+
+<span class="sd">    node1, node2 : Node</span>
+<span class="sd">        first try, retry</span>
+
+<span class="sd">    output_key : str</span>
+<span class="sd">        field to choose</span>
+
+<span class="sd">    guardrail_node : Node</span>
+<span class="sd">        guardrail to collect &#39;failed_qc&#39; from if not node1</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    select : Node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=redefined-outer-name,reimported,unused-import</span>
+    <span class="c1"># noqa: F401</span>
+    <span class="kn">from</span> <span class="nn">CPAC.pipeline.nipype_pipeline_engine</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Workflow</span>
+    <span class="k">if</span> <span class="n">guardrail_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">guardrail_node</span> <span class="o">=</span> <span class="n">node1</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">node1</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">if</span> <span class="n">output_key</span> <span class="o">!=</span> <span class="s1">&#39;registered&#39;</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">output_key</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">Merge</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">run_without_submitting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                   <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_choices&#39;</span><span class="p">)</span>
+    <span class="n">select</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">Select</span><span class="p">(),</span> <span class="n">run_without_submitting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;choose_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">([(</span><span class="n">node1</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="p">[(</span><span class="n">output_key</span><span class="p">,</span> <span class="s1">&#39;in1&#39;</span><span class="p">)]),</span>
+                <span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="p">[(</span><span class="n">output_key</span><span class="p">,</span> <span class="s1">&#39;in2&#39;</span><span class="p">)]),</span>
+                <span class="p">(</span><span class="n">choices</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="s1">&#39;inlist&#39;</span><span class="p">)]),</span>
+                <span class="p">(</span><span class="n">guardrail_node</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;failed_qc&#39;</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">)])])</span>
+    <span class="k">return</span> <span class="n">select</span></div>
+
+
+<div class="viewcode-block" id="registration_guardrail"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.registration_guardrail">[docs]</a><span class="k">def</span> <span class="nf">registration_guardrail</span><span class="p">(</span><span class="n">registered</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reference</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                           <span class="n">retry</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">retry_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Check QC metrics post-registration and throw an exception if</span>
+<span class="sd">    metrics are below given thresholds.</span>
+
+<span class="sd">    If inputs point to images that are not masks, images will be</span>
+<span class="sd">    binarized before being compared.</span>
+
+<span class="sd">    .. seealso::</span>
+
+<span class="sd">       :py:mod:`CPAC.qc.qcmetrics`</span>
+<span class="sd">          Documentation of the :py:mod:`CPAC.qc.qcmetrics` module.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    registered, reference : str</span>
+<span class="sd">        path to mask</span>
+
+<span class="sd">    retry : bool, optional</span>
+<span class="sd">        can retry?</span>
+
+<span class="sd">    retry_num : int, optional</span>
+<span class="sd">        how many previous tries?</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    registered_mask : str</span>
+<span class="sd">        path to mask</span>
+
+<span class="sd">    failed_qc : int</span>
+<span class="sd">        metrics met specified thresholds?, used as index for selecting</span>
+<span class="sd">        outputs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;nipype.workflow&#39;</span><span class="p">)</span>
+    <span class="n">qc_metrics</span> <span class="o">=</span> <span class="n">qc_masks</span><span class="p">(</span><span class="n">registered</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>
+    <span class="n">failed_qc</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="n">registration_guardrail_thresholds</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">qc_metrics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="n">failed_qc</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">registered</span><span class="si">}</span><span class="s1">.failed_qc&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                          <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
+                    <span class="n">_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1"> &lt; </span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">retry</span><span class="p">:</span>
+                    <span class="n">registered</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">registered</span><span class="si">}</span><span class="s1">-failed&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">bad_registration</span> <span class="o">=</span> <span class="n">BadRegistrationError</span><span class="p">(</span>
+                        <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">bad_registration</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">retry_num</span><span class="p">:</span>
+                        <span class="c1"># if we&#39;ve already retried, raise the error</span>
+                        <span class="k">raise</span> <span class="n">bad_registration</span>
+    <span class="k">return</span> <span class="n">registered</span><span class="p">,</span> <span class="n">failed_qc</span></div>
+
+
+<div class="viewcode-block" id="registration_guardrail_node"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.registration_guardrail_node">[docs]</a><span class="k">def</span> <span class="nf">registration_guardrail_node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_num</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convenience method to get a new registration_guardrail Node</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str, optional</span>
+
+<span class="sd">    retry_num : int, optional</span>
+<span class="sd">        how many previous tries?</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;registration_guardrail&#39;</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;registered&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">,</span> <span class="s1">&#39;retry_num&#39;</span><span class="p">],</span>
+                         <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;registered&#39;</span><span class="p">,</span> <span class="s1">&#39;failed_qc&#39;</span><span class="p">],</span>
+                         <span class="n">imports</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;import logging&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;from typing import Tuple&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;from CPAC.qc import qc_masks, &#39;</span>
+                                  <span class="s1">&#39;registration_guardrail_thresholds&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;from CPAC.registration.guardrails &#39;</span>
+                                  <span class="s1">&#39;import BadRegistrationError&#39;</span><span class="p">],</span>
+                         <span class="n">function</span><span class="o">=</span><span class="n">registration_guardrail</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">retry_num</span><span class="p">:</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">retry_num</span> <span class="o">=</span> <span class="n">retry_num</span>
+    <span class="k">return</span> <span class="n">node</span></div>
+
+
+<div class="viewcode-block" id="registration_guardrail_workflow"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.registration_guardrail_workflow">[docs]</a><span class="k">def</span> <span class="nf">registration_guardrail_workflow</span><span class="p">(</span><span class="n">registration_node</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A workflow to handle hitting a registration guardrail</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+
+<span class="sd">    registration_node : Node</span>
+
+<span class="sd">    retry : bool, optional</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Workflow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">registration_node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">_guardrail&#39;</span>
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_wf&#39;</span><span class="p">)</span>
+    <span class="n">outputspec</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">registration_node</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
+    <span class="n">guardrail</span> <span class="o">=</span> <span class="n">registration_guardrail_node</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">outkey</span> <span class="o">=</span> <span class="n">spec_key</span><span class="p">(</span><span class="n">registration_node</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>
+        <span class="p">(</span><span class="n">registration_node</span><span class="p">,</span> <span class="n">guardrail</span><span class="p">,</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">spec_key</span><span class="p">(</span><span class="n">registration_node</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">),</span> <span class="s1">&#39;reference&#39;</span><span class="p">)]),</span>
+        <span class="p">(</span><span class="n">registration_node</span><span class="p">,</span> <span class="n">guardrail</span><span class="p">,</span> <span class="p">[(</span><span class="n">outkey</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">)])])</span>
+    <span class="k">if</span> <span class="n">retry</span><span class="p">:</span>
+        <span class="n">wf</span> <span class="o">=</span> <span class="n">retry_registration</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">registration_node</span><span class="p">,</span>
+                                <span class="n">guardrail</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">registered</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">guardrail</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">,</span> <span class="n">outputspec</span><span class="p">,</span> <span class="n">outkey</span><span class="p">)</span>
+        <span class="c1"># connect_from_spec(outputspec, registration_node, outkey)</span>
+    <span class="k">return</span> <span class="n">wf</span></div>
+
+
+<div class="viewcode-block" id="retry_clone"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.retry_clone">[docs]</a><span class="k">def</span> <span class="nf">retry_clone</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="s1">&#39;Node&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Node&#39;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function to clone a node, name the clone, and increment its</span>
+<span class="sd">    random seed</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    node : Node</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">increment_seed</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;retry_</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="retry_registration"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.retry_registration">[docs]</a><span class="k">def</span> <span class="nf">retry_registration</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">registration_node</span><span class="p">,</span> <span class="n">registered</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function conditionally retry registration if previous attempt failed</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wf : Workflow</span>
+
+<span class="sd">    registration_node : Node</span>
+
+<span class="sd">    registered : str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Workflow</span>
+
+<span class="sd">    Node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;retry_</span><span class="si">{</span><span class="n">registration_node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">retry_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">retry_registration_node</span><span class="p">,</span>
+                               <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;registered&#39;</span><span class="p">,</span> <span class="s1">&#39;registration_node&#39;</span><span class="p">],</span>
+                               <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;registered&#39;</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">retry_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">registration_node</span> <span class="o">=</span> <span class="n">registration_node</span>
+    <span class="n">inputspec</span> <span class="o">=</span> <span class="n">registration_node</span><span class="o">.</span><span class="n">inputs</span>
+    <span class="n">outputspec</span> <span class="o">=</span> <span class="n">registration_node</span><span class="o">.</span><span class="n">outputs</span>
+    <span class="n">outkey</span> <span class="o">=</span> <span class="n">spec_key</span><span class="p">(</span><span class="n">registration_node</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">)</span>
+    <span class="n">guardrail</span> <span class="o">=</span> <span class="n">registration_guardrail_node</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_guardrail&#39;</span><span class="p">)</span>
+    <span class="c1"># connect_from_spec(inputspec, retry_node)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>
+        <span class="p">(</span><span class="n">inputspec</span><span class="p">,</span> <span class="n">guardrail</span><span class="p">,</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">spec_key</span><span class="p">(</span><span class="n">retry_node</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">),</span> <span class="s1">&#39;reference&#39;</span><span class="p">)]),</span>
+        <span class="p">(</span><span class="n">retry_node</span><span class="p">,</span> <span class="n">guardrail</span><span class="p">,</span> <span class="p">[(</span><span class="n">outkey</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">)]),</span>
+        <span class="p">(</span><span class="n">guardrail</span><span class="p">,</span> <span class="n">outputspec</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;registered&#39;</span><span class="p">,</span> <span class="n">outkey</span><span class="p">)])])</span>
+    <span class="c1"># connect_from_spec(retry_node, outputspec, registered)</span>
+    <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">retry_node</span></div>
+
+
+<div class="viewcode-block" id="retry_hardcoded_reg"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.retry_hardcoded_reg">[docs]</a><span class="nd">@retry_docstring</span><span class="p">(</span><span class="n">hardcoded_reg</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">retry_hardcoded_reg</span><span class="p">(</span><span class="n">moving_brain</span><span class="p">,</span> <span class="n">reference_brain</span><span class="p">,</span> <span class="n">moving_skull</span><span class="p">,</span>
+                        <span class="n">reference_skull</span><span class="p">,</span> <span class="n">ants_para</span><span class="p">,</span> <span class="n">moving_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">reference_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fixed_image_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">interp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reg_with_skull</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">previous_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">previous_failure</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">hardcoded_reg</span><span class="p">(</span><span class="n">moving_brain</span><span class="p">,</span> <span class="n">reference_brain</span><span class="p">,</span> <span class="n">moving_skull</span><span class="p">,</span>
+                         <span class="n">reference_skull</span><span class="p">,</span> <span class="n">ants_para</span><span class="p">,</span> <span class="n">moving_mask</span><span class="p">,</span>
+                         <span class="n">reference_mask</span><span class="p">,</span> <span class="n">fixed_image_mask</span><span class="p">,</span> <span class="n">interp</span><span class="p">,</span>
+                         <span class="n">reg_with_skull</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="retry_registration_node"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.retry_registration_node">[docs]</a><span class="k">def</span> <span class="nf">retry_registration_node</span><span class="p">(</span><span class="n">registered</span><span class="p">,</span> <span class="n">registration_node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retry registration if previous attempt failed</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    registered : str</span>
+
+<span class="sd">    registration_node : Node</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">CPAC.pipeline.random_state.seed</span> <span class="kn">import</span> <span class="n">increment_seed</span>
+    <span class="k">if</span> <span class="n">registered</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;-failed&#39;</span><span class="p">):</span>
+        <span class="n">retry_node</span> <span class="o">=</span> <span class="n">increment_seed</span><span class="p">(</span><span class="n">registration_node</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">registration_node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">-retry&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">retry_node</span>
+    <span class="k">return</span> <span class="n">registration_node</span></div>
+
+
+<div class="viewcode-block" id="spec_key"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.guardrails.spec_key">[docs]</a><span class="k">def</span> <span class="nf">spec_key</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">guardrail_key</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function to get the canonical key to connect to a guardrail</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    interface : Interface or Node</span>
+
+<span class="sd">    guardrail_key : str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
+        <span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">interface</span>
+    <span class="k">return</span> <span class="n">_SPEC_KEYS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">guardrail_key</span><span class="p">,</span> <span class="n">guardrail_key</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index">
+              <img class="logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.registration.guardrails</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>

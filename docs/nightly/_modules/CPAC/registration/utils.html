@@ -1,0 +1,757 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPAC.registration.utils &#8212; C-PAC 1.8.5.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex" />
+    <link rel="search" title="Search" href="../../../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.registration.utils</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for CPAC.registration.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">single_ants_xfm_to_list</span><span class="p">(</span><span class="n">transform</span><span class="p">):</span>
+    <span class="n">transform_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">transform</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">transform_list</span>
+
+
+<span class="k">def</span> <span class="nf">interpolation_string</span><span class="p">(</span><span class="n">interpolation</span><span class="p">,</span> <span class="n">reg_tool</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">reg_tool</span> <span class="o">==</span> <span class="s1">&#39;ants&#39;</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="n">reg_tool</span> <span class="o">==</span> <span class="s1">&#39;fsl&#39;</span><span class="p">:</span>
+        <span class="c1"># translate to FSL</span>
+        <span class="c1"># warning: flirt requires &#39;nearestneighbour&#39;, but FSL applywarp uses</span>
+        <span class="c1">#          &#39;nn&#39;, so this is designed for applywarp, as all FSL xfm&#39;s</span>
+        <span class="c1">#          in C-PAC are now converted to .nii.gz</span>
+        <span class="n">interpolation</span> <span class="o">=</span> <span class="n">interpolation</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;NearestNeighbor&#39;</span><span class="p">,</span> <span class="s1">&#39;nn&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">interpolation</span>
+
+
+<span class="k">def</span> <span class="nf">combine_inputs_into_list</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">,</span> <span class="n">input3</span><span class="p">):</span>
+    <span class="n">outputs_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">,</span> <span class="n">input3</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">outputs_list</span>
+
+
+<span class="k">def</span> <span class="nf">seperate_warps_list</span><span class="p">(</span><span class="n">warp_list</span><span class="p">,</span> <span class="n">selection</span><span class="p">):</span>
+    <span class="n">selected_warp</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">warp</span> <span class="ow">in</span> <span class="n">warp_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">selection</span> <span class="o">==</span> <span class="s1">&#39;Warp&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;3Warp&#39;</span> <span class="ow">in</span> <span class="n">warp</span> <span class="ow">or</span> <span class="s1">&#39;2Warp&#39;</span> <span class="ow">in</span> <span class="n">warp</span> <span class="ow">or</span> <span class="s1">&#39;1Warp&#39;</span> <span class="ow">in</span> <span class="n">warp</span><span class="p">:</span>
+                <span class="n">selected_warp</span> <span class="o">=</span> <span class="n">warp</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">warp</span><span class="p">:</span>
+                <span class="n">selected_warp</span> <span class="o">=</span> <span class="n">warp</span>
+    <span class="k">return</span> <span class="n">selected_warp</span>
+
+
+<span class="k">def</span> <span class="nf">check_transforms</span><span class="p">(</span><span class="n">transform_list</span><span class="p">):</span>
+    <span class="n">transform_number</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">transform_list</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">transform_number</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span>
+            <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">transform_number</span><span class="p">))],</span> <span class="nb">len</span><span class="p">(</span><span class="n">transform_number</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">generate_inverse_transform_flags</span><span class="p">(</span><span class="n">transform_list</span><span class="p">):</span>
+    <span class="n">inverse_transform_flags</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">transform</span> <span class="ow">in</span> <span class="n">transform_list</span><span class="p">:</span>
+        <span class="c1"># check `blip_warp_inverse` file name and rename it</span>
+        <span class="k">if</span> <span class="s1">&#39;WARPINV&#39;</span> <span class="ow">in</span> <span class="n">transform</span><span class="p">:</span>
+            <span class="n">inverse_transform_flags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;updated_affine&#39;</span> <span class="ow">in</span> <span class="n">transform</span><span class="p">:</span>
+            <span class="n">inverse_transform_flags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Initial&#39;</span> <span class="ow">in</span> <span class="n">transform</span><span class="p">:</span>
+            <span class="n">inverse_transform_flags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Rigid&#39;</span> <span class="ow">in</span> <span class="n">transform</span><span class="p">:</span>
+            <span class="n">inverse_transform_flags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Affine&#39;</span> <span class="ow">in</span> <span class="n">transform</span><span class="p">:</span>
+            <span class="n">inverse_transform_flags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;InverseWarp&#39;</span> <span class="ow">in</span> <span class="n">transform</span><span class="p">:</span>
+            <span class="n">inverse_transform_flags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inverse_transform_flags</span>
+
+
+<span class="k">def</span> <span class="nf">hardcoded_reg</span><span class="p">(</span><span class="n">moving_brain</span><span class="p">,</span> <span class="n">reference_brain</span><span class="p">,</span> <span class="n">moving_skull</span><span class="p">,</span>
+                  <span class="n">reference_skull</span><span class="p">,</span> <span class="n">ants_para</span><span class="p">,</span> <span class="n">moving_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">reference_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fixed_image_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">reg_with_skull</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">subprocess</span>
+    <span class="kn">from</span> <span class="nn">CPAC.registration.exceptions</span> <span class="kn">import</span> <span class="n">BadRegistrationError</span>
+    <span class="c1"># TODO: expand transforms to cover all in ANTs para</span>
+
+    <span class="n">regcmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;antsRegistration&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">para_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ants_para</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">para_type</span> <span class="ow">in</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">para_type</span> <span class="o">==</span> <span class="s1">&#39;dimensionality&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+                    <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Dimensionality specified in ANTs parameters: </span><span class="si">%d</span><span class="s1">, is not supported. &#39;</span> \
+                              <span class="s1">&#39;Change to 2, 3, or 4 and try again&#39;</span> <span class="o">%</span> \
+                              <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--dimensionality&quot;</span><span class="p">)</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]))</span>
+
+            <span class="k">elif</span> <span class="n">para_type</span> <span class="o">==</span> <span class="s1">&#39;verbose&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Verbose output option in ANTs parameters: </span><span class="si">%d</span><span class="s1">, is not supported. &#39;</span> \
+                              <span class="s1">&#39;Change to 0 or 1 and try again&#39;</span> <span class="o">%</span> \
+                              <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--verbose&quot;</span><span class="p">)</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]))</span>
+
+            <span class="k">elif</span> <span class="n">para_type</span> <span class="o">==</span> <span class="s1">&#39;float&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Float option in ANTs parameters: </span><span class="si">%d</span><span class="s1">, is not supported. &#39;</span> \
+                              <span class="s1">&#39;Change to 0 or 1 and try again&#39;</span> <span class="o">%</span> \
+                              <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--float&quot;</span><span class="p">)</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]))</span>
+
+            <span class="k">elif</span> <span class="n">para_type</span> <span class="o">==</span> <span class="s1">&#39;collapse-output-transforms&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;collapse-output-transforms specified in ANTs parameters: </span><span class="si">%d</span><span class="s1">, is not supported. &#39;</span> \
+                              <span class="s1">&#39;Change to 0 or 1 and try again&#39;</span> <span class="o">%</span> \
+                              <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--collapse-output-transforms&quot;</span><span class="p">)</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]))</span>
+
+            <span class="k">elif</span> <span class="n">para_type</span> <span class="o">==</span> <span class="s1">&#39;winsorize-image-intensities&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="s1">&#39;lowerQuantile&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="s1">&#39;upperQuantile&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Please specifiy lowerQuantile and upperQuantile of ANTs parameters --winsorize-image-intensities in pipeline config. &#39;</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--winsorize-image-intensities&quot;</span><span class="p">)</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="s1">&#39;lowerQuantile&#39;</span><span class="p">],</span>
+                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="s1">&#39;upperQuantile&#39;</span><span class="p">]))</span>
+
+            <span class="k">elif</span> <span class="n">para_type</span> <span class="o">==</span> <span class="s1">&#39;initial-moving-transform&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                    <span class="s1">&#39;initializationFeature&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Please specifiy initializationFeature of ANTs parameters in pipeline config. &#39;</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--initial-moving-transform&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">reg_with_skull</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">,</span><span class="si">{2}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">reference_skull</span><span class="p">,</span> <span class="n">moving_skull</span><span class="p">,</span>
+                            <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                <span class="s1">&#39;initializationFeature&#39;</span><span class="p">]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">,</span><span class="si">{2}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">reference_brain</span><span class="p">,</span> <span class="n">moving_brain</span><span class="p">,</span>
+                            <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                <span class="s1">&#39;initializationFeature&#39;</span><span class="p">]))</span>
+
+            <span class="k">elif</span> <span class="n">para_type</span> <span class="o">==</span> <span class="s1">&#39;transforms&#39;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">trans_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                        <span class="nb">len</span><span class="p">(</span><span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">])):</span>
+                    <span class="k">for</span> <span class="n">trans_type</span> <span class="ow">in</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                        <span class="n">trans_index</span><span class="p">]:</span>
+                        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--transform&quot;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">trans_type</span> <span class="o">==</span> <span class="s1">&#39;Rigid&#39;</span> <span class="ow">or</span> <span class="n">trans_type</span> <span class="o">==</span> <span class="s1">&#39;Affine&#39;</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;gradientStep&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Please specifiy </span><span class="si">% s</span><span class="s1"> Gradient Step of ANTs parameters in pipeline config. &#39;</span> <span class="o">%</span> <span class="n">trans_type</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">[</span><span class="si">{1}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">trans_type</span><span class="p">,</span>
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                        <span class="s1">&#39;gradientStep&#39;</span><span class="p">]))</span>
+
+                        <span class="k">if</span> <span class="n">trans_type</span> <span class="o">==</span> <span class="s1">&#39;SyN&#39;</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;gradientStep&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Please specifiy </span><span class="si">% s</span><span class="s1"> Gradient Step of ANTs parameters in pipeline config. &#39;</span> <span class="o">%</span> <span class="n">trans_type</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">SyN_para</span> <span class="o">=</span> <span class="p">[]</span>
+                                <span class="n">SyN_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                        <span class="s1">&#39;gradientStep&#39;</span><span class="p">]))</span>
+                                <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                    <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                    <span class="s1">&#39;updateFieldVarianceInVoxelSpace&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                    <span class="n">SyN_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;updateFieldVarianceInVoxelSpace&#39;</span><span class="p">]))</span>
+                                <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                    <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                    <span class="s1">&#39;totalFieldVarianceInVoxelSpace&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                    <span class="n">SyN_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;totalFieldVarianceInVoxelSpace&#39;</span><span class="p">]))</span>
+                                <span class="n">SyN_para</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+                                                     <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">SyN_para</span><span class="p">])</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">[</span><span class="si">{1}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">trans_type</span><span class="p">,</span> <span class="n">SyN_para</span><span class="p">))</span>
+
+                        <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                            <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;MI&#39;</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                <span class="s1">&#39;metricWeight&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> \
+                                            <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                                <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                                <span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                                <span class="s1">&#39;numberOfBins&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Please specifiy metricWeight and numberOfBins for metric MI of ANTs parameters in pipeline config.&#39;</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">MI_para</span> <span class="o">=</span> <span class="p">[]</span>
+                                <span class="n">MI_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span>
+                                    <span class="p">[</span><span class="s1">&#39;metricWeight&#39;</span><span class="p">],</span>
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                        <span class="s1">&#39;numberOfBins&#39;</span><span class="p">]))</span>
+                                <span class="k">if</span> <span class="s1">&#39;samplingStrategy&#39;</span> <span class="ow">in</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;metric&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span>
+                                                    <span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                                    <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                                    <span class="s1">&#39;samplingStrategy&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span>
+                                            <span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="s1">&#39;Regular&#39;</span><span class="p">,</span> <span class="s1">&#39;Random&#39;</span><span class="p">]:</span>
+                                    <span class="n">MI_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;metric&#39;</span><span class="p">][</span><span class="s1">&#39;samplingStrategy&#39;</span><span class="p">]))</span>
+                                <span class="k">if</span> <span class="s1">&#39;samplingPercentage&#39;</span> <span class="ow">in</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;metric&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span>
+                                                    <span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                                    <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                                    <span class="s1">&#39;samplingPercentage&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                    <span class="n">MI_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;metric&#39;</span><span class="p">][</span><span class="s1">&#39;samplingPercentage&#39;</span><span class="p">]))</span>
+                                <span class="n">MI_para</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                                    <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">MI_para</span><span class="p">])</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--metric&quot;</span><span class="p">)</span>
+                                <span class="k">if</span> <span class="n">reg_with_skull</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;MI[</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">,</span><span class="si">{2}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">reference_skull</span><span class="p">,</span> <span class="n">moving_skull</span><span class="p">,</span> <span class="n">MI_para</span><span class="p">))</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;MI[</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">,</span><span class="si">{2}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">reference_brain</span><span class="p">,</span> <span class="n">moving_brain</span><span class="p">,</span> <span class="n">MI_para</span><span class="p">))</span>
+
+                        <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                            <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;CC&#39;</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                <span class="s1">&#39;metricWeight&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> \
+                                            <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                                <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                                <span class="s1">&#39;metric&#39;</span><span class="p">][</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Please specifiy metricWeight and radius for metric CC of ANTs parameters in pipeline config.&#39;</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">CC_para</span> <span class="o">=</span> <span class="p">[]</span>
+                                <span class="n">CC_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span>
+                                    <span class="p">[</span><span class="s1">&#39;metricWeight&#39;</span><span class="p">],</span>
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                        <span class="s1">&#39;radius&#39;</span><span class="p">]))</span>
+                                <span class="k">if</span> <span class="s1">&#39;samplingStrategy&#39;</span> <span class="ow">in</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;metric&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span>
+                                                    <span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                                    <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                                    <span class="s1">&#39;samplingStrategy&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span>
+                                            <span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="s1">&#39;Regular&#39;</span><span class="p">,</span> <span class="s1">&#39;Random&#39;</span><span class="p">]:</span>
+                                    <span class="n">CC_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;metric&#39;</span><span class="p">][</span><span class="s1">&#39;samplingStrategy&#39;</span><span class="p">]))</span>
+                                <span class="k">if</span> <span class="s1">&#39;samplingPercentage&#39;</span> <span class="ow">in</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;metric&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span>
+                                                    <span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                                    <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;metric&#39;</span><span class="p">][</span>
+                                                    <span class="s1">&#39;samplingPercentage&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                    <span class="n">CC_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;metric&#39;</span><span class="p">][</span><span class="s1">&#39;samplingPercentage&#39;</span><span class="p">]))</span>
+                                <span class="n">CC_para</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                                    <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">CC_para</span><span class="p">])</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--metric&quot;</span><span class="p">)</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;CC[</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">,</span><span class="si">{2}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">reference_skull</span><span class="p">,</span> <span class="n">moving_skull</span><span class="p">,</span> <span class="n">CC_para</span><span class="p">))</span>
+
+                        <span class="k">if</span> <span class="s1">&#39;convergence&#39;</span> <span class="ow">in</span> \
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">]:</span>
+                            <span class="n">convergence_para</span> <span class="o">=</span> <span class="p">[]</span>
+                            <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;convergence&#39;</span><span class="p">][</span>
+                                <span class="s1">&#39;iteration&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Please specifiy convergence iteration of ANTs parameters in pipeline config.&#39;</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">convergence_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                        <span class="s1">&#39;convergence&#39;</span><span class="p">][</span><span class="s1">&#39;iteration&#39;</span><span class="p">]))</span>
+                                <span class="k">if</span> <span class="s1">&#39;convergenceThreshold&#39;</span> <span class="ow">in</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;convergence&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span>
+                                                    <span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                                    <span class="n">trans_type</span><span class="p">][</span>
+                                                    <span class="s1">&#39;convergence&#39;</span><span class="p">][</span>
+                                                    <span class="s1">&#39;convergenceThreshold&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                    <span class="n">convergence_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;convergence&#39;</span><span class="p">][</span>
+                                            <span class="s1">&#39;convergenceThreshold&#39;</span><span class="p">]))</span>
+                                <span class="k">if</span> <span class="s1">&#39;convergenceWindowSize&#39;</span> <span class="ow">in</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;convergence&#39;</span><span class="p">]</span> <span class="ow">and</span> \
+                                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span>
+                                                    <span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                                    <span class="n">trans_type</span><span class="p">][</span>
+                                                    <span class="s1">&#39;convergence&#39;</span><span class="p">][</span>
+                                                    <span class="s1">&#39;convergenceWindowSize&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                    <span class="n">convergence_para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;convergence&#39;</span><span class="p">][</span>
+                                            <span class="s1">&#39;convergenceWindowSize&#39;</span><span class="p">]))</span>
+                                <span class="n">convergence_para</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                                    <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">convergence_para</span><span class="p">])</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--convergence&quot;</span><span class="p">)</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                                    <span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">convergence_para</span><span class="p">))</span>
+
+                        <span class="k">if</span> <span class="s1">&#39;smoothing-sigmas&#39;</span> <span class="ow">in</span> \
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">]</span> <span class="ow">and</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;smoothing-sigmas&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--smoothing-sigmas&quot;</span><span class="p">)</span>
+                            <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;smoothing-sigmas&#39;</span><span class="p">]))</span>
+
+                        <span class="k">if</span> <span class="s1">&#39;shrink-factors&#39;</span> <span class="ow">in</span> \
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">]</span> <span class="ow">and</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;shrink-factors&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--shrink-factors&quot;</span><span class="p">)</span>
+                            <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;shrink-factors&#39;</span><span class="p">]))</span>
+
+                        <span class="k">if</span> <span class="s1">&#39;use-histogram-matching&#39;</span> <span class="ow">in</span> \
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;use-histogram-matching&#39;</span><span class="p">]:</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--use-histogram-matching&quot;</span><span class="p">)</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+                        <span class="k">if</span> <span class="s1">&#39;winsorize-image-intensities&#39;</span> <span class="ow">in</span> \
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">]</span> <span class="ow">and</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;winsorize-image-intensities&#39;</span><span class="p">][</span>
+                                            <span class="s1">&#39;lowerQuantile&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+                                        <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                            <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span>
+                                            <span class="s1">&#39;winsorize-image-intensities&#39;</span><span class="p">][</span>
+                                            <span class="s1">&#39;upperQuantile&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--winsorize-image-intensities&quot;</span><span class="p">)</span>
+                            <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;winsorize-image-intensities&#39;</span><span class="p">]</span>
+                                <span class="p">[</span><span class="s1">&#39;lowerQuantile&#39;</span><span class="p">],</span>
+                                <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                                    <span class="n">trans_type</span><span class="p">][</span>
+                                    <span class="s1">&#39;winsorize-image-intensities&#39;</span><span class="p">][</span>
+                                    <span class="s1">&#39;upperQuantile&#39;</span><span class="p">]))</span>
+
+                        <span class="k">if</span> <span class="s1">&#39;masks&#39;</span> <span class="ow">in</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span>
+                            <span class="n">trans_type</span><span class="p">]</span> <span class="ow">and</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                <span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;masks&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span><span class="n">trans_index</span><span class="p">][</span><span class="n">trans_type</span><span class="p">][</span><span class="s1">&#39;masks&#39;</span><span class="p">]:</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--masks&quot;</span><span class="p">)</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">,</span><span class="si">{1}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reference_mask</span><span class="p">,</span> <span class="n">moving_mask</span><span class="p">))</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--masks&quot;</span><span class="p">)</span>
+                                <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[NULL,NULL]&quot;</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">para_type</span> <span class="o">==</span> <span class="s1">&#39;masks&#39;</span><span class="p">:</span>
+                <span class="c1"># lesion preproc has</span>
+                <span class="k">if</span> <span class="n">fixed_image_mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--masks&quot;</span><span class="p">)</span>
+                    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fixed_image_mask</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                        <span class="s1">&#39;fixed_image_mask&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> \
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="s1">&#39;moving_image_mask&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Masks option in ANTs parameters: </span><span class="si">%d</span><span class="s1"> is not supported. &#39;</span> \
+                                  <span class="s1">&#39;Please set `fixed_image_mask` as True. &#39;</span> \
+                                  <span class="s1">&#39;Or set both `fixed_image_mask` and `moving_image_mask` as False&#39;</span> <span class="o">%</span> \
+                                  <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">]</span>
+                        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                        <span class="s1">&#39;fixed_image_mask&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span> <span class="ow">and</span> \
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="s1">&#39;moving_image_mask&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--masks&quot;</span><span class="p">)</span>
+                        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">reference_mask</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+                            <span class="n">moving_mask</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                        <span class="s1">&#39;fixed_image_mask&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span> <span class="ow">and</span> \
+                                    <span class="n">ants_para</span><span class="p">[</span><span class="n">para_index</span><span class="p">][</span><span class="n">para_type</span><span class="p">][</span>
+                                        <span class="s1">&#39;moving_image_mask&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--masks&quot;</span><span class="p">)</span>
+                        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">reference_mask</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">continue</span>
+
+    <span class="k">if</span> <span class="n">interp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--interpolation&quot;</span><span class="p">)</span>
+        <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interp</span><span class="p">))</span>
+
+    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--output&quot;</span><span class="p">)</span>
+    <span class="n">regcmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[transform,transform_Warped.nii.gz]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># write out the actual command-line entry for testing/validation later</span>
+    <span class="n">command_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;command.txt&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">command_file</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">regcmd</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># pylint: disable=unused-variable</span>
+        <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">regcmd</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
+    <span class="k">except</span> <span class="n">BadRegistrationError</span> <span class="k">as</span> <span class="n">bad_registration</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">bad_registration</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;[!] ANTS registration did not complete successfully.&#39;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Error details:</span><span class="se">\n</span><span class="si">{e}</span><span class="se">\n</span><span class="si">{e.output}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>  <span class="c1"># pylint: disable=raise-missing-from</span>
+
+    <span class="n">warp_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">warped_image</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;transform&quot;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;Warped&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">):</span>
+            <span class="n">warp_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">f</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;Warped&quot;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">warped_image</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">f</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">warped_image</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">[!] No registration output file found. ANTS &quot;</span>
+                        <span class="s2">&quot;registration may not have completed &quot;</span>
+                        <span class="s2">&quot;successfully.</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">warp_list</span><span class="p">,</span> <span class="n">warped_image</span>
+
+
+<div class="viewcode-block" id="change_itk_transform_type"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.utils.change_itk_transform_type">[docs]</a><span class="k">def</span> <span class="nf">change_itk_transform_type</span><span class="p">(</span><span class="n">input_affine_file</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    this function takes in the affine.txt produced by the c3d_affine_tool</span>
+<span class="sd">    (which converted an FSL FLIRT affine.mat into the affine.txt)</span>
+
+<span class="sd">    it then modifies the &#39;Transform Type&#39; of this affine.txt so that it is</span>
+<span class="sd">    compatible with the antsApplyTransforms tool and produces a new affine</span>
+<span class="sd">    file titled &#39;updated_affine.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">new_file_lines</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_affine_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;Transform:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;MatrixOffsetTransformBase_double_3_3&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="n">transform_line</span> <span class="o">=</span> <span class="s1">&#39;Transform: AffineTransform_double_3_3</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="n">new_file_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform_line</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_file_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+    <span class="n">updated_affine_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;updated_affine.txt&#39;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">updated_affine_file</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">new_file_lines</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">updated_affine_file</span></div>
+
+
+<div class="viewcode-block" id="one_d_to_mat"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.utils.one_d_to_mat">[docs]</a><span class="k">def</span> <span class="nf">one_d_to_mat</span><span class="p">(</span><span class="n">one_d_filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a .1D file to a .mat directory</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    one_d_filename : str</span>
+<span class="sd">        The filename of the .1D file to convert</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mat_filenames : list of str</span>
+<span class="sd">        The of paths in the .mat directory created</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mat_dirname</span> <span class="o">=</span> <span class="n">one_d_filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.1D&#39;</span><span class="p">,</span> <span class="s1">&#39;.mat&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">one_d_filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">one_d_file</span><span class="p">:</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">[[</span>
+            <span class="n">term</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">term</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">one_d_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="k">if</span>
+            <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)]]]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">mat_dirname</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mat_dirname</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;MAT_</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">04</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span>
+                   <span class="n">row</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.5f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">mat_filenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mat_dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span> <span class="k">for</span>
+            <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">mat_dirname</span><span class="p">)]</span>
+        <span class="n">mat_filenames</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">mat_filenames</span></div>
+
+
+<div class="viewcode-block" id="run_ants_apply_warp"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.utils.run_ants_apply_warp">[docs]</a><span class="k">def</span> <span class="nf">run_ants_apply_warp</span><span class="p">(</span><span class="n">moving_image</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rigid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">affine</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nonlinear</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func_to_anat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">anatomical_brain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s1">&#39;Linear&#39;</span><span class="p">,</span>
+                        <span class="n">inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply a transform using ANTs transforms.&quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">subprocess</span>
+
+    <span class="k">if</span> <span class="n">func_to_anat</span><span class="p">:</span>
+        <span class="c1"># this assumes the func-&gt;anat affine transform is FSL-based and needs</span>
+        <span class="c1"># to be converted to ITK format via c3d_affine_tool</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c3d_affine_tool&#39;</span><span class="p">,</span> <span class="s1">&#39;-ref&#39;</span><span class="p">,</span> <span class="n">anatomical_brain</span><span class="p">,</span> <span class="s1">&#39;-src&#39;</span><span class="p">,</span>
+               <span class="n">moving_image</span><span class="p">,</span> <span class="n">func_to_anat</span><span class="p">,</span> <span class="s1">&#39;-fsl2ras&#39;</span><span class="p">,</span> <span class="s1">&#39;-oitk&#39;</span><span class="p">,</span> <span class="s1">&#39;affine.txt&#39;</span><span class="p">]</span>
+        <span class="c1"># pylint: disable=unused-variable</span>
+        <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
+        <span class="n">func_to_anat</span> <span class="o">=</span> <span class="n">change_itk_transform_type</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
+                                                              <span class="s1">&#39;affine.txt&#39;</span><span class="p">))</span>
+
+    <span class="n">out_image</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">moving_image</span><span class="p">[</span><span class="n">moving_image</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span>
+        <span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">moving_image</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s1">&#39;.nii.gz&#39;</span><span class="p">)]</span> <span class="o">+</span> <span class="s1">&#39;_warp.nii.gz&#39;</span><span class="p">)</span>
+
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antsApplyTransforms&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span> <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="n">moving_image</span><span class="p">,</span> <span class="s1">&#39;-r&#39;</span><span class="p">,</span>
+           <span class="n">reference</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">out_image</span><span class="p">,</span> <span class="s1">&#39;-n&#39;</span><span class="p">,</span> <span class="n">interp</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">nonlinear</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">nonlinear</span><span class="p">),</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">nonlinear</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">affine</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">affine</span><span class="p">),</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">affine</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">rigid</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">rigid</span><span class="p">),</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">rigid</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">initial</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">initial</span><span class="p">),</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">initial</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">func_to_anat</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s1">&#39;[</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">func_to_anat</span><span class="p">),</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">func_to_anat</span><span class="p">))</span>
+
+    <span class="c1"># pylint: disable=unused-variable</span>
+    <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
+
+    <span class="k">return</span> <span class="n">out_image</span></div>
+
+
+<div class="viewcode-block" id="cpac_ants_apply_nonlinear_inverse_warp"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.utils.cpac_ants_apply_nonlinear_inverse_warp">[docs]</a><span class="k">def</span> <span class="nf">cpac_ants_apply_nonlinear_inverse_warp</span><span class="p">(</span><span class="n">cpac_dir</span><span class="p">,</span> <span class="n">moving_image</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span>
+                                           <span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s1">&#39;Linear&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run antsApplyTransforms for inverse warping when given a C-PAC output</span>
+<span class="sd">    directory.&quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="n">cpac_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">cpac_dir</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">cpac_dir</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;ants_initial_xfm&#39;</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+            <span class="c1"># run_ants_apply_warp()</span>
+
+
+<span class="k">def</span> <span class="nf">run_c3d</span><span class="p">(</span><span class="n">reference_file</span><span class="p">,</span> <span class="n">source_file</span><span class="p">,</span> <span class="n">transform_file</span><span class="p">,</span>
+            <span class="n">retry</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">previous_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="c1"># pylint: disable=redefined-outer-name,reimported</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">subprocess</span>
+
+    <span class="n">itk_transform</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;affine.txt&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">retry</span><span class="p">)</span> <span class="ow">or</span> <span class="n">previous_failure</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c3d_affine_tool&#39;</span><span class="p">,</span> <span class="s1">&#39;-ref&#39;</span><span class="p">,</span> <span class="n">reference_file</span><span class="p">,</span> <span class="s1">&#39;-src&#39;</span><span class="p">,</span>
+               <span class="n">source_file</span><span class="p">,</span> <span class="n">transform_file</span><span class="p">,</span> <span class="s1">&#39;-fsl2ras&#39;</span><span class="p">,</span> <span class="s1">&#39;-oitk&#39;</span><span class="p">,</span> <span class="n">itk_transform</span><span class="p">]</span>
+        <span class="c1"># pylint: disable=unused-variable</span>
+        <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
+
+    <span class="k">return</span> <span class="n">itk_transform</span>
+
+
+<span class="k">def</span> <span class="nf">run_c4d</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output_name</span><span class="p">):</span>
+
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="n">output1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">output_name</span><span class="o">+</span><span class="s1">&#39;1.nii.gz&#39;</span><span class="p">)</span>
+    <span class="n">output2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">output_name</span><span class="o">+</span><span class="s1">&#39;2.nii.gz&#39;</span><span class="p">)</span>
+    <span class="n">output3</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">output_name</span><span class="o">+</span><span class="s1">&#39;3.nii.gz&#39;</span><span class="p">)</span>
+
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;c4d -mcs </span><span class="si">%s</span><span class="s1"> -oo </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output1</span><span class="p">,</span> <span class="n">output2</span><span class="p">,</span> <span class="n">output3</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output1</span><span class="p">,</span> <span class="n">output2</span><span class="p">,</span> <span class="n">output3</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index">
+              <img class="logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.registration.utils</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>

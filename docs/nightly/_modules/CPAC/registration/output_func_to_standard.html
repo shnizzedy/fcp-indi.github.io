@@ -1,0 +1,880 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPAC.registration.output_func_to_standard &#8212; C-PAC 1.8.5.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex" />
+    <link rel="search" title="Search" href="../../../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.registration.output_func_to_standard</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for CPAC.registration.output_func_to_standard</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">nipype.interfaces.fsl</span> <span class="k">as</span> <span class="nn">fsl</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">import</span> <span class="nn">nipype.interfaces.ants</span> <span class="k">as</span> <span class="nn">ants</span>
+<span class="kn">import</span> <span class="nn">nipype.interfaces.c3</span> <span class="k">as</span> <span class="nn">c3</span>
+<span class="kn">from</span> <span class="nn">CPAC.registration.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">change_itk_transform_type</span><span class="p">,</span>
+    <span class="n">check_transforms</span><span class="p">,</span>
+    <span class="n">generate_inverse_transform_flags</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">nipype.interfaces.afni</span> <span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
+<span class="kn">from</span> <span class="nn">CPAC.func_preproc.utils</span> <span class="kn">import</span> <span class="n">chunk_ts</span><span class="p">,</span> <span class="n">split_ts_chunks</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span> <span class="nn">CPAC.vmhc.utils</span> <span class="kn">import</span> <span class="n">get_img_nvols</span>
+
+<span class="c1"># Todo: CC distcor is not implement for fsl apply xform func to mni, why ??</span>
+
+
+<div class="viewcode-block" id="fsl_apply_transform_func_to_mni"><a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.output_func_to_standard.fsl_apply_transform_func_to_mni">[docs]</a><span class="k">def</span> <span class="nf">fsl_apply_transform_func_to_mni</span><span class="p">(</span>
+        <span class="n">workflow</span><span class="p">,</span>
+        <span class="n">output_name</span><span class="p">,</span> 
+        <span class="n">func_key</span><span class="p">,</span> 
+        <span class="n">ref_key</span><span class="p">,</span>
+        <span class="n">num_strat</span><span class="p">,</span> 
+        <span class="n">strat</span><span class="p">,</span> 
+        <span class="n">interpolation_method</span><span class="p">,</span> 
+        <span class="n">distcor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+        <span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">func_ts</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">num_cpus</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Applies previously calculated FSL registration transforms to input</span>
+<span class="sd">    images. This workflow employs the FSL applywarp tool:</span>
+
+<span class="sd">    https://fsl.fmrib.ox.ac.uk/fslcourse/lectures/practicals/registration/index.html</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    workflow : Nipype workflow object</span>
+<span class="sd">        the workflow containing the resources involved</span>
+<span class="sd">    output_name : str</span>
+<span class="sd">        what the name of the warped functional should be when written to the</span>
+<span class="sd">        resource pool</span>
+<span class="sd">    func_key : string</span>
+<span class="sd">        resource pool key correspoding to the node containing the 3D or 4D</span>
+<span class="sd">        functional file to be written into MNI space, use &#39;leaf&#39; for a</span>
+<span class="sd">        leaf node</span>
+<span class="sd">    ref_key : string</span>
+<span class="sd">        resource pool key correspoding to the file path to the template brain</span>
+<span class="sd">        used for functional-to-template registration</span>
+<span class="sd">    num_strat : int</span>
+<span class="sd">        the number of strategy objects</span>
+<span class="sd">    strat : C-PAC Strategy object</span>
+<span class="sd">        a strategy with one or more resource pools</span>
+<span class="sd">    interpolation_method : str</span>
+<span class="sd">        which interpolation to use when applying the warps</span>
+<span class="sd">    distcor : boolean</span>
+<span class="sd">        indicates whether a distortion correction transformation should be</span>
+<span class="sd">        added to the transforms, this of course requires that a distortion</span>
+<span class="sd">        correction map exist in the resource pool</span>
+<span class="sd">    map_node : boolean</span>
+<span class="sd">        indicates whether a mapnode should be used, if TRUE func_key is</span>
+<span class="sd">        expected to correspond to a list of resources that should each</span>
+<span class="sd">        be written into standard space with the other parameters</span>
+<span class="sd">    func_ts : boolean</span>
+<span class="sd">        indicates whether the input image is a 4D time series</span>
+<span class="sd">    num_cpus : int</span>
+<span class="sd">        the number of CPUs dedicated to each participant workflow - this</span>
+<span class="sd">        is used to determine how to parallelize the warp application step</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    workflow : nipype.pipeline.engine.Workflow</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">strat_nodes</span> <span class="o">=</span> <span class="n">strat</span><span class="o">.</span><span class="n">get_nodes_names</span><span class="p">()</span>
+
+    <span class="c1"># if the input is a string, assume that it is resource pool key, </span>
+    <span class="c1"># if it is a tuple, assume that it is a node, outfile pair,</span>
+    <span class="c1"># otherwise, something funky is going on</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">func_key</span> <span class="o">==</span> <span class="s2">&quot;leaf&quot;</span><span class="p">:</span>
+            <span class="n">func_node</span><span class="p">,</span> <span class="n">func_file</span> <span class="o">=</span> <span class="n">strat</span><span class="o">.</span><span class="n">get_leaf_properties</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func_node</span><span class="p">,</span> <span class="n">func_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">func_key</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func_key</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">func_node</span><span class="p">,</span> <span class="n">func_file</span> <span class="o">=</span> <span class="n">func_key</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ref_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">ref_node</span><span class="p">,</span> <span class="n">ref_out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">ref_key</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ref_key</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">ref_node</span><span class="p">,</span> <span class="n">ref_out_file</span> <span class="o">=</span> <span class="n">ref_key</span>
+
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_cpus</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">func_ts</span><span class="p">:</span>
+        <span class="c1"># parallelize time series warp application</span>
+        <span class="n">map_node</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">map_node</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># func_mni_warp</span>
+        <span class="n">func_mni_warp</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">MapNode</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ApplyWarp</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_mni_fsl_warp_</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="n">num_strat</span><span class="p">),</span>
+                <span class="n">iterfield</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">],</span>
+                <span class="n">mem_gb</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># func_mni_warp</span>
+        <span class="n">func_mni_warp</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ApplyWarp</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_mni_fsl_warp_</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="n">num_strat</span><span class="p">))</span>
+
+    <span class="n">func_mni_warp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">interp</span> <span class="o">=</span> <span class="n">interpolation_method</span>
+
+    <span class="c1"># parallelize the apply warp, if multiple CPUs, and it&#39;s a time series!</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_cpus</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">func_ts</span><span class="p">:</span>
+
+        <span class="n">node_id</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="n">num_strat</span><span class="p">)</span>
+
+        <span class="n">chunk_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import nibabel as nb&#39;</span><span class="p">]</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;func_file&#39;</span><span class="p">,</span>
+                                              <span class="s1">&#39;n_cpus&#39;</span><span class="p">],</span>
+                                 <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;TR_ranges&#39;</span><span class="p">],</span>
+                                 <span class="n">function</span><span class="o">=</span><span class="n">chunk_ts</span><span class="p">,</span>
+                                 <span class="n">imports</span><span class="o">=</span><span class="n">chunk_imports</span><span class="p">),</span>
+                        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;chunk_</span><span class="si">{</span><span class="n">node_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">chunk</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_cpus</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_cpus</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_node</span><span class="p">,</span> <span class="n">func_file</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="s1">&#39;func_file&#39;</span><span class="p">)</span>
+
+        <span class="n">split_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import os&#39;</span><span class="p">,</span> <span class="s1">&#39;import subprocess&#39;</span><span class="p">]</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;func_file&#39;</span><span class="p">,</span>
+                                              <span class="s1">&#39;tr_ranges&#39;</span><span class="p">],</span>
+                                 <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;split_funcs&#39;</span><span class="p">],</span>
+                                 <span class="n">function</span><span class="o">=</span><span class="n">split_ts_chunks</span><span class="p">,</span>
+                                 <span class="n">imports</span><span class="o">=</span><span class="n">split_imports</span><span class="p">),</span>
+                        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;split_</span><span class="si">{</span><span class="n">node_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_node</span><span class="p">,</span> <span class="n">func_file</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="s1">&#39;func_file&#39;</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="s1">&#39;TR_ranges&#39;</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="s1">&#39;tr_ranges&#39;</span><span class="p">)</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">split</span><span class="p">,</span> <span class="s1">&#39;split_funcs&#39;</span><span class="p">,</span> <span class="n">func_mni_warp</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+        <span class="n">func_concat</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TCat</span><span class="p">(),</span>
+                              <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;func_concat</span><span class="si">{</span><span class="n">node_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">func_concat</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_mni_warp</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+                         <span class="n">func_concat</span><span class="p">,</span> <span class="s1">&#39;in_files&#39;</span><span class="p">)</span>
+
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span>
+            <span class="n">output_name</span><span class="p">:</span> <span class="p">(</span><span class="n">func_concat</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_node</span><span class="p">,</span> <span class="n">func_file</span><span class="p">,</span>
+                         <span class="n">func_mni_warp</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span><span class="n">output_name</span><span class="p">:</span> <span class="p">(</span><span class="n">func_mni_warp</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)})</span>
+
+    <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ref_node</span><span class="p">,</span> <span class="n">ref_out_file</span><span class="p">,</span>
+                     <span class="n">func_mni_warp</span><span class="p">,</span> <span class="s1">&#39;ref_file&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;anat_mni_fnirt_register&#39;</span> <span class="ow">in</span> <span class="n">strat_nodes</span><span class="p">:</span>
+
+        <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;functional_to_anat_linear_xfm&#39;</span><span class="p">]</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+                         <span class="n">func_mni_warp</span><span class="p">,</span> <span class="s1">&#39;premat&#39;</span><span class="p">)</span>
+
+        <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;anatomical_to_mni_nonlinear_xfm&#39;</span><span class="p">]</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+                         <span class="n">func_mni_warp</span><span class="p">,</span> <span class="s1">&#39;field_file&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">output_name</span> <span class="o">==</span> <span class="s2">&quot;functional_to_standard&quot;</span><span class="p">:</span>
+            <span class="n">write_composite_xfm</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ConvertWarp</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;combine_fsl_warps_</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span>\
+                        <span class="n">num_strat</span><span class="p">))</span>
+
+            <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ref_node</span><span class="p">,</span> <span class="n">ref_out_file</span><span class="p">,</span>
+                             <span class="n">write_composite_xfm</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">)</span>
+
+            <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;functional_to_anat_linear_xfm&#39;</span><span class="p">]</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+                             <span class="n">write_composite_xfm</span><span class="p">,</span> <span class="s1">&#39;premat&#39;</span><span class="p">)</span>
+
+            <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;anatomical_to_mni_nonlinear_xfm&#39;</span><span class="p">]</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+                             <span class="n">write_composite_xfm</span><span class="p">,</span> <span class="s1">&#39;warp1&#39;</span><span class="p">)</span>
+
+            <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">&quot;functional_to_standard_xfm&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">write_composite_xfm</span><span class="p">,</span>
+                                                <span class="s1">&#39;out_file&#39;</span><span class="p">)})</span>
+
+    <span class="k">elif</span> <span class="s1">&#39;anat_mni_flirt_register&#39;</span> <span class="ow">in</span> <span class="n">strat_nodes</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="s1">&#39;functional_to_mni_linear_xfm&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">strat</span><span class="p">:</span>
+
+            <span class="n">combine_transforms</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ConvertXFM</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;combine_fsl_xforms_</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span>\
+                        <span class="n">num_strat</span><span class="p">))</span>
+
+            <span class="n">combine_transforms</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">concat_xfm</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;anatomical_to_mni_linear_xfm&#39;</span><span class="p">]</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+                             <span class="n">combine_transforms</span><span class="p">,</span> <span class="s1">&#39;in_file2&#39;</span><span class="p">)</span>
+
+            <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;functional_to_anat_linear_xfm&#39;</span><span class="p">]</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+                             <span class="n">combine_transforms</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+            <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span><span class="s1">&#39;functional_to_mni_linear_xfm&#39;</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">combine_transforms</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)})</span> 
+            <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="n">combine_transforms</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">combine_transforms</span><span class="p">,</span> <span class="n">outfile</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;functional_to_mni_linear_xfm&#39;</span><span class="p">]</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">combine_transforms</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span>
+                         <span class="n">func_mni_warp</span><span class="p">,</span> <span class="s1">&#39;premat&#39;</span><span class="p">)</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Could not find flirt or fnirt registration in nodes&#39;</span><span class="p">)</span>
+        
+    <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="n">func_mni_warp</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">workflow</span></div>
+
+
+<span class="k">def</span> <span class="nf">ants_apply_warps_func_mni</span><span class="p">(</span>
+        <span class="n">workflow</span><span class="p">,</span>
+        <span class="n">output_name</span><span class="p">,</span>
+        <span class="n">func_key</span><span class="p">,</span>
+        <span class="n">ref_key</span><span class="p">,</span>
+        <span class="n">num_strat</span><span class="p">,</span>
+        <span class="n">strat</span><span class="p">,</span>
+        <span class="n">interpolation_method</span><span class="o">=</span><span class="s1">&#39;LanczosWindowedSinc&#39;</span><span class="p">,</span>
+        <span class="n">distcor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">symmetry</span><span class="o">=</span><span class="s1">&#39;asymmetric&#39;</span><span class="p">,</span>
+        <span class="n">input_image_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">num_ants_cores</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">registration_template</span><span class="o">=</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span>
+        <span class="n">func_type</span><span class="o">=</span><span class="s1">&#39;non-ica-aroma&#39;</span><span class="p">,</span>
+        <span class="n">num_cpus</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Applies previously calculated ANTS registration transforms to input</span>
+<span class="sd">    images. This workflow employs the antsApplyTransforms tool:</span>
+
+<span class="sd">    http://stnava.github.io/ANTs/</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : string, optional</span>
+<span class="sd">        Name of the workflow.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    apply_ants_warp_wf : nipype.pipeline.engine.Workflow</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    Workflow Inputs::</span>
+
+<span class="sd">        workflow : Nipype workflow object</span>
+<span class="sd">            the workflow containing the resources involved</span>
+<span class="sd">        output_name : str</span>
+<span class="sd">            what the name of the warped functional should be when written to the</span>
+<span class="sd">            resource pool</span>
+<span class="sd">        func_key : string</span>
+<span class="sd">            resource pool key correspoding to the node containing the 3D or 4D</span>
+<span class="sd">            functional file to be written into MNI space, use &#39;leaf&#39; for a </span>
+<span class="sd">            leaf node</span>
+<span class="sd">        ref_key : string</span>
+<span class="sd">            resource pool key correspoding to the file path to the template brain</span>
+<span class="sd">            used for functional-to-template registration</span>
+<span class="sd">        num_strat : int</span>
+<span class="sd">            the number of strategy objects</span>
+<span class="sd">        strat : C-PAC Strategy object</span>
+<span class="sd">            a strategy with one or more resource pools</span>
+<span class="sd">        interpolation_method : str</span>
+<span class="sd">            which interpolation to use when applying the warps, commonly used</span>
+<span class="sd">            options are &#39;Linear&#39;, &#39;Bspline&#39;, &#39;LanczosWindowedSinc&#39; (default) </span>
+<span class="sd">            for derivatives and image data &#39;NearestNeighbor&#39; for masks</span>
+<span class="sd">        distcor : boolean</span>
+<span class="sd">            indicates whether a distortion correction transformation should be </span>
+<span class="sd">            added to the transforms, this of course requires that a distortion</span>
+<span class="sd">            correction map exist in the resource pool</span>
+<span class="sd">        map_node : boolean</span>
+<span class="sd">            indicates whether a mapnode should be used, if TRUE func_key is </span>
+<span class="sd">            expected to correspond to a list of resources that should each </span>
+<span class="sd">            be written into standard space with the other parameters</span>
+<span class="sd">        inverse : boolean</span>
+<span class="sd">            writes the invrse of the transform, i.e. MNI-&gt;EPI instead of</span>
+<span class="sd">            EPI-&gt;MNI</span>
+<span class="sd">        input_image_type : int</span>
+<span class="sd">            argument taken by the ANTs apply warp tool; in this case, should be</span>
+<span class="sd">            0 for scalars (default) and 3 for 4D functional time-series</span>
+<span class="sd">        num_ants_cores : int</span>
+<span class="sd">            the number of CPU cores dedicated to ANTS anatomical-to-standard</span>
+<span class="sd">            registration</span>
+<span class="sd">        registration_template : str</span>
+<span class="sd">            which template to use as a target for the apply warps (&#39;t1&#39; or &#39;epi&#39;),</span>
+<span class="sd">            should be the same as the target used in the warp calculation</span>
+<span class="sd">            (registration)</span>
+<span class="sd">        func_type : str</span>
+<span class="sd">            &#39;non-ica-aroma&#39; or &#39;ica-aroma&#39; - how to handle the functional time series</span>
+<span class="sd">            based on the particular demands of ICA-AROMA processed time series</span>
+<span class="sd">        num_cpus : int</span>
+<span class="sd">            the number of CPUs dedicated to each participant workflow - this is</span>
+<span class="sd">            used to determine how to parallelize the warp application step</span>
+<span class="sd">            </span>
+<span class="sd">    Workflow Outputs::</span>
+<span class="sd">    </span>
+<span class="sd">        outputspec.output_image : string (nifti file)</span>
+<span class="sd">            Normalized output file</span>
+
+<span class="sd">                 </span>
+<span class="sd">    Workflow Graph:</span>
+<span class="sd">    </span>
+<span class="sd">    .. image::</span>
+<span class="sd">        :width: 500</span>
+<span class="sd">    </span>
+<span class="sd">    Detailed Workflow Graph:</span>
+<span class="sd">    </span>
+<span class="sd">    .. image:: </span>
+<span class="sd">        :width: 500</span>
+
+<span class="sd">    Apply the functional-to-structural and structural-to-template warps to</span>
+<span class="sd">    the 4D functional time-series to warp it to template space.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># if the input is a string, assume that it is resource pool key, </span>
+    <span class="c1"># if it is a tuple, assume that it is a node, outfile pair,</span>
+    <span class="c1"># otherwise, something funky is going on</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">func_key</span> <span class="o">==</span> <span class="s2">&quot;leaf&quot;</span><span class="p">:</span>
+            <span class="n">input_node</span><span class="p">,</span> <span class="n">input_out</span> <span class="o">=</span> <span class="n">strat</span><span class="o">.</span><span class="n">get_leaf_properties</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_node</span><span class="p">,</span> <span class="n">input_out</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">func_key</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func_key</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">input_node</span><span class="p">,</span> <span class="n">input_out</span> <span class="o">=</span> <span class="n">func_key</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ref_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">ref_node</span><span class="p">,</span> <span class="n">ref_out</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">ref_key</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ref_key</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">ref_node</span><span class="p">,</span> <span class="n">ref_out</span> <span class="o">=</span> <span class="n">func_key</span>
+
+
+    <span class="c1"># when inverse is enabled, we want to update the name of various</span>
+    <span class="c1"># nodes so that we know they were inverted</span>
+    <span class="n">inverse_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">inverse</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">inverse_string</span> <span class="o">=</span> <span class="s1">&#39;_inverse&#39;</span>
+
+    <span class="c1"># make sure that resource pool has some required resources before proceeding</span>
+    <span class="k">if</span> <span class="s1">&#39;fsl_mat_as_itk&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">strat</span> <span class="ow">and</span> <span class="n">registration_template</span> <span class="o">==</span> <span class="s1">&#39;t1&#39;</span><span class="p">:</span>
+
+        <span class="n">fsl_reg_2_itk</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">c3</span><span class="o">.</span><span class="n">C3dAffineTool</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;fsl_reg_2_itk_</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_strat</span><span class="p">))</span>
+        <span class="n">fsl_reg_2_itk</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">itk_transform</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">fsl_reg_2_itk</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">fsl2ras</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># convert the .mat from linear Func-&gt;Anat to</span>
+        <span class="c1"># ANTS format</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;functional_to_anat_linear_xfm&#39;</span><span class="p">]</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">fsl_reg_2_itk</span><span class="p">,</span> <span class="s1">&#39;transform_file&#39;</span><span class="p">)</span>
+
+        <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;anatomical_brain&#39;</span><span class="p">]</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">fsl_reg_2_itk</span><span class="p">,</span> <span class="s1">&#39;reference_file&#39;</span><span class="p">)</span>
+
+        <span class="n">ref_node</span><span class="p">,</span> <span class="n">ref_out</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="s1">&#39;mean_functional&#39;</span><span class="p">]</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ref_node</span><span class="p">,</span> <span class="n">ref_out</span><span class="p">,</span> <span class="n">fsl_reg_2_itk</span><span class="p">,</span> <span class="s1">&#39;source_file&#39;</span><span class="p">)</span>
+
+        <span class="n">itk_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import os&#39;</span><span class="p">]</span>
+        <span class="n">change_transform</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span>
+                <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;input_affine_file&#39;</span><span class="p">],</span>
+                <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;updated_affine_file&#39;</span><span class="p">],</span>
+                <span class="n">function</span><span class="o">=</span><span class="n">change_itk_transform_type</span><span class="p">,</span>
+                <span class="n">imports</span><span class="o">=</span><span class="n">itk_imports</span><span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;change_transform_type_</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_strat</span><span class="p">))</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">fsl_reg_2_itk</span><span class="p">,</span> <span class="s1">&#39;itk_transform&#39;</span><span class="p">,</span>
+                <span class="n">change_transform</span><span class="p">,</span> <span class="s1">&#39;input_affine_file&#39;</span><span class="p">)</span>
+
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span>
+            <span class="s1">&#39;fsl_mat_as_itk&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">change_transform</span><span class="p">,</span> <span class="s1">&#39;updated_affine_file&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+
+        <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="n">fsl_reg_2_itk</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># stack of transforms to be combined to acheive the desired transformation</span>
+    <span class="n">num_transforms</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">collect_transforms_key</span> <span class="o">=</span> \
+            <span class="s1">&#39;collect_transforms</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inverse_string</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">distcor</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">func_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;ica-aroma&#39;</span><span class="p">:</span>
+        <span class="n">num_transforms</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="n">collect_transforms_key</span> <span class="o">=</span> \
+                <span class="s1">&#39;collect_transforms</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;_distcor&#39;</span><span class="p">,</span>
+                        <span class="n">inverse_string</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">collect_transforms_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">strat</span><span class="p">:</span>      
+        <span class="k">if</span> <span class="n">registration_template</span> <span class="o">==</span> <span class="s1">&#39;t1&#39;</span><span class="p">:</span>
+            <span class="c1"># handle both symmetric and asymmetric transforms</span>
+            <span class="n">ants_transformation_dict</span> <span class="o">=</span>  <span class="p">{</span>
+                    <span class="s1">&#39;asymmetric&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;anatomical_to_mni_nonlinear_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;anatomical_to_mni_nonlinear_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;mni_to_anatomical_nonlinear_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;mni_to_anatomical_nonlinear_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;ants_affine_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;ants_affine_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;ants_rigid_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;ants_rigid_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;ants_initial_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;ants_initial_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;blip_warp&#39;</span><span class="p">:</span> <span class="s1">&#39;blip_warp&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;blip_warp_inverse&#39;</span><span class="p">:</span> <span class="s1">&#39;blip_warp_inverse&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;fsl_mat_as_itk&#39;</span><span class="p">:</span> <span class="s1">&#39;fsl_mat_as_itk&#39;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                    <span class="s1">&#39;symmetric&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;anatomical_to_mni_nonlinear_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;anatomical_to_symmetric_mni_nonlinear_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;mni_to_anatomical_nonlinear_xfm&#39;</span><span class="p">:</span><span class="s1">&#39;symmetric_mni_to_anatomical_nonlinear_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;ants_affine_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;ants_symmetric_affine_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;ants_rigid_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;ants_symmetric_rigid_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;ants_initial_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;ants_symmetric_initial_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;blip_warp&#39;</span><span class="p">:</span> <span class="s1">&#39;blip_warp&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;blip_warp_inverse&#39;</span><span class="p">:</span> <span class="s1">&#39;blip_warp_inverse&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;fsl_mat_as_itk&#39;</span><span class="p">:</span> <span class="s1">&#39;fsl_mat_as_itk&#39;</span><span class="p">,</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+
+            <span class="c1"># transforms to be concatenated, the first element of each tuple is</span>
+            <span class="c1"># the resource pool key related to the resource that should be </span>
+            <span class="c1"># connected in, and the second element is the input to which it </span>
+            <span class="c1"># should be connected</span>
+            <span class="k">if</span> <span class="n">inverse</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">distcor</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">func_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;ica-aroma&#39;</span><span class="p">:</span>
+                    <span class="c1"># Field file from anatomical nonlinear registration</span>
+                    <span class="n">transforms_to_combine</span> <span class="o">=</span> <span class="p">[</span>\
+                            <span class="p">(</span><span class="s1">&#39;mni_to_anatomical_nonlinear_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in6&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;ants_affine_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in5&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;ants_rigid_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in4&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;ants_initial_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in3&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;fsl_mat_as_itk&#39;</span><span class="p">,</span> <span class="s1">&#39;in2&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;blip_warp_inverse&#39;</span><span class="p">,</span> <span class="s1">&#39;in1&#39;</span><span class="p">)]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">transforms_to_combine</span> <span class="o">=</span> <span class="p">[</span>\
+                            <span class="p">(</span><span class="s1">&#39;mni_to_anatomical_nonlinear_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in5&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;ants_affine_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in4&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;ants_rigid_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in3&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;ants_initial_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in2&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;fsl_mat_as_itk&#39;</span><span class="p">,</span> <span class="s1">&#39;in1&#39;</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">transforms_to_combine</span> <span class="o">=</span> <span class="p">[</span>\
+                        <span class="p">(</span><span class="s1">&#39;anatomical_to_mni_nonlinear_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in1&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;ants_affine_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in2&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;ants_rigid_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in3&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;ants_initial_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in4&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;fsl_mat_as_itk&#39;</span><span class="p">,</span> <span class="s1">&#39;in5&#39;</span><span class="p">)]</span>
+
+                <span class="k">if</span> <span class="n">distcor</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">func_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;ica-aroma&#39;</span><span class="p">:</span>
+                    <span class="n">transforms_to_combine</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">&#39;blip_warp&#39;</span><span class="p">,</span> <span class="s1">&#39;in6&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">registration_template</span> <span class="o">==</span> <span class="s1">&#39;epi&#39;</span><span class="p">:</span>
+            <span class="c1"># handle both symmetric and asymmetric transforms</span>
+            <span class="n">ants_transformation_dict</span> <span class="o">=</span>  <span class="p">{</span>
+                    <span class="s1">&#39;asymmetric&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;func_to_epi_nonlinear_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;func_to_epi_nonlinear_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;epi_to_func_nonlinear_xfm&#39;</span> <span class="p">:</span> <span class="s1">&#39;epi_to_func_nonlinear_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;func_to_epi_ants_affine_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;func_to_epi_ants_affine_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;func_to_epi_ants_rigid_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;func_to_epi_ants_rigid_xfm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;func_to_epi_ants_initial_xfm&#39;</span><span class="p">:</span> <span class="s1">&#39;func_to_epi_ants_initial_xfm&#39;</span><span class="p">,</span>
+                        <span class="c1"># &#39;blip_warp&#39;: &#39;blip_warp&#39;,</span>
+                        <span class="c1"># &#39;blip_warp_inverse&#39;: &#39;blip_warp_inverse&#39;,</span>
+                        <span class="c1"># &#39;fsl_mat_as_itk&#39;: &#39;fsl_mat_as_itk&#39;,</span>
+                        <span class="p">},</span>
+                    <span class="c1"># &#39;symmetric&#39;: {</span>
+                        <span class="c1"># &#39;func_to_epi_nonlinear_xfm&#39;: &#39;anatomical_to_mni_nonlinear_xfm&#39;,</span>
+                        <span class="c1"># &#39;func_to_epi_ants_affine_xfm&#39;: &#39;func_to_epi_ants_affine_xfm&#39;,</span>
+                        <span class="c1"># &#39;func_to_epi_ants_rigid_xfm&#39;: &#39;func_to_epi_ants_rigid_xfm&#39;,</span>
+                        <span class="c1"># &#39;func_to_epi_ants_initial_xfm&#39;: &#39;ants_initial_xfm&#39;,</span>
+                        <span class="c1"># &#39;blip_warp&#39;: &#39;blip_warp&#39;,</span>
+                        <span class="c1"># &#39;blip_warp_inverse&#39;: &#39;blip_warp_inverse&#39;,</span>
+                        <span class="c1"># &#39;fsl_mat_as_itk&#39;: &#39;fsl_mat_as_itk&#39;,</span>
+                        <span class="c1"># }</span>
+                    <span class="p">}</span>
+
+            <span class="c1"># transforms to be concatenated, the first element of each tuple is</span>
+            <span class="c1"># the resource pool key related to the resource that should be </span>
+            <span class="c1"># connected in, and the second element is the input to which it </span>
+            <span class="c1"># should be connected</span>
+            <span class="k">if</span> <span class="n">inverse</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">distcor</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">func_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;ica-aroma&#39;</span><span class="p">:</span>
+                    <span class="c1"># Field file from anatomical nonlinear registration</span>
+                    <span class="n">transforms_to_combine</span> <span class="o">=</span> <span class="p">[</span>\
+                            <span class="p">(</span><span class="s1">&#39;epi_to_func_nonlinear_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in4&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_affine_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in3&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_rigid_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in2&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_initial_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in1&#39;</span><span class="p">)]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">transforms_to_combine</span> <span class="o">=</span> <span class="p">[</span>\
+                            <span class="p">(</span><span class="s1">&#39;epi_to_func_nonlinear_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in4&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_affine_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in3&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_rigid_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in2&#39;</span><span class="p">),</span>
+                            <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_initial_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in1&#39;</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">transforms_to_combine</span> <span class="o">=</span> <span class="p">[</span>\
+                        <span class="p">(</span><span class="s1">&#39;func_to_epi_nonlinear_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in1&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_affine_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in2&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_rigid_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in3&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;func_to_epi_ants_initial_xfm&#39;</span><span class="p">,</span> <span class="s1">&#39;in4&#39;</span><span class="p">)]</span>
+
+        <span class="c1"># define the node</span>
+        <span class="n">collect_transforms</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">Merge</span><span class="p">(</span><span class="n">num_transforms</span><span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;collect_transforms_</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1}</span><span class="s1">_</span><span class="si">{2}</span><span class="s1">_</span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span>
+                                                                 <span class="n">inverse_string</span><span class="p">,</span>
+                                                                 <span class="n">registration_template</span><span class="p">,</span>
+                                                                 <span class="n">num_strat</span><span class="p">))</span>
+
+        <span class="c1"># wire in the various transformations</span>
+        <span class="k">for</span> <span class="n">transform_key</span><span class="p">,</span> <span class="n">input_port</span> <span class="ow">in</span> <span class="n">transforms_to_combine</span><span class="p">:</span>
+             <span class="k">try</span><span class="p">:</span>
+                 <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">ants_transformation_dict</span><span class="p">[</span><span class="n">symmetry</span><span class="p">][</span><span class="n">transform_key</span><span class="p">]]</span>
+             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
+             <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">collect_transforms</span><span class="p">,</span> <span class="n">input_port</span><span class="p">)</span>
+
+        <span class="c1"># check transform list (if missing any init/rig/affine) and exclude Nonetype</span>
+        <span class="n">check_transform</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;transform_list&#39;</span><span class="p">],</span> 
+                                                <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;checked_transform_list&#39;</span><span class="p">,</span> <span class="s1">&#39;list_length&#39;</span><span class="p">],</span>
+                                                <span class="n">function</span><span class="o">=</span><span class="n">check_transforms</span><span class="p">),</span>
+                                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;check_transforms</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1}</span><span class="s1">_</span><span class="si">{2}</span><span class="s1">_</span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span>
+                                                                                <span class="n">inverse_string</span><span class="p">,</span>
+                                                                                <span class="n">registration_template</span><span class="p">,</span>
+                                                                                <span class="n">num_strat</span><span class="p">))</span>
+        
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">collect_transforms</span><span class="p">,</span> <span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="n">check_transform</span><span class="p">,</span> <span class="s1">&#39;transform_list&#39;</span><span class="p">)</span>
+
+        <span class="c1"># generate inverse transform flags, which depends on the number of transforms</span>
+        <span class="n">inverse_transform_flags</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;transform_list&#39;</span><span class="p">],</span> 
+                                                        <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;inverse_transform_flags&#39;</span><span class="p">],</span>
+                                                        <span class="n">function</span><span class="o">=</span><span class="n">generate_inverse_transform_flags</span><span class="p">),</span> 
+                                          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;inverse_transform_flags_</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1}</span><span class="s1">_</span><span class="si">{2}</span><span class="s1">_</span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span>
+                                                                                                <span class="n">inverse_string</span><span class="p">,</span>
+                                                                                                <span class="n">registration_template</span><span class="p">,</span>
+                                                                                                <span class="n">num_strat</span><span class="p">))</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">check_transform</span><span class="p">,</span> <span class="s1">&#39;checked_transform_list&#39;</span><span class="p">,</span> <span class="n">inverse_transform_flags</span><span class="p">,</span> <span class="s1">&#39;transform_list&#39;</span><span class="p">)</span>
+
+
+        <span class="c1"># set the output</span>
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span>
+            <span class="n">collect_transforms_key</span><span class="p">:</span> <span class="p">(</span><span class="n">check_transform</span><span class="p">,</span> <span class="s1">&#39;checked_transform_list&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+
+        <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="n">check_transform</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="n">inverse_transform_flags</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1">#### now we add in the apply ants warps node</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_cpus</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">input_image_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="c1"># parallelize time series warp application</span>
+        <span class="n">map_node</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">map_node</span><span class="p">:</span>
+        <span class="n">apply_ants_warp</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">MapNode</span><span class="p">(</span>
+                <span class="n">interface</span><span class="o">=</span><span class="n">ants</span><span class="o">.</span><span class="n">ApplyTransforms</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;apply_ants_warp_</span><span class="si">{0}</span><span class="s1">_mapnode_</span><span class="si">{1}</span><span class="s1">_</span><span class="si">{2}</span><span class="s1">_</span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">output_name</span><span class="p">,</span> <span class="n">inverse_string</span><span class="p">,</span> <span class="n">registration_template</span><span class="p">,</span>
+                    <span class="n">num_strat</span><span class="p">),</span>
+                <span class="n">iterfield</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;input_image&#39;</span><span class="p">],</span>
+                <span class="n">mem_gb</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">mem_x</span><span class="o">=</span><span class="p">(</span><span class="mi">1401462037888665</span> <span class="o">/</span> <span class="mi">2361183241434822606848</span><span class="p">,</span>
+                       <span class="s1">&#39;input_image&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">apply_ants_warp</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+                <span class="n">interface</span><span class="o">=</span><span class="n">ants</span><span class="o">.</span><span class="n">ApplyTransforms</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;apply_ants_warp_</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1}</span><span class="s1">_</span><span class="si">{2}</span><span class="s1">_</span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">output_name</span><span class="p">,</span> <span class="n">inverse_string</span><span class="p">,</span> <span class="n">registration_template</span><span class="p">,</span>
+                    <span class="n">num_strat</span><span class="p">),</span>
+                <span class="n">mem_gb</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">mem_x</span><span class="o">=</span><span class="p">(</span><span class="mi">1401462037888665</span> <span class="o">/</span> <span class="mi">2361183241434822606848</span><span class="p">,</span>
+                       <span class="s1">&#39;input_image&#39;</span><span class="p">))</span>
+
+    <span class="n">apply_ants_warp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_postfix</span> <span class="o">=</span> <span class="s1">&#39;_antswarp&#39;</span>
+    <span class="n">apply_ants_warp</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">num_threads</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_ants_cores</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">inverse</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inverse_transform_flags</span><span class="p">,</span> <span class="s1">&#39;inverse_transform_flags&#39;</span><span class="p">,</span> <span class="n">apply_ants_warp</span><span class="p">,</span> <span class="s1">&#39;invert_transform_flags&#39;</span><span class="p">)</span>
+
+    <span class="c1"># input_image_type:</span>
+    <span class="c1"># (0 or 1 or 2 or 3)</span>
+    <span class="c1"># Option specifying the input image type of scalar</span>
+    <span class="c1"># (default), vector, tensor, or time series.</span>
+    <span class="n">apply_ants_warp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_image_type</span> <span class="o">=</span> <span class="n">input_image_type</span>
+    <span class="n">apply_ants_warp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">apply_ants_warp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">interpolation</span> <span class="o">=</span> <span class="n">interpolation_method</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">ref_key</span><span class="p">]</span>
+    <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+                     <span class="n">apply_ants_warp</span><span class="p">,</span> <span class="s1">&#39;reference_image&#39;</span><span class="p">)</span>
+
+    <span class="n">collect_node</span><span class="p">,</span> <span class="n">collect_out</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">collect_transforms_key</span><span class="p">]</span>
+    <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">collect_node</span><span class="p">,</span> <span class="n">collect_out</span><span class="p">,</span>
+                     <span class="n">apply_ants_warp</span><span class="p">,</span> <span class="s1">&#39;transforms&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output_name</span> <span class="o">==</span> <span class="s2">&quot;functional_to_standard&quot;</span><span class="p">:</span>
+        <span class="c1"># write out the composite functional to standard transforms</span>
+        <span class="n">write_composite_xfm</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+                <span class="n">interface</span><span class="o">=</span><span class="n">ants</span><span class="o">.</span><span class="n">ApplyTransforms</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;write_composite_xfm_</span><span class="si">{0}</span><span class="s1">_</span><span class="si">{1}</span><span class="s1">_</span><span class="si">{2}</span><span class="s1">_</span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span>
+                    <span class="n">inverse_string</span><span class="p">,</span> <span class="n">registration_template</span><span class="p">,</span> <span class="n">num_strat</span><span class="p">),</span> <span class="n">mem_gb</span><span class="o">=</span><span class="mf">8.0</span><span class="p">)</span>
+        <span class="n">write_composite_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">print_out_composite_warp_file</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">write_composite_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">output_image</span> <span class="o">=</span> <span class="s2">&quot;func_to_standard_xfm.nii.gz&quot;</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="n">input_out</span><span class="p">,</span>
+                         <span class="n">write_composite_xfm</span><span class="p">,</span> <span class="s1">&#39;input_image&#39;</span><span class="p">)</span>
+
+        <span class="n">write_composite_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_image_type</span> <span class="o">=</span> <span class="n">input_image_type</span>
+        <span class="n">write_composite_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">write_composite_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">interpolation</span> <span class="o">=</span> <span class="n">interpolation_method</span>
+
+        <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">ref_key</span><span class="p">]</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+                         <span class="n">write_composite_xfm</span><span class="p">,</span> <span class="s1">&#39;reference_image&#39;</span><span class="p">)</span>
+
+        <span class="n">collect_node</span><span class="p">,</span> <span class="n">collect_out</span> <span class="o">=</span> <span class="n">strat</span><span class="p">[</span><span class="n">collect_transforms_key</span><span class="p">]</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">collect_node</span><span class="p">,</span> <span class="n">collect_out</span><span class="p">,</span>
+                         <span class="n">write_composite_xfm</span><span class="p">,</span> <span class="s1">&#39;transforms&#39;</span><span class="p">)</span>
+
+        <span class="c1"># write_composite_inv_xfm = pe.Node(</span>
+        <span class="c1">#         interface=ants.ApplyTransforms(),</span>
+        <span class="c1">#         name=&#39;write_composite_xfm_{0}_{1}_{2}_{3}&#39;.format(output_name,</span>
+        <span class="c1">#             &#39;_inverse&#39;, registration_template, num_strat), mem_gb=1.5)</span>
+        <span class="c1"># write_composite_inv_xfm.inputs.print_out_composite_warp_file = True</span>
+        <span class="c1"># write_composite_inv_xfm.inputs.output_image = &quot;func_to_standard_inverse-xfm.nii.gz&quot;</span>
+        <span class="c1">#</span>
+        <span class="c1"># workflow.connect(input_node, input_out,</span>
+        <span class="c1">#                  write_composite_inv_xfm, &#39;input_image&#39;)</span>
+        <span class="c1">#</span>
+        <span class="c1"># workflow.connect(inverse_transform_flags, &#39;inverse_transform_flags&#39;,</span>
+        <span class="c1">#                  write_composite_inv_xfm, &#39;invert_transform_flags&#39;)</span>
+        <span class="c1">#</span>
+        <span class="c1">#</span>
+        <span class="c1"># write_composite_inv_xfm.inputs.input_image_type = input_image_type</span>
+        <span class="c1"># write_composite_inv_xfm.inputs.dimension = 3</span>
+        <span class="c1"># write_composite_inv_xfm.inputs.interpolation = interpolation_method</span>
+        <span class="c1">#</span>
+        <span class="c1"># node, out_file = strat[ref_key]</span>
+        <span class="c1"># workflow.connect(node, out_file,</span>
+        <span class="c1">#                  write_composite_inv_xfm, &#39;reference_image&#39;)</span>
+        <span class="c1">#</span>
+        <span class="c1"># collect_node, collect_out = strat[collect_transforms_key]</span>
+        <span class="c1"># workflow.connect(collect_node, collect_out,</span>
+        <span class="c1">#                  write_composite_inv_xfm, &#39;transforms&#39;)</span>
+
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span>
+            <span class="s2">&quot;functional_to_standard_xfm&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">write_composite_xfm</span><span class="p">,</span> <span class="s1">&#39;output_image&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+            <span class="c1">#&quot;functional_to_standard_inverse-xfm&quot;: (write_composite_inv_xfm, &#39;output_image&#39;)</span>
+        <span class="c1">#})</span>
+
+    <span class="c1"># parallelize the apply warp, if multiple CPUs, and it&#39;s a time series!</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_cpus</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">input_image_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+
+        <span class="n">node_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">output_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">inverse_string</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">registration_template</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">num_strat</span><span class="si">}</span><span class="s1">&#39;</span>
+
+        <span class="n">chunk_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import nibabel as nb&#39;</span><span class="p">]</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;func_file&#39;</span><span class="p">,</span>
+                                              <span class="s1">&#39;n_cpus&#39;</span><span class="p">],</span>
+                                 <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;TR_ranges&#39;</span><span class="p">],</span>
+                                 <span class="n">function</span><span class="o">=</span><span class="n">chunk_ts</span><span class="p">,</span>
+                                 <span class="n">imports</span><span class="o">=</span><span class="n">chunk_imports</span><span class="p">),</span>
+                        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;chunk_</span><span class="si">{</span><span class="n">node_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">chunk</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_cpus</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_cpus</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="n">input_out</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="s1">&#39;func_file&#39;</span><span class="p">)</span>
+
+        <span class="n">split_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import os&#39;</span><span class="p">,</span> <span class="s1">&#39;import subprocess&#39;</span><span class="p">]</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;func_file&#39;</span><span class="p">,</span>
+                                              <span class="s1">&#39;tr_ranges&#39;</span><span class="p">],</span>
+                                 <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;split_funcs&#39;</span><span class="p">],</span>
+                                 <span class="n">function</span><span class="o">=</span><span class="n">split_ts_chunks</span><span class="p">,</span>
+                                 <span class="n">imports</span><span class="o">=</span><span class="n">split_imports</span><span class="p">),</span>
+                        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;split_</span><span class="si">{</span><span class="n">node_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="n">input_out</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="s1">&#39;func_file&#39;</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="s1">&#39;TR_ranges&#39;</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="s1">&#39;tr_ranges&#39;</span><span class="p">)</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">split</span><span class="p">,</span> <span class="s1">&#39;split_funcs&#39;</span><span class="p">,</span> <span class="n">apply_ants_warp</span><span class="p">,</span> <span class="s1">&#39;input_image&#39;</span><span class="p">)</span>
+
+        <span class="n">func_concat</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TCat</span><span class="p">(),</span>
+                              <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;func_concat_</span><span class="si">{</span><span class="n">node_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">func_concat</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">apply_ants_warp</span><span class="p">,</span> <span class="s1">&#39;output_image&#39;</span><span class="p">,</span>
+                         <span class="n">func_concat</span><span class="p">,</span> <span class="s1">&#39;in_files&#39;</span><span class="p">)</span>
+
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span>
+            <span class="n">output_name</span><span class="p">:</span> <span class="p">(</span><span class="n">func_concat</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="n">input_out</span><span class="p">,</span>
+                         <span class="n">apply_ants_warp</span><span class="p">,</span> <span class="s1">&#39;input_image&#39;</span><span class="p">)</span>
+
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span>
+            <span class="n">output_name</span><span class="p">:</span> <span class="p">(</span><span class="n">apply_ants_warp</span><span class="p">,</span> <span class="s1">&#39;output_image&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+
+    <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="n">apply_ants_warp</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">workflow</span>
+
+
+<span class="k">def</span> <span class="nf">output_func_to_standard</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">func_key</span><span class="p">,</span> <span class="n">ref_key</span><span class="p">,</span> <span class="n">output_name</span><span class="p">,</span>
+        <span class="n">strat</span><span class="p">,</span> <span class="n">num_strat</span><span class="p">,</span> <span class="n">pipeline_config_obj</span><span class="p">,</span> <span class="n">input_image_type</span><span class="o">=</span><span class="s1">&#39;func_derivative&#39;</span><span class="p">,</span>
+        <span class="n">symmetry</span><span class="o">=</span><span class="s1">&#39;asymmetric&#39;</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">registration_template</span><span class="o">=</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span>
+        <span class="n">func_type</span><span class="o">=</span><span class="s1">&#39;non-ica-aroma&#39;</span><span class="p">):</span>
+
+    <span class="n">image_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;func_derivative&#39;</span><span class="p">,</span> <span class="s1">&#39;func_derivative_multi&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;func_4d&#39;</span><span class="p">,</span> <span class="s1">&#39;func_mask&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">input_image_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">image_types</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Input image type </span><span class="si">{0}</span><span class="s1"> should be one of </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>\
+                <span class="n">input_image_type</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_types</span><span class="p">)))</span>
+
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">strat</span><span class="o">.</span><span class="n">get_nodes_names</span><span class="p">()</span>
+    
+    <span class="n">map_node</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">input_image_type</span> <span class="o">==</span> <span class="s1">&#39;func_derivative_multi&#39;</span> <span class="k">else</span> <span class="kc">False</span>
+
+    <span class="n">distcor</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="s1">&#39;epi_distcorr&#39;</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="ow">or</span> \
+            <span class="s1">&#39;blip_correct&#39;</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="k">else</span> <span class="kc">False</span>
+
+    <span class="n">num_cpus</span> <span class="o">=</span> <span class="n">pipeline_config_obj</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s1">&#39;system_config&#39;</span><span class="p">][</span><span class="s1">&#39;max_cores_per_participant&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="s1">&#39;anat_mni_fnirt_register&#39;</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="ow">or</span> \
+        <span class="s1">&#39;anat_mni_flirt_register&#39;</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="ow">or</span> \
+        <span class="s1">&#39;func_to_epi_fsl&#39;</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">input_image_type</span> <span class="o">==</span> <span class="s1">&#39;map&#39;</span> <span class="ow">or</span> <span class="s1">&#39;mask&#39;</span> <span class="ow">in</span> <span class="n">input_image_type</span><span class="p">:</span>
+            <span class="n">interp</span> <span class="o">=</span> <span class="s1">&#39;nn&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">interp</span> <span class="o">=</span> <span class="n">pipeline_config_obj</span><span class="o">.</span><span class="n">functional_registration</span><span class="p">[</span><span class="s1">&#39;2-func_registration_to_template&#39;</span><span class="p">][</span><span class="s1">&#39;FNIRT_pipelines&#39;</span><span class="p">][</span><span class="s1">&#39;interpolation&#39;</span><span class="p">]</span>
+
+        <span class="n">func_ts</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">input_image_type</span> <span class="o">==</span> <span class="s1">&#39;func_4d&#39;</span> <span class="k">else</span> <span class="kc">False</span>
+
+        <span class="n">fsl_apply_transform_func_to_mni</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">output_name</span><span class="p">,</span> <span class="n">func_key</span><span class="p">,</span>
+                <span class="n">ref_key</span><span class="p">,</span> <span class="n">num_strat</span><span class="p">,</span> <span class="n">strat</span><span class="p">,</span> <span class="n">interp</span><span class="p">,</span> <span class="n">distcor</span><span class="o">=</span><span class="n">distcor</span><span class="p">,</span>
+                <span class="n">map_node</span><span class="o">=</span><span class="n">map_node</span><span class="p">,</span> <span class="n">func_ts</span><span class="o">=</span><span class="n">func_ts</span><span class="p">,</span> <span class="n">num_cpus</span><span class="o">=</span><span class="n">num_cpus</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="s1">&#39;ANTS&#39;</span> <span class="ow">in</span> <span class="n">pipeline_config_obj</span><span class="o">.</span><span class="n">anatomical_preproc</span><span class="p">[</span>
+            <span class="s1">&#39;registration_workflow&#39;</span>
+        <span class="p">][</span><span class="s1">&#39;registration&#39;</span><span class="p">][</span><span class="s1">&#39;using&#39;</span><span class="p">]:</span>
+
+        <span class="k">if</span> <span class="n">input_image_type</span> <span class="o">==</span> <span class="s1">&#39;map&#39;</span> <span class="ow">or</span> <span class="s1">&#39;mask&#39;</span> <span class="ow">in</span> <span class="n">input_image_type</span><span class="p">:</span>
+            <span class="n">interp</span> <span class="o">=</span> <span class="s1">&#39;NearestNeighbor&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">interp</span> <span class="o">=</span> <span class="n">pipeline_config_obj</span><span class="o">.</span><span class="n">functional_registration</span><span class="p">[</span><span class="s1">&#39;2-func_registration_to_template&#39;</span><span class="p">][</span><span class="s1">&#39;ANTs_pipelines&#39;</span><span class="p">][</span><span class="s1">&#39;interpolation&#39;</span><span class="p">]</span>
+
+        <span class="n">image_type</span> <span class="o">=</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">input_image_type</span> <span class="o">==</span> <span class="s1">&#39;func_4d&#39;</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="n">ants_apply_warps_func_mni</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">output_name</span><span class="p">,</span> <span class="n">func_key</span><span class="p">,</span> <span class="n">ref_key</span><span class="p">,</span>
+                <span class="n">num_strat</span><span class="p">,</span> <span class="n">strat</span><span class="p">,</span> <span class="n">interpolation_method</span><span class="o">=</span><span class="n">interp</span><span class="p">,</span>
+                <span class="n">distcor</span><span class="o">=</span><span class="n">distcor</span><span class="p">,</span> <span class="n">map_node</span><span class="o">=</span><span class="n">map_node</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="n">inverse</span><span class="p">,</span>
+                <span class="n">symmetry</span><span class="o">=</span><span class="n">symmetry</span><span class="p">,</span> <span class="n">input_image_type</span><span class="o">=</span><span class="n">image_type</span><span class="p">,</span>
+                <span class="n">num_ants_cores</span><span class="o">=</span><span class="n">pipeline_config_obj</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s1">&#39;system_config&#39;</span><span class="p">][</span><span class="s1">&#39;num_ants_threads&#39;</span><span class="p">],</span> 
+                <span class="n">registration_template</span><span class="o">=</span><span class="n">registration_template</span><span class="p">,</span> 
+                <span class="n">func_type</span><span class="o">=</span><span class="n">func_type</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Cannot determine whether a ANTS or FSL registration&#39;</span> \
+                <span class="s1">&#39;is desired, check your pipeline.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">workflow</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index">
+              <img class="logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.registration.output_func_to_standard</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>
