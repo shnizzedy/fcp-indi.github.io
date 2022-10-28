@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPAC.qc.pipeline &#8212; C-PAC 1.8.5.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex" />
+    <link rel="search" title="Search" href="../../../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.qc.pipeline</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for CPAC.qc.pipeline</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span> <span class="k">as</span> <span class="nn">p</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span>
+<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">fsl</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
+
+<span class="kn">from</span> <span class="nn">CPAC.qc.qc</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_montage</span><span class="p">,</span>
+    <span class="n">create_montage_gm_wm_csf</span><span class="p">,</span>
+    <span class="n">qa_montages</span><span class="p">,</span>
+    <span class="n">create_qc_snr</span><span class="p">,</span>
+    <span class="n">create_qc_motion</span><span class="p">,</span>
+    <span class="n">create_qc_fd</span><span class="p">,</span>
+    <span class="n">create_qc_skullstrip</span><span class="p">,</span>
+    <span class="n">create_qc_carpet</span><span class="p">,</span>
+    <span class="n">afni_Edge3</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">CPAC.qc.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">register_pallete</span><span class="p">,</span>
+    <span class="n">generate_qc_pages</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># register color palettes</span>
+<span class="n">palletes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red_to_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;cyan_to_yellow&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">pallete</span> <span class="ow">in</span> <span class="n">palletes</span><span class="p">:</span>
+    <span class="n">register_pallete</span><span class="p">(</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;CPAC&#39;</span><span class="p">,</span> <span class="s1">&#39;qc/colors/</span><span class="si">%s</span><span class="s1">.txt&#39;</span> <span class="o">%</span> <span class="n">pallete</span><span class="p">),</span>
+        <span class="n">pallete</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="qc_snr_plot"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_snr_plot">[docs]</a><span class="k">def</span> <span class="nf">qc_snr_plot</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_snr_plot&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [([&quot;desc-brain_bold&quot;, &quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;],</span>
+<span class="sd">                 &quot;space-bold_desc-brain_mask&quot;),</span>
+<span class="sd">                &quot;from-bold_to-T1w_mode-image_desc-linear_xfm&quot;,</span>
+<span class="sd">                &quot;desc-brain_T1w&quot;,</span>
+<span class="sd">                &quot;space-T1w_desc-mean_bold&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;bold-snr-axial-qc&quot;,</span>
+<span class="sd">                 &quot;bold-snr-sagittal-qc&quot;,</span>
+<span class="sd">                 &quot;bold-snr-hist-qc&quot;,</span>
+<span class="sd">                 &quot;bold-snr-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make SNR plot</span>
+    <span class="n">qc_workflow</span> <span class="o">=</span> <span class="n">create_qc_snr</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;qc_snr_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-brain_bold&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_preprocessed&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_brain_mask&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> \
+        <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;from-bold_to-T1w_mode-image_desc-linear_xfm&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+               <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_to_anat_linear_xfm&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_brain&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-T1w_desc-mean_bold&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.mean_functional_in_anat&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;bold-snr-axial-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.snr_axial_image&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;bold-snr-sagittal-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.snr_sagittal_image&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;bold-snr-hist-qc&#39;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.snr_histogram_image&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;bold-snr-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.snr_mean&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qc_motion_plot"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_motion_plot">[docs]</a><span class="k">def</span> <span class="nf">qc_motion_plot</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_motion_plot&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;movement-parameters&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;movement-parameters-trans-qc&quot;,</span>
+<span class="sd">                 &quot;movement-parameters-rot-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make motion parameters plot</span>
+    <span class="n">qc_workflow</span> <span class="o">=</span> <span class="n">create_qc_motion</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;qc_motion_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;movement-parameters&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.motion_parameters&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;movement-parameters-trans-qc&#39;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.motion_translation_plot&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;movement-parameters-rot-qc&#39;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.motion_rotation_plot&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qc_fd_plot"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_fd_plot">[docs]</a><span class="k">def</span> <span class="nf">qc_fd_plot</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_fd_plot&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;framewise-displacement-jenkinson&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;framewise-displacement-jenkinson-plot-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">qc_workflow</span> <span class="o">=</span> <span class="n">create_qc_fd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;qc_fd_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;framewise-displacement-jenkinson&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.fd&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;framewise-displacement-jenkinson-plot-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.fd_histogram_plot&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qc_brain_extraction"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_brain_extraction">[docs]</a><span class="k">def</span> <span class="nf">qc_brain_extraction</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_brain_extraction&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;desc-brain_T1w&quot;,</span>
+<span class="sd">                &quot;desc-reorient_T1w&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;desc-brain_T1w-axial-qc&quot;,</span>
+<span class="sd">                 &quot;desc-brain_T1w-sagittal-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make QC montages for Skull Stripping Visualization</span>
+    <span class="n">qc_workflow</span> <span class="o">=</span> <span class="n">create_qc_skullstrip</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;qc_skullstrip_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_brain&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-reorient_T1w&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_reorient&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;desc-brain_T1w-axial-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_image&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;desc-brain_T1w-sagittal-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_image&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qc_T1w_standard"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_T1w_standard">[docs]</a><span class="k">def</span> <span class="nf">qc_T1w_standard</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_brain_extraction&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;space-template_desc-brain_T1w&quot;,</span>
+<span class="sd">                &quot;T1w-brain-template&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-brain_T1w-axial-qc&quot;,</span>
+<span class="sd">                 &quot;space-template_desc-brain_T1w-sagittal-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make QC montages for mni normalized anatomical image</span>
+    <span class="n">montage_mni_anat</span> <span class="o">=</span> <span class="n">create_montage</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;montage_mni_anat_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;mni_anat&#39;</span><span class="p">,</span>
+                                      <span class="n">mapnode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_mni_anat</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
+
+    <span class="n">anat_template_edge</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">],</span>
+                                          <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
+                                          <span class="n">function</span><span class="o">=</span><span class="n">afni_Edge3</span><span class="p">,</span>
+                                          <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;anat_template_edge_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;T1w-brain-template&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">anat_template_edge</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">anat_template_edge</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">montage_mni_anat</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;space-template_desc-brain_T1w-axial-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">montage_mni_anat</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;space-template_desc-brain_T1w-sagittal-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">montage_mni_anat</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qc_segmentation"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_segmentation">[docs]</a><span class="k">def</span> <span class="nf">qc_segmentation</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_segmentation&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-brain_T1w&quot;,</span>
+<span class="sd">                 [&quot;label-CSF_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;label-CSF_mask&quot;],</span>
+<span class="sd">                 [&quot;label-WM_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;label-WM_mask&quot;],</span>
+<span class="sd">                 [&quot;label-GM_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;label-GM_mask&quot;])],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;dseg-axial-qc&quot;,</span>
+<span class="sd">                 &quot;dseg-sagittal-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make QC montages for CSF WM GM</span>
+    <span class="n">montage_csf_gm_wm</span> <span class="o">=</span> <span class="n">create_montage_gm_wm_csf</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;montage_csf_gm_wm_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;montage_csf_gm_wm&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;label-CSF_desc-preproc_mask&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;label-CSF_mask&#39;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay_csf&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;label-WM_desc-preproc_mask&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;label-WM_mask&#39;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay_wm&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;label-GM_desc-preproc_mask&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;label-GM_mask&#39;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay_gm&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;dseg-axial-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;dseg-sagittal-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+    
+    
+<div class="viewcode-block" id="qc_epi_segmentation"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_epi_segmentation">[docs]</a><span class="k">def</span> <span class="nf">qc_epi_segmentation</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_epi_segmentation&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-brain_bold&quot;,</span>
+<span class="sd">                 [&quot;space-bold_label-CSF_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-CSF_mask&quot;],</span>
+<span class="sd">                 [&quot;space-bold_label-WM_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-WM_mask&quot;],</span>
+<span class="sd">                 [&quot;space-bold_label-GM_desc-preproc_mask&quot;,</span>
+<span class="sd">                  &quot;space-bold_label-GM_mask&quot;])],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;epi-dseg-axial-qc&quot;,</span>
+<span class="sd">                 &quot;epi-dseg-sagittal-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make QC montages for CSF WM GM</span>
+    <span class="n">montage_csf_gm_wm</span> <span class="o">=</span> <span class="n">create_montage_gm_wm_csf</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;montage_csf_gm_wm_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;montage_csf_gm_wm&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_bold&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;space-bold_label-CSF_desc-preproc_mask&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;space-bold_label-CSF_mask&#39;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay_csf&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;space-bold_label-WM_desc-preproc_mask&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;space-bold_label-WM_mask&#39;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay_wm&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;space-bold_label-GM_desc-preproc_mask&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;space-bold_label-GM_mask&#39;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay_gm&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;epi-dseg-axial-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;epi-dseg-sagittal-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qc_carpet_plot"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_carpet_plot">[docs]</a><span class="k">def</span> <span class="nf">qc_carpet_plot</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_carpet_plot&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [([&quot;space-template_desc-cleaned_bold&quot;,</span>
+<span class="sd">                  &quot;space-template_desc-brain_bold&quot;,</span>
+<span class="sd">                  &quot;space-template_desc-preproc_bold&quot;,</span>
+<span class="sd">                  &quot;space-template_bold&quot;],</span>
+<span class="sd">                 &quot;space-template_desc-mean_bold&quot;),</span>
+<span class="sd">                &quot;GM-path&quot;,</span>
+<span class="sd">                &quot;WM-path&quot;,</span>
+<span class="sd">                &quot;CSF-path&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-cleaned_bold-carpet-qc&quot;,</span>
+<span class="sd">                 &quot;space-template_desc-brain_bold-carpet-qc&quot;,</span>
+<span class="sd">                 &quot;space-template_desc-preproc_bold-carpet-qc&quot;,</span>
+<span class="sd">                 &quot;space-template_bold-carpet-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make QC Carpet plot</span>
+    <span class="n">carpet_seg</span> <span class="o">=</span> <span class="n">create_qc_carpet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;carpet_seg_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;carpet_seg&#39;</span><span class="p">)</span>
+
+    <span class="n">connection</span><span class="p">,</span> <span class="n">resource</span> <span class="o">=</span> \
+        <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_desc-cleaned_bold&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;space-template_desc-brain_bold&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;space-template_bold&quot;</span><span class="p">],</span>
+                            <span class="n">report_fetched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">connection</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">carpet_seg</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_to_standard&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-template_desc-mean_bold&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">carpet_seg</span><span class="p">,</span> <span class="s1">&#39;inputspec.mean_functional_to_standard&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;GM-path&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">carpet_seg</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_gm_mask&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;WM-path&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">carpet_seg</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_wm_mask&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;CSF-path&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">carpet_seg</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_csf_mask&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">resource</span><span class="si">}</span><span class="s1">-carpet-qc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">carpet_seg</span><span class="p">,</span> <span class="s1">&#39;outputspec.carpet_plot&#39;</span><span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qc_coregistration"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_coregistration">[docs]</a><span class="k">def</span> <span class="nf">qc_coregistration</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_coregistration&quot;,</span>
+<span class="sd">     &quot;config&quot;: [&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;],</span>
+<span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-brain_T1w&quot;,</span>
+<span class="sd">                 &quot;space-T1w_desc-mean_bold&quot;)],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-T1w_desc-mean_bold-axial-qc&quot;,</span>
+<span class="sd">                 &quot;space-T1w_desc-mean_bold-sagittal-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make QC montage for Mean Functional in T1 with T1 edge</span>
+    <span class="n">anat_edge</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">],</span>
+                                 <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
+                                 <span class="n">function</span><span class="o">=</span><span class="n">afni_Edge3</span><span class="p">,</span>
+                                 <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;anat_edge_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">anat_edge</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">montage_anat</span> <span class="o">=</span> <span class="n">create_montage</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;montage_anat_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;t1_edge_on_mean_func_in_t1&#39;</span><span class="p">,</span> 
+                                  <span class="n">mapnode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">anat_edge</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">montage_anat</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-T1w_desc-mean_bold&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_anat</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;space-T1w_desc-mean_bold-axial-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">montage_anat</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;space-T1w_desc-mean_bold-sagittal-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">montage_anat</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qc_bold_registration"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_bold_registration">[docs]</a><span class="k">def</span> <span class="nf">qc_bold_registration</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_bold_registration&quot;,</span>
+<span class="sd">     &quot;config&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;switch&quot;: [[&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;,</span>
+<span class="sd">                 &quot;generate_quality_control_images&quot;],</span>
+<span class="sd">                [&quot;registration_workflows&quot;, &quot;anatomical_registration&quot;, &quot;run&quot;]],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;space-template_desc-mean_bold&quot;,</span>
+<span class="sd">                &quot;T1w-brain-template-funcreg&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-mean_bold-axial-qc&quot;,</span>
+<span class="sd">                 &quot;space-template_desc-mean_bold-sagittal-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make QC montage for Mean Functional in MNI with MNI edge</span>
+    <span class="n">montage_mfi</span> <span class="o">=</span> <span class="n">create_montage</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;montage_mfi_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;MNI_edge_on_mean_func_mni&#39;</span><span class="p">,</span>
+                                 <span class="n">mapnode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_desc-mean_bold&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>  <span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
+
+    <span class="n">func_template_edge</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">],</span>
+                                          <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
+                                          <span class="n">function</span><span class="o">=</span><span class="n">afni_Edge3</span><span class="p">,</span>
+                                          <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;func_template_edge_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;T1w-brain-template-funcreg&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_template_edge</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_template_edge</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;space-template_desc-mean_bold-axial-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;space-template_desc-mean_bold-sagittal-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+    
+    
+<div class="viewcode-block" id="qc_bold_EPI_registration"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.pipeline.qc_bold_EPI_registration">[docs]</a><span class="k">def</span> <span class="nf">qc_bold_EPI_registration</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    {&quot;name&quot;: &quot;qc_bold_EPI_registration&quot;,</span>
+<span class="sd">     &quot;config&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;switch&quot;: [[&quot;pipeline_setup&quot;, &quot;output_directory&quot;, &quot;quality_control&quot;,</span>
+<span class="sd">                 &quot;generate_quality_control_images&quot;],</span>
+<span class="sd">                [&quot;registration_workflows&quot;, &quot;functional_registration&quot;,</span>
+<span class="sd">                 &quot;func_registration_to_template&quot;, &quot;run_EPI&quot;]],</span>
+<span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;space-EPItemplate_desc-mean_bold&quot;,</span>
+<span class="sd">                &quot;EPI-template-funcreg&quot;],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-EPItemplate_desc-mean_bold-axial-qc&quot;,</span>
+<span class="sd">                 &quot;space-EPItemplate_desc-mean_bold-sagittal-qc&quot;]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># make QC montage for Mean Functional in MNI with MNI edge</span>
+    <span class="n">montage_mfi</span> <span class="o">=</span> <span class="n">create_montage</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;montage_mfi_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;EPI_MNI_edge_on_mean_func_mni&#39;</span><span class="p">,</span>
+                                 <span class="n">mapnode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-EPItemplate_desc-mean_bold&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>  <span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
+
+    <span class="n">func_template_edge</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">],</span>
+                                          <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
+                                          <span class="n">function</span><span class="o">=</span><span class="n">afni_Edge3</span><span class="p">,</span>
+                                          <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;EPI_func_template_edge_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;EPI-template-funcreg&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">func_template_edge</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_template_edge</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+               <span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay&#39;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;space-EPItemplate_desc-mean_bold-axial-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;space-EPItemplate_desc-mean_bold-sagittal-qc&#39;</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">create_qc_workflow</span><span class="p">(</span><span class="n">cfg</span><span class="p">):</span>
+    <span class="n">qc_montage_id_a</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">qc_montage_id_s</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">qc_plot_id</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">qc_hist_id</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">qc_stack</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span>
+        <span class="s1">&#39;functional_registration&#39;</span><span class="p">][</span><span class="s1">&#39;coregistration&#39;</span><span class="p">][</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+
+        <span class="n">qc_stack</span> <span class="o">+=</span> <span class="p">[</span><span class="n">qc_snr_plot</span><span class="p">,</span> <span class="n">qc_coregistration</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">qc_montage_id_a</span><span class="p">:</span>
+            <span class="n">qc_montage_id_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;snr_a&#39;</span>
+            <span class="n">qc_montage_id_s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;snr_s&#39;</span>
+            <span class="n">qc_hist_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;snr_hist&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">9</span> <span class="ow">in</span> <span class="n">qc_montage_id_a</span><span class="p">:</span>
+            <span class="n">qc_montage_id_a</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mean_func_with_t1_edge_a&#39;</span>
+            <span class="n">qc_montage_id_s</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mean_func_with_t1_edge_s&#39;</span>
+
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+
+        <span class="n">qc_stack</span> <span class="o">+=</span> <span class="p">[</span><span class="n">qc_motion_plot</span><span class="p">,</span> <span class="n">qc_fd_plot</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">qc_plot_id</span><span class="p">:</span>
+            <span class="n">qc_plot_id</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;movement_trans_plot&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">qc_plot_id</span><span class="p">:</span>
+            <span class="n">qc_plot_id</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;movement_rot_plot&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">3</span> <span class="ow">in</span> <span class="n">qc_plot_id</span><span class="p">:</span>
+            <span class="n">qc_plot_id</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;fd_plot&#39;</span>
+
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">anatomical_preproc</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+
+        <span class="n">qc_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc_brain_extraction</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">4</span> <span class="ow">in</span> <span class="n">qc_montage_id_a</span><span class="p">:</span>
+            <span class="n">qc_montage_id_a</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;skullstrip_vis_a&#39;</span>
+            <span class="n">qc_montage_id_s</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;skullstrip_vis_s&#39;</span>
+
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span><span class="s1">&#39;anatomical_registration&#39;</span><span class="p">][</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+
+        <span class="n">qc_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc_T1w_standard</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">5</span> <span class="ow">in</span> <span class="n">qc_montage_id_a</span><span class="p">:</span>
+            <span class="n">qc_montage_id_a</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mni_normalized_anatomical_a&#39;</span>
+            <span class="n">qc_montage_id_s</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mni_normalized_anatomical_s&#39;</span>
+
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">anatomical_preproc</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">cfg</span><span class="o">.</span><span class="n">segmentation</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+
+        <span class="k">if</span> <span class="s1">&#39;T1_Template&#39;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">segmentation</span><span class="p">[</span><span class="s1">&#39;tissue_segmentation&#39;</span><span class="p">][</span>
+            <span class="s1">&#39;Template_Based&#39;</span><span class="p">][</span><span class="s1">&#39;template_for_segmentation&#39;</span><span class="p">]:</span>
+            <span class="n">qc_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc_segmentation</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EPI_Template&#39;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">segmentation</span><span class="p">[</span><span class="s1">&#39;tissue_segmentation&#39;</span><span class="p">][</span>
+            <span class="s1">&#39;Template_Based&#39;</span><span class="p">][</span><span class="s1">&#39;template_for_segmentation&#39;</span><span class="p">]:</span>
+            <span class="n">qc_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc_epi_segmentation</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">7</span> <span class="ow">in</span> <span class="n">qc_montage_id_a</span><span class="p">:</span>
+            <span class="n">qc_montage_id_a</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;csf_gm_wm_a&#39;</span>
+            <span class="n">qc_montage_id_s</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;csf_gm_wm_s&#39;</span>
+
+        <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span><span class="s1">&#39;functional_registration&#39;</span><span class="p">][</span>
+            <span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">][</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+
+            <span class="n">qc_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc_carpet_plot</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="mi">8</span> <span class="ow">in</span> <span class="n">qc_plot_id</span><span class="p">:</span>
+                <span class="n">qc_plot_id</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;carpet&#39;</span>
+
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span><span class="s1">&#39;functional_registration&#39;</span><span class="p">][</span>
+        <span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">][</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+
+        <span class="n">qc_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qc_bold_registration</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">10</span> <span class="ow">in</span> <span class="n">qc_montage_id_a</span><span class="p">:</span>
+            <span class="n">qc_montage_id_a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mean_func_with_mni_edge_a&#39;</span>
+            <span class="n">qc_montage_id_s</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mean_func_with_mni_edge_s&#39;</span>
+
+    <span class="k">return</span> <span class="n">qc_stack</span><span class="p">,</span> <span class="n">qc_montage_id_a</span><span class="p">,</span> <span class="n">qc_montage_id_s</span><span class="p">,</span> <span class="n">qc_hist_id</span><span class="p">,</span> <span class="n">qc_plot_id</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index">
+              <img class="logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CPAC.qc.pipeline</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>

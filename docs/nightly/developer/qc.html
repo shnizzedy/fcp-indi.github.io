@@ -1,0 +1,1479 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Quality Control &#8212; C-PAC 1.8.5.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex" />
+    <link rel="search" title="Search" href="../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Quality Control</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-CPAC.qc">
+<span id="quality-control"></span><h1>Quality Control<a class="headerlink" href="#module-CPAC.qc" title="Permalink to this headline">¶</a></h1>
+<p>Quality control utilities for C-PAC</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.qc_masks">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.</span></span><span class="sig-name descname"><span class="pre">qc_masks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">native_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#qc_masks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qc_masks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return QC measures for coregistration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>registered_mask</strong><span class="classifier">str</span></dt><dd><p>path to registered mask</p>
+</dd>
+<dt><strong>native_mask</strong><span class="classifier">str</span></dt><dd><p>path to native-space mask</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.registration_guardrail_thresholds">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/globals#registration_guardrail_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.registration_guardrail_thresholds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get registration guardrail thresholds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>dict</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.update_thresholds">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.</span></span><span class="sig-name descname"><span class="pre">update_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thresholds</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../_modules/CPAC/qc/globals#update_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.update_thresholds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a registration guardrail threshold</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>thresholds</strong><span class="classifier">dict of {str: float or int}</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-CPAC.qc.globals"></span><p>Global QC values</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.globals.registration_guardrail_thresholds">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.globals.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/globals#registration_guardrail_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.globals.registration_guardrail_thresholds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get registration guardrail thresholds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>dict</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.globals.update_thresholds">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.globals.</span></span><span class="sig-name descname"><span class="pre">update_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thresholds</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../_modules/CPAC/qc/globals#update_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.globals.update_thresholds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a registration guardrail threshold</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>thresholds</strong><span class="classifier">dict of {str: float or int}</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-CPAC.qc.pipeline"></span><dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_T1w_standard">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_T1w_standard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_T1w_standard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_T1w_standard" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_brain_extraction”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [“space-template_desc-brain_T1w”,</p>
+<blockquote>
+<div><p>“T1w-brain-template”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-brain_T1w-axial-qc”,</dt><dd><p>“space-template_desc-brain_T1w-sagittal-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_bold_EPI_registration">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_bold_EPI_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_bold_EPI_registration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_bold_EPI_registration" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_bold_EPI_registration”,</dt><dd><p>“config”: “None”,
+“switch”: [[“pipeline_setup”, “output_directory”, “quality_control”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“generate_quality_control_images”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>[“registration_workflows”, “functional_registration”,</dt><dd><p>“func_registration_to_template”, “run_EPI”]],</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [“space-EPItemplate_desc-mean_bold”,</p>
+<blockquote>
+<div><p>“EPI-template-funcreg”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-EPItemplate_desc-mean_bold-axial-qc”,</dt><dd><p>“space-EPItemplate_desc-mean_bold-sagittal-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_bold_registration">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_bold_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_bold_registration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_bold_registration" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_bold_registration”,</dt><dd><p>“config”: “None”,
+“switch”: [[“pipeline_setup”, “output_directory”, “quality_control”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“generate_quality_control_images”],</p>
+</div></blockquote>
+<p>[“registration_workflows”, “anatomical_registration”, “run”]],</p>
+</div></blockquote>
+<p>“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [“space-template_desc-mean_bold”,</p>
+<blockquote>
+<div><p>“T1w-brain-template-funcreg”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-mean_bold-axial-qc”,</dt><dd><p>“space-template_desc-mean_bold-sagittal-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_brain_extraction">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_brain_extraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_brain_extraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_brain_extraction" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_brain_extraction”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [“desc-brain_T1w”,</p>
+<blockquote>
+<div><p>“desc-reorient_T1w”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“desc-brain_T1w-axial-qc”,</dt><dd><p>“desc-brain_T1w-sagittal-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_carpet_plot">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_carpet_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_carpet_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_carpet_plot" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_carpet_plot”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [([“space-template_desc-cleaned_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>“space-template_desc-brain_bold”,
+“space-template_desc-preproc_bold”,
+“space-template_bold”],</p>
+</div></blockquote>
+<p>“space-template_desc-mean_bold”),</p>
+</div></blockquote>
+<p>“GM-path”,
+“WM-path”,
+“CSF-path”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_desc-cleaned_bold-carpet-qc”,</dt><dd><p>“space-template_desc-brain_bold-carpet-qc”,
+“space-template_desc-preproc_bold-carpet-qc”,
+“space-template_bold-carpet-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_coregistration">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_coregistration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_coregistration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_coregistration" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_coregistration”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“desc-brain_T1w”,</p>
+<blockquote>
+<div><p>“space-T1w_desc-mean_bold”)],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-T1w_desc-mean_bold-axial-qc”,</dt><dd><p>“space-T1w_desc-mean_bold-sagittal-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_epi_segmentation">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_epi_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_epi_segmentation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_epi_segmentation" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_epi_segmentation”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“desc-brain_bold”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>[“space-bold_label-CSF_desc-preproc_mask”,</dt><dd><p>“space-bold_label-CSF_mask”],</p>
+</dd>
+<dt>[“space-bold_label-WM_desc-preproc_mask”,</dt><dd><p>“space-bold_label-WM_mask”],</p>
+</dd>
+<dt>[“space-bold_label-GM_desc-preproc_mask”,</dt><dd><p>“space-bold_label-GM_mask”])],</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“epi-dseg-axial-qc”,</dt><dd><p>“epi-dseg-sagittal-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_fd_plot">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_fd_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_fd_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_fd_plot" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>{“name”: “qc_fd_plot”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [“framewise-displacement-jenkinson”],
+“outputs”: [“framewise-displacement-jenkinson-plot-qc”]}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_motion_plot">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_motion_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_motion_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_motion_plot" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_motion_plot”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [“movement-parameters”],
+“outputs”: [“movement-parameters-trans-qc”,</p>
+<blockquote>
+<div><p>“movement-parameters-rot-qc”]}</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_segmentation">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_segmentation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_segmentation" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_segmentation”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [(“desc-brain_T1w”,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>[“label-CSF_desc-preproc_mask”,</dt><dd><p>“label-CSF_mask”],</p>
+</dd>
+<dt>[“label-WM_desc-preproc_mask”,</dt><dd><p>“label-WM_mask”],</p>
+</dd>
+<dt>[“label-GM_desc-preproc_mask”,</dt><dd><p>“label-GM_mask”])],</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“dseg-axial-qc”,</dt><dd><p>“dseg-sagittal-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_snr_plot">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_snr_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_snr_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_snr_plot" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{“name”: “qc_snr_plot”,</dt><dd><p>“config”: [“pipeline_setup”, “output_directory”, “quality_control”],
+“switch”: [“generate_quality_control_images”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [([“desc-brain_bold”, “desc-motion_bold”, “desc-preproc_bold”],</p>
+<blockquote>
+<div><blockquote>
+<div><p>“space-bold_desc-brain_mask”),</p>
+</div></blockquote>
+<p>“from-bold_to-T1w_mode-image_desc-linear_xfm”,
+“desc-brain_T1w”,
+“space-T1w_desc-mean_bold”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“bold-snr-axial-qc”,</dt><dd><p>“bold-snr-sagittal-qc”,
+“bold-snr-hist-qc”,
+“bold-snr-qc”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-CPAC.qc.qc"></span><span class="target" id="module-CPAC.qc.qcmetrics"></span><p>QC metrics from XCP-D v0.0.9</p>
+<p>Ref: <a class="reference external" href="https://github.com/PennLINC/xcp_d/tree/0.0.9">https://github.com/PennLINC/xcp_d/tree/0.0.9</a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.qcmetrics.coverage">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.qcmetrics.</span></span><span class="sig-name descname"><span class="pre">coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#coverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qcmetrics.coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the coverage between two masks.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.qcmetrics.crosscorr">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.qcmetrics.</span></span><span class="sig-name descname"><span class="pre">crosscorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#crosscorr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qcmetrics.crosscorr" title="Permalink to this definition">¶</a></dt>
+<dd><p>cross correlation: compute cross correction bewteen input masks</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.qcmetrics.dc">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.qcmetrics.</span></span><span class="sig-name descname"><span class="pre">dc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#dc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qcmetrics.dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dice coefficient
+Computes the Dice coefficient (also known as Sorensen index)
+between the binary objects in two images.
+The metric is defined as</p>
+<div class="math notranslate nohighlight">
+\[DC=\frac{2|A\cap B|}{|A|+|B|}\]</div>
+<p>, where <span class="math notranslate nohighlight">\(A\)</span> is the first and <span class="math notranslate nohighlight">\(B\)</span> the second set of
+samples (here: binary objects).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input1</strong><span class="classifier">array_like</span></dt><dd><p>Input data containing objects. Can be any type but will be converted
+into binary: background where 0, object everywhere else.</p>
+</dd>
+<dt><strong>input2</strong><span class="classifier">array_like</span></dt><dd><p>Input data containing objects. Can be any type but will be converted
+into binary: background where 0, object everywhere else.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>dc</strong><span class="classifier">float</span></dt><dd><p>The Dice coefficient between the object(s) in <code class="docutils literal notranslate"><span class="pre">`input1`</span></code> and the
+object(s) in <code class="docutils literal notranslate"><span class="pre">`input2`</span></code>. It ranges from 0 (no overlap) to 1
+(perfect overlap).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This is a real metric.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.qcmetrics.jc">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.qcmetrics.</span></span><span class="sig-name descname"><span class="pre">jc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#jc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qcmetrics.jc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jaccard coefficient
+Computes the Jaccard coefficient between the binary objects in two images.
+Parameters
+———-
+input1: array_like</p>
+<blockquote>
+<div><p>Input data containing objects. Can be any type but will be
+converted into binary: background where 0, object everywhere else.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>input2: array_like</dt><dd><p>Input data containing objects. Can be any type but will be
+converted into binary: background where 0, object everywhere else.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>jc: float</dt><dd><p>The Jaccard coefficient between the object(s) in <cite>input1</cite> and the
+object(s) in <cite>input2</cite>. It ranges from 0 (no overlap) to 1
+(perfect overlap).</p>
+</dd>
+</dl>
+<p>This is a real metric.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.qcmetrics.qc_masks">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.qcmetrics.</span></span><span class="sig-name descname"><span class="pre">qc_masks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">native_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#qc_masks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qcmetrics.qc_masks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return QC measures for coregistration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>registered_mask</strong><span class="classifier">str</span></dt><dd><p>path to registered mask</p>
+</dd>
+<dt><strong>native_mask</strong><span class="classifier">str</span></dt><dd><p>path to native-space mask</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.qcmetrics.regisQ">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.qcmetrics.</span></span><span class="sig-name descname"><span class="pre">regisQ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bold2t1w_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1w_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2template_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#regisQ"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qcmetrics.regisQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collect coregistration QC measures</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>bold2t1w_mask, t1w_mask, bold2template_mask, template_mask</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-CPAC.qc.utils"></span><dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.add_head">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">add_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frameset_html_fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_html_fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_html_fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#add_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.add_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write HTML Headers to various html files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>frameset_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to main html file</p>
+</dd>
+<dt><strong>menu_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to navigation bar html file</p>
+</dd>
+<dt><strong>content_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to html file contaning pngs and plots</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.add_tail">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">add_tail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frameset_html_fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_html_fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_html_fd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#add_tail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.add_tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write HTML Tail Tags to various html files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>frameset_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to main html file</p>
+</dd>
+<dt><strong>menu_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to navigation bar html file</p>
+</dd>
+<dt><strong>content_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to html file contaning pngs and plots</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.append_to_files_in_dict_way">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">append_to_files_in_dict_way</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#append_to_files_in_dict_way"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.append_to_files_in_dict_way" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine files so at each resource in file appears exactly once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>list_files</strong><span class="classifier">list</span></dt><dd></dd>
+<dt><strong>file_</strong><span class="classifier">string</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Writes contents of <a href="#id3"><span class="problematic" id="id4">file_</span></a> into list_files, ensuring list_files finally has
+each resource appearing exactly once</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.cal_snr_val">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">cal_snr_val</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measure_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#cal_snr_val"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.cal_snr_val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate average snr value for snr image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>measure_file</strong><span class="classifier">string</span></dt><dd><p>path to input nifti file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>avg_snr_file</strong><span class="classifier">string</span></dt><dd><p>a text file store average snr value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.coverage">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#coverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>estimate the coverage between  two mask</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.crosscorr">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">crosscorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#crosscorr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.crosscorr" title="Permalink to this definition">¶</a></dt>
+<dd><p>cross correlation
+computer compute cross correction bewteen input mask</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.dc">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">dc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#dc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.dc" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Dice coefficient</p>
+<p>Computes the Dice coefficient (also known as Sorensen index) between the binary
+objects in two images.</p>
+<p>The metric is defined as</p>
+<div class="math notranslate nohighlight">
+\[DC=\]</div>
+</div></blockquote>
+<p>rac{2|Acap B|}{<a href="#id1"><span class="problematic" id="id2">|A|+|B|</span></a>}</p>
+<blockquote>
+<div><p>, where <span class="math notranslate nohighlight">\(A\)</span> is the first and <span class="math notranslate nohighlight">\(B\)</span> the second set of samples (here: binary objects).</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input1</strong><span class="classifier">array_like</span></dt><dd><p>Input data containing objects. Can be any type but will be converted
+into binary: background where 0, object everywhere else.</p>
+</dd>
+<dt><strong>input2</strong><span class="classifier">array_like</span></dt><dd><p>Input data containing objects. Can be any type but will be converted
+into binary: background where 0, object everywhere else.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>dc</strong><span class="classifier">float</span></dt><dd><p>The Dice coefficient between the object(s) in <code class="docutils literal notranslate"><span class="pre">`input1`</span></code> and the
+object(s) in <code class="docutils literal notranslate"><span class="pre">`input2`</span></code>. It ranges from 0 (no overlap) to 1 (perfect overlap).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This is a real metric.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.determine_start_and_end">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">determine_start_and_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#determine_start_and_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.determine_start_and_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine start slice and end slice in data file in
+given direction with at least threshold percent of voxels
+at start and end slices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">string</span></dt><dd><p>input nifti file</p>
+</dd>
+<dt><strong>direction</strong><span class="classifier">string</span></dt><dd><p>axial or sagittal</p>
+</dd>
+<dt><strong>percent</strong><span class="classifier">float</span></dt><dd><p>percent(from total) of non zero voxels at starting and ending slice</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>start</strong><span class="classifier">integer</span></dt><dd><p>Index of starting slice</p>
+</dd>
+<dt><strong>end</strong><span class="classifier">integer</span></dt><dd><p>Index of the last slice</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.drange">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">drange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#drange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.drange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate list of float values in a specified range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>min_</strong><span class="classifier">float</span></dt><dd><p>Min value</p>
+</dd>
+<dt><strong>max_</strong><span class="classifier">float</span></dt><dd><p>Max value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>range_</strong><span class="classifier">list</span></dt><dd><p>list of float values in the <a href="#id5"><span class="problematic" id="id6">min_</span></a> <a href="#id7"><span class="problematic" id="id8">max_</span></a> range</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.drop_percent">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">drop_percent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measure_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#drop_percent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.drop_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zeros out voxels in measure files whose intensity doesnt fall in percent
+of voxel intensities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>measure_file</strong><span class="classifier">string</span></dt><dd><p>Input nifti file</p>
+</dd>
+<dt><strong>percent</strong><span class="classifier">percentage of the voxels to keep</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>modified_measure_file</strong><span class="classifier">string</span></dt><dd><p>measure_file with 1 - percent voxels zeroed out</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.feed_line_body">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">feed_line_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_html_fd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#feed_line_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.feed_line_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write to html file that has to contain images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>image_name</strong><span class="classifier">string</span></dt><dd><p>name of image</p>
+</dd>
+<dt><strong>anchor</strong><span class="classifier">string</span></dt><dd><p>anchor id of the image</p>
+</dd>
+<dt><strong>image</strong><span class="classifier">string</span></dt><dd><p>path to the image</p>
+</dd>
+<dt><strong>content_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to html file contaning pngs and plots</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.feed_line_nav">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">feed_line_nav</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_html_fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_html_fd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#feed_line_nav"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.feed_line_nav" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write to navigation bar html file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>anchor</strong><span class="classifier">string</span></dt><dd><p>anchor id of the image</p>
+</dd>
+<dt><strong>image_name</strong><span class="classifier">string</span></dt><dd><p>name of image</p>
+</dd>
+<dt><strong>menu_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to navigation bar html file</p>
+</dd>
+<dt><strong>content_html_fd</strong><span class="classifier">string</span></dt><dd><p>path to html file contaning pngs and plots</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.feed_lines_html">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">feed_lines_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">montage_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">montages_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">montages_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histograms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_plot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_montage_id_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_montage_id_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_plot_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_hist_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_html_fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_html_fd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#feed_lines_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.feed_lines_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write HTML Tags to various html files and embeds images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dict_a</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of axial montages key : id no
+value is list of paths to axial montages</p>
+</dd>
+<dt><strong>dict_s</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of sagittal montages key : id no
+value is list of paths to sagittal montages</p>
+</dd>
+<dt><strong>dict_plot</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of plot pngs key : id no
+value is list of paths to plots</p>
+</dd>
+<dt><strong>dict_hist</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of histogram pngs key : id no
+value is list of paths to histogram pngs</p>
+</dd>
+<dt><strong>qc_montage_id_a</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of axial montages key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_montage_id_s</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of sagittal montages key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_plot_id</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of plot pngs key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_hist_id</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of histogram pngs key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>f_html_0</strong><span class="classifier">string</span></dt><dd><p>path to navigation bar html file</p>
+</dd>
+<dt><strong>f_html_1</strong><span class="classifier">string</span></dt><dd><p>path to html file contaning pngs and plots</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.first_pass_organizing_files">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">first_pass_organizing_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qc_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#first_pass_organizing_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.first_pass_organizing_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>First Pass at organizing qc txt files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>qc_path</strong><span class="classifier">string</span></dt><dd><p>existing path of qc_html directory</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Combines files with same strategy. First pass combines file names,
+where one file name is substring of the other.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.gen_histogram">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">gen_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measure_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#gen_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.gen_histogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates Histogram Image of intensities for a given input nifti file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>measure_file</strong><span class="classifier">string</span></dt><dd><p>path to input nifti file</p>
+</dd>
+<dt><strong>measure</strong><span class="classifier">string</span></dt><dd><p>Name of the measure label in the plot</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>hist_path</strong><span class="classifier">string</span></dt><dd><p>Path to the generated histogram png</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.gen_motion_plt">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">gen_motion_plt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motion_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#gen_motion_plt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.gen_motion_plt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to Generate Matplotlib plot for motion.
+Separate plots for Translation and Rotation are generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>motion_parameters</strong><span class="classifier">string</span></dt><dd><p>Motion Parameters file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>translation_plot</strong><span class="classifier">string</span></dt><dd><p>path to translation plot</p>
+</dd>
+<dt><strong>rotation_plot</strong><span class="classifier">string</span></dt><dd><p>path to rotation plot</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.gen_plot_png">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">gen_plot_png</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ex_vol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#gen_plot_png"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.gen_plot_png" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Motion FD Plot. Shows which volumes were dropped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>arr</strong><span class="classifier">list</span></dt><dd><p>Frame wise Displacements</p>
+</dd>
+<dt><strong>measure</strong><span class="classifier">string</span></dt><dd><p>Label of the Measure</p>
+</dd>
+<dt><strong>ex_vol</strong><span class="classifier">list</span></dt><dd><p>Volumes excluded</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>png_name</strong><span class="classifier">string</span></dt><dd><p>path to the generated plot png</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.generate_qc_pages">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">generate_qc_pages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qc_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#generate_qc_pages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.generate_qc_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the QC HTML files populated with the QC images that were
+created during the CPAC pipeline run.</p>
+<p>This function runs after the pipeline is over.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>qc_dir</strong><span class="classifier">string</span></dt><dd><p>path to qc directory</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.get_map_and_measure">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">get_map_and_measure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">png_a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#get_map_and_measure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.get_map_and_measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract Map name and Measure name from png.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>png_a</strong><span class="classifier">string</span></dt><dd><p>name of png</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>map_name</strong><span class="classifier">string</span></dt><dd><p>proper name for map</p>
+</dd>
+<dt><strong>measure_name</strong><span class="classifier">string</span></dt><dd><p>proper name for measure</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.get_map_id">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">get_map_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#get_map_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.get_map_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the proper map name given identifier for it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>str_</strong><span class="classifier">string</span></dt><dd><p>string containing text for identifier</p>
+</dd>
+<dt><strong>id_</strong><span class="classifier">string</span></dt><dd><p>string for identifier</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>map_id</strong><span class="classifier">string</span></dt><dd><p>proper name for a map</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.get_spacing">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">get_spacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">across</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">down</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimension</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#get_spacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.get_spacing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Spacing in slices to be selected for montage
+display varying in given dimension</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>across</strong><span class="classifier">integer</span></dt><dd><p># images placed horizontally in montage</p>
+</dd>
+<dt><strong>down</strong><span class="classifier">integer</span></dt><dd><p># images stacked vertically in montage</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>space</strong><span class="classifier">integer</span></dt><dd><p># of images to skip before displaying next one</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.grp_pngs_by_id">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">grp_pngs_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pngs_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_montage_id_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_montage_id_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_plot_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_hist_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#grp_pngs_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.grp_pngs_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Groups pngs by their ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pngs_</strong><span class="classifier">list</span></dt><dd><p>list of all pngs</p>
+</dd>
+<dt><strong>qc_montage_id_a</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of axial montages key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_montage_id_s</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of sagittal montages key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_plot_id</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of plot pngs key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_hist_id</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of histogram pngs key : id no
+value is list of png types</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>dict_a</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of axial montages key : id no
+value is list of paths to axial montages</p>
+</dd>
+<dt><strong>dict_s</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of sagittal montages key : id no
+value is list of paths to sagittal montages</p>
+</dd>
+<dt><strong>dict_plot</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of plot pngs key : id no
+value is list of paths to plots</p>
+</dd>
+<dt><strong>dict_hist</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of histogram pngs key : id no
+value is list of paths to histogram pngs</p>
+</dd>
+<dt><strong>all_ids</strong><span class="classifier">list</span></dt><dd><p>list of png id nos</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.jc">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">jc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#jc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.jc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jaccard coefficient</p>
+<p>Computes the Jaccard coefficient between the binary objects in two images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input1</strong><span class="classifier">array_like</span></dt><dd><p>Input data containing objects. Can be any type but will be converted
+into binary: background where 0, object everywhere else.</p>
+</dd>
+<dt><strong>input2</strong><span class="classifier">array_like</span></dt><dd><p>Input data containing objects. Can be any type but will be converted
+into binary: background where 0, object everywhere else.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>jc</strong><span class="classifier">float</span></dt><dd><p>The Jaccard coefficient between the object(s) in <cite>input1</cite> and the
+object(s) in <cite>input2</cite>. It ranges from 0 (no overlap) to 1 (perfect overlap).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This is a real metric.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.make_histogram">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">make_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measure_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#make_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.make_histogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates Histogram Image of intensities for a given input
+nifti file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>measure_file</strong><span class="classifier">string</span></dt><dd><p>path to input nifti file</p>
+</dd>
+<dt><strong>measure</strong><span class="classifier">string</span></dt><dd><p>Name of the measure label in the plot</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>hist_path</strong><span class="classifier">string</span></dt><dd><p>Path to the generated histogram png</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.make_montage_axial">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">make_montage_axial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">png_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#make_montage_axial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.make_montage_axial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws Montage using overlay on Anatomical brain in Axial Direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>overlay</strong><span class="classifier">string</span></dt><dd><p>Nifi file</p>
+</dd>
+<dt><strong>underlay</strong><span class="classifier">string</span></dt><dd><p>Nifti for Anatomical Brain</p>
+</dd>
+<dt><strong>cbar_name</strong><span class="classifier">string</span></dt><dd><p>name of the cbar</p>
+</dd>
+<dt><strong>png_name</strong><span class="classifier">string</span></dt><dd><p>Proposed name of the montage plot</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>png_name</strong><span class="classifier">Path to generated PNG</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.make_montage_sagittal">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">make_montage_sagittal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">png_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#make_montage_sagittal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.make_montage_sagittal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws Montage using overlay on Anatomical brain in Sagittal Direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>overlay</strong><span class="classifier">string</span></dt><dd><p>Nifi file</p>
+</dd>
+<dt><strong>underlay</strong><span class="classifier">string</span></dt><dd><p>Nifti for Anatomical Brain</p>
+</dd>
+<dt><strong>cbar_name</strong><span class="classifier">string</span></dt><dd><p>name of the cbar</p>
+</dd>
+<dt><strong>png_name</strong><span class="classifier">string</span></dt><dd><p>Proposed name of the montage plot</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>png_name</strong><span class="classifier">Path to generated PNG</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.make_page">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">make_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qc_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_montage_id_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_montage_id_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_plot_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_hist_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#make_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.make_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a ‘qc_html’ text file in the CPAC output directory into
+a QC HTML page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_</strong><span class="classifier">string</span></dt><dd><p>path to qc path file</p>
+</dd>
+<dt><strong>sub_output_dir</strong><span class="classifier">string</span></dt><dd><p>path to subject’s output directory</p>
+</dd>
+<dt><strong>qc_montage_id_a</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of axial montages key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_montage_id_s</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of sagittal montages key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_plot_id</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of plot pngs key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_hist_id</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of histogram pngs key : id no
+value is list of png types</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.make_qc_pages">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">make_qc_pages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qc_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_montage_id_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_montage_id_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_plot_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_hist_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#make_qc_pages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.make_qc_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a QC HTML file for each text file in the ‘qc_html’
+folder in the CPAC output directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>qc_path</strong><span class="classifier">string</span></dt><dd><p>path to qc_html directory</p>
+</dd>
+<dt><strong>sub_output_dir</strong><span class="classifier">string</span></dt><dd><p>path to subject’s output directory</p>
+</dd>
+<dt><strong>qc_montage_id_a</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of axial montages key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_montage_id_s</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of sagittal montages key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_plot_id</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of plot pngs key : id no
+value is list of png types</p>
+</dd>
+<dt><strong>qc_hist_id</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary of histogram pngs key : id no
+value is list of png types</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.make_resample_1mm">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">make_resample_1mm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#make_resample_1mm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.make_resample_1mm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resamples input nifti file to 1mm space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_</strong><span class="classifier">string</span></dt><dd><p>Input Nifti File</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>new_fname</strong><span class="classifier">string</span></dt><dd><p>Input Nifti resampled to 1mm space</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.montage_axial">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">montage_axial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">png_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#montage_axial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.montage_axial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws Montage using overlay on Anatomical brain in Axial Direction,
+calls make_montage_axial.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>overlay</strong><span class="classifier">string</span></dt><dd><p>Nifi file</p>
+</dd>
+<dt><strong>underlay</strong><span class="classifier">string</span></dt><dd><p>Nifti for Anatomical Brain</p>
+</dd>
+<dt><strong>cbar_name</strong><span class="classifier">string</span></dt><dd><p>name of the cbar</p>
+</dd>
+<dt><strong>png_name</strong><span class="classifier">string</span></dt><dd><p>Proposed name of the montage plot</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>png_name</strong><span class="classifier">Path to generated PNG</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.montage_gm_wm_csf_axial">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">montage_gm_wm_csf_axial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overlay_csf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_wm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_gm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">png_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#montage_gm_wm_csf_axial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.montage_gm_wm_csf_axial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws Montage using GM WM and CSF overlays on Anatomical brain in Sagittal Direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>overlay_csf</strong><span class="classifier">string</span></dt><dd><p>Nifi file CSF MAP</p>
+</dd>
+<dt><strong>overlay_wm</strong><span class="classifier">string</span></dt><dd><p>Nifti file WM MAP</p>
+</dd>
+<dt><strong>overlay_gm</strong><span class="classifier">string</span></dt><dd><p>Nifti file GM MAP</p>
+</dd>
+<dt><strong>underlay</strong><span class="classifier">string</span></dt><dd><p>Nifti for Anatomical Brain</p>
+</dd>
+<dt><strong>png_name</strong><span class="classifier">string</span></dt><dd><p>Proposed name of the montage plot</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>png_name</strong><span class="classifier">Path to generated PNG</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.montage_gm_wm_csf_sagittal">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">montage_gm_wm_csf_sagittal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overlay_csf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_wm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_gm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">png_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#montage_gm_wm_csf_sagittal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.montage_gm_wm_csf_sagittal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws Montage using GM WM and CSF overlays on Anatomical brain in Sagittal Direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>overlay_csf</strong><span class="classifier">string</span></dt><dd><p>Nifi file CSF MAP</p>
+</dd>
+<dt><strong>overlay_wm</strong><span class="classifier">string</span></dt><dd><p>Nifti file WM MAP</p>
+</dd>
+<dt><strong>overlay_gm</strong><span class="classifier">string</span></dt><dd><p>Nifti file GM MAP</p>
+</dd>
+<dt><strong>underlay</strong><span class="classifier">string</span></dt><dd><p>Nifti for Anatomical Brain</p>
+</dd>
+<dt><strong>png_name</strong><span class="classifier">string</span></dt><dd><p>Proposed name of the montage plot</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>png_name</strong><span class="classifier">Path to generated PNG</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.montage_sagittal">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">montage_sagittal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underlay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">png_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#montage_sagittal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.montage_sagittal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws Montage using overlay on Anatomical brain in Sagittal Direction
+calls make_montage_sagittal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>overlay</strong><span class="classifier">string</span></dt><dd><p>Nifi file</p>
+</dd>
+<dt><strong>underlay</strong><span class="classifier">string</span></dt><dd><p>Nifti for Anatomical Brain</p>
+</dd>
+<dt><strong>cbar_name</strong><span class="classifier">string</span></dt><dd><p>name of the cbar</p>
+</dd>
+<dt><strong>png_name</strong><span class="classifier">string</span></dt><dd><p>Proposed name of the montage plot</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>png_name</strong><span class="classifier">Path to generated PNG</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.organize">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">organize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">png_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#organize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.organize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Organizes pngs according to their IDS in new_dict dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dict_</strong><span class="classifier">dictionary</span></dt><dd><p>dict containing png id no and png type(montage/plot/hist)</p>
+</dd>
+<dt><strong>all_ids</strong><span class="classifier">list</span></dt><dd><p>list of all png id numbers</p>
+</dd>
+<dt><strong>png_</strong><span class="classifier">string</span></dt><dd><p>path to png</p>
+</dd>
+<dt><strong>new_dict</strong><span class="classifier">dictionary</span></dt><dd><p>dictionary containg ids and png lists</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>all_ids</strong><span class="classifier">list</span></dt><dd><p>list of png id nos</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.register_pallete">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">register_pallete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">colors_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#register_pallete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.register_pallete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers color pallete to matplotlib</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>colors_file</strong><span class="classifier">string</span></dt><dd><p>file containing colors in hexadecimal formats in each line</p>
+</dd>
+<dt><strong>cbar_name</strong><span class="classifier">string</span></dt><dd><p>Proposed name for the color bar</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.resample_1mm">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">resample_1mm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#resample_1mm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.resample_1mm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls make_resample_1mm which resamples file to 1mm space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_</strong><span class="classifier">string</span></dt><dd><p>path to the scan</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>new_fname</strong><span class="classifier">string</span></dt><dd><p>path to 1mm resampled nifti file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.utils.second_pass_organizing_files">
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.utils.</span></span><span class="sig-name descname"><span class="pre">second_pass_organizing_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qc_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/utils#second_pass_organizing_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.utils.second_pass_organizing_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Second Pass at organizing qc txt files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>qc_path</strong><span class="classifier">string</span></dt><dd><p>existing path of qc_html directory</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Combines files with same strategy. combines files for derivative
+falff , alff with others</p>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index">
+              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Quality Control</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>
