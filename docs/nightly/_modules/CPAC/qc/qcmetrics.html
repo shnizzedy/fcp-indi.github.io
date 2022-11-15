@@ -41,92 +41,28 @@
           <div class="body" role="main">
             
   <h1>Source code for CPAC.qc.qcmetrics</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Modifications: Copyright (C) 2022  C-PAC Developers</span>
-
-<span class="c1"># This file is part of C-PAC.</span>
-
-<span class="c1"># C-PAC is free software: you can redistribute it and/or modify it under</span>
-<span class="c1"># the terms of the GNU Lesser General Public License as published by the</span>
-<span class="c1"># Free Software Foundation, either version 3 of the License, or (at your</span>
-<span class="c1"># option) any later version.</span>
-
-<span class="c1"># C-PAC is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
-<span class="c1"># License for more details.</span>
-
-<span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
-<span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-
-<span class="c1"># Original code: BSD 3-Clause License</span>
-
-<span class="c1"># Copyright (c) 2020, Lifespan Informatics and Neuroimaging Center</span>
-
-<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
-<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
-
-<span class="c1"># 1. Redistributions of source code must retain the above copyright notice,</span>
-<span class="c1">#    this list of conditions and the following disclaimer.</span>
-
-<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
-<span class="c1">#    this list of conditions and the following disclaimer in the documentation</span>
-<span class="c1">#    and/or other materials provided with the distribution.</span>
-
-<span class="c1"># 3. Neither the name of the copyright holder nor the names of its</span>
-<span class="c1">#    contributors may be used to endorse or promote products derived from</span>
-<span class="c1">#    this software without specific prior written permission.</span>
-
-<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
-<span class="c1"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
-<span class="c1"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
-<span class="c1"># ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE</span>
-<span class="c1"># LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
-<span class="c1"># CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
-<span class="c1"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
-<span class="c1"># INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
-<span class="c1"># CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
-<span class="c1"># ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
-<span class="c1"># POSSIBILITY OF SUCH DAMAGE.</span>
-<span class="sd">&quot;&quot;&quot;QC metrics from XCP-D v0.0.9</span>
+<span></span><span class="sd">&quot;&quot;&quot;QC metrics from XCP-D v0.0.9</span>
 
 <span class="sd">Ref: https://github.com/PennLINC/xcp_d/tree/0.0.9</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="c1"># LGPL-3.0-or-later: Module docstring and lint exclusions</span>
 <span class="c1"># pylint: disable=invalid-name, redefined-outer-name</span>
-<span class="c1"># BSD-3-Clause: imports and unspecified sections</span>
 <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nb</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<span class="c1"># BSD-3-Clause</span>
-<div class="viewcode-block" id="coverage"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.coverage">[docs]</a><span class="k">def</span> <span class="nf">coverage</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Estimate the coverage between two masks.&quot;&quot;&quot;</span>
-    <span class="n">input1</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
-    <span class="n">input2</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
-    <span class="n">input1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">input1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span>
-    <span class="n">input2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">input2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span>
-    <span class="n">intsec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">input1</span> <span class="o">&amp;</span> <span class="n">input2</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">input2</span><span class="p">):</span>
-        <span class="n">smallv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">smallv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span>
-    <span class="n">cov</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">intsec</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">smallv</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">cov</span></div>
+<span class="k">def</span> <span class="nf">regisQ</span><span class="p">(</span><span class="n">bold2t1w_mask</span><span class="p">,</span> <span class="n">t1w_mask</span><span class="p">,</span> <span class="n">bold2template_mask</span><span class="p">,</span> <span class="n">template_mask</span><span class="p">):</span>
+    <span class="n">reg_qc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;coregDice&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">dc</span><span class="p">(</span><span class="n">bold2t1w_mask</span><span class="p">,</span> <span class="n">t1w_mask</span><span class="p">)],</span>
+              <span class="s1">&#39;coregJaccard&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">jc</span><span class="p">(</span><span class="n">bold2t1w_mask</span><span class="p">,</span> <span class="n">t1w_mask</span><span class="p">)],</span>
+              <span class="s1">&#39;coregCrossCorr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">crosscorr</span><span class="p">(</span><span class="n">bold2t1w_mask</span><span class="p">,</span> <span class="n">t1w_mask</span><span class="p">)],</span>
+              <span class="s1">&#39;coregCoverage&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">coverage</span><span class="p">(</span><span class="n">bold2t1w_mask</span><span class="p">,</span> <span class="n">t1w_mask</span><span class="p">)],</span>
+              <span class="s1">&#39;normDice&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">dc</span><span class="p">(</span><span class="n">bold2template_mask</span><span class="p">,</span> <span class="n">template_mask</span><span class="p">)],</span>
+              <span class="s1">&#39;normJaccard&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">jc</span><span class="p">(</span><span class="n">bold2template_mask</span><span class="p">,</span> <span class="n">template_mask</span><span class="p">)],</span>
+              <span class="s1">&#39;normCrossCorr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">crosscorr</span><span class="p">(</span><span class="n">bold2template_mask</span><span class="p">,</span> <span class="n">template_mask</span><span class="p">)],</span>
+              <span class="s1">&#39;normCoverage&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">coverage</span><span class="p">(</span><span class="n">bold2template_mask</span><span class="p">,</span> <span class="n">template_mask</span><span class="p">)]}</span>
+    <span class="k">return</span> <span class="n">reg_qc</span>
 
 
-<span class="c1"># BSD-3-Clause</span>
-<div class="viewcode-block" id="crosscorr"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.crosscorr">[docs]</a><span class="k">def</span> <span class="nf">crosscorr</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;cross correlation: compute cross correction bewteen input masks&quot;&quot;&quot;</span>
-    <span class="n">input1</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
-    <span class="n">input2</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
-    <span class="n">input1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">input1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">input2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">input2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">cc</span></div>
-
-
-<span class="c1"># BSD-3-Clause</span>
-<div class="viewcode-block" id="dc"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.dc">[docs]</a><span class="k">def</span> <span class="nf">dc</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
+<div class="viewcode-block" id="dc"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.qcmetrics.dc">[docs]</a><span class="k">def</span> <span class="nf">dc</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dice coefficient</span>
 <span class="sd">    Computes the Dice coefficient (also known as Sorensen index)</span>
@@ -178,8 +114,7 @@
     <span class="k">return</span> <span class="n">dc</span></div>
 
 
-<span class="c1"># BSD-3-Clause</span>
-<div class="viewcode-block" id="jc"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.jc">[docs]</a><span class="k">def</span> <span class="nf">jc</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
+<div class="viewcode-block" id="jc"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.qcmetrics.jc">[docs]</a><span class="k">def</span> <span class="nf">jc</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Jaccard coefficient</span>
 <span class="sd">    Computes the Jaccard coefficient between the binary objects in two images.</span>
@@ -214,65 +149,29 @@
     <span class="k">return</span> <span class="n">jc</span></div>
 
 
-<span class="c1"># LGPL-3.0-or-later</span>
-<span class="k">def</span> <span class="nf">_prefix_regqc_keys</span><span class="p">(</span><span class="n">qc_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Prepend string to each key in a qc dict</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    qc_dict : dict</span>
-<span class="sd">        output of ``qc_masks``</span>
-
-<span class="sd">    prefix : str</span>
-<span class="sd">        string to prepend</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    dict</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">_key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">_value</span> <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">_value</span> <span class="ow">in</span> <span class="n">qc_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<div class="viewcode-block" id="crosscorr"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.qcmetrics.crosscorr">[docs]</a><span class="k">def</span> <span class="nf">crosscorr</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;cross correlation: compute cross correction bewteen input masks&quot;&quot;&quot;</span>
+    <span class="n">input1</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">input2</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">input1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">input1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">input2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">input2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">cc</span></div>
 
 
-<span class="c1"># BSD-3-Clause: logic</span>
-<span class="c1"># LGPL-3.0-or-later: docstring and refactored function</span>
-<div class="viewcode-block" id="qc_masks"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.qc_masks">[docs]</a><span class="k">def</span> <span class="nf">qc_masks</span><span class="p">(</span><span class="n">registered_mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">native_mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return QC measures for coregistration</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    registered_mask : str</span>
-<span class="sd">        path to registered mask</span>
-
-<span class="sd">    native_mask : str</span>
-<span class="sd">        path to native-space mask</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    dict</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;Dice&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">dc</span><span class="p">(</span><span class="n">registered_mask</span><span class="p">,</span> <span class="n">native_mask</span><span class="p">)],</span>
-            <span class="s1">&#39;Jaccard&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">jc</span><span class="p">(</span><span class="n">registered_mask</span><span class="p">,</span> <span class="n">native_mask</span><span class="p">)],</span>
-            <span class="s1">&#39;CrossCorr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">crosscorr</span><span class="p">(</span><span class="n">registered_mask</span><span class="p">,</span> <span class="n">native_mask</span><span class="p">)],</span>
-            <span class="s1">&#39;Coverage&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">coverage</span><span class="p">(</span><span class="n">registered_mask</span><span class="p">,</span> <span class="n">native_mask</span><span class="p">)]}</span></div>
-
-
-<span class="c1"># BSD-3-Clause: name and signature</span>
-<span class="c1"># LGPL-3.0-or-later: docstring and refactored function</span>
-<div class="viewcode-block" id="regisQ"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.regisQ">[docs]</a><span class="k">def</span> <span class="nf">regisQ</span><span class="p">(</span><span class="n">bold2t1w_mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t1w_mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bold2template_mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-           <span class="n">template_mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Collect coregistration QC measures</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    bold2t1w_mask, t1w_mask, bold2template_mask, template_mask : str</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    dict</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">_prefix_regqc_keys</span><span class="p">(</span><span class="n">qc_masks</span><span class="p">(</span><span class="n">bold2t1w_mask</span><span class="p">,</span> <span class="n">t1w_mask</span><span class="p">),</span> <span class="s1">&#39;coreg&#39;</span><span class="p">),</span>
-            <span class="o">**</span><span class="n">_prefix_regqc_keys</span><span class="p">(</span><span class="n">qc_masks</span><span class="p">(</span><span class="n">bold2template_mask</span><span class="p">,</span> <span class="n">template_mask</span><span class="p">),</span>
-                                 <span class="s1">&#39;norm&#39;</span><span class="p">)}</span></div>
+<div class="viewcode-block" id="coverage"><a class="viewcode-back" href="../../../developer/qc#CPAC.qc.qcmetrics.coverage">[docs]</a><span class="k">def</span> <span class="nf">coverage</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Estimate the coverage between two masks.&quot;&quot;&quot;</span>
+    <span class="n">input1</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">input2</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">input1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">input1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span>
+    <span class="n">input2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">input2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">))</span>
+    <span class="n">intsec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">input1</span> <span class="o">&amp;</span> <span class="n">input2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">input2</span><span class="p">):</span>
+        <span class="n">smallv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">smallv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">intsec</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">smallv</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cov</span></div>
 </pre></div>
 
             <div class="clearer"></div>

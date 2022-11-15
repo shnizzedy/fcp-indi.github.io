@@ -192,12 +192,23 @@
 </tr>
 </tbody>
 </table>
-<p>and the format <code class="docutils literal notranslate"><span class="pre">{filterType}{filterOrder}[{key}{value}]*</span></code> with a lowercase <code class="docutils literal notranslate"><span class="pre">p</span></code> replacing any decimal points. If any filters have duplicate names (given or generated), each name after the first will be suffixed with <code class="docutils literal notranslate"><span class="pre">dup{duplicate_number}</span></code>, with <code class="docutils literal notranslate"><span class="pre">duplicate_number</span></code> starting at 1. See <code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.pipeline.schema.name_motion_filter</span></code> for examples.</p>
+<p>and the format <code class="docutils literal notranslate"><span class="pre">{filterType}{filterOrder}[{key}{value}]*</span></code> with a lowercase <code class="docutils literal notranslate"><span class="pre">p</span></code> replacing any decimal points. If any filters have duplicate names (given or generated), each name after the first will be suffixed with <code class="docutils literal notranslate"><span class="pre">dup{duplicate_number}</span></code>, with <code class="docutils literal notranslate"><span class="pre">duplicate_number</span></code> starting at 1. See <a class="reference internal" href="../developer/schema#CPAC.pipeline.schema.name_motion_filter" title="CPAC.pipeline.schema.name_motion_filter"><code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.pipeline.schema.name_motion_filter</span></code></a> for examples.</p>
 <dl class="footnote brackets">
 <dt class="label" id="motion-filter-abbreviations"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>These abbreviations are based on <span id="id2">[]</span> but modified to comply with <span id="id3">[]</span>.</p>
+<dd><p>These abbreviations are based on <span id="id2">[<a class="reference internal" href="#id10" title="Eyben, F. 2016. Spectral Bands and Filter Shapes. Real-time Speech and Music Classification by Large Audio Feature Space Extraction Cham, Switzerland: Springer International Publishing.">1</a>]</span> but modified to comply with <span id="id3">[<a class="reference internal" href="#id6" title="BIDS-contributors. 2021. Appendix IX: Entities. The Brain Imaging Data Structure (BIDS) Specification, 1.6.0">2</a>]</span>.</p>
 </dd>
 </dl>
+<p class="rubric">References</p>
+<div class="docutils container" id="id4">
+<dl class="citation">
+<dt class="label" id="id10"><span class="brackets">1</span></dt>
+<dd><p>Eyben, F. 2016. Spectral Bands and Filter Shapes. <em>Real-time Speech and Music Classification by Large Audio Feature Space Extraction</em> Cham, Switzerland: Springer International Publishing.</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets">2</span></dt>
+<dd><p>BIDS-contributors. 2021. <a class="reference external" href="https://bids-specification.readthedocs.io/en/v1.6.0/99-appendices/09-entities.html">Appendix IX: Entities.</a> <em>The Brain Imaging Data Structure (BIDS) Specification, 1.6.0</em></p>
+</dd>
+</dl>
+</div>
 </section>
 </section>
 <section id="slice-timing-correction">
@@ -215,8 +226,8 @@
 <li><p><strong>Slice Acquisition Pattern - [Use NifTI Header, alt+z, alt+z2, alt-z, alt-z2, seq+z, seq-z]:</strong> The order of slice acquisition for the scans.</p></li>
 </ol>
 <p>Note that if a scan parameters file was used to construct the participant list, the parameters defined in this file will override the settings used here.</p>
-<section id="id4">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<section id="id28">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 <section id="through-the-data-configuration">
@@ -286,8 +297,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Dwell to asymmetric ratio - [float]:</strong> This is the ratio between the Dwell time, as referenced above, and the asymmetric time. Here, the default value is 0.93902439.</p></li>
 <li><p><strong>Phase encoding direction - [string]:</strong> This is the position of the voxels in the input image, and can have values of x/y/z or -x/-y/-z.</p></li>
 </ol>
-<section id="id5">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<section id="id29">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>
@@ -304,8 +315,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Functional Volume to Use as Input (Selected Functional Volume only) - [integer]:</strong> Only for when ‘Use as Functional-to-Anatomical Registration Input’ is set to ‘Selected Functional Volume’. Input the index of which volume from the functional 4D timeseries input file you wish to use as the input for functional-to-anatomical registration.</p></li>
 <li><p><strong>Functional Masking - [AFNI, FSL, FSL_AFNI, Anatomical_Refined]:</strong> Choose which tool to be used in functional masking - AFNI (3dAutoMask), FSL (BET), FSL_AFNI (BET+3dAutoMask) or Anatomical_Refined (generate functional mask by registering anatomical mask to functional space). Default is AFNI.</p></li>
 </ol>
-<section id="id6">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<section id="id30">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 <section id="configuring-fsl-bet-options">
@@ -331,8 +342,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Robust brain center - [Off, On]:</strong> Robust brain center estimation. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</p></li>
 </ol>
 </section>
-<section id="id7">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<section id="id31">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>
@@ -353,8 +364,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Standard Brain Template - [path]:</strong> Used as a reference image for functional EPI registration.</p></li>
 <li><p><strong>ANTs Registration Parameters :</strong> Clicking on the setting icon will bring up a dialog where you can set ‘antsRegistration’ parameters.</p></li>
 </ol>
-<section id="id8">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<section id="id32">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>

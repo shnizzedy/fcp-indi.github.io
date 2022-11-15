@@ -44,91 +44,6 @@
             
   <section id="module-CPAC.qc">
 <span id="quality-control"></span><h1>Quality Control<a class="headerlink" href="#module-CPAC.qc" title="Permalink to this headline">¶</a></h1>
-<p>Quality control utilities for C-PAC</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.qc.qc_masks">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.</span></span><span class="sig-name descname"><span class="pre">qc_masks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">native_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#qc_masks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qc_masks" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return QC measures for coregistration</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>registered_mask</strong><span class="classifier">str</span></dt><dd><p>path to registered mask</p>
-</dd>
-<dt><strong>native_mask</strong><span class="classifier">str</span></dt><dd><p>path to native-space mask</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.qc.registration_guardrail_thresholds">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/globals#registration_guardrail_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.registration_guardrail_thresholds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get registration guardrail thresholds</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>dict</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.qc.update_thresholds">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.</span></span><span class="sig-name descname"><span class="pre">update_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thresholds</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../_modules/CPAC/qc/globals#update_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.update_thresholds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set a registration guardrail threshold</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>thresholds</strong><span class="classifier">dict of {str: float or int}</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>None</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<span class="target" id="module-CPAC.qc.globals"></span><p>Global QC values</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.qc.globals.registration_guardrail_thresholds">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.globals.</span></span><span class="sig-name descname"><span class="pre">registration_guardrail_thresholds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/globals#registration_guardrail_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.globals.registration_guardrail_thresholds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get registration guardrail thresholds</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>dict</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.qc.globals.update_thresholds">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.globals.</span></span><span class="sig-name descname"><span class="pre">update_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thresholds</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../_modules/CPAC/qc/globals#update_thresholds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.globals.update_thresholds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set a registration guardrail threshold</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>thresholds</strong><span class="classifier">dict of {str: float or int}</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>None</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <span class="target" id="module-CPAC.qc.pipeline"></span><dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.pipeline.qc_T1w_standard">
 <span class="sig-prename descclassname"><span class="pre">CPAC.qc.pipeline.</span></span><span class="sig-name descname"><span class="pre">qc_T1w_standard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/pipeline#qc_T1w_standard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.pipeline.qc_T1w_standard" title="Permalink to this definition">¶</a></dt>
@@ -137,7 +52,7 @@
 “switch”: [“generate_quality_control_images”],
 “option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [“space-template_desc-brain_T1w”,</p>
+“inputs”: [“space-template_desc-preproc_T1w”,</p>
 <blockquote>
 <div><p>“T1w-brain-template”],</p>
 </div></blockquote>
@@ -166,12 +81,15 @@
 </div></blockquote>
 <p>“option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [“space-EPItemplate_desc-mean_bold”,</p>
+“inputs”: [(“space-template_sbref”,</p>
 <blockquote>
-<div><p>“EPI-template-funcreg”],</p>
+<div><blockquote>
+<div><p>“from-bold_to-EPItemplate_mode-image_xfm”),</p>
+</div></blockquote>
+<p>“EPI-template-funcreg”],</p>
 </div></blockquote>
 <dl class="simple">
-<dt>“outputs”: [“space-EPItemplate_desc-mean_bold-axial-qc”,</dt><dd><p>“space-EPItemplate_desc-mean_bold-sagittal-qc”]}</p>
+<dt>“outputs”: [“space-template_desc-mean_bold-axial-qc”,</dt><dd><p>“space-template_desc-mean_bold-sagittal-qc”]}</p>
 </dd>
 </dl>
 </dd>
@@ -192,12 +110,12 @@
 </div></blockquote>
 <p>“option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [“space-template_desc-mean_bold”,</p>
+“inputs”: [“space-template_sbref”,</p>
 <blockquote>
 <div><p>“T1w-brain-template-funcreg”],</p>
 </div></blockquote>
 <dl class="simple">
-<dt>“outputs”: [“space-template_desc-mean_bold-axial-qc”,</dt><dd><p>“space-template_desc-mean_bold-sagittal-qc”]}</p>
+<dt>“outputs”: [“space-template_bold-axial-qc”,</dt><dd><p>“space-template_bold-sagittal-qc”]}</p>
 </dd>
 </dl>
 </dd>
@@ -212,9 +130,9 @@
 “switch”: [“generate_quality_control_images”],
 “option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [“desc-brain_T1w”,</p>
+“inputs”: [“desc-preproc_T1w”,</p>
 <blockquote>
-<div><p>“desc-reorient_T1w”],</p>
+<div><p>“desc-head_T1w”],</p>
 </div></blockquote>
 <dl class="simple">
 <dt>“outputs”: [“desc-brain_T1w-axial-qc”,</dt><dd><p>“desc-brain_T1w-sagittal-qc”]}</p>
@@ -232,26 +150,16 @@
 “switch”: [“generate_quality_control_images”],
 “option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [([“space-template_desc-cleaned_bold”,</p>
+“inputs”: [(“space-template_desc-preproc_bold”,</p>
 <blockquote>
 <div><blockquote>
-<div><blockquote>
-<div><p>“space-template_desc-brain_bold”,
-“space-template_desc-preproc_bold”,
-“space-template_bold”],</p>
-</div></blockquote>
-<p>“space-template_desc-mean_bold”),</p>
+<div><p>“space-template_sbref”),</p>
 </div></blockquote>
 <p>“GM-path”,
 “WM-path”,
 “CSF-path”],</p>
 </div></blockquote>
-<dl class="simple">
-<dt>“outputs”: [“space-template_desc-cleaned_bold-carpet-qc”,</dt><dd><p>“space-template_desc-brain_bold-carpet-qc”,
-“space-template_desc-preproc_bold-carpet-qc”,
-“space-template_bold-carpet-qc”]}</p>
-</dd>
-</dl>
+<p>“outputs”: [“space-template_desc-preproc_bold-carpet-qc”]}</p>
 </dd>
 </dl>
 </dd></dl>
@@ -264,12 +172,12 @@
 “switch”: [“generate_quality_control_images”],
 “option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [(“desc-brain_T1w”,</p>
+“inputs”: [(“desc-preproc_T1w”,</p>
 <blockquote>
-<div><p>“space-T1w_desc-mean_bold”)],</p>
+<div><p>“space-T1w_sbref”)],</p>
 </div></blockquote>
 <dl class="simple">
-<dt>“outputs”: [“space-T1w_desc-mean_bold-axial-qc”,</dt><dd><p>“space-T1w_desc-mean_bold-sagittal-qc”]}</p>
+<dt>“outputs”: [“space-T1w_bold-axial-qc”,</dt><dd><p>“space-T1w_bold-sagittal-qc”]}</p>
 </dd>
 </dl>
 </dd>
@@ -284,7 +192,7 @@
 “switch”: [“generate_quality_control_images”],
 “option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [(“desc-brain_bold”,</p>
+“inputs”: [(“desc-preproc_bold”,</p>
 <blockquote>
 <div><dl class="simple">
 <dt>[“space-bold_label-CSF_desc-preproc_mask”,</dt><dd><p>“space-bold_label-CSF_mask”],</p>
@@ -342,7 +250,7 @@
 “switch”: [“generate_quality_control_images”],
 “option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [(“desc-brain_T1w”,</p>
+“inputs”: [(“desc-preproc_T1w”,</p>
 <blockquote>
 <div><dl class="simple">
 <dt>[“label-CSF_desc-preproc_mask”,</dt><dd><p>“label-CSF_mask”],</p>
@@ -369,14 +277,14 @@
 “switch”: [“generate_quality_control_images”],
 “option_key”: “None”,
 “option_val”: “None”,
-“inputs”: [([“desc-brain_bold”, “desc-motion_bold”, “desc-preproc_bold”],</p>
+“inputs”: [(“desc-preproc_bold”,</p>
 <blockquote>
 <div><blockquote>
 <div><p>“space-bold_desc-brain_mask”),</p>
 </div></blockquote>
 <p>“from-bold_to-T1w_mode-image_desc-linear_xfm”,
-“desc-brain_T1w”,
-“space-T1w_desc-mean_bold”],</p>
+“desc-preproc_T1w”,
+“space-T1w_sbref”],</p>
 </div></blockquote>
 <dl class="simple">
 <dt>“outputs”: [“bold-snr-axial-qc”,</dt><dd><p>“bold-snr-sagittal-qc”,
@@ -461,45 +369,6 @@ object(s) in <cite>input2</cite>. It ranges from 0 (no overlap) to 1
 </dd>
 </dl>
 <p>This is a real metric.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.qc.qcmetrics.qc_masks">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.qcmetrics.</span></span><span class="sig-name descname"><span class="pre">qc_masks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">native_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#qc_masks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qcmetrics.qc_masks" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return QC measures for coregistration</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>registered_mask</strong><span class="classifier">str</span></dt><dd><p>path to registered mask</p>
-</dd>
-<dt><strong>native_mask</strong><span class="classifier">str</span></dt><dd><p>path to native-space mask</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.qc.qcmetrics.regisQ">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.qcmetrics.</span></span><span class="sig-name descname"><span class="pre">regisQ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bold2t1w_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1w_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2template_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_mask</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/CPAC/qc/qcmetrics#regisQ"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.qcmetrics.regisQ" title="Permalink to this definition">¶</a></dt>
-<dd><p>Collect coregistration QC measures</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>bold2t1w_mask, t1w_mask, bold2template_mask, template_mask</strong><span class="classifier">str</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd></dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <span class="target" id="module-CPAC.qc.utils"></span><dl class="py function">

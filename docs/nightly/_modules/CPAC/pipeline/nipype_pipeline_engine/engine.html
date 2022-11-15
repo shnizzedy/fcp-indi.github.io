@@ -93,9 +93,8 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Signature</span><span class="p">,</span> <span class="n">signature</span>
 <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">getLogger</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Signature</span><span class="p">,</span> <span class="n">signature</span>
 <span class="kn">from</span> <span class="nn">nibabel</span> <span class="kn">import</span> <span class="n">load</span>
 <span class="kn">from</span> <span class="nn">nipype</span> <span class="kn">import</span> <span class="n">logging</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces.utility</span> <span class="kn">import</span> <span class="n">Function</span>
@@ -550,40 +549,6 @@
                                         <span class="ne">TypeError</span><span class="p">):</span>
                                     <span class="bp">self</span><span class="o">.</span><span class="n">_handle_just_in_time_exception</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Workflow.connect_retries"><a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.connect_retries">[docs]</a>    <span class="k">def</span> <span class="nf">connect_retries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="s1">&#39;Node&#39;</span><span class="p">],</span>
-                        <span class="n">connections</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="s1">&#39;Node&#39;</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
-                                                    <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Method to generalize making the same connections to try and</span>
-<span class="sd">        retry nodes.</span>
-
-<span class="sd">        For each 3-tuple (``conn``) in ``connections``, will do</span>
-<span class="sd">        ``wf.connect(conn[0], conn[1], node, conn[2])`` for each ``node``</span>
-<span class="sd">        in ``nodes``</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        nodes : iterable of Nodes</span>
-
-<span class="sd">        connections : iterable of 3-tuples of (Node, str or tuple, str)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">wrong_conn_type_msg</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;connect_retries `connections` argument &#39;</span>
-                               <span class="s1">&#39;must be an iterable of (Node, str or &#39;</span>
-                               <span class="s1">&#39;tuple, str) tuples.&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wrong_conn_type_msg</span><span class="si">}</span><span class="s1">: Given </span><span class="si">{</span><span class="n">connections</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;connect_retries requires an iterable &#39;</span>
-                                <span class="sa">r</span><span class="s1">&#39;of nodes for the `nodes` parameter: &#39;</span>
-                                <span class="sa">f</span><span class="s1">&#39;Given </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">((</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)),</span> <span class="nb">len</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span>
-                            <span class="nb">isinstance</span><span class="p">(</span><span class="n">conn</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Node</span><span class="p">),</span>
-                            <span class="nb">isinstance</span><span class="p">(</span><span class="n">conn</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">)),</span>
-                            <span class="nb">isinstance</span><span class="p">(</span><span class="n">conn</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">str</span><span class="p">))):</span>
-                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wrong_conn_type_msg</span><span class="si">}</span><span class="s1">: Given </span><span class="si">{</span><span class="n">conn</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">*</span><span class="n">conn</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">node</span><span class="p">,</span> <span class="n">conn</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></div>
-
     <span class="k">def</span> <span class="nf">_get_dot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hierarchy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">simple_form</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">level</span><span class="o">=</span><span class="mi">0</span>
@@ -705,33 +670,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># TODO: handle S3 files</span>
             <span class="n">node</span><span class="o">.</span><span class="n">_apply_mem_x</span><span class="p">(</span><span class="n">UNDEFINED_SIZE</span><span class="p">)</span>  <span class="c1"># noqa: W0212</span>
-
-<div class="viewcode-block" id="Workflow.nodes_and_guardrails"><a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.nodes_and_guardrails">[docs]</a>    <span class="k">def</span> <span class="nf">nodes_and_guardrails</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">nodes</span><span class="p">,</span> <span class="n">registered</span><span class="p">,</span> <span class="n">add_clones</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a two tuples of Nodes: (try, retry) and their</span>
-<span class="sd">        respective guardrails</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        nodes : any number of Nodes</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        nodes : tuple of Nodes</span>
-
-<span class="sd">        guardrails : tuple of Nodes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">CPAC.registration.guardrails</span> <span class="kn">import</span> <span class="n">registration_guardrail_node</span><span class="p">,</span> \
-                                                 <span class="n">retry_clone</span>
-        <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">add_clones</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">retries</span> <span class="o">=</span> <span class="p">[</span><span class="n">retry_clone</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">]</span>
-            <span class="n">nodes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">retries</span><span class="p">)</span>
-        <span class="n">guardrails</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
-            <span class="n">guardrails</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">registration_guardrail_node</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s1">&#39;guardrail_</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">registered</span><span class="p">,</span> <span class="n">guardrails</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s1">&#39;registered&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">guardrails</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Workflow.write_graph"><a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.write_graph">[docs]</a>    <span class="k">def</span> <span class="nf">write_graph</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>

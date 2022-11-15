@@ -81,11 +81,11 @@
 <span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [([&quot;desc-brain_bold&quot;, &quot;desc-motion_bold&quot;, &quot;desc-preproc_bold&quot;],</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-preproc_bold&quot;,</span>
 <span class="sd">                 &quot;space-bold_desc-brain_mask&quot;),</span>
 <span class="sd">                &quot;from-bold_to-T1w_mode-image_desc-linear_xfm&quot;,</span>
-<span class="sd">                &quot;desc-brain_T1w&quot;,</span>
-<span class="sd">                &quot;space-T1w_desc-mean_bold&quot;],</span>
+<span class="sd">                &quot;desc-preproc_T1w&quot;,</span>
+<span class="sd">                &quot;space-T1w_sbref&quot;],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;bold-snr-axial-qc&quot;,</span>
 <span class="sd">                 &quot;bold-snr-sagittal-qc&quot;,</span>
 <span class="sd">                 &quot;bold-snr-hist-qc&quot;,</span>
@@ -95,9 +95,7 @@
     <span class="c1"># make SNR plot</span>
     <span class="n">qc_workflow</span> <span class="o">=</span> <span class="n">create_qc_snr</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;qc_snr_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-brain_bold&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">])</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_preprocessed&#39;</span><span class="p">)</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">)</span>
@@ -108,10 +106,10 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
                <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_to_anat_linear_xfm&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-preproc_T1w&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_brain&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-T1w_desc-mean_bold&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-T1w_sbref&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.mean_functional_in_anat&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
@@ -185,8 +183,8 @@
 <span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [&quot;desc-brain_T1w&quot;,</span>
-<span class="sd">                &quot;desc-reorient_T1w&quot;],</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;desc-preproc_T1w&quot;,</span>
+<span class="sd">                &quot;desc-head_T1w&quot;],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;desc-brain_T1w-axial-qc&quot;,</span>
 <span class="sd">                 &quot;desc-brain_T1w-sagittal-qc&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -196,10 +194,10 @@
         <span class="sa">f</span><span class="s1">&#39;qc_skullstrip_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span>
     <span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-preproc_T1w&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_brain&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-reorient_T1w&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-head_T1w&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">qc_workflow</span><span class="p">,</span> <span class="s1">&#39;inputspec.anatomical_reorient&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
@@ -218,7 +216,7 @@
 <span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [&quot;space-template_desc-brain_T1w&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;space-template_desc-preproc_T1w&quot;,</span>
 <span class="sd">                &quot;T1w-brain-template&quot;],</span>
 <span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-brain_T1w-axial-qc&quot;,</span>
 <span class="sd">                 &quot;space-template_desc-brain_T1w-sagittal-qc&quot;]}</span>
@@ -229,7 +227,7 @@
                                       <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;mni_anat&#39;</span><span class="p">,</span>
                                       <span class="n">mapnode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_desc-preproc_T1w&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_mni_anat</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
 
     <span class="n">anat_template_edge</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">],</span>
@@ -261,7 +259,7 @@
 <span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [(&quot;desc-brain_T1w&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-preproc_T1w&quot;,</span>
 <span class="sd">                 [&quot;label-CSF_desc-preproc_mask&quot;,</span>
 <span class="sd">                  &quot;label-CSF_mask&quot;],</span>
 <span class="sd">                 [&quot;label-WM_desc-preproc_mask&quot;,</span>
@@ -276,7 +274,7 @@
     <span class="n">montage_csf_gm_wm</span> <span class="o">=</span> <span class="n">create_montage_gm_wm_csf</span><span class="p">(</span>
         <span class="sa">f</span><span class="s1">&#39;montage_csf_gm_wm_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;montage_csf_gm_wm&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-preproc_T1w&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;label-CSF_desc-preproc_mask&#39;</span><span class="p">,</span>
@@ -306,7 +304,7 @@
 <span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [(&quot;desc-brain_bold&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-preproc_bold&quot;,</span>
 <span class="sd">                 [&quot;space-bold_label-CSF_desc-preproc_mask&quot;,</span>
 <span class="sd">                  &quot;space-bold_label-CSF_mask&quot;],</span>
 <span class="sd">                 [&quot;space-bold_label-WM_desc-preproc_mask&quot;,</span>
@@ -321,7 +319,7 @@
     <span class="n">montage_csf_gm_wm</span> <span class="o">=</span> <span class="n">create_montage_gm_wm_csf</span><span class="p">(</span>
         <span class="sa">f</span><span class="s1">&#39;montage_csf_gm_wm_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;montage_csf_gm_wm&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_bold&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_csf_gm_wm</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;space-bold_label-CSF_desc-preproc_mask&#39;</span><span class="p">,</span>
@@ -351,33 +349,24 @@
 <span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [([&quot;space-template_desc-cleaned_bold&quot;,</span>
-<span class="sd">                  &quot;space-template_desc-brain_bold&quot;,</span>
-<span class="sd">                  &quot;space-template_desc-preproc_bold&quot;,</span>
-<span class="sd">                  &quot;space-template_bold&quot;],</span>
-<span class="sd">                 &quot;space-template_desc-mean_bold&quot;),</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;space-template_desc-preproc_bold&quot;,</span>
+<span class="sd">                 &quot;space-template_sbref&quot;),</span>
 <span class="sd">                &quot;GM-path&quot;,</span>
 <span class="sd">                &quot;WM-path&quot;,</span>
 <span class="sd">                &quot;CSF-path&quot;],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-cleaned_bold-carpet-qc&quot;,</span>
-<span class="sd">                 &quot;space-template_desc-brain_bold-carpet-qc&quot;,</span>
-<span class="sd">                 &quot;space-template_desc-preproc_bold-carpet-qc&quot;,</span>
-<span class="sd">                 &quot;space-template_bold-carpet-qc&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-preproc_bold-carpet-qc&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># make QC Carpet plot</span>
     <span class="n">carpet_seg</span> <span class="o">=</span> <span class="n">create_qc_carpet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;carpet_seg_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;carpet_seg&#39;</span><span class="p">)</span>
 
     <span class="n">connection</span><span class="p">,</span> <span class="n">resource</span> <span class="o">=</span> \
-        <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_desc-cleaned_bold&quot;</span><span class="p">,</span>
-                             <span class="s2">&quot;space-template_desc-brain_bold&quot;</span><span class="p">,</span>
-                             <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">,</span>
-                             <span class="s2">&quot;space-template_bold&quot;</span><span class="p">],</span>
+        <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">],</span>
                             <span class="n">report_fetched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">connection</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">carpet_seg</span><span class="p">,</span> <span class="s1">&#39;inputspec.functional_to_standard&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-template_desc-mean_bold&quot;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-template_sbref&quot;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">carpet_seg</span><span class="p">,</span> <span class="s1">&#39;inputspec.mean_functional_to_standard&#39;</span><span class="p">)</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;GM-path&quot;</span><span class="p">)</span>
@@ -403,10 +392,10 @@
 <span class="sd">     &quot;switch&quot;: [&quot;generate_quality_control_images&quot;],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [(&quot;desc-brain_T1w&quot;,</span>
-<span class="sd">                 &quot;space-T1w_desc-mean_bold&quot;)],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;space-T1w_desc-mean_bold-axial-qc&quot;,</span>
-<span class="sd">                 &quot;space-T1w_desc-mean_bold-sagittal-qc&quot;]}</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;desc-preproc_T1w&quot;,</span>
+<span class="sd">                 &quot;space-T1w_sbref&quot;)],</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-T1w_bold-axial-qc&quot;,</span>
+<span class="sd">                 &quot;space-T1w_bold-sagittal-qc&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># make QC montage for Mean Functional in T1 with T1 edge</span>
@@ -416,7 +405,7 @@
                                  <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
                         <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;anat_edge_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-brain_T1w&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;desc-preproc_T1w&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">anat_edge</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
 
     <span class="n">montage_anat</span> <span class="o">=</span> <span class="n">create_montage</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;montage_anat_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
@@ -425,13 +414,13 @@
 
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">anat_edge</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">montage_anat</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-T1w_desc-mean_bold&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-T1w_sbref&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">montage_anat</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;space-T1w_desc-mean_bold-axial-qc&#39;</span><span class="p">:</span>
+        <span class="s1">&#39;space-T1w_bold-axial-qc&#39;</span><span class="p">:</span>
             <span class="p">(</span><span class="n">montage_anat</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;space-T1w_desc-mean_bold-sagittal-qc&#39;</span><span class="p">:</span>
+        <span class="s1">&#39;space-T1w_bold-sagittal-qc&#39;</span><span class="p">:</span>
             <span class="p">(</span><span class="n">montage_anat</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
@@ -447,10 +436,10 @@
 <span class="sd">                [&quot;registration_workflows&quot;, &quot;anatomical_registration&quot;, &quot;run&quot;]],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [&quot;space-template_desc-mean_bold&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [&quot;space-template_sbref&quot;,</span>
 <span class="sd">                &quot;T1w-brain-template-funcreg&quot;],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-mean_bold-axial-qc&quot;,</span>
-<span class="sd">                 &quot;space-template_desc-mean_bold-sagittal-qc&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-template_bold-axial-qc&quot;,</span>
+<span class="sd">                 &quot;space-template_bold-sagittal-qc&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># make QC montage for Mean Functional in MNI with MNI edge</span>
@@ -458,7 +447,7 @@
                                  <span class="s1">&#39;MNI_edge_on_mean_func_mni&#39;</span><span class="p">,</span>
                                  <span class="n">mapnode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_desc-mean_bold&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_sbref&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>  <span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
 
     <span class="n">func_template_edge</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">],</span>
@@ -474,9 +463,9 @@
                <span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;space-template_desc-mean_bold-axial-qc&#39;</span><span class="p">:</span>
+        <span class="s1">&#39;space-template_bold-axial-qc&#39;</span><span class="p">:</span>
             <span class="p">(</span><span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;space-template_desc-mean_bold-sagittal-qc&#39;</span><span class="p">:</span>
+        <span class="s1">&#39;space-template_bold-sagittal-qc&#39;</span><span class="p">:</span>
             <span class="p">(</span><span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
@@ -493,10 +482,11 @@
 <span class="sd">                 &quot;func_registration_to_template&quot;, &quot;run_EPI&quot;]],</span>
 <span class="sd">     &quot;option_key&quot;: &quot;None&quot;,</span>
 <span class="sd">     &quot;option_val&quot;: &quot;None&quot;,</span>
-<span class="sd">     &quot;inputs&quot;: [&quot;space-EPItemplate_desc-mean_bold&quot;,</span>
+<span class="sd">     &quot;inputs&quot;: [(&quot;space-template_sbref&quot;,</span>
+<span class="sd">                 &quot;from-bold_to-EPItemplate_mode-image_xfm&quot;),</span>
 <span class="sd">                &quot;EPI-template-funcreg&quot;],</span>
-<span class="sd">     &quot;outputs&quot;: [&quot;space-EPItemplate_desc-mean_bold-axial-qc&quot;,</span>
-<span class="sd">                 &quot;space-EPItemplate_desc-mean_bold-sagittal-qc&quot;]}</span>
+<span class="sd">     &quot;outputs&quot;: [&quot;space-template_desc-mean_bold-axial-qc&quot;,</span>
+<span class="sd">                 &quot;space-template_desc-mean_bold-sagittal-qc&quot;]}</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># make QC montage for Mean Functional in MNI with MNI edge</span>
@@ -504,7 +494,7 @@
                                  <span class="s1">&#39;EPI_MNI_edge_on_mean_func_mni&#39;</span><span class="p">,</span>
                                  <span class="n">mapnode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-EPItemplate_desc-mean_bold&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_sbref&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>  <span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;inputspec.underlay&#39;</span><span class="p">)</span>
 
     <span class="n">func_template_edge</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">],</span>
@@ -520,9 +510,9 @@
                <span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;inputspec.overlay&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;space-EPItemplate_desc-mean_bold-axial-qc&#39;</span><span class="p">:</span>
+        <span class="s1">&#39;space-template_bold-axial-qc&#39;</span><span class="p">:</span>
             <span class="p">(</span><span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;outputspec.axial_png&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;space-EPItemplate_desc-mean_bold-sagittal-qc&#39;</span><span class="p">:</span>
+        <span class="s1">&#39;space-template_bold-sagittal-qc&#39;</span><span class="p">:</span>
             <span class="p">(</span><span class="n">montage_mfi</span><span class="p">,</span> <span class="s1">&#39;outputspec.sagittal_png&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 

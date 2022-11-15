@@ -41,33 +41,35 @@
           <div class="body" role="main">
             
   <h1>Source code for CPAC.pipeline.schema</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (C) 2022  C-PAC Developers</span>
+<span></span><span class="sd">&#39;&#39;&#39;Validation schema for C-PAC pipeline configurations</span>
 
-<span class="c1"># This file is part of C-PAC.</span>
+<span class="sd">Copyright (C) 2022  C-PAC Developers</span>
 
-<span class="c1"># C-PAC is free software: you can redistribute it and/or modify it under</span>
-<span class="c1"># the terms of the GNU Lesser General Public License as published by the</span>
-<span class="c1"># Free Software Foundation, either version 3 of the License, or (at your</span>
-<span class="c1"># option) any later version.</span>
+<span class="sd">This file is part of C-PAC.</span>
 
-<span class="c1"># C-PAC is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
-<span class="c1"># License for more details.</span>
+<span class="sd">C-PAC is free software: you can redistribute it and/or modify it under</span>
+<span class="sd">the terms of the GNU Lesser General Public License as published by the</span>
+<span class="sd">Free Software Foundation, either version 3 of the License, or (at your</span>
+<span class="sd">option) any later version.</span>
 
-<span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
-<span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="sd">&quot;&quot;&quot;Validation schema for C-PAC pipeline configurations&quot;&quot;&quot;</span>
+<span class="sd">C-PAC is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="sd">ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="sd">FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<span class="sd">License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU Lesser General Public</span>
+<span class="sd">License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.&#39;&#39;&#39;</span>
 <span class="c1"># pylint: disable=too-many-lines</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">permutations</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathvalidate</span> <span class="kn">import</span> <span class="n">sanitize_filename</span>
-<span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">All</span><span class="p">,</span> <span class="n">ALLOW_EXTRA</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Capitalize</span><span class="p">,</span> <span class="n">Coerce</span><span class="p">,</span> <span class="n">Equal</span><span class="p">,</span> \
+<span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">All</span><span class="p">,</span> <span class="n">ALLOW_EXTRA</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Capitalize</span><span class="p">,</span> <span class="n">Coerce</span><span class="p">,</span> \
                        <span class="n">ExactSequence</span><span class="p">,</span> <span class="n">ExclusiveInvalid</span><span class="p">,</span> <span class="n">In</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Lower</span><span class="p">,</span> \
-                       <span class="n">Match</span><span class="p">,</span> <span class="n">Maybe</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Required</span><span class="p">,</span> <span class="n">Schema</span>
+                       <span class="n">Match</span><span class="p">,</span> <span class="n">Maybe</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Required</span><span class="p">,</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">Title</span>
 <span class="kn">from</span> <span class="nn">CPAC</span> <span class="kn">import</span> <span class="n">docs_prefix</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.random_state.seed</span> <span class="kn">import</span> <span class="n">MAX_SEED</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.datatypes</span> <span class="kn">import</span> <span class="n">ListFromItem</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">YAML_BOOLS</span>
 
 <span class="c1"># 1 or more digits, optional decimal, &#39;e&#39;, optional &#39;-&#39;, 1 or more digits</span>
 <span class="n">scientific_notation_str_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^([0-9]+(\.[0-9]*)*(e)-{0,1}[0-9]+)*$&#39;</span>
@@ -80,7 +82,35 @@
                    <span class="sa">r</span><span class="s1">&#39;(x[0-9]+(\.[0-9]*){0,1}[a-z]*)*$&#39;</span>
 
 <span class="n">Number</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">All</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Match</span><span class="p">(</span><span class="n">scientific_notation_str_regex</span><span class="p">)))</span>
-<span class="n">forkable</span> <span class="o">=</span> <span class="n">All</span><span class="p">(</span><span class="n">Coerce</span><span class="p">(</span><span class="n">ListFromItem</span><span class="p">),</span> <span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="str_to_bool1_1"><a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.str_to_bool1_1">[docs]</a><span class="k">def</span> <span class="nf">str_to_bool1_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="sd">&#39;&#39;&#39;Convert strings to Booleans for YAML1.1 syntax</span>
+
+<span class="sd">    Ref https://yaml.org/type/bool.html</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : any</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="kc">True</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">YAML_BOOLS</span><span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="k">else</span>
+             <span class="kc">False</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">YAML_BOOLS</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<span class="n">bool1_1</span> <span class="o">=</span> <span class="n">All</span><span class="p">(</span><span class="n">str_to_bool1_1</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+<span class="n">forkable</span> <span class="o">=</span> <span class="n">All</span><span class="p">(</span><span class="n">Coerce</span><span class="p">(</span><span class="n">ListFromItem</span><span class="p">),</span> <span class="p">[</span><span class="n">bool1_1</span><span class="p">],</span> <span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">valid_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;acpc&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="s1">&#39;whole-head&#39;</span><span class="p">]</span>
@@ -116,7 +146,7 @@
     <span class="s1">&#39;Regressors&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;CompCor&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;degree&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="s1">&#39;erode_mask_mm&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;erode_mask_mm&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="s1">&#39;components&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -127,18 +157,19 @@
             <span class="s1">&#39;extraction_resolution&#39;</span><span class="p">:</span> <span class="nb">int</span>
         <span class="p">},</span>
         <span class="s1">&#39;segmentation&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;erode_mask&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;erode_mask&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;extraction_resolution&#39;</span><span class="p">:</span> <span class="n">Any</span><span class="p">(</span>
                 <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;Functional&#39;</span><span class="p">,</span> <span class="n">All</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Match</span><span class="p">(</span><span class="n">resolution_regex</span><span class="p">))</span>
             <span class="p">),</span>
-            <span class="s1">&#39;include_delayed&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s1">&#39;include_delayed_squared&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s1">&#39;include_squared&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;include_delayed&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;include_delayed_squared&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;include_squared&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="n">Any</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;components&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}</span>
             <span class="p">),</span>
         <span class="p">},</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;target_space&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Native&#39;</span><span class="p">,</span> <span class="s1">&#39;Template&#39;</span><span class="p">]</span>
 <span class="p">}</span>
 <span class="n">mutex</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># mutually exclusive booleans</span>
     <span class="s1">&#39;FSL-BET&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -148,18 +179,18 @@
         <span class="c1"># the remaining keys: validators for FSL-BET</span>
         <span class="s1">&#39;rem&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;frac&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s1">&#39;mesh_boolean&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s1">&#39;outline&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;mesh_boolean&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;outline&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="s1">&#39;skull&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;skull&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;vertical_gradient&#39;</span><span class="p">:</span> <span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_included</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                        <span class="n">max_included</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
             <span class="s1">&#39;functional_mean_thr&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;threshold_value&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
             <span class="p">},</span>
-            <span class="s1">&#39;functional_mean_bias_correction&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;functional_mean_bias_correction&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -180,7 +211,7 @@
     <span class="p">},</span>
     <span class="s1">&#39;smoothing-sigmas&#39;</span><span class="p">:</span> <span class="n">All</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Match</span><span class="p">(</span><span class="n">resolution_regex</span><span class="p">)),</span>
     <span class="s1">&#39;shrink-factors&#39;</span><span class="p">:</span> <span class="n">All</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Match</span><span class="p">(</span><span class="n">resolution_regex</span><span class="p">)),</span>
-    <span class="s1">&#39;use-histogram-matching&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;use-histogram-matching&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
     <span class="s1">&#39;updateFieldVarianceInVoxelSpace&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
     <span class="s1">&#39;totalFieldVarianceInVoxelSpace&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
     <span class="s1">&#39;winsorize-image-intensities&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -206,20 +237,128 @@
             <span class="s1">&#39;SyN&#39;</span><span class="p">:</span> <span class="n">ANTs_parameter_transforms</span><span class="p">,</span>
         <span class="p">})],</span>
     <span class="p">},</span> <span class="p">{</span>
-        <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="n">Any</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">In</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">})),</span>
+        <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="n">Any</span><span class="p">(</span><span class="n">bool1_1</span><span class="p">,</span> <span class="n">In</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">})),</span>
     <span class="p">},</span> <span class="p">{</span>
-        <span class="s1">&#39;float&#39;</span><span class="p">:</span> <span class="n">Any</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">In</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">})),</span>
+        <span class="s1">&#39;float&#39;</span><span class="p">:</span> <span class="n">Any</span><span class="p">(</span><span class="n">bool1_1</span><span class="p">,</span> <span class="n">In</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">})),</span>
     <span class="p">},</span> <span class="p">{</span>
         <span class="s1">&#39;masks&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;fixed_image_mask&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s1">&#39;moving_image_mask&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;fixed_image_mask&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;moving_image_mask&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">},</span> <span class="nb">dict</span>  <span class="c1"># TODO: specify other valid ANTs parameters</span>
 <span class="p">)]</span>
+<span class="n">motion_estimate_filter</span> <span class="o">=</span> <span class="n">Any</span><span class="p">({</span>  <span class="c1"># notch filter with breathing_rate_* set</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_type&#39;</span><span class="p">):</span> <span class="s1">&#39;notch&#39;</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_order&#39;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
+        <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
+        <span class="s1">&#39;center_frequency&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">{</span>  <span class="c1"># notch filter with manual parameters set</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_type&#39;</span><span class="p">):</span> <span class="s1">&#39;notch&#39;</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_order&#39;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;center_frequency&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
+        <span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">{</span>  <span class="c1"># lowpass filter with breathing_rate_min</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_type&#39;</span><span class="p">):</span> <span class="s1">&#39;lowpass&#39;</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_order&#39;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
+        <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;center_frequency&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">{</span>  <span class="c1"># lowpass filter with lowpass_cutoff</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_type&#39;</span><span class="p">):</span> <span class="s1">&#39;lowpass&#39;</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_order&#39;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;center_frequency&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
+        <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">)},</span>
+    <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;`motion_estimate_filter` configuration is invalid.</span><span class="se">\n</span><span class="s1">See &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">docs_prefix</span><span class="si">}</span><span class="s1">/user/&#39;</span>
+        <span class="s1">&#39;func#motion-estimate-filter-valid-options for details.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">target_space</span> <span class="o">=</span> <span class="n">All</span><span class="p">(</span><span class="n">Coerce</span><span class="p">(</span><span class="n">ListFromItem</span><span class="p">),</span>
+                   <span class="p">[</span><span class="n">All</span><span class="p">(</span><span class="n">Title</span><span class="p">,</span> <span class="n">In</span><span class="p">(</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;target_space&#39;</span><span class="p">]))])</span>
+
+
+<div class="viewcode-block" id="name_motion_filter"><a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.name_motion_filter">[docs]</a><span class="k">def</span> <span class="nf">name_motion_filter</span><span class="p">(</span><span class="n">mfilter</span><span class="p">,</span> <span class="n">mfilters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Given a motion filter, create a short string for the filename</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mfilter : dict</span>
+
+<span class="sd">    mfliters : list or None</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; name_motion_filter({&#39;filter_type&#39;: &#39;notch&#39;, &#39;filter_order&#39;: 2,</span>
+<span class="sd">    ...     &#39;center_frequency&#39;: 0.31, &#39;filter_bandwidth&#39;: 0.12})</span>
+<span class="sd">    &#39;notch2fc0p31bw0p12&#39;</span>
+<span class="sd">    &gt;&gt;&gt; name_motion_filter({&#39;filter_type&#39;: &#39;notch&#39;, &#39;filter_order&#39;: 4,</span>
+<span class="sd">    ...     &#39;breathing_rate_min&#39;: 0.19, &#39;breathing_rate_max&#39;: 0.43})</span>
+<span class="sd">    &#39;notch4fl0p19fu0p43&#39;</span>
+<span class="sd">    &gt;&gt;&gt; name_motion_filter({&#39;filter_type&#39;: &#39;lowpass&#39;, &#39;filter_order&#39;: 4,</span>
+<span class="sd">    ...     &#39;lowpass_cutoff&#39;: .0032})</span>
+<span class="sd">    &#39;lowpass4fc0p0032&#39;</span>
+<span class="sd">    &gt;&gt;&gt; name_motion_filter({&#39;filter_type&#39;: &#39;lowpass&#39;, &#39;filter_order&#39;: 2,</span>
+<span class="sd">    ...     &#39;breathing_rate_min&#39;: 0.19})</span>
+<span class="sd">    &#39;lowpass2fl0p19&#39;</span>
+<span class="sd">    &gt;&gt;&gt; name_motion_filter({&#39;filter_type&#39;: &#39;lowpass&#39;, &#39;filter_order&#39;: 2,</span>
+<span class="sd">    ...     &#39;breathing_rate_min&#39;: 0.19}, [{&#39;Name&#39;: &#39;lowpass2fl0p19&#39;}])</span>
+<span class="sd">    &#39;lowpass2fl0p19dup1&#39;</span>
+<span class="sd">    &gt;&gt;&gt; name_motion_filter({&#39;filter_type&#39;: &#39;lowpass&#39;, &#39;filter_order&#39;: 2,</span>
+<span class="sd">    ...     &#39;breathing_rate_min&#39;: 0.19}, [{&#39;Name&#39;: &#39;lowpass2fl0p19&#39;},</span>
+<span class="sd">    ...     {&#39;Name&#39;: &#39;lowpass2fl0p19dup1&#39;}])</span>
+<span class="sd">    &#39;lowpass2fl0p19dup2&#39;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">mfilters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mfilters</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="s1">&#39;Name&#39;</span> <span class="ow">in</span> <span class="n">mfilter</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">mfilter</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mfilter</span><span class="p">[</span><span class="s1">&#39;filter_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;notch&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mfilter</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">):</span>
+                <span class="n">range_str</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;fl</span><span class="si">{</span><span class="n">mfilter</span><span class="p">[</span><span class="s2">&quot;breathing_rate_min&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+                             <span class="sa">f</span><span class="s1">&#39;fu</span><span class="si">{</span><span class="n">mfilter</span><span class="p">[</span><span class="s2">&quot;breathing_rate_max&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">range_str</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;fc</span><span class="si">{</span><span class="n">mfilter</span><span class="p">[</span><span class="s2">&quot;center_frequency&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+                             <span class="sa">f</span><span class="s1">&#39;bw</span><span class="si">{</span><span class="n">mfilter</span><span class="p">[</span><span class="s2">&quot;filter_bandwidth&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mfilter</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">):</span>
+                <span class="n">range_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;fl</span><span class="si">{</span><span class="n">mfilter</span><span class="p">[</span><span class="s2">&quot;breathing_rate_min&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">range_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;fc</span><span class="si">{</span><span class="n">mfilter</span><span class="p">[</span><span class="s2">&quot;lowpass_cutoff&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">range_str</span> <span class="o">=</span> <span class="n">range_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">mfilter</span><span class="p">[</span><span class="s2">&quot;filter_type&quot;</span><span class="p">]</span><span class="si">}{</span><span class="n">mfilter</span><span class="p">[</span><span class="s2">&quot;filter_order&quot;</span><span class="p">]</span><span class="si">}{</span><span class="n">range_str</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">dupes</span> <span class="o">=</span> <span class="s1">&#39;Name&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mfilter</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">([</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span>
+                                           <span class="n">_</span> <span class="ow">in</span> <span class="n">mfilters</span><span class="p">)</span> <span class="k">if</span>
+                                           <span class="n">_</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">name</span><span class="p">)])</span>
+    <span class="k">if</span> <span class="n">dupes</span><span class="p">:</span>
+        <span class="n">dup</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;(?=[A-Za-z0-9]*)(dup[0-9]*)&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dup</span><span class="p">:</span>  <span class="c1"># Don&#39;t chain &#39;dup&#39; suffixes</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">dup</span><span class="o">.</span><span class="n">group</span><span class="p">(),</span> <span class="sa">f</span><span class="s1">&#39;dup</span><span class="si">{</span><span class="n">dupes</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">dup</span><span class="si">{</span><span class="n">dupes</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="n">name</span></div>
 
 
 <div class="viewcode-block" id="permutation_message"><a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.permutation_message">[docs]</a><span class="k">def</span> <span class="nf">permutation_message</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Function to give a clean, human-readable error message for keys that accept permutation values</span>
+    <span class="sd">&#39;&#39;&#39;Function to give a clean, human-readable error message for keys</span>
+<span class="sd">    that accept permutation values</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -256,21 +395,21 @@
         <span class="s1">&#39;output_directory&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="s1">&#39;source_outputs_dir&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
-            <span class="s1">&#39;pull_source_once&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s1">&#39;write_func_outputs&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s1">&#39;write_debugging_outputs&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;pull_source_once&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;write_func_outputs&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;write_debugging_outputs&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;output_tree&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="s1">&#39;quality_control&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;generate_quality_control_images&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;generate_xcpqc_files&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;generate_quality_control_images&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;generate_xcpqc_files&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">},</span>
         <span class="s1">&#39;working_directory&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="s1">&#39;remove_working_dir&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;remove_working_dir&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="s1">&#39;log_directory&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run_logging&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run_logging&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="s1">&#39;graphviz&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;entire_workflow&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -287,9 +426,10 @@
             <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
         <span class="p">},</span>
         <span class="s1">&#39;system_config&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;fail_fast&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;FSLDIR&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;on_grid&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;resource_manager&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;SGE&#39;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s1">&#39;parallel_environment&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
@@ -297,14 +437,14 @@
                 <span class="p">},</span>
             <span class="p">},</span>
             <span class="s1">&#39;maximum_memory_per_participant&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
-            <span class="s1">&#39;raise_insufficient&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;raise_insufficient&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;max_cores_per_participant&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="s1">&#39;num_ants_threads&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="s1">&#39;num_OMP_threads&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="s1">&#39;num_participants_at_once&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="s1">&#39;random_seed&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span>
                 <span class="s1">&#39;random&#39;</span><span class="p">,</span>
-                <span class="n">All</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">MAX_SEED</span><span class="p">)))),</span>
+                <span class="n">All</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">)))),</span>
             <span class="s1">&#39;observed_usage&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;callback_log&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;buffer&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
@@ -312,15 +452,15 @@
         <span class="p">},</span>
         <span class="s1">&#39;Amazon-AWS&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;aws_output_bucket_credentials&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
-            <span class="s1">&#39;s3_encryption&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;s3_encryption&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="s1">&#39;Debugging&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;anatomical_preproc&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="s1">&#39;run_t2&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+        <span class="s1">&#39;run_t2&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;non_local_means_filtering&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">forkable</span><span class="p">,</span>
             <span class="s1">&#39;noise_model&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
@@ -344,33 +484,33 @@
             <span class="c1"># &#39;T2w_brain_ACPC_template&#39; if &#39;acpc_target&#39; is &#39;brain&#39;</span>
             <span class="n">Any</span><span class="p">({</span>
                 <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-                <span class="s1">&#39;run_before_preproc&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">bool</span><span class="p">),</span>
+                <span class="s1">&#39;run_before_preproc&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">bool1_1</span><span class="p">),</span>
                 <span class="s1">&#39;brain_size&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
                 <span class="s1">&#39;FOV_crop&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;robustfov&#39;</span><span class="p">,</span> <span class="s1">&#39;flirt&#39;</span><span class="p">})),</span>
                 <span class="s1">&#39;acpc_target&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">In</span><span class="p">(</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;acpc&#39;</span><span class="p">][</span><span class="s1">&#39;target&#39;</span><span class="p">])),</span>
-                <span class="s1">&#39;align_brain_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">bool</span><span class="p">),</span>
+                <span class="s1">&#39;align_brain_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">bool1_1</span><span class="p">),</span>
                 <span class="s1">&#39;T1w_ACPC_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;T1w_brain_ACPC_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;T2w_ACPC_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;T2w_brain_ACPC_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="p">},</span> <span class="p">{</span>
                 <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-                <span class="s1">&#39;run_before_preproc&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;run_before_preproc&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;brain_size&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="s1">&#39;FOV_crop&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;robustfov&#39;</span><span class="p">,</span> <span class="s1">&#39;flirt&#39;</span><span class="p">}),</span>
                 <span class="s1">&#39;acpc_target&#39;</span><span class="p">:</span> <span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;acpc&#39;</span><span class="p">][</span><span class="s1">&#39;target&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                <span class="s1">&#39;align_brain_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">bool</span><span class="p">),</span>
+                <span class="s1">&#39;align_brain_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">bool1_1</span><span class="p">),</span>
                 <span class="s1">&#39;T1w_ACPC_template&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="s1">&#39;T1w_brain_ACPC_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;T2w_ACPC_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;T2w_brain_ACPC_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="p">},</span> <span class="p">{</span>
                 <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-                <span class="s1">&#39;run_before_preproc&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;run_before_preproc&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;brain_size&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="s1">&#39;FOV_crop&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;robustfov&#39;</span><span class="p">,</span> <span class="s1">&#39;flirt&#39;</span><span class="p">}),</span>
                 <span class="s1">&#39;acpc_target&#39;</span><span class="p">:</span> <span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;acpc&#39;</span><span class="p">][</span><span class="s1">&#39;target&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                <span class="s1">&#39;align_brain_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">bool</span><span class="p">),</span>
+                <span class="s1">&#39;align_brain_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">bool1_1</span><span class="p">),</span>
                 <span class="s1">&#39;T1w_ACPC_template&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="s1">&#39;T1w_brain_ACPC_template&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="s1">&#39;T2w_ACPC_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
@@ -381,30 +521,30 @@
                 <span class="s1">&#39;be populated if </span><span class="se">\&#39;</span><span class="s1">run</span><span class="se">\&#39;</span><span class="s1"> is not set to Off&#39;</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="s1">&#39;brain_extraction&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">(</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;brain_extraction&#39;</span><span class="p">][</span><span class="s1">&#39;using&#39;</span><span class="p">])],</span>
             <span class="s1">&#39;AFNI-3dSkullStrip&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;mask_vol&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;mask_vol&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;shrink_factor&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
-                <span class="s1">&#39;var_shrink_fac&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;var_shrink_fac&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;shrink_factor_bot_lim&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
-                <span class="s1">&#39;avoid_vent&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;avoid_vent&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;n_iterations&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                <span class="s1">&#39;pushout&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;touchup&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;pushout&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;touchup&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;fill_hole&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="s1">&#39;NN_smooth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="s1">&#39;smooth_final&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                <span class="s1">&#39;avoid_eyes&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;use_edge&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;avoid_eyes&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;use_edge&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;exp_frac&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
-                <span class="s1">&#39;push_to_edge&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;use_skull&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;push_to_edge&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;use_skull&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;perc_int&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
                 <span class="s1">&#39;max_inter_iter&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="s1">&#39;fac&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
                 <span class="s1">&#39;blur_fwhm&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
-                <span class="s1">&#39;monkey&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;monkey&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s1">&#39;FSL-FNIRT&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;interpolation&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span>
@@ -413,17 +553,17 @@
             <span class="p">},</span>
             <span class="s1">&#39;FSL-BET&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;frac&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
-                <span class="s1">&#39;mask_boolean&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;mesh_boolean&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;outline&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;padding&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;mask_boolean&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;mesh_boolean&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;outline&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;padding&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                <span class="s1">&#39;reduce_bias&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;remove_eyes&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;robust&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;skull&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;surfaces&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;reduce_bias&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;remove_eyes&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;robust&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;skull&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;surfaces&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;vertical_gradient&#39;</span><span class="p">:</span> <span class="n">Range</span><span class="p">(</span><span class="nb">min</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="p">},</span>
             <span class="s1">&#39;UNet&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -440,7 +580,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;segmentation&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;tissue_segmentation&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">(</span>
                 <span class="p">{</span><span class="s1">&#39;FSL-FAST&#39;</span><span class="p">,</span> <span class="s1">&#39;FreeSurfer&#39;</span><span class="p">,</span> <span class="s1">&#39;ANTs_Prior_Based&#39;</span><span class="p">,</span>
@@ -456,7 +596,7 @@
                     <span class="p">},</span>
                 <span class="p">},</span>
                 <span class="s1">&#39;use_priors&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                     <span class="s1">&#39;priors_path&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                     <span class="s1">&#39;WM_path&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                     <span class="s1">&#39;GM_path&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
@@ -489,20 +629,17 @@
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;registration_workflows&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;quality_thresholds&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="n">metric</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span>
-            <span class="n">metric</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;Dice&#39;</span><span class="p">,</span> <span class="s1">&#39;Jaccard&#39;</span><span class="p">,</span> <span class="s1">&#39;CrossCorr&#39;</span><span class="p">,</span> <span class="s1">&#39;Coverage&#39;</span><span class="p">)},</span>
         <span class="s1">&#39;anatomical_registration&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;resolution_for_anat&#39;</span><span class="p">:</span> <span class="n">All</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Match</span><span class="p">(</span><span class="n">resolution_regex</span><span class="p">)),</span>
             <span class="s1">&#39;T1w_brain_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;T1w_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;T1w_brain_template_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
-            <span class="s1">&#39;reg_with_skull&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;reg_with_skull&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;registration&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;ANTS&#39;</span><span class="p">,</span> <span class="s1">&#39;FSL&#39;</span><span class="p">,</span> <span class="s1">&#39;FSL-linear&#39;</span><span class="p">})],</span>
                 <span class="s1">&#39;ANTs&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;use_lesion_mask&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;use_lesion_mask&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                     <span class="s1">&#39;T1_registration&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">ANTs_parameters</span><span class="p">),</span>
                     <span class="s1">&#39;interpolation&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span>
                         <span class="s1">&#39;Linear&#39;</span><span class="p">,</span> <span class="s1">&#39;BSpline&#39;</span><span class="p">,</span> <span class="s1">&#39;LanczosWindowedSinc&#39;</span>
@@ -523,13 +660,13 @@
                 <span class="p">},</span>
             <span class="p">},</span>
             <span class="s1">&#39;overwrite_transform&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;FSL&#39;</span><span class="p">}),</span>
             <span class="p">},</span>
         <span class="p">},</span>
         <span class="s1">&#39;functional_registration&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;coregistration&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="s1">&#39;restore-brain&#39;</span><span class="p">}),</span>
                 <span class="s1">&#39;interpolation&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;trilinear&#39;</span><span class="p">,</span> <span class="s1">&#39;sinc&#39;</span><span class="p">,</span> <span class="s1">&#39;spline&#39;</span><span class="p">}),</span>
                 <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -538,31 +675,28 @@
                 <span class="s1">&#39;dof&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="s1">&#39;arguments&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;func_input_prep&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;reg_with_skull&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;reg_with_skull&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                     <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span>
                         <span class="s1">&#39;Mean_Functional&#39;</span><span class="p">,</span> <span class="s1">&#39;Selected_Functional_Volume&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;fmriprep_reference&#39;</span>
                     <span class="p">})],</span>
                     <span class="s1">&#39;Mean Functional&#39;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s1">&#39;n4_correct_func&#39;</span><span class="p">:</span> <span class="nb">bool</span>
+                        <span class="s1">&#39;n4_correct_func&#39;</span><span class="p">:</span> <span class="n">bool1_1</span>
                     <span class="p">},</span>
                     <span class="s1">&#39;Selected Functional Volume&#39;</span><span class="p">:</span> <span class="p">{</span>
                         <span class="s1">&#39;func_reg_input_volume&#39;</span><span class="p">:</span> <span class="nb">int</span>
                     <span class="p">},</span>
                 <span class="p">},</span>
                 <span class="s1">&#39;boundary_based_registration&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">All</span><span class="p">(</span><span class="n">Coerce</span><span class="p">(</span><span class="n">ListFromItem</span><span class="p">),</span>
-                               <span class="p">[</span><span class="n">Any</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">All</span><span class="p">(</span><span class="n">Lower</span><span class="p">,</span> <span class="n">Equal</span><span class="p">(</span><span class="s1">&#39;fallback&#39;</span><span class="p">)))],</span>
-                               <span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
+                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">forkable</span><span class="p">,</span>
                     <span class="s1">&#39;bbr_schedule&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                    <span class="s1">&#39;bbr_wm_map&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">((</span><span class="s1">&#39;probability_map&#39;</span><span class="p">,</span>
-                                      <span class="s1">&#39;partial_volume_map&#39;</span><span class="p">)),</span>
+                    <span class="s1">&#39;bbr_wm_map&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;probability_map&#39;</span><span class="p">,</span> <span class="s1">&#39;partial_volume_map&#39;</span><span class="p">}),</span>
                     <span class="s1">&#39;bbr_wm_mask_args&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                    <span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">((</span><span class="s1">&#39;whole-head&#39;</span><span class="p">,</span> <span class="s1">&#39;brain&#39;</span><span class="p">))</span>
+                    <span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;whole-head&#39;</span><span class="p">,</span> <span class="s1">&#39;brain&#39;</span><span class="p">})</span>
                 <span class="p">},</span>
             <span class="p">},</span>
             <span class="s1">&#39;EPI_registration&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;ANTS&#39;</span><span class="p">,</span> <span class="s1">&#39;FSL&#39;</span><span class="p">,</span> <span class="s1">&#39;FSL-linear&#39;</span><span class="p">})],</span>
                 <span class="s1">&#39;EPI_template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;EPI_template_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
@@ -579,8 +713,8 @@
                 <span class="p">},</span>
             <span class="p">},</span>
             <span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;run_EPI&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;run_EPI&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="s1">&#39;output_resolution&#39;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s1">&#39;func_preproc_outputs&#39;</span><span class="p">:</span> <span class="n">All</span><span class="p">(</span>
                         <span class="nb">str</span><span class="p">,</span> <span class="n">Match</span><span class="p">(</span><span class="n">resolution_regex</span><span class="p">)),</span>
@@ -619,12 +753,12 @@
     <span class="p">},</span>
     <span class="s1">&#39;surface_analysis&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;freesurfer&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;reconall_args&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;freesurfer_dir&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
         <span class="p">},</span>
         <span class="s1">&#39;post_freesurfer&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;surf_atlas_dir&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;gray_ordinates_dir&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;gray_ordinates_res&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
@@ -637,7 +771,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;longitudinal_template_generation&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;average_method&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">}),</span>
         <span class="s1">&#39;dof&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">}),</span>
         <span class="s1">&#39;interp&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;trilinear&#39;</span><span class="p">,</span> <span class="s1">&#39;nearestneighbour&#39;</span><span class="p">,</span> <span class="s1">&#39;sinc&#39;</span><span class="p">,</span> <span class="s1">&#39;spline&#39;</span><span class="p">}),</span>
@@ -648,17 +782,18 @@
         <span class="s1">&#39;convergence_threshold&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="s1">&#39;functional_preproc&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;truncation&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;start_tr&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="s1">&#39;stop_tr&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">All</span><span class="p">(</span><span class="n">Capitalize</span><span class="p">,</span> <span class="s1">&#39;End&#39;</span><span class="p">)))</span>
         <span class="p">},</span>
         <span class="s1">&#39;scaling&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;scaling_factor&#39;</span><span class="p">:</span> <span class="n">Number</span>
         <span class="p">},</span>
         <span class="s1">&#39;despiking&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">forkable</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">forkable</span><span class="p">,</span>
+            <span class="s1">&#39;space&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;native&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">})</span>
         <span class="p">},</span>
         <span class="s1">&#39;slice_timing_correction&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">forkable</span><span class="p">,</span>
@@ -666,71 +801,26 @@
             <span class="s1">&#39;tzero&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
         <span class="p">},</span>
         <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;motion_estimates&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;calculate_motion_first&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s1">&#39;calculate_motion_after&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;calculate_motion_first&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;calculate_motion_after&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s1">&#39;motion_correction&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">,</span> <span class="s1">&#39;mcflirt&#39;</span><span class="p">})],</span>
                 <span class="s1">&#39;AFNI-3dvolreg&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;functional_volreg_twopass&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;functional_volreg_twopass&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="p">},</span>
                 <span class="s1">&#39;motion_correction_reference&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span>
-                    <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;selected_volume&#39;</span><span class="p">,</span> <span class="s1">&#39;fmriprep_reference&#39;</span><span class="p">})],</span>
+                    <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;selected_volume&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;fmriprep_reference&#39;</span><span class="p">})],</span>
                 <span class="s1">&#39;motion_correction_reference_volume&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s1">&#39;motion_estimate_filter&#39;</span><span class="p">:</span> <span class="n">Required</span><span class="p">(</span>
-                <span class="n">Any</span><span class="p">({</span>  <span class="c1"># no motion estimate filter</span>
-                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span>
-                        <span class="n">ExactSequence</span><span class="p">([</span><span class="kc">False</span><span class="p">]),</span> <span class="n">ExactSequence</span><span class="p">([]),</span> <span class="kc">False</span><span class="p">)),</span>
-                    <span class="s1">&#39;filter_type&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;notch&#39;</span><span class="p">,</span> <span class="s1">&#39;lowpass&#39;</span><span class="p">})),</span>
-                    <span class="s1">&#39;filter_order&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
-                    <span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;center_frequency&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                <span class="p">},</span> <span class="p">{</span>  <span class="c1"># notch filter with breathing_rate_* set</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span> <span class="n">forkable</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_type&#39;</span><span class="p">):</span> <span class="s1">&#39;notch&#39;</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_order&#39;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
-                    <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
-                    <span class="s1">&#39;center_frequency&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                <span class="p">},</span> <span class="p">{</span>  <span class="c1"># notch filter with manual parameters set</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span> <span class="n">forkable</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_type&#39;</span><span class="p">):</span> <span class="s1">&#39;notch&#39;</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_order&#39;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
-                    <span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;center_frequency&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
-                    <span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                <span class="p">},</span> <span class="p">{</span>  <span class="c1"># lowpass filter with breathing_rate_min</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span> <span class="n">forkable</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_type&#39;</span><span class="p">):</span> <span class="s1">&#39;lowpass&#39;</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_order&#39;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
-                    <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;center_frequency&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                <span class="p">},</span> <span class="p">{</span>  <span class="c1"># lowpass filter with lowpass_cutoff</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span> <span class="n">forkable</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_type&#39;</span><span class="p">):</span> <span class="s1">&#39;lowpass&#39;</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;filter_order&#39;</span><span class="p">):</span> <span class="nb">int</span><span class="p">,</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;breathing_rate_min&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="s1">&#39;breathing_rate_max&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;center_frequency&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="s1">&#39;filter_bandwidth&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
-                    <span class="n">Required</span><span class="p">(</span><span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">):</span> <span class="n">Number</span><span class="p">,</span>
-                <span class="p">},),</span>
-                <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;`motion_estimate_filter` configuration is invalid. See &#39;</span>
-                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">docs_prefix</span><span class="si">}</span><span class="s1">/user/&#39;</span>
-                    <span class="s1">&#39;func#motion_estimate_filter_valid_options for details.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="n">Any</span><span class="p">({</span><span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">forkable</span><span class="p">,</span>
+                     <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">motion_estimate_filter</span><span class="p">]},</span>
+                    <span class="p">{</span><span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">All</span><span class="p">(</span><span class="n">forkable</span><span class="p">,</span> <span class="p">[</span><span class="n">In</span><span class="p">([</span><span class="kc">False</span><span class="p">],</span> <span class="p">[])]),</span>
+                     <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">list</span><span class="p">)})</span>
             <span class="p">),</span>
         <span class="p">},</span>
         <span class="s1">&#39;distortion_correction&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -781,7 +871,7 @@
                 <span class="c1"># no mutually-exclusive options on</span>
                 <span class="p">[{</span>
                     <span class="o">**</span><span class="n">mutex</span><span class="p">[</span><span class="s1">&#39;FSL-BET&#39;</span><span class="p">][</span><span class="s1">&#39;rem&#39;</span><span class="p">],</span>
-                    <span class="s1">&#39;functional_mean_boolean&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;functional_mean_boolean&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                     <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">mutex</span><span class="p">[</span><span class="s1">&#39;FSL-BET&#39;</span><span class="p">][</span><span class="s1">&#39;mutex&#39;</span><span class="p">]}</span>
                 <span class="p">}]))</span>
             <span class="p">),</span>
@@ -791,15 +881,15 @@
                 <span class="s1">&#39;brain_probseg&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="p">},</span>
             <span class="s1">&#39;Anatomical_Refined&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;anatomical_mask_dilation&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">bool</span><span class="p">),</span>
+                <span class="s1">&#39;anatomical_mask_dilation&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">bool1_1</span><span class="p">),</span>
             <span class="p">},</span>
-            <span class="s1">&#39;apply_func_mask_in_native_space&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;apply_func_mask_in_native_space&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="s1">&#39;generate_func_mean&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="s1">&#39;normalize_func&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -811,7 +901,7 @@
             <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">forkable</span><span class="p">,</span>
             <span class="s1">&#39;space&#39;</span><span class="p">:</span> <span class="n">All</span><span class="p">(</span><span class="n">Coerce</span><span class="p">(</span><span class="n">ListFromItem</span><span class="p">),</span>
                          <span class="p">[</span><span class="n">All</span><span class="p">(</span><span class="n">Lower</span><span class="p">,</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;native&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">}))]),</span>
-            <span class="s1">&#39;create_regressors&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;create_regressors&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;Regressors&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">([</span><span class="n">Schema</span><span class="p">({</span>
                 <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="n">Required</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;Censor&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -824,9 +914,9 @@
                     <span class="s1">&#39;number_of_subsequent_trs_to_censor&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
                 <span class="p">},</span>
                 <span class="s1">&#39;Motion&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;include_delayed&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                    <span class="s1">&#39;include_squared&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                    <span class="s1">&#39;include_delayed_squared&#39;</span><span class="p">:</span> <span class="nb">bool</span>
+                    <span class="s1">&#39;include_delayed&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                    <span class="s1">&#39;include_squared&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                    <span class="s1">&#39;include_delayed_squared&#39;</span><span class="p">:</span> <span class="n">bool1_1</span>
                 <span class="p">},</span>
                 <span class="s1">&#39;aCompCor&#39;</span><span class="p">:</span> <span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;Regressors&#39;</span><span class="p">][</span><span class="s1">&#39;CompCor&#39;</span><span class="p">],</span>
                 <span class="s1">&#39;tCompCor&#39;</span><span class="p">:</span> <span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;Regressors&#39;</span><span class="p">][</span><span class="s1">&#39;CompCor&#39;</span><span class="p">],</span>
@@ -852,25 +942,25 @@
                 <span class="n">In</span><span class="p">({</span><span class="s1">&#39;After&#39;</span><span class="p">,</span> <span class="s1">&#39;Before&#39;</span><span class="p">})),</span>
             <span class="s1">&#39;regressor_masks&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;erode_anatomical_brain_mask&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                     <span class="s1">&#39;brain_mask_erosion_prop&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                     <span class="s1">&#39;brain_mask_erosion_mm&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                     <span class="s1">&#39;brain_erosion_mm&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">)</span>
                 <span class="p">},</span>
                 <span class="s1">&#39;erode_csf&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                     <span class="s1">&#39;csf_erosion_prop&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                     <span class="s1">&#39;csf_mask_erosion_mm&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                     <span class="s1">&#39;csf_erosion_mm&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                 <span class="p">},</span>
                 <span class="s1">&#39;erode_wm&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                     <span class="s1">&#39;wm_erosion_prop&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                     <span class="s1">&#39;wm_mask_erosion_mm&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                     <span class="s1">&#39;wm_erosion_mm&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                 <span class="p">},</span>
                 <span class="s1">&#39;erode_gm&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                     <span class="s1">&#39;gm_erosion_prop&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                     <span class="s1">&#39;gm_mask_erosion_mm&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
                     <span class="s1">&#39;gm_erosion_mm&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Number</span><span class="p">),</span>
@@ -879,43 +969,49 @@
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;amplitude_low_frequency_fluctuation&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+        <span class="s1">&#39;target_space&#39;</span><span class="p">:</span> <span class="n">target_space</span><span class="p">,</span>
         <span class="s1">&#39;highpass_cutoff&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">],</span>
         <span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="s1">&#39;voxel_mirrored_homotopic_connectivity&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;symmetric_registration&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;T1w_brain_template_symmetric&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
+            <span class="s1">&#39;T1w_brain_template_symmetric_funcreg&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;T1w_brain_template_symmetric_for_resample&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;T1w_template_symmetric&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
+            <span class="s1">&#39;T1w_template_symmetric_funcreg&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;T1w_template_symmetric_for_resample&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;dilated_symmetric_brain_mask&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
             <span class="s1">&#39;dilated_symmetric_brain_mask_for_resample&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;regional_homogeneity&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+        <span class="s1">&#39;target_space&#39;</span><span class="p">:</span> <span class="n">target_space</span><span class="p">,</span>
         <span class="s1">&#39;cluster_size&#39;</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="mi">7</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">27</span><span class="p">}),</span>
     <span class="p">},</span>
     <span class="s1">&#39;post_processing&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;spatial_smoothing&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;smoothed&#39;</span><span class="p">,</span> <span class="s1">&#39;nonsmoothed&#39;</span><span class="p">})],</span>
             <span class="s1">&#39;smoothing_method&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;FSL&#39;</span><span class="p">,</span> <span class="s1">&#39;AFNI&#39;</span><span class="p">})],</span>
             <span class="s1">&#39;fwhm&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">int</span><span class="p">]</span>
         <span class="p">},</span>
         <span class="s1">&#39;z-scoring&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;z-scored&#39;</span><span class="p">,</span> <span class="s1">&#39;raw&#39;</span><span class="p">})],</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;timeseries_extraction&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;roi_paths_fully_specified&#39;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;roi_paths_fully_specified&#39;</span><span class="p">):</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;tse_roi_paths&#39;</span><span class="p">:</span> <span class="n">Optional</span><span class="p">(</span>
             <span class="n">Maybe</span><span class="p">({</span>
-                <span class="nb">str</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                    <span class="n">option</span> <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">options</span>
-                <span class="p">])</span> <span class="k">for</span> <span class="n">options</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="nb">list</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+                <span class="p">)</span> <span class="k">for</span> <span class="n">options</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span>
                     <span class="n">permutations</span><span class="p">(</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;timeseries&#39;</span><span class="p">][</span><span class="s1">&#39;roi_paths&#39;</span><span class="p">],</span>
                                  <span class="n">number_of</span><span class="p">)</span>
                 <span class="p">)</span> <span class="k">for</span> <span class="n">number_of</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]))}),</span>
@@ -930,23 +1026,23 @@
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;seed_based_correlation_analysis&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;roi_paths_fully_specified&#39;</span><span class="p">):</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">(</span><span class="s1">&#39;roi_paths_fully_specified&#39;</span><span class="p">):</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;sca_roi_paths&#39;</span><span class="p">:</span> <span class="n">Optional</span><span class="p">(</span>
             <span class="n">Maybe</span><span class="p">({</span>
-                <span class="nb">str</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                    <span class="n">option</span> <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">options</span>
-                <span class="p">])</span> <span class="k">for</span> <span class="n">options</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">:</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span>
+                    <span class="n">options</span>
+                <span class="p">))</span> <span class="k">for</span> <span class="n">options</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span>
                     <span class="n">permutations</span><span class="p">(</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;sca&#39;</span><span class="p">][</span><span class="s1">&#39;roi_paths&#39;</span><span class="p">],</span> <span class="n">number_of</span><span class="p">)</span>
                 <span class="p">)</span> <span class="k">for</span> <span class="n">number_of</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]))})</span>
             <span class="p">}),</span>
             <span class="n">msg</span><span class="o">=</span><span class="n">permutation_message</span><span class="p">(</span>
                 <span class="s1">&#39;sca_roi_paths&#39;</span><span class="p">,</span> <span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;sca&#39;</span><span class="p">][</span><span class="s1">&#39;roi_paths&#39;</span><span class="p">])</span>
         <span class="p">),</span>
-        <span class="s1">&#39;norm_timeseries_for_DR&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;norm_timeseries_for_DR&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="s1">&#39;network_centrality&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;memory_allocation&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span>
         <span class="s1">&#39;template_specification_file&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
         <span class="s1">&#39;degree_centrality&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -978,14 +1074,14 @@
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;PyPEER&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="s1">&#39;eye_scan_names&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Any</span><span class="p">([</span><span class="nb">str</span><span class="p">],</span> <span class="p">[])),</span>
         <span class="s1">&#39;data_scan_names&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Any</span><span class="p">([</span><span class="nb">str</span><span class="p">],</span> <span class="p">[])),</span>
         <span class="s1">&#39;eye_mask_path&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
         <span class="s1">&#39;stimulus_path&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
         <span class="s1">&#39;minimal_nuisance_correction&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;peer_gsr&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s1">&#39;peer_scrub&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;peer_gsr&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;peer_scrub&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;scrub_thresh&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">},</span>
@@ -1013,18 +1109,38 @@
             <span class="s1">&#39;functional_registration&#39;</span>
         <span class="p">][</span><span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">][</span><span class="s1">&#39;apply_transform&#39;</span><span class="p">][</span>
             <span class="s1">&#39;using&#39;</span>
-        <span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;single_step_resampling_from_stc&#39;</span> <span class="ow">and</span> <span class="n">partially_validated</span><span class="p">[</span>
-            <span class="s1">&#39;nuisance_corrections&#39;</span>
-        <span class="p">][</span><span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;space&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="p">[</span><span class="s1">&#39;template&#39;</span><span class="p">]):</span>
-            <span class="k">raise</span> <span class="n">ExclusiveInvalid</span><span class="p">(</span>
-                <span class="s1">&#39;``single_step_resampling_from_stc`` requires template-space &#39;</span>
-                <span class="s1">&#39;nuisance regression. Either set ``nuisance_corrections: &#39;</span>
-                <span class="s1">&#39;2-nuisance_regression: space`` to ``template`` or choose a &#39;</span>
-                <span class="s1">&#39;different option for ``registration_workflows: &#39;</span>
-                <span class="s1">&#39;functional_registration: func_registration_to_template: &#39;</span>
-                <span class="s1">&#39;apply_transform: using``&#39;</span><span class="p">)</span>
+        <span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;single_step_resampling_from_stc&#39;</span><span class="p">):</span>
+            <span class="n">or_else</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;or choose a different option for &#39;</span>
+                       <span class="s1">&#39;``registration_workflows: functional_registration: &#39;</span>
+                       <span class="s1">&#39;func_registration_to_template: apply_transform: &#39;</span>
+                       <span class="s1">&#39;using``&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="kc">True</span> <span class="ow">in</span> <span class="n">partially_validated</span><span class="p">[</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">][</span>
+                <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">partially_validated</span><span class="p">[</span>
+                <span class="s1">&#39;nuisance_corrections&#39;</span>
+            <span class="p">][</span><span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;space&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="p">[</span><span class="s1">&#39;template&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="n">ExclusiveInvalid</span><span class="p">(</span>
+                    <span class="s1">&#39;``single_step_resampling_from_stc`` requires &#39;</span>
+                    <span class="s1">&#39;template-space nuisance regression. Either set &#39;</span>
+                    <span class="s1">&#39;``nuisance_corrections: 2-nuisance_regression: space`` &#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;to ``template`` </span><span class="si">{</span><span class="n">or_else</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">registration</span> <span class="o">!=</span> <span class="s1">&#39;ANTS&#39;</span> <span class="k">for</span> <span class="n">registration</span> <span class="ow">in</span>
+                   <span class="n">partially_validated</span><span class="p">[</span><span class="s1">&#39;registration_workflows&#39;</span><span class="p">][</span>
+                       <span class="s1">&#39;anatomical_registration&#39;</span><span class="p">][</span><span class="s1">&#39;registration&#39;</span><span class="p">][</span><span class="s1">&#39;using&#39;</span><span class="p">]):</span>
+                <span class="k">raise</span> <span class="n">ExclusiveInvalid</span><span class="p">(</span>
+                    <span class="s1">&#39;``single_step_resampling_from_stc`` requires &#39;</span>
+                    <span class="s1">&#39;ANTS registration. Either set &#39;</span>
+                    <span class="s1">&#39;``registration_workflows: anatomical_registration: &#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;registration: using`` to ``ANTS`` </span><span class="si">{</span><span class="n">or_else</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">pass</span>
+    <span class="n">motion_filters</span> <span class="o">=</span> <span class="n">partially_validated</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">][</span>
+        <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">][</span><span class="s1">&#39;motion_estimate_filter&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="kc">True</span> <span class="ow">in</span> <span class="n">motion_filters</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">motion_filter</span> <span class="ow">in</span> <span class="n">motion_filters</span><span class="p">[</span><span class="s1">&#39;filters&#39;</span><span class="p">]:</span>
+            <span class="n">motion_filter</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name_motion_filter</span><span class="p">(</span>
+                <span class="n">motion_filter</span><span class="p">,</span> <span class="n">motion_filters</span><span class="p">[</span><span class="s1">&#39;filters&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">motion_filters</span><span class="p">[</span><span class="s1">&#39;filters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">return</span> <span class="n">partially_validated</span></div>
 
 

@@ -109,8 +109,6 @@
                   <span class="n">reference_skull</span><span class="p">,</span> <span class="n">ants_para</span><span class="p">,</span> <span class="n">moving_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">reference_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fixed_image_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">reg_with_skull</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">subprocess</span>
-    <span class="kn">from</span> <span class="nn">CPAC.registration.exceptions</span> <span class="kn">import</span> <span class="n">BadRegistrationError</span>
     <span class="c1"># TODO: expand transforms to cover all in ANTs para</span>
 
     <span class="n">regcmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;antsRegistration&quot;</span><span class="p">]</span>
@@ -489,15 +487,10 @@
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">regcmd</span><span class="p">))</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># pylint: disable=unused-variable</span>
-        <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">regcmd</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
-    <span class="k">except</span> <span class="n">BadRegistrationError</span> <span class="k">as</span> <span class="n">bad_registration</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">bad_registration</span>
+        <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">regcmd</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;[!] ANTS registration did not complete successfully.&#39;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Error details:</span><span class="se">\n</span><span class="si">{e}</span><span class="se">\n</span><span class="si">{e.output}</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>  <span class="c1"># pylint: disable=raise-missing-from</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;[!] ANTS registration did not complete successfully.&#39;</span>
+                        <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Error details:</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">output</span><span class="p">))</span>
 
     <span class="n">warp_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">warped_image</span> <span class="o">=</span> <span class="kc">None</span>
@@ -595,8 +588,7 @@
         <span class="c1"># to be converted to ITK format via c3d_affine_tool</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c3d_affine_tool&#39;</span><span class="p">,</span> <span class="s1">&#39;-ref&#39;</span><span class="p">,</span> <span class="n">anatomical_brain</span><span class="p">,</span> <span class="s1">&#39;-src&#39;</span><span class="p">,</span>
                <span class="n">moving_image</span><span class="p">,</span> <span class="n">func_to_anat</span><span class="p">,</span> <span class="s1">&#39;-fsl2ras&#39;</span><span class="p">,</span> <span class="s1">&#39;-oitk&#39;</span><span class="p">,</span> <span class="s1">&#39;affine.txt&#39;</span><span class="p">]</span>
-        <span class="c1"># pylint: disable=unused-variable</span>
-        <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
+        <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
         <span class="n">func_to_anat</span> <span class="o">=</span> <span class="n">change_itk_transform_type</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
                                                               <span class="s1">&#39;affine.txt&#39;</span><span class="p">))</span>
 
@@ -642,8 +634,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">func_to_anat</span><span class="p">))</span>
 
-    <span class="c1"># pylint: disable=unused-variable</span>
-    <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
+    <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">out_image</span></div>
 
@@ -664,19 +655,16 @@
             <span class="c1"># run_ants_apply_warp()</span>
 
 
-<span class="k">def</span> <span class="nf">run_c3d</span><span class="p">(</span><span class="n">reference_file</span><span class="p">,</span> <span class="n">source_file</span><span class="p">,</span> <span class="n">transform_file</span><span class="p">,</span>
-            <span class="n">retry</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">previous_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="c1"># pylint: disable=redefined-outer-name,reimported</span>
+<span class="k">def</span> <span class="nf">run_c3d</span><span class="p">(</span><span class="n">reference_file</span><span class="p">,</span> <span class="n">source_file</span><span class="p">,</span> <span class="n">transform_file</span><span class="p">):</span>
+
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">subprocess</span>
 
     <span class="n">itk_transform</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;affine.txt&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">retry</span><span class="p">)</span> <span class="ow">or</span> <span class="n">previous_failure</span><span class="p">:</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c3d_affine_tool&#39;</span><span class="p">,</span> <span class="s1">&#39;-ref&#39;</span><span class="p">,</span> <span class="n">reference_file</span><span class="p">,</span> <span class="s1">&#39;-src&#39;</span><span class="p">,</span>
-               <span class="n">source_file</span><span class="p">,</span> <span class="n">transform_file</span><span class="p">,</span> <span class="s1">&#39;-fsl2ras&#39;</span><span class="p">,</span> <span class="s1">&#39;-oitk&#39;</span><span class="p">,</span> <span class="n">itk_transform</span><span class="p">]</span>
-        <span class="c1"># pylint: disable=unused-variable</span>
-        <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c3d_affine_tool&#39;</span><span class="p">,</span> <span class="s1">&#39;-ref&#39;</span><span class="p">,</span> <span class="n">reference_file</span><span class="p">,</span> <span class="s1">&#39;-src&#39;</span><span class="p">,</span>
+            <span class="n">source_file</span><span class="p">,</span> <span class="n">transform_file</span><span class="p">,</span> <span class="s1">&#39;-fsl2ras&#39;</span><span class="p">,</span> <span class="s1">&#39;-oitk&#39;</span><span class="p">,</span> <span class="n">itk_transform</span><span class="p">]</span>
+    <span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">itk_transform</span>
 

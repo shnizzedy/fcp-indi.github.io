@@ -226,7 +226,7 @@ with space-T1w_desc-brain_mask reference</p>
 ‘option_val’: ‘None’,
 ‘inputs’: [(‘subject’, ‘scan’, ‘bold’, ‘desc-preproc_bold’,</p>
 <blockquote>
-<div><p>‘space-T1w_desc-mean_bold’, ‘space-T1w_desc-brain_mask’,
+<div><p>‘space-T1w_sbref’, ‘space-T1w_desc-brain_mask’,
 ‘max-displacement’, ‘space-template_desc-preproc_bold’,
 ‘space-bold_desc-brain_mask’, [‘T1w-brain-template-mask’,
 ‘EPI-template-mask’], [‘space-template_desc-bold_mask’,
@@ -235,7 +235,10 @@ with space-T1w_desc-brain_mask reference</p>
 ‘movement-parameters’, ‘dvars’,
 ‘framewise-displacement-jenkinson’)],</p>
 </div></blockquote>
-<p>‘outputs’: [‘space-template_desc-xcp_quality’]}</p>
+<dl class="simple">
+<dt>‘outputs’: {‘space-template_desc-xcp_quality’: {</dt><dd><p>‘Template’: ‘T1w-brain-template-mask’}}}</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
