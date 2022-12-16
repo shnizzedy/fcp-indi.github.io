@@ -43,6 +43,11 @@
   <section id="run-on-docker">
 <h1>Run on Docker<a class="headerlink" href="#run-on-docker" title="Permalink to this headline">¶</a></h1>
 <p>A C-PAC <a class="reference external" href="https://www.docker.com/">Docker image</a> is available so that you can easily get an analysis running without needing to install C-PAC.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><span class="xref std std-doc">/user/versions-and-variants</span></p>
+<p><a class="reference internal" href="singularity"><span class="doc">Run on Singularity</span></a></p>
+</div>
 <p>The Docker image is designed following the specification established by the <a class="reference external" href="https://github.com/BIDS-Apps">BIDS-Apps project</a>, an initiative to create a collection of reproducible neuroimaging workflows that can be executed as self-contained environments using <a class="reference external" href="https://www.docker.com/">Docker</a> containers.  These workflows take as input any dataset that is organized according to the <a class="reference external" href="http://http://bids.neuroimaging.io">Brain Imaging Data Structure (BIDS) standard</a> and generating first-level outputs for this dataset. However, you can provide the C-PAC Docker image with a custom non-BIDS dataset by entering your own data configuration file. More details below.</p>
 <p>In addition, we have created a Docker default pipeline configuration as part of this initiative that allows you to run the C-PAC pipeline on your data in an environment that is fully provisioned with all of C-PAC’s dependencies - more details about the default pipeline are available further below. If you wish to run your own pipeline configuration, you can also provide this to the Docker image at run-time.</p>
 <p>To start, first pull the image from Docker Hub:</p>
@@ -101,20 +106,20 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac run --help
 
 <span class="go">Loading 🐳 Docker</span>
-<span class="go">Could not create /outputs/logs. Binding /outputs/logs to /home/circleci/build/outputs/logs instead.</span>
-<span class="go">Could not create /outputs/output. Binding /outputs/output to /home/circleci/build/outputs/output instead.</span>
 <span class="go">Could not create /outputs/crash. Binding /outputs/crash to /home/circleci/build/outputs/crash instead.</span>
+<span class="go">Could not create /outputs/output. Binding /outputs/output to /home/circleci/build/outputs/output instead.</span>
 <span class="go">Could not create /outputs/working. Binding /outputs/working to /home/circleci/build/outputs/working instead.</span>
+<span class="go">Could not create /outputs/logs. Binding /outputs/logs to /home/circleci/build/outputs/logs instead.</span>
 <span class="go">Loading 🐳 fcpindi/c-pac:latest as &quot;circleci (1001)&quot; with these directory bindings:</span>
 <span class="go">  local                                 Docker                mode</span>
 <span class="go">  ------------------------------------  --------------------  ------</span>
 <span class="go">  /etc/passwd                           /etc/passwd           ro</span>
 <span class="go">  /home/circleci/.cpac                  /home/circleci/.cpac  rw</span>
 <span class="go">  /home/circleci/build                  /home/circleci/build  rw</span>
-<span class="go">  /home/circleci/build/outputs/logs     /outputs/logs         rw</span>
-<span class="go">  /home/circleci/build/outputs/output   /outputs/output       rw</span>
 <span class="go">  /home/circleci/build/outputs/crash    /outputs/crash        rw</span>
+<span class="go">  /home/circleci/build/outputs/output   /outputs/output       rw</span>
 <span class="go">  /home/circleci/build/outputs/working  /outputs/working      rw</span>
+<span class="go">  /home/circleci/build/outputs/logs     /outputs/logs         rw</span>
 <span class="go">Logging messages will refer to the Docker paths.</span>
 
 <span class="go">usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]</span>
