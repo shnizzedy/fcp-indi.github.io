@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Versions and Variants &#8212; C-PAC 1.8.5.dev Beta documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex" />
+    <link rel="search" title="Search" href="../search" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Versions and Variants</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="versions-and-variants">
+<h1>Versions and Variants<a class="headerlink" href="#versions-and-variants" title="Permalink to this headline">¶</a></h1>
+<p>While still in beta, C-PAC versions are currently released through a <a class="reference internal" href="../glossary/release-schedule-feature-based"><span class="doc">feature-based schedule</span></a> <span id="id1">[<a class="reference internal" href="#id16" title="Khomh, F., Dhaliwal, T., Zou, Y., and Adams, B. 2012 June. Do faster releases improve software quality? An empirical case study of Mozilla Firefox. 2012 9th IEEE Working Conference on Mining Software Repositories (MSR) Zurich: IEEE.">1</a>]</span>.</p>
+<p>For each version, in addition to the standard image, we release 3 variants:</p>
+<p>2 intended for nearer like-for-like comparisons and harmonization when mixing or comparing software pipelines:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ABCD-HCP</span></code>, software dependencies are matched to <a class="reference external" href="https://github.com/DCAN-Labs/abcd-hcp-pipeline/releases/tag/v0.0.3">DCAN Labs ABCD-HCP BIDS fMRI Pipeline v0.0.3</a> <span id="id2">[<a class="reference internal" href="#id27" title="Sturgeon, D., Earl, E., Snider, K., Perrone, A., Ramirez, J., Mitchell, A. J., and Fair, D. Zenodo, 2020 June. DCAN-Labs/nhp-abcd-bids-pipeline Version 0.1.0. doi:10.5281/zenodo.3888969#.Xw31IpNKjyU">2</a>]</span>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fMRIPrep-LTS</span></code>, software dependencies are matched to those of <a class="reference external" href="https://fmriprep.org/en/20.1.3/">fMRIPrep v20.1</a> <span id="id3">[<a class="reference internal" href="#id8" title="Esteban, O., Markiewicz, C. J., Blair, R. W., Moodie, C. A., Isik, A. I., Erramuzpe, A., Kent, J. D., Goncalves, M., DuPre, E., Snyder, M., Oya, H., Ghosh, S. S., Wright, J., Durnez, J., Poldrack, R. A., and Gorgolewski, K. J. 2019 January. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nature methods, 16 :1 , pp. 111–116 doi:10.1038/s41592-018-0235-4">3</a>, <a class="reference internal" href="#id11" title="fMRIPrep developers. 2020. fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data — fmriprep version [20.1.3] documentation.">4</a>]</span>,</p></li>
+</ul>
+<p>and 1 intended to conserve disk space:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lite</span></code>, a slimmer image than the standard image; this variant does not include FreeSurfer.</p></li>
+</ul>
+<p>This flowchart is intended to help guide selection of a version (and potentially variant) C-PAC image to use in <a class="reference internal" href="docker"><span class="doc">Docker</span></a> or <cite>Apptainer / Singularity &lt;/user/singularity&gt;</cite>:</p>
+<div class="flowchart-container"><object data="../_static/flowcharts/choose-an-image.svg" type="image/svg+xml"></object></div><p class="rubric">References</p>
+<div class="docutils container" id="id4">
+<dl class="citation">
+<dt class="label" id="id16"><span class="brackets">1</span></dt>
+<dd><p>Khomh, F., Dhaliwal, T., Zou, Y., and Adams, B. 2012 June. Do faster releases improve software quality? An empirical case study of Mozilla Firefox. <em>2012 9th IEEE Working Conference on Mining Software Repositories (MSR)</em> Zurich: IEEE.</p>
+</dd>
+<dt class="label" id="id27"><span class="brackets">2</span></dt>
+<dd><p>Sturgeon, D., Earl, E., Snider, K., Perrone, A., Ramirez, J., Mitchell, A. J., and Fair, D. Zenodo, 2020 June. DCAN-Labs/nhp-abcd-bids-pipeline Version 0.1.0. <a class="reference external" href="https://dx.doi.org/10.5281/zenodo.3888969#.Xw31IpNKjyU">doi:10.5281/zenodo.3888969#.Xw31IpNKjyU</a></p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">3</span></dt>
+<dd><p>Esteban, O., Markiewicz, C. J., Blair, R. W., Moodie, C. A., Isik, A. I., Erramuzpe, A., Kent, J. D., Goncalves, M., DuPre, E., Snyder, M., Oya, H., Ghosh, S. S., Wright, J., Durnez, J., Poldrack, R. A., and Gorgolewski, K. J. 2019 January. fMRIPrep: a robust preprocessing pipeline for functional MRI. <em>Nature methods, 16</em> :1 , pp. 111–116 <a class="reference external" href="https://dx.doi.org/10.1038/s41592-018-0235-4">doi:10.1038/s41592-018-0235-4</a></p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">4</span></dt>
+<dd><p>fMRIPrep developers. 2020. <a class="reference external" href="https://fmriprep.org/en/20.1.3/"><em>fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data — fmriprep version [20.1.3] documentation</em></a>.</p>
+</dd>
+</dl>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index">
+              <img class="logo" src="../_static/cpac_logo_vertical.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="index">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Versions and Variants</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.0.
+    </div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-19224662-10');
+    </script>
+    <script defer src="https://fcp-indi.github.io/scripts/versionList.js"></script>
+
+  </body>
+</html>
