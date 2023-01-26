@@ -121,27 +121,32 @@
 <span class="sd">    `subprocess.check_output`.</span>
 
 <span class="sd">    Caveat: if you&#39;re assigning to a variable (like</span>
+
 <span class="sd">    ```Python</span>
 <span class="sd">    output = subprocess.check_output(cmd)</span>
 <span class="sd">    ```</span>
 
 <span class="sd">    ), the new function also returns the command&#39;s exit code, so you can just</span>
 <span class="sd">    assign that to a throwaway variable if you don&#39;t want it</span>
+
 <span class="sd">    ```Python</span>
 <span class="sd">    output, _ = log_subprocess(cmd)</span>
 <span class="sd">    ```</span>
 
 <span class="sd">    or subscript the command like</span>
+
 <span class="sd">    ```Python</span>
 <span class="sd">    output = log_subprocess(cmd)[0]</span>
 <span class="sd">    ```</span>
 
 <span class="sd">    . If you&#39;re not assigning to a variable, it doesn&#39;t matter and just</span>
+
 <span class="sd">    ```Python</span>
 <span class="sd">    log_subprocess(cmd)</span>
 <span class="sd">    ```</span>
 
 <span class="sd">    should work just like</span>
+
 <span class="sd">    ```Python</span>
 <span class="sd">    subprocess.check_output(cmd)</span>
 <span class="sd">    ```</span>

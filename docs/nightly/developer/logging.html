@@ -192,25 +192,25 @@ a console handler with a pre-defined format.</p>
 <dd><p>Pass STDERR and STDOUT from subprocess to interface’s logger.
 This function is nearly a drop-in replacement for
 <cite>subprocess.check_output</cite>.</p>
-<p>Caveat: if you’re assigning to a variable (like
-<code class="docutils literal notranslate"><span class="pre">`Python</span>
+<p>Caveat: if you’re assigning to a variable (like</p>
+<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
 <span class="pre">output</span> <span class="pre">=</span> <span class="pre">subprocess.check_output(cmd)</span>
 <span class="pre">`</span></code></p>
 <p>), the new function also returns the command’s exit code, so you can just
-assign that to a throwaway variable if you don’t want it
-<code class="docutils literal notranslate"><span class="pre">`Python</span>
+assign that to a throwaway variable if you don’t want it</p>
+<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
 <span class="pre">output,</span> <span class="pre">_</span> <span class="pre">=</span> <span class="pre">log_subprocess(cmd)</span>
 <span class="pre">`</span></code></p>
-<p>or subscript the command like
-<code class="docutils literal notranslate"><span class="pre">`Python</span>
+<p>or subscript the command like</p>
+<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
 <span class="pre">output</span> <span class="pre">=</span> <span class="pre">log_subprocess(cmd)[0]</span>
 <span class="pre">`</span></code></p>
-<p>. If you’re not assigning to a variable, it doesn’t matter and just
-<code class="docutils literal notranslate"><span class="pre">`Python</span>
+<p>. If you’re not assigning to a variable, it doesn’t matter and just</p>
+<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
 <span class="pre">log_subprocess(cmd)</span>
 <span class="pre">`</span></code></p>
-<p>should work just like
-<code class="docutils literal notranslate"><span class="pre">`Python</span>
+<p>should work just like</p>
+<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
 <span class="pre">subprocess.check_output(cmd)</span>
 <span class="pre">`</span></code></p>
 <dl class="field-list simple">
