@@ -192,17 +192,27 @@ a console handler with a pre-defined format.</p>
 <dd><p>Pass STDERR and STDOUT from subprocess to interface’s logger.
 This function is nearly a drop-in replacement for
 <cite>subprocess.check_output</cite>.</p>
-<p>Caveat: if you’re assigning to a variable (like
-&gt;&gt;&gt; output = subprocess.check_output(cmd)  # doctest: +SKIP
-), the new function also returns the command’s exit code, so you can just
-assign that to a throwaway variable if you don’t want it
-&gt;&gt;&gt; output, _ = log_subprocess(cmd)  # doctest: +SKIP
-or subscript the command like
-&gt;&gt;&gt; output = log_subprocess(cmd)[0]  # doctest: +SKIP
-. If you’re not assigning to a variable, it doesn’t matter and just
-&gt;&gt;&gt; log_subprocess(cmd)  # doctest: +SKIP
-should work just like
-&gt;&gt;&gt; subprocess.check_output(cmd)  # doctest: +SKIP</p>
+<p>Caveat: if you’re assigning to a variable (like</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  
+</pre></div>
+</div>
+<p>), the new function also returns the command’s exit code, so you can just
+assign that to a throwaway variable if you don’t want it</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">output</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">log_subprocess</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  
+</pre></div>
+</div>
+<p>or subscript the command like</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">log_subprocess</span><span class="p">(</span><span class="n">cmd</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  
+</pre></div>
+</div>
+<p>. If you’re not assigning to a variable, it doesn’t matter and just</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_subprocess</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  
+</pre></div>
+</div>
+<p>should work just like</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>  
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
