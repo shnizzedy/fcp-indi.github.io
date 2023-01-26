@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>C-PAC Quickstart &#8212; C-PAC 1.8.5.dev Beta documentation</title>
+    <title>C-PAC Quickstart &#8212; C-PAC 1.8.5.dev1 Beta documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="index" title="User Documentation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">C-PAC Quickstart</a></li> 
       </ul>
@@ -64,40 +64,8 @@
 <li><p>More information regarding all of these points are available below, and throughout the rest of the User Guide.</p></li>
 </ol>
 </section>
-</section>
-<section id="versions-and-variants">
-<h1>Versions and Variants<a class="headerlink" href="#versions-and-variants" title="Permalink to this headline">¶</a></h1>
-<p>While still in beta, C-PAC versions are currently released through a <a class="reference internal" href="../glossary/release-schedule-feature-based"><span class="doc">feature-based schedule</span></a> <span id="id1">[<a class="reference internal" href="versions_and_variants#id16" title="Khomh, F., Dhaliwal, T., Zou, Y., and Adams, B. 2012 June. Do faster releases improve software quality? An empirical case study of Mozilla Firefox. 2012 9th IEEE Working Conference on Mining Software Repositories (MSR) Zurich: IEEE.">1</a>]</span>.</p>
-<p>For each version, in addition to the standard image, we release 3 variants:</p>
-<p>2 intended for nearer like-for-like comparisons and harmonization when mixing or comparing software pipelines:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ABCD-HCP</span></code>, software dependencies are matched to <a class="reference external" href="https://github.com/DCAN-Labs/abcd-hcp-pipeline/releases/tag/v0.0.3">DCAN Labs ABCD-HCP BIDS fMRI Pipeline v0.0.3</a> <span id="id2">[<a class="reference internal" href="versions_and_variants#id27" title="Sturgeon, D., Earl, E., Snider, K., Perrone, A., Ramirez, J., Mitchell, A. J., and Fair, D. Zenodo, 2020 June. DCAN-Labs/nhp-abcd-bids-pipeline Version 0.1.0. doi:10.5281/zenodo.3888969#.Xw31IpNKjyU">2</a>]</span>,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fMRIPrep-LTS</span></code>, software dependencies are matched to those of <a class="reference external" href="https://fmriprep.org/en/20.1.3/">fMRIPrep v20.1</a> <span id="id3">[<a class="reference internal" href="versions_and_variants#id8" title="Esteban, O., Markiewicz, C. J., Blair, R. W., Moodie, C. A., Isik, A. I., Erramuzpe, A., Kent, J. D., Goncalves, M., DuPre, E., Snyder, M., Oya, H., Ghosh, S. S., Wright, J., Durnez, J., Poldrack, R. A., and Gorgolewski, K. J. 2019 January. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nature methods, 16 :1 , pp. 111–116 doi:10.1038/s41592-018-0235-4">3</a>, <a class="reference internal" href="versions_and_variants#id11" title="fMRIPrep developers. 2020. fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data — fmriprep version [20.1.3] documentation.">4</a>]</span>,</p></li>
-</ul>
-<p>and 1 intended to conserve disk space:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">lite</span></code>, a slimmer image than the standard image; this variant does not include FreeSurfer.</p></li>
-</ul>
-<p>This flowchart is intended to help guide selection of a version (and potentially variant) C-PAC image to use in <a class="reference internal" href="docker"><span class="doc">Docker</span></a> or <a class="reference internal" href="singularity"><span class="doc">Apptainer / Singularity</span></a>:</p>
-<div class="flowchart-container"><object data="../_static/flowcharts/choose-an-image.svg" type="image/svg+xml"></object></div><p class="rubric">References</p>
-<div class="docutils container" id="id4">
-<dl class="citation">
-<dt class="label" id="id16"><span class="brackets">1</span></dt>
-<dd><p>Khomh, F., Dhaliwal, T., Zou, Y., and Adams, B. 2012 June. Do faster releases improve software quality? An empirical case study of Mozilla Firefox. <em>2012 9th IEEE Working Conference on Mining Software Repositories (MSR)</em> Zurich: IEEE.</p>
-</dd>
-<dt class="label" id="id27"><span class="brackets">2</span></dt>
-<dd><p>Sturgeon, D., Earl, E., Snider, K., Perrone, A., Ramirez, J., Mitchell, A. J., and Fair, D. Zenodo, 2020 June. DCAN-Labs/nhp-abcd-bids-pipeline Version 0.1.0. <a class="reference external" href="https://dx.doi.org/10.5281/zenodo.3888969#.Xw31IpNKjyU">doi:10.5281/zenodo.3888969#.Xw31IpNKjyU</a></p>
-</dd>
-<dt class="label" id="id8"><span class="brackets">3</span></dt>
-<dd><p>Esteban, O., Markiewicz, C. J., Blair, R. W., Moodie, C. A., Isik, A. I., Erramuzpe, A., Kent, J. D., Goncalves, M., DuPre, E., Snyder, M., Oya, H., Ghosh, S. S., Wright, J., Durnez, J., Poldrack, R. A., and Gorgolewski, K. J. 2019 January. fMRIPrep: a robust preprocessing pipeline for functional MRI. <em>Nature methods, 16</em> :1 , pp. 111–116 <a class="reference external" href="https://dx.doi.org/10.1038/s41592-018-0235-4">doi:10.1038/s41592-018-0235-4</a></p>
-</dd>
-<dt class="label" id="id11"><span class="brackets">4</span></dt>
-<dd><p>fMRIPrep developers. 2020. <a class="reference external" href="https://fmriprep.org/en/20.1.3/"><em>fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data — fmriprep version [20.1.3] documentation</em></a>.</p>
-</dd>
-</dl>
-</div>
 <section id="cpac-python-package">
-<span id="id30"></span><h2>cpac (Python package)<a class="headerlink" href="#cpac-python-package" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>cpac (Python package)<a class="headerlink" href="#cpac-python-package" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://pypi.org/project/cpac/">cpac</a> is available so that you can easily run analyses without needing interact with the container platform that allows you to run C-PAC without installing all of the underlying software.</p>
 <p>cpac requires Python 3.6 or greater. To get cpac, simply</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install cpac</span>
@@ -134,7 +102,7 @@
 </section>
 <section id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac<span class="w"> </span>--help
 
 <span class="go">usage: cpac [-h] [--version] [-o OPT] [-B CUSTOM_BINDING]</span>
 <span class="go">            [--platform {docker,singularity}] [--image IMAGE] [--tag TAG]</span>
@@ -272,23 +240,23 @@
 </section>
 <section id="usage-cpac-run">
 <h3>Usage: cpac run<a class="headerlink" href="#usage-cpac-run" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac run --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac<span class="w"> </span>run<span class="w"> </span>--help
 
 <span class="go">Loading 🐳 Docker</span>
-<span class="go">Could not create /outputs/crash. Binding /outputs/crash to /home/circleci/build/outputs/crash instead.</span>
 <span class="go">Could not create /outputs/output. Binding /outputs/output to /home/circleci/build/outputs/output instead.</span>
-<span class="go">Could not create /outputs/working. Binding /outputs/working to /home/circleci/build/outputs/working instead.</span>
 <span class="go">Could not create /outputs/logs. Binding /outputs/logs to /home/circleci/build/outputs/logs instead.</span>
+<span class="go">Could not create /outputs/working. Binding /outputs/working to /home/circleci/build/outputs/working instead.</span>
+<span class="go">Could not create /outputs/crash. Binding /outputs/crash to /home/circleci/build/outputs/crash instead.</span>
 <span class="go">Loading 🐳 fcpindi/c-pac:latest as &quot;circleci (1001)&quot; with these directory bindings:</span>
 <span class="go">  local                                 Docker                mode</span>
 <span class="go">  ------------------------------------  --------------------  ------</span>
 <span class="go">  /etc/passwd                           /etc/passwd           ro</span>
 <span class="go">  /home/circleci/.cpac                  /home/circleci/.cpac  rw</span>
 <span class="go">  /home/circleci/build                  /home/circleci/build  rw</span>
-<span class="go">  /home/circleci/build/outputs/crash    /outputs/crash        rw</span>
 <span class="go">  /home/circleci/build/outputs/output   /outputs/output       rw</span>
-<span class="go">  /home/circleci/build/outputs/working  /outputs/working      rw</span>
 <span class="go">  /home/circleci/build/outputs/logs     /outputs/logs         rw</span>
+<span class="go">  /home/circleci/build/outputs/working  /outputs/working      rw</span>
+<span class="go">  /home/circleci/build/outputs/crash    /outputs/crash        rw</span>
 <span class="go">Logging messages will refer to the Docker paths.</span>
 
 <span class="go">usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]</span>
@@ -492,13 +460,13 @@
 </section>
 <section id="usage-cpac-utils">
 <h3>Usage: cpac utils<a class="headerlink" href="#usage-cpac-utils" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac utils --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac<span class="w"> </span>utils<span class="w"> </span>--help
 
 <span class="go">Loading 🐳 Docker</span>
 <span class="go">Could not create /outputs/logs. Binding /outputs/logs to /home/circleci/build/outputs/logs instead.</span>
-<span class="go">Could not create /outputs/working. Binding /outputs/working to /home/circleci/build/outputs/working instead.</span>
 <span class="go">Could not create /outputs/output. Binding /outputs/output to /home/circleci/build/outputs/output instead.</span>
 <span class="go">Could not create /outputs/crash. Binding /outputs/crash to /home/circleci/build/outputs/crash instead.</span>
+<span class="go">Could not create /outputs/working. Binding /outputs/working to /home/circleci/build/outputs/working instead.</span>
 <span class="go">Loading 🐳 fcpindi/c-pac:latest as &quot;circleci (1001)&quot; with these directory bindings:</span>
 <span class="go">  local                                 Docker                mode</span>
 <span class="go">  ------------------------------------  --------------------  ------</span>
@@ -506,9 +474,9 @@
 <span class="go">  /home/circleci/.cpac                  /home/circleci/.cpac  rw</span>
 <span class="go">  /home/circleci/build                  /home/circleci/build  rw</span>
 <span class="go">  /home/circleci/build/outputs/logs     /outputs/logs         rw</span>
-<span class="go">  /home/circleci/build/outputs/working  /outputs/working      rw</span>
 <span class="go">  /home/circleci/build/outputs/output   /outputs/output       rw</span>
 <span class="go">  /home/circleci/build/outputs/crash    /outputs/crash        rw</span>
+<span class="go">  /home/circleci/build/outputs/working  /outputs/working      rw</span>
 <span class="go">Logging messages will refer to the Docker paths.</span>
 
 <span class="go">Usage: run.py utils [OPTIONS] COMMAND [ARGS]...</span>
@@ -538,7 +506,7 @@
 </ul>
 <p class="rubric">Footnotes</p>
 <dl class="footnote brackets">
-<dt class="label" id="id31"><span class="brackets">*</span></dt>
+<dt class="label" id="id2"><span class="brackets">*</span></dt>
 <dd><p>The version restrictions for Singularity are specific to cpac the convenience wrapper. C-PAC itself should <a class="reference internal" href="singularity"><span class="doc">run on Singularity</span></a> 2 or 3.</p>
 </dd>
 </dl>
@@ -717,8 +685,7 @@
   <h3><a href="../index">Table of Contents</a></h3>
   <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index">User Guide</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">C-PAC Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#versions-and-variants">Versions and Variants</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipelines/pipeline_config">3. Select Your Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocessing">4. Pre-Process Your Data</a></li>
@@ -766,7 +733,7 @@
         <li class="right" >
           <a href="index" title="User Documentation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev Beta documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index">C-PAC 1.8.5.dev1 Beta documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">C-PAC Quickstart</a></li> 
       </ul>
