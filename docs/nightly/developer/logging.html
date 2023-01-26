@@ -192,27 +192,17 @@ a console handler with a pre-defined format.</p>
 <dd><p>Pass STDERR and STDOUT from subprocess to interface’s logger.
 This function is nearly a drop-in replacement for
 <cite>subprocess.check_output</cite>.</p>
-<p>Caveat: if you’re assigning to a variable (like</p>
-<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
-<span class="pre">output</span> <span class="pre">=</span> <span class="pre">subprocess.check_output(cmd)</span>
-<span class="pre">`</span></code></p>
-<p>), the new function also returns the command’s exit code, so you can just
-assign that to a throwaway variable if you don’t want it</p>
-<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
-<span class="pre">output,</span> <span class="pre">_</span> <span class="pre">=</span> <span class="pre">log_subprocess(cmd)</span>
-<span class="pre">`</span></code></p>
-<p>or subscript the command like</p>
-<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
-<span class="pre">output</span> <span class="pre">=</span> <span class="pre">log_subprocess(cmd)[0]</span>
-<span class="pre">`</span></code></p>
-<p>. If you’re not assigning to a variable, it doesn’t matter and just</p>
-<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
-<span class="pre">log_subprocess(cmd)</span>
-<span class="pre">`</span></code></p>
-<p>should work just like</p>
-<p><code class="docutils literal notranslate"><span class="pre">`Python</span>
-<span class="pre">subprocess.check_output(cmd)</span>
-<span class="pre">`</span></code></p>
+<p>Caveat: if you’re assigning to a variable (like
+&gt;&gt;&gt; output = subprocess.check_output(cmd)  # doctest: +SKIP
+), the new function also returns the command’s exit code, so you can just
+assign that to a throwaway variable if you don’t want it
+&gt;&gt;&gt; output, _ = log_subprocess(cmd)  # doctest: +SKIP
+or subscript the command like
+&gt;&gt;&gt; output = log_subprocess(cmd)[0]  # doctest: +SKIP
+. If you’re not assigning to a variable, it doesn’t matter and just
+&gt;&gt;&gt; log_subprocess(cmd)  # doctest: +SKIP
+should work just like
+&gt;&gt;&gt; subprocess.check_output(cmd)  # doctest: +SKIP</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
