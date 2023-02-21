@@ -240,11 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../rnotes">11. Release Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendix">Appendix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../appendix#benchmark-package">Benchmark Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../versions">C-PAC versions</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../developer/index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../developer/installation">Installing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/installation">Installing C-PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/pipeline">Pipeline Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/random_state">Random State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/logging">Logging</a></li>
@@ -275,6 +277,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../developer/xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/testing">Testing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/continuous_integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/deprecating">Deprecating a version of C-PAC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../license">License</a></li>
@@ -320,9 +323,9 @@
 <div class="topic" id="ndmg-atlases">
 <p class="topic-title">Neuroparc v1.0: Baseline</p>
 <p>On July 20, 2020, Neuroparc released v1.0. In moving from v0 to v1, the paths to several of the Neuroparc atlases changed. The atlases are used by C-PAC in its default and preconfigured pipelines. C-PAC v1.7.0 includes the Neuroparc v1.0 paths, but <strong>if you are using a pipeline based on C-PAC 1.6.2a or older, you will need to update any Nueroparc v0 paths in your config</strong></p>
-<div class="table-wrapper docutils container" id="id50">
-<table class="docutils align-default" id="id50">
-<caption><span class="caption-text">All paths begin with <code class="docutils literal notranslate"><span class="pre">/ndmg_atlases/label/Human/</span></code></span><a class="headerlink" href="#id50" title="Permalink to this table">#</a></caption>
+<div class="table-wrapper docutils container" id="id58">
+<table class="docutils align-default" id="id58">
+<caption><span class="caption-text">All paths begin with <code class="docutils literal notranslate"><span class="pre">/ndmg_atlases/label/Human/</span></code></span><a class="headerlink" href="#id58" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -434,7 +437,7 @@
 <li><dl>
 <dt>Atlas</dt><dd><blockquote>
 <div><p>An <em>atlas</em> provides a guide to the location of anatomical features in a coordinate space.</p>
-<p class="attribution">—<span id="id1">[<a class="reference internal" href="#id45" title="Poldrack, R. A., Mumford, J. A., and Nichols, T. E. 2011 August. Handbook of Functional MRI Data Analysis. New York: Cambridge University Press.">1</a>]</span> p. 55</p>
+<p class="attribution">—<span id="id1">[<a class="reference internal" href="#id52" title="Poldrack, R. A., Mumford, J. A., and Nichols, T. E. 2011 August. Handbook of Functional MRI Data Analysis. New York: Cambridge University Press.">1</a>]</span> p. 55</p>
 </div></blockquote>
 <p>An atlas provides a defined coordinate space, a <a class="reference internal" href="../../glossary/template"><span class="doc">template</span></a> for aligning images, and labels for regions of interest.</p>
 <p>Currently C-PAC only supports atlases in NifTI format.</p>
@@ -442,9 +445,9 @@
 <p class="rubric">CIFTI Resources</p>
 <div class="docutils container" id="id2">
 <ul class="simple">
-<li id="id7"><p>Etzel, J. 2014 March. <a class="reference external" href="http://mvpa.blogspot.com/2014/03/nifti-cifti-gifti-in-hcp-and-workbench.html">NIfTI, CIFTI, GIFTI in the HCP and Workbench: a primer</a>, <em>MVPA meanderings.</em></p></li>
-<li id="id9"><p>Habeeb, H. 2018 December. <a class="reference external" href="https://neurostars.org/t/convert-from-cifti2-hcp-to-3d-array/3054">Convert from CIFTI2 (HCP) to 3D array</a>, <em>Neurostars.</em></p></li>
-<li id="id13"><p>Mejia, M. 2015 August. <a class="reference external" href="https://mandymejia.com/2015/08/10/a-laymans-guide-to-working-with-cifti-files/">A layman’s guide to working with CIFTI files</a>, <em>Mandy Mejia.</em></p></li>
+<li id="id8"><p>Etzel, J. 2014 March. <a class="reference external" href="http://mvpa.blogspot.com/2014/03/nifti-cifti-gifti-in-hcp-and-workbench.html">NIfTI, CIFTI, GIFTI in the HCP and Workbench: a primer</a>, <em>MVPA meanderings.</em></p></li>
+<li id="id11"><p>Habeeb, H. 2018 December. <a class="reference external" href="https://neurostars.org/t/convert-from-cifti2-hcp-to-3d-array/3054">Convert from CIFTI2 (HCP) to 3D array</a>, <em>Neurostars.</em></p></li>
+<li id="id15"><p>Mejia, M. 2015 August. <a class="reference external" href="https://mandymejia.com/2015/08/10/a-laymans-guide-to-working-with-cifti-files/">A layman’s guide to working with CIFTI files</a>, <em>Mandy Mejia.</em></p></li>
 </ul>
 </div>
 </dd>
@@ -453,7 +456,7 @@
 <li><dl>
 <dt>Template</dt><dd><blockquote>
 <div><p>A <em>template</em> is an image that is representative of the <a class="reference internal" href="../../glossary/atlas"><span class="doc">atlas</span></a> and provides a target to which individual images can be aligned.</p>
-<p class="attribution">—<span id="id25">[<a class="reference internal" href="#id45" title="Poldrack, R. A., Mumford, J. A., and Nichols, T. E. 2011 August. Handbook of Functional MRI Data Analysis. New York: Cambridge University Press.">1</a>]</span> p. 55</p>
+<p class="attribution">—<span id="id29">[<a class="reference internal" href="#id52" title="Poldrack, R. A., Mumford, J. A., and Nichols, T. E. 2011 August. Handbook of Functional MRI Data Analysis. New York: Cambridge University Press.">1</a>]</span> p. 55</p>
 </div></blockquote>
 <p>C-PAC images include the following templates:</p>
 <div class="table-wrapper docutils container">
@@ -572,7 +575,7 @@
 <p>Please report errors on the <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/issues">C-PAC GitHub issue tracker</a>. Please use <a class="reference external" href="https://neurostars.org/tag/cpac">Neurostars</a> for help using C-PAC and this application.</p>
 </section>
 <section id="using-a-text-editor">
-<span id="id26"></span><h2>Using a Text Editor<a class="headerlink" href="#using-a-text-editor" title="Permalink to this headline">#</a></h2>
+<span id="id30"></span><h2>Using a Text Editor<a class="headerlink" href="#using-a-text-editor" title="Permalink to this headline">#</a></h2>
 <p>If you want to base a pipeline on another pipeline configuration YAML file, you can specify</p>
 <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">FROM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/pipeline.yml</span>
 </pre></div>
@@ -642,9 +645,9 @@
 <div class="toctree-wrapper compound">
 </div>
 <p class="rubric">References</p>
-<div class="docutils container" id="id27">
+<div class="docutils container" id="id31">
 <dl class="citation">
-<dt class="label" id="id45"><span class="brackets">1</span></dt>
+<dt class="label" id="id52"><span class="brackets">1</span></dt>
 <dd><p>Poldrack, R. A., Mumford, J. A., and Nichols, T. E. 2011 August. <em>Handbook of Functional MRI Data Analysis</em>. New York: Cambridge University Press.</p>
 </dd>
 </dl>
@@ -682,7 +685,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later
+                Copyright &#169; 2012‒2023, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

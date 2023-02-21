@@ -238,11 +238,13 @@
 <li class="toctree-l2"><a class="reference internal" href="user/rnotes">11. Release Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user/appendix">Appendix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user/appendix#benchmark-package">Benchmark Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/versions">C-PAC versions</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="developer/index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer/installation">Installing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer/installation">Installing C-PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/pipeline">Pipeline Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer/templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/random_state">Random State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/logging">Logging</a></li>
@@ -273,6 +275,7 @@
 <li class="toctree-l2"><a class="reference internal" href="developer/xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/testing">Testing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/continuous_integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer/deprecating">Deprecating a version of C-PAC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license">License</a></li>
@@ -481,6 +484,13 @@
 
         <ul>
           <li><a href="developer/workflows/nuisance#module-CPAC.nuisance">module</a>
+</li>
+        </ul></li>
+        <li>
+    CPAC.pipeline.schema
+
+        <ul>
+          <li><a href="developer/pipeline#module-CPAC.pipeline.schema">module</a>, <a href="developer/schema#module-CPAC.pipeline.schema">[1]</a>
 </li>
         </ul></li>
     </ul></td>
@@ -826,6 +836,8 @@
 </li>
         <li><a href="developer/nodes#CPAC.utils.monitoring.log_nodes_cb">log_nodes_cb() (in module CPAC.utils.monitoring)</a>
 </li>
+        <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.log_subprocess">log_subprocess() (in module CPAC.utils.monitoring.custom_logging)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -876,6 +888,8 @@
 </li>
           <li><a href="developer/workflows/nuisance#module-CPAC.nuisance">CPAC.nuisance</a>
 </li>
+          <li><a href="developer/pipeline#module-CPAC.pipeline.schema">CPAC.pipeline.schema</a>, <a href="developer/schema#module-CPAC.pipeline.schema">[1]</a>
+</li>
           <li><a href="developer/xcpqc#module-CPAC.qc.xcp">CPAC.qc.xcp</a>
 </li>
           <li><a href="developer/workflows/registration#module-CPAC.registration">CPAC.registration</a>
@@ -923,6 +937,8 @@
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/pipeline#CPAC.pipeline.schema.name_motion_filter">name_motion_filter() (in module CPAC.pipeline.schema)</a>, <a href="developer/schema#CPAC.pipeline.schema.name_motion_filter">[1]</a>
+</li>
         <li><a href="developer/workflows/mdmr#CPAC.cwas.nifti_cwas">nifti_cwas() (in module CPAC.cwas)</a>
 </li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node">Node (class in CPAC.pipeline.nipype_pipeline_engine)</a>
@@ -971,6 +987,8 @@
   <h2>P</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/pipeline#CPAC.pipeline.schema.permutation_message">permutation_message() (in module CPAC.pipeline.schema)</a>, <a href="developer/schema#CPAC.pipeline.schema.permutation_message">[1]</a>
+</li>
         <li><a href="developer/workflows/seg_preproc#CPAC.seg_preproc.pick_wm_class_0">pick_wm_class_0() (in module CPAC.seg_preproc)</a>
 </li>
         <li><a href="developer/workflows/seg_preproc#CPAC.seg_preproc.pick_wm_class_1">pick_wm_class_1() (in module CPAC.seg_preproc)</a>
@@ -1041,6 +1059,8 @@
   <h2>S</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/pipeline#CPAC.pipeline.schema.sanitize">sanitize() (in module CPAC.pipeline.schema)</a>, <a href="developer/schema#CPAC.pipeline.schema.sanitize">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.save">save() (CPAC.pipeline.nipype_pipeline_engine.MapNode method)</a>
 
         <ul>
@@ -1053,12 +1073,16 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/nodes#CPAC.utils.interfaces.function.Function.save_inputs_to_json">save_inputs_to_json() (CPAC.utils.interfaces.function.Function method)</a>
 </li>
+        <li><a href="developer/pipeline#CPAC.pipeline.schema.schema">schema() (in module CPAC.pipeline.schema)</a>, <a href="developer/schema#CPAC.pipeline.schema.schema">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.set_input">set_input() (CPAC.pipeline.nipype_pipeline_engine.MapNode method)</a>
 
         <ul>
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node.set_input">(CPAC.pipeline.nipype_pipeline_engine.Node method)</a>
 </li>
         </ul></li>
+        <li><a href="developer/pipeline#CPAC.pipeline.schema.str_to_bool1_1">str_to_bool1_1() (in module CPAC.pipeline.schema)</a>, <a href="developer/schema#CPAC.pipeline.schema.str_to_bool1_1">[1]</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -1119,7 +1143,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later
+                Copyright &#169; 2012‒2023, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

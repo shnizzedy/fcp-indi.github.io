@@ -240,11 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="rnotes">11. Release Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix">Appendix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appendix#benchmark-package">Benchmark Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versions">C-PAC versions</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../developer/installation">Installing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/installation">Installing C-PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/pipeline">Pipeline Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/random_state">Random State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/logging">Logging</a></li>
@@ -275,6 +277,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../developer/xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/testing">Testing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/continuous_integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/deprecating">Deprecating a version of C-PAC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>
@@ -350,22 +353,101 @@
 <section id="configuration-without-the-gui">
 <span id="func-init-without-gui"></span><h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
-<p id="motion-estimate-filter-valid-options">For <code class="docutils literal notranslate"><span class="pre">motion_estimate_filter</span></code>, if <code class="docutils literal notranslate"><span class="pre">breathing_rate_min</span></code> and <code class="docutils literal notranslate"><span class="pre">breathing_rate_max</span></code> are provided, the filter design attributes (<code class="docutils literal notranslate"><span class="pre">center_frequency</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_bandwidth</span></code>, <code class="docutils literal notranslate"><span class="pre">lowpass_cutoff</span></code>) are automatically configured. But if you provide these directly, you don’t need the breathing rates. If all all parameters are provided, the filter design attributes will be ignored in favor of the <code class="docutils literal notranslate"><span class="pre">breathing_rate_*</span></code> attributes. A configuration must match at least one row in the following table:</p>
+<div class="versionchanged" id="motion-estimate-filter-valid-options">
+<p><span class="versionmodified changed">Changed in version 1.8.5: </span>Changed from single dictionary to <code class="docutils literal notranslate"><span class="pre">filters</span></code> list of dictionaries</p>
+</div>
+<p>For each filter in <code class="docutils literal notranslate"><span class="pre">motion_estimate_filter.filters</span></code>, if <code class="docutils literal notranslate"><span class="pre">breathing_rate_min</span></code> and <code class="docutils literal notranslate"><span class="pre">breathing_rate_max</span></code> are provided, the filter design attributes (<code class="docutils literal notranslate"><span class="pre">center_frequency</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_bandwidth</span></code>, <code class="docutils literal notranslate"><span class="pre">lowpass_cutoff</span></code>) are automatically configured. But if you provide these directly, you don’t need the breathing rates. If all all parameters are provided, the filter design attributes will be ignored in favor of the <code class="docutils literal notranslate"><span class="pre">breathing_rate_*</span></code> attributes. A configuration must match at least one row in the following table:</p>
 <div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 6%" />
+<col style="width: 5%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
 <col style="width: 12%" />
-<col style="width: 18%" />
-<col style="width: 18%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 15%" />
+<col style="width: 8%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">run</span></code></p></th>
 <th class="head"><p><code class="docutils literal notranslate"><span class="pre">filter_type</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">filter_order</span></code></p></th>
 <th class="head"><p><code class="docutils literal notranslate"><span class="pre">breathing_rate_min</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">breathing_rate_max</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">center_frequency</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">filter_bandwidth</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">lowpass_cutoff</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">Name</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“Off”</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>“On”</p></td>
+<td><p>“notch”</p></td>
+<td><p><strong>required</strong> int</p></td>
+<td><p><strong>required</strong> float</p></td>
+<td><p><strong>required</strong> float</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>optional str</p></td>
+</tr>
+<tr class="row-even"><td><p>“On”</p></td>
+<td><p>“notch”</p></td>
+<td><p><strong>required</strong> int</p></td>
+<td><p><em>None</em></p></td>
+<td><p><em>None</em></p></td>
+<td><p><strong>required</strong> float</p></td>
+<td><p><strong>required</strong> float</p></td>
+<td></td>
+<td><p>optional str</p></td>
+</tr>
+<tr class="row-odd"><td><p>“On”</p></td>
+<td><p>“lowpass”</p></td>
+<td><p><strong>required</strong> int</p></td>
+<td><p><strong>required</strong> float</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>optional str</p></td>
+</tr>
+<tr class="row-even"><td><p>“On”</p></td>
+<td><p>“lowpass”</p></td>
+<td><p><strong>required</strong> int</p></td>
+<td><p><em>None</em></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p><strong>required</strong> float</p></td>
+<td><p>optional str</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For each filter, <code class="docutils literal notranslate"><span class="pre">Name</span></code> need not be provided; if <code class="docutils literal notranslate"><span class="pre">Name</span></code> is not provided, it will be autopopulated based on the configuration, using the keys in this table <a class="footnote-reference brackets" href="#motion-filter-abbreviations" id="id1">1</a>:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 22%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">breathing_rate_min</span></code></p></th>
 <th class="head"><p><code class="docutils literal notranslate"><span class="pre">breathing_rate_max</span></code></p></th>
 <th class="head"><p><code class="docutils literal notranslate"><span class="pre">center_frequency</span></code></p></th>
 <th class="head"><p><code class="docutils literal notranslate"><span class="pre">filter_bandwidth</span></code></p></th>
@@ -373,48 +455,32 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Off</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>On</p></td>
-<td><p>notch</p></td>
-<td><p><strong>required</strong></p></td>
-<td><p><strong>required</strong></p></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>On</p></td>
-<td><p>notch</p></td>
-<td><p>None</p></td>
-<td><p>None</p></td>
-<td><p><strong>required</strong></p></td>
-<td><p><strong>required</strong></p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>On</p></td>
-<td><p>lowpass</p></td>
-<td><p><strong>required</strong></p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>On</p></td>
-<td><p>lowpass</p></td>
-<td><p>None</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td><p><strong>required</strong></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fc</span></code></p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<p>and the format <code class="docutils literal notranslate"><span class="pre">{filterType}{filterOrder}[{key}{value}]*</span></code> with a lowercase <code class="docutils literal notranslate"><span class="pre">p</span></code> replacing any decimal points. If any filters have duplicate names (given or generated), each name after the first will be suffixed with <code class="docutils literal notranslate"><span class="pre">dup{duplicate_number}</span></code>, with <code class="docutils literal notranslate"><span class="pre">duplicate_number</span></code> starting at 1. See <a class="reference internal" href="../developer/schema#CPAC.pipeline.schema.name_motion_filter" title="CPAC.pipeline.schema.name_motion_filter"><code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.pipeline.schema.name_motion_filter</span></code></a> for examples.</p>
+<p class="rubric">Note about abbreviation table</p>
+<dl class="footnote brackets">
+<dt class="label" id="motion-filter-abbreviations"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>These abbreviations are based on <span id="id2">[<a class="reference internal" href="#id11" title="Eyben, F. 2016. Spectral Bands and Filter Shapes. Real-time Speech and Music Classification by Large Audio Feature Space Extraction Cham, Switzerland: Springer International Publishing.">1</a>]</span> but modified to comply with <span id="id3">[<a class="reference internal" href="#id7" title="BIDS-contributors. 2022. Appendix IX: Entities. The Brain Imaging Data Structure (BIDS) Specification, 1.7.0">2</a>]</span>.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<div class="docutils container" id="id4">
+<dl class="citation">
+<dt class="label" id="id11"><span class="brackets">1</span></dt>
+<dd><p>Eyben, F. 2016. Spectral Bands and Filter Shapes. <em>Real-time Speech and Music Classification by Large Audio Feature Space Extraction</em> Cham, Switzerland: Springer International Publishing.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">2</span></dt>
+<dd><p>BIDS-contributors. 2022. <a class="reference external" href="https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/09-entities.html">Appendix IX: Entities.</a> <em>The Brain Imaging Data Structure (BIDS) Specification, 1.7.0</em></p>
+</dd>
+</dl>
 </div>
 </section>
 </section>
@@ -433,8 +499,8 @@
 <li><p><strong>Slice Acquisition Pattern - [Use NifTI Header, alt+z, alt+z2, alt-z, alt-z2, seq+z, seq-z]:</strong> The order of slice acquisition for the scans.</p></li>
 </ol>
 <p>Note that if a scan parameters file was used to construct the participant list, the parameters defined in this file will override the settings used here.</p>
-<section id="id1">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<section id="id31">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id31" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 <section id="through-the-data-configuration">
@@ -493,19 +559,30 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <figure class="align-default">
 <img alt="../_images/fmap_dist_corr.png" src="../_images/fmap_dist_corr.png" />
 </figure>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p><strong>Distortion correction - [On, Off]:</strong> Perform field map-based distortion correction.</p></li>
 <li><p><strong>PhaseDiff - [On, Off]:</strong> Perform field map correction using a single phase difference image, a subtraction of the two phase images from each echo. Default scanner for this method is SIEMENS.</p></li>
 <li><p><strong>Blip - [On, Off]:</strong> Uses AFNI 3dQWarp to calculate the distortion unwarp for EPI field maps of opposite/same phase encoding direction.</p></li>
 <li><p><strong>Skull-strip the magnitude file with - [BET, 3dSkullStrip]:</strong> Since the results of the distortion correction can be strongly affected by the strength of the skull-stripping of the magnitude file, the choice between using FSL’s BET or AFNI’s 3dSkullStrip is left open, as these tools can have varying results depending on the data itself. The choice of tool is only for skull-stripping the magnitude file, and not for the skull-stripping step of the main anatomical pre-processing part of the pipeline.</p></li>
 <li><p><strong>BET threshold/AFNI shrink factor - [float]:</strong> The threshold for brain extraction. FSL requires tight skull-stripping, erring on the side of ignoring brain voxels rather than adding noise. However, it might not be required to increase the threshold in all datasets, so it is important to check your dataset before changing the threshold.In FSL-BET, this is referred to as “threshold intensity” and in AFNI’S 3dSkull Strip, it is the -shrink_factor. The default value is 0.5.</p></li>
 <li><p><strong>DeltaTE, in ms - [float]:</strong> The time difference between the first magnitude image and the second magnitude image. The default value is 2.46 ms, which is widely used for SIEMENS, but it may differ with different datasets acquired by other MRI scanner brands, so it is important to ascertain this value specific to your data.</p></li>
-<li><p><strong>Dwell Time, in s - [float]:</strong> The dwell time is also known as echo spacing, and it is the time between the start of the readout of two successive lines in k-space during the EPI acquisition. This is a value obtained from the functional EPI (NOT the fieldmap). Here, the default value is 0.0005s.</p></li>
-<li><p><strong>Dwell to asymmetric ratio - [float]:</strong> This is the ratio between the Dwell time, as referenced above, and the asymmetric time. Here, the default value is 0.93902439.</p></li>
+<li><p><strong>EffectiveEchoSpacing, in s - [float]:</strong> The effective echo spacing is the time between the start of the readout of two successive lines in k-space during the EPI acquisition. This is a value obtained from the functional EPI (NOT the fieldmap).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version v.1.0.3.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version v1.8.5.</span></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Prior to v1.8.5, C-PAC erroneously used the <code class="docutils literal notranslate"><span class="pre">DwellTime</span></code> value from the fieldmap metadata instead of the appropriate <code class="docutils literal notranslate"><span class="pre">EffectiveEchoSpacing</span></code> value from the BOLD metadata.</p>
+</div>
+</li>
+<li><p><strong>EffectiveEchoSpacing to asymmetric ratio - [float]:</strong> This is the ratio between the effective echo spacing, as referenced above, and the asymmetric time.</p></li>
 <li><p><strong>Phase encoding direction - [string]:</strong> This is the position of the voxels in the input image, and can have values of x/y/z or -x/-y/-z.</p></li>
 </ol>
-<section id="id2">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<section id="id32">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id32" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>
@@ -522,8 +599,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Functional Volume to Use as Input (Selected Functional Volume only) - [integer]:</strong> Only for when ‘Use as Functional-to-Anatomical Registration Input’ is set to ‘Selected Functional Volume’. Input the index of which volume from the functional 4D timeseries input file you wish to use as the input for functional-to-anatomical registration.</p></li>
 <li><p><strong>Functional Masking - [AFNI, FSL, FSL_AFNI, Anatomical_Refined]:</strong> Choose which tool to be used in functional masking - AFNI (3dAutoMask), FSL (BET), FSL_AFNI (BET+3dAutoMask) or Anatomical_Refined (generate functional mask by registering anatomical mask to functional space). Default is AFNI.</p></li>
 </ol>
-<section id="id3">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<section id="id33">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id33" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 <section id="configuring-fsl-bet-options">
@@ -549,8 +626,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Robust brain center - [Off, On]:</strong> Robust brain center estimation. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</p></li>
 </ol>
 </section>
-<section id="id4">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<section id="id34">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id34" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>
@@ -571,8 +648,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Standard Brain Template - [path]:</strong> Used as a reference image for functional EPI registration.</p></li>
 <li><p><strong>ANTs Registration Parameters :</strong> Clicking on the setting icon will bring up a dialog where you can set ‘antsRegistration’ parameters.</p></li>
 </ol>
-<section id="id5">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<section id="id35">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id35" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>
@@ -607,7 +684,7 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later
+                Copyright &#169; 2012‒2023, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -641,22 +718,22 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 </ul>
 </li>
 <li><a class="reference internal" href="#slice-timing-correction">Slice Timing Correction</a><ul>
-<li><a class="reference internal" href="#id1">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id31">Configuration Without the GUI</a></li>
 <li><a class="reference internal" href="#through-the-data-configuration">Through the Data Configuration</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#field-map-based-distortion-correction">Field Map-Based Distortion Correction</a><ul>
-<li><a class="reference internal" href="#id2">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id32">Configuration Without the GUI</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#functional-to-anatomical-registration">Functional to Anatomical Registration</a><ul>
-<li><a class="reference internal" href="#id3">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id33">Configuration Without the GUI</a></li>
 <li><a class="reference internal" href="#configuring-fsl-bet-options">Configuring FSL BET options:</a></li>
-<li><a class="reference internal" href="#id4">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id34">Configuration Without the GUI</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#functional-to-template-registration">Functional to Template Registration</a><ul>
-<li><a class="reference internal" href="#id5">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id35">Configuration Without the GUI</a></li>
 </ul>
 </li>
 </ul>

@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" /><link rel="next" title="Installing CPAC" href="installation" /><link rel="prev" title="Appendix" href="../user/appendix" />
+<link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" /><link rel="next" title="Installing C-PAC" href="installation" /><link rel="prev" title="C-PAC versions" href="../user/versions" />
 
     <link rel="shortcut icon" href="../_static/favicon.ico"/><meta name="generator" content="sphinx-4.0.0, furo 2022.09.29"/>
         <title>Developer Documentation - C-PAC 1.8.5.dev1 Beta documentation</title>
@@ -240,11 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../user/rnotes">11. Release Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/appendix">Appendix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/appendix#benchmark-package">Benchmark Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user/versions">C-PAC versions</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Developer Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation">Installing CPAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation">Installing C-PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline">Pipeline Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_state">Random State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging">Logging</a></li>
@@ -275,6 +277,7 @@
 <li class="toctree-l2"><a class="reference internal" href="xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing">Testing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="continuous_integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deprecating">Deprecating a version of C-PAC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../license">License</a></li>
@@ -319,8 +322,9 @@
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation">Installing CPAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation">Installing C-PAC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline">Pipeline Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates">Templates and Atlases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nodes">Nodes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random_state">Random State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging">Logging</a></li>
@@ -351,6 +355,7 @@
 <li class="toctree-l1"><a class="reference internal" href="xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing">Testing CPAC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="continuous_integration">Continuous Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deprecating">Deprecating a version of C-PAC</a></li>
 </ul>
 </div>
 </section>
@@ -374,18 +379,18 @@
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Installing CPAC</div>
+                <div class="title">Installing C-PAC</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../user/appendix">
+          <a class="prev-page" href="../user/versions">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Appendix</div>
+                <div class="title">C-PAC versions</div>
                 
               </div>
             </a>
@@ -393,7 +398,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2012‒2022, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later
+                Copyright &#169; 2012‒2023, C-PAC Developers. C-PAC is licensed under LGPL-3.0-or-later
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
