@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" /><link rel="next" title="Pipeline Development" href="pipeline" /><link rel="prev" title="Developer Documentation" href="index" />
 
     <link rel="shortcut icon" href="../_static/favicon.ico"/><meta name="generator" content="sphinx-4.0.0, furo 2022.09.29"/>
-        <title>Installing C-PAC - C-PAC 1.8.5.dev1 Beta documentation</title>
+        <title>Installing CPAC - C-PAC 1.8.5.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -244,7 +244,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index">Developer Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Installing C-PAC</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline">Pipeline Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nodes">Nodes</a></li>
@@ -315,87 +315,11 @@
           </label>
         </div>
         <article role="main">
-          <section id="installing-c-pac">
-<span id="installation"></span><h1>Installing C-PAC<a class="headerlink" href="#installing-c-pac" title="Permalink to this headline">#</a></h1>
-<section id="downloading-c-pac">
-<span id="install-cpac"></span><h2>Downloading C-PAC<a class="headerlink" href="#downloading-c-pac" title="Permalink to this headline">#</a></h2>
-<p>C-PAC is only supported as a container image. To get the latest version of C-PAC, use one of the following commands, depending on your containerization software:</p>
-<section id="docker">
-<h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">#</a></h3>
-<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>fcpindi/c-pac:latest
-</pre></div>
-</div>
-</section>
-<section id="apptainer-singularity">
-<h3>Apptainer / Singularity<a class="headerlink" href="#apptainer-singularity" title="Permalink to this headline">#</a></h3>
-<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>pull<span class="w"> </span>C-PAC_latest.sif<span class="w"> </span>docker://fcpindi/c-pac:latest
-</pre></div>
-</div>
-</section>
-<section id="other-versions">
-<h3>other versions<a class="headerlink" href="#other-versions" title="Permalink to this headline">#</a></h3>
-<p>For a development image of the next release (the latest build of <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/tree/develop"><code class="docutils literal notranslate"><span class="pre">develop</span></code></a>), simply replace <code class="docutils literal notranslate"><span class="pre">latest</span></code> with <code class="docutils literal notranslate"><span class="pre">nightly</span></code>.</p>
-<p>For branch-specific images, replace <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac</span></code> with <code class="docutils literal notranslate"><span class="pre">ghcr.io/fcp-indi/c-pac</span></code> and replace <code class="docutils literal notranslate"><span class="pre">latest</span></code> with the appropriate branch-specific tag. You can see the GitHub Actions-generated image tags at <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/pkgs/container/c-pac">https://github.com/FCP-INDI/C-PAC/pkgs/container/c-pac</a> or in the log of the relevent GitHub Actions “Build and test C-PAC job” under the heading “Set tag &amp; Dockerfile”.</p>
-</section>
-</section>
-<section id="replacing-c-pac-code-in-an-already-built-image">
-<h2>Replacing C-PAC code in an already-built image<a class="headerlink" href="#replacing-c-pac-code-in-an-already-built-image" title="Permalink to this headline">#</a></h2>
-<p>If you have made changes to C-PAC that you would like to test without rebuilding the whole image, you can simply bind your code to your container when you launch to override the internal copy of C-PAC like</p>
-<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_CPAC_PATH</span><span class="si">}</span>/CPAC:/code/CPAC<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_CPAC_PATH</span><span class="si">}</span>/dev/docker_data/run.py:/code/run.py<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_CPAC_PATH</span><span class="si">}</span>/dev/docker_data/run-with-freesurfer.sh:/code/run-with-freesurfer.sh<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>fcpindi/c-pac:latest<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="si">${</span><span class="nv">INPUT_BIDS_DIR</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span><span class="w"> </span>participant
-</pre></div>
-</div>
-<p>or</p>
-<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>run<span class="w"> </span>--cleanenv<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-B<span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_CPAC_PATH</span><span class="si">}</span>/CPAC:/code/CPAC<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-B<span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_CPAC_PATH</span><span class="si">}</span>/dev/docker_data/run.py:/code/run.py<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-B<span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_CPAC_PATH</span><span class="si">}</span>/dev/docker_data/run-with-freesurfer.sh:/code/run-with-freesurfer.sh<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>C-PAC_latest.sif<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="si">${</span><span class="nv">INPUT_BIDS_DIR</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span><span class="w"> </span>participant
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">${LOCAL_CPAC_PATH}</span></code> is the path to the root of your clone of the C-PAC git repository. If you haven’t made any changes to the entrypoint scripts (<code class="docutils literal notranslate"><span class="pre">run.py</span></code> / <code class="docutils literal notranslate"><span class="pre">run-with-freesurfer.sh</span></code>), then <code class="docutils literal notranslate"><span class="pre">${LOCAL_CPAC_PATH}/CPAC:/code/CPAC</span></code> is the only binding you need to replace the in-container C-PAC code with your local copy.</p>
-</section>
-<section id="building-a-new-c-pac-image">
-<h2>Building a new C-PAC image<a class="headerlink" href="#building-a-new-c-pac-image" title="Permalink to this headline">#</a></h2>
-<p>The C-PAC build process makes use of Docker’s multi-stage build functionality <a class="footnote-reference brackets" href="#footcite-mult23" id="id1">1</a> to reduce iteration time. See <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/tree/develop/.github">https://github.com/FCP-INDI/C-PAC/tree/develop/.github</a> for the latest Dockerfiles and GitHub Actions workflow configurations.</p>
-<p>For each stage that you don’t need to change, you can just pull that stage from GitHub Packages <a class="footnote-reference brackets" href="#footcite-work23" id="id2">2</a><a class="footnote-reference brackets" href="#footcite-ghcr" id="id3">3</a>. If you need to build a stage, you can do so locally by running</p>
-<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_CPAC_PATH</span><span class="si">}</span>
-docker<span class="w"> </span>build<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--platform<span class="w"> </span>linux/amd64<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-f<span class="w"> </span>.github/Dockerfiles/<span class="si">${</span><span class="nv">STAGE_DOCKERFILE</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-t<span class="w"> </span>ghcr.io/fcpindi/c-pac/<span class="si">${</span><span class="nv">STAGE</span><span class="si">}</span>:<span class="si">${</span><span class="nv">TAG</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>.
-</pre></div>
-</div>
-<p>To interactively develop a staging image Dockerfile, attach to a base image in a BASH session. For some staging images, BASH is not installed (e.g., images built <code class="docutils literal notranslate"><span class="pre">FROM</span> <span class="pre">scratch</span></code>, so you may want to interact with a different image than what will ultimately be packaged. The base image in a Dockerfile is defined in the final <code class="docutils literal notranslate"><span class="pre">FROM</span></code> instruction. For example</p>
-<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--entrypoint<span class="w"> </span>/bin/bash<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--user<span class="w"> </span>root<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>ghcr.io/fcp-indi/c-pac/ubuntu:jammy-non-free
-</pre></div>
-</div>
-<p>enters a C-PAC staging Ubuntu 22.04 image where you can test installation commands interactively before committing them in a Dockerfile.</p>
-</section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id4">
-<dl class="footnote brackets">
-<dt class="label" id="footcite-mult23"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>2023 February. <a class="reference external" href="https://docs.docker.com/build/building/multi-stage/">Multi-stage builds</a>, <em>Docker documentation.</em></p>
-</dd>
-<dt class="label" id="footcite-work23"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>2023. <a class="reference external" href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">Working with the Container registry</a>, <em>Github docs.</em></p>
-</dd>
-<dt class="label" id="footcite-ghcr"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
-<dd><p>FCP-INDI. <a class="reference external" href="https://github.com/orgs/FCP-INDI/packages?repo_name=C-PAC">C-PAC</a>, <em>Github packages.</em></p>
-</dd>
-</dl>
-</div>
+          <section id="installing-cpac">
+<span id="installation"></span><h1>Installing CPAC<a class="headerlink" href="#installing-cpac" title="Permalink to this headline">#</a></h1>
+<section id="downloading-the-latest-version-of-cpac">
+<span id="install-cpac"></span><h2>Downloading the latest version of CPAC<a class="headerlink" href="#downloading-the-latest-version-of-cpac" title="Permalink to this headline">#</a></h2>
+<p>This section describes how to download the latest developer version of CPAC</p>
 </section>
 </section>
 
@@ -456,16 +380,8 @@ docker<span class="w"> </span>build<span class="w"> </span><span class="se">\</s
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Installing C-PAC</a><ul>
-<li><a class="reference internal" href="#downloading-c-pac">Downloading C-PAC</a><ul>
-<li><a class="reference internal" href="#docker">Docker</a></li>
-<li><a class="reference internal" href="#apptainer-singularity">Apptainer / Singularity</a></li>
-<li><a class="reference internal" href="#other-versions">other versions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#replacing-c-pac-code-in-an-already-built-image">Replacing C-PAC code in an already-built image</a></li>
-<li><a class="reference internal" href="#building-a-new-c-pac-image">Building a new C-PAC image</a></li>
-<li><a class="reference internal" href="#references">References</a></li>
+<li><a class="reference internal" href="#">Installing CPAC</a><ul>
+<li><a class="reference internal" href="#downloading-the-latest-version-of-cpac">Downloading the latest version of CPAC</a></li>
 </ul>
 </li>
 </ul>

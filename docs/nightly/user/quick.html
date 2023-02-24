@@ -244,7 +244,7 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../developer/installation">Installing C-PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/installation">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/pipeline">Pipeline Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/nodes">Nodes</a></li>
@@ -515,20 +515,20 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac<span class="w"> </span>run<span class="w"> </span>--help
 
 <span class="go">Loading 🐳 Docker</span>
-<span class="go">Could not create /outputs/working. Binding /outputs/working to /home/circleci/build/outputs/working instead.</span>
-<span class="go">Could not create /outputs/output. Binding /outputs/output to /home/circleci/build/outputs/output instead.</span>
 <span class="go">Could not create /outputs/logs. Binding /outputs/logs to /home/circleci/build/outputs/logs instead.</span>
 <span class="go">Could not create /outputs/crash. Binding /outputs/crash to /home/circleci/build/outputs/crash instead.</span>
+<span class="go">Could not create /outputs/working. Binding /outputs/working to /home/circleci/build/outputs/working instead.</span>
+<span class="go">Could not create /outputs/output. Binding /outputs/output to /home/circleci/build/outputs/output instead.</span>
 <span class="go">Loading 🐳 fcpindi/c-pac:latest as &quot;circleci (1001)&quot; with these directory bindings:</span>
 <span class="go">  local                                 Docker                mode</span>
 <span class="go">  ------------------------------------  --------------------  ------</span>
 <span class="go">  /etc/passwd                           /etc/passwd           ro</span>
 <span class="go">  /home/circleci/.cpac                  /home/circleci/.cpac  rw</span>
 <span class="go">  /home/circleci/build                  /home/circleci/build  rw</span>
-<span class="go">  /home/circleci/build/outputs/working  /outputs/working      rw</span>
-<span class="go">  /home/circleci/build/outputs/output   /outputs/output       rw</span>
 <span class="go">  /home/circleci/build/outputs/logs     /outputs/logs         rw</span>
 <span class="go">  /home/circleci/build/outputs/crash    /outputs/crash        rw</span>
+<span class="go">  /home/circleci/build/outputs/working  /outputs/working      rw</span>
+<span class="go">  /home/circleci/build/outputs/output   /outputs/output       rw</span>
 <span class="go">Logging messages will refer to the Docker paths.</span>
 
 <span class="go">usage: run.py [-h] [--pipeline_file PIPELINE_FILE] [--group_file GROUP_FILE]</span>
@@ -736,9 +736,9 @@
 
 <span class="go">Loading 🐳 Docker</span>
 <span class="go">Could not create /outputs/output. Binding /outputs/output to /home/circleci/build/outputs/output instead.</span>
+<span class="go">Could not create /outputs/logs. Binding /outputs/logs to /home/circleci/build/outputs/logs instead.</span>
 <span class="go">Could not create /outputs/crash. Binding /outputs/crash to /home/circleci/build/outputs/crash instead.</span>
 <span class="go">Could not create /outputs/working. Binding /outputs/working to /home/circleci/build/outputs/working instead.</span>
-<span class="go">Could not create /outputs/logs. Binding /outputs/logs to /home/circleci/build/outputs/logs instead.</span>
 <span class="go">Loading 🐳 fcpindi/c-pac:latest as &quot;circleci (1001)&quot; with these directory bindings:</span>
 <span class="go">  local                                 Docker                mode</span>
 <span class="go">  ------------------------------------  --------------------  ------</span>
@@ -746,9 +746,9 @@
 <span class="go">  /home/circleci/.cpac                  /home/circleci/.cpac  rw</span>
 <span class="go">  /home/circleci/build                  /home/circleci/build  rw</span>
 <span class="go">  /home/circleci/build/outputs/output   /outputs/output       rw</span>
+<span class="go">  /home/circleci/build/outputs/logs     /outputs/logs         rw</span>
 <span class="go">  /home/circleci/build/outputs/crash    /outputs/crash        rw</span>
 <span class="go">  /home/circleci/build/outputs/working  /outputs/working      rw</span>
-<span class="go">  /home/circleci/build/outputs/logs     /outputs/logs         rw</span>
 <span class="go">Logging messages will refer to the Docker paths.</span>
 
 <span class="go">Usage: run.py utils [OPTIONS] COMMAND [ARGS]...</span>
