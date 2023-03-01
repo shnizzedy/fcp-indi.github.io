@@ -321,12 +321,22 @@
 <h2>human<a class="headerlink" href="#human" title="Permalink to this headline">#</a></h2>
 <section id="default-the-default-pipeline">
 <h3>default: The Default Pipeline<a class="headerlink" href="#default-the-default-pipeline" title="Permalink to this headline">#</a></h3>
-<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/dev/docker_data/default_pipeline.yml">https://github.com/FCP-INDI/C-PAC/blob/main/dev/docker_data/default_pipeline.yml</a></p>
-<p><strong>Note:</strong> C-PAC runs this pipeline by default, and it is not necessary to invoke the <cite>–preconfig</cite> flag to run it.</p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_default.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_default.yml</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>C-PAC runs this pipeline by default, and it is not necessary to invoke the <cite>–preconfig</cite> flag to run it.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.8.5: </span>This pipeline was modified during the v1.8.5 release cycle. See <span class="xref std std-doc">user/release_notes/v1.8.5</span> for details. The previous default pipeline has been preserved as <a href="#id104"><span class="problematic" id="id105">|default_deprecated|_</span></a></p>
+</div>
 <p>C-PAC is packaged with a default processing pipeline so that you can get your data preprocessing and analysis started immediately. Just pull the C-PAC Docker container and kick off the container with your data, and you’re on your way.</p>
 <p>The default processing pipeline performs fMRI processing using four strategies, with and without global signal regression, with and without bandpass filtering.</p>
-<p>Anatomical processing begins with conforming the data to RPI orientation and removing orientation header information that will interfere with further processing. A non-linear transform between skull-on images and a 2mm MNI brain-only template are calculated using ANTs [3]. Images are them skull-stripped using AFNI’s 3dSkullStrip [5] and subsequently segmented into WM, GM, and CSF using FSL’s fast tool [6]. The resulting WM mask was multiplied by a WM prior map that was transformed into individual space using the inverse of the linear transforms previously calculated during the ANTs procedure. A CSF mask was multiplied by a ventricle map derived from the Harvard-Oxford atlas distributed with FSL [4]. Skull-stripped images and grey matter tissue maps are written into MNI space at 2mm resolution.</p>
-<p>Functional preprocessing begins with resampling the data to RPI orientation, and slice timing correction. Next, motion correction is performed using a two-stage approach in which the images are first coregistered to the mean fMRI and then a new mean is calculated and used as the target for a second coregistration (AFNI 3dvolreg [2]). A 7 degree of freedom linear transform between the mean fMRI and the structural image is calculated using FSL’s implementation of boundary-based registration [7]. Nuisance variable regression (NVR) is performed on motion corrected data using a 2nd order polynomial, a 24-regressor model of motion [8], 5 nuisance signals, identified via principal components analysis of signals obtained from white matter (CompCor, [9]), and mean CSF signal. WM and CSF signals were extracted using the previously described masks after transforming the fMRI data to match them in 2mm space using the inverse of the linear fMRI-sMRI transform. The NVR procedure is performed twice, with and without the inclusion of the global signal as a nuisance regressor. The residuals of the NVR procedure are processed with and without bandpass filtering (0.01Hz &lt; f &lt; 0.1Hz), written into MNI space at 3mm resolution and subsequently smoothed using a 6mm FWHM kernel.</p>
+<p>Anatomical processing begins with conforming the data to RPI orientation and removing orientation header information that will interfere with further processing. A non-linear transform between skull-on images and a 2mm MNI brain-only template are calculated using ANTs <span id="id1">[<a class="reference internal" href="#id9" title="Avants, B., Epstein, C., Grossman, M., and Gee, J. 2008 February. Symmetric diffeomorphic image registration with cross-correlation: Evaluating automated labeling of elderly and neurodegenerative brain. Medical image analysis, 12 :1 , pp. 26–41 doi:10.1016/j.media.2007.06.004">1</a>]</span>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.8.5: </span>Images are them skull-stripped using FSL’s BET <span id="id2">[]</span> (was using AFNI’s 3dSkullStrip <span id="id3">[<a class="reference internal" href="#id13" title="Cox, R. W. 1996 June. AFNI: Software for Analysis and Visualization of Functional Magnetic Resonance Neuroimages. Computers and biomedical research, 29 :3 , pp. 162–173 doi:10.1006/cbmr.1996.0014">2</a>, <a class="reference internal" href="#id14" title="Cox, R. W. and Hyde, J. S. 1997 June. Software tools for analysis and visualization of fMRI data. Nmr in biomedicine, 10 :4-5 , pp. 171–178 doi:10.1002/(SICI)1099-1492(199706/08)10:4/5&lt;171::AID-NBM453&gt;3.0.CO;2-L">3</a>]</span> prior to v1.8.5. See <span class="xref std std-doc">user/release_notes/v1.8.5</span> for details.) and subsequently segmented into WM, GM, and CSF using FSL’s fast tool <span id="id4">[]</span>.</p>
+</div>
+<p>The resulting WM mask was multiplied by a WM prior map that was transformed into individual space using the inverse of the linear transforms previously calculated during the ANTs procedure. A CSF mask was multiplied by a ventricle map derived from the Harvard-Oxford atlas distributed with FSL <span id="id5">[]</span>. Skull-stripped images and grey matter tissue maps are written into MNI space at 2mm resolution.</p>
+<p>Functional preprocessing begins with resampling the data to RPI orientation, and slice timing correction. Next, motion correction is performed using a two-stage approach in which the images are first coregistered to the mean fMRI and then a new mean is calculated and used as the target for a second coregistration (AFNI 3dvolreg <span id="id6">[<a class="reference internal" href="#id15" title="Cox, R. W. and Jesmanowicz, A. 1999. Real-time 3D image registration for functional MRI. Magnetic resonance in medicine, 42 :6 , pp. 1014–1018 doi:10.1002/(SICI)1522-2594(199912)42:6&lt;1014::AID-MRM4&gt;3.0.CO;2-F">4</a>]</span>). A 7 degree of freedom linear transform between the mean fMRI and the structural image is calculated using FSL’s implementation of boundary-based registration [7]. Nuisance variable regression (NVR) is performed on motion corrected data using a 2nd order polynomial, a 24-regressor model of motion [8], 5 nuisance signals, identified via principal components analysis of signals obtained from white matter (CompCor, [9]), and mean CSF signal. WM and CSF signals were extracted using the previously described masks after transforming the fMRI data to match them in 2mm space using the inverse of the linear fMRI-sMRI transform. The NVR procedure is performed twice, with and without the inclusion of the global signal as a nuisance regressor. The residuals of the NVR procedure are processed with and without bandpass filtering (0.01Hz &lt; f &lt; 0.1Hz), written into MNI space at 3mm resolution and subsequently smoothed using a 6mm FWHM kernel.</p>
 <p>Several different individual level analysis are performed on the fMRI data including:</p>
 <ul class="simple">
 <li><p><strong>Amplitude of low frequency fluctuations (alff) [10]:</strong> the variance of each voxel is calculated after bandpass filtering in original space and subsequently written into MNI space at 2mm resolution and spatially smoothed using a 6mm FWHM kernel.</p></li>
@@ -340,6 +350,22 @@
 <li><p><strong>Seed correlation analysis (SCA):</strong> preprocessed fMRI data is to match template that includes 160 regions of interest defined from a meta-analysis of different task results [19]. A time series is calculated for each region from the mean of all intra-ROI voxel time series. A separate functional connectivity map is calculated per ROI by correlating its time course with the time courses of every other voxel in the brain. Resulting values are Fisher transformed, written into MNI space at 2mm resolution, and then spatially smoothed using a 6mm FWHM kernel.</p></li>
 <li><p><strong>Time series extraction:</strong> similar the procedure used for time series analysis, the preprocessed functional data is written into MNI space at 2mm and then time series for the various atlases are extracted by averaging within region voxel time courses. This procedure was used to generate summary time series for the automated anatomic labelling atlas [20], Eickhoff-Zilles atlas [21], Harvard-Oxford atlas [22], Talaraich and Tournoux atlas [23], 200 and 400 regions from the spatially constrained clustering voxel timeseries [24], and 160 ROIs from a meta-analysis of task results [19]. Time series for 10 ICNs were extracted using spatial regression.</p></li>
 </ul>
+<div class="docutils container" id="id7">
+<dl class="citation">
+<dt class="label" id="id9"><span class="brackets">1</span></dt>
+<dd><p>Avants, B., Epstein, C., Grossman, M., and Gee, J. 2008 February. Symmetric diffeomorphic image registration with cross-correlation: Evaluating automated labeling of elderly and neurodegenerative brain. <em>Medical image analysis, 12</em> :1 , pp. 26–41 <a class="reference external" href="https://dx.doi.org/10.1016/j.media.2007.06.004">doi:10.1016/j.media.2007.06.004</a></p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">2</span></dt>
+<dd><p>Cox, R. W. 1996 June. AFNI: Software for Analysis and Visualization of Functional Magnetic Resonance Neuroimages. <em>Computers and biomedical research, 29</em> :3 , pp. 162–173 <a class="reference external" href="https://dx.doi.org/10.1006/cbmr.1996.0014">doi:10.1006/cbmr.1996.0014</a></p>
+</dd>
+<dt class="label" id="id14"><span class="brackets">3</span></dt>
+<dd><p>Cox, R. W. and Hyde, J. S. 1997 June. Software tools for analysis and visualization of fMRI data. <em>Nmr in biomedicine, 10</em> :4-5 , pp. 171–178 <a class="reference external" href="https://dx.doi.org/10.1002/(SICI)1099-1492(199706/08)10:4/5&lt;171::AID-NBM453&gt;3.0.CO;2-L">doi:10.1002/(SICI)1099-1492(199706/08)10:4/5&lt;171::AID-NBM453&gt;3.0.CO;2-L</a></p>
+</dd>
+<dt class="label" id="id15"><span class="brackets">4</span></dt>
+<dd><p>Cox, R. W. and Jesmanowicz, A. 1999. Real-time 3D image registration for functional MRI. <em>Magnetic resonance in medicine, 42</em> :6 , pp. 1014–1018 <a class="reference external" href="https://dx.doi.org/10.1002/(SICI)1522-2594(199912)42:6&lt;1014::AID-MRM4&gt;3.0.CO;2-F">doi:10.1002/(SICI)1522-2594(199912)42:6&lt;1014::AID-MRM4&gt;3.0.CO;2-F</a></p>
+</dd>
+</dl>
+</div>
 </section>
 <section id="anat-only-default-with-anatomical-preprocessing-only">
 <h3>anat-only: Default with Anatomical Preprocessing Only<a class="headerlink" href="#anat-only-default-with-anatomical-preprocessing-only" title="Permalink to this headline">#</a></h3>
@@ -373,17 +399,16 @@
 <section id="fmriprep-options-fmriprep-options-pipeline">
 <h3>fmriprep-options: fmriprep-Options Pipeline<a class="headerlink" href="#fmriprep-options-fmriprep-options-pipeline" title="Permalink to this headline">#</a></h3>
 <p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_fmriprep-options.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_fmriprep-options.yml</a></p>
-<p>This pipeline is designed to increase reproducibility with the preprocessing results of the fmriprep pipeline package <span id="id1">[<a class="reference internal" href="#id42" title="fMRIPrep developers. 2016. fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data — fmriprep stable version documentation.">1</a>]</span> produced by the <a class="reference external" href="https://poldracklab.stanford.edu/">Poldrack Lab at Stanford University</a>.</p>
-<div class="docutils container" id="id2">
+<p>This pipeline is designed to increase reproducibility with the preprocessing results of the fmriprep pipeline package <span id="id20">[<a class="reference internal" href="#id46" title="fMRIPrep developers. 2016. fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data — fMRIPrep stable version documentation.">1</a>]</span> produced by the <a class="reference external" href="https://poldracklab.stanford.edu/">Poldrack Lab at Stanford University</a>.</p>
+<div class="docutils container" id="id21">
 <ul class="simple">
-<li id="id7"><p>Esteban, O., Markiewicz, C. J., Blair, R. W., Moodie, C. A., Isik, A. I., Erramuzpe, A., Kent, J. D., Goncalves, M., DuPre, E., Snyder, M., Oya, H., Ghosh, S. S., Wright, J., Durnez, J., Poldrack, R. A., and Gorgolewski, K. J. 2019 January. fMRIPrep: a robust preprocessing pipeline for functional MRI. <em>Nature methods, 16</em> :1 , pp. 111–116 <a class="reference external" href="https://dx.doi.org/10.1038/s41592-018-0235-4">doi:10.1038/s41592-018-0235-4</a></p></li>
-<li id="id21"><p>NiPreps Developers. 2020 September. <a class="reference external" href="https://github.com/nipreps/fmriprep">fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data</a>.</p></li>
+<li id="id30"><p>Esteban, O., Markiewicz, C. J., Blair, R. W., Moodie, C. A., Isik, A. I., Erramuzpe, A., Kent, J. D., Goncalves, M., DuPre, E., Snyder, M., Oya, H., Ghosh, S. S., Wright, J., Durnez, J., Poldrack, R. A., and Gorgolewski, K. J. 2019 January. fMRIPrep: A robust preprocessing pipeline for functional MRI. <em>Nature methods, 16</em> :1 , pp. 111–116 <a class="reference external" href="https://dx.doi.org/10.1038/s41592-018-0235-4">doi:10.1038/s41592-018-0235-4</a></p></li>
 </ul>
 </div>
 <div class="docutils container" id="id34">
 <dl class="citation">
-<dt class="label" id="id42"><span class="brackets">1</span></dt>
-<dd><p>fMRIPrep developers. 2016. <a class="reference external" href="https://fmriprep.org/en/stable/"><em>fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data — fmriprep stable version documentation</em></a>.</p>
+<dt class="label" id="id46"><span class="brackets">1</span></dt>
+<dd><p>fMRIPrep developers. 2016. <a class="reference external" href="https://fmriprep.org/en/stable/"><em>fMRIPrep: A Robust Preprocessing Pipeline for fMRI Data — fMRIPrep stable version documentation</em></a>.</p>
 </dd>
 </dl>
 </div>
@@ -393,50 +418,20 @@
 <p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_ndmg.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_ndmg.yml</a></p>
 <p>This pipeline is the result of <a class="reference external" href="https://neurodata.io/">Neurodata’s</a> study to converge upon the intersection of pipeline configuration decisions that maximizes discriminability between participants’ data, drawing from the connectome graphs produced (labeled ‘ndmg_graph’ in the C-PAC output directory). This pipeline invokes a minimal set of preprocessing.</p>
 <p>Note, the ‘ndmg_graph’ connectome graph outputs are always produced by C-PAC. This pipeline configuration simply replicates the preprocessing methods described in the paper, linked below.</p>
-<div class="docutils container" id="id66">
-<ul class="simple">
-<li id="id79"><p>Kiar, G., Bridgeford, E. W., Roncal, W. R. G., Consortium for Reliability and Reproducibility (CoRR), Chandrashekhar, V., Mhembere, D., Ryman, S., Zuo, X.-N., Margulies, D. S., Craddock, R. C., Priebe, C. E., Jung, R., Calhoun, V. D., Caffo, B., Burns, R., Milham, M. P., and Vogelstein, J. T. 2018 April. A High-Throughput Pipeline Identifies Robust Connectomes But Troublesome Variability. <a class="reference external" href="https://dx.doi.org/10.1101/188706">doi:10.1101/188706</a></p></li>
-<li id="id81"><p>NeuroData. <a class="reference external" href="https://neurodata.io/m2g/">NeuroData's MRI to Graphs</a>.</p></li>
-<li id="id82"><p>NeuroData. 2018 January. <a class="reference external" href="https://github.com/neurodata/m2g/tree/v0.1.0">ndmg v0.1.0</a>.</p></li>
-</ul>
-</div>
-</section>
+<span class="target" id="id47"></span></section>
 <section id="rbc-options-reprobrainchart-options-pipeline">
 <h3>rbc-options: ReproBrainChart Options Pipeline<a class="headerlink" href="#rbc-options-reprobrainchart-options-pipeline" title="Permalink to this headline">#</a></h3>
 <p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_rbc-options.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_rbc-options.yml</a></p>
-<p>RBC-options pipeline was built and integrated in C-PAC based on the Reproducible Brain Charts initiative, which aims to aggregate and harmonize phenotypic and neuroimage data to delineate node mechanisms regarding developmental basis of psychopathology in youth and yield reproducible growth charts of brain development <span id="id98">[<a class="reference internal" href="#id109" title="Hoffmann, M. S., Salum, G., Moore, T. M., Milham, M., and Satterthwaite, T. 2021 June. Reproducible Brain Charts initiative - Reliability and Validity of Bifactor Models of Dimensional Psychopathology in Youth. doi:10.17605/OSF.IO/UWY5N">1</a>]</span>.</p>
-<div class="docutils container" id="id99">
-<dl class="citation">
-<dt class="label" id="id109"><span class="brackets">1</span></dt>
-<dd><p>Hoffmann, M. S., Salum, G., Moore, T. M., Milham, M., and Satterthwaite, T. 2021 June. Reproducible Brain Charts initiative - Reliability and Validity of Bifactor Models of Dimensional Psychopathology in Youth. <a class="reference external" href="https://dx.doi.org/10.17605/OSF.IO/UWY5N">doi:10.17605/OSF.IO/UWY5N</a></p>
-</dd>
-</dl>
-</div>
-</section>
+<p>RBC-options pipeline was built and integrated in C-PAC based on the Reproducible Brain Charts initiative, which aims to aggregate and harmonize phenotypic and neuroimage data to delineate node mechanisms regarding developmental basis of psychopathology in youth and yield reproducible growth charts of brain development <span id="id60">[]</span>.</p>
+<span class="target" id="id61"></span></section>
 </section>
 <section id="non-human-primate">
 <h2>non-human primate<a class="headerlink" href="#non-human-primate" title="Permalink to this headline">#</a></h2>
 <section id="monkey-default-with-monkey-preprocessing">
 <h3>monkey: Default with Monkey Preprocessing<a class="headerlink" href="#monkey-default-with-monkey-preprocessing" title="Permalink to this headline">#</a></h3>
 <p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_monkey.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_monkey.yml</a></p>
-<p>This pipeline is based on the work of Xu et al. <span id="id131">[<a class="reference internal" href="#id192" title="Xu, T., Sturgeon, D., Ramirez, J. S. B., Froudist-Walsh, S., Margulies, D. S., Schroeder, C. E., Fair, D. A., and Milham, M. P. 2019 June. Interindividual variability of functional connectivity in awake and anesthetized rhesus macaque monkeys. Biological psychiatry: cognitive neuroscience and neuroimaging, 4 :6 , pp. 543–553 doi:10.1016/j.bpsc.2019.02.005">1</a>]</span> and nhp-ABCD-BIDS-pipeline. <span id="id132">[<a class="reference internal" href="#id190" title="Sturgeon, D., Earl, E., Snider, K., Perrone, A., Ramirez, J., Mitchell, A. J., and Fair, D. Zenodo, 2020 June. DCAN-Labs/nhp-abcd-bids-pipeline Version 0.1.0. doi:10.5281/zenodo.3888969#.Xw31IpNKjyU">2</a>]</span></p>
-<div class="docutils container" id="id133">
-<ul class="simple">
-<li id="id156"><p>Ramirez, J. S. B., Graham, A. M., Thompson, J. R., Zhu, J. Y., Sturgeon, D., Bagley, J. L., Thomas, E., Papadakis, S., Bah, M., Perrone, A., Earl, E., Miranda-Dominguez, O., Feczko, E., Fombonne, E. J., Amaral, D. G., Nigg, J. T., Sullivan, E. L., and Fair, D. A. 2020 March. Maternal Interleukin-6 Is Associated With Macaque Offspring Amygdala Development and Behavior. <em>Cerebral cortex, 30</em> :3 , pp. 1573–1585 <a class="reference external" href="https://dx.doi.org/10.1093/cercor/bhz188">doi:10.1093/cercor/bhz188</a></p></li>
-<li id="id159"><p>Wang, X., Li, X.-H., Cho, J. W., Russ, B. E., Rajamani, N., Omelchenko, A., Ai, L., Korchmaros, A., Sawiak, S., Benn, R. A., Garcia-Saldivar, P., Wang, Z., Kalin, N. H., Schroeder, C. E., Craddock, R. C., Fox, A. S., Evans, A. C., Messinger, A., Milham, M. P., and Xu, T. 2021 July. U-net model for brain extraction: Trained on humans for transfer to non-human primates. <em>Neuroimage, 235</em> , pp. 118001 <a class="reference external" href="https://dx.doi.org/10.1016/j.neuroimage.2021.118001">doi:10.1016/j.neuroimage.2021.118001</a></p></li>
-</ul>
-</div>
-<div class="docutils container" id="id165">
-<dl class="citation">
-<dt class="label" id="id192"><span class="brackets">1</span></dt>
-<dd><p>Xu, T., Sturgeon, D., Ramirez, J. S. B., Froudist-Walsh, S., Margulies, D. S., Schroeder, C. E., Fair, D. A., and Milham, M. P. 2019 June. Interindividual variability of functional connectivity in awake and anesthetized rhesus macaque monkeys. <em>Biological psychiatry: cognitive neuroscience and neuroimaging, 4</em> :6 , pp. 543–553 <a class="reference external" href="https://dx.doi.org/10.1016/j.bpsc.2019.02.005">doi:10.1016/j.bpsc.2019.02.005</a></p>
-</dd>
-<dt class="label" id="id190"><span class="brackets">2</span></dt>
-<dd><p>Sturgeon, D., Earl, E., Snider, K., Perrone, A., Ramirez, J., Mitchell, A. J., and Fair, D. Zenodo, 2020 June. DCAN-Labs/nhp-abcd-bids-pipeline Version 0.1.0. <a class="reference external" href="https://dx.doi.org/10.5281/zenodo.3888969#.Xw31IpNKjyU">doi:10.5281/zenodo.3888969#.Xw31IpNKjyU</a></p>
-</dd>
-</dl>
-</div>
-<p>Based on the preprocessing decisions of the default pipeline, this preconfiguration allows you to preprocess all of your macaque data, includes:</p>
+<p>This pipeline is based on the work of Xu et al. <span id="id74">[]</span> and nhp-ABCD-BIDS-pipeline. <span id="id75">[]</span></p>
+<span class="target" id="id76"></span><span class="target" id="id89"></span><p>Based on the preprocessing decisions of the default pipeline, this preconfiguration allows you to preprocess all of your macaque data, includes:</p>
 <p>Anatomical:</p>
 <ul class="simple">
 <li><p>Brain extraction (via U-Net)</p></li>
