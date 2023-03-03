@@ -335,7 +335,7 @@
 <li><p><strong>Motion Correction Tool - [3dvolreg, mcflirt]:</strong> Choose motion correction method. Options: AFNI volreg, FSL mcflirt. Default is AFNI volreg.</p></li>
 <li><p><strong>Motion Correction Reference - [mean, median, selected volume]:</strong> Choose motion correction reference. Options: mean, median, selected volume. Default is mean.</p></li>
 <li><p><strong>Motion Correction Reference Volume - [integer]:</strong> Choose an integer as the motion correction reference volume if choosing “selected volume” as motion correction reference.</p></li>
-<li><p><strong>Motion Estimate Filter:</strong> Adapted from the motion estimate filter by <a class="reference external" href="https://github.com/DCAN-Labs">DCAN Labs</a>. Based on the filter described <a class="reference external" href="https://www.biorxiv.org/content/10.1101/337360v1.full.pdf">in this publication</a>.</p>
+<li><p><strong>Motion Estimate Filter:</strong> Adapted from the motion estimate filter by <a class="reference external" href="https://github.com/DCAN-Labs">DCAN Labs</a>. Based on the filter described in Fair <em>et al.</em><a class="footnote-reference brackets" href="#footcite-fair20" id="id1">1</a>.</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p><strong>run - [False, True]:</strong> Toggle the filter.</p></li>
@@ -436,7 +436,7 @@
 </tbody>
 </table>
 </div>
-<p>For each filter, <code class="docutils literal notranslate"><span class="pre">Name</span></code> need not be provided; if <code class="docutils literal notranslate"><span class="pre">Name</span></code> is not provided, it will be autopopulated based on the configuration, using the keys in this table <a class="footnote-reference brackets" href="#motion-filter-abbreviations" id="id1">1</a>:</p>
+<p>For each filter, <code class="docutils literal notranslate"><span class="pre">Name</span></code> need not be provided; if <code class="docutils literal notranslate"><span class="pre">Name</span></code> is not provided, it will be autopopulated based on the configuration, using the keys in this table <a class="footnote-reference brackets" href="#motion-filter-abbreviations" id="id2">2</a>:</p>
 <div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <colgroup>
@@ -467,17 +467,20 @@
 <p>and the format <code class="docutils literal notranslate"><span class="pre">{filterType}{filterOrder}[{key}{value}]*</span></code> with a lowercase <code class="docutils literal notranslate"><span class="pre">p</span></code> replacing any decimal points. If any filters have duplicate names (given or generated), each name after the first will be suffixed with <code class="docutils literal notranslate"><span class="pre">dup{duplicate_number}</span></code>, with <code class="docutils literal notranslate"><span class="pre">duplicate_number</span></code> starting at 1. See <a class="reference internal" href="../developer/schema#CPAC.pipeline.schema.name_motion_filter" title="CPAC.pipeline.schema.name_motion_filter"><code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.pipeline.schema.name_motion_filter</span></code></a> for examples.</p>
 <p class="rubric">Note about abbreviation table</p>
 <dl class="footnote brackets">
-<dt class="label" id="motion-filter-abbreviations"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>These abbreviations are based on <span id="id2">[<a class="reference internal" href="#id21" title="Eyben, F. 2016. Spectral Bands and Filter Shapes. Real-time Speech and Music Classification by Large Audio Feature Space Extraction Cham, Switzerland: Springer International Publishing.">1</a>]</span> but modified to comply with <span id="id3">[<a class="reference internal" href="#id9" title="BIDS-contributors. 2022. Appendix IX: Entities. The Brain Imaging Data Structure (BIDS) Specification, 1.7.0">2</a>]</span>.</p>
+<dt class="label" id="motion-filter-abbreviations"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>These abbreviations are based on <a class="footnote-reference brackets" href="#footcite-eybe16" id="id3">3</a> but modified to comply with <a class="footnote-reference brackets" href="#footcite-bids21" id="id4">4</a>.</p>
 </dd>
 </dl>
 <p class="rubric">References</p>
-<div class="docutils container" id="id4">
-<dl class="citation">
-<dt class="label" id="id21"><span class="brackets">1</span></dt>
+<div class="docutils container" id="id5">
+<dl class="footnote brackets">
+<dt class="label" id="footcite-fair20"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Fair, D. A., Miranda-Dominguez, O., Snyder, A. Z., Perrone, A., Earl, E. A., Van, A. N., Koller, J. M., Feczko, E., Tisdall, M. D., van der Kouwe, A., Klein, R. L., Mirro, A. E., Hampton, J. M., Adeyemo, B., Laumann, T. O., Gratton, C., Greene, D. J., Schlaggar, B. L., Hagler, D. J., Watts, R., Garavan, H., Barch, D. M., Nigg, J. T., Petersen, S. E., Dale, A. M., Feldstein-Ewing, S. W., Nagel, B. J., and Dosenbach, N. U. F. 2020 March. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S1053811919309917">Correction of respiratory artifacts in MRI head motion estimates.</a> <em>Neuroimage, 208</em> , pp. 116400 <a class="reference external" href="https://dx.doi.org/10.1016/j.neuroimage.2019.116400">doi:10.1016/j.neuroimage.2019.116400</a></p>
+</dd>
+<dt class="label" id="footcite-eybe16"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
 <dd><p>Eyben, F. 2016. Spectral Bands and Filter Shapes. <em>Real-time Speech and Music Classification by Large Audio Feature Space Extraction</em> Cham, Switzerland: Springer International Publishing.</p>
 </dd>
-<dt class="label" id="id9"><span class="brackets">2</span></dt>
+<dt class="label" id="footcite-bids21"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
 <dd><p>BIDS-contributors. 2022. <a class="reference external" href="https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/09-entities.html">Appendix IX: Entities.</a> <em>The Brain Imaging Data Structure (BIDS) Specification, 1.7.0</em></p>
 </dd>
 </dl>
@@ -499,8 +502,8 @@
 <li><p><strong>Slice Acquisition Pattern - [Use NifTI Header, alt+z, alt+z2, alt-z, alt-z2, seq+z, seq-z]:</strong> The order of slice acquisition for the scans.</p></li>
 </ol>
 <p>Note that if a scan parameters file was used to construct the participant list, the parameters defined in this file will override the settings used here.</p>
-<section id="id58">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id58" title="Permalink to this headline">#</a></h3>
+<section id="id6">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 <section id="through-the-data-configuration">
@@ -581,8 +584,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>EffectiveEchoSpacing to asymmetric ratio - [float]:</strong> This is the ratio between the effective echo spacing, as referenced above, and the asymmetric time.</p></li>
 <li><p><strong>Phase encoding direction - [string]:</strong> This is the position of the voxels in the input image, and can have values of x/y/z or -x/-y/-z.</p></li>
 </ol>
-<section id="id59">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id59" title="Permalink to this headline">#</a></h3>
+<section id="id7">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>
@@ -599,8 +602,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Functional Volume to Use as Input (Selected Functional Volume only) - [integer]:</strong> Only for when ‘Use as Functional-to-Anatomical Registration Input’ is set to ‘Selected Functional Volume’. Input the index of which volume from the functional 4D timeseries input file you wish to use as the input for functional-to-anatomical registration.</p></li>
 <li><p><strong>Functional Masking - [AFNI, FSL, FSL_AFNI, Anatomical_Refined]:</strong> Choose which tool to be used in functional masking - AFNI (3dAutoMask), FSL (BET), FSL_AFNI (BET+3dAutoMask) or Anatomical_Refined (generate functional mask by registering anatomical mask to functional space). Default is AFNI.</p></li>
 </ol>
-<section id="id60">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id60" title="Permalink to this headline">#</a></h3>
+<section id="id8">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 <section id="configuring-fsl-bet-options">
@@ -626,8 +629,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Robust brain center - [Off, On]:</strong> Robust brain center estimation. Mutually exclusive with functional, reduce_bias, robust, padding, remove_eyes, surfaces.</p></li>
 </ol>
 </section>
-<section id="id61">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id61" title="Permalink to this headline">#</a></h3>
+<section id="id9">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>
@@ -648,8 +651,8 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 <li><p><strong>Standard Brain Template - [path]:</strong> Used as a reference image for functional EPI registration.</p></li>
 <li><p><strong>ANTs Registration Parameters :</strong> Clicking on the setting icon will bring up a dialog where you can set ‘antsRegistration’ parameters.</p></li>
 </ol>
-<section id="id62">
-<h3>Configuration Without the GUI<a class="headerlink" href="#id62" title="Permalink to this headline">#</a></h3>
+<section id="id10">
+<h3>Configuration Without the GUI<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
 </section>
 </section>
@@ -718,22 +721,22 @@ Phase-Encoding Polarity (commonly known as blip-up/blip-down) employs phase-enco
 </ul>
 </li>
 <li><a class="reference internal" href="#slice-timing-correction">Slice Timing Correction</a><ul>
-<li><a class="reference internal" href="#id58">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id6">Configuration Without the GUI</a></li>
 <li><a class="reference internal" href="#through-the-data-configuration">Through the Data Configuration</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#field-map-based-distortion-correction">Field Map-Based Distortion Correction</a><ul>
-<li><a class="reference internal" href="#id59">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id7">Configuration Without the GUI</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#functional-to-anatomical-registration">Functional to Anatomical Registration</a><ul>
-<li><a class="reference internal" href="#id60">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id8">Configuration Without the GUI</a></li>
 <li><a class="reference internal" href="#configuring-fsl-bet-options">Configuring FSL BET options:</a></li>
-<li><a class="reference internal" href="#id61">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id9">Configuration Without the GUI</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#functional-to-template-registration">Functional to Template Registration</a><ul>
-<li><a class="reference internal" href="#id62">Configuration Without the GUI</a></li>
+<li><a class="reference internal" href="#id10">Configuration Without the GUI</a></li>
 </ul>
 </li>
 </ul>
