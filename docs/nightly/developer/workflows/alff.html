@@ -320,71 +320,57 @@
 <span class="target" id="module-CPAC.alff.alff"></span><dl class="py function">
 <dt class="sig sig-object py" id="CPAC.alff.alff.alff_falff">
 <span class="sig-prename descclassname"><span class="pre">CPAC.alff.alff.</span></span><span class="sig-name descname"><span class="pre">alff_falff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/alff/alff#alff_falff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.alff.alff.alff_falff" title="Permalink to this definition">#</a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; {&quot;name&quot;: &quot;alff_falff&quot;,
-&gt;&gt;&gt;  &quot;config&quot;: [&quot;amplitude_low_frequency_fluctuation&quot;],
-&gt;&gt;&gt;  &quot;switch&quot;: [&quot;run&quot;],
-&gt;&gt;&gt;  &quot;option_key&quot;: &quot;None&quot;,
-&gt;&gt;&gt;  &quot;option_val&quot;: &quot;None&quot;,
-&gt;&gt;&gt;  &quot;inputs&quot;: [([&quot;desc-denoisedNofilt_bold&quot;,
-&gt;&gt;&gt;               &quot;desc-preproc_bold&quot;],
-&gt;&gt;&gt;              &quot;space-bold_desc-brain_mask&quot;)],
-&gt;&gt;&gt;  &quot;outputs&quot;: [&quot;alff&quot;,
-&gt;&gt;&gt;              &quot;falff&quot;]}
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; ..
-&gt;&gt;&gt;     !! processed by numpydoc !!
-</pre></div>
-</div>
+<dd><dl>
+<dt>
+.. code-block:: Python
+
+   {“name”: “alff_falff”,</dt><dd><blockquote>
+<div><p>“config”: [“amplitude_low_frequency_fluctuation”],
+“switch”: [“run”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [([“desc-denoisedNofilt_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“desc-preproc_bold”],</p>
+</div></blockquote>
+<p>“space-bold_desc-brain_mask”)],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“alff”,</dt><dd><p>“falff”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.alff.alff.alff_falff_space_template">
 <span class="sig-prename descclassname"><span class="pre">CPAC.alff.alff.</span></span><span class="sig-name descname"><span class="pre">alff_falff_space_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/alff/alff#alff_falff_space_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.alff.alff.alff_falff_space_template" title="Permalink to this definition">#</a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; {&quot;name&quot;: &quot;alff_falff_space_template&quot;,
-&gt;&gt;&gt;  &quot;config&quot;: [&quot;amplitude_low_frequency_fluctuation&quot;],
-&gt;&gt;&gt;  &quot;switch&quot;: [&quot;run&quot;],
-&gt;&gt;&gt;  &quot;option_key&quot;: &quot;None&quot;,
-&gt;&gt;&gt;  &quot;option_val&quot;: &quot;None&quot;,
-&gt;&gt;&gt;  &quot;inputs&quot;: [([&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;,
-&gt;&gt;&gt;               &quot;space-template_res-derivative_desc-preproc_bold&quot;],
-&gt;&gt;&gt;              &quot;space-template_res-derivative_desc-bold_mask&quot;)],
-&gt;&gt;&gt;  &quot;outputs&quot;: [&quot;space-template_alff&quot;,
-&gt;&gt;&gt;              &quot;space-template_falff&quot;]}
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; 
-&gt;&gt;&gt; ..
-&gt;&gt;&gt;     !! processed by numpydoc !!
-</pre></div>
-</div>
+<dd><dl>
+<dt>
+.. code-block:: Python
+
+   {“name”: “alff_falff_space_template”,</dt><dd><blockquote>
+<div><p>“config”: [“amplitude_low_frequency_fluctuation”],
+“switch”: [“run”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [([“space-template_res-derivative_desc-denoisedNofilt_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“space-template_res-derivative_desc-preproc_bold”],</p>
+</div></blockquote>
+<p>“space-template_res-derivative_desc-bold_mask”)],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_alff”,</dt><dd><p>“space-template_falff”]}</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
