@@ -320,71 +320,55 @@
 <span class="target" id="module-CPAC.alff.alff"></span><dl class="py function">
 <dt class="sig sig-object py" id="CPAC.alff.alff.alff_falff">
 <span class="sig-prename descclassname"><span class="pre">CPAC.alff.alff.</span></span><span class="sig-name descname"><span class="pre">alff_falff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/alff/alff#alff_falff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.alff.alff.alff_falff" title="Permalink to this definition">#</a></dt>
-<dd><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>{&quot;name&quot;: &quot;alff_falff&quot;,
- &quot;config&quot;: [&quot;amplitude_low_frequency_fluctuation&quot;],
- &quot;switch&quot;: [&quot;run&quot;],
- &quot;option_key&quot;: &quot;None&quot;,
- &quot;option_val&quot;: &quot;None&quot;,
- &quot;inputs&quot;: [([&quot;desc-denoisedNofilt_bold&quot;,
-              &quot;desc-preproc_bold&quot;],
-             &quot;space-bold_desc-brain_mask&quot;)],
- &quot;outputs&quot;: [&quot;alff&quot;,
-             &quot;falff&quot;]}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-..
-    !! processed by numpydoc !!
-</pre></div>
-</div>
+<dd><p>Node Block:
+.. code-block:: Python</p>
+<blockquote>
+<div><dl>
+<dt>{“name”: “alff_falff”,</dt><dd><p>“config”: [“amplitude_low_frequency_fluctuation”],
+“switch”: [“run”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [([“desc-denoisedNofilt_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“desc-preproc_bold”],</p>
+</div></blockquote>
+<p>“space-bold_desc-brain_mask”)],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“alff”,</dt><dd><p>“falff”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.alff.alff.alff_falff_space_template">
 <span class="sig-prename descclassname"><span class="pre">CPAC.alff.alff.</span></span><span class="sig-name descname"><span class="pre">alff_falff_space_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/alff/alff#alff_falff_space_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.alff.alff.alff_falff_space_template" title="Permalink to this definition">#</a></dt>
-<dd><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>{&quot;name&quot;: &quot;alff_falff_space_template&quot;,
- &quot;config&quot;: [&quot;amplitude_low_frequency_fluctuation&quot;],
- &quot;switch&quot;: [&quot;run&quot;],
- &quot;option_key&quot;: &quot;None&quot;,
- &quot;option_val&quot;: &quot;None&quot;,
- &quot;inputs&quot;: [([&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;,
-              &quot;space-template_res-derivative_desc-preproc_bold&quot;],
-             &quot;space-template_res-derivative_desc-bold_mask&quot;)],
- &quot;outputs&quot;: [&quot;space-template_alff&quot;,
-             &quot;space-template_falff&quot;]}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-..
-    !! processed by numpydoc !!
-</pre></div>
-</div>
+<dd><p>Node Block:
+.. code-block:: Python</p>
+<blockquote>
+<div><dl>
+<dt>{“name”: “alff_falff_space_template”,</dt><dd><p>“config”: [“amplitude_low_frequency_fluctuation”],
+“switch”: [“run”],
+“option_key”: “None”,
+“option_val”: “None”,
+“inputs”: [([“space-template_res-derivative_desc-denoisedNofilt_bold”,</p>
+<blockquote>
+<div><blockquote>
+<div><p>“space-template_res-derivative_desc-preproc_bold”],</p>
+</div></blockquote>
+<p>“space-template_res-derivative_desc-bold_mask”)],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“outputs”: [“space-template_alff”,</dt><dd><p>“space-template_falff”]}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py function">
@@ -393,16 +377,13 @@
 <dd><p>Calculate Amplitude of low frequency oscillations (ALFF) and fractional ALFF maps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>wf_name</strong><span class="classifier">string</span></dt><dd><p>Workflow name</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – Workflow name</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>alff_workflow</strong><span class="classifier">workflow object</span></dt><dd><p>ALFF workflow</p>
+<dd class="field-even"><p><strong>alff_workflow</strong> – ALFF workflow</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>workflow object</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -521,8 +502,8 @@ fALFF_Z.nii.gz
 <p>Detailed Workflow Graph:</p>
 <a class="reference internal image-reference" href="images/generated/alff_detailed.png"><img alt="images/generated/alff_detailed.png" src="images/generated/alff_detailed.png" style="width: 500px;" /></a>
 <p class="rubric">References</p>
-<dl class="citation">
-<dt class="label" id="r266d30e2b869-1"><span class="brackets">1</span></dt>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
 <dd><p>Zou, Q.-H., Zhu, C.-Z., Yang, Y., Zuo, X.-N., Long, X.-Y., Cao, Q.-J., Wang, Y.-F., et al. (2008). An improved approach to detection of amplitude of low-frequency fluctuation (ALFF) for resting-state fMRI: fractional ALFF. Journal of neuroscience methods, 172(1), 137-41. doi:10.10</p>
 </dd>
 </dl>
@@ -545,16 +526,13 @@ fALFF_Z.nii.gz
 <dd><p>Method to return option string for 3dTstat</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>mask</strong><span class="classifier">string</span></dt><dd><p>Path to mask file</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>mask</strong> (<em>string</em>) – Path to mask file</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>opt_str</strong><span class="classifier">string</span></dt><dd><p>Command args</p>
+<dd class="field-even"><p><strong>opt_str</strong> – Command args</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
