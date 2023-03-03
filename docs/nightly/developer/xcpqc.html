@@ -485,33 +485,42 @@ with space-T1w_desc-brain_mask reference</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.qc_xcp">
 <span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">qc_xcp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#qc_xcp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.qc_xcp" title="Permalink to this definition">#</a></dt>
-<dd><dl>
-<dt>
-.. code:: Python
-
-   {‘name’: ‘qc_xcp’,</dt><dd><blockquote>
-<div><p>‘config’: [‘pipeline_setup’, ‘output_directory’, ‘quality_control’],
-‘switch’: [‘generate_xcpqc_files’],
-‘option_key’: ‘None’,
-‘option_val’: ‘None’,
-‘inputs’: [(‘subject’, ‘scan’, ‘bold’, ‘desc-preproc_bold’,</p>
-<blockquote>
-<div><p>‘space-T1w_sbref’, ‘space-T1w_desc-brain_mask’,
-‘max-displacement’, ‘space-template_desc-preproc_bold’,
-‘space-bold_desc-brain_mask’, [‘T1w-brain-template-mask’,
-‘EPI-template-mask’], [‘space-template_desc-bold_mask’,
-‘space-EPItemplate_desc-bold_mask’], ‘regressors’,
-[‘T1w-brain-template-funcreg’, ‘EPI-brain-template-funcreg’],
-‘movement-parameters’, ‘dvars’,
-‘framewise-displacement-jenkinson’)],</p>
-</div></blockquote>
-<dl class="simple">
-<dt>‘outputs’: {‘space-template_desc-xcp_quality’: {</dt><dd><p>‘Template’: ‘T1w-brain-template-mask’}}}</p>
-</dd>
-</dl>
-</div></blockquote>
-</dd>
-</dl>
+<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; {&#39;name&#39;: &#39;qc_xcp&#39;,
+&gt;&gt;&gt;  &#39;config&#39;: [&#39;pipeline_setup&#39;, &#39;output_directory&#39;, &#39;quality_control&#39;],
+&gt;&gt;&gt;  &#39;switch&#39;: [&#39;generate_xcpqc_files&#39;],
+&gt;&gt;&gt;  &#39;option_key&#39;: &#39;None&#39;,
+&gt;&gt;&gt;  &#39;option_val&#39;: &#39;None&#39;,
+&gt;&gt;&gt;  &#39;inputs&#39;: [(&#39;subject&#39;, &#39;scan&#39;, &#39;bold&#39;, &#39;desc-preproc_bold&#39;,
+&gt;&gt;&gt;              &#39;space-T1w_sbref&#39;, &#39;space-T1w_desc-brain_mask&#39;,
+&gt;&gt;&gt;              &#39;max-displacement&#39;, &#39;space-template_desc-preproc_bold&#39;,
+&gt;&gt;&gt;              &#39;space-bold_desc-brain_mask&#39;, [&#39;T1w-brain-template-mask&#39;,
+&gt;&gt;&gt;              &#39;EPI-template-mask&#39;], [&#39;space-template_desc-bold_mask&#39;,
+&gt;&gt;&gt;              &#39;space-EPItemplate_desc-bold_mask&#39;], &#39;regressors&#39;,
+&gt;&gt;&gt;              [&#39;T1w-brain-template-funcreg&#39;, &#39;EPI-brain-template-funcreg&#39;],
+&gt;&gt;&gt;              &#39;movement-parameters&#39;, &#39;dvars&#39;,
+&gt;&gt;&gt;              &#39;framewise-displacement-jenkinson&#39;)],
+&gt;&gt;&gt;  &#39;outputs&#39;: {&#39;space-template_desc-xcp_quality&#39;: {
+&gt;&gt;&gt;                  &#39;Template&#39;: &#39;T1w-brain-template-mask&#39;}}}
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; 
+&gt;&gt;&gt; ..
+&gt;&gt;&gt;     !! processed by numpydoc !!
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
