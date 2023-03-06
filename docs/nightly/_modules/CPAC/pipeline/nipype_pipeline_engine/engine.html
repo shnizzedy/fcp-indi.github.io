@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex" /><link rel="search" title="Search" href="../../../../search" />
 
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.0.0, furo 2022.09.29"/>
-        <title>CPAC.pipeline.nipype_pipeline_engine.engine - C-PAC 1.8.5.dev1 Beta documentation</title>
+        <title>CPAC.pipeline.nipype_pipeline_engine.engine - C-PAC 1.8.5 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../../index"><div class="brand">C-PAC 1.8.5.dev1 Beta documentation</div></a>
+      <a href="../../../../index"><div class="brand">C-PAC 1.8.5 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
     <img class="sidebar-logo" src="../../../../_static/cpac_logo_vertical.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.5.dev1 Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.5 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../../search" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -342,7 +342,7 @@
 
 <span class="c1">#     Prior to release 0.12, Nipype was licensed under a BSD license.</span>
 
-<span class="c1"># Modifications Copyright (C) 2022 C-PAC Developers</span>
+<span class="c1"># Modifications Copyright (C) 2022-2023 C-PAC Developers</span>
 
 <span class="c1"># This file is part of C-PAC.</span>
 
@@ -752,7 +752,9 @@
     <span class="p">)</span>
 
 <div class="viewcode-block" id="MapNode.__init__"><a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">_&#39;</span></div>
 
     <span class="fm">__init__</span><span class="o">.</span><span class="n">__signature__</span> <span class="o">=</span> <span class="n">Signature</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
         <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;mem_gb&#39;</span> <span class="k">else</span> <span class="p">(</span>

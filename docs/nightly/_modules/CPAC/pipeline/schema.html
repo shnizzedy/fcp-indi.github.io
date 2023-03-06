@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.0.0, furo 2022.09.29"/>
-        <title>CPAC.pipeline.schema - C-PAC 1.8.5.dev1 Beta documentation</title>
+        <title>CPAC.pipeline.schema - C-PAC 1.8.5 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index"><div class="brand">C-PAC 1.8.5.dev1 Beta documentation</div></a>
+      <a href="../../../index"><div class="brand">C-PAC 1.8.5 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
     <img class="sidebar-logo" src="../../../_static/cpac_logo_vertical.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.5.dev1 Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.5 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -391,7 +391,7 @@
     <span class="s1">&#39;brain_extraction&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3dSkullStrip&#39;</span><span class="p">,</span> <span class="s1">&#39;BET&#39;</span><span class="p">,</span> <span class="s1">&#39;UNet&#39;</span><span class="p">,</span> <span class="s1">&#39;niworkflows-ants&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;FreeSurfer-BET-Tight&#39;</span><span class="p">,</span> <span class="s1">&#39;FreeSurfer-BET-Loose&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;FreeSurfer-ABCD&#39;</span><span class="p">]</span>
+                  <span class="s1">&#39;FreeSurfer-ABCD&#39;</span><span class="p">,</span> <span class="s1">&#39;FreeSurfer-Brainmask&#39;</span><span class="p">]</span>
     <span class="p">},</span>
     <span class="s1">&#39;centrality&#39;</span><span class="p">:</span> <span class="p">{</span>
        <span class="s1">&#39;method_options&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;degree_centrality&#39;</span><span class="p">,</span> <span class="s1">&#39;eigenvector_centrality&#39;</span><span class="p">,</span>
@@ -753,6 +753,7 @@
                 <span class="s1">&#39;BiasFieldSmoothingSigma&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
             <span class="p">},),</span>
         <span class="p">),</span>
+
         <span class="s1">&#39;acpc_alignment&#39;</span><span class="p">:</span> <span class="n">Required</span><span class="p">(</span>
             <span class="c1"># require &#39;T1w_brain_ACPC_template&#39; and</span>
             <span class="c1"># &#39;T2w_brain_ACPC_template&#39; if &#39;acpc_target&#39; is &#39;brain&#39;</span>
@@ -1028,7 +1029,9 @@
     <span class="s1">&#39;surface_analysis&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;freesurfer&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;run_reconall&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
-            <span class="s1">&#39;reconall_args&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+            <span class="s1">&#39;reconall_args&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
+            <span class="c1"># &#39;generate_masks&#39;: bool1_1,</span>
+            <span class="s1">&#39;ingress_reconall&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="s1">&#39;post_freesurfer&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
