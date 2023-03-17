@@ -317,6 +317,7 @@
         <article role="main">
           <section id="module-CPAC.generate_motion_statistics">
 <span id="generate-motion-and-power-statistics"></span><h1>Generate Motion and Power Statistics<a class="headerlink" href="#module-CPAC.generate_motion_statistics" title="Permalink to this headline">#</a></h1>
+<p>Functions for generating motion statistics</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.generate_motion_statistics.ImageTo1D">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">CPAC.generate_motion_statistics.</span></span><span class="sig-name descname"><span class="pre">ImageTo1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/generate_motion_statistics/generate_motion_statistics#ImageTo1D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.generate_motion_statistics.ImageTo1D" title="Permalink to this definition">#</a></dt>
@@ -332,6 +333,54 @@
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.generate_motion_statistics.generate_motion_statistics.ImageTo1DOutputSpec</span></code></p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.generate_motion_statistics.affine_file_from_params_file">
+<span class="sig-prename descclassname"><span class="pre">CPAC.generate_motion_statistics.</span></span><span class="sig-name descname"><span class="pre">affine_file_from_params_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affine_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="reference internal" href="../../_modules/CPAC/generate_motion_statistics/utils#affine_file_from_params_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.generate_motion_statistics.affine_file_from_params_file" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a 6-DOF motion parameters array into a 4x4 affine matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params_file</strong> (<em>str</em>) – path to a motion parameter file (6 DOF, one timepoint per line)</p></li>
+<li><p><strong>affine_file</strong> (<em>str</em>) – path to a 4x4 affine matrix file (the first 12 values,
+one timepoint per line), optional
+If included, comments will be passed on to filtered affine file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>affine_file</strong> – path to a 4x4 affine matrix file (the first 12 values,
+one timepoint per line)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.generate_motion_statistics.affine_from_params">
+<span class="sig-prename descclassname"><span class="pre">CPAC.generate_motion_statistics.</span></span><span class="sig-name descname"><span class="pre">affine_from_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="reference internal" href="../../_modules/CPAC/generate_motion_statistics/utils#affine_from_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.generate_motion_statistics.affine_from_params" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a 6-DOF motion parameters array into a 4x4 affine matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>np.ndarray</em>) – 2-dimensional array (t x 6) with the first dimension as timepoints and
+the second dimension containing these 6 elements
+(as output by <cite>3dvolreg -1Dfile</cite>):
+roll, pitch, yaw in degrees counterclockwise, and
+displacement in millimeters in the respective
+superior, left and posterior directions</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>affine</strong> – t x 4 x 4 affine matrix with
+the upper-left 3 x 3 matrix encoding rotation,
+the top three values in the fourth column encoding translation
+and the bottom row being [0, 0, 0, 1] for each timepoint</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">

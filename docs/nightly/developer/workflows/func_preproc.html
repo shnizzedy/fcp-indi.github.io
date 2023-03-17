@@ -317,6 +317,154 @@
         <article role="main">
           <section id="module-CPAC.func_preproc">
 <span id="functional-preprocessing"></span><h1>Functional Preprocessing<a class="headerlink" href="#module-CPAC.func_preproc" title="Permalink to this headline">#</a></h1>
+<p>Functional preprocessing</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.calc_motion_stats">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.</span></span><span class="sig-name descname"><span class="pre">calc_motion_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#calc_motion_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.calc_motion_stats" title="Permalink to this definition">#</a></dt>
+<dd><p>Node Block:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;calc_motion_stats&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;switch&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;motion_estimates&quot;</span><span class="p">,</span> <span class="s2">&quot;calculate_motion_after&quot;</span><span class="p">]],</span>
+ <span class="s2">&quot;option_key&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;option_val&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;movement-parameters&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;max-displacement&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;rels-displacement&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;coordinate-transformation&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;subject&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scan&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;framewise-displacement-power&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;framewise-displacement-jenkinson&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;dvars&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;power-params&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;motion-params&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion_correct">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_motion_correct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#func_motion_correct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion_correct" title="Permalink to this definition">#</a></dt>
+<dd><p>Node Block:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;motion_correction&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;switch&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;run&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;option_key&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;motion_correction&quot;</span><span class="p">,</span> <span class="s2">&quot;using&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;option_val&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3dvolreg&quot;</span><span class="p">,</span> <span class="s2">&quot;mcflirt&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;motion-basefile&quot;</span><span class="p">)],</span>
+ <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+     <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Motion-corrected BOLD time-series.&quot;</span>
+     <span class="p">},</span>
+     <span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Motion-corrected BOLD time-series.&quot;</span>
+     <span class="p">},</span>
+     <span class="s2">&quot;max-displacement&quot;</span><span class="p">:</span> <span class="p">{},</span>
+     <span class="s2">&quot;rels-displacement&quot;</span><span class="p">:</span> <span class="p">{},</span>
+     <span class="s2">&quot;movement-parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Each line contains for one timepoint a 6-DOF &quot;</span>
+                        <span class="s2">&quot;rigid transform parameters in the format &quot;</span>
+                        <span class="s2">&quot;defined by AFNI&#39;s 3dvolreg: [roll, pitch, yaw, &quot;</span>
+                        <span class="s2">&quot;superior displacement, left displacement, &quot;</span>
+                        <span class="s2">&quot;posterior displacement]. Rotation parameters &quot;</span>
+                        <span class="s2">&quot;are in degrees counterclockwise, and translation &quot;</span>
+                        <span class="s2">&quot;parameters are in millimeters.&quot;</span>
+     <span class="p">},</span>
+     <span class="s2">&quot;coordinate-transformation&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;Description&quot;</span> <span class="p">:</span> <span class="s2">&quot;Each row contains for one timepoint the first &quot;</span>
+                          <span class="s2">&quot;12 values of a 4x4 affine matrix&quot;</span>
+     <span class="p">}</span>
+<span class="p">}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion_correct_only">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_motion_correct_only</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#func_motion_correct_only"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion_correct_only" title="Permalink to this definition">#</a></dt>
+<dd><p>Node Block:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;motion_correction_only&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;switch&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;run&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;option_key&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;motion_correction&quot;</span><span class="p">,</span> <span class="s2">&quot;using&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;option_val&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3dvolreg&quot;</span><span class="p">,</span> <span class="s2">&quot;mcflirt&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;motion-basefile&quot;</span><span class="p">)],</span>
+ <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+     <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Motion-corrected BOLD time-series.&quot;</span>
+     <span class="p">},</span>
+     <span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Motion-corrected BOLD time-series.&quot;</span>
+     <span class="p">}</span>
+<span class="p">}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion_estimates">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_motion_estimates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#func_motion_estimates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion_estimates" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate motion estimates using 3dVolReg or MCFLIRT.
+Node Block:
+.. code-block:: Python</p>
+<blockquote>
+<div><dl>
+<dt>{“name”: “motion_estimates”,</dt><dd><p>“config”: “None”,
+“switch”: [“functional_preproc”, “motion_estimates_and_correction”,</p>
+<blockquote>
+<div><p>“run”],</p>
+</div></blockquote>
+<dl class="simple">
+<dt>“option_key”: [“functional_preproc”, “motion_estimates_and_correction”,</dt><dd><p>“motion_correction”, “using”],</p>
+</dd>
+</dl>
+<p>“option_val”: [“3dvolreg”, “mcflirt”],
+“inputs”: [(“desc-preproc_bold”,</p>
+<blockquote>
+<div><p>“motion-basefile”)],</p>
+</div></blockquote>
+<dl>
+<dt>“outputs”: {</dt><dd><p>“max-displacement”: {},
+“rels-displacement”: {},
+“movement-parameters”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“Description”: “Each line contains for one timepoint a 6-DOF “</dt><dd><p>“rigid transform parameters in the format ”
+“defined by AFNI’s 3dvolreg: [roll, pitch, yaw, ”
+“superior displacement, left displacement, ”
+“posterior displacement]. Rotation parameters ”
+“are in degrees counterclockwise, and translation ”
+“parameters are in millimeters.”</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>},
+“coordinate-transformation”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“Description”<span class="classifier">“Each row contains for one timepoint the first “</span></dt><dd><p>“12 values of a 4x4 affine matrix”</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}}</p>
+</div></blockquote>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.get_idx">
 <span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.</span></span><span class="sig-name descname"><span class="pre">get_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#get_idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.get_idx" title="Permalink to this definition">#</a></dt>
@@ -342,6 +490,67 @@ in the configuration file</p></li>
 </p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.get_motion_ref">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.</span></span><span class="sig-name descname"><span class="pre">get_motion_ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#get_motion_ref"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.get_motion_ref" title="Permalink to this definition">#</a></dt>
+<dd><p>Node Block:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_motion_ref&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;switch&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;run&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;option_key&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;motion_correction&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_correction_reference&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;option_val&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="s2">&quot;selected_volume&quot;</span><span class="p">,</span> <span class="s2">&quot;fmriprep_reference&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;desc-reorient_bold&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;motion-basefile&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.motion_estimate_filter">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.</span></span><span class="sig-name descname"><span class="pre">motion_estimate_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#motion_estimate_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.motion_estimate_filter" title="Permalink to this definition">#</a></dt>
+<dd><p>Filter motion parameters.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.8.6: </span>Beginning with version 1.8.6, C-PAC outputs both the unfiltered
+and the filtered motion parameters and uses the unfiltered
+parameters in QC. Previous versions only reported the filtered
+parameters and used the filtered parameters for QC.</p>
+</div>
+<p>Node Block:
+.. code-block:: Python</p>
+<blockquote>
+<div><dl>
+<dt>{“name”: “motion_estimate_filter”,</dt><dd><dl class="simple">
+<dt>“config”: [“functional_preproc”, “motion_estimates_and_correction”,</dt><dd><p>“motion_estimate_filter”],</p>
+</dd>
+</dl>
+<p>“switch”: [“run”],
+“option_key”: “filters”,
+“option_val”: “USER-DEFINED”,
+“inputs”: [“coordinate-transformation”,</p>
+<blockquote>
+<div><p>“movement-parameters”,
+“TR”],</p>
+</div></blockquote>
+<dl>
+<dt>“outputs”: {“coordinate-transformation”: {},</dt><dd><dl class="simple">
+<dt>“filtered-movement-parameters”: {</dt><dd><dl class="simple">
+<dt>“Description”: “Filtered movement parameters”</dt><dd><p>” (3 rotation, 3 translation).”},</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>“motion-filter-info”: {},
+“motion-filter-plot”: {}}}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 </section>

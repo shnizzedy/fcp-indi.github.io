@@ -2507,6 +2507,7 @@
 <span class="sd">                 &quot;desc-brain_bold&quot;,</span>
 <span class="sd">                 &quot;space-bold_desc-brain_mask&quot;,</span>
 <span class="sd">                 &quot;movement-parameters&quot;,</span>
+<span class="sd">                 &quot;filtered-movement-parameters&quot;,</span>
 <span class="sd">                 &quot;framewise-displacement-jenkinson&quot;,</span>
 <span class="sd">                 &quot;framewise-displacement-power&quot;,</span>
 <span class="sd">                 &quot;dvars&quot;,</span>
@@ -2543,6 +2544,7 @@
 <span class="sd">                 &quot;space-bold_desc-brain_mask&quot;,</span>
 <span class="sd">                 &quot;from-bold_to-T1w_mode-image_desc-linear_xfm&quot;,</span>
 <span class="sd">                 &quot;movement-parameters&quot;,</span>
+<span class="sd">                 &quot;filtered-movement-parameters&quot;,</span>
 <span class="sd">                 &quot;framewise-displacement-jenkinson&quot;,</span>
 <span class="sd">                 &quot;framewise-displacement-power&quot;,</span>
 <span class="sd">                 &quot;dvars&quot;,</span>
@@ -2728,8 +2730,10 @@
                        <span class="n">regressors</span><span class="p">,</span>
                        <span class="s1">&#39;inputspec.func_to_anat_linear_xfm_file_path&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;movement-parameters&#39;</span><span class="p">):</span>
-        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;movement-parameters&#39;</span><span class="p">)</span>
+    <span class="n">movement_parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;filtered-movement-parameters&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;movement-parameters&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="n">movement_parameters</span><span class="p">):</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">movement_parameters</span><span class="p">)</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
                    <span class="n">regressors</span><span class="p">,</span> <span class="s1">&#39;inputspec.motion_parameters_file_path&#39;</span><span class="p">)</span>
 
