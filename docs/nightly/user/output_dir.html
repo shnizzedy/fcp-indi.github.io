@@ -324,22 +324,22 @@
 <p><span class="versionmodified changed">Changed in version 1.8.5: </span>some output directory naming conventions</p>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>└── pipeline-name
-      ├── log
-      │   └── pipeline_{pipeline-name}
-      │       └── sub-{sub}_ses-{ses}
-      ├── output
-      │   └── pipeline_{pipeline-name}
-      │       └── sub-{sub}
-      │           └── ses-{ses}
-      │               ├── anat
-      │               └── func
-      └── working
-         └── pipeline_{pipeline-name}
+    ├── log
+    │   └── pipeline_{pipeline-name}
+    │       └── sub-{sub}_ses-{ses}
+    ├── output
+    │   └── pipeline_{pipeline-name}
+    │       └── sub-{sub}
+    │           └── ses-{ses}
+    │               ├── anat
+    │               └── func
+    └── working
+        └── pipeline_{pipeline-name}
             └── cpac_pipeline_{pipeline-name}_sub-{sub}_ses-{ses}
 </pre></div>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.8.5: </span>the location of <cite>cpac_*_config_*.yml</cite> files</p>
+<p><span class="versionmodified changed">Changed in version 1.8.5: </span>the location of <code class="docutils literal notranslate"><span class="pre">cpac_*_config_*.yml</span></code> files</p>
 </div>
 <p>When <code class="docutils literal notranslate"><span class="pre">test_config</span></code> or a <code class="docutils literal notranslate"><span class="pre">participant</span></code>-level analysis is run, C-PAC will output a data config file called <code class="docutils literal notranslate"><span class="pre">cpac_data_config_{data-hash}_{datetime}.yml</span></code> and two pipeline config files called <code class="docutils literal notranslate"><span class="pre">cpac_pipeline_config_{data-hash}_{datetime}.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">cpac_pipeline_config_{data-hash}_{datetime}_min.yml</span></code>. These files reflect exactly the configuration C-PAC did or would run after all expansions and substitutions. The two pipeline configs are funcitionally equivalent, with the <code class="docutils literal notranslate"><span class="pre">*_min.yml</span></code> only showing the options that are configured and the other pipeline config showing every configurable option.</p>
 <p>These three files will be written in the <code class="docutils literal notranslate"><span class="pre">log/pipeline_{pipeline-name}/sub-{sub}_ses-{ses}</span></code> directory for the run. Prior to version 1.8.5, these config files were written to the top-level output directory (siblings with <code class="docutils literal notranslate"><span class="pre">log</span></code>, <code class="docutils literal notranslate"><span class="pre">output</span></code> and <code class="docutils literal notranslate"><span class="pre">working</span></code>).</p>
