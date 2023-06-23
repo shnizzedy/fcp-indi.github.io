@@ -321,7 +321,7 @@
 <span id="outputs"></span><h2>C-PAC ≥ 1.8.0<a class="headerlink" href="#c-pac-1-8-0" title="Permalink to this headline">#</a></h2>
 <p>The output structure of C-PAC ≥ 1.8.0 is based on <a class="reference external" href="https://bids-specification.readthedocs.io/en/latest/05-derivatives/01-introduction.html">the Brain Imaging Data Structure v1.6.0-dev BIDS Derivatives specification</a>. The output directory structure is a simple tree like</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.8.5: </span>some output directory naming conventions</p>
+<p><span class="versionmodified changed">Changed in version 1.8.5.</span></p>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>└── pipeline-name
     ├── log
@@ -338,13 +338,8 @@
             └── cpac_pipeline_{pipeline-name}_sub-{sub}_ses-{ses}
 </pre></div>
 </div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.8.5: </span>the location of <code class="docutils literal notranslate"><span class="pre">cpac_*_config_*.yml</span></code> files</p>
-</div>
-<p>When <code class="docutils literal notranslate"><span class="pre">test_config</span></code> or a <code class="docutils literal notranslate"><span class="pre">participant</span></code>-level analysis is run, C-PAC will output a data config file called <code class="docutils literal notranslate"><span class="pre">cpac_data_config_{data-hash}_{datetime}.yml</span></code> and two pipeline config files called <code class="docutils literal notranslate"><span class="pre">cpac_pipeline_config_{data-hash}_{datetime}.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">cpac_pipeline_config_{data-hash}_{datetime}_min.yml</span></code>. These files reflect exactly the configuration C-PAC did or would run after all expansions and substitutions. The two pipeline configs are funcitionally equivalent, with the <code class="docutils literal notranslate"><span class="pre">*_min.yml</span></code> only showing the options that are configured and the other pipeline config showing every configurable option.</p>
-<p>These three files will be written in the <code class="docutils literal notranslate"><span class="pre">log/pipeline_{pipeline-name}/sub-{sub}_ses-{ses}</span></code> directory for the run. Prior to version 1.8.5, these config files were written to the top-level output directory (siblings with <code class="docutils literal notranslate"><span class="pre">log</span></code>, <code class="docutils literal notranslate"><span class="pre">output</span></code> and <code class="docutils literal notranslate"><span class="pre">working</span></code>).</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.8.4: </span><code class="docutils literal notranslate"><span class="pre">sub-{sub}_ses-{ses}_expectedOutputs.yml</span></code></p>
+<p><span class="versionmodified added">New in version 1.8.4.</span></p>
 </div>
 <p>Beginning with C-PAC v1.8.4, C-PAC generates a YAML file called <code class="docutils literal notranslate"><span class="pre">sub-{sub}_ses-{ses}_expectedOutputs.yml</span></code> near the beginning of each participant run. This file is stored in the participant’s log directory and lists derivative modalities (e.g., <code class="docutils literal notranslate"><span class="pre">anat</span></code>, <code class="docutils literal notranslate"><span class="pre">func</span></code>) and partial BIDS filenames for outputs expected to be generated and stored for each modality given the provided data and pipeline configuration. At the end of the run (or when crashing gracefully), C-PAC will check the output directory for the presence of all expected outputs. If any expected outputs are missing, C-PAC will generate a <code class="docutils literal notranslate"><span class="pre">sub-{sub}_ses-{ses}_missingOutputs.yml</span></code> file listing those missing outputs, also in the participant’s log directory.</p>
 <div class="admonition note">

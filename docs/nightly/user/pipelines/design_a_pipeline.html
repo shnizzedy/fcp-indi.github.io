@@ -376,7 +376,7 @@
 <span class="go">        -v /tmp:/tmp \</span>
 <span class="go">        -v /Users/You/Documents:/configs \</span>
 <span class="go">        -v /Users/You/resources:/resources \</span>
-<span class="go">        fcpindi/c-pac:latest /bids_dataset /outputs participant --pipeline_file /configs/pipeline_config.yml</span>
+<span class="go">        fcpindi/c-pac:latest /bids_dataset /outputs participant --pipeline-file /configs/pipeline_config.yml</span>
 </pre></div>
 </div>
 <p>Or you can provide it to the C-PAC Singularity container like so:</p>
@@ -384,7 +384,7 @@
 <span class="go">        -B /Users/You/some_folder:/outputs \</span>
 <span class="go">        -B /tmp:/tmp \</span>
 <span class="go">        -B /Users/You/Documents:/configs \</span>
-<span class="go">        fcpindi_c-pac_latest-{date}-{hash value}.img s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant --pipeline_file /configs/pipeline_config.yml</span>
+<span class="go">        fcpindi_c-pac_latest-{date}-{hash value}.img s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant --pipeline-file /configs/pipeline_config.yml</span>
 </pre></div>
 </div>
 <p><strong>Reporting errors and getting help</strong></p>
