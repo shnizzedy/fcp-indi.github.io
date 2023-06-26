@@ -371,6 +371,17 @@
 </pre></div>
 </div>
 <p>This will produce:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">   </span>Usage:<span class="w"> </span>run.py<span class="w"> </span>group<span class="w"> </span>feat<span class="w"> </span>load-preset<span class="w"> </span>unpaired-two<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>PIPELINE_DIR
+<span class="w">                                                     </span>Z_THRESH<span class="w"> </span>P_THRESH<span class="w"> </span>PHENO_FILE
+<span class="w">                                                     </span>PHENO_SUB<span class="w"> </span>COVARIATE
+<span class="w">                                                     </span>MODEL_NAME
+<span class="w">   </span>
+<span class="w">   </span>Options:
+<span class="w">     </span>--output-dir,<span class="w"> </span>--output_dir<span class="w"> </span>TEXT
+<span class="w">     </span>--group-participants,<span class="w"> </span>--group_participants<span class="w"> </span>TEXT
+<span class="w">     </span>--help<span class="w">                          </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+</pre></div>
+</div>
 <p>Following this, you could generate a ready-to-run two-sample unpaired t-test by running the following, assuming the phenotype CSV has a column of participant IDs named “subject_id” and a column named “diagnosis”, which is the covariate you wish to test:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac group feat load-preset unpaired-two /path/to/group_participant_list.txt 2.3 0.05</span>
 <span class="go">        /path/to/phenotypic_file.csv subject_id diagnosis grp_analysis1</span>
