@@ -316,9 +316,14 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-CPAC.func_preproc.func_ingress">
-<span id="functional-preprocessing"></span><h1>Functional Preprocessing<a class="headerlink" href="#module-CPAC.func_preproc.func_ingress" title="Permalink to this heading">#</a></h1>
-<span class="target" id="module-CPAC.func_preproc.func_motion"></span><p>Functions for calculating motion parameters</p>
+          <section id="functional-preprocessing">
+<h1>Functional Preprocessing<a class="headerlink" href="#functional-preprocessing" title="Permalink to this heading">#</a></h1>
+<section id="module-CPAC.func_preproc.func_ingress">
+<span id="ingress"></span><h2>Ingress<a class="headerlink" href="#module-CPAC.func_preproc.func_ingress" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-CPAC.func_preproc.func_motion">
+<span id="motion"></span><h2>Motion<a class="headerlink" href="#module-CPAC.func_preproc.func_motion" title="Permalink to this heading">#</a></h2>
+<p>Functions for calculating motion parameters</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.estimate_reference_image">
 <span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">estimate_reference_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#estimate_reference_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.estimate_reference_image" title="Permalink to this definition">#</a></dt>
@@ -362,7 +367,10 @@ Ref: <a class="reference external" href="https://github.com/nipreps/niworkflows/
 <dd><p>Convert FSL mcflirt motion parameters to AFNI space</p>
 </dd></dl>
 
-<span class="target" id="module-CPAC.func_preproc.func_preproc"></span><p>Functional preprocessing</p>
+</section>
+<section id="module-CPAC.func_preproc.func_preproc">
+<span id="preprocessing"></span><h2>Preprocessing<a class="headerlink" href="#module-CPAC.func_preproc.func_preproc" title="Permalink to this heading">#</a></h2>
+<p>Functional preprocessing</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.create_scale_func_wf">
 <span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">create_scale_func_wf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scaling_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scale_func'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#create_scale_func_wf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.create_scale_func_wf" title="Permalink to this definition">#</a></dt>
@@ -454,7 +462,11 @@ in the configuration file</p></li>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-CPAC.func_preproc.utils"></span></section>
+</section>
+<section id="module-CPAC.func_preproc.utils">
+<span id="utilities"></span><h2>Utilities<a class="headerlink" href="#module-CPAC.func_preproc.utils" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
 
         </article>
       </div>
@@ -512,14 +524,22 @@ in the configuration file</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Functional Preprocessing</a><ul>
+<li><a class="reference internal" href="#module-CPAC.func_preproc.func_ingress">Ingress</a></li>
+<li><a class="reference internal" href="#module-CPAC.func_preproc.func_motion">Motion</a><ul>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.estimate_reference_image"><code class="docutils literal notranslate"><span class="pre">estimate_reference_image</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_3dvolreg"><code class="docutils literal notranslate"><span class="pre">motion_correct_3dvolreg</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_connections"><code class="docutils literal notranslate"><span class="pre">motion_correct_connections</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_mcflirt"><code class="docutils literal notranslate"><span class="pre">motion_correct_mcflirt</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.normalize_motion_parameters"><code class="docutils literal notranslate"><span class="pre">normalize_motion_parameters</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-CPAC.func_preproc.func_preproc">Preprocessing</a><ul>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.create_scale_func_wf"><code class="docutils literal notranslate"><span class="pre">create_scale_func_wf</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.create_wf_edit_func"><code class="docutils literal notranslate"><span class="pre">create_wf_edit_func</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.get_idx"><code class="docutils literal notranslate"><span class="pre">get_idx</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-CPAC.func_preproc.utils">Utilities</a></li>
 </ul>
 </li>
 </ul>
