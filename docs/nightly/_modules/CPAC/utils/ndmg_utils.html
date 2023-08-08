@@ -315,42 +315,40 @@
         </div>
         <article role="main">
           <h1>Source code for CPAC.utils.ndmg_utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Functions in this file adapted from NeuroData group:</span>
-<span class="sd">STATEMENT OF CHANGES:</span>
-<span class="sd">    This file is derived from sources licensed under the Apache-2.0 terms,</span>
-<span class="sd">    and this file has been changed.</span>
+<span></span><span class="c1"># Functions in this file adapted from NeuroData group:</span>
+<span class="c1"># STATEMENT OF CHANGES:</span>
+<span class="c1">#     This file is derived from sources licensed under the Apache-2.0 terms,</span>
+<span class="c1">#     and this file has been changed.</span>
 
-<span class="sd">CHANGES:</span>
-<span class="sd">    * Minor refactoring for compatibility with C-PAC</span>
+<span class="c1"># CHANGES:</span>
+<span class="c1">#     * Minor refactoring for compatibility with C-PAC</span>
 
-<span class="sd">ORIGINAL WORK&#39;S ATTRIBUTION NOTICE:</span>
-<span class="sd">    Copyright 2016 NeuroData (http://neurodata.io)</span>
+<span class="c1"># ORIGINAL WORK&#39;S ATTRIBUTION NOTICE:</span>
+<span class="c1">#     Copyright 2016 NeuroData (http://neurodata.io)</span>
 
-<span class="sd">    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="sd">    you may not use this file except in compliance with the License.</span>
-<span class="sd">    You may obtain a copy of the License at</span>
+<span class="c1">#     Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#     you may not use this file except in compliance with the License.</span>
+<span class="c1">#     You may obtain a copy of the License at</span>
 
-<span class="sd">        http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#         http://www.apache.org/licenses/LICENSE-2.0</span>
 
-<span class="sd">    Unless required by applicable law or agreed to in writing, software</span>
-<span class="sd">    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="sd">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="sd">    See the License for the specific language governing permissions and</span>
-<span class="sd">    limitations under the License.</span>
+<span class="c1">#     Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#     distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#     See the License for the specific language governing permissions and</span>
+<span class="c1">#     limitations under the License.</span>
 
 
-<span class="sd">    graph.py</span>
-<span class="sd">    Created by Greg Kiar on 2016-01-27.</span>
-<span class="sd">    Email: gkiar@jhu.edu</span>
+<span class="c1">#     graph.py</span>
+<span class="c1">#     Created by Greg Kiar on 2016-01-27.</span>
+<span class="c1">#     Email: gkiar@jhu.edu</span>
 
-<span class="sd">Can be found here:</span>
-<span class="sd">    https://github.com/neurodata/m2g/blob/v0.1.0/ndmg/graph/graph.py</span>
+<span class="c1"># Can be found here:</span>
+<span class="c1">#     https://github.com/neurodata/m2g/blob/v0.1.0/ndmg/graph/graph.py</span>
 
-<span class="sd">Modifications Copyright (C) 2022  C-PAC Developers</span>
+<span class="c1"># Modifications Copyright (C) 2022  C-PAC Developers</span>
 
-<span class="sd">This file is part of C-PAC.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># This file is part of C-PAC.</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nb</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -361,18 +359,18 @@
 <span class="sd">    Function to extract average timeseries for the voxels in each</span>
 <span class="sd">    roi of the labelled atlas.</span>
 <span class="sd">    Returns the roi timeseries as a numpy.ndarray.</span>
-<span class="sd">    **Positional Arguments**</span>
-<span class="sd">        func_file:</span>
-<span class="sd">            - the path to the 4d volume to extract timeseries</span>
-<span class="sd">        label_file:</span>
-<span class="sd">            - the path to the labelled atlas containing labels</span>
-<span class="sd">                for the voxels in the fmri image</span>
-<span class="sd">        roits_file:</span>
-<span class="sd">            - the path to where the roi timeseries will be saved. If</span>
-<span class="sd">            None, don&#39;t save and just return the roi_timeseries.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func_file</span>
+<span class="sd">        the path to the 4d volume to extract timeseries</span>
+<span class="sd">    label_file</span>
+<span class="sd">        the path to the labelled atlas containing labels</span>
+<span class="sd">        for the voxels in the fmri image</span>
 
-<span class="sd">    # Adapted from ndmg v0.1.1</span>
-<span class="sd">    # Copyright 2016 NeuroData (http://neurodata.io)</span>
+<span class="sd">    .. centered::</span>
+<span class="sd">        Adapted from ndmg v0.1.1</span>
+<span class="sd">        Copyright 2016 NeuroData (http://neurodata.io)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">labeldata</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">label_file</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
     <span class="c1"># rois are all the nonzero unique values the parcellation can take</span>
@@ -407,19 +405,22 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">rois</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sens</span><span class="o">=</span><span class="s2">&quot;dwi&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the graph with nodes corresponding to the number of ROIs</span>
-<span class="sd">        **Positional Arguments:**</span>
-<span class="sd">                N:</span>
-<span class="sd">                    - Number of rois</span>
-<span class="sd">                rois:</span>
-<span class="sd">                    - Set of ROIs as either an array or niftii file)</span>
-<span class="sd">                attr:</span>
-<span class="sd">                    - Node or graph attributes. Can be a list. If 1 dimensional</span>
-<span class="sd">                      will be interpretted as a graph attribute. If N</span>
-<span class="sd">                      dimensional will be interpretted as node attributes. If</span>
-<span class="sd">                      it is any other dimensional, it will be ignored.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        N</span>
+<span class="sd">            Number of rois</span>
+<span class="sd">        rois</span>
+<span class="sd">            Set of ROIs as either an array or niftii file)</span>
+<span class="sd">        attr</span>
+<span class="sd">            Node or graph attributes. Can be a list. If 1 dimensional</span>
+<span class="sd">            will be interpretted as a graph attribute. If N</span>
+<span class="sd">            dimensional will be interpretted as node attributes. If</span>
+<span class="sd">            it is any other dimensional, it will be ignored.</span>
 
-<span class="sd">        # Adapted from ndmg v0.1.1</span>
-<span class="sd">        # Copyright 2016 NeuroData (http://neurodata.io)</span>
+<span class="sd">        .. centered::</span>
+<span class="sd">            Adapted from ndmg v0.1.1</span>
+<span class="sd">            Copyright 2016 NeuroData (http://neurodata.io)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
         <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nb</span>
@@ -437,10 +438,12 @@
     <span class="k">def</span> <span class="nf">make_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">streamlines</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Takes streamlines and produces a graph</span>
-<span class="sd">        **Positional Arguments:**</span>
-<span class="sd">                streamlines:</span>
-<span class="sd">                    - Fiber streamlines either file or array in a dipy EuDX</span>
-<span class="sd">                      or compatible format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        streamlines</span>
+<span class="sd">            Fiber streamlines either file or array in a dipy EuDX</span>
+<span class="sd">            or compatible format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">time</span>
         <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -488,10 +491,12 @@
     <span class="k">def</span> <span class="nf">cor_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeseries</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Takes timeseries and produces a correlation matrix</span>
-<span class="sd">        **Positional Arguments:**</span>
-<span class="sd">            timeseries:</span>
-<span class="sd">                -the timeseries file to extract correlation for.</span>
-<span class="sd">                          dimensions are [numrois]x[numtimesteps]</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        timeseries</span>
+<span class="sd">            the timeseries file to extract correlation for.</span>
+<span class="sd">            dimensions are [numrois]x[numtimesteps]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
         <span class="n">ts</span> <span class="o">=</span> <span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -531,9 +536,11 @@
     <span class="k">def</span> <span class="nf">save_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graphname</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the graph to disk</span>
-<span class="sd">        **Positional Arguments:**</span>
-<span class="sd">                graphname:</span>
-<span class="sd">                    - Filename for the graph</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        graphname</span>
+<span class="sd">            Filename for the graph</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
         <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>

@@ -1154,53 +1154,41 @@ python file. The method extracts anatomical
 and functional data for each site( if multiple site)
 and/or scan parameters for each site and put it into
 a data structure read by python</p>
-<p>Example:
-subjects_list =[</p>
-<blockquote>
-<div><dl>
-<dt>{</dt><dd><p>‘subject_id’ : ‘0050386’,
-‘unique_id’ : ‘session_1’,
-‘anat’: ‘/Users/home/data/NYU/0050386/session_1/anat_1/anat.nii.gz’,
-‘rest’:{</p>
-<blockquote>
-<div><p>‘rest_1_rest’ : ‘/Users/home/data/NYU/0050386/session_1/rest_1/rest.nii.gz’,
-‘rest_2_rest’ : ‘/Users/home/data/NYU/0050386/session_1/rest_2/rest.nii.gz’,
-}</p>
-</div></blockquote>
-<dl class="simple">
-<dt>‘scan_parameters’:{</dt><dd><p>‘tr’: ‘2’,
-‘acquisition’: ‘alt+z2’,
-‘reference’: ‘17’,
-‘first_tr’: ‘’,
-‘last_tr’: ‘’,
-}</p>
-</dd>
-</dl>
-<p>},</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>]</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subjects_list</span> <span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>   <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;subject_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;0050386&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;unique_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;session_1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;anat&#39;</span><span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/anat_1/anat.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;rest&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>        <span class="s1">&#39;rest_1_rest&#39;</span> <span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/rest_1/rest.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;rest_2_rest&#39;</span> <span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/rest_2/rest.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">},</span>
+<span class="gp">... </span>    <span class="s1">&#39;scan_parameters&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>        <span class="s1">&#39;tr&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;acquisition&#39;</span><span class="p">:</span> <span class="s1">&#39;alt+z2&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="s1">&#39;17&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;first_tr&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;last_tr&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
 <p>or</p>
-<dl>
-<dt>subjects_list =[</dt><dd><dl>
-<dt>{</dt><dd><p>‘subject_id’ : ‘0050386’,
-‘unique_id’ : ‘session_1’,
-‘anat’: ‘/Users/home/data/NYU/0050386/session_1/anat_1/anat.nii.gz’,
-‘rest’:{</p>
-<blockquote>
-<div><blockquote>
-<div><p>‘rest_1_rest’ : ‘/Users/home/data/NYU/0050386/session_1/rest_1/rest.nii.gz’,
-‘rest_2_rest’ : ‘/Users/home/data/NYU/0050386/session_1/rest_2/rest.nii.gz’,
-}</p>
-</div></blockquote>
-<p>},</p>
-</div></blockquote>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subjects_list</span> <span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>   <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;subject_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;0050386&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;unique_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;session_1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;anat&#39;</span><span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/anat_1/anat.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;rest&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>        <span class="s1">&#39;rest_1_rest&#39;</span> <span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/rest_1/rest.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;rest_2_rest&#39;</span> <span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/rest_2/rest.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">... </span>      <span class="p">},</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1237,63 +1225,53 @@ python file. The method extracts anatomical
 functional data and scan parameters for each
 site( if multiple site) and for each scan
 and put it into a data structure read by python</p>
-<section id="note">
-<h2>Note:<a class="headerlink" href="#note" title="Permalink to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Use this tool only if the scan parameters are different
 for each scan as shown in the example below.</p>
-</section>
-<section id="example">
-<h2>Example:<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
-<dl>
-<dt>subjects_list = [</dt><dd><dl>
-<dt>{</dt><dd><p>‘subject_id’: ‘0021001’,
-‘unique_id’: ‘session2’,
-‘anat’: ‘/home/data/multiband_data/NKITRT/0021001/anat/mprage.nii.gz’,
-‘rest’:{</p>
-<blockquote>
-<div><p>‘RfMRI_mx_1400_rest’: ‘/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_mx_1400/rest.nii.gz’,
-‘RfMRI_mx_645_rest’: ‘/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_mx_645/rest.nii.gz’,
-‘RfMRI_std_2500_rest’: ‘/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_std_2500/rest.nii.gz’,
-},</p>
-</div></blockquote>
-<dl>
-<dt>‘scan_parameters’:{</dt><dd><dl class="simple">
-<dt>‘TR’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘1.4’,
-‘RfMRI_mx_645_rest’: ‘1.4’,
-‘RfMRI_std_2500_rest’: ‘2.5’,
-},</p>
-</dd>
-<dt>‘Acquisition’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘/home/data/1400.txt’,
-‘RfMRI_mx_645_rest’: ‘/home/data/645.txt’,
-‘RfMRI_std_2500_rest’: ‘/home/data/2500.txt’,
-},</p>
-</dd>
-<dt>‘Reference’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘32’,
-‘RfMRI_mx_645_rest’: ‘20’,
-‘RfMRI_std_2500_rest’: ‘19’,
-},</p>
-</dd>
-<dt>‘FirstTR’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘7’,
-‘RfMRI_mx_645_rest’: ‘15’,
-‘RfMRI_std_2500_rest’: ‘4’,
-},</p>
-</dd>
-<dt>‘LastTR’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘440’,
-‘RfMRI_mx_645_rest’: ‘898’,
-‘RfMRI_std_2500_rest’: ‘None’,
-},</p>
-</dd>
-</dl>
-<p>}</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>},</p>
-</dd>
-</dl>
-<p>]</p>
-</section>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subjects_list</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">{</span>
+<span class="gp">... </span>        <span class="s1">&#39;subject_id&#39;</span><span class="p">:</span> <span class="s1">&#39;0021001&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="s1">&#39;session2&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;anat&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/multiband_data/NKITRT/0021001/anat/mprage.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;rest&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>          <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_mx_1400/rest.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_mx_645/rest.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_std_2500/rest.nii.gz&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="p">},</span>
+<span class="gp">... </span>        <span class="s1">&#39;scan_parameters&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>            <span class="s1">&#39;TR&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;1.4&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;1.4&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;2.5&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">},</span>
+<span class="gp">... </span>            <span class="s1">&#39;Acquisition&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/1400.txt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/645.txt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/2500.txt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">},</span>
+<span class="gp">... </span>            <span class="s1">&#39;Reference&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;32&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;20&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;19&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">},</span>
+<span class="gp">... </span>            <span class="s1">&#39;FirstTR&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">},</span>
+<span class="gp">... </span>            <span class="s1">&#39;LastTR&#39;</span><span class="p">:{</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;440&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;898&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="p">},</span>
+<span class="gp">... </span>            <span class="p">}</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="p">]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1397,68 +1375,23 @@ slow network connection), the tracking is dropped.</p></li>
 </div>
 </dd></dl>
 
-<span class="target" id="module-CPAC.utils.ndmg_utils"></span><p>Functions in this file adapted from NeuroData group:
-STATEMENT OF CHANGES:</p>
-<blockquote>
-<div><p>This file is derived from sources licensed under the Apache-2.0 terms,
-and this file has been changed.</p>
-</div></blockquote>
-<dl>
-<dt>CHANGES:</dt><dd><ul class="simple">
-<li><p>Minor refactoring for compatibility with C-PAC</p></li>
-</ul>
-</dd>
-<dt>ORIGINAL WORK’S ATTRIBUTION NOTICE:</dt><dd><p>Copyright 2016 NeuroData (<a class="reference external" href="http://neurodata.io">http://neurodata.io</a>)</p>
-<p>Licensed under the Apache License, Version 2.0 (the “License”);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at</p>
-<blockquote>
-<div><p><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
-</div></blockquote>
-<p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an “AS IS” BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.</p>
-<p>graph.py
-Created by Greg Kiar on 2016-01-27.
-Email: <a class="reference external" href="mailto:gkiar&#37;&#52;&#48;jhu&#46;edu">gkiar<span>&#64;</span>jhu<span>&#46;</span>edu</a></p>
-</dd>
-<dt>Can be found here:</dt><dd><p><a class="reference external" href="https://github.com/neurodata/m2g/blob/v0.1.0/ndmg/graph/graph.py">https://github.com/neurodata/m2g/blob/v0.1.0/ndmg/graph/graph.py</a></p>
-</dd>
-</dl>
-<p>Modifications Copyright (C) 2022  C-PAC Developers</p>
-<p>This file is part of C-PAC.</p>
-<dl class="py function">
+<span class="target" id="module-CPAC.utils.ndmg_utils"></span><dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.ndmg_utils.ndmg_roi_timeseries">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.ndmg_utils.</span></span><span class="sig-name descname"><span class="pre">ndmg_roi_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/ndmg_utils#ndmg_roi_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.ndmg_utils.ndmg_roi_timeseries" title="Permalink to this definition">#</a></dt>
 <dd><p>Function to extract average timeseries for the voxels in each
 roi of the labelled atlas.
-Returns the roi timeseries as a numpy.ndarray.
-<strong>Positional Arguments</strong></p>
-<blockquote>
-<div><dl>
-<dt>func_file:</dt><dd><ul class="simple">
-<li><p>the path to the 4d volume to extract timeseries</p></li>
+Returns the roi timeseries as a numpy.ndarray.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_file</strong> – the path to the 4d volume to extract timeseries</p></li>
+<li><p><strong>label_file</strong> – the path to the labelled atlas containing labels
+for the voxels in the fmri image</p></li>
+<li><p><strong>centered::</strong> (<em>..</em>) – Adapted from ndmg v0.1.1
+Copyright 2016 NeuroData (<a class="reference external" href="http://neurodata.io">http://neurodata.io</a>)</p></li>
 </ul>
-</dd>
-<dt>label_file:</dt><dd><ul class="simple">
-<li><dl class="simple">
-<dt>the path to the labelled atlas containing labels</dt><dd><p>for the voxels in the fmri image</p>
 </dd>
 </dl>
-</li>
-</ul>
-</dd>
-<dt>roits_file:</dt><dd><ul class="simple">
-<li><p>the path to where the roi timeseries will be saved. If</p></li>
-</ul>
-<p>None, don’t save and just return the roi_timeseries.</p>
-</dd>
-</dl>
-</div></blockquote>
-<p># Adapted from ndmg v0.1.1
-# Copyright 2016 NeuroData (<a class="reference external" href="http://neurodata.io">http://neurodata.io</a>)</p>
 </dd></dl>
 
 <span class="target" id="module-CPAC.utils.nifti_utils"></span><dl class="py function">
@@ -2554,18 +2487,6 @@ conversions against the schema.</p>
 <section id="module-CPAC.utils.configuration">
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#module-CPAC.utils.configuration" title="Permalink to this heading">#</a></h2>
 <p>C-PAC Configuration module</p>
-<p>Copyright (C) 2022  C-PAC Developers</p>
-<p>This file is part of C-PAC.</p>
-<p>C-PAC is free software: you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License as published by the
-Free Software Foundation, either version 3 of the License, or (at your
-option) any later version.</p>
-<p>C-PAC is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
-License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with C-PAC. If not, see &lt;<a class="reference external" href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.configuration.Configuration">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Configuration" title="Permalink to this definition">#</a></dt>
@@ -2729,7 +2650,7 @@ sub_dict</p>
 <section id="module-CPAC.utils.monitoring">
 <span id="monitoring"></span><h2>Monitoring<a class="headerlink" href="#module-CPAC.utils.monitoring" title="Permalink to this heading">#</a></h2>
 <p>Module to customize Nipype’s process monitoring for use in C-PAC</p>
-<p>See <a class="reference external" href="https://fcp-indi.github.io/docs/developer/nodes">https://fcp-indi.github.io/docs/developer/nodes</a> for C-PAC-specific documentation.
+<p>See <a class="reference external" href="https://fcp-indi.github.io/docs/nightly/developer/nodes">https://fcp-indi.github.io/docs/nightly/developer/nodes</a> for C-PAC-specific documentation.
 See <a class="reference external" href="https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.profiler.html">https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.profiler.html</a> for Nipype’s documentation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.LoggingHTTPServer">
