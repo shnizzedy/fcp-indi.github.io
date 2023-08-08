@@ -829,7 +829,7 @@ compare</p>
 model_name: (optional) name/label of the model to run</p>
 <dl class="simple">
 <dt>Sets up the model described here:</dt><dd><dl class="simple">
-<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Paired_Two-<a href="#id3"><span class="problematic" id="id4">Group_Difference_</span></a>.28Two-Sample_Paired_T-Test.29</p>
+<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Paired_Two-<a href="#id1"><span class="problematic" id="id2">Group_Difference_</span></a>.28Two-Sample_Paired_T-Test.29</p>
 </dd>
 </dl>
 </dd>
@@ -862,7 +862,7 @@ to compare</p>
 model_name: (optional) name/label of the model to run</p>
 <dl class="simple">
 <dt>Sets up the model described here:</dt><dd><dl class="simple">
-<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Tripled_Two-<a href="#id5"><span class="problematic" id="id6">Group_Difference_</span></a>.28.22Tripled.22_T-Test.29</p>
+<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Tripled_Two-<a href="#id3"><span class="problematic" id="id4">Group_Difference_</span></a>.28.22Tripled.22_T-Test.29</p>
 </dd>
 </dl>
 </dd>
@@ -888,7 +888,7 @@ groups: a list of either one or two strings- design matrix EV/covariate</p>
 model_name: (optional) name/label of the model to run</p>
 <dl class="simple">
 <dt>Sets up the model described here:</dt><dd><dl class="simple">
-<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Unpaired_Two-<a href="#id7"><span class="problematic" id="id8">Group_Difference_</span></a>.28Two-Sample_Unpaired_T-Test.29</p>
+<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Unpaired_Two-<a href="#id5"><span class="problematic" id="id6">Group_Difference_</span></a>.28Two-Sample_Unpaired_T-Test.29</p>
 </dd>
 </dl>
 </dd>
@@ -2003,16 +2003,18 @@ file in the subject directory</p>
 <dt class="sig sig-object py" id="CPAC.utils.utils.delete_nested_value">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.utils.</span></span><span class="sig-name descname"><span class="pre">delete_nested_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/utils#delete_nested_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.utils.delete_nested_value" title="Permalink to this definition">#</a></dt>
 <dd><p>Helper function to delete nested values</p>
-<section id="paramters">
-<h2>Paramters<a class="headerlink" href="#paramters" title="Permalink to this heading">#</a></h2>
-<p>d: dict
-keys: list or tuple</p>
 <dl class="field-list simple">
-<dt class="field-odd">returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>updated</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>keys</strong> (<em>list</em><em> or </em><em>tuple</em>) – </p></li>
+</ul>
 </dd>
-<dt class="field-even">rtype<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -2022,7 +2024,6 @@ keys: list or tuple</p>
 <span class="go">{&#39;nested&#39;: {&#39;key2&#39;: &#39;value&#39;}}</span>
 </pre></div>
 </div>
-</section>
 </dd></dl>
 
 <dl class="py function">
@@ -2181,16 +2182,18 @@ and scan parameters.</p>
 <dt class="sig sig-object py" id="CPAC.utils.utils.lookup_nested_value">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.utils.</span></span><span class="sig-name descname"><span class="pre">lookup_nested_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/utils#lookup_nested_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.utils.lookup_nested_value" title="Permalink to this definition">#</a></dt>
 <dd><p>Helper method to look up nested values</p>
-<section id="id1">
-<h2>Paramters<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>d: dict
-keys: list or tuple</p>
 <dl class="field-list simple">
-<dt class="field-odd">returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>yaml</strong></p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>keys</strong> (<em>list</em><em> or </em><em>tuple</em>) – </p></li>
+</ul>
 </dd>
-<dt class="field-even">rtype<span class="colon">:</span></dt>
-<dd class="field-even"><p>str or dict</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>yaml</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str or dict</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -2200,7 +2203,6 @@ keys: list or tuple</p>
 <span class="go">&#39;&#39;</span>
 </pre></div>
 </div>
-</section>
 </dd></dl>
 
 <dl class="py function">
@@ -2332,17 +2334,19 @@ are the same shape.</p>
 <dt class="sig sig-object py" id="CPAC.utils.utils.set_nested_value">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.utils.</span></span><span class="sig-name descname"><span class="pre">set_nested_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/utils#set_nested_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.utils.set_nested_value" title="Permalink to this definition">#</a></dt>
 <dd><p>Helper method to set nested values</p>
-<section id="id2">
-<h2>Paramters<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>d: dict
-keys: list or tuple
-value: any</p>
 <dl class="field-list simple">
-<dt class="field-odd">returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>updated</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>keys</strong> (<em>list</em><em> or </em><em>tuple</em>) – </p></li>
+<li><p><strong>value</strong> (<em>any</em>) – </p></li>
+</ul>
 </dd>
-<dt class="field-even">rtype<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -2350,7 +2354,6 @@ value: any</p>
 <span class="go">{&#39;nested&#39;: {&#39;keys&#39;: &#39;value&#39;}}</span>
 </pre></div>
 </div>
-</section>
 </dd></dl>
 
 <dl class="py function">
