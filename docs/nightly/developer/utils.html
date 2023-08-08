@@ -529,15 +529,12 @@ one have the same minimum length.</p>
 <dt class="sig sig-object py" id="CPAC.utils.bids_utils.camelCase">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">camelCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#camelCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.camelCase" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert a hyphenated string to camelCase</p>
-<section id="paremeters">
-<h2>Paremeters<a class="headerlink" href="#paremeters" title="Permalink to this heading">#</a></h2>
-<dl class="simple">
-<dt>string<span class="classifier">str</span></dt><dd><p>string to convert to camelCase</p>
-</dd>
-</dl>
 <dl class="field-list simple">
-<dt class="field-odd">rtype<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>str</em>) – string to convert to camelCase</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -547,7 +544,6 @@ one have the same minimum length.</p>
 <span class="go">&#39;meanPearsonNilearnACompCor&#39;</span>
 </pre></div>
 </div>
-</section>
 </dd></dl>
 
 <dl class="py function">
@@ -784,175 +780,6 @@ specified suffixes</p>
 <span class="go">&#39;1&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">without_key</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;sub&#39;</span><span class="p">)</span>
 <span class="go">&#39;1&#39;</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<span class="target" id="module-CPAC.utils.configuration"></span><p>C-PAC Configuration module</p>
-<p>Copyright (C) 2022  C-PAC Developers</p>
-<p>This file is part of C-PAC.</p>
-<p>C-PAC is free software: you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License as published by the
-Free Software Foundation, either version 3 of the License, or (at your
-option) any later version.</p>
-<p>C-PAC is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
-License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with C-PAC. If not, see &lt;<a class="reference external" href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="CPAC.utils.configuration.Configuration">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Configuration" title="Permalink to this definition">#</a></dt>
-<dd><p>Class to set dictionary keys as map attributes.</p>
-<p>If the given dictionary includes the key <cite>FROM</cite>, that key’s value
-will form the base of the Configuration object with the values in
-the given dictionary overriding matching keys in the base at any
-depth. If no <cite>FROM</cite> key is included, the base Configuration is
-the default Configuration.</p>
-<p><cite>FROM</cite> accepts either the name of a preconfigured pipleine or a
-path to a YAML file.</p>
-<p>Given a Configuration <cite>c</cite>, and a list or tuple of an attribute name
-and nested keys <cite>keys = [‘attribute’, ‘key0’, ‘key1’]</cite> or
-<cite>keys = (‘attribute’, ‘key0’, ‘key1’)</cite>, the value ‘value’ nested in</p>
-<p>c.attribute = {‘key0’: {‘key1’: ‘value’}}</p>
-<p>can be accessed (get and set) in any of the following ways (and
-more):</p>
-<p>c.attribute[‘key0’][‘key1’]
-c[‘attribute’][‘key0’][‘key1’]
-c[‘attribute’, ‘key0’, ‘key1’]
-c[keys]</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">({})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span>
-<span class="go">&#39;cpac-blank-template&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">({</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">... </span>    <span class="s1">&#39;pipeline_name&#39;</span><span class="p">:</span> <span class="s1">&#39;example_pipeline&#39;</span><span class="p">}})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span>
-<span class="go">&#39;example_pipeline&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;new_pipeline2&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span>
-<span class="go">&#39;new_pipeline2&#39;</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="CPAC.utils.configuration.Configuration.dict">
-<span class="sig-name descname"><span class="pre">dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Configuration.dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Configuration.dict" title="Permalink to this definition">#</a></dt>
-<dd><p>Show contents of a C-PAC configuration as a dict</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="CPAC.utils.configuration.Configuration.keys">
-<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Configuration.keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Configuration.keys" title="Permalink to this definition">#</a></dt>
-<dd><p>Show toplevel keys of a C-PAC configuration dict</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="CPAC.utils.configuration.Preconfiguration">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">Preconfiguration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preconfig</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Preconfiguration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Preconfiguration" title="Permalink to this definition">#</a></dt>
-<dd><p>A preconfigured Configuration</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>preconfig</strong> (<em>str</em>) – The canonical name of the preconfig to load</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.utils.configuration.check_pname">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">check_pname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#check_pname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.check_pname" title="Permalink to this definition">#</a></dt>
-<dd><p>Function to check / set <cite>p_name</cite>, the string representation of a
-pipeline for use in filetrees</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>p_name</strong> (<em>str</em><em> or </em><em>None</em>) – </p></li>
-<li><p><strong>pipe_config</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><em>Configuration</em></a>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>p_name</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">check_pname</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-<span class="go">&#39;pipeline_cpac-blank-template&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">check_pname</span><span class="p">(</span><span class="s1">&#39;cpac-default-pipeline&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-<span class="go">&#39;pipeline_cpac-default-pipeline&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">check_pname</span><span class="p">(</span><span class="s1">&#39;pipeline_cpac-default-pipeline&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-<span class="go">&#39;pipeline_cpac-default-pipeline&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">check_pname</span><span class="p">(</span><span class="s1">&#39;different-name&#39;</span><span class="p">,</span> <span class="n">Configuration</span><span class="p">())</span>
-<span class="go">&#39;pipeline_different-name&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span> <span class="o">=</span> <span class="n">check_pname</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">Preconfiguration</span><span class="p">(</span><span class="s1">&#39;blank&#39;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span>
-<span class="go">&#39;pipeline_cpac-blank-template&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span> <span class="o">=</span> <span class="n">check_pname</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">Preconfiguration</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span>
-<span class="go">&#39;pipeline_cpac-default-pipeline&#39;</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.utils.configuration.preconfig_yaml">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">preconfig_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preconfig_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#preconfig_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.preconfig_yaml" title="Permalink to this definition">#</a></dt>
-<dd><p>Get the path to a preconfigured pipeline’s YAML file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>preconfig_name</strong> (<em>str</em>) – </p></li>
-<li><p><strong>load</strong> (<em>boolean</em>) – return dict if True, str if False</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>path to YAML file or dict loaded from YAML</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str or dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.utils.configuration.set_subject">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">set_subject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#set_subject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.set_subject" title="Permalink to this definition">#</a></dt>
-<dd><p>Function to set pipeline name and log directory path for a given
-sub_dict</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sub_dict</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>pipe_config</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><em>CPAC.utils.configuration.Configuration</em></a>) – </p></li>
-<li><p><strong>p_name</strong> (<em>str</em><em>, </em><em>optional</em>) – pipeline name string</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>subject_id</strong> (<em>str</em>)</p></li>
-<li><p><strong>p_name</strong> (<em>str</em>) – pipeline name string</p></li>
-<li><p><strong>log_dir</strong> (<em>str</em>) – path to subject log directory</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CPAC.utils.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sub_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;site_id&#39;</span><span class="p">:</span> <span class="s1">&#39;site1&#39;</span><span class="p">,</span> <span class="s1">&#39;subject_id&#39;</span><span class="p">:</span> <span class="s1">&#39;sub1&#39;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="s1">&#39;uid1&#39;</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">subject_id</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">log_dir</span> <span class="o">=</span> <span class="n">set_subject</span><span class="p">(</span>
-<span class="gp">... </span>        <span class="n">sub_dict</span><span class="p">,</span> <span class="n">Configuration</span><span class="p">({</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;log_directory&#39;</span><span class="p">:</span>
-<span class="gp">... </span>            <span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">tmpdir</span><span class="p">}}}))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">subject_id</span>
-<span class="go">&#39;sub1_uid1&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span>
-<span class="go">&#39;pipeline_cpac-blank-template&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">log_dir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1537,7 +1364,7 @@ slow network connection), the tracking is dropped.</p></li>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-CPAC.utils.interfaces"></span><span class="target" id="module-CPAC.utils.misc"></span><p>Miscellaneous utilities</p>
+<span class="target" id="module-CPAC.utils.misc"></span><p>Miscellaneous utilities</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.misc.get_template_specs">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.misc.</span></span><span class="sig-name descname"><span class="pre">get_template_specs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_spec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/misc#get_template_specs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.misc.get_template_specs" title="Permalink to this definition">#</a></dt>
@@ -1566,123 +1393,6 @@ slow network connection), the tracking is dropped.</p></li>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="gr">RuntimeError</span><span class="w">:</span>
 <span class="x">...</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<span class="target" id="module-CPAC.utils.monitoring"></span><p>Module to customize Nipype’s process monitoring for use in C-PAC</p>
-<p>See <a class="reference external" href="https://fcp-indi.github.io/docs/developer/nodes">https://fcp-indi.github.io/docs/developer/nodes</a> for C-PAC-specific documentation.
-See <a class="reference external" href="https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.profiler.html">https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.profiler.html</a> for Nipype’s documentation.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="CPAC.utils.monitoring.LoggingHTTPServer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">LoggingHTTPServer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipeline_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_dir=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port=8080</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request=&lt;class</span> <span class="pre">'CPAC.utils.monitoring.monitoring.LoggingRequestHandler'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#LoggingHTTPServer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.LoggingHTTPServer" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="CPAC.utils.monitoring.LoggingRequestHandler">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">LoggingRequestHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#LoggingRequestHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.LoggingRequestHandler" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.utils.monitoring.failed_to_start">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">failed_to_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/custom_logging#failed_to_start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.failed_to_start" title="Permalink to this definition">#</a></dt>
-<dd><p>Launch a failed-to-start logger for a run that failed to start.
-Must be called from within an <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>log_dir</strong> (<em>str</em>) – path to logging directory</p></li>
-<li><p><strong>exception</strong> (<em>Exception</em>) – </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.utils.monitoring.getLogger">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">getLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/custom_logging#getLogger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.getLogger" title="Permalink to this definition">#</a></dt>
-<dd><p>Function to get a mock logger if one exists, falling back on
-real loggers.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>logger</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="logging#CPAC.utils.monitoring.custom_logging.MockLogger" title="CPAC.utils.monitoring.custom_logging.MockLogger">CPAC.utils.monitoring.custom_logging.MockLogger</a> or logging.Logger</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.utils.monitoring.log_nodes_cb">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">log_nodes_cb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#log_nodes_cb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.log_nodes_cb" title="Permalink to this definition">#</a></dt>
-<dd><p>Function to record node run statistics to a log file as json
-dictionaries</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>node</strong> (<em>nipype.pipeline.engine.Node</em>) – the node being logged</p></li>
-<li><p><strong>status</strong> (<em>string</em>) – acceptable values are ‘start’, ‘end’; otherwise it is
-considered and error</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>this function does not return any values, it logs the node
-status info to the callback logger</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="CPAC.utils.monitoring.set_up_logger">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">set_up_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mock</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_existing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/custom_logging#set_up_logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.set_up_logger" title="Permalink to this definition">#</a></dt>
-<dd><p>Function to initialize a logger</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – logger name (for subsequent calls to <code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code>) to
-write to the same log file)</p></li>
-<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – filename to write log to. If not specified, filename will be
-the same as <code class="docutils literal notranslate"><span class="pre">name</span></code> with the extension <code class="docutils literal notranslate"><span class="pre">log</span></code></p></li>
-<li><p><strong>level</strong> (<em>str</em><em>, </em><em>optional</em>) – one of <code class="docutils literal notranslate"><span class="pre">{critical,</span> <span class="pre">error,</span> <span class="pre">warning,</span> <span class="pre">info,</span> <span class="pre">debug,</span> <span class="pre">notset}</span></code>,
-case-insensitive</p></li>
-<li><p><strong>log_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – </p></li>
-<li><p><strong>mock</strong> (<em>bool</em><em>, </em><em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, return a <code class="docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.MockLogger</span></code>
-instead of a <code class="docutils literal notranslate"><span class="pre">logging.Logger</span></code></p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>logger</strong> – initialized logging Handler</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>logging.Handler</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span> <span class="o">=</span> <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">handlers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">baseFilename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">&#39;test.log&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">level</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span> <span class="o">=</span> <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;second_test&#39;</span><span class="p">,</span> <span class="s1">&#39;specific_filename.custom&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">handlers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">baseFilename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">&#39;specific_filename.custom&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">level</span>
-<span class="go">10</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span> <span class="o">=</span> <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;third_test&#39;</span><span class="p">,</span> <span class="n">mock</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;third_test&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">lg</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;third_test&#39;</span> <span class="ow">in</span> <span class="n">MOCK_LOGGERS</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;third_test&#39;</span> <span class="ow">in</span> <span class="n">MOCK_LOGGERS</span>
-<span class="go">False</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1812,7 +1522,7 @@ return image</p>
 <dd><p>Skip test if we have Pytest, ignore test entirely if not</p>
 </dd></dl>
 
-<span class="target" id="module-CPAC.utils.serialization"></span><span class="target" id="module-CPAC.utils.strategy"></span><span class="target" id="module-CPAC.utils.symlinks"></span><span class="target" id="module-CPAC.utils.test_init"></span><p>This module contains functions that assist in initializing CPAC
+<span class="target" id="module-CPAC.utils.strategy"></span><span class="target" id="module-CPAC.utils.symlinks"></span><span class="target" id="module-CPAC.utils.test_init"></span><p>This module contains functions that assist in initializing CPAC
 tests resources</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.test_init.concordance">
@@ -2104,7 +1814,7 @@ on the smoothed data</p>
 small sub-workflows.</p>
 </dd></dl>
 
-<span class="target" id="module-CPAC.utils.tests"></span><span class="target" id="module-CPAC.utils.trimmer"></span><dl class="py function">
+<span class="target" id="module-CPAC.utils.trimmer"></span><dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.trimmer.the_trimmer">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.trimmer.</span></span><span class="sig-name descname"><span class="pre">the_trimmer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_creds_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/trimmer#the_trimmer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.trimmer.the_trimmer" title="Permalink to this definition">#</a></dt>
 <dd><p>The trimmer: trimming your workflow based on its datasinks.</p>
@@ -2188,8 +1898,9 @@ executed</p>
 </dd></dl>
 
 <span class="target" id="module-CPAC.utils.typing"></span><p>Helpers and aliases for handling typing in main and variant Python versions</p>
-<p>Once all variants run Python ≥ 3.10, these global variables can be
-replaced with the preferred syntax</p>
+<p>Once all variants (see <a class="reference external" href="https://fcp-indi.github.io/docs/nightly/user/versions#variants">https://fcp-indi.github.io/docs/nightly/user/versions#variants</a>)
+run Python ≥ 3.10, these global variables can be replaced with the
+current preferred syntax.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="CPAC.utils.typing.TUPLE">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.typing.</span></span><span class="sig-name descname"><span class="pre">TUPLE</span></span><a class="headerlink" href="#CPAC.utils.typing.TUPLE" title="Permalink to this definition">#</a></dt>
@@ -2837,7 +2548,311 @@ conversions against the schema.</p>
 <dd><p>Method to write into log file the status of the workflow run.</p>
 </dd></dl>
 
-<span class="target" id="module-CPAC.utils.versioning"></span><p>Gather and report versions</p>
+<section id="module-CPAC.utils.configuration">
+<span id="configuration"></span><h2>Configuration<a class="headerlink" href="#module-CPAC.utils.configuration" title="Permalink to this heading">#</a></h2>
+<p>C-PAC Configuration module</p>
+<p>Copyright (C) 2022  C-PAC Developers</p>
+<p>This file is part of C-PAC.</p>
+<p>C-PAC is free software: you can redistribute it and/or modify it under
+the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>C-PAC is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with C-PAC. If not, see &lt;<a class="reference external" href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="CPAC.utils.configuration.Configuration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Configuration" title="Permalink to this definition">#</a></dt>
+<dd><p>Class to set dictionary keys as map attributes.</p>
+<p>If the given dictionary includes the key <cite>FROM</cite>, that key’s value
+will form the base of the Configuration object with the values in
+the given dictionary overriding matching keys in the base at any
+depth. If no <cite>FROM</cite> key is included, the base Configuration is
+the default Configuration.</p>
+<p><cite>FROM</cite> accepts either the name of a preconfigured pipleine or a
+path to a YAML file.</p>
+<p>Given a Configuration <cite>c</cite>, and a list or tuple of an attribute name
+and nested keys <cite>keys = [‘attribute’, ‘key0’, ‘key1’]</cite> or
+<cite>keys = (‘attribute’, ‘key0’, ‘key1’)</cite>, the value ‘value’ nested in</p>
+<p>c.attribute = {‘key0’: {‘key1’: ‘value’}}</p>
+<p>can be accessed (get and set) in any of the following ways (and
+more):</p>
+<p>c.attribute[‘key0’][‘key1’]
+c[‘attribute’][‘key0’][‘key1’]
+c[‘attribute’, ‘key0’, ‘key1’]
+c[keys]</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">({})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span>
+<span class="go">&#39;cpac-blank-template&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">({</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;pipeline_name&#39;</span><span class="p">:</span> <span class="s1">&#39;example_pipeline&#39;</span><span class="p">}})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span>
+<span class="go">&#39;example_pipeline&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;new_pipeline2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span>
+<span class="go">&#39;new_pipeline2&#39;</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.utils.configuration.Configuration.dict">
+<span class="sig-name descname"><span class="pre">dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Configuration.dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Configuration.dict" title="Permalink to this definition">#</a></dt>
+<dd><p>Show contents of a C-PAC configuration as a dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CPAC.utils.configuration.Configuration.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Configuration.keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Configuration.keys" title="Permalink to this definition">#</a></dt>
+<dd><p>Show toplevel keys of a C-PAC configuration dict</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="CPAC.utils.configuration.Preconfiguration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">Preconfiguration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preconfig</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Preconfiguration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Preconfiguration" title="Permalink to this definition">#</a></dt>
+<dd><p>A preconfigured Configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>preconfig</strong> (<em>str</em>) – The canonical name of the preconfig to load</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.utils.configuration.check_pname">
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">check_pname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#check_pname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.check_pname" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to check / set <cite>p_name</cite>, the string representation of a
+pipeline for use in filetrees</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_name</strong> (<em>str</em><em> or </em><em>None</em>) – </p></li>
+<li><p><strong>pipe_config</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><em>Configuration</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>p_name</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_pname</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="go">&#39;pipeline_cpac-blank-template&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_pname</span><span class="p">(</span><span class="s1">&#39;cpac-default-pipeline&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="go">&#39;pipeline_cpac-default-pipeline&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_pname</span><span class="p">(</span><span class="s1">&#39;pipeline_cpac-default-pipeline&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="go">&#39;pipeline_cpac-default-pipeline&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_pname</span><span class="p">(</span><span class="s1">&#39;different-name&#39;</span><span class="p">,</span> <span class="n">Configuration</span><span class="p">())</span>
+<span class="go">&#39;pipeline_different-name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span> <span class="o">=</span> <span class="n">check_pname</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">Preconfiguration</span><span class="p">(</span><span class="s1">&#39;blank&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span>
+<span class="go">&#39;pipeline_cpac-blank-template&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span> <span class="o">=</span> <span class="n">check_pname</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">Preconfiguration</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span>
+<span class="go">&#39;pipeline_cpac-default-pipeline&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.utils.configuration.preconfig_yaml">
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">preconfig_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preconfig_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#preconfig_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.preconfig_yaml" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the path to a preconfigured pipeline’s YAML file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preconfig_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>load</strong> (<em>boolean</em>) – return dict if True, str if False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>path to YAML file or dict loaded from YAML</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.utils.configuration.set_subject">
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">set_subject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#set_subject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.set_subject" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to set pipeline name and log directory path for a given
+sub_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_dict</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>pipe_config</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><em>CPAC.utils.configuration.Configuration</em></a>) – </p></li>
+<li><p><strong>p_name</strong> (<em>str</em><em>, </em><em>optional</em>) – pipeline name string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>subject_id</strong> (<em>str</em>)</p></li>
+<li><p><strong>p_name</strong> (<em>str</em>) – pipeline name string</p></li>
+<li><p><strong>log_dir</strong> (<em>str</em>) – path to subject log directory</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CPAC.utils.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sub_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;site_id&#39;</span><span class="p">:</span> <span class="s1">&#39;site1&#39;</span><span class="p">,</span> <span class="s1">&#39;subject_id&#39;</span><span class="p">:</span> <span class="s1">&#39;sub1&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="s1">&#39;uid1&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">subject_id</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">log_dir</span> <span class="o">=</span> <span class="n">set_subject</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">sub_dict</span><span class="p">,</span> <span class="n">Configuration</span><span class="p">({</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;log_directory&#39;</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">tmpdir</span><span class="p">}}}))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject_id</span>
+<span class="go">&#39;sub1_uid1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_name</span>
+<span class="go">&#39;pipeline_cpac-blank-template&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_dir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-CPAC.utils.interfaces">
+<span id="interfaces"></span><h2>Interfaces<a class="headerlink" href="#module-CPAC.utils.interfaces" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-CPAC.utils.monitoring">
+<span id="monitoring"></span><h2>Monitoring<a class="headerlink" href="#module-CPAC.utils.monitoring" title="Permalink to this heading">#</a></h2>
+<p>Module to customize Nipype’s process monitoring for use in C-PAC</p>
+<p>See <a class="reference external" href="https://fcp-indi.github.io/docs/developer/nodes">https://fcp-indi.github.io/docs/developer/nodes</a> for C-PAC-specific documentation.
+See <a class="reference external" href="https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.profiler.html">https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.profiler.html</a> for Nipype’s documentation.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="CPAC.utils.monitoring.LoggingHTTPServer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">LoggingHTTPServer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipeline_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_dir=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port=8080</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request=&lt;class</span> <span class="pre">'CPAC.utils.monitoring.monitoring.LoggingRequestHandler'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#LoggingHTTPServer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.LoggingHTTPServer" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="CPAC.utils.monitoring.LoggingRequestHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">LoggingRequestHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#LoggingRequestHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.LoggingRequestHandler" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.utils.monitoring.failed_to_start">
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">failed_to_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/custom_logging#failed_to_start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.failed_to_start" title="Permalink to this definition">#</a></dt>
+<dd><p>Launch a failed-to-start logger for a run that failed to start.
+Must be called from within an <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_dir</strong> (<em>str</em>) – path to logging directory</p></li>
+<li><p><strong>exception</strong> (<em>Exception</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.utils.monitoring.getLogger">
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">getLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/custom_logging#getLogger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.getLogger" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to get a mock logger if one exists, falling back on
+real loggers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>logger</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="logging#CPAC.utils.monitoring.custom_logging.MockLogger" title="CPAC.utils.monitoring.custom_logging.MockLogger">CPAC.utils.monitoring.custom_logging.MockLogger</a> or logging.Logger</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.utils.monitoring.log_nodes_cb">
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">log_nodes_cb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#log_nodes_cb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.log_nodes_cb" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to record node run statistics to a log file as json
+dictionaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<em>nipype.pipeline.engine.Node</em>) – the node being logged</p></li>
+<li><p><strong>status</strong> (<em>string</em>) – acceptable values are ‘start’, ‘end’; otherwise it is
+considered and error</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>this function does not return any values, it logs the node
+status info to the callback logger</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.utils.monitoring.set_up_logger">
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">set_up_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mock</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_existing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/custom_logging#set_up_logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.set_up_logger" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to initialize a logger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – logger name (for subsequent calls to <code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code>) to
+write to the same log file)</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – filename to write log to. If not specified, filename will be
+the same as <code class="docutils literal notranslate"><span class="pre">name</span></code> with the extension <code class="docutils literal notranslate"><span class="pre">log</span></code></p></li>
+<li><p><strong>level</strong> (<em>str</em><em>, </em><em>optional</em>) – one of <code class="docutils literal notranslate"><span class="pre">{critical,</span> <span class="pre">error,</span> <span class="pre">warning,</span> <span class="pre">info,</span> <span class="pre">debug,</span> <span class="pre">notset}</span></code>,
+case-insensitive</p></li>
+<li><p><strong>log_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – </p></li>
+<li><p><strong>mock</strong> (<em>bool</em><em>, </em><em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, return a <code class="docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.MockLogger</span></code>
+instead of a <code class="docutils literal notranslate"><span class="pre">logging.Logger</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>logger</strong> – initialized logging Handler</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logging.Handler</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span> <span class="o">=</span> <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">handlers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">baseFilename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&#39;test.log&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">level</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span> <span class="o">=</span> <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;second_test&#39;</span><span class="p">,</span> <span class="s1">&#39;specific_filename.custom&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">handlers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">baseFilename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&#39;specific_filename.custom&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">level</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span> <span class="o">=</span> <span class="n">set_up_logger</span><span class="p">(</span><span class="s1">&#39;third_test&#39;</span><span class="p">,</span> <span class="n">mock</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;third_test&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">lg</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;third_test&#39;</span> <span class="ow">in</span> <span class="n">MOCK_LOGGERS</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;third_test&#39;</span> <span class="ow">in</span> <span class="n">MOCK_LOGGERS</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-CPAC.utils.serialization">
+<span id="serialization"></span><h2>Serialization<a class="headerlink" href="#module-CPAC.utils.serialization" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-CPAC.utils.tests">
+<span id="tests"></span><h2>Tests<a class="headerlink" href="#module-CPAC.utils.tests" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-CPAC.utils.versioning">
+<span id="versioning"></span><h2>Versioning<a class="headerlink" href="#module-CPAC.utils.versioning" title="Permalink to this heading">#</a></h2>
+<p>Gather and report versions</p>
+</section>
 </section>
 
         </article>
@@ -2914,15 +2929,6 @@ conversions against the schema.</p>
 <li><a class="reference internal" href="#CPAC.utils.bids_utils.sub_list_filter_by_labels"><code class="docutils literal notranslate"><span class="pre">sub_list_filter_by_labels</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.bids_utils.with_key"><code class="docutils literal notranslate"><span class="pre">with_key</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.bids_utils.without_key"><code class="docutils literal notranslate"><span class="pre">without_key</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.configuration.Configuration"><code class="docutils literal notranslate"><span class="pre">Configuration</span></code></a><ul>
-<li><a class="reference internal" href="#CPAC.utils.configuration.Configuration.dict"><code class="docutils literal notranslate"><span class="pre">Configuration.dict</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.configuration.Configuration.keys"><code class="docutils literal notranslate"><span class="pre">Configuration.keys</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#CPAC.utils.configuration.Preconfiguration"><code class="docutils literal notranslate"><span class="pre">Preconfiguration</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.configuration.check_pname"><code class="docutils literal notranslate"><span class="pre">check_pname</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.configuration.preconfig_yaml"><code class="docutils literal notranslate"><span class="pre">preconfig_yaml</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.configuration.set_subject"><code class="docutils literal notranslate"><span class="pre">set_subject</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.create_flame_model_files.create_con_ftst_file"><code class="docutils literal notranslate"><span class="pre">create_con_ftst_file</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.create_fsl_flame_preset.create_contrasts_template_df"><code class="docutils literal notranslate"><span class="pre">create_contrasts_template_df</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.create_fsl_flame_preset.create_design_matrix_df"><code class="docutils literal notranslate"><span class="pre">create_design_matrix_df</span></code></a></li>
@@ -2960,12 +2966,6 @@ conversions against the schema.</p>
 <li><a class="reference internal" href="#CPAC.utils.extract_parameters.merge"><code class="docutils literal notranslate"><span class="pre">merge</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.ga.track_event"><code class="docutils literal notranslate"><span class="pre">track_event</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.misc.get_template_specs"><code class="docutils literal notranslate"><span class="pre">get_template_specs</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.monitoring.LoggingHTTPServer"><code class="docutils literal notranslate"><span class="pre">LoggingHTTPServer</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.monitoring.LoggingRequestHandler"><code class="docutils literal notranslate"><span class="pre">LoggingRequestHandler</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.monitoring.failed_to_start"><code class="docutils literal notranslate"><span class="pre">failed_to_start</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.monitoring.getLogger"><code class="docutils literal notranslate"><span class="pre">getLogger</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.monitoring.log_nodes_cb"><code class="docutils literal notranslate"><span class="pre">log_nodes_cb</span></code></a></li>
-<li><a class="reference internal" href="#CPAC.utils.monitoring.set_up_logger"><code class="docutils literal notranslate"><span class="pre">set_up_logger</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.ndmg_utils.ndmg_roi_timeseries"><code class="docutils literal notranslate"><span class="pre">ndmg_roi_timeseries</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.nifti_utils.inverse_nifti_values"><code class="docutils literal notranslate"><span class="pre">inverse_nifti_values</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.nifti_utils.more_zeros_than_ones"><code class="docutils literal notranslate"><span class="pre">more_zeros_than_ones</span></code></a></li>
@@ -3019,6 +3019,31 @@ conversions against the schema.</p>
 <li><a class="reference internal" href="#CPAC.utils.utils.update_pipeline_values_1_8"><code class="docutils literal notranslate"><span class="pre">update_pipeline_values_1_8</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.utils.update_values_from_list"><code class="docutils literal notranslate"><span class="pre">update_values_from_list</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.utils.utils.write_to_log"><code class="docutils literal notranslate"><span class="pre">write_to_log</span></code></a></li>
+<li><a class="reference internal" href="#module-CPAC.utils.configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#CPAC.utils.configuration.Configuration"><code class="docutils literal notranslate"><span class="pre">Configuration</span></code></a><ul>
+<li><a class="reference internal" href="#CPAC.utils.configuration.Configuration.dict"><code class="docutils literal notranslate"><span class="pre">Configuration.dict</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.configuration.Configuration.keys"><code class="docutils literal notranslate"><span class="pre">Configuration.keys</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#CPAC.utils.configuration.Preconfiguration"><code class="docutils literal notranslate"><span class="pre">Preconfiguration</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.configuration.check_pname"><code class="docutils literal notranslate"><span class="pre">check_pname</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.configuration.preconfig_yaml"><code class="docutils literal notranslate"><span class="pre">preconfig_yaml</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.configuration.set_subject"><code class="docutils literal notranslate"><span class="pre">set_subject</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-CPAC.utils.interfaces">Interfaces</a></li>
+<li><a class="reference internal" href="#module-CPAC.utils.monitoring">Monitoring</a><ul>
+<li><a class="reference internal" href="#CPAC.utils.monitoring.LoggingHTTPServer"><code class="docutils literal notranslate"><span class="pre">LoggingHTTPServer</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.monitoring.LoggingRequestHandler"><code class="docutils literal notranslate"><span class="pre">LoggingRequestHandler</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.monitoring.failed_to_start"><code class="docutils literal notranslate"><span class="pre">failed_to_start</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.monitoring.getLogger"><code class="docutils literal notranslate"><span class="pre">getLogger</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.monitoring.log_nodes_cb"><code class="docutils literal notranslate"><span class="pre">log_nodes_cb</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.utils.monitoring.set_up_logger"><code class="docutils literal notranslate"><span class="pre">set_up_logger</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-CPAC.utils.serialization">Serialization</a></li>
+<li><a class="reference internal" href="#module-CPAC.utils.tests">Tests</a></li>
+<li><a class="reference internal" href="#module-CPAC.utils.versioning">Versioning</a></li>
 </ul>
 </li>
 </ul>
