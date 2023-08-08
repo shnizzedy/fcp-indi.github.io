@@ -355,7 +355,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="Configuration"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.Configuration">[docs]</a><span class="k">class</span> <span class="nc">Configuration</span><span class="p">:</span>
+<div class="viewcode-block" id="Configuration"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration">[docs]</a><span class="k">class</span> <span class="nc">Configuration</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to set dictionary keys as map attributes.</span>
 
 <span class="sd">    If the given dictionary includes the key `FROM`, that key&#39;s value</span>
@@ -518,11 +518,11 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span><span class="p">(</span><span class="n">dct_diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">dict</span><span class="p">()))</span>
 
-<div class="viewcode-block" id="Configuration.dict"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.Configuration.dict">[docs]</a>    <span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.dict"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.dict">[docs]</a>    <span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Show contents of a C-PAC configuration as a dict&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">v</span><span class="p">)}</span></div>
 
-<div class="viewcode-block" id="Configuration.keys"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.Configuration.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.keys"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Show toplevel keys of a C-PAC configuration dict&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
@@ -655,7 +655,7 @@
             <span class="p">]))</span></div>
 
 
-<div class="viewcode-block" id="check_pname"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.check_pname">[docs]</a><span class="k">def</span> <span class="nf">check_pname</span><span class="p">(</span><span class="n">p_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="check_pname"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.check_pname">[docs]</a><span class="k">def</span> <span class="nf">check_pname</span><span class="p">(</span><span class="n">p_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to check / set `p_name`, the string representation of a</span>
 <span class="sd">    pipeline for use in filetrees</span>
 
@@ -736,7 +736,7 @@
         <span class="k">return</span> <span class="n">Configuration</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">config</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="preconfig_yaml"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.preconfig_yaml">[docs]</a><span class="k">def</span> <span class="nf">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the path to a preconfigured pipeline&#39;s YAML file</span>
 
 <span class="sd">    Parameters</span>
@@ -755,10 +755,10 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig_name</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">_f</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;CPAC&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-        <span class="s2">&quot;resources&quot;</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;pipeline_config_</span><span class="si">{</span><span class="n">preconfig_name</span><span class="si">}</span><span class="s2">.yml&quot;</span><span class="p">))</span>
+        <span class="s2">&quot;resources&quot;</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;pipeline_config_</span><span class="si">{</span><span class="n">preconfig_name</span><span class="si">}</span><span class="s2">.yml&quot;</span><span class="p">))</span></div>
 
 
-<span class="k">class</span> <span class="nc">Preconfiguration</span><span class="p">(</span><span class="n">Configuration</span><span class="p">):</span>
+<div class="viewcode-block" id="Preconfiguration"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Preconfiguration">[docs]</a><span class="k">class</span> <span class="nc">Preconfiguration</span><span class="p">(</span><span class="n">Configuration</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A preconfigured Configuration</span>
 
 <span class="sd">    Parameters</span>
@@ -767,7 +767,7 @@
 <span class="sd">        The canonical name of the preconfig to load</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preconfig</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_map</span><span class="o">=</span><span class="n">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_map</span><span class="o">=</span><span class="n">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span></div>
 
 
 <span class="k">def</span> <span class="nf">set_from_ENV</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
@@ -814,7 +814,7 @@
     <span class="k">return</span> <span class="n">conf</span>
 
 
-<div class="viewcode-block" id="set_subject"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.set_subject">[docs]</a><span class="k">def</span> <span class="nf">set_subject</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="s1">&#39;Configuration&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="set_subject"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.set_subject">[docs]</a><span class="k">def</span> <span class="nf">set_subject</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="s1">&#39;Configuration&#39;</span><span class="p">,</span>
                 <span class="n">p_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TUPLE</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to set pipeline name and log directory path for a given</span>
 <span class="sd">    sub_dict</span>

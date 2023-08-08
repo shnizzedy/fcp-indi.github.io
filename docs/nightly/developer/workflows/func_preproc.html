@@ -316,12 +316,120 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-CPAC.func_preproc">
-<span id="functional-preprocessing"></span><h1>Functional Preprocessing<a class="headerlink" href="#module-CPAC.func_preproc" title="Permalink to this heading">#</a></h1>
-<p>Functional preprocessing</p>
+          <section id="module-CPAC.func_preproc.func_motion">
+<span id="functional-preprocessing"></span><h1>Functional Preprocessing<a class="headerlink" href="#module-CPAC.func_preproc.func_motion" title="Permalink to this heading">#</a></h1>
+<p>Functions for calculating motion parameters</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="CPAC.func_preproc.get_idx">
-<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.</span></span><span class="sig-name descname"><span class="pre">get_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#get_idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.get_idx" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.estimate_reference_image">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">estimate_reference_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#estimate_reference_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.estimate_reference_image" title="Permalink to this definition">#</a></dt>
+<dd><p>fMRIPrep-style BOLD reference
+Ref: <a class="reference external" href="https://github.com/nipreps/niworkflows/blob/maint/1.3.x/niworkflows/interfaces/registration.py#L446-L549">https://github.com/nipreps/niworkflows/blob/maint/1.3.x/niworkflows/interfaces/registration.py#L446-L549</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.motion_correct_3dvolreg">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">motion_correct_3dvolreg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#motion_correct_3dvolreg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.motion_correct_3dvolreg" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate motion parameters with 3dvolreg</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.motion_correct_connections">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">motion_correct_connections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#motion_correct_connections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.motion_correct_connections" title="Permalink to this definition">#</a></dt>
+<dd><p>Check opt for valid option, then connect that option.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>block</strong> (<em>passed through from node</em>) – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>wf</strong> (<em>pe.Workflow</em>)</p></li>
+<li><p><strong>outputs</strong> (<em>dict</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.motion_correct_mcflirt">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">motion_correct_mcflirt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#motion_correct_mcflirt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.motion_correct_mcflirt" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate motion parameters with MCFLIRT</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.normalize_motion_parameters">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">normalize_motion_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#normalize_motion_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.normalize_motion_parameters" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert FSL mcflirt motion parameters to AFNI space</p>
+</dd></dl>
+
+<span class="target" id="module-CPAC.func_preproc.func_preproc"></span><p>Functional preprocessing</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.create_scale_func_wf">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">create_scale_func_wf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scaling_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scale_func'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#create_scale_func_wf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.create_scale_func_wf" title="Permalink to this definition">#</a></dt>
+<dd><p>Workflow to scale func data.
+:param scaling_factor: Scale the size of the dataset voxels by the factor.
+:type scaling_factor: float
+:param wf_name: name of the workflow
+:type wf_name: string</p>
+<dl class="simple">
+<dt>Workflow Inputs::</dt><dd><dl class="simple">
+<dt>inputspec.func<span class="classifier">func file or a list of func/rest nifti file</span></dt><dd><p>User input functional(T2*) Image</p>
+</dd>
+</dl>
+</dd>
+<dt>Workflow Outputs::</dt><dd><dl class="simple">
+<dt>outputspec.scaled_func<span class="classifier">string (nifti file)</span></dt><dd><p>Path to Output image with scaled data</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Order of commands:
+- Scale the size of the dataset voxels by the factor ‘fac’. For details see <a class="reference external" href="https://afni.nimh.nih.gov/pub/dist/doc/program_help/3drefit.html">3dcalc</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="n">drefit</span> <span class="o">-</span><span class="n">xyzscale</span> <span class="n">fac</span> <span class="n">rest</span><span class="o">.</span><span class="n">nii</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.create_wf_edit_func">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">create_wf_edit_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'edit_func'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#create_wf_edit_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.create_wf_edit_func" title="Permalink to this definition">#</a></dt>
+<dd><p>Workflow to edit the scan to the proscribed TRs.</p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">func</span> <span class="p">:</span> <span class="n">func</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">func</span><span class="o">/</span><span class="n">rest</span> <span class="n">nifti</span> <span class="n">file</span>
+    <span class="n">User</span> <span class="nb">input</span> <span class="n">functional</span><span class="p">(</span><span class="n">T2</span><span class="o">*</span><span class="p">)</span> <span class="n">Image</span>
+
+<span class="n">inputspec</span><span class="o">.</span><span class="n">start_idx</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">Starting</span> <span class="n">volume</span><span class="o">/</span><span class="nb">slice</span> <span class="n">of</span> <span class="n">the</span> <span class="n">functional</span> <span class="n">image</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+
+<span class="n">inputspec</span><span class="o">.</span><span class="n">stop_idx</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">Last</span> <span class="n">volume</span><span class="o">/</span><span class="nb">slice</span> <span class="n">of</span> <span class="n">the</span> <span class="n">functional</span> <span class="n">image</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">edited_func</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">Path</span> <span class="n">to</span> <span class="n">Output</span> <span class="n">image</span> <span class="k">with</span> <span class="n">the</span> <span class="n">initial</span> <span class="n">few</span> <span class="n">slices</span> <span class="n">dropped</span>
+</pre></div>
+</div>
+<p>Order of commands:</p>
+<ul>
+<li><p>Get the start and the end volume index of the functional run. If not defined by the user, return the first and last volume.</p>
+<blockquote>
+<div><p>get_idx(in_files, stop_idx, start_idx)</p>
+</div></blockquote>
+</li>
+<li><p>Dropping the initial TRs. For details see <a class="reference external" href="http://afni.nimh.nih.gov/pub/dist/doc/program_help/3dcalc.html">3dcalc</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="n">dcalc</span> <span class="o">-</span><span class="n">a</span> <span class="n">rest</span><span class="o">.</span><span class="n">nii</span><span class="o">.</span><span class="n">gz</span><span class="p">[</span><span class="mf">4..299</span><span class="p">]</span>
+       <span class="o">-</span><span class="n">expr</span> <span class="s1">&#39;a&#39;</span>
+       <span class="o">-</span><span class="n">prefix</span> <span class="n">rest_3dc</span><span class="o">.</span><span class="n">nii</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.get_idx">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">get_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#get_idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.get_idx" title="Permalink to this definition">#</a></dt>
 <dd><p>Method to get the first and the last slice for
 the functional run. It verifies the user specified
 first and last slice. If the values are not valid, it
@@ -404,7 +512,14 @@ in the configuration file</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Functional Preprocessing</a><ul>
-<li><a class="reference internal" href="#CPAC.func_preproc.get_idx"><code class="docutils literal notranslate"><span class="pre">get_idx</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.estimate_reference_image"><code class="docutils literal notranslate"><span class="pre">estimate_reference_image</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_3dvolreg"><code class="docutils literal notranslate"><span class="pre">motion_correct_3dvolreg</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_connections"><code class="docutils literal notranslate"><span class="pre">motion_correct_connections</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_mcflirt"><code class="docutils literal notranslate"><span class="pre">motion_correct_mcflirt</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.normalize_motion_parameters"><code class="docutils literal notranslate"><span class="pre">normalize_motion_parameters</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.create_scale_func_wf"><code class="docutils literal notranslate"><span class="pre">create_scale_func_wf</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.create_wf_edit_func"><code class="docutils literal notranslate"><span class="pre">create_wf_edit_func</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.get_idx"><code class="docutils literal notranslate"><span class="pre">get_idx</span></code></a></li>
 </ul>
 </li>
 </ul>

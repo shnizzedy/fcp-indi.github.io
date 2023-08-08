@@ -567,7 +567,7 @@
     <span class="k">return</span> <span class="n">wf</span>
 
 
-<span class="k">def</span> <span class="nf">create_scale_func_wf</span><span class="p">(</span><span class="n">scaling_factor</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;scale_func&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_scale_func_wf"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_scale_func_wf">[docs]</a><span class="k">def</span> <span class="nf">create_scale_func_wf</span><span class="p">(</span><span class="n">scaling_factor</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;scale_func&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow to scale func data.</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -612,10 +612,10 @@
     <span class="n">preproc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_scale</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
                     <span class="n">outputNode</span><span class="p">,</span> <span class="s1">&#39;scaled_func&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">preproc</span>
+    <span class="k">return</span> <span class="n">preproc</span></div>
 
 
-<span class="k">def</span> <span class="nf">create_wf_edit_func</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;edit_func&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_wf_edit_func"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_wf_edit_func">[docs]</a><span class="k">def</span> <span class="nf">create_wf_edit_func</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;edit_func&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow to edit the scan to the proscribed TRs.</span>
 
 <span class="sd">    Workflow Inputs::</span>
@@ -704,7 +704,7 @@
     <span class="n">preproc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_drop_trs</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
                     <span class="n">outputNode</span><span class="p">,</span> <span class="s1">&#39;edited_func&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">preproc</span>
+    <span class="k">return</span> <span class="n">preproc</span></div>
 
 
 <span class="k">def</span> <span class="nf">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;slice_timing&#39;</span><span class="p">,</span> <span class="n">tpattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tzero</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -771,7 +771,7 @@
     <span class="k">return</span> <span class="n">wf</span>
 
 
-<div class="viewcode-block" id="get_idx"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.get_idx">[docs]</a><span class="k">def</span> <span class="nf">get_idx</span><span class="p">(</span><span class="n">in_files</span><span class="p">,</span> <span class="n">stop_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="get_idx"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.get_idx">[docs]</a><span class="k">def</span> <span class="nf">get_idx</span><span class="p">(</span><span class="n">in_files</span><span class="p">,</span> <span class="n">stop_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to get the first and the last slice for</span>
 <span class="sd">    the functional run. It verifies the user specified</span>

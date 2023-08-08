@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
-        <title>CPAC.utils.datatypes - C-PAC 1.8.6.dev Beta documentation</title>
+        <title>CPAC.utils.misc - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -314,42 +314,62 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for CPAC.utils.datatypes</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Custom datatypes for C-PAC&quot;&quot;&quot;</span>
+          <h1>Source code for CPAC.utils.misc</h1><div class="highlight"><pre>
+<span></span><span class="c1"># emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-</span>
+<span class="c1"># vi: set ft=python sts=4 ts=4 sw=4 et:</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Miscellaneous utilities</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># This functionality is adapted from poldracklab/niworkflows:</span>
+<span class="c1"># https://github.com/poldracklab/niworkflows/blob/master/niworkflows/utils/misc.py        </span>
+<span class="c1"># https://fmriprep.readthedocs.io/</span>
+<span class="c1"># https://poldracklab.stanford.edu/</span>
+<span class="c1"># We are temporarily maintaining our own copy for more granular control.</span>
 
 
-<div class="viewcode-block" id="ListFromItem"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datatypes.ListFromItem">[docs]</a><span class="k">class</span> <span class="nc">ListFromItem</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Subclass of list to coerce non-lists into lists</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;get_template_specs&#39;</span><span class="p">]</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; list(&#39;one&#39;)</span>
-<span class="sd">    [&#39;o&#39;, &#39;n&#39;, &#39;e&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; ListFromItem(&#39;one&#39;)</span>
-<span class="sd">    [&#39;one&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; list([&#39;one&#39;])</span>
-<span class="sd">    [&#39;one&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; ListFromItem([&#39;one&#39;])</span>
-<span class="sd">    [&#39;one&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; list()</span>
-<span class="sd">    []</span>
-<span class="sd">    &gt;&gt;&gt; ListFromItem()</span>
-<span class="sd">    []</span>
-<span class="sd">    &gt;&gt;&gt; list(None)</span>
+
+<div class="viewcode-block" id="get_template_specs"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.misc.get_template_specs">[docs]</a><span class="k">def</span> <span class="nf">get_template_specs</span><span class="p">(</span><span class="n">in_template</span><span class="p">,</span> <span class="n">template_spec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">default_resolution</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse template specifications</span>
+
+<span class="sd">    &gt;&gt;&gt; get_template_specs(&#39;MNI152NLin2009cAsym&#39;, {&#39;suffix&#39;: &#39;T1w&#39;})[1]  # doctest: +SKIP</span>
+<span class="sd">    {&#39;resolution&#39;: 1}</span>
+
+<span class="sd">    &gt;&gt;&gt; get_template_specs(&#39;MNI152NLin2009cAsym&#39;, {&#39;res&#39;: &#39;2&#39;, &#39;suffix&#39;: &#39;T1w&#39;})[1]  # doctest: +SKIP</span>
+<span class="sd">    {&#39;resolution&#39;: &#39;2&#39;}</span>
+
+<span class="sd">    &gt;&gt;&gt; get_template_specs(&#39;MNIInfant&#39;, {&#39;res&#39;: &#39;2&#39;, &#39;cohort&#39;: &#39;10&#39;, &#39;suffix&#39;: &#39;T1w&#39;})[1]  # doctest: +SKIP</span>
+<span class="sd">    {&#39;resolution&#39;: &#39;2&#39;, &#39;cohort&#39;: &#39;10&#39;}</span>
+
+<span class="sd">    &gt;&gt;&gt; get_template_specs(&#39;MNI152NLin2009cAsym&#39;,</span>
+<span class="sd">    ...                    {&#39;suffix&#39;: &#39;T1w&#39;, &#39;cohort&#39;: 1})[1] # doctest: +IGNORE_EXCEPTION_DETAIL +SKIP</span>
 <span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    RuntimeError:</span>
 <span class="sd">    ...</span>
-<span class="sd">    TypeError: &#39;NoneType&#39; object is not iterable</span>
-<span class="sd">    &gt;&gt;&gt; ListFromItem(None)</span>
-<span class="sd">    []</span>
+
+<span class="sd">    &gt;&gt;&gt; get_template_specs(&#39;MNI152NLin2009cAsym&#39;,</span>
+<span class="sd">    ...                    {&#39;suffix&#39;: &#39;T1w&#39;, &#39;res&#39;: &#39;1|2&#39;})[1] # doctest: +IGNORE_EXCEPTION_DETAIL +SKIP</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    RuntimeError:</span>
+<span class="sd">    ...</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ListFromItem&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">args</span> <span class="o">=</span> <span class="p">()</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">args</span> <span class="o">=</span> <span class="p">([</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]],)</span>
-        <span class="nb">list</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    <span class="c1"># from templateflow.api import get as get_template</span>
+    <span class="c1"># Massage spec (start creating if None)</span>
+    <span class="n">template_spec</span> <span class="o">=</span> <span class="n">template_spec</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">template_spec</span><span class="p">[</span><span class="s1">&#39;desc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;desc&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">template_spec</span><span class="p">[</span><span class="s1">&#39;atlas&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;atlas&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">template_spec</span><span class="p">[</span><span class="s1">&#39;resolution&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
+        <span class="s1">&#39;res&#39;</span><span class="p">,</span> <span class="n">template_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resolution&#39;</span><span class="p">,</span> <span class="n">default_resolution</span><span class="p">))</span>
+
+    <span class="n">common_spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;resolution&#39;</span><span class="p">:</span> <span class="n">template_spec</span><span class="p">[</span><span class="s1">&#39;resolution&#39;</span><span class="p">]}</span>
+    <span class="k">if</span> <span class="s1">&#39;cohort&#39;</span> <span class="ow">in</span> <span class="n">template_spec</span><span class="p">:</span>
+        <span class="n">common_spec</span><span class="p">[</span><span class="s1">&#39;cohort&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_spec</span><span class="p">[</span><span class="s1">&#39;cohort&#39;</span><span class="p">]</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
 </pre></div>
         </article>
       </div>
