@@ -316,7 +316,7 @@
         <article role="main">
           <h1>Source code for CPAC.utils.create_fsl_model</h1><div class="highlight"><pre>
 <span></span>
-<span class="k">def</span> <span class="nf">load_pheno_file</span><span class="p">(</span><span class="n">pheno_file</span><span class="p">):</span>
+<div class="viewcode-block" id="load_pheno_file"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.load_pheno_file">[docs]</a><span class="k">def</span> <span class="nf">load_pheno_file</span><span class="p">(</span><span class="n">pheno_file</span><span class="p">):</span>
 
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -333,10 +333,10 @@
         <span class="n">pheno_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 
-    <span class="k">return</span> <span class="n">pheno_dataframe</span>
+    <span class="k">return</span> <span class="n">pheno_dataframe</span></div>
 
 
-<span class="k">def</span> <span class="nf">load_group_participant_list</span><span class="p">(</span><span class="n">group_participant_list_file</span><span class="p">):</span>
+<div class="viewcode-block" id="load_group_participant_list"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.load_group_participant_list">[docs]</a><span class="k">def</span> <span class="nf">load_group_participant_list</span><span class="p">(</span><span class="n">group_participant_list_file</span><span class="p">):</span>
 
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -360,10 +360,10 @@
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
 
-    <span class="k">return</span> <span class="n">group_subs_dataframe</span>
+    <span class="k">return</span> <span class="n">group_subs_dataframe</span></div>
 
 
-<span class="k">def</span> <span class="nf">process_pheno_file</span><span class="p">(</span><span class="n">pheno_file_dataframe</span><span class="p">,</span> <span class="n">group_subs_dataframe</span><span class="p">,</span> \
+<div class="viewcode-block" id="process_pheno_file"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.process_pheno_file">[docs]</a><span class="k">def</span> <span class="nf">process_pheno_file</span><span class="p">(</span><span class="n">pheno_file_dataframe</span><span class="p">,</span> <span class="n">group_subs_dataframe</span><span class="p">,</span> \
                        <span class="n">participant_id_label</span><span class="p">):</span>
 
     <span class="c1"># drops participants from the phenotype file if they are not in the group</span>
@@ -500,10 +500,10 @@
     <span class="n">pheno_file_rows</span> <span class="o">=</span> <span class="n">new_pheno_df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 
 
-    <span class="k">return</span> <span class="n">pheno_file_rows</span>
+    <span class="k">return</span> <span class="n">pheno_file_rows</span></div>
 
 
-<span class="k">def</span> <span class="nf">create_pheno_dict</span><span class="p">(</span><span class="n">pheno_file_rows</span><span class="p">,</span> <span class="n">ev_selections</span><span class="p">,</span> <span class="n">participant_id_label</span><span class="p">):</span>
+<div class="viewcode-block" id="create_pheno_dict"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.create_pheno_dict">[docs]</a><span class="k">def</span> <span class="nf">create_pheno_dict</span><span class="p">(</span><span class="n">pheno_file_rows</span><span class="p">,</span> <span class="n">ev_selections</span><span class="p">,</span> <span class="n">participant_id_label</span><span class="p">):</span>
 
     <span class="c1"># creates the phenotype data dictionary in a format Patsy requires,</span>
     <span class="c1"># and also demeans the continuous EVs marked for demeaning</span>
@@ -608,10 +608,10 @@
                 <span class="n">pheno_data_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pheno_data_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
 
 
-    <span class="k">return</span> <span class="n">pheno_data_dict</span>
+    <span class="k">return</span> <span class="n">pheno_data_dict</span></div>
 
 
-<span class="k">def</span> <span class="nf">get_measure_dict</span><span class="p">(</span><span class="n">param_file</span><span class="p">):</span>
+<div class="viewcode-block" id="get_measure_dict"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.get_measure_dict">[docs]</a><span class="k">def</span> <span class="nf">get_measure_dict</span><span class="p">(</span><span class="n">param_file</span><span class="p">):</span>
 
     <span class="c1"># load the CPAC-generated power parameters file and parse it</span>
 
@@ -666,10 +666,10 @@
         <span class="n">measure_dict</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">measure_map</span>
 
 
-    <span class="k">return</span> <span class="n">measure_dict</span>
+    <span class="k">return</span> <span class="n">measure_dict</span></div>
 
 
-<span class="k">def</span> <span class="nf">get_custom_roi_info</span><span class="p">(</span><span class="n">roi_means_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="get_custom_roi_info"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.get_custom_roi_info">[docs]</a><span class="k">def</span> <span class="nf">get_custom_roi_info</span><span class="p">(</span><span class="n">roi_means_dict</span><span class="p">):</span>
 
     <span class="c1"># check</span>
     <span class="k">if</span> <span class="n">roi_means_dict</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -700,10 +700,10 @@
         <span class="n">roi_dict_dict</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_roi_dict</span>
 
 
-    <span class="k">return</span> <span class="n">roi_dict_dict</span>
+    <span class="k">return</span> <span class="n">roi_dict_dict</span></div>
 
 
-<span class="k">def</span> <span class="nf">model_group_var_separately</span><span class="p">(</span><span class="n">grouping_var</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">pheno_data_dict</span><span class="p">,</span> \
+<div class="viewcode-block" id="model_group_var_separately"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.model_group_var_separately">[docs]</a><span class="k">def</span> <span class="nf">model_group_var_separately</span><span class="p">(</span><span class="n">grouping_var</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">pheno_data_dict</span><span class="p">,</span> \
                                    <span class="n">ev_selections</span><span class="p">,</span> <span class="n">coding_scheme</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="n">grouping_var</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">grouping_var</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">formula</span><span class="p">:</span>
@@ -830,10 +830,10 @@
     <span class="c1"># remove intercept when modeling group variances separately</span>
     <span class="n">formula</span> <span class="o">=</span> <span class="n">formula</span> <span class="o">+</span> <span class="s2">&quot; - 1&quot;</span>
 
-    <span class="k">return</span> <span class="n">pheno_data_dict</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">grouping_var_id_dict</span>
+    <span class="k">return</span> <span class="n">pheno_data_dict</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">grouping_var_id_dict</span></div>
 
 
-<span class="k">def</span> <span class="nf">check_multicollinearity</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+<div class="viewcode-block" id="check_multicollinearity"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.check_multicollinearity">[docs]</a><span class="k">def</span> <span class="nf">check_multicollinearity</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
 
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -862,10 +862,10 @@
 
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[!] CPAC warns: Detected multicollinearity in the &#39;</span> \
                       <span class="s1">&#39;computed group-level analysis model. Please double-&#39;</span> \
-                      <span class="s1">&#39;check your model design.</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                      <span class="s1">&#39;check your model design.</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">write_mat_file</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> \
+<div class="viewcode-block" id="write_mat_file"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.write_mat_file">[docs]</a><span class="k">def</span> <span class="nf">write_mat_file</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> \
                        <span class="n">depatsified_EV_names</span><span class="p">,</span> <span class="n">current_output</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="kn">import</span> <span class="nn">os</span>
@@ -912,10 +912,10 @@
 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/Matrix&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
 
-        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">design_matrix</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.5e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">design_matrix</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.5e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">create_grp_file</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">,</span> <span class="n">grouping_var_id_dict</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> \
+<div class="viewcode-block" id="create_grp_file"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.create_grp_file">[docs]</a><span class="k">def</span> <span class="nf">create_grp_file</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">,</span> <span class="n">grouping_var_id_dict</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> \
                         <span class="n">model_name</span><span class="p">,</span> <span class="n">current_output</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="kn">import</span> <span class="nn">os</span>
@@ -952,10 +952,10 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/NumWaves</span><span class="se">\t</span><span class="s1">1&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/NumPoints</span><span class="se">\t</span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span><span class="n">dimx</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/Matrix&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">design_matrix_ones</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">design_matrix_ones</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">create_design_matrix</span><span class="p">(</span><span class="n">pheno_file</span><span class="p">,</span> <span class="n">ev_selections</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> \
+<div class="viewcode-block" id="create_design_matrix"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.create_design_matrix">[docs]</a><span class="k">def</span> <span class="nf">create_design_matrix</span><span class="p">(</span><span class="n">pheno_file</span><span class="p">,</span> <span class="n">ev_selections</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> \
                              <span class="n">subject_id_label</span><span class="p">,</span> <span class="n">sub_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
                              <span class="n">coding_scheme</span><span class="o">=</span><span class="s2">&quot;Treatment&quot;</span><span class="p">,</span> <span class="n">grouping_var</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
                              <span class="n">new_regressor_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">roi_means_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
@@ -1294,11 +1294,11 @@
 
 
     <span class="c1"># return the PATSY OBJECT of dmatrix, not the Numpy array &quot;design_matrix&quot;</span>
-    <span class="k">return</span> <span class="n">dmatrix</span><span class="p">,</span> <span class="n">depatsified_EV_names</span>
+    <span class="k">return</span> <span class="n">dmatrix</span><span class="p">,</span> <span class="n">depatsified_EV_names</span></div>
 
 
 
-<span class="k">def</span> <span class="nf">positive</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">):</span>
+<div class="viewcode-block" id="positive"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.positive">[docs]</a><span class="k">def</span> <span class="nf">positive</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">):</span>
 
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -1371,29 +1371,29 @@
             <span class="c1"># make Intercept 1</span>
             <span class="n">con</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">con</span>
+    <span class="k">return</span> <span class="n">con</span></div>
 
 
-<span class="k">def</span> <span class="nf">greater_than</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">):</span>
+<div class="viewcode-block" id="greater_than"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.greater_than">[docs]</a><span class="k">def</span> <span class="nf">greater_than</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">):</span>
     <span class="n">c1</span> <span class="o">=</span> <span class="n">positive</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">)</span>
     <span class="n">c2</span> <span class="o">=</span> <span class="n">positive</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">c1</span><span class="o">-</span><span class="n">c2</span>
+    <span class="k">return</span> <span class="n">c1</span><span class="o">-</span><span class="n">c2</span></div>
 
 
-<span class="k">def</span> <span class="nf">negative</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">):</span>
+<div class="viewcode-block" id="negative"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.negative">[docs]</a><span class="k">def</span> <span class="nf">negative</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">):</span>
     <span class="n">con</span> <span class="o">=</span> <span class="mi">0</span><span class="o">-</span><span class="n">positive</span><span class="p">(</span><span class="n">dmat</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">coding</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> <span class="n">grouping_var</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">con</span>
+    <span class="k">return</span> <span class="n">con</span></div>
 
 
-<span class="k">def</span> <span class="nf">create_dummy_string</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+<div class="viewcode-block" id="create_dummy_string"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.create_dummy_string">[docs]</a><span class="k">def</span> <span class="nf">create_dummy_string</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
     <span class="n">ppstring</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
         <span class="n">ppstring</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%1.5e</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
     <span class="n">ppstring</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="k">return</span> <span class="n">ppstring</span>
+    <span class="k">return</span> <span class="n">ppstring</span></div>
 
 
-<span class="k">def</span> <span class="nf">create_con_file</span><span class="p">(</span><span class="n">con_dict</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">):</span>
+<div class="viewcode-block" id="create_con_file"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.create_con_file">[docs]</a><span class="k">def</span> <span class="nf">create_con_file</span><span class="p">(</span><span class="n">con_dict</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">):</span>
 
     <span class="kn">import</span> <span class="nn">os</span>
 
@@ -1428,10 +1428,10 @@
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">con_dict</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">con_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%1.5e</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">v</span><span class="p">)</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">create_fts_file</span><span class="p">(</span><span class="n">ftest_list</span><span class="p">,</span> <span class="n">con_dict</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span>
+<div class="viewcode-block" id="create_fts_file"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.create_fts_file">[docs]</a><span class="k">def</span> <span class="nf">create_fts_file</span><span class="p">(</span><span class="n">ftest_list</span><span class="p">,</span> <span class="n">con_dict</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span>
                     <span class="n">out_dir</span><span class="p">):</span>
 
     <span class="kn">import</span> <span class="nn">os</span>
@@ -1486,7 +1486,7 @@
                     <span class="s2">&quot;FLAMEO or write it to disk.</span><span class="se">\n</span><span class="s2">Attempted filepath: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> \
                     <span class="s2">&quot;Error details: </span><span class="si">%s</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="create_con_ftst_file"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.create_con_ftst_file">[docs]</a><span class="k">def</span> <span class="nf">create_con_ftst_file</span><span class="p">(</span><span class="n">con_file</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span>
@@ -1658,7 +1658,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fts_n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">process_contrast</span><span class="p">(</span><span class="n">parsed_contrast</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">ev_selections</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> \
+<div class="viewcode-block" id="process_contrast"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.process_contrast">[docs]</a><span class="k">def</span> <span class="nf">process_contrast</span><span class="p">(</span><span class="n">parsed_contrast</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">ev_selections</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">,</span> \
                          <span class="n">grouping_var</span><span class="p">,</span> <span class="n">coding_scheme</span><span class="p">):</span>
 
     <span class="c1"># take the contrast strings and process them appropriately</span>
@@ -1733,10 +1733,10 @@
                                       <span class="n">parsed_EVs_in_contrast</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> \
                                       <span class="n">parsed_EVs_in_contrast</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
 
-    <span class="k">return</span> <span class="n">parsed_EVs_in_contrast</span>
+    <span class="k">return</span> <span class="n">parsed_EVs_in_contrast</span></div>
 
 
-<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">group_config</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> <span class="n">param_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_model.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">group_config</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> <span class="n">param_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
             <span class="n">derivative_means_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">roi_means_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
                 <span class="n">model_out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">CPAC_run</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
@@ -1961,7 +1961,7 @@
 
         <span class="n">create_con_ftst_file</span><span class="p">(</span><span class="n">custom_contrasts</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> \
                                  <span class="n">model_out_dir</span><span class="p">,</span> <span class="n">regressor_names</span><span class="p">,</span> \
-                                 <span class="n">coding_scheme</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">)</span>
+                                 <span class="n">coding_scheme</span><span class="p">,</span> <span class="n">group_sep</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>

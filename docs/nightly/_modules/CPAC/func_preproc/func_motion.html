@@ -545,13 +545,13 @@
                                  <span class="s1">&#39;rels-displacement&#39;</span><span class="p">]))</span>
 
 
-<span class="k">def</span> <span class="nf">get_mcflirt_rms_abs</span><span class="p">(</span><span class="n">rms_files</span><span class="p">):</span>
+<div class="viewcode-block" id="get_mcflirt_rms_abs"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.get_mcflirt_rms_abs">[docs]</a><span class="k">def</span> <span class="nf">get_mcflirt_rms_abs</span><span class="p">(</span><span class="n">rms_files</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">rms_files</span><span class="p">:</span>
         <span class="k">if</span> <span class="s1">&#39;abs.rms&#39;</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
             <span class="n">abs_file</span> <span class="o">=</span> <span class="n">path</span>
         <span class="k">if</span> <span class="s1">&#39;rel.rms&#39;</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
             <span class="n">rels_file</span> <span class="o">=</span> <span class="n">path</span>
-    <span class="k">return</span> <span class="n">abs_file</span><span class="p">,</span> <span class="n">rels_file</span>
+    <span class="k">return</span> <span class="n">abs_file</span><span class="p">,</span> <span class="n">rels_file</span></div>
 
 
 <span class="nd">@nodeblock</span><span class="p">(</span>

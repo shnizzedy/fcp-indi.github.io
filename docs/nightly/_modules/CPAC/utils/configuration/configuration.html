@@ -552,7 +552,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">d</span>
 
-    <span class="k">def</span> <span class="nf">return_config_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.return_config_elements"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.return_config_elements">[docs]</a>    <span class="k">def</span> <span class="nf">return_config_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># this returns a list of tuples</span>
         <span class="c1"># each tuple contains the name of the element in the yaml config file</span>
         <span class="c1"># and its value</span>
@@ -561,12 +561,12 @@
             <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)</span>
         <span class="p">]</span>
-        <span class="k">return</span> <span class="n">attributes</span>
+        <span class="k">return</span> <span class="n">attributes</span></div>
 
-    <span class="k">def</span> <span class="nf">sub_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">orig_key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">pattern</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)])</span>
+<div class="viewcode-block" id="Configuration.sub_pattern"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.sub_pattern">[docs]</a>    <span class="k">def</span> <span class="nf">sub_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">orig_key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">pattern</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)])</span></div>
 
-    <span class="k">def</span> <span class="nf">check_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.check_pattern"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.check_pattern">[docs]</a>    <span class="k">def</span> <span class="nf">check_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">tags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orig_key</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -588,7 +588,7 @@
                 <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">ae</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">pattern</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPECIAL_REPLACEMENT_STRINGS</span><span class="p">:</span>
                         <span class="n">warn</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ae</span><span class="p">),</span> <span class="n">category</span><span class="o">=</span><span class="ne">SyntaxWarning</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">orig_key</span>
+        <span class="k">return</span> <span class="n">orig_key</span></div>
 
     <span class="c1"># method to find any pattern ($) in the configuration</span>
     <span class="c1"># and update the attributes with its pattern value</span>
@@ -620,12 +620,12 @@
                 <span class="n">new_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_pattern</span><span class="p">(</span><span class="n">attr_value</span><span class="p">)</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_key</span><span class="p">,</span> <span class="n">new_key</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">ConfigurationDictUpdateConflation</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.update"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">ConfigurationDictUpdateConflation</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ConfigurationDictUpdateConflation</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">get_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.get_nested"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.get_nested">[docs]</a>    <span class="k">def</span> <span class="nf">get_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -634,9 +634,9 @@
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_nested</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
             <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-        <span class="k">return</span> <span class="n">d</span>
+        <span class="k">return</span> <span class="n">d</span></div>
 
-    <span class="k">def</span> <span class="nf">set_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
+<div class="viewcode-block" id="Configuration.set_nested"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.set_nested">[docs]</a>    <span class="k">def</span> <span class="nf">set_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -644,15 +644,15 @@
                 <span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_nested</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">value</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="k">return</span> <span class="n">d</span>
+        <span class="k">return</span> <span class="n">d</span></div>
 
-    <span class="k">def</span> <span class="nf">key_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.key_type_error"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.key_type_error">[docs]</a>    <span class="k">def</span> <span class="nf">key_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
                 <span class="s1">&#39;Configuration key must be a string, list, or tuple;&#39;</span><span class="p">,</span>
                 <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                 <span class="sa">f</span><span class="s1">&#39;`</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="si">}</span><span class="s1">`&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;was given.&#39;</span>
-            <span class="p">]))</span></div>
+            <span class="p">]))</span></div></div>
 
 
 <div class="viewcode-block" id="check_pname"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.check_pname">[docs]</a><span class="k">def</span> <span class="nf">check_pname</span><span class="p">(</span><span class="n">p_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

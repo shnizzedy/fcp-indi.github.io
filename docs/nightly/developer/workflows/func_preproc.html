@@ -320,6 +320,11 @@
 <h1>Functional Preprocessing<a class="headerlink" href="#functional-preprocessing" title="Permalink to this heading">#</a></h1>
 <section id="module-CPAC.func_preproc.func_ingress">
 <span id="ingress"></span><h2>Ingress<a class="headerlink" href="#module-CPAC.func_preproc.func_ingress" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_ingress.connect_func_ingress">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_ingress.</span></span><span class="sig-name descname"><span class="pre">connect_func_ingress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_creds_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_ingress#connect_func_ingress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_ingress.connect_func_ingress" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 </section>
 <section id="module-CPAC.func_preproc.func_motion">
 <span id="motion"></span><h2>Motion<a class="headerlink" href="#module-CPAC.func_preproc.func_motion" title="Permalink to this heading">#</a></h2>
@@ -330,6 +335,11 @@
 <dd><p>fMRIPrep-style BOLD reference
 Ref: <a class="reference external" href="https://github.com/nipreps/niworkflows/blob/maint/1.3.x/niworkflows/interfaces/registration.py#L446-L549">https://github.com/nipreps/niworkflows/blob/maint/1.3.x/niworkflows/interfaces/registration.py#L446-L549</a></p>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.get_mcflirt_rms_abs">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">get_mcflirt_rms_abs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rms_files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#get_mcflirt_rms_abs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.get_mcflirt_rms_abs" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.motion_correct_3dvolreg">
@@ -371,6 +381,21 @@ Ref: <a class="reference external" href="https://github.com/nipreps/niworkflows/
 <section id="module-CPAC.func_preproc.func_preproc">
 <span id="preprocessing"></span><h2>Preprocessing<a class="headerlink" href="#module-CPAC.func_preproc.func_preproc" title="Permalink to this heading">#</a></h2>
 <p>Functional preprocessing</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.anat_based_mask">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">anat_based_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bold_mask'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#anat_based_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.anat_based_mask" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.anat_refined_mask">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">anat_refined_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_bold_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'init_bold_mask'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#anat_refined_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.anat_refined_mask" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.collect_arguments">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">collect_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#collect_arguments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.collect_arguments" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.create_scale_func_wf">
 <span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">create_scale_func_wf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scaling_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scale_func'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#create_scale_func_wf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.create_scale_func_wf" title="Permalink to this definition">#</a></dt>
@@ -462,9 +487,49 @@ in the configuration file</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.slice_timing_wf">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">slice_timing_wf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'slice_timing'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tpattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tzero</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#slice_timing_wf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.slice_timing_wf" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 </section>
 <section id="module-CPAC.func_preproc.utils">
 <span id="utilities"></span><h2>Utilities<a class="headerlink" href="#module-CPAC.func_preproc.utils" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.utils.chunk_ts">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.utils.</span></span><span class="sig-name descname"><span class="pre">chunk_ts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_chunks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/utils#chunk_ts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.utils.chunk_ts" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.utils.degrees_to_mm">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.utils.</span></span><span class="sig-name descname"><span class="pre">degrees_to_mm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/utils#degrees_to_mm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.utils.degrees_to_mm" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.utils.mm_to_degrees">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.utils.</span></span><span class="sig-name descname"><span class="pre">mm_to_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/utils#mm_to_degrees"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.utils.mm_to_degrees" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.utils.notch_filter_motion">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.utils.</span></span><span class="sig-name descname"><span class="pre">notch_filter_motion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motion_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fc_RR_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fc_RR_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq_bw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lowpass_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/utils#notch_filter_motion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.utils.notch_filter_motion" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.utils.nullify">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.utils.</span></span><span class="sig-name descname"><span class="pre">nullify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/utils#nullify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.utils.nullify" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.utils.oned_text_concat">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.utils.</span></span><span class="sig-name descname"><span class="pre">oned_text_concat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/utils#oned_text_concat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.utils.oned_text_concat" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.utils.split_ts_chunks">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.utils.</span></span><span class="sig-name descname"><span class="pre">split_ts_chunks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tr_ranges</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/utils#split_ts_chunks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.utils.split_ts_chunks" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 </section>
 </section>
 
@@ -524,9 +589,13 @@ in the configuration file</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Functional Preprocessing</a><ul>
-<li><a class="reference internal" href="#module-CPAC.func_preproc.func_ingress">Ingress</a></li>
+<li><a class="reference internal" href="#module-CPAC.func_preproc.func_ingress">Ingress</a><ul>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_ingress.connect_func_ingress"><code class="docutils literal notranslate"><span class="pre">connect_func_ingress</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-CPAC.func_preproc.func_motion">Motion</a><ul>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.estimate_reference_image"><code class="docutils literal notranslate"><span class="pre">estimate_reference_image</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.get_mcflirt_rms_abs"><code class="docutils literal notranslate"><span class="pre">get_mcflirt_rms_abs</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_3dvolreg"><code class="docutils literal notranslate"><span class="pre">motion_correct_3dvolreg</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_connections"><code class="docutils literal notranslate"><span class="pre">motion_correct_connections</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_mcflirt"><code class="docutils literal notranslate"><span class="pre">motion_correct_mcflirt</span></code></a></li>
@@ -534,12 +603,25 @@ in the configuration file</p></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-CPAC.func_preproc.func_preproc">Preprocessing</a><ul>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.anat_based_mask"><code class="docutils literal notranslate"><span class="pre">anat_based_mask</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.anat_refined_mask"><code class="docutils literal notranslate"><span class="pre">anat_refined_mask</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.collect_arguments"><code class="docutils literal notranslate"><span class="pre">collect_arguments</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.create_scale_func_wf"><code class="docutils literal notranslate"><span class="pre">create_scale_func_wf</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.create_wf_edit_func"><code class="docutils literal notranslate"><span class="pre">create_wf_edit_func</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.get_idx"><code class="docutils literal notranslate"><span class="pre">get_idx</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.slice_timing_wf"><code class="docutils literal notranslate"><span class="pre">slice_timing_wf</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-CPAC.func_preproc.utils">Utilities</a></li>
+<li><a class="reference internal" href="#module-CPAC.func_preproc.utils">Utilities</a><ul>
+<li><a class="reference internal" href="#CPAC.func_preproc.utils.chunk_ts"><code class="docutils literal notranslate"><span class="pre">chunk_ts</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.utils.degrees_to_mm"><code class="docutils literal notranslate"><span class="pre">degrees_to_mm</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.utils.mm_to_degrees"><code class="docutils literal notranslate"><span class="pre">mm_to_degrees</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.utils.notch_filter_motion"><code class="docutils literal notranslate"><span class="pre">notch_filter_motion</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.utils.nullify"><code class="docutils literal notranslate"><span class="pre">nullify</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.utils.oned_text_concat"><code class="docutils literal notranslate"><span class="pre">oned_text_concat</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.utils.split_ts_chunks"><code class="docutils literal notranslate"><span class="pre">split_ts_chunks</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
