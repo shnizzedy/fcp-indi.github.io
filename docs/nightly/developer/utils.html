@@ -1066,25 +1066,21 @@ directory with the values listed in the phenotype file.</p>
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.create_fsl_flame_preset.</span></span><span class="sig-name descname"><span class="pre">preset_paired_two_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conditions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'session'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two_sample_unpaired_T-test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/create_fsl_flame_preset#preset_paired_two_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.create_fsl_flame_preset.preset_paired_two_group" title="Permalink to this definition">#</a></dt>
 <dd><p>Set up the design matrix and contrasts matrix for running an paired
 two-group difference (two-sample paired T-test).</p>
-<p>group_list: a list of strings- sub_ses unique IDs
-conditions: a two-item list of strings- session or series/scan names of</p>
-<blockquote>
-<div><p>the two sessions or two scans (per participant) you wish to
-compare</p>
-</div></blockquote>
 <dl class="simple">
-<dt>condition_type: a string, either “session” or “scan”, depending on what</dt><dd><p>is in “conditions”</p>
+<dt>group_list<span class="classifier">list of str</span></dt><dd><p>sub_ses unique IDs</p>
+</dd>
+<dt>conditions<span class="classifier">list of str</span></dt><dd><p>a two-item list of strings- session or series/scan names of the
+two sessions or two scans (per participant) you wish to compare</p>
+</dd>
+<dt>condition_type<span class="classifier">str</span></dt><dd><p>either “session” or “scan”, depending on what is in “conditions”</p>
+</dd>
+<dt>output_dir<span class="classifier">str, optional</span></dt><dd><p>the output directory path</p>
+</dd>
+<dt>model_name<span class="classifier">str, optional</span></dt><dd><p>name/label of the model to run</p>
 </dd>
 </dl>
-<p>output_dir: (optional) string of the output directory path
-model_name: (optional) name/label of the model to run</p>
-<dl class="simple">
-<dt>Sets up the model described here:</dt><dd><dl class="simple">
-<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Paired_Two-<a href="#id3"><span class="problematic" id="id4">Group_Difference_</span></a>.28Two-Sample_Paired_T-Test.29</p>
-</dd>
-</dl>
-</dd>
-</dl>
+<p>Sets up the model described here:
+<a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Paired_Two">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Paired_Two</a>-<a href="#id3"><span class="problematic" id="id4">Group_Difference_</span></a>.28Two-Sample_Paired_T-Test.29</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1099,25 +1095,22 @@ model_name: (optional) name/label of the model to run</p>
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.create_fsl_flame_preset.</span></span><span class="sig-name descname"><span class="pre">preset_tripled_two_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conditions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sessions'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tripled_T-test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/create_fsl_flame_preset#preset_tripled_two_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.create_fsl_flame_preset.preset_tripled_two_group" title="Permalink to this definition">#</a></dt>
 <dd><p>Set up the design matrix and contrasts matrix for running a tripled
 two-group difference (‘tripled’ T-test).</p>
-<p>group_list: a list of strings- sub_ses unique IDs
-conditions: a three-item list of strings- session or series/scan names of</p>
-<blockquote>
-<div><p>the three sessions or three scans (per participant) you wish
+<dl class="simple">
+<dt>group_list<span class="classifier">list of str</span></dt><dd><p>sub_ses unique IDs</p>
+</dd>
+<dt>conditions<span class="classifier">list of str</span></dt><dd><p>a three-item list of strings- session or series/scan names of
+the three sessions or three scans (per participant) you wish
 to compare</p>
-</div></blockquote>
-<dl class="simple">
-<dt>condition_type: a string, either “session” or “scan”, depending on what</dt><dd><p>is in “conditions”</p>
+</dd>
+<dt>condition_type<span class="classifier">str</span></dt><dd><p>either “session” or “scan”, depending on what is in “conditions”</p>
+</dd>
+<dt>output_dir<span class="classifier">str, optional</span></dt><dd><p>the output directory path</p>
+</dd>
+<dt>model_name<span class="classifier">str, optional</span></dt><dd><p>name/label of the model to run</p>
 </dd>
 </dl>
-<p>output_dir: (optional) string of the output directory path
-model_name: (optional) name/label of the model to run</p>
-<dl class="simple">
-<dt>Sets up the model described here:</dt><dd><dl class="simple">
-<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Tripled_Two-<a href="#id5"><span class="problematic" id="id6">Group_Difference_</span></a>.28.22Tripled.22_T-Test.29</p>
-</dd>
-</dl>
-</dd>
-</dl>
+<p>Sets up the model described here:
+<a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Tripled_Two">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Tripled_Two</a>-<a href="#id5"><span class="problematic" id="id6">Group_Difference_</span></a>.28.22Tripled.22_T-Test.29</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1125,30 +1118,30 @@ model_name: (optional) name/label of the model to run</p>
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.create_fsl_flame_preset.</span></span><span class="sig-name descname"><span class="pre">preset_unpaired_two_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheno_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheno_sub_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two_sample_unpaired_T-test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/create_fsl_flame_preset#preset_unpaired_two_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.create_fsl_flame_preset.preset_unpaired_two_group" title="Permalink to this definition">#</a></dt>
 <dd><p>Set up the design matrix and contrasts matrix for running an unpaired
 two-group difference (two-sample unpaired T-test).</p>
-<p>group_list: a list of strings- sub_ses unique IDs
-pheno_df: a Pandas DataFrame object of the phenotypic file CSV/matrix
-groups: a list of either one or two strings- design matrix EV/covariate</p>
-<blockquote>
-<div><p>labels to take from the phenotype DF and include in the model</p>
-</div></blockquote>
-<dl class="simple">
-<dt>pheno_sub_label: a string of the label name of the column in the phenotype</dt><dd><p>file that holds the participant/session ID for each row</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_list</strong> (<em>list</em><em> of </em><em>str</em>) – sub_ses unique IDs</p></li>
+<li><p><strong>pheno_df</strong> (<em>pandas.core.frame.DataFrame</em>) – a Pandas DataFrame object of the phenotypic file CSV/matrix</p></li>
+<li><p><strong>groups</strong> (<em>list</em><em> of </em><em>str</em>) – a list of either one or two strings- design matrix EV/covariate
+labels to take from the phenotype DF and include in the model</p></li>
+<li><p><strong>pheno_sub_label</strong> (<em>str</em>) – the label name of the column in the phenotype
+file that holds the participant/session ID for each row</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – the output directory path</p></li>
+<li><p><strong>model_name</strong> (<em>str</em><em>, </em><em>optional</em>) – name/label of the model to run</p></li>
+<li><p><strong>here</strong> (<em>Sets up the model described</em>) – </p></li>
+<li><p><strong>https</strong> (//fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Unpaired_Two-<a href="#id7"><span class="problematic" id="id8">Group_Difference_</span></a>.28Two-Sample_Unpaired_T-Test.29) – </p></li>
+<li><p><strong>the</strong> (<em>Only one &quot;group&quot; will be provided usually if the two groups in</em>) – </p></li>
+<li><p><strong>covariate</strong> (<em>phenotypic information you wish to compare are encoded in one</em>) – </p></li>
+<li><p><strong>column</strong> – </p></li>
+<li><p><strong>Thus</strong> (<em>as categorical information.</em>) – </p></li>
+<li><p><strong>will</strong> (<em>providing this one name</em>) – </p></li>
+<li><p><strong>file</strong> (<em>pull it from the phenotype</em>) – </p></li>
+<li><p><strong>into</strong> (<em>and this function will break it out</em>) – </p></li>
+<li><p><strong>dummy-coding.</strong> (<em>two columns using</em>) – </p></li>
+</ul>
 </dd>
 </dl>
-<p>output_dir: (optional) string of the output directory path
-model_name: (optional) name/label of the model to run</p>
-<dl class="simple">
-<dt>Sets up the model described here:</dt><dd><dl class="simple">
-<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Unpaired_Two-<a href="#id7"><span class="problematic" id="id8">Group_Difference_</span></a>.28Two-Sample_Unpaired_T-Test.29</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>Only one “group” will be provided usually if the two groups in the
-phenotypic information you wish to compare are encoded in one covariate
-column, as categorical information. Thus, providing this one name will
-pull it from the phenotype file, and this function will break it out into
-two columns using dummy-coding.</p>
 </dd></dl>
 
 <dl class="py function">
