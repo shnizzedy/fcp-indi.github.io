@@ -808,6 +808,18 @@ specified suffixes</p>
 <section id="module-CPAC.utils.configuration">
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#module-CPAC.utils.configuration" title="Permalink to this heading">#</a></h2>
 <p>C-PAC Configuration module</p>
+<p>Copyright (C) 2022  C-PAC Developers</p>
+<p>This file is part of C-PAC.</p>
+<p>C-PAC is free software: you can redistribute it and/or modify it under
+the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>C-PAC is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with C-PAC. If not, see &lt;<a class="reference external" href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.configuration.Configuration">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.Configuration" title="Permalink to this definition">#</a></dt>
@@ -1066,21 +1078,25 @@ directory with the values listed in the phenotype file.</p>
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.create_fsl_flame_preset.</span></span><span class="sig-name descname"><span class="pre">preset_paired_two_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conditions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'session'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two_sample_unpaired_T-test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/create_fsl_flame_preset#preset_paired_two_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.create_fsl_flame_preset.preset_paired_two_group" title="Permalink to this definition">#</a></dt>
 <dd><p>Set up the design matrix and contrasts matrix for running an paired
 two-group difference (two-sample paired T-test).</p>
+<p>group_list: a list of strings- sub_ses unique IDs
+conditions: a two-item list of strings- session or series/scan names of</p>
+<blockquote>
+<div><p>the two sessions or two scans (per participant) you wish to
+compare</p>
+</div></blockquote>
 <dl class="simple">
-<dt>group_list<span class="classifier">list of str</span></dt><dd><p>sub_ses unique IDs</p>
-</dd>
-<dt>conditions<span class="classifier">list of str</span></dt><dd><p>a two-item list of strings- session or series/scan names of the
-two sessions or two scans (per participant) you wish to compare</p>
-</dd>
-<dt>condition_type<span class="classifier">str</span></dt><dd><p>either “session” or “scan”, depending on what is in “conditions”</p>
-</dd>
-<dt>output_dir<span class="classifier">str, optional</span></dt><dd><p>the output directory path</p>
-</dd>
-<dt>model_name<span class="classifier">str, optional</span></dt><dd><p>name/label of the model to run</p>
+<dt>condition_type: a string, either “session” or “scan”, depending on what</dt><dd><p>is in “conditions”</p>
 </dd>
 </dl>
-<p>Sets up the model described here:
-<a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Paired_Two">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Paired_Two</a>-<a href="#id3"><span class="problematic" id="id4">Group_Difference_</span></a>.28Two-Sample_Paired_T-Test.29</p>
+<p>output_dir: (optional) string of the output directory path
+model_name: (optional) name/label of the model to run</p>
+<dl class="simple">
+<dt>Sets up the model described here:</dt><dd><dl class="simple">
+<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Paired_Two-<a href="#id3"><span class="problematic" id="id4">Group_Difference_</span></a>.28Two-Sample_Paired_T-Test.29</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -1095,22 +1111,25 @@ two sessions or two scans (per participant) you wish to compare</p>
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.create_fsl_flame_preset.</span></span><span class="sig-name descname"><span class="pre">preset_tripled_two_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conditions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sessions'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tripled_T-test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/create_fsl_flame_preset#preset_tripled_two_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.create_fsl_flame_preset.preset_tripled_two_group" title="Permalink to this definition">#</a></dt>
 <dd><p>Set up the design matrix and contrasts matrix for running a tripled
 two-group difference (‘tripled’ T-test).</p>
-<dl class="simple">
-<dt>group_list<span class="classifier">list of str</span></dt><dd><p>sub_ses unique IDs</p>
-</dd>
-<dt>conditions<span class="classifier">list of str</span></dt><dd><p>a three-item list of strings- session or series/scan names of
-the three sessions or three scans (per participant) you wish
+<p>group_list: a list of strings- sub_ses unique IDs
+conditions: a three-item list of strings- session or series/scan names of</p>
+<blockquote>
+<div><p>the three sessions or three scans (per participant) you wish
 to compare</p>
-</dd>
-<dt>condition_type<span class="classifier">str</span></dt><dd><p>either “session” or “scan”, depending on what is in “conditions”</p>
-</dd>
-<dt>output_dir<span class="classifier">str, optional</span></dt><dd><p>the output directory path</p>
-</dd>
-<dt>model_name<span class="classifier">str, optional</span></dt><dd><p>name/label of the model to run</p>
+</div></blockquote>
+<dl class="simple">
+<dt>condition_type: a string, either “session” or “scan”, depending on what</dt><dd><p>is in “conditions”</p>
 </dd>
 </dl>
-<p>Sets up the model described here:
-<a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Tripled_Two">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Tripled_Two</a>-<a href="#id5"><span class="problematic" id="id6">Group_Difference_</span></a>.28.22Tripled.22_T-Test.29</p>
+<p>output_dir: (optional) string of the output directory path
+model_name: (optional) name/label of the model to run</p>
+<dl class="simple">
+<dt>Sets up the model described here:</dt><dd><dl class="simple">
+<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Tripled_Two-<a href="#id5"><span class="problematic" id="id6">Group_Difference_</span></a>.28.22Tripled.22_T-Test.29</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -1118,30 +1137,30 @@ to compare</p>
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.create_fsl_flame_preset.</span></span><span class="sig-name descname"><span class="pre">preset_unpaired_two_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheno_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pheno_sub_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two_sample_unpaired_T-test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/create_fsl_flame_preset#preset_unpaired_two_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.create_fsl_flame_preset.preset_unpaired_two_group" title="Permalink to this definition">#</a></dt>
 <dd><p>Set up the design matrix and contrasts matrix for running an unpaired
 two-group difference (two-sample unpaired T-test).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>group_list</strong> (<em>list</em><em> of </em><em>str</em>) – sub_ses unique IDs</p></li>
-<li><p><strong>pheno_df</strong> (<em>pandas.core.frame.DataFrame</em>) – a Pandas DataFrame object of the phenotypic file CSV/matrix</p></li>
-<li><p><strong>groups</strong> (<em>list</em><em> of </em><em>str</em>) – a list of either one or two strings- design matrix EV/covariate
-labels to take from the phenotype DF and include in the model</p></li>
-<li><p><strong>pheno_sub_label</strong> (<em>str</em>) – the label name of the column in the phenotype
-file that holds the participant/session ID for each row</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – the output directory path</p></li>
-<li><p><strong>model_name</strong> (<em>str</em><em>, </em><em>optional</em>) – name/label of the model to run</p></li>
-<li><p><strong>here</strong> (<em>Sets up the model described</em>) – </p></li>
-<li><p><strong>https</strong> (//fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Unpaired_Two-<a href="#id7"><span class="problematic" id="id8">Group_Difference_</span></a>.28Two-Sample_Unpaired_T-Test.29) – </p></li>
-<li><p><strong>the</strong> (<em>Only one &quot;group&quot; will be provided usually if the two groups in</em>) – </p></li>
-<li><p><strong>covariate</strong> (<em>phenotypic information you wish to compare are encoded in one</em>) – </p></li>
-<li><p><strong>column</strong> – </p></li>
-<li><p><strong>Thus</strong> (<em>as categorical information.</em>) – </p></li>
-<li><p><strong>will</strong> (<em>providing this one name</em>) – </p></li>
-<li><p><strong>file</strong> (<em>pull it from the phenotype</em>) – </p></li>
-<li><p><strong>into</strong> (<em>and this function will break it out</em>) – </p></li>
-<li><p><strong>dummy-coding.</strong> (<em>two columns using</em>) – </p></li>
-</ul>
+<p>group_list: a list of strings- sub_ses unique IDs
+pheno_df: a Pandas DataFrame object of the phenotypic file CSV/matrix
+groups: a list of either one or two strings- design matrix EV/covariate</p>
+<blockquote>
+<div><p>labels to take from the phenotype DF and include in the model</p>
+</div></blockquote>
+<dl class="simple">
+<dt>pheno_sub_label: a string of the label name of the column in the phenotype</dt><dd><p>file that holds the participant/session ID for each row</p>
 </dd>
 </dl>
+<p>output_dir: (optional) string of the output directory path
+model_name: (optional) name/label of the model to run</p>
+<dl class="simple">
+<dt>Sets up the model described here:</dt><dd><dl class="simple">
+<dt><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</a></dt><dd><p>#Unpaired_Two-<a href="#id7"><span class="problematic" id="id8">Group_Difference_</span></a>.28Two-Sample_Unpaired_T-Test.29</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Only one “group” will be provided usually if the two groups in the
+phenotypic information you wish to compare are encoded in one covariate
+column, as categorical information. Thus, providing this one name will
+pull it from the phenotype file, and this function will break it out into
+two columns using dummy-coding.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1611,41 +1630,53 @@ python file. The method extracts anatomical
 and functional data for each site( if multiple site)
 and/or scan parameters for each site and put it into
 a data structure read by python</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subjects_list</span> <span class="o">=</span><span class="p">[</span>
-<span class="gp">... </span>   <span class="p">{</span>
-<span class="gp">... </span>    <span class="s1">&#39;subject_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;0050386&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;unique_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;session_1&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;anat&#39;</span><span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/anat_1/anat.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;rest&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>        <span class="s1">&#39;rest_1_rest&#39;</span> <span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/rest_1/rest.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;rest_2_rest&#39;</span> <span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/rest_2/rest.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="p">},</span>
-<span class="gp">... </span>    <span class="s1">&#39;scan_parameters&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>        <span class="s1">&#39;tr&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;acquisition&#39;</span><span class="p">:</span> <span class="s1">&#39;alt+z2&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="s1">&#39;17&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;first_tr&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;last_tr&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="p">}</span>
-<span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span><span class="p">]</span>
-</pre></div>
-</div>
+<p>Example:
+subjects_list =[</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>‘subject_id’ : ‘0050386’,
+‘unique_id’ : ‘session_1’,
+‘anat’: ‘/Users/home/data/NYU/0050386/session_1/anat_1/anat.nii.gz’,
+‘rest’:{</p>
+<blockquote>
+<div><p>‘rest_1_rest’ : ‘/Users/home/data/NYU/0050386/session_1/rest_1/rest.nii.gz’,
+‘rest_2_rest’ : ‘/Users/home/data/NYU/0050386/session_1/rest_2/rest.nii.gz’,
+}</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘scan_parameters’:{</dt><dd><p>‘tr’: ‘2’,
+‘acquisition’: ‘alt+z2’,
+‘reference’: ‘17’,
+‘first_tr’: ‘’,
+‘last_tr’: ‘’,
+}</p>
+</dd>
+</dl>
+<p>},</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>]</p>
 <p>or</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subjects_list</span> <span class="o">=</span><span class="p">[</span>
-<span class="gp">... </span>   <span class="p">{</span>
-<span class="gp">... </span>    <span class="s1">&#39;subject_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;0050386&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;unique_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;session_1&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;anat&#39;</span><span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/anat_1/anat.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;rest&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>        <span class="s1">&#39;rest_1_rest&#39;</span> <span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/rest_1/rest.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;rest_2_rest&#39;</span> <span class="p">:</span> <span class="s1">&#39;/Users/home/data/NYU/0050386/session_1/rest_2/rest.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="p">}</span>
-<span class="gp">... </span>      <span class="p">},</span>
-<span class="gp">... </span><span class="p">]</span>
-</pre></div>
-</div>
+<dl>
+<dt>subjects_list =[</dt><dd><dl>
+<dt>{</dt><dd><p>‘subject_id’ : ‘0050386’,
+‘unique_id’ : ‘session_1’,
+‘anat’: ‘/Users/home/data/NYU/0050386/session_1/anat_1/anat.nii.gz’,
+‘rest’:{</p>
+<blockquote>
+<div><blockquote>
+<div><p>‘rest_1_rest’ : ‘/Users/home/data/NYU/0050386/session_1/rest_1/rest.nii.gz’,
+‘rest_2_rest’ : ‘/Users/home/data/NYU/0050386/session_1/rest_2/rest.nii.gz’,
+}</p>
+</div></blockquote>
+<p>},</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1690,53 +1721,63 @@ python file. The method extracts anatomical
 functional data and scan parameters for each
 site( if multiple site) and for each scan
 and put it into a data structure read by python</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<section id="note">
+<h3>Note:<a class="headerlink" href="#note" title="Permalink to this heading">#</a></h3>
 <p>Use this tool only if the scan parameters are different
 for each scan as shown in the example below.</p>
-</div>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subjects_list</span> <span class="o">=</span> <span class="p">[</span>
-<span class="gp">... </span>    <span class="p">{</span>
-<span class="gp">... </span>        <span class="s1">&#39;subject_id&#39;</span><span class="p">:</span> <span class="s1">&#39;0021001&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;unique_id&#39;</span><span class="p">:</span> <span class="s1">&#39;session2&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;anat&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/multiband_data/NKITRT/0021001/anat/mprage.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;rest&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>          <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_mx_1400/rest.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>          <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_mx_645/rest.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>          <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_std_2500/rest.nii.gz&#39;</span><span class="p">,</span>
-<span class="gp">... </span>          <span class="p">},</span>
-<span class="gp">... </span>        <span class="s1">&#39;scan_parameters&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>            <span class="s1">&#39;TR&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;1.4&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;1.4&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;2.5&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="p">},</span>
-<span class="gp">... </span>            <span class="s1">&#39;Acquisition&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/1400.txt&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/645.txt&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/data/2500.txt&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="p">},</span>
-<span class="gp">... </span>            <span class="s1">&#39;Reference&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;32&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;20&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;19&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="p">},</span>
-<span class="gp">... </span>            <span class="s1">&#39;FirstTR&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="p">},</span>
-<span class="gp">... </span>            <span class="s1">&#39;LastTR&#39;</span><span class="p">:{</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_1400_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;440&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_mx_645_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;898&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s1">&#39;RfMRI_std_2500_rest&#39;</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="p">},</span>
-<span class="gp">... </span>            <span class="p">}</span>
-<span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="p">]</span>
-</pre></div>
-</div>
+</section>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt>subjects_list = [</dt><dd><dl>
+<dt>{</dt><dd><p>‘subject_id’: ‘0021001’,
+‘unique_id’: ‘session2’,
+‘anat’: ‘/home/data/multiband_data/NKITRT/0021001/anat/mprage.nii.gz’,
+‘rest’:{</p>
+<blockquote>
+<div><p>‘RfMRI_mx_1400_rest’: ‘/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_mx_1400/rest.nii.gz’,
+‘RfMRI_mx_645_rest’: ‘/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_mx_645/rest.nii.gz’,
+‘RfMRI_std_2500_rest’: ‘/home/data/multiband_data/NKITRT/0021001/session2/RfMRI_std_2500/rest.nii.gz’,
+},</p>
+</div></blockquote>
+<dl>
+<dt>‘scan_parameters’:{</dt><dd><dl class="simple">
+<dt>‘TR’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘1.4’,
+‘RfMRI_mx_645_rest’: ‘1.4’,
+‘RfMRI_std_2500_rest’: ‘2.5’,
+},</p>
+</dd>
+<dt>‘Acquisition’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘/home/data/1400.txt’,
+‘RfMRI_mx_645_rest’: ‘/home/data/645.txt’,
+‘RfMRI_std_2500_rest’: ‘/home/data/2500.txt’,
+},</p>
+</dd>
+<dt>‘Reference’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘32’,
+‘RfMRI_mx_645_rest’: ‘20’,
+‘RfMRI_std_2500_rest’: ‘19’,
+},</p>
+</dd>
+<dt>‘FirstTR’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘7’,
+‘RfMRI_mx_645_rest’: ‘15’,
+‘RfMRI_std_2500_rest’: ‘4’,
+},</p>
+</dd>
+<dt>‘LastTR’:{</dt><dd><p>‘RfMRI_mx_1400_rest’: ‘440’,
+‘RfMRI_mx_645_rest’: ‘898’,
+‘RfMRI_std_2500_rest’: ‘None’,
+},</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>},</p>
+</dd>
+</dl>
+<p>]</p>
+</section>
 </dd></dl>
 
 <dl class="py function">
@@ -1935,7 +1976,7 @@ CPAC.seg_preproc.utils.pick_tissue_from_labels_file</p>
 <section id="module-CPAC.utils.monitoring">
 <span id="monitoring"></span><h2>Monitoring<a class="headerlink" href="#module-CPAC.utils.monitoring" title="Permalink to this heading">#</a></h2>
 <p>Module to customize Nipype’s process monitoring for use in C-PAC</p>
-<p>See <a class="reference external" href="https://fcp-indi.github.io/docs/nightly/developer/nodes">https://fcp-indi.github.io/docs/nightly/developer/nodes</a> for C-PAC-specific documentation.
+<p>See <a class="reference external" href="https://fcp-indi.github.io/docs/developer/nodes">https://fcp-indi.github.io/docs/developer/nodes</a> for C-PAC-specific documentation.
 See <a class="reference external" href="https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.profiler.html">https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.profiler.html</a> for Nipype’s documentation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.LoggingHTTPServer">
@@ -2074,6 +2115,38 @@ instead of a <code class="docutils literal notranslate"><span class="pre">loggin
 </section>
 <section id="module-CPAC.utils.ndmg_utils">
 <span id="neurodata-s-mri-to-graphs-ndmg-m2g-utilities"></span><h2>NeuroData’s MRI to Graphs (NDMG | m2g) Utilities<a class="headerlink" href="#module-CPAC.utils.ndmg_utils" title="Permalink to this heading">#</a></h2>
+<p>Functions in this file adapted from NeuroData group:
+STATEMENT OF CHANGES:</p>
+<blockquote>
+<div><p>This file is derived from sources licensed under the Apache-2.0 terms,
+and this file has been changed.</p>
+</div></blockquote>
+<dl>
+<dt>CHANGES:</dt><dd><ul class="simple">
+<li><p>Minor refactoring for compatibility with C-PAC</p></li>
+</ul>
+</dd>
+<dt>ORIGINAL WORK’S ATTRIBUTION NOTICE:</dt><dd><p>Copyright 2016 NeuroData (<a class="reference external" href="http://neurodata.io">http://neurodata.io</a>)</p>
+<p>Licensed under the Apache License, Version 2.0 (the “License”);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<blockquote>
+<div><p><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+</div></blockquote>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an “AS IS” BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+<p>graph.py
+Created by Greg Kiar on 2016-01-27.
+Email: <a class="reference external" href="mailto:gkiar&#37;&#52;&#48;jhu&#46;edu">gkiar<span>&#64;</span>jhu<span>&#46;</span>edu</a></p>
+</dd>
+<dt>Can be found here:</dt><dd><p><a class="reference external" href="https://github.com/neurodata/m2g/blob/v0.1.0/ndmg/graph/graph.py">https://github.com/neurodata/m2g/blob/v0.1.0/ndmg/graph/graph.py</a></p>
+</dd>
+</dl>
+<p>Modifications Copyright (C) 2022  C-PAC Developers</p>
+<p>This file is part of C-PAC.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.ndmg_utils.graph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.ndmg_utils.</span></span><span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rois</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dwi'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/ndmg_utils#graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.ndmg_utils.graph" title="Permalink to this definition">#</a></dt>
@@ -2086,13 +2159,17 @@ instead of a <code class="docutils literal notranslate"><span class="pre">loggin
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.utils.ndmg_utils.graph.cor_graph">
 <span class="sig-name descname"><span class="pre">cor_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/ndmg_utils#graph.cor_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.ndmg_utils.graph.cor_graph" title="Permalink to this definition">#</a></dt>
-<dd><p>Takes timeseries and produces a correlation matrix</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>timeseries</strong> – the timeseries file to extract correlation for.
-dimensions are [numrois]x[numtimesteps]</p>
+<dd><p>Takes timeseries and produces a correlation matrix
+<strong>Positional Arguments:</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>timeseries:</dt><dd><dl class="simple">
+<dt>-the timeseries file to extract correlation for.</dt><dd><p>dimensions are [numrois]x[numtimesteps]</p>
 </dd>
 </dl>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -2104,24 +2181,32 @@ dimensions are [numrois]x[numtimesteps]</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.utils.ndmg_utils.graph.make_graph">
 <span class="sig-name descname"><span class="pre">make_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">streamlines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/ndmg_utils#graph.make_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.ndmg_utils.graph.make_graph" title="Permalink to this definition">#</a></dt>
-<dd><p>Takes streamlines and produces a graph</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>streamlines</strong> – Fiber streamlines either file or array in a dipy EuDX
-or compatible format.</p>
+<dd><p>Takes streamlines and produces a graph
+<strong>Positional Arguments:</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>streamlines:</dt><dd><ul class="simple">
+<li><p>Fiber streamlines either file or array in a dipy EuDX
+or compatible format.</p></li>
+</ul>
 </dd>
 </dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.utils.ndmg_utils.graph.save_graph">
 <span class="sig-name descname"><span class="pre">save_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graphname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/ndmg_utils#graph.save_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.ndmg_utils.graph.save_graph" title="Permalink to this definition">#</a></dt>
-<dd><p>Saves the graph to disk</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>graphname</strong> – Filename for the graph</p>
+<dd><p>Saves the graph to disk
+<strong>Positional Arguments:</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>graphname:</dt><dd><ul class="simple">
+<li><p>Filename for the graph</p></li>
+</ul>
 </dd>
 </dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -2142,18 +2227,31 @@ or compatible format.</p>
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.ndmg_utils.</span></span><span class="sig-name descname"><span class="pre">ndmg_roi_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/ndmg_utils#ndmg_roi_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.ndmg_utils.ndmg_roi_timeseries" title="Permalink to this definition">#</a></dt>
 <dd><p>Function to extract average timeseries for the voxels in each
 roi of the labelled atlas.
-Returns the roi timeseries as a numpy.ndarray.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>func_file</strong> – the path to the 4d volume to extract timeseries</p></li>
-<li><p><strong>label_file</strong> – the path to the labelled atlas containing labels
-for the voxels in the fmri image</p></li>
-<li><p><strong>centered::</strong> (<em>..</em>) – Adapted from ndmg v0.1.1
-Copyright 2016 NeuroData (<a class="reference external" href="http://neurodata.io">http://neurodata.io</a>)</p></li>
+Returns the roi timeseries as a numpy.ndarray.
+<strong>Positional Arguments</strong></p>
+<blockquote>
+<div><dl>
+<dt>func_file:</dt><dd><ul class="simple">
+<li><p>the path to the 4d volume to extract timeseries</p></li>
 </ul>
 </dd>
+<dt>label_file:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>the path to the labelled atlas containing labels</dt><dd><p>for the voxels in the fmri image</p>
+</dd>
 </dl>
+</li>
+</ul>
+</dd>
+<dt>roits_file:</dt><dd><ul class="simple">
+<li><p>the path to where the roi timeseries will be saved. If</p></li>
+</ul>
+<p>None, don’t save and just return the roi_timeseries.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Adapted from ndmg v0.1.1
+# Copyright 2016 NeuroData (<a class="reference external" href="http://neurodata.io">http://neurodata.io</a>)</p>
 </dd></dl>
 
 </section>
@@ -3179,9 +3277,9 @@ and scan parameters.</p>
 </pre></div>
 </div>
 <p>High Level Workflow Graph:</p>
-<a class="reference internal image-reference" href="images/generated/zscore.png"><img alt="images/generated/zscore.png" src="images/generated/zscore.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../images/generated/zscore.png"><img alt="../images/generated/zscore.png" src="../images/generated/zscore.png" style="width: 500px;" /></a>
 <p>Detailed Workflow Graph:</p>
-<a class="reference internal image-reference" href="images/generated/zscore_detailed.png"><img alt="images/generated/zscore_detailed.png" src="images/generated/zscore_detailed.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../images/generated/zscore_detailed.png"><img alt="../images/generated/zscore_detailed.png" src="../images/generated/zscore_detailed.png" style="width: 500px;" /></a>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span> <span class="o">=</span> <span class="n">get_zscore</span><span class="p">(</span><span class="s1">&#39;example_input&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">input_file</span> <span class="o">=</span> <span class="s1">&#39;/home/data/graph_working_dir/calculate_centrality/degree_centrality_binarize.nii.gz&#39;</span>

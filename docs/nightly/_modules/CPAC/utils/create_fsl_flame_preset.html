@@ -733,30 +733,18 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up the design matrix and contrasts matrix for running an unpaired</span>
 <span class="sd">    two-group difference (two-sample unpaired T-test).</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    group_list : list of str</span>
-<span class="sd">        sub_ses unique IDs</span>
-
-<span class="sd">    pheno_df : pandas.core.frame.DataFrame</span>
-<span class="sd">        a Pandas DataFrame object of the phenotypic file CSV/matrix</span>
-
-<span class="sd">    groups : list of str</span>
-<span class="sd">        a list of either one or two strings- design matrix EV/covariate</span>
-<span class="sd">        labels to take from the phenotype DF and include in the model</span>
-
-<span class="sd">    pheno_sub_label : str</span>
-<span class="sd">        the label name of the column in the phenotype</span>
-<span class="sd">        file that holds the participant/session ID for each row</span>
-
-<span class="sd">    output_dir : str, optional</span>
-<span class="sd">        the output directory path</span>
-
-<span class="sd">    model_name : str, optional</span>
-<span class="sd">        name/label of the model to run</span>
+<span class="sd">    group_list: a list of strings- sub_ses unique IDs</span>
+<span class="sd">    pheno_df: a Pandas DataFrame object of the phenotypic file CSV/matrix</span>
+<span class="sd">    groups: a list of either one or two strings- design matrix EV/covariate</span>
+<span class="sd">            labels to take from the phenotype DF and include in the model</span>
+<span class="sd">    pheno_sub_label: a string of the label name of the column in the phenotype</span>
+<span class="sd">                     file that holds the participant/session ID for each row</span>
+<span class="sd">    output_dir: (optional) string of the output directory path</span>
+<span class="sd">    model_name: (optional) name/label of the model to run</span>
 
 <span class="sd">    Sets up the model described here:</span>
-<span class="sd">    https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Unpaired_Two-Group_Difference_.28Two-Sample_Unpaired_T-Test.29</span>
+<span class="sd">        https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</span>
+<span class="sd">            #Unpaired_Two-Group_Difference_.28Two-Sample_Unpaired_T-Test.29</span>
 
 <span class="sd">    Only one &quot;group&quot; will be provided usually if the two groups in the</span>
 <span class="sd">    phenotypic information you wish to compare are encoded in one covariate</span>
@@ -910,24 +898,18 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up the design matrix and contrasts matrix for running an paired</span>
 <span class="sd">    two-group difference (two-sample paired T-test).</span>
 
-<span class="sd">    group_list : list of str</span>
-<span class="sd">        sub_ses unique IDs</span>
-
-<span class="sd">    conditions : list of str</span>
-<span class="sd">        a two-item list of strings- session or series/scan names of the</span>
-<span class="sd">        two sessions or two scans (per participant) you wish to compare</span>
-
-<span class="sd">    condition_type : str</span>
-<span class="sd">        either &quot;session&quot; or &quot;scan&quot;, depending on what is in &quot;conditions&quot;</span>
-
-<span class="sd">    output_dir : str, optional</span>
-<span class="sd">        the output directory path</span>
-
-<span class="sd">    model_name : str, optional</span>
-<span class="sd">        name/label of the model to run</span>
+<span class="sd">    group_list: a list of strings- sub_ses unique IDs</span>
+<span class="sd">    conditions: a two-item list of strings- session or series/scan names of</span>
+<span class="sd">                the two sessions or two scans (per participant) you wish to</span>
+<span class="sd">                compare</span>
+<span class="sd">    condition_type: a string, either &quot;session&quot; or &quot;scan&quot;, depending on what</span>
+<span class="sd">                    is in &quot;conditions&quot;</span>
+<span class="sd">    output_dir: (optional) string of the output directory path</span>
+<span class="sd">    model_name: (optional) name/label of the model to run</span>
 
 <span class="sd">    Sets up the model described here:</span>
-<span class="sd">    https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Paired_Two-Group_Difference_.28Two-Sample_Paired_T-Test.29</span>
+<span class="sd">        https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</span>
+<span class="sd">            #Paired_Two-Group_Difference_.28Two-Sample_Paired_T-Test.29</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">import</span> <span class="nn">os</span>
@@ -1097,25 +1079,18 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up the design matrix and contrasts matrix for running a tripled</span>
 <span class="sd">    two-group difference (&#39;tripled&#39; T-test).</span>
 
-<span class="sd">    group_list : list of str</span>
-<span class="sd">        sub_ses unique IDs</span>
-
-<span class="sd">    conditions : list of str</span>
-<span class="sd">        a three-item list of strings- session or series/scan names of</span>
-<span class="sd">        the three sessions or three scans (per participant) you wish</span>
-<span class="sd">        to compare</span>
-
-<span class="sd">    condition_type : str</span>
-<span class="sd">        either &quot;session&quot; or &quot;scan&quot;, depending on what is in &quot;conditions&quot;</span>
-
-<span class="sd">    output_dir : str, optional</span>
-<span class="sd">        the output directory path</span>
-
-<span class="sd">    model_name : str, optional</span>
-<span class="sd">        name/label of the model to run</span>
+<span class="sd">    group_list: a list of strings- sub_ses unique IDs</span>
+<span class="sd">    conditions: a three-item list of strings- session or series/scan names of</span>
+<span class="sd">                the three sessions or three scans (per participant) you wish</span>
+<span class="sd">                to compare</span>
+<span class="sd">    condition_type: a string, either &quot;session&quot; or &quot;scan&quot;, depending on what</span>
+<span class="sd">                    is in &quot;conditions&quot;</span>
+<span class="sd">    output_dir: (optional) string of the output directory path</span>
+<span class="sd">    model_name: (optional) name/label of the model to run</span>
 
 <span class="sd">    Sets up the model described here:</span>
-<span class="sd">    https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide#Tripled_Two-Group_Difference_.28.22Tripled.22_T-Test.29</span>
+<span class="sd">        https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</span>
+<span class="sd">            #Tripled_Two-Group_Difference_.28.22Tripled.22_T-Test.29</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">import</span> <span class="nn">os</span>
