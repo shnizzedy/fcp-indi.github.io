@@ -420,6 +420,144 @@ checks before returning validated config_dict.</p>
 </dl>
 </dd></dl>
 
+<section id="module-CPAC.pipeline.utils">
+<span id="pipeline-utilities"></span><h3>Pipeline Utilities<a class="headerlink" href="#module-CPAC.pipeline.utils" title="Permalink to this heading">#</a></h3>
+<p>C-PAC pipeline engine utilities</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="CPAC.pipeline.utils.FilteredUnfilteredError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.utils.</span></span><span class="sig-name descname"><span class="pre">FilteredUnfilteredError</span></span><a class="reference internal" href="../_modules/CPAC/pipeline/utils#FilteredUnfilteredError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.utils.FilteredUnfilteredError" title="Permalink to this definition">#</a></dt>
+<dd><p>Custom error class to catch “filtered” outputs with “filt-none”.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.pipeline.utils.name_fork">
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.utils.</span></span><span class="sig-name descname"><span class="pre">name_fork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dct</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/utils#name_fork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.utils.name_fork" title="Permalink to this definition">#</a></dt>
+<dd><p>Create and insert entities for forkpoints</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_idx</strong> (<em>str</em>) – </p></li>
+<li><p><strong>cfg</strong> (<a class="reference internal" href="utils#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><em>CPAC.utils.configuration.Configuration</em></a>) – </p></li>
+<li><p><strong>json_info</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>out_dct</strong> (<em>dict</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>resource_idx</strong> (<em>str</em>)</p></li>
+<li><p><strong>out_dct</strong> (<em>dict</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.pipeline.utils.present_outputs">
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.utils.</span></span><span class="sig-name descname"><span class="pre">present_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/CPAC/pipeline/utils#present_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.utils.present_outputs" title="Permalink to this definition">#</a></dt>
+<dd><p>Given an outputs dictionary and a list of output keys, returns
+the subset of <code class="docutils literal notranslate"><span class="pre">outputs</span></code> that includes all keys in <code class="docutils literal notranslate"><span class="pre">keys</span></code> that are
+present. I.e., ~:py:func:<cite>CPAC.func_preproc.func_motion.motion_correct_connections</cite>
+will have different items in its <code class="docutils literal notranslate"><span class="pre">outputs</span></code> dictionary at different
+times depending on the <code class="docutils literal notranslate"><span class="pre">motion_correction</span></code> configuration;
+~:py:func:<cite>CPAC.func_preproc.func_motion.func_motion_estimates</cite> can
+then wrap that <code class="docutils literal notranslate"><span class="pre">outputs</span></code> in this function and provide a list of
+keys of the desired outputs to include, if they are present in the
+provided <code class="docutils literal notranslate"><span class="pre">outputs</span></code> dictionary, eliminating the need for multiple
+NodeBlocks that differ only by configuration options and relevant
+output keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputs</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>keys</strong> (<em>list</em><em> of </em><em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>outputs filtered down to keys</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">present_outputs</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="go">{&#39;b&#39;: 2}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">present_outputs</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span>
+<span class="go">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">present_outputs</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="go">{&#39;a&#39;: 1, &#39;c&#39;: 3}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.pipeline.utils.source_set">
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.utils.</span></span><span class="sig-name descname"><span class="pre">source_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="reference internal" href="../_modules/CPAC/pipeline/utils#source_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.utils.source_set" title="Permalink to this definition">#</a></dt>
+<dd><p>Given a CpacProvenance, return a set of {resource}:{source} strings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sources</strong> (<em>str</em><em>, </em><em>list</em><em>, or </em><em>set</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>set</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">source_set</span><span class="p">([[[[</span><span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span>
+<span class="gp">... </span>      <span class="s1">&#39;desc-preproc_bold:func_reorient&#39;</span><span class="p">,</span>
+<span class="gp">... </span>      <span class="s1">&#39;desc-preproc_bold:func_truncate&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="s1">&#39;TR:func_metadata_ingress&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="s1">&#39;tpattern:func_metadata_ingress&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;desc-preproc_bold:func_slice_time&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span>
+<span class="gp">... </span>      <span class="s1">&#39;desc-preproc_bold:func_reorient&#39;</span><span class="p">,</span>
+<span class="gp">... </span>      <span class="s1">&#39;desc-preproc_bold:func_truncate&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span> <span class="s1">&#39;desc-reorient_bold:func_reorient&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;motion-basefile:get_motion_ref_fmriprep_reference&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;desc-preproc_bold:motion_correction_only_mcflirt&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[[[</span><span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="s1">&#39;desc-preproc_bold:func_reorient&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="s1">&#39;desc-preproc_bold:func_truncate&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span> <span class="s1">&#39;desc-reorient_bold:func_reorient&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;motion-basefile:get_motion_ref_fmriprep_reference&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[[[</span><span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span>
+<span class="gp">... </span>       <span class="s1">&#39;desc-preproc_bold:func_reorient&#39;</span><span class="p">,</span>
+<span class="gp">... </span>       <span class="s1">&#39;desc-preproc_bold:func_truncate&#39;</span><span class="p">],</span>
+<span class="gp">... </span>      <span class="p">[</span><span class="s1">&#39;TR:func_metadata_ingress&#39;</span><span class="p">],</span>
+<span class="gp">... </span>      <span class="p">[</span><span class="s1">&#39;tpattern:func_metadata_ingress&#39;</span><span class="p">],</span>
+<span class="gp">... </span>      <span class="s1">&#39;desc-preproc_bold:func_slice_time&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[[</span><span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span>
+<span class="gp">... </span>       <span class="s1">&#39;desc-preproc_bold:func_reorient&#39;</span><span class="p">,</span>
+<span class="gp">... </span>       <span class="s1">&#39;desc-preproc_bold:func_truncate&#39;</span><span class="p">],</span>
+<span class="gp">... </span>      <span class="p">[</span><span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span> <span class="s1">&#39;desc-reorient_bold:func_reorient&#39;</span><span class="p">],</span>
+<span class="gp">... </span>      <span class="s1">&#39;motion-basefile:get_motion_ref_fmriprep_reference&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;desc-preproc_bold:motion_correction_only_mcflirt&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;FSL-AFNI-bold-ref:template_resample&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;FSL-AFNI-brain-mask:template_resample&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;FSL-AFNI-brain-probseg:template_resample&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;space-bold_desc-brain_mask:bold_mask_fsl_afni&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;desc-preproc_bold:bold_masking&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;FSL-AFNI-bold-ref:template_resample&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;FSL-AFNI-brain-mask:template_resample&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;FSL-AFNI-brain-probseg:template_resample&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;TR:func_metadata_ingress&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;bold:func_ingress&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;desc-preproc_bold:bold_masking&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;desc-preproc_bold:func_reorient&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;desc-preproc_bold:func_slice_time&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;desc-preproc_bold:func_truncate&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;desc-preproc_bold:motion_correction_only_mcflirt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;desc-reorient_bold:func_reorient&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;motion-basefile:get_motion_ref_fmriprep_reference&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;space-bold_desc-brain_mask:bold_mask_fsl_afni&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;tpattern:func_metadata_ingress&#39;</span><span class="p">})</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
 </section>
 </section>
 
@@ -485,6 +623,13 @@ checks before returning validated config_dict.</p>
 <li><a class="reference internal" href="#CPAC.pipeline.schema.sanitize"><code class="docutils literal notranslate"><span class="pre">sanitize</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.pipeline.schema.schema"><code class="docutils literal notranslate"><span class="pre">schema</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.pipeline.schema.str_to_bool1_1"><code class="docutils literal notranslate"><span class="pre">str_to_bool1_1</span></code></a></li>
+<li><a class="reference internal" href="#module-CPAC.pipeline.utils">Pipeline Utilities</a><ul>
+<li><a class="reference internal" href="#CPAC.pipeline.utils.FilteredUnfilteredError"><code class="docutils literal notranslate"><span class="pre">FilteredUnfilteredError</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.pipeline.utils.name_fork"><code class="docutils literal notranslate"><span class="pre">name_fork</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.pipeline.utils.present_outputs"><code class="docutils literal notranslate"><span class="pre">present_outputs</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.pipeline.utils.source_set"><code class="docutils literal notranslate"><span class="pre">source_set</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
