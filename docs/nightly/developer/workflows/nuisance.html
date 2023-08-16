@@ -325,9 +325,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>realigned_file</strong> (<em>string</em>) – Path of a realigned nifti file.</p></li>
-<li><p><strong>bandpass_freqs</strong> (<em>tuple</em>) – Tuple containing the bandpass frequencies. (LowCutoff_HighPass HighCutoff_LowPass)</p></li>
-<li><p><strong>sample_period</strong> (<em>float</em><em>, </em><em>optional</em>) – Length of sampling period in seconds.  If not specified,
+<li><p><strong>realigned_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Path of a realigned nifti file.</p></li>
+<li><p><strong>bandpass_freqs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Tuple containing the bandpass frequencies. (LowCutoff_HighPass HighCutoff_LowPass)</p></li>
+<li><p><strong>sample_period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Length of sampling period in seconds.  If not specified,
 this value is read from the nifti file provided.</p></li>
 </ul>
 </dd>
@@ -335,7 +335,7 @@ this value is read from the nifti file provided.</p></li>
 <dd class="field-even"><p><strong>bandpassed_file</strong> – Path of filtered output (nifti file).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -360,13 +360,13 @@ this value is read from the nifti file provided.</p></li>
 fMRI data.  The residual signals for linear regression denoising is performed in a single
 model.  Therefore the residual time-series will be orthogonal to all signals.</p>
 <p>:param :
-:type : param nuisance_selectors: dictionary describing nuisance regression to be performed
+:type : <code class="xref py py-class docutils literal notranslate"><span class="pre">param</span> <span class="pre">nuisance_selectors</span></code>: <code class="xref py py-class docutils literal notranslate"><span class="pre">dictionary</span> <span class="pre">describing</span> <span class="pre">nuisance</span> <span class="pre">regression</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">be</span> <span class="pre">performed</span></code>
 :param :
-:type : param use_ants: flag indicating whether FNIRT or ANTS is used
+:type : <code class="xref py py-class docutils literal notranslate"><span class="pre">param</span> <span class="pre">use_ants</span></code>: <code class="xref py py-class docutils literal notranslate"><span class="pre">flag</span> <span class="pre">indicating</span> <span class="pre">whether</span> <span class="pre">FNIRT</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">ANTS</span> <span class="pre">is</span> <span class="pre">used</span></code>
 :param :
-:type : param name: Name of the workflow, defaults to ‘nuisance’
+:type : <code class="xref py py-class docutils literal notranslate"><span class="pre">param</span> <span class="pre">name</span></code>: <code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">the</span> <span class="pre">workflow</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">'nuisance'</span></code>
 :param : Nuisance workflow.
-:type : return: nuisance : nipype.pipeline.engine.Workflow</p>
+:type : <code class="xref py py-class docutils literal notranslate"><span class="pre">return</span></code>: nuisance : <code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
 <p class="rubric">Notes</p>
 <section id="workflow-inputs">
 <h2>Workflow Inputs<a class="headerlink" href="#workflow-inputs" title="Permalink to this heading">#</a></h2>

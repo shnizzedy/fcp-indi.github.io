@@ -328,8 +328,8 @@ orientation/origin or qform/sform info) from one image to another</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>infile_a</strong> (<em>nifti file</em>) – input volume from which the geometry is copied from</p></li>
-<li><p><strong>infile_b</strong> (<em>nifti file</em>) – input volume from which the geometry is copied to</p></li>
+<li><p><strong>infile_a</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nifti</span> <span class="pre">file</span></code>) – input volume from which the geometry is copied from</p></li>
+<li><p><strong>infile_b</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nifti</span> <span class="pre">file</span></code>) – input volume from which the geometry is copied to</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -337,10 +337,10 @@ orientation/origin or qform/sform info) from one image to another</p>
 in the header.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nifti file</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nifti</span> <span class="pre">file</span></code></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>Exception</strong> – If fslcpgeom fails</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><strong>Exception</strong></a> – If fslcpgeom fails</p>
 </dd>
 </dl>
 </dd></dl>
@@ -352,13 +352,13 @@ in the header.</p>
 and colour activation overlaying</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – Workflow name</p>
+<dd class="field-odd"><p><strong>wf_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Workflow name</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>easy_thresh</strong> – Easy thresh workflow object</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>object</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -511,18 +511,18 @@ standard data directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>in_file</strong> (<em>nifti file</em>) – Merged 4D Zmap volume</p></li>
-<li><p><strong>file_parameters</strong> (<em>tuple</em>) – Value FSLDIR and MNI from config file</p></li>
+<li><p><strong>in_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nifti</span> <span class="pre">file</span></code>) – Merged 4D Zmap volume</p></li>
+<li><p><strong>file_parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Value FSLDIR and MNI from config file</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>standard_path</strong> – Standard FSL Image file path</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>Exception</strong> – If nibabel cannot load the input nifti volume</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><strong>Exception</strong></a> – If nibabel cannot load the input nifti volume</p>
 </dd>
 </dl>
 </dd></dl>
@@ -536,8 +536,8 @@ for input to the overlay.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>z_theshold</strong> (<em>float</em>) – z threshold value</p></li>
-<li><p><strong>intensity_stat</strong> (<em>tuple</em><em> of </em><em>float values</em>) – minimum and maximum intensity values</p></li>
+<li><p><strong>z_theshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – z threshold value</p></li>
+<li><p><strong>intensity_stat</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span> <span class="pre">values</span></code>) – minimum and maximum intensity values</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -545,7 +545,7 @@ for input to the overlay.</p>
 value of z statistic image</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple (float)</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span> <span class="pre">(float)</span></code></p>
 </dd>
 </dl>
 </dd></dl>

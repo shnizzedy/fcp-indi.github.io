@@ -319,18 +319,64 @@
           <section id="module-CPAC.alff">
 <span id="amplitude-of-low-frequency-fluctuations-alff-and-fractional-alff"></span><h1>Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF<a class="headerlink" href="#module-CPAC.alff" title="Permalink to this heading">#</a></h1>
 <span class="target" id="module-CPAC.alff.alff"></span><dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NodeBlockFunction:</span> <span class="pre">alff_falff(wf,</span> <span class="pre">cfg,</span> <span class="pre">strat_pool,</span> <span class="pre">pipe_num,</span> <span class="pre">opt=None)</span></span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wf</strong> (<a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></a>) – </p></li>
+<li><p><strong>cfg</strong> (<a class="reference internal" href="../utils#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a>) – </p></li>
+<li><p><strong>strat_pool</strong> – </p></li>
+<li><p><strong>pipe_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – </p></li>
+<li><p><strong>opt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>wf</strong> (<a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></a>)</p></li>
+<li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">NodeBlockFunction:</span> <span class="pre">alff_falff_space_template(wf,</span> <span class="pre">cfg,</span> <span class="pre">strat_pool,</span> <span class="pre">pipe_num,</span> <span class="pre">opt=None)</span></span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wf</strong> (<a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></a>) – </p></li>
+<li><p><strong>cfg</strong> (<a class="reference internal" href="../utils#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a>) – </p></li>
+<li><p><strong>strat_pool</strong> – </p></li>
+<li><p><strong>pipe_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – </p></li>
+<li><p><strong>opt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>wf</strong> (<a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></a>)</p></li>
+<li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="CPAC.alff.alff.create_alff">
 <span class="sig-prename descclassname"><span class="pre">CPAC.alff.alff.</span></span><span class="sig-name descname"><span class="pre">create_alff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'alff_workflow'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/alff/alff#create_alff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.alff.alff.create_alff" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate Amplitude of low frequency oscillations (ALFF) and fractional ALFF maps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – Workflow name</p>
+<dd class="field-odd"><p><strong>wf_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Workflow name</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>alff_workflow</strong> – ALFF workflow</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>workflow object</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">workflow</span> <span class="pre">object</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -474,13 +520,13 @@ fALFF_Z.nii.gz
 <dd><p>Method to return option string for 3dTstat</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mask</strong> (<em>string</em>) – Path to mask file</p>
+<dd class="field-odd"><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Path to mask file</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>opt_str</strong> – Command args</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>

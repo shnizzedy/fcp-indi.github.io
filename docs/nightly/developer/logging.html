@@ -329,7 +329,7 @@
 <p class="attribution">—<a class="reference external" href="https://docs.python.org/3/howto/logging-cookbook.html#creating-a-lot-of-loggers">Logging Cookbook: Creating a lot of loggers</a></p>
 </div></blockquote>
 <p><code class="docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.custom_logging.getLogger</span></code> will look for a <a class="reference internal" href="#CPAC.utils.monitoring.custom_logging.MockLogger" title="CPAC.utils.monitoring.custom_logging.MockLogger"><code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.custom_logging.MockLogger</span></code></a> before falling back on <code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code>.</p>
-<p>A <code class="docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.custom_logging.MockLogger</span></code> can be used in place of a <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Logger</span></code> and deleted from memory when no longer needed. For an example, see how <code class="docutils literal notranslate"><span class="pre">missing_log</span></code> is created and deleted in <code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.pipeline.check_outputs.check_outputs</span></code>.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.custom_logging.MockLogger</span></code> can be used in place of a <a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Logger</span></code></a> and deleted from memory when no longer needed. For an example, see how <code class="docutils literal notranslate"><span class="pre">missing_log</span></code> is created and deleted in <code class="xref py py-func docutils literal notranslate"><span class="pre">CPAC.pipeline.check_outputs.check_outputs</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">nipype.utils.logger.Logging.getLogger</span></code> will only consider loggers that are part of the class instance calling the method.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.custom_logging.getLogger">
@@ -338,13 +338,13 @@
 real loggers.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>logger</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#CPAC.utils.monitoring.custom_logging.MockLogger" title="CPAC.utils.monitoring.custom_logging.MockLogger">CPAC.utils.monitoring.custom_logging.MockLogger</a> or logging.Logger</p>
+<dd class="field-odd"><p><a class="reference internal" href="#CPAC.utils.monitoring.custom_logging.MockLogger" title="CPAC.utils.monitoring.custom_logging.MockLogger"><code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.custom_logging.MockLogger</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Logger</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -454,16 +454,16 @@ assign that to a throwaway variable if you don’t want it</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cmd</strong> (<em>str</em>) – command to run with <cite>subprocess.check_output</cite></p></li>
-<li><p><strong>raise_error</strong> (<em>boolean</em>) – raise any exception after logging</p></li>
-<li><p><strong>args</strong> (<em>any</em>) – pass-through arguments for subprocess.check_output</p></li>
-<li><p><strong>kwargs</strong> (<em>any</em>) – pass-through arguments for subprocess.check_output</p></li>
+<li><p><strong>cmd</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – command to run with <cite>subprocess.check_output</cite></p></li>
+<li><p><strong>raise_error</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – raise any exception after logging</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">any</span></code>) – pass-through arguments for subprocess.check_output</p></li>
+<li><p><strong>kwargs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">any</span></code>) – pass-through arguments for subprocess.check_output</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>output</strong> (<em>str</em>)</p></li>
-<li><p><strong>exit_code</strong> (<em>int</em>)</p></li>
+<li><p><strong>output</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</p></li>
+<li><p><strong>exit_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>)</p></li>
 </ul>
 </p>
 </dd>

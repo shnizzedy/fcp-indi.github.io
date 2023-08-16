@@ -332,13 +332,13 @@
 filename.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>entities</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -358,23 +358,23 @@ BIDS formatted set of data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>bids_dir</strong> (<em>str</em>) – base directory that contains all of the data, this could be a
+<li><p><strong>bids_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – base directory that contains all of the data, this could be a
 directory that contains data for a multiple BIDS datasets, in
 which case the intervening directories will be interpreted as
 site names</p></li>
-<li><p><strong>paths_list</strong> (<em>str</em>) – lists of all nifti files found in bids_dir, these paths are
+<li><p><strong>paths_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – lists of all nifti files found in bids_dir, these paths are
 relative to bids_dir</p></li>
-<li><p><strong>config_dict</strong> (<em>dict</em>) – dictionary that contains information from the JSON sidecars
+<li><p><strong>config_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – dictionary that contains information from the JSON sidecars
 found in bids_dir, keys are relative paths and values are
 dictionaries containing all of the parameter information. if
 config_dict is None, the subject list will be built without the
 parameters</p></li>
-<li><p><strong>creds_path</strong> (<em>str</em>) – if using S3 bucket, this path credentials needed to access the
+<li><p><strong>creds_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – if using S3 bucket, this path credentials needed to access the
 bucket, if accessing anonymous bucket, this can be set to None</p></li>
-<li><p><strong>dbg</strong> (<em>bool</em>) – indicating whether or not the debug statements should be
+<li><p><strong>dbg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – indicating whether or not the debug statements should be
 printed</p></li>
-<li><p><strong>raise_error</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>only_one_anat</strong> (<em>bool</em>) – The “anat” key for a subject expects a string value, but we can
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – </p></li>
+<li><p><strong>only_one_anat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – The “anat” key for a subject expects a string value, but we can
 temporarily store a list instead by passing True here if we
 will be filtering that list down to a single string later</p></li>
 </ul>
@@ -384,7 +384,7 @@ will be filtering that list down to a single string later</p></li>
 to be processed</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -396,13 +396,13 @@ to be processed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>file_list</strong> (<em>list</em><em> of </em><em>str</em>) – </p></li>
-<li><p><strong>entities</strong> (<em>str</em>) – BIDS entities joined by underscores (e.g., ‘ses-001_task-PEER1’)</p></li>
-<li><p><strong>suffix</strong> (<em>str</em>) – BIDS suffix (e.g., ‘bold’, ‘T1w’)</p></li>
+<li><p><strong>file_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
+<li><p><strong>entities</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – BIDS entities joined by underscores (e.g., ‘ses-001_task-PEER1’)</p></li>
+<li><p><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – BIDS suffix (e.g., ‘bold’, ‘T1w’)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of str</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -457,15 +457,15 @@ such as sub, sess, run, acq, and scan type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – BIDS string to remove entity from</p></li>
-<li><p><strong>key</strong> (<em>str</em>) – BIDS key of entity to remove</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – BIDS string to remove entity from</p></li>
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – BIDS key of entity to remove</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>BIDS name with entity removed</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -514,10 +514,10 @@ BIDS entities from a given list, returning the first if more than
 one have the same minimum length.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>file_list</strong> (<em>list</em><em> of </em><em>strings</em>) – </p>
+<dd class="field-odd"><p><strong>file_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">strings</span></code>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str or None</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -534,14 +534,14 @@ one have the same minimum length.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.bids_utils.camelCase">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">camelCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#camelCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.camelCase" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">camelCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#camelCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.camelCase" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert a hyphenated string to camelCase</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>string</strong> (<em>str</em>) – string to convert to camelCase</p>
+<dd class="field-odd"><p><strong>string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – string to convert to camelCase</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -560,10 +560,10 @@ one have the same minimum length.</p>
 arguments in a list of commandline arguments</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg_list</strong> (<em>list</em>) – </p>
+<dd class="field-odd"><p><strong>arg_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -595,15 +595,15 @@ arguments in a list of commandline arguments</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.bids_utils.combine_multiple_entity_instances">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">combine_multiple_entity_instances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bids_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#combine_multiple_entity_instances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.combine_multiple_entity_instances" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">combine_multiple_entity_instances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bids_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#combine_multiple_entity_instances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.combine_multiple_entity_instances" title="Permalink to this definition">#</a></dt>
 <dd><p>Combines mutliple instances of a key in a BIDS string to a single
 instance by camelCasing and concatenating the values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>bids_str</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>bids_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -626,17 +626,17 @@ instance by camelCasing and concatenating the values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>bids_dir</strong> (<em>str</em>) – </p></li>
-<li><p><strong>participant_labels</strong> (<em>list</em><em> or </em><em>None</em>) – </p></li>
+<li><p><strong>bids_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
+<li><p><strong>participant_labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>) – </p></li>
 <li><p><strong>aws_input_creds</strong> – </p></li>
-<li><p><strong>skip_bids_validator</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>only_one_anat</strong> (<em>bool</em>) – The “anat” key for a subject expects a string value, but we
+<li><p><strong>skip_bids_validator</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – </p></li>
+<li><p><strong>only_one_anat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – The “anat” key for a subject expects a string value, but we
 can temporarily store a list instead by passing True here if
 we will be filtering that list down to a single string later</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -654,13 +654,13 @@ present or before the suffix otherwise</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>resource</strong> (<em>str</em>) – </p></li>
-<li><p><strong>key</strong> (<em>str</em>) – </p></li>
-<li><p><strong>value</strong> (<em>str</em>) – </p></li>
+<li><p><strong>resource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -683,13 +683,13 @@ present or before the suffix otherwise</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data_config_file</strong> (<em>str</em>) – path to data config</p></li>
-<li><p><strong>participants_labels</strong> (<em>list</em><em> or </em><em>None</em>) – </p></li>
+<li><p><strong>data_config_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – path to data config</p></li>
+<li><p><strong>participants_labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>) – </p></li>
 <li><p><strong>aws_input_creds</strong> – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -706,15 +706,15 @@ present or before the suffix otherwise</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cfg</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><em>CPAC.utils.configuration.Configuration</em></a>) – </p></li>
-<li><p><strong>label</strong> (<em>str</em>) – </p></li>
+<li><p><strong>cfg</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.configuration.Configuration</span></code></a>) – </p></li>
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>label</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -741,31 +741,31 @@ specified suffixes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sub_list</strong> (<em>list</em>) – </p></li>
-<li><p><strong>labels</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>labels</strong><strong>[</strong><strong>'T1w'</strong><strong>]</strong> (<em>str</em><em> or </em><em>None</em>) – C-PAC currently only uses a single T1w image</p></li>
-<li><p><strong>labels</strong><strong>[</strong><strong>'bold'</strong><strong>]</strong> (<em>str</em><em>, </em><em>list</em><em>, or </em><em>None</em>) – </p></li>
+<li><p><strong>sub_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – </p></li>
+<li><p><strong>labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p></li>
+<li><p><strong>labels</strong><strong>[</strong><strong>'T1w'</strong><strong>]</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>) – C-PAC currently only uses a single T1w image</p></li>
+<li><p><strong>labels</strong><strong>[</strong><strong>'bold'</strong><strong>]</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.bids_utils.with_key">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">with_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#with_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.with_key" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">with_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#with_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.with_key" title="Permalink to this definition">#</a></dt>
 <dd><p>Return a keyed BIDS entity</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>entity</strong> (<em>str</em>) – </p></li>
-<li><p><strong>key</strong> (<em>str</em>) – </p></li>
+<li><p><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -779,17 +779,17 @@ specified suffixes</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.bids_utils.without_key">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">without_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#without_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.without_key" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.bids_utils.</span></span><span class="sig-name descname"><span class="pre">without_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/bids_utils#without_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.bids_utils.without_key" title="Permalink to this definition">#</a></dt>
 <dd><p>Return a BIDS entity value</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>entity</strong> (<em>str</em>) – </p></li>
-<li><p><strong>key</strong> (<em>str</em>) – </p></li>
+<li><p><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -909,25 +909,25 @@ c[keys]</p>
 <dd><p>A preconfigured Configuration</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>preconfig</strong> (<em>str</em>) – The canonical name of the preconfig to load</p>
+<dd class="field-odd"><p><strong>preconfig</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The canonical name of the preconfig to load</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.configuration.check_pname">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">check_pname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#check_pname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.check_pname" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">check_pname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#check_pname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.check_pname" title="Permalink to this definition">#</a></dt>
 <dd><p>Function to check / set <cite>p_name</cite>, the string representation of a
 pipeline for use in filetrees</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_name</strong> (<em>str</em><em> or </em><em>None</em>) – </p></li>
-<li><p><strong>pipe_config</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><em>Configuration</em></a>) – </p></li>
+<li><p><strong>p_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>) – </p></li>
+<li><p><strong>pipe_config</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>p_name</p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">p_name</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -957,37 +957,37 @@ pipeline for use in filetrees</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>preconfig_name</strong> (<em>str</em>) – </p></li>
-<li><p><strong>load</strong> (<em>boolean</em>) – return dict if True, str if False</p></li>
+<li><p><strong>preconfig_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p></li>
+<li><p><strong>load</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – return dict if True, str if False</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>path to YAML file or dict loaded from YAML</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str or dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.configuration.set_subject">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">set_subject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#set_subject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.set_subject" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.configuration.</span></span><span class="sig-name descname"><span class="pre">set_subject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/CPAC/utils/configuration/configuration#set_subject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.configuration.set_subject" title="Permalink to this definition">#</a></dt>
 <dd><p>Function to set pipeline name and log directory path for a given
 sub_dict</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sub_dict</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>pipe_config</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><em>CPAC.utils.configuration.Configuration</em></a>) – </p></li>
-<li><p><strong>p_name</strong> (<em>str</em><em>, </em><em>optional</em>) – pipeline name string</p></li>
+<li><p><strong>sub_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p></li>
+<li><p><strong>pipe_config</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.configuration.Configuration</span></code></a>) – </p></li>
+<li><p><strong>p_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – pipeline name string</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>subject_id</strong> (<em>str</em>)</p></li>
-<li><p><strong>p_name</strong> (<em>str</em>) – pipeline name string</p></li>
-<li><p><strong>log_dir</strong> (<em>str</em>) – path to subject log directory</p></li>
+<li><p><strong>subject_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</p></li>
+<li><p><strong>p_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – pipeline name string</p></li>
+<li><p><strong>log_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – path to subject log directory</p></li>
 </ul>
 </p>
 </dd>
@@ -1329,13 +1329,13 @@ two columns using dummy-coding.</p>
 <dd><p>Function to return a BIDSier prefix for a given unique_id</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>unique_id</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>unique_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>prefix</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -1353,19 +1353,19 @@ two columns using dummy-coding.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.datasource.calc_delta_te_and_asym_ratio">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.datasource.</span></span><span class="sig-name descname"><span class="pre">calc_delta_te_and_asym_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">effective_echo_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">echo_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/CPAC/utils/datasource#calc_delta_te_and_asym_ratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.datasource.calc_delta_te_and_asym_ratio" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.datasource.</span></span><span class="sig-name descname"><span class="pre">calc_delta_te_and_asym_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">effective_echo_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">echo_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/CPAC/utils/datasource#calc_delta_te_and_asym_ratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.datasource.calc_delta_te_and_asym_ratio" title="Permalink to this definition">#</a></dt>
 <dd><p>Calcluate <code class="docutils literal notranslate"><span class="pre">deltaTE</span></code> and <code class="docutils literal notranslate"><span class="pre">ees_asym_ratio</span></code> from given metadata</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>effective_echo_spacing</strong> (<em>float</em>) – EffectiveEchoSpacing from sidecar JSON</p></li>
-<li><p><strong>echo_times</strong> (<em>list</em>) – </p></li>
+<li><p><strong>effective_echo_spacing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – EffectiveEchoSpacing from sidecar JSON</p></li>
+<li><p><strong>echo_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>deltaTE</strong> (<em>float</em>)</p></li>
-<li><p><strong>ees_asym_ratio</strong> (<em>float</em>)</p></li>
+<li><p><strong>deltaTE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>)</p></li>
+<li><p><strong>ees_asym_ratio</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>)</p></li>
 </ul>
 </p>
 </dd>
@@ -1524,13 +1524,13 @@ scan_parameters: &lt;config dictionary of BOLD scan parameters&gt;</p>
 <dd><p>Converts a resolution string to a tuple of floats.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>resolution</strong> (<em>str</em>) – Resolution string, e.g. “3.438mmx3.438mmx3.4mm”</p>
+<dd class="field-odd"><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Resolution string, e.g. “3.438mmx3.438mmx3.4mm”</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>resolution</strong> – Tuple of floats, e.g. (3.438, 3.438, 3.4)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1610,7 +1610,7 @@ Use double-curly-braces ({{}}) for literal curly braces.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.docs.version_report">
-<span class="sig-prename descclassname"><span class="pre">CPAC.utils.docs.</span></span><span class="sig-name descname"><span class="pre">version_report</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/CPAC/utils/docs#version_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.docs.version_report" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.utils.docs.</span></span><span class="sig-name descname"><span class="pre">version_report</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/docs#version_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.docs.version_report" title="Permalink to this definition">#</a></dt>
 <dd><p>A formatted block of versions included in CPAC’s environment</p>
 </dd></dl>
 
@@ -1817,7 +1817,7 @@ and power parameters file from each subject
 for each pipeline and merge them</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>output_dir</strong> (<em>string</em>) – Path to the datasink output directory of CPAC</p>
+<dd class="field-odd"><p><strong>output_dir</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Path to the datasink output directory of CPAC</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1864,14 +1864,14 @@ parameters file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tracking_id</strong> (<em>str</em>) – Google Analytics tracking ID.</p></li>
-<li><p><strong>category</strong> (<em>str</em>) – Event category.</p></li>
-<li><p><strong>action</strong> (<em>str</em>) – Event action.</p></li>
-<li><p><strong>uid</strong> (<em>str</em>) – User unique ID, assigned when popylar was installed.</p></li>
-<li><p><strong>label</strong> (<em>str</em>) – Event label.</p></li>
-<li><p><strong>value</strong> (<em>int</em>) – Event value.</p></li>
-<li><p><strong>software_version</strong> (<em>str</em>) – Records a version of the software.</p></li>
-<li><p><strong>timeout</strong> (<em>float</em>) – Maximal duration (in seconds) for the network connection to track the
+<li><p><strong>tracking_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Google Analytics tracking ID.</p></li>
+<li><p><strong>category</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Event category.</p></li>
+<li><p><strong>action</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Event action.</p></li>
+<li><p><strong>uid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – User unique ID, assigned when popylar was installed.</p></li>
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Event label.</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Event value.</p></li>
+<li><p><strong>software_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Records a version of the software.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Maximal duration (in seconds) for the network connection to track the
 event. After this duration has elapsed with no response (e.g., on a
 slow network connection), the tracking is dropped.</p></li>
 </ul>
@@ -1912,7 +1912,7 @@ slow network connection), the tracking is dropped.</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.output_spec">
 <span class="sig-name descname"><span class="pre">output_spec</span></span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.output_spec" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicTraitedSpec</span></code></p>
+<dd><p>alias of <a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.interfaces.base.specs.html#nipype.interfaces.base.specs.DynamicTraitedSpec" title="(in nipype v1.8.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicTraitedSpec</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -1924,10 +1924,10 @@ slow network connection), the tracking is dropped.</p></li>
 CPAC.seg_preproc.utils.pick_tissue_from_labels_file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>input_names</strong> (<em>list</em><em>, </em><em>optional</em>) – </p>
+<dd class="field-odd"><p><strong>input_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, <em>optional</em>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="nodes#nipype.interfaces.base.core.Interface" title="nipype.interfaces.base.core.Interface">nipype.interfaces.base.core.Interface</a></p>
+<dd class="field-even"><p><a class="reference internal" href="nodes#nipype.interfaces.base.core.Interface" title="nipype.interfaces.base.core.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.interfaces.base.core.Interface</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2001,8 +2001,8 @@ Must be called from within an <code class="docutils literal notranslate"><span c
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>log_dir</strong> (<em>str</em>) – path to logging directory</p></li>
-<li><p><strong>exception</strong> (<em>Exception</em>) – </p></li>
+<li><p><strong>log_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – path to logging directory</p></li>
+<li><p><strong>exception</strong> (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -2015,13 +2015,13 @@ Must be called from within an <code class="docutils literal notranslate"><span c
 real loggers.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>logger</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="logging#CPAC.utils.monitoring.custom_logging.MockLogger" title="CPAC.utils.monitoring.custom_logging.MockLogger">CPAC.utils.monitoring.custom_logging.MockLogger</a> or logging.Logger</p>
+<dd class="field-odd"><p><a class="reference internal" href="logging#CPAC.utils.monitoring.custom_logging.MockLogger" title="CPAC.utils.monitoring.custom_logging.MockLogger"><code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.custom_logging.MockLogger</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Logger</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2034,8 +2034,8 @@ dictionaries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>node</strong> (<em>nipype.pipeline.engine.Node</em>) – the node being logged</p></li>
-<li><p><strong>status</strong> (<em>string</em>) – acceptable values are ‘start’, ‘end’; otherwise it is
+<li><p><strong>node</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Node</span></code>) – the node being logged</p></li>
+<li><p><strong>status</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – acceptable values are ‘start’, ‘end’; otherwise it is
 considered and error</p></li>
 </ul>
 </dd>
@@ -2044,7 +2044,7 @@ considered and error</p></li>
 status info to the callback logger</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2071,14 +2071,14 @@ status info to the callback logger</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – logger name (for subsequent calls to <code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code>) to
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – logger name (for subsequent calls to <code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code>) to
 write to the same log file)</p></li>
-<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – filename to write log to. If not specified, filename will be
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – filename to write log to. If not specified, filename will be
 the same as <code class="docutils literal notranslate"><span class="pre">name</span></code> with the extension <code class="docutils literal notranslate"><span class="pre">log</span></code></p></li>
-<li><p><strong>level</strong> (<em>str</em><em>, </em><em>optional</em>) – one of <code class="docutils literal notranslate"><span class="pre">{critical,</span> <span class="pre">error,</span> <span class="pre">warning,</span> <span class="pre">info,</span> <span class="pre">debug,</span> <span class="pre">notset}</span></code>,
+<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – one of <code class="docutils literal notranslate"><span class="pre">{critical,</span> <span class="pre">error,</span> <span class="pre">warning,</span> <span class="pre">info,</span> <span class="pre">debug,</span> <span class="pre">notset}</span></code>,
 case-insensitive</p></li>
-<li><p><strong>log_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – </p></li>
-<li><p><strong>mock</strong> (<em>bool</em><em>, </em><em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, return a <code class="docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.MockLogger</span></code>
+<li><p><strong>log_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – </p></li>
+<li><p><strong>mock</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, return a <code class="docutils literal notranslate"><span class="pre">CPAC.utils.monitoring.MockLogger</span></code>
 instead of a <code class="docutils literal notranslate"><span class="pre">logging.Logger</span></code></p></li>
 </ul>
 </dd>
@@ -2086,7 +2086,7 @@ instead of a <code class="docutils literal notranslate"><span class="pre">loggin
 <dd class="field-even"><p><strong>logger</strong> – initialized logging Handler</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>logging.Handler</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Handler" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Handler</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -2270,7 +2270,7 @@ Returns the roi timeseries as a numpy.ndarray.
 <dd class="field-odd"><p><strong>output</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Nibabel Nifti1Image</p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Nibabel</span> <span class="pre">Nifti1Image</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2288,7 +2288,7 @@ Returns the roi timeseries as a numpy.ndarray.
 <dd class="field-odd"><p><strong>more_zeros</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>boolean</p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2299,14 +2299,14 @@ Returns the roi timeseries as a numpy.ndarray.
 <dd><p>Test if an input is a path or a nifti.image and the image loaded through
 nibabel
 :param image: path to the nifti file or the image already loaded through nibabel
-:type image: str or nibabel.nifti1.Nifti1Image</p>
+:type image: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">nibabel.nifti1.Nifti1Image</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>img</strong> – load and return the nifti image if image is a path, otherwise simply
 return image</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>nibabel.nifti1.Nifti1Image</p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nibabel.nifti1.Nifti1Image</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2548,15 +2548,15 @@ Lin (1989)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>list</em><em> or </em><em>array</em>) – a list of array of length N of numbers</p></li>
-<li><p><strong>y</strong> (<em>list</em><em> or </em><em>array</em>) – a list of array of length N of numbers</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – a list of array of length N of numbers</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – a list of array of length N of numbers</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>rho_c</strong> – the concordance value as a float</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.float32</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.float32</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2573,7 +2573,7 @@ Lin (1989)</p>
 <dd class="field-even"><p><strong>bucket_name</strong> – default S3 bucket name for testing</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2585,7 +2585,7 @@ Lin (1989)</p>
 S3</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>local_base</strong> (<em>string</em>) – the local directory to save the ‘cpac_resources’ contents</p>
+<dd class="field-odd"><p><strong>local_base</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – the local directory to save the ‘cpac_resources’ contents</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2609,7 +2609,7 @@ S3</p>
 <dd class="field-odd"><p><strong>None</strong> – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2621,14 +2621,14 @@ S3</p>
 CPAC_RESOURCE_DIR and populate it with actual filepaths</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>config_type</strong> (<em>string</em>) – config file to populate; accepts ‘data_config’ and
+<dd class="field-odd"><p><strong>config_type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – config file to populate; accepts ‘data_config’ and
 ‘pipeline_config’</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>config_test</strong> – filepath to the newly written config file for testing</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2640,13 +2640,13 @@ CPAC_RESOURCE_DIR and populate it with actual filepaths</p>
 and return the filepaths of all nifti files found</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>base_dir</strong> (<em>string</em>) – filepath to the base directory to search through</p>
+<dd class="field-odd"><p><strong>base_dir</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – filepath to the base directory to search through</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>nii_list</strong> – a list of filepath strings of the nifti files found in base_dir</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2665,7 +2665,7 @@ CPAC_AWS_CREDS environment variable</p>
 access key</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2683,7 +2683,7 @@ CPAC_RESOURCE_DIR environment variable must be set</p>
 <dd class="field-even"><p><strong>resource_dir</strong> – the file path on disk where the cpac resources folder is</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2694,13 +2694,13 @@ CPAC_RESOURCE_DIR environment variable must be set</p>
 <dd><p>Funnction to return subfolders of the CPAC_RESOURCE_DIR</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subfolder</strong> (<em>string</em>) – subfolder name to return path of</p>
+<dd class="field-odd"><p><strong>subfolder</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – subfolder name to return path of</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>resource_subfolder</strong> – filepath to the resource subfolder</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2718,7 +2718,7 @@ the CPAC_RESOURCE_DIR</p>
 <dd class="field-even"><p><strong>strats_obj</strong> – filepath to the strategies obj file</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2730,7 +2730,7 @@ the CPAC_RESOURCE_DIR</p>
 files for a given measure or workflow</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>measure</strong> (<em>string</em>) – the measure or workflow or derivative of interest to parse for;
+<dd class="field-odd"><p><strong>measure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – the measure or workflow or derivative of interest to parse for;
 this must be the folder name where all of the subject’s test
 outputs are located (e.g. ‘network_centrality’)</p>
 </dd>
@@ -2739,7 +2739,7 @@ outputs are located (e.g. ‘network_centrality’)</p>
 the desired measure folder within the test subjects outputs</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2757,7 +2757,7 @@ the CPAC_RESOURCE_DIR</p>
 <dd class="field-even"><p><strong>subject_list</strong> – filepath to the subject list yaml file</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2775,7 +2775,7 @@ CPAC_RESOURCE_DIR environment variable must be set</p>
 <dd class="field-even"><p><strong>resource_dir</strong> – the file path on disk where the cpac resources folder is</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2788,12 +2788,12 @@ and (optionally) the screen.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>logger_name</strong> (<em>string</em>) – name of the logger</p></li>
-<li><p><strong>log_file</strong> (<em>string</em>) – file path to the log file on disk</p></li>
-<li><p><strong>level</strong> (<em>integer</em>) – indicates the level at which the logger should log; this is
+<li><p><strong>logger_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – name of the logger</p></li>
+<li><p><strong>log_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – file path to the log file on disk</p></li>
+<li><p><strong>level</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">integer</span></code>) – indicates the level at which the logger should log; this is
 controlled by integers that come with the python logging
 package. (e.g. logging.INFO=20, logging.DEBUG=10)</p></li>
-<li><p><strong>to_screen</strong> (<em>boolean</em><em> (</em><em>optional</em><em>)</em>) – flag to indicate whether to enable logging to the screen</p></li>
+<li><p><strong>to_screen</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span> <span class="pre">(optional)</span></code>) – flag to indicate whether to enable logging to the screen</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2801,7 +2801,7 @@ package. (e.g. logging.INFO=20, logging.DEBUG=10)</p></li>
 time information about the program to file and/or screen</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>logging.Logger object</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Logger</span> <span class="pre">object</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2814,16 +2814,16 @@ on the smoothed data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>nii_file</strong> (<em>string</em>) – filepath to the nifti file to smooth</p></li>
-<li><p><strong>fwhm</strong> (<em>float</em>) – FWHM for Gaussian smoothing kernel, in mm</p></li>
-<li><p><strong>mask_file</strong> (<em>string</em><em> (</em><em>optional</em><em>)</em><em>; default=None</em>) – filepath to the mask file to use</p></li>
+<li><p><strong>nii_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – filepath to the nifti file to smooth</p></li>
+<li><p><strong>fwhm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – FWHM for Gaussian smoothing kernel, in mm</p></li>
+<li><p><strong>mask_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span> <span class="pre">(optional);</span> <span class="pre">default=None</span></code>) – filepath to the mask file to use</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>smooth_arr</strong> – smoothed nifti image as a numpy array</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.ndarray</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2938,18 +2938,18 @@ into what is called an execution graph, creating a node for each iterable value.
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>wf</strong> (<a class="reference internal" href="nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow" title="CPAC.pipeline.nipype_pipeline_engine.Workflow"><em>Workflow</em></a>) – A Nipype workflow to be pruned.</p></li>
-<li><p><strong>output_dir</strong> (<em>Path</em>) – The directory in which the outputs are stored. If not provided, value is inferred
+<li><p><strong>wf</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code>) – A Nipype workflow to be pruned.</p></li>
+<li><p><strong>output_dir</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – The directory in which the outputs are stored. If not provided, value is inferred
 from the DataSink nodes.</p></li>
-<li><p><strong>container</strong> (<em>Path</em>) – The subdirectory from the output_dir in which the output are stored. If not provided,
+<li><p><strong>container</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – The subdirectory from the output_dir in which the output are stored. If not provided,
 value is inferred from the DataSink nodes.</p></li>
-<li><p><strong>s3_creds_path</strong> (<em>Path</em>) – Path to S3 credentials, in case output_dir is in a S3 bucket.</p></li>
+<li><p><strong>s3_creds_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – Path to S3 credentials, in case output_dir is in a S3 bucket.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul>
-<li><p><strong>wf_new</strong> (<em>Workflow</em>) – Prunned workflow</p></li>
-<li><p><strong>(replacement_mapping, deletions)</strong> (<em>(Dict, List)</em>) – replacement_mapping contains the nodes replaces with input nodes, pointing to
+<li><p><strong>wf_new</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code>) – Prunned workflow</p></li>
+<li><p><strong>(replacement_mapping, deletions)</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">(Dict</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List)</span></code>) – replacement_mapping contains the nodes replaces with input nodes, pointing to
 files from the output_dir</p>
 <p>deletions contains the nodes removed from the workflow, as they do not need to be
 executed</p>
@@ -2970,7 +2970,7 @@ current preferred syntax.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="CPAC.utils.typing.TUPLE">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.typing.</span></span><span class="sig-name descname"><span class="pre">TUPLE</span></span><a class="headerlink" href="#CPAC.utils.typing.TUPLE" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
 </dd></dl>
 
 </section>
@@ -3013,7 +3013,7 @@ current preferred syntax.</p>
 Code from scikit-learn (<a class="reference external" href="https://github.com/scikit-learn/scikit-learn">https://github.com/scikit-learn/scikit-learn</a>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>seed</strong> (<em>None</em><em> | </em><em>int</em><em> | </em><em>instance</em><em> of </em><em>RandomState</em>) – If seed is None, return the RandomState singleton used by np.random.
+<dd class="field-odd"><p><strong>seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">None</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">instance</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">RandomState</span></code>) – If seed is None, return the RandomState singleton used by np.random.
 If seed is an int, return a new RandomState instance seeded with seed.
 If seed is already a RandomState instance, return it.
 Otherwise raise ValueError.</p>
@@ -3042,13 +3042,13 @@ the function returns z score for each ROI as a seperate nifti
 file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>correlation_file</strong> (<em>string</em>) – Input correlations file</p>
+<dd class="field-odd"><p><strong>correlation_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Input correlations file</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>out_file</strong> – list of z_scores for mask or ROI</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list (nifti files)</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span> <span class="pre">(nifti</span> <span class="pre">files)</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3059,15 +3059,15 @@ file</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>in_list1</strong> (<em>list</em><em> or </em><em>str</em>) – file path or a list of file paths</p></li>
-<li><p><strong>in_list2</strong> (<em>list</em><em> or </em><em>str</em>) – file path or a list of file paths</p></li>
+<li><p><strong>in_list1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – file path or a list of file paths</p></li>
+<li><p><strong>in_list2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – file path or a list of file paths</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>out_list</strong> – a list of file paths</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3115,15 +3115,15 @@ file in the subject directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>keys</strong> (<em>list</em><em> or </em><em>tuple</em>) – </p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p></li>
+<li><p><strong>keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>updated</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3190,15 +3190,15 @@ roi timeseries required for dual regression</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mean</strong> (<em>string</em>) – path to img containing mean</p></li>
-<li><p><strong>std_dev</strong> (<em>string</em>) – path to img containing standard deviation</p></li>
+<li><p><strong>mean</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – path to img containing mean</p></li>
+<li><p><strong>std_dev</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – path to img containing standard deviation</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>op_string</strong> – operand string</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3216,22 +3216,22 @@ and scan parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>subject_id</strong> (<em>str</em>) – subject id</p></li>
-<li><p><strong>scan</strong> (<em>str</em>) – scan id</p></li>
-<li><p><strong>pipeconfig_start_indx</strong> (<em>int</em>) – starting volume index as provided in the pipeline config yaml file</p></li>
-<li><p><strong>pipeconfig_stop_indx</strong> (<em>int</em>) – ending volume index as provided in the pipeline config yaml file</p></li>
-<li><p><strong>data_config_scan_params</strong> (<em>str</em>) – file path to scan parameter JSON file listed in data config yaml file</p></li>
+<li><p><strong>subject_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – subject id</p></li>
+<li><p><strong>scan</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – scan id</p></li>
+<li><p><strong>pipeconfig_start_indx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – starting volume index as provided in the pipeline config yaml file</p></li>
+<li><p><strong>pipeconfig_stop_indx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – ending volume index as provided in the pipeline config yaml file</p></li>
+<li><p><strong>data_config_scan_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – file path to scan parameter JSON file listed in data config yaml file</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>TR</strong> (<em>a string</em>) – TR value</p></li>
-<li><p><strong>pattern</strong> (<em>a string</em>) – slice aquisition pattern string or file path</p></li>
-<li><p><strong>ref_slice</strong> (<em>an integer</em>) – reference slice which is used to allign all other slices</p></li>
-<li><p><strong>first_tr</strong> (<em>an integer</em>) – starting TR or starting volume index</p></li>
-<li><p><strong>last_tr</strong> (<em>an integer</em>) – ending TR or ending volume index</p></li>
-<li><p><strong>pe_direction</strong> (<em>str</em>)</p></li>
-<li><p><strong>effective_echo_spacing</strong> (<em>float</em>)</p></li>
+<li><p><strong>TR</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">a</span> <span class="pre">string</span></code>) – TR value</p></li>
+<li><p><strong>pattern</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">a</span> <span class="pre">string</span></code>) – slice aquisition pattern string or file path</p></li>
+<li><p><strong>ref_slice</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">an</span> <span class="pre">integer</span></code>) – reference slice which is used to allign all other slices</p></li>
+<li><p><strong>first_tr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">an</span> <span class="pre">integer</span></code>) – starting TR or starting volume index</p></li>
+<li><p><strong>last_tr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">an</span> <span class="pre">integer</span></code>) – ending TR or ending volume index</p></li>
+<li><p><strong>pe_direction</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</p></li>
+<li><p><strong>effective_echo_spacing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>)</p></li>
 </ul>
 </p>
 </dd>
@@ -3250,13 +3250,13 @@ and scan parameters.</p>
 <dd><p>Workflow to calculate z-scores</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – name of the workflow</p>
+<dd class="field-odd"><p><strong>wf_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – name of the workflow</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>wf</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>workflow object</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">workflow</span> <span class="pre">object</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -3296,16 +3296,16 @@ and scan parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>l</strong> (<em>list</em><em> or </em><em>string</em>) – </p></li>
-<li><p><strong>old</strong> (<em>any</em>) – item to replace</p></li>
-<li><p><strong>new</strong> (<em>any</em>) – new item</p></li>
+<li><p><strong>l</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – </p></li>
+<li><p><strong>old</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">any</span></code>) – item to replace</p></li>
+<li><p><strong>new</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">any</span></code>) – new item</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>l</strong> – updated</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list or string</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3329,15 +3329,15 @@ and scan parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>keys</strong> (<em>list</em><em> or </em><em>tuple</em>) – </p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p></li>
+<li><p><strong>keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>yaml</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str or dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3372,15 +3372,15 @@ and scan parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>k</strong> (<em>list</em>) – </p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>d</strong> – updated</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3397,15 +3397,15 @@ and scan parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>k</strong> (<em>list</em>) – </p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>d</strong> – updated</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3422,10 +3422,10 @@ and scan parameters.</p>
 convert any Python 2 pickles found to Python 3 pickles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>directory</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3437,8 +3437,8 @@ convert any Python 2 pickles found to Python 3 pickles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>any</em>) – </p></li>
-<li><p><strong>replacements</strong> (<em>list</em><em> of </em><em>2-tuples</em>) – <dl class="simple">
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">any</span></code>) – </p></li>
+<li><p><strong>replacements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">2-tuples</span></code>) – <dl class="simple">
 <dt>0<span class="classifier">str</span></dt><dd><p>substring to replace</p>
 </dd>
 <dt>1<span class="classifier">str</span></dt><dd><p>replacement substring</p>
@@ -3451,7 +3451,7 @@ convert any Python 2 pickles found to Python 3 pickles.</p>
 <dd class="field-even"><p><strong>d</strong> – same as input, but updated</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>any</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">any</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3469,17 +3469,17 @@ are the same shape.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>vol_data0</strong> (<em>ndarray</em>) – Volumes to check</p></li>
-<li><p><strong>vol_data1</strong> (<em>ndarray</em>) – Volumes to check</p></li>
-<li><p><strong>...</strong> (<em>ndarray</em>) – Volumes to check</p></li>
-<li><p><strong>vol_datan</strong> (<em>ndarray</em>) – Volumes to check</p></li>
+<li><p><strong>vol_data0</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Volumes to check</p></li>
+<li><p><strong>vol_data1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Volumes to check</p></li>
+<li><p><strong>...</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Volumes to check</p></li>
+<li><p><strong>vol_datan</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Volumes to check</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>same_volume</strong> – True only if all volumes have the same shape.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3491,16 +3491,16 @@ are the same shape.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>keys</strong> (<em>list</em><em> or </em><em>tuple</em>) – </p></li>
-<li><p><strong>value</strong> (<em>any</em>) – </p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p></li>
+<li><p><strong>keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – </p></li>
+<li><p><strong>value</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">any</span></code>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>updated</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3521,13 +3521,13 @@ are the same shape.</p>
 <dd><p>Function to convert an old config dict to a new config dict</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>old_dict</strong> (<em>dict</em>) – </p>
+<dd class="field-odd"><p><strong>old_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>new_dict</strong> (<em>dict</em>) – 1.8 nested config dictionary</p></li>
-<li><p><strong>old_dict</strong> (<em>dict</em>) – remaining undefined mappings</p></li>
-<li><p><strong>combined_dict</strong> (<em>dict</em>) – 1.8 nested config dictionary plus remaining undefined mappings</p></li>
+<li><p><strong>new_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – 1.8 nested config dictionary</p></li>
+<li><p><strong>old_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – remaining undefined mappings</p></li>
+<li><p><strong>combined_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – 1.8 nested config dictionary plus remaining undefined mappings</p></li>
 </ul>
 </p>
 </dd>
@@ -3552,16 +3552,16 @@ are the same shape.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d_base</strong> (<em>dict</em>) – original dictionary</p></li>
-<li><p><strong>d_update</strong> (<em>dict</em>) – dictionary with updates</p></li>
-<li><p><strong>fully_specified</strong> (<em>bool</em>) – if True, overwrite instead of update</p></li>
+<li><p><strong>d_base</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – original dictionary</p></li>
+<li><p><strong>d_update</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – dictionary with updates</p></li>
+<li><p><strong>fully_specified</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – if True, overwrite instead of update</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>d_base</strong> – original dictionary with updates</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3652,13 +3652,13 @@ are the same shape.</p>
 C-PAC 1.7 to 1.8.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>d_old</strong> (<em>dict</em>) – </p>
+<dd class="field-odd"><p><strong>d_old</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>d</strong> – updated</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3682,15 +3682,15 @@ conversions against the schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d_old</strong> (<em>dict</em>) – </p></li>
-<li><p><strong>last_exception</strong> (<em>Exception</em><em> or </em><em>None</em>) – if the same exception recurs, raise it.</p></li>
+<li><p><strong>d_old</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – </p></li>
+<li><p><strong>last_exception</strong> (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>) – if the same exception recurs, raise it.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>d</strong> – updated</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>

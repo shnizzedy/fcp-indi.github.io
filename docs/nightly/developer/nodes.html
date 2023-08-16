@@ -318,7 +318,7 @@
         <article role="main">
           <section id="nodes">
 <h1>Nodes<a class="headerlink" href="#nodes" title="Permalink to this heading">#</a></h1>
-<p id="n-cpus"><span id="n-procs"></span><span id="mem-gb"></span>A Nipype <code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code> has an initialization parameter <code class="docutils literal notranslate"><span class="pre">mem_gb</span></code> that differs from the <a class="reference internal" href="../user/run/help"><span class="doc">commandline option</span></a> <code class="docutils literal notranslate"><span class="pre">--mem_gb</span></code>. While the commandline option is <strong>a limit</strong>, the Node initialization parameter is <strong>an estimate</strong> of the most memory that Node will consume when run. The Node parameter is not a limit; rather, this value is used to allocate system resources at runtime.</p>
+<p id="n-cpus"><span id="n-procs"></span><span id="mem-gb"></span>A Nipype <a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.nodes.html#nipype.pipeline.engine.nodes.Node" title="(in nipype v1.8.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a> has an initialization parameter <code class="docutils literal notranslate"><span class="pre">mem_gb</span></code> that differs from the <a class="reference internal" href="../user/run/help"><span class="doc">commandline option</span></a> <code class="docutils literal notranslate"><span class="pre">--mem_gb</span></code>. While the commandline option is <strong>a limit</strong>, the Node initialization parameter is <strong>an estimate</strong> of the most memory that Node will consume when run. The Node parameter is not a limit; rather, this value is used to allocate system resources at runtime.</p>
 <p>Conversely, the commandline option <code class="docutils literal notranslate"><span class="pre">--n_cpus</span></code> is <strong>a limit</strong> and the Node initialization parameter <code class="docutils literal notranslate"><span class="pre">n_procs</span></code> is <strong>also a limit</strong> of the maximum number of threads a Node will be permmitted to consume.</p>
 <p>C-PAC automatically creates a JSON-like file called <code class="docutils literal notranslate"><span class="pre">callback.log</span></code> (via the function <a class="reference internal" href="utils#CPAC.utils.monitoring.log_nodes_cb" title="CPAC.utils.monitoring.log_nodes_cb"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_nodes_cb</span></code></a>) when running. This file includes for each Node:</p>
 <blockquote>
@@ -362,9 +362,9 @@ re-executed.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>interface</strong> (<em>interface object</em>) – node specific interface (fsl.Bet(), spm.Coregister())</p></li>
-<li><p><strong>name</strong> (<em>alphanumeric string</em>) – node specific name</p></li>
-<li><p><strong>iterables</strong> (<em>generator</em>) – <p>Input field and list to iterate using the pipeline engine
+<li><p><strong>interface</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">interface</span> <span class="pre">object</span></code>) – node specific interface (fsl.Bet(), spm.Coregister())</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">alphanumeric</span> <span class="pre">string</span></code>) – node specific name</p></li>
+<li><p><strong>iterables</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">generator</span></code>) – <p>Input field and list to iterate using the pipeline engine
 for example to iterate over different frac values in fsl.Bet()
 for a single field the input can be a tuple, otherwise a list
 of tuples : :</p>
@@ -398,28 +398,28 @@ node.iterables = [(‘frac’, ‘threshold’),</p>
 </div></blockquote>
 </div></blockquote>
 </p></li>
-<li><p><strong>itersource</strong> (<em>tuple</em>) – The (name, fields) iterables source which specifies the name
+<li><p><strong>itersource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – The (name, fields) iterables source which specifies the name
 of the predecessor iterable node and the input fields to use
 from that source node. The output field values comprise the
 key to the iterables parameter value mapping dictionary.</p></li>
-<li><p><strong>synchronize</strong> (<em>boolean</em>) – Flag indicating whether iterables are synchronized.
+<li><p><strong>synchronize</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – Flag indicating whether iterables are synchronized.
 If the iterables are synchronized, then this iterable
 node is expanded once per iteration over all of the
 iterables values.
 Otherwise, this iterable node is expanded once per
 each permutation of the iterables values.</p></li>
-<li><p><strong>overwrite</strong> (<em>Boolean</em>) – Whether to overwrite contents of output directory if it already
+<li><p><strong>overwrite</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Boolean</span></code>) – Whether to overwrite contents of output directory if it already
 exists. If directory exists and hash matches it
 assumes that process has been executed</p></li>
-<li><p><strong>needed_outputs</strong> (<em>list</em><em> of </em><em>output_names</em>) – Force the node to keep only specific outputs. By default all
+<li><p><strong>needed_outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">output_names</span></code>) – Force the node to keep only specific outputs. By default all
 outputs are kept. Setting this attribute will delete any output
 files and directories from the node’s working directory that are
 not part of the <cite>needed_outputs</cite>.</p></li>
-<li><p><strong>run_without_submitting</strong> (<em>boolean</em>) – Run the node without submitting to a job engine or to a
+<li><p><strong>run_without_submitting</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – Run the node without submitting to a job engine or to a
 multiprocessing pool</p></li>
-<li><p><strong>mem_gb</strong> (<em>int</em><em> or </em><em>float</em>) – Estimate (in GB) of constant memory to allocate for this
+<li><p><strong>mem_gb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Estimate (in GB) of constant memory to allocate for this
 node.</p></li>
-<li><p><strong>mem_x</strong> (<em>2-tuple</em><em> or </em><em>3-tuple</em>) – <p>(<code class="docutils literal notranslate"><span class="pre">multiplier</span></code>, <code class="docutils literal notranslate"><span class="pre">input_file</span></code>)
+<li><p><strong>mem_x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">2-tuple</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">3-tuple</span></code>) – <p>(<code class="docutils literal notranslate"><span class="pre">multiplier</span></code>, <code class="docutils literal notranslate"><span class="pre">input_file</span></code>)
 (int or float, str)</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">multiplier</span></code>, <code class="docutils literal notranslate"><span class="pre">input_file</span></code>, <code class="docutils literal notranslate"><span class="pre">mode</span></code>)
 (int or float, str, str)</p>
@@ -460,7 +460,7 @@ an actual path.</p>
 <dd><p>Clone an EngineBase object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em> (</em><em>mandatory</em><em>)</em>) – A clone of node or workflow must have a new name</p>
+<dd class="field-odd"><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span> <span class="pre">(mandatory)</span></code>) – A clone of node or workflow must have a new name</p>
 </dd>
 </dl>
 </dd></dl>
@@ -565,7 +565,7 @@ temporal only). Returns <code class="docutils literal notranslate"><span class="
 <dd><p>Override the Node’s memory estimate with a new value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>new_mem_gb</strong> (<em>int</em><em> or </em><em>float</em>) – new memory estimate in GB</p>
+<dd class="field-odd"><p><strong>new_mem_gb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – new memory estimate in GB</p>
 </dd>
 </dl>
 </dd></dl>
@@ -582,7 +582,7 @@ temporal only). Returns <code class="docutils literal notranslate"><span class="
 <dd><p>Execute the node in its directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>updatehash</strong> (<em>boolean</em>) – When the hash stored in the output directory as a result of a previous run
+<dd class="field-odd"><p><strong>updatehash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – When the hash stored in the output directory as a result of a previous run
 does not match that calculated for this execution, updatehash=True only
 updates the hash without re-running.</p>
 </dd>
@@ -629,9 +629,9 @@ updates the hash without re-running.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>interface</strong> (<em>interface object</em>) – node specific interface (fsl.Bet(), spm.Coregister())</p></li>
-<li><p><strong>name</strong> (<em>alphanumeric string</em>) – node specific name</p></li>
-<li><p><strong>iterables</strong> (<em>generator</em>) – <p>Input field and list to iterate using the pipeline engine
+<li><p><strong>interface</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">interface</span> <span class="pre">object</span></code>) – node specific interface (fsl.Bet(), spm.Coregister())</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">alphanumeric</span> <span class="pre">string</span></code>) – node specific name</p></li>
+<li><p><strong>iterables</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">generator</span></code>) – <p>Input field and list to iterate using the pipeline engine
 for example to iterate over different frac values in fsl.Bet()
 for a single field the input can be a tuple, otherwise a list
 of tuples : :</p>
@@ -665,28 +665,28 @@ node.iterables = [(‘frac’, ‘threshold’),</p>
 </div></blockquote>
 </div></blockquote>
 </p></li>
-<li><p><strong>itersource</strong> (<em>tuple</em>) – The (name, fields) iterables source which specifies the name
+<li><p><strong>itersource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – The (name, fields) iterables source which specifies the name
 of the predecessor iterable node and the input fields to use
 from that source node. The output field values comprise the
 key to the iterables parameter value mapping dictionary.</p></li>
-<li><p><strong>synchronize</strong> (<em>boolean</em>) – Flag indicating whether iterables are synchronized.
+<li><p><strong>synchronize</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – Flag indicating whether iterables are synchronized.
 If the iterables are synchronized, then this iterable
 node is expanded once per iteration over all of the
 iterables values.
 Otherwise, this iterable node is expanded once per
 each permutation of the iterables values.</p></li>
-<li><p><strong>overwrite</strong> (<em>Boolean</em>) – Whether to overwrite contents of output directory if it already
+<li><p><strong>overwrite</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Boolean</span></code>) – Whether to overwrite contents of output directory if it already
 exists. If directory exists and hash matches it
 assumes that process has been executed</p></li>
-<li><p><strong>needed_outputs</strong> (<em>list</em><em> of </em><em>output_names</em>) – Force the node to keep only specific outputs. By default all
+<li><p><strong>needed_outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">output_names</span></code>) – Force the node to keep only specific outputs. By default all
 outputs are kept. Setting this attribute will delete any output
 files and directories from the node’s working directory that are
 not part of the <cite>needed_outputs</cite>.</p></li>
-<li><p><strong>run_without_submitting</strong> (<em>boolean</em>) – Run the node without submitting to a job engine or to a
+<li><p><strong>run_without_submitting</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – Run the node without submitting to a job engine or to a
 multiprocessing pool</p></li>
-<li><p><strong>mem_gb</strong> (<em>int</em><em> or </em><em>float</em>) – Estimate (in GB) of constant memory to allocate for this
+<li><p><strong>mem_gb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Estimate (in GB) of constant memory to allocate for this
 node.</p></li>
-<li><p><strong>mem_x</strong> (<em>2-tuple</em><em> or </em><em>3-tuple</em>) – <p>(<code class="docutils literal notranslate"><span class="pre">multiplier</span></code>, <code class="docutils literal notranslate"><span class="pre">input_file</span></code>)
+<li><p><strong>mem_x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">2-tuple</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">3-tuple</span></code>) – <p>(<code class="docutils literal notranslate"><span class="pre">multiplier</span></code>, <code class="docutils literal notranslate"><span class="pre">input_file</span></code>)
 (int or float, str)</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">multiplier</span></code>, <code class="docutils literal notranslate"><span class="pre">input_file</span></code>, <code class="docutils literal notranslate"><span class="pre">mode</span></code>)
 (int or float, str, str)</p>
@@ -727,7 +727,7 @@ an actual path.</p>
 <dd><p>Clone an EngineBase object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em> (</em><em>mandatory</em><em>)</em>) – A clone of node or workflow must have a new name</p>
+<dd class="field-odd"><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span> <span class="pre">(mandatory)</span></code>) – A clone of node or workflow must have a new name</p>
 </dd>
 </dl>
 </dd></dl>
@@ -844,7 +844,7 @@ temporal only). Returns <code class="docutils literal notranslate"><span class="
 <dd><p>Override the Node’s memory estimate with a new value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>new_mem_gb</strong> (<em>int</em><em> or </em><em>float</em>) – new memory estimate in GB</p>
+<dd class="field-odd"><p><strong>new_mem_gb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – new memory estimate in GB</p>
 </dd>
 </dl>
 </dd></dl>
@@ -861,7 +861,7 @@ temporal only). Returns <code class="docutils literal notranslate"><span class="
 <dd><p>Execute the node in its directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>updatehash</strong> (<em>boolean</em>) – When the hash stored in the output directory as a result of a previous run
+<dd class="field-odd"><p><strong>updatehash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – When the hash stored in the output directory as a result of a previous run
 does not match that calculated for this execution, updatehash=True only
 updates the hash without re-running.</p>
 </dd>
@@ -976,14 +976,14 @@ Only applies to interfaces being run within a workflow context.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input_names</strong> (<em>single str</em><em> or </em><em>list</em><em> or </em><em>None</em>) – names corresponding to function inputs
+<li><p><strong>input_names</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">single</span> <span class="pre">str</span></code> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>) – names corresponding to function inputs
 if <code class="docutils literal notranslate"><span class="pre">None</span></code>, derive input names from function argument names</p></li>
-<li><p><strong>output_names</strong> (<em>single str</em><em> or </em><em>list</em>) – names corresponding to function outputs (default: ‘out’).
+<li><p><strong>output_names</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">single</span> <span class="pre">str</span></code> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – names corresponding to function outputs (default: ‘out’).
 if list of length &gt; 1, has to match the number of outputs</p></li>
-<li><p><strong>function</strong> (<em>callable</em>) – callable python object. must be able to execute in an
+<li><p><strong>function</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">callable</span></code>) – callable python object. must be able to execute in an
 isolated namespace (possibly in concert with the <code class="docutils literal notranslate"><span class="pre">imports</span></code>
 parameter)</p></li>
-<li><p><strong>imports</strong> (<em>list</em><em> of </em><em>strings</em>) – list of import statements that allow the function to execute
+<li><p><strong>imports</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">strings</span></code>) – list of import statements that allow the function to execute
 in an otherwise empty namespace</p></li>
 </ul>
 </dd>
@@ -1031,7 +1031,7 @@ Only applies to interfaces being run within a workflow context.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.output_spec">
 <span class="sig-name descname"><span class="pre">output_spec</span></span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.output_spec" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicTraitedSpec</span></code></p>
+<dd><p>alias of <a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.interfaces.base.specs.html#nipype.interfaces.base.specs.DynamicTraitedSpec" title="(in nipype v1.8.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicTraitedSpec</span></code></a></p>
 </dd></dl>
 
 <dl class="py method">
@@ -1043,8 +1043,8 @@ non-zero.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cwd</strong> (<em>specify a folder where the interface should be run</em>) – </p></li>
-<li><p><strong>inputs</strong> (<em>allows the interface settings to be updated</em>) – </p></li>
+<li><p><strong>cwd</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">specify</span> <span class="pre">a</span> <span class="pre">folder</span> <span class="pre">where</span> <span class="pre">the</span> <span class="pre">interface</span> <span class="pre">should</span> <span class="pre">be</span> <span class="pre">run</span></code>) – </p></li>
+<li><p><strong>inputs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">allows</span> <span class="pre">the</span> <span class="pre">interface</span> <span class="pre">settings</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">be</span> <span class="pre">updated</span></code>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1052,7 +1052,7 @@ non-zero.</p>
 if successful, results</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">nipype.interfaces.base.support.InterfaceResult</span></code></p>
+<dd class="field-odd"><p><a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.interfaces.base.support.html#nipype.interfaces.base.support.InterfaceResult" title="(in nipype v1.8.6)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nipype.interfaces.base.support.InterfaceResult</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1080,11 +1080,11 @@ if successful, results</p>
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.__init__" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a workflow object.
 :param name: unique identifier for the workflow
-:type name: alphanumeric string
+:type name: <code class="xref py py-class docutils literal notranslate"><span class="pre">alphanumeric</span> <span class="pre">string</span></code>
 :param base_dir: path to workflow storage
-:type base_dir: string, optional
+:type base_dir: <code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>
 :param debug: enable verbose debug-level logging
-:type debug: boolean, optional</p>
+:type debug: <code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>, <em>optional</em></p>
 </dd></dl>
 
 <dl class="py method">
@@ -1093,7 +1093,7 @@ if successful, results</p>
 <dd><p>Add nodes to a workflow</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>nodes</strong> (<em>list</em>) – A list of EngineBase-based objects</p>
+<dd class="field-odd"><p><strong>nodes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – A list of EngineBase-based objects</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1115,7 +1115,7 @@ _init_runtime_fields.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>alphanumeric name</em>) – unique name for the workflow</p>
+<dd class="field-odd"><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">alphanumeric</span> <span class="pre">name</span></code>) – unique name for the workflow</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1131,7 +1131,7 @@ in the <cite>connection_list</cite>.  Uses the NetworkX method
 DiGraph.add_edges_from.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>args</strong> (<em>list</em><em> or </em><em>a set</em><em> of </em><em>four positional arguments</em>) – <p>Four positional arguments of the form:</p>
+<dd class="field-odd"><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">a</span> <span class="pre">set</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">four</span> <span class="pre">positional</span> <span class="pre">arguments</span></code>) – <p>Four positional arguments of the form:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">sourceoutput</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">destinput</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1177,10 +1177,10 @@ See the docstring for connect for format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>string</em>) – file to save the code to; overrides prefix</p></li>
-<li><p><strong>prefix</strong> (<em>string</em>) – prefix to use for output file</p></li>
-<li><p><strong>format</strong> (<em>string</em>) – one of “python”</p></li>
-<li><p><strong>include_config</strong> (<em>boolean</em>) – whether to include node and workflow config values</p></li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – file to save the code to; overrides prefix</p></li>
+<li><p><strong>prefix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – prefix to use for output file</p></li>
+<li><p><strong>format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – one of “python”</p></li>
+<li><p><strong>include_config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>) – whether to include node and workflow config values</p></li>
 </ul>
 </dd>
 </dl>
@@ -1228,7 +1228,7 @@ See the docstring for connect for format.</p>
 <dd><p>Remove nodes from a workflow</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>nodes</strong> (<em>list</em>) – A list of EngineBase-based objects</p>
+<dd class="field-odd"><p><strong>nodes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – A list of EngineBase-based objects</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1240,9 +1240,9 @@ See the docstring for connect for format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>plugin</strong> (<em>plugin name</em><em> or </em><em>object</em>) – Plugin to use for execution. You can create your own plugins for
+<li><p><strong>plugin</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">plugin</span> <span class="pre">name</span></code> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>) – Plugin to use for execution. You can create your own plugins for
 execution.</p></li>
-<li><p><strong>plugin_args</strong> (<em>dictionary containing arguments to be sent to plugin</em>) – constructor. see individual plugin doc strings for details.</p></li>
+<li><p><strong>plugin_args</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dictionary</span> <span class="pre">containing</span> <span class="pre">arguments</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">be</span> <span class="pre">sent</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">plugin</span></code>) – constructor. see individual plugin doc strings for details.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1261,7 +1261,7 @@ execution.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph2use</strong> (<em>'orig'</em><em>, </em><em>'hierarchical'</em><em> (</em><em>default</em><em>)</em><em>, </em><em>'flat'</em><em>, </em><em>'exec'</em><em>, </em><em>'colored'</em>) – orig - creates a top level graph without expanding internal
+<li><p><strong>graph2use</strong> (<code class="docutils literal notranslate"><span class="pre">'orig'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hierarchical'</span></code> (default), <code class="docutils literal notranslate"><span class="pre">'flat'</span></code>, <code class="docutils literal notranslate"><span class="pre">'exec'</span></code>, <code class="docutils literal notranslate"><span class="pre">'colored'</span></code>) – orig - creates a top level graph without expanding internal
 workflow nodes;
 flat - expands workflow nodes recursively;
 hierarchical - expands workflow nodes recursively with a
@@ -1269,8 +1269,8 @@ notion on hierarchy;
 colored - expands workflow nodes recursively with a
 notion on hierarchy in color;
 exec - expands workflows to depict iterables</p></li>
-<li><p><strong>format</strong> (<em>'png'</em><em>, </em><em>'svg'</em>) – </p></li>
-<li><p><strong>simple_form</strong> (<em>boolean</em><em> (</em><em>default: True</em><em>)</em>) – Determines if the node name used in the graph should be of the form
+<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">'png'</span></code>, <code class="docutils literal notranslate"><span class="pre">'svg'</span></code>) – </p></li>
+<li><p><strong>simple_form</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span> <span class="pre">(default</span></code>: <code class="xref py py-class docutils literal notranslate"><span class="pre">True)</span></code>) – Determines if the node name used in the graph should be of the form
 ‘nodename (package)’ when True or ‘nodename.Class.package’ when
 False.</p></li>
 </ul>
@@ -1280,7 +1280,7 @@ False.</p></li>
 
 </dd></dl>
 
-<p>The Nipype utility function <code class="xref py py-func docutils literal notranslate"><span class="pre">log_to_dict</span></code> reads a log file generated by <code class="docutils literal notranslate"><span class="pre">log_nodes_cb</span></code> to a Python dictionary.</p>
+<p>The Nipype utility function <a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.utils.draw_gantt_chart.html#nipype.utils.draw_gantt_chart.log_to_dict" title="(in nipype v1.8.6)"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_to_dict</span></code></a> reads a log file generated by <code class="docutils literal notranslate"><span class="pre">log_nodes_cb</span></code> to a Python dictionary.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.log_nodes_cb">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">log_nodes_cb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#log_nodes_cb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.log_nodes_cb" title="Permalink to this definition">#</a></dt>
@@ -1289,8 +1289,8 @@ dictionaries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>node</strong> (<em>nipype.pipeline.engine.Node</em>) – the node being logged</p></li>
-<li><p><strong>status</strong> (<em>string</em>) – acceptable values are ‘start’, ‘end’; otherwise it is
+<li><p><strong>node</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Node</span></code>) – the node being logged</p></li>
+<li><p><strong>status</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – acceptable values are ‘start’, ‘end’; otherwise it is
 considered and error</p></li>
 </ul>
 </dd>
@@ -1299,7 +1299,7 @@ considered and error</p></li>
 status info to the callback logger</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1315,9 +1315,9 @@ as a timeseries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>events</strong> (<em>dictionary</em>) – a dictionary of event-based node dictionaries of the workflow
+<li><p><strong>events</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dictionary</span></code>) – a dictionary of event-based node dictionaries of the workflow
 execution statistics</p></li>
-<li><p><strong>resource</strong> (<em>string</em>) – the resource of interest to return the time-series of;
+<li><p><strong>resource</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – the resource of interest to return the time-series of;
 e.g. ‘runtime_memory_gb’, ‘estimated_threads’, etc</p></li>
 </ul>
 </dd>
@@ -1326,7 +1326,7 @@ e.g. ‘runtime_memory_gb’, ‘estimated_threads’, etc</p></li>
 and the resource amount as values</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas Series</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas</span> <span class="pre">Series</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1339,8 +1339,8 @@ from the nodes list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>start_time</strong> (<em>datetime.datetime</em>) – a datetime object of the pipeline start time</p></li>
-<li><p><strong>nodes_list</strong> (<em>list</em>) – a list of the node dictionaries that were run in the pipeline</p></li>
+<li><p><strong>start_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) – a datetime object of the pipeline start time</p></li>
+<li><p><strong>nodes_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – a list of the node dictionaries that were run in the pipeline</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1348,7 +1348,7 @@ from the nodes list</p>
 the pipeline execution to the value node it accompanies</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dictionary</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1361,16 +1361,16 @@ gantt chart</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>start</strong> (<em>datetime.datetime obj</em>) – start time for first node</p></li>
-<li><p><strong>nodes_list</strong> (<em>list</em>) – a list of the node dictionaries</p></li>
-<li><p><strong>cores</strong> (<em>integer</em>) – the number of cores given to the workflow via the ‘n_procs’
+<li><p><strong>start</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span> <span class="pre">obj</span></code>) – start time for first node</p></li>
+<li><p><strong>nodes_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – a list of the node dictionaries</p></li>
+<li><p><strong>cores</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">integer</span></code>) – the number of cores given to the workflow via the ‘n_procs’
 plugin arg</p></li>
-<li><p><strong>total_duration</strong> (<em>float</em>) – total duration of the workflow execution (in seconds)</p></li>
-<li><p><strong>minute_scale</strong> (<em>integer</em>) – the scale, in minutes, at which to plot line markers for the
+<li><p><strong>total_duration</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – total duration of the workflow execution (in seconds)</p></li>
+<li><p><strong>minute_scale</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">integer</span></code>) – the scale, in minutes, at which to plot line markers for the
 gantt chart; for example, minute_scale=10 means there are lines
 drawn at every 10 minute interval from start to finish</p></li>
-<li><p><strong>space_between_minutes</strong> (<em>integer</em>) – scale factor in pixel spacing between minute line markers</p></li>
-<li><p><strong>colors</strong> (<em>list</em>) – a list of colors to choose from when coloring the nodes in the
+<li><p><strong>space_between_minutes</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">integer</span></code>) – scale factor in pixel spacing between minute line markers</p></li>
+<li><p><strong>colors</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – a list of colors to choose from when coloring the nodes in the
 gantt chart</p></li>
 </ul>
 </dd>
@@ -1379,7 +1379,7 @@ gantt chart</p></li>
 time line markers</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1393,36 +1393,36 @@ The following code shows how to set up the workflow in order to generate the log
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>logfile</strong> (<em>string</em>) – filepath to the callback log file to plot the gantt chart of</p></li>
-<li><p><strong>cores</strong> (<em>integer</em>) – the number of cores given to the workflow via the ‘n_procs’
+<li><p><strong>logfile</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – filepath to the callback log file to plot the gantt chart of</p></li>
+<li><p><strong>cores</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">integer</span></code>) – the number of cores given to the workflow via the ‘n_procs’
 plugin arg</p></li>
-<li><p><strong>minute_scale</strong> (<em>integer</em><em> (</em><em>optional</em><em>)</em><em>; default=10</em>) – the scale, in minutes, at which to plot line markers for the
+<li><p><strong>minute_scale</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">integer</span> <span class="pre">(optional);</span> <span class="pre">default=10</span></code>) – the scale, in minutes, at which to plot line markers for the
 gantt chart; for example, minute_scale=10 means there are lines
 drawn at every 10 minute interval from start to finish</p></li>
-<li><p><strong>space_between_minutes</strong> (<em>integer</em><em> (</em><em>optional</em><em>)</em><em>; default=50</em>) – scale factor in pixel spacing between minute line markers</p></li>
-<li><p><strong>colors</strong> (<em>list</em><em> (</em><em>optional</em><em>)</em>) – a list of colors to choose from when coloring the nodes in the
+<li><p><strong>space_between_minutes</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">integer</span> <span class="pre">(optional);</span> <span class="pre">default=50</span></code>) – scale factor in pixel spacing between minute line markers</p></li>
+<li><p><strong>colors</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span> <span class="pre">(optional)</span></code>) – a list of colors to choose from when coloring the nodes in the
 gantt chart</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><em>None</em> – the function does not return any value but writes out an html
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> – the function does not return any value but writes out an html
 file in the same directory as the callback log path passed in</p></li>
-<li><p><em>Usage</em></p></li>
-<li><p><em>—–</em></p></li>
-<li><p><em># import logging</em></p></li>
-<li><p><em># import logging.handlers</em></p></li>
-<li><p><em># from nipype.utils.profiler import log_nodes_cb</em></p></li>
-<li><p><em># log_filename = ‘callback.log’</em></p></li>
-<li><p><em># logger = logging.getLogger(‘callback’)</em></p></li>
-<li><p><em># logger.setLevel(logging.DEBUG)</em></p></li>
-<li><p><em># handler = logging.FileHandler(log_filename)</em></p></li>
-<li><p><em># logger.addHandler(handler)</em></p></li>
-<li><p><em># #create workflow</em></p></li>
-<li><p><em># workflow = …</em></p></li>
-<li><p><em># workflow.run(plugin=’MultiProc’,</em></p></li>
-<li><p><strong>#     plugin_args={‘n_procs’</strong> (<em>8, ‘memory’:12, ‘status_callback’: log_nodes_cb})</em>)</p></li>
-<li><p><em># generate_gantt_chart(‘callback.log’, 8)</em></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Usage</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">-----</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">import</span> <span class="pre">logging</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">import</span> <span class="pre">logging.handlers</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">from</span> <span class="pre">nipype.utils.profiler</span> <span class="pre">import</span> <span class="pre">log_nodes_cb</span></code></p></li>
+<li><p># log_filename = <code class="docutils literal notranslate"><span class="pre">'callback.log'</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">logger</span> <span class="pre">=</span> <span class="pre">logging.getLogger(``</span></code>’callback’<a href="#id2"><span class="problematic" id="id3">``</span></a><code class="xref py py-class docutils literal notranslate"><span class="pre">)</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">logger.setLevel(logging.DEBUG)</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">handler</span> <span class="pre">=</span> <span class="pre">logging.FileHandler(log_filename)</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">logger.addHandler(handler)</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">#create</span> <span class="pre">workflow</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">workflow</span> <span class="pre">=</span> <span class="pre">...</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">workflow.run(plugin=``</span></code>’MultiProc’<a href="#id4"><span class="problematic" id="id5">``</span></a><code class="xref py py-class docutils literal notranslate"><span class="pre">,</span></code></p></li>
+<li><p><strong>#     plugin_args={‘n_procs’</strong> (<code class="docutils literal notranslate"><span class="pre">8</span></code>, <code class="docutils literal notranslate"><span class="pre">'memory'</span></code><code class="xref py py-class docutils literal notranslate"><span class="pre">:12</span></code>, <code class="docutils literal notranslate"><span class="pre">'status_callback'</span></code>: <code class="xref py py-class docutils literal notranslate"><span class="pre">log_nodes_cb``</span></code>}``:class:<cite>)</cite>)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">generate_gantt_chart(``</span></code>’callback.log’<a href="#id6"><span class="problematic" id="id7">``</span></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">8)</span></code></p></li>
 </ul>
 </p>
 </dd>
@@ -1436,12 +1436,12 @@ file in the same directory as the callback log path passed in</p></li>
 thread usage above estimates / limits.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>cblog</strong> (<em>str</em>) – path to callback.log</p>
+<dd class="field-odd"><p><strong>cblog</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – path to callback.log</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>text_report</strong> (<em>str</em>)</p></li>
-<li><p><strong>excessive</strong> (<em>dict</em>)</p></li>
+<li><p><strong>text_report</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</p></li>
+<li><p><strong>excessive</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>)</p></li>
 </ul>
 </p>
 </dd>
@@ -1456,13 +1456,13 @@ generate an interactive HTML chart.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>callback_log</strong> (<em>str</em>) – path to callback.log</p></li>
-<li><p><strong>num_cores</strong> (<em>int</em>) – </p></li>
-<li><p><strong>logger</strong> (<em>Logger</em>) – <a class="reference external" href="https://docs.python.org/3/library/logging.html#logger-objects">https://docs.python.org/3/library/logging.html#logger-objects</a></p></li>
+<li><p><strong>callback_log</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – path to callback.log</p></li>
+<li><p><strong>num_cores</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – </p></li>
+<li><p><strong>logger</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code>) – <a class="reference external" href="https://docs.python.org/3/library/logging.html#logger-objects">https://docs.python.org/3/library/logging.html#logger-objects</a></p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

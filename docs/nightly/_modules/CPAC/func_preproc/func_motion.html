@@ -354,7 +354,7 @@
     <span class="n">motion_correct_options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">,</span> <span class="s1">&#39;mcflirt&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="calc_motion_stats"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.calc_motion_stats">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;calc_motion_stats&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
@@ -410,7 +410,7 @@
         <span class="s1">&#39;motion-params&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">gen_motion_stats</span><span class="p">,</span> <span class="s1">&#39;outputspec.motion_params&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
-    <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span></div>
+    <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span>
 
 
 <div class="viewcode-block" id="estimate_reference_image"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.estimate_reference_image">[docs]</a><span class="k">def</span> <span class="nf">estimate_reference_image</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
@@ -488,7 +488,7 @@
                         <span class="s2">&quot;12 values of a 4x4 affine matrix&quot;</span><span class="p">}}</span>
 
 
-<div class="viewcode-block" id="func_motion_correct"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.func_motion_correct">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;motion_correction&quot;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">],</span>
     <span class="n">option_key</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
@@ -500,10 +500,10 @@
     <span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">motion_correct_connections</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span>
                                              <span class="n">opt</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span></div>
+    <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span>
 
 
-<div class="viewcode-block" id="func_motion_correct_only"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.func_motion_correct_only">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;motion_correction_only&quot;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">],</span>
     <span class="n">option_key</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
@@ -520,10 +520,10 @@
         <span class="s1">&#39;desc-motion_bold&#39;</span><span class="p">:</span> <span class="n">wf_outputs</span><span class="p">[</span><span class="s1">&#39;desc-motion_bold&#39;</span><span class="p">]</span>
     <span class="p">}</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="func_motion_estimates"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.func_motion_estimates">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;motion_estimates&quot;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">],</span>
     <span class="n">option_key</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
@@ -542,7 +542,7 @@
                                  <span class="s1">&#39;max-displacement&#39;</span><span class="p">,</span>
                                  <span class="s1">&#39;filtered-movement-parameters&#39;</span><span class="p">,</span>
                                  <span class="s1">&#39;movement-parameters&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;rels-displacement&#39;</span><span class="p">]))</span></div>
+                                 <span class="s1">&#39;rels-displacement&#39;</span><span class="p">]))</span>
 
 
 <div class="viewcode-block" id="get_mcflirt_rms_abs"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.get_mcflirt_rms_abs">[docs]</a><span class="k">def</span> <span class="nf">get_mcflirt_rms_abs</span><span class="p">(</span><span class="n">rms_files</span><span class="p">):</span>
@@ -554,7 +554,7 @@
     <span class="k">return</span> <span class="n">abs_file</span><span class="p">,</span> <span class="n">rels_file</span></div>
 
 
-<div class="viewcode-block" id="get_motion_ref"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.get_motion_ref">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;get_motion_ref&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
     <span class="n">option_key</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">,</span>
@@ -626,7 +626,7 @@
         <span class="s1">&#39;motion-basefile&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">func_get_RPI</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="motion_correct_3dvolreg"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.motion_correct_3dvolreg">[docs]</a><span class="k">def</span> <span class="nf">motion_correct_3dvolreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">):</span>
@@ -894,18 +894,7 @@
 
 
 <div class="viewcode-block" id="motion_correct_connections"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.motion_correct_connections">[docs]</a><span class="k">def</span> <span class="nf">motion_correct_connections</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check opt for valid option, then connect that option.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    passed through from node block</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    wf : pe.Workflow</span>
-
-<span class="sd">    outputs : dict</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check opt for valid option, then connect that option.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">opt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">motion_correct_options</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">[!] Error: The &#39;tool&#39; parameter of the &quot;</span>
                        <span class="s2">&quot;&#39;motion_correction&#39; workflow must be one of &quot;</span>
@@ -914,7 +903,7 @@
     <span class="k">return</span> <span class="n">motion_correct</span><span class="p">[</span><span class="n">opt</span><span class="p">](</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="motion_estimate_filter"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.motion_estimate_filter">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;motion_estimate_filter&quot;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;motion_estimates_and_correction&quot;</span><span class="p">,</span>
             <span class="s2">&quot;motion_estimate_filter&quot;</span><span class="p">],</span>
@@ -943,8 +932,7 @@
               <span class="s2">&quot;motion-filter-info&quot;</span><span class="p">:</span> <span class="p">{},</span>
               <span class="s2">&quot;motion-filter-plot&quot;</span><span class="p">:</span> <span class="p">{}})</span>
 <span class="k">def</span> <span class="nf">motion_estimate_filter</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Filter motion parameters.</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Filter motion parameters.</span>
 
 <span class="sd">    .. versionchanged:: 1.8.6</span>
 <span class="sd">       Beginning with version 1.8.6, C-PAC outputs both the unfiltered</span>
@@ -1003,7 +991,7 @@
         <span class="s1">&#39;filtered-movement-parameters&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">notch</span><span class="p">,</span> <span class="s1">&#39;filtered_motion_params&#39;</span><span class="p">)</span>
     <span class="p">}</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="normalize_motion_parameters"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_motion.normalize_motion_parameters">[docs]</a><span class="k">def</span> <span class="nf">normalize_motion_parameters</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>

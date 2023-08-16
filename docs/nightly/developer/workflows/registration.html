@@ -327,16 +327,16 @@ relies on some of its outputs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fieldmap_distortion</strong> (<em>bool</em><em>, </em><em>optional</em>) – If field map-based distortion correction is being run, FLIRT should
+<li><p><strong>fieldmap_distortion</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – If field map-based distortion correction is being run, FLIRT should
 take in the appropriate field map-related inputs.</p></li>
-<li><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the workflow.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>) – Name of the workflow.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>register_func_to_anat</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nipype.pipeline.engine.Workflow</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -369,13 +369,13 @@ take in the appropriate field map-related inputs.</p></li>
 using FSL FNIRT.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the workflow.</p>
+<dd class="field-odd"><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>) – Name of the workflow.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>nonlinear_register</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nipype.pipeline.engine.Workflow</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -425,13 +425,13 @@ file to the input file.</p></li>
 using FSL FNIRT.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the workflow.</p>
+<dd class="field-odd"><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>) – Name of the workflow.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>nonlinear_register</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nipype.pipeline.engine.Workflow</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -484,17 +484,17 @@ linear transform and does not include bbregister.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>config</strong> (<em>configuration</em><em>, </em><em>mandatory</em>) – Pipeline configuration.</p></li>
-<li><p><strong>fieldmap_distortion</strong> (<em>bool</em><em>, </em><em>optional</em>) – If field map-based distortion correction is being run, FLIRT should
+<li><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">configuration</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">mandatory</span></code>) – Pipeline configuration.</p></li>
+<li><p><strong>fieldmap_distortion</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – If field map-based distortion correction is being run, FLIRT should
 take in the appropriate field map-related inputs.</p></li>
-<li><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the workflow.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>) – Name of the workflow.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>create_register_func_to_anat</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nipype.pipeline.engine.Workflow</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -525,15 +525,15 @@ linear transform and does not include bbregister, use T1 and T2 image.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>config</strong> (<em>configuration</em><em>, </em><em>mandatory</em>) – Pipeline configuration.</p></li>
-<li><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the workflow.</p></li>
+<li><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">configuration</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">mandatory</span></code>) – Pipeline configuration.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>) – Name of the workflow.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>create_register_func_to_anat_use_T2</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nipype.pipeline.engine.Workflow</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -561,13 +561,13 @@ employs the antsRegistration tool:</p>
 <p><a class="reference external" href="http://stnava.github.io/ANTs/">http://stnava.github.io/ANTs/</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the workflow.</p>
+<dd class="field-odd"><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>) – Name of the workflow.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>calc_ants_warp_wf</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nipype.pipeline.engine.Workflow</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
