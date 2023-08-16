@@ -330,6 +330,12 @@
 <span id="motion"></span><h2>Motion<a class="headerlink" href="#module-CPAC.func_preproc.func_motion" title="Permalink to this heading">#</a></h2>
 <p>Functions for calculating motion parameters</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.calc_motion_stats">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">calc_motion_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#calc_motion_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.calc_motion_stats" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate motion statistics for motion parameters.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.estimate_reference_image">
 <span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">estimate_reference_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#estimate_reference_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.estimate_reference_image" title="Permalink to this definition">#</a></dt>
 <dd><p>fMRIPrep-style BOLD reference
@@ -337,8 +343,29 @@ Ref: <a class="reference external" href="https://github.com/nipreps/niworkflows/
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.func_motion_correct">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">func_motion_correct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#func_motion_correct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.func_motion_correct" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.func_motion_correct_only">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">func_motion_correct_only</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#func_motion_correct_only"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.func_motion_correct_only" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.func_motion_estimates">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">func_motion_estimates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#func_motion_estimates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.func_motion_estimates" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate motion estimates using 3dVolReg or MCFLIRT.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.get_mcflirt_rms_abs">
 <span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">get_mcflirt_rms_abs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rms_files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#get_mcflirt_rms_abs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.get_mcflirt_rms_abs" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.get_motion_ref">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">get_motion_ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#get_motion_ref"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.get_motion_ref" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -372,6 +399,18 @@ Ref: <a class="reference external" href="https://github.com/nipreps/niworkflows/
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.motion_estimate_filter">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">motion_estimate_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#motion_estimate_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.motion_estimate_filter" title="Permalink to this definition">#</a></dt>
+<dd><p>Filter motion parameters.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.8.6: </span>Beginning with version 1.8.6, C-PAC outputs both the unfiltered
+and the filtered motion parameters and uses the unfiltered
+parameters in QC. Previous versions only reported the filtered
+parameters and used the filtered parameters for QC.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_motion.normalize_motion_parameters">
 <span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_motion.</span></span><span class="sig-name descname"><span class="pre">normalize_motion_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_motion#normalize_motion_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_motion.normalize_motion_parameters" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert FSL mcflirt motion parameters to AFNI space</p>
@@ -389,6 +428,61 @@ Ref: <a class="reference external" href="https://github.com/nipreps/niworkflows/
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.anat_refined_mask">
 <span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">anat_refined_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_bold_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'init_bold_mask'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#anat_refined_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.anat_refined_mask" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.bold_mask_afni">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">bold_mask_afni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#bold_mask_afni"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.bold_mask_afni" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.bold_mask_anatomical_based">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">bold_mask_anatomical_based</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#bold_mask_anatomical_based"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.bold_mask_anatomical_based" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate the BOLD mask by basing it off of the anatomical brain mask.
+Adapted from DCAN Lab’s BOLD mask method from the ABCD pipeline.</p>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/DCAN-Labs/DCAN-HCP/blob/master/fMRIVolume/scripts/DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased.sh">https://github.com/DCAN-Labs/DCAN-HCP/blob/master/fMRIVolume/scripts/DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased.sh</a></p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.bold_mask_anatomical_refined">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">bold_mask_anatomical_refined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#bold_mask_anatomical_refined"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.bold_mask_anatomical_refined" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.bold_mask_anatomical_resampled">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">bold_mask_anatomical_resampled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#bold_mask_anatomical_resampled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.bold_mask_anatomical_resampled" title="Permalink to this definition">#</a></dt>
+<dd><p>Resample anatomical brain mask in standard space to get BOLD brain mask in standard space
+Adapted from DCAN Lab’s BOLD mask method from the ABCD pipeline.</p>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/DCAN-Labs/DCAN-HCP/blob/master/fMRIVolume/scripts/OneStepResampling.sh#L121-L132">https://github.com/DCAN-Labs/DCAN-HCP/blob/master/fMRIVolume/scripts/OneStepResampling.sh#L121-L132</a></p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.bold_mask_ccs">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">bold_mask_ccs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#bold_mask_ccs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.bold_mask_ccs" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate the BOLD mask by basing it off of the anatomical brain.
+Adapted from the BOLD mask method from the CCS pipeline.</p>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/TingsterX/CCS/blob/master/ccs_01_funcpreproc.sh#L89-L110">https://github.com/TingsterX/CCS/blob/master/ccs_01_funcpreproc.sh#L89-L110</a></p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.bold_mask_fsl">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">bold_mask_fsl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#bold_mask_fsl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.bold_mask_fsl" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.bold_mask_fsl_afni">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">bold_mask_fsl_afni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#bold_mask_fsl_afni"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.bold_mask_fsl_afni" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.bold_masking">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">bold_masking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#bold_masking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.bold_masking" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -459,6 +553,51 @@ Ref: <a class="reference external" href="https://github.com/nipreps/niworkflows/
 </li>
 </ul>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_despike">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_despike</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_despike"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_despike" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_despike_template">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_despike_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_despike_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_despike_template" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_mask_normalize">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_mask_normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_mask_normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_mask_normalize" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_mean">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_mean" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_normalize">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_normalize" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_reorient">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_reorient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_reorient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_reorient" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_scaling">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_scaling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_scaling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_scaling" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_slice_time">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_slice_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_slice_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_slice_time" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.func_truncate">
+<span class="sig-prename descclassname"><span class="pre">CPAC.func_preproc.func_preproc.</span></span><span class="sig-name descname"><span class="pre">func_truncate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/func_preproc/func_preproc#func_truncate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.func_preproc.func_preproc.func_truncate" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.func_preproc.func_preproc.get_idx">
@@ -594,20 +733,43 @@ in the configuration file</p></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-CPAC.func_preproc.func_motion">Motion</a><ul>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.calc_motion_stats"><code class="docutils literal notranslate"><span class="pre">calc_motion_stats</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.estimate_reference_image"><code class="docutils literal notranslate"><span class="pre">estimate_reference_image</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.func_motion_correct"><code class="docutils literal notranslate"><span class="pre">func_motion_correct</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.func_motion_correct_only"><code class="docutils literal notranslate"><span class="pre">func_motion_correct_only</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.func_motion_estimates"><code class="docutils literal notranslate"><span class="pre">func_motion_estimates</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.get_mcflirt_rms_abs"><code class="docutils literal notranslate"><span class="pre">get_mcflirt_rms_abs</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.get_motion_ref"><code class="docutils literal notranslate"><span class="pre">get_motion_ref</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_3dvolreg"><code class="docutils literal notranslate"><span class="pre">motion_correct_3dvolreg</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_connections"><code class="docutils literal notranslate"><span class="pre">motion_correct_connections</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_correct_mcflirt"><code class="docutils literal notranslate"><span class="pre">motion_correct_mcflirt</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_motion.motion_estimate_filter"><code class="docutils literal notranslate"><span class="pre">motion_estimate_filter</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_motion.normalize_motion_parameters"><code class="docutils literal notranslate"><span class="pre">normalize_motion_parameters</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-CPAC.func_preproc.func_preproc">Preprocessing</a><ul>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.anat_based_mask"><code class="docutils literal notranslate"><span class="pre">anat_based_mask</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.anat_refined_mask"><code class="docutils literal notranslate"><span class="pre">anat_refined_mask</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.bold_mask_afni"><code class="docutils literal notranslate"><span class="pre">bold_mask_afni</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.bold_mask_anatomical_based"><code class="docutils literal notranslate"><span class="pre">bold_mask_anatomical_based</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.bold_mask_anatomical_refined"><code class="docutils literal notranslate"><span class="pre">bold_mask_anatomical_refined</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.bold_mask_anatomical_resampled"><code class="docutils literal notranslate"><span class="pre">bold_mask_anatomical_resampled</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.bold_mask_ccs"><code class="docutils literal notranslate"><span class="pre">bold_mask_ccs</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.bold_mask_fsl"><code class="docutils literal notranslate"><span class="pre">bold_mask_fsl</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.bold_mask_fsl_afni"><code class="docutils literal notranslate"><span class="pre">bold_mask_fsl_afni</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.bold_masking"><code class="docutils literal notranslate"><span class="pre">bold_masking</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.collect_arguments"><code class="docutils literal notranslate"><span class="pre">collect_arguments</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.create_scale_func_wf"><code class="docutils literal notranslate"><span class="pre">create_scale_func_wf</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.create_wf_edit_func"><code class="docutils literal notranslate"><span class="pre">create_wf_edit_func</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_despike"><code class="docutils literal notranslate"><span class="pre">func_despike</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_despike_template"><code class="docutils literal notranslate"><span class="pre">func_despike_template</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_mask_normalize"><code class="docutils literal notranslate"><span class="pre">func_mask_normalize</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_mean"><code class="docutils literal notranslate"><span class="pre">func_mean</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_normalize"><code class="docutils literal notranslate"><span class="pre">func_normalize</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_reorient"><code class="docutils literal notranslate"><span class="pre">func_reorient</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_scaling"><code class="docutils literal notranslate"><span class="pre">func_scaling</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_slice_time"><code class="docutils literal notranslate"><span class="pre">func_slice_time</span></code></a></li>
+<li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.func_truncate"><code class="docutils literal notranslate"><span class="pre">func_truncate</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.get_idx"><code class="docutils literal notranslate"><span class="pre">get_idx</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.func_preproc.func_preproc.slice_timing_wf"><code class="docutils literal notranslate"><span class="pre">slice_timing_wf</span></code></a></li>
 </ul>
