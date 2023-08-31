@@ -1,11 +1,11 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../../genindex" /><link rel="search" title="Search" href="../../search" /><link rel="next" title="C-PAC Pipeline Construction" href="cpac_pipeline" /><link rel="prev" title="Workflow Documentation" href="../workflow_documentation" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.08.19 -->
         <title>Workflows - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
@@ -329,7 +329,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="anat_preproc">Anatomical Preprocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="func_preproc">Functional Preprocessing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="func_preproc#module-CPAC.func_preproc.func_ingress">Ingress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="func_preproc#ingress">Ingress</a></li>
 <li class="toctree-l2"><a class="reference internal" href="func_preproc#module-CPAC.func_preproc.func_motion">Motion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="func_preproc#module-CPAC.func_preproc.func_preproc">Preprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="func_preproc#module-CPAC.func_preproc.utils">Utilities</a></li>
@@ -350,25 +350,10 @@
 <li class="toctree-l2"><a class="reference internal" href="seg_preproc#CPAC.seg_preproc.process_segment_map"><code class="docutils literal notranslate"><span class="pre">process_segment_map</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="sca">Seed Based Correlation Analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sca#CPAC.sca.compute_fisher_z_score"><code class="docutils literal notranslate"><span class="pre">compute_fisher_z_score</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="sca#CPAC.sca.create_sca"><code class="docutils literal notranslate"><span class="pre">create_sca</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="sca#CPAC.sca.create_temporal_reg"><code class="docutils literal notranslate"><span class="pre">create_temporal_reg</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="sca#CPAC.sca.map_to_roi"><code class="docutils literal notranslate"><span class="pre">map_to_roi</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="sca">Seed Based Correlation Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basc">Bootstrap Analysis of Stable Clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nuisance">Nuisance Signal Removal</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="nuisance#CPAC.nuisance.bandpass_voxels"><code class="docutils literal notranslate"><span class="pre">bandpass_voxels</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="nuisance#CPAC.nuisance.cosine_filter"><code class="docutils literal notranslate"><span class="pre">cosine_filter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="nuisance#CPAC.nuisance.create_regressor_workflow"><code class="docutils literal notranslate"><span class="pre">create_regressor_workflow</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="nuisance#CPAC.nuisance.find_offending_time_points"><code class="docutils literal notranslate"><span class="pre">find_offending_time_points</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="nuisance#CPAC.nuisance.generate_summarize_tissue_mask"><code class="docutils literal notranslate"><span class="pre">generate_summarize_tissue_mask</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="nuisance">Nuisance Signal Removal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="alff">Amplitude of Low Frequency Fluctuations(ALFF) and fractional ALFF</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="alff#CPAC.alff.alff.alff_falff"><code class="docutils literal notranslate"><span class="pre">alff_falff</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="alff#CPAC.alff.alff.alff_falff_space_template"><code class="docutils literal notranslate"><span class="pre">alff_falff_space_template</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="alff#CPAC.alff.alff.create_alff"><code class="docutils literal notranslate"><span class="pre">create_alff</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="alff#CPAC.alff.utils.get_opt_string"><code class="docutils literal notranslate"><span class="pre">get_opt_string</span></code></a></li>
 </ul>
@@ -415,12 +400,7 @@
 <li class="toctree-l2"><a class="reference internal" href="easy_thresh#CPAC.easy_thresh.get_tuple"><code class="docutils literal notranslate"><span class="pre">get_tuple</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mdmr">Multivariate Distance Matrix Regression (MDMR)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mdmr#CPAC.cwas.create_cwas"><code class="docutils literal notranslate"><span class="pre">create_cwas</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="mdmr#CPAC.cwas.joint_mask"><code class="docutils literal notranslate"><span class="pre">joint_mask</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="mdmr#CPAC.cwas.nifti_cwas"><code class="docutils literal notranslate"><span class="pre">nifti_cwas</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="mdmr">Multivariate Distance Matrix Regression (MDMR)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="median_angle">Median Angle Correction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registration">Registration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="registration#CPAC.registration.create_bbregister_func_to_anat"><code class="docutils literal notranslate"><span class="pre">create_bbregister_func_to_anat</span></code></a></li>
@@ -431,16 +411,7 @@
 <li class="toctree-l2"><a class="reference internal" href="registration#CPAC.registration.create_wf_calculate_ants_warp"><code class="docutils literal notranslate"><span class="pre">create_wf_calculate_ants_warp</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="timeseries">Timeseries Analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="timeseries#CPAC.timeseries.gen_roi_timeseries"><code class="docutils literal notranslate"><span class="pre">gen_roi_timeseries</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeseries#CPAC.timeseries.gen_vertices_timeseries"><code class="docutils literal notranslate"><span class="pre">gen_vertices_timeseries</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeseries#CPAC.timeseries.gen_voxel_timeseries"><code class="docutils literal notranslate"><span class="pre">gen_voxel_timeseries</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeseries#CPAC.timeseries.get_roi_timeseries"><code class="docutils literal notranslate"><span class="pre">get_roi_timeseries</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeseries#CPAC.timeseries.get_spatial_map_timeseries"><code class="docutils literal notranslate"><span class="pre">get_spatial_map_timeseries</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeseries#CPAC.timeseries.get_vertices_timeseries"><code class="docutils literal notranslate"><span class="pre">get_vertices_timeseries</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeseries#CPAC.timeseries.get_voxel_timeseries"><code class="docutils literal notranslate"><span class="pre">get_voxel_timeseries</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries">Timeseries Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="network_centrality">Network Centrality</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="network_centrality#CPAC.network_centrality.convert_pvalue_to_r"><code class="docutils literal notranslate"><span class="pre">convert_pvalue_to_r</span></code></a></li>
 </ul>

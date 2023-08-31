@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex" /><link rel="search" title="Search" href="../../../../search" />
 
-    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.08.19 -->
         <title>CPAC.utils.configuration.configuration - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=135e06be" />
@@ -339,11 +339,13 @@
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 <span class="kn">import</span> <span class="nn">pkg_resources</span> <span class="k">as</span> <span class="nn">p</span>
 <span class="kn">import</span> <span class="nn">yaml</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.typing</span> <span class="kn">import</span> <span class="n">TUPLE</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.typing</span> <span class="kn">import</span> <span class="n">ConfigKeyType</span><span class="p">,</span> <span class="n">TUPLE</span>
 <span class="kn">from</span> <span class="nn">.diff</span> <span class="kn">import</span> <span class="n">dct_diff</span>
 
 <span class="n">SPECIAL_REPLACEMENT_STRINGS</span> <span class="o">=</span> <span class="p">{</span><span class="sa">r</span><span class="s1">&#39;$</span><span class="si">{resolution_for_anat}</span><span class="s1">&#39;</span><span class="p">,</span>
                                <span class="sa">r</span><span class="s1">&#39;$</span><span class="si">{func_resolution}</span><span class="s1">&#39;</span><span class="p">}</span>
+
+
 
 
 <span class="k">class</span> <span class="nc">ConfigurationDictUpdateConflation</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">):</span>
@@ -645,6 +647,181 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">return</span> <span class="n">d</span></div>
+
+    <span class="k">def</span> <span class="nf">_check_if_switch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span>
+                         <span class="n">error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Check if a given entity is a switch</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str or list of str</span>
+<span class="sd">            key to check</span>
+
+<span class="sd">        error : bool</span>
+<span class="sd">            raise a TypeError if not a switch</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if the given key is a switch, False otherwise</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; c = Configuration()</span>
+<span class="sd">        &gt;&gt;&gt; c._check_if_switch(&#39;anatomical_preproc&#39;)</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; c._check_if_switch([&#39;anatomical_preproc&#39;])</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; c._check_if_switch([&#39;anatomical_preproc&#39;, &#39;run&#39;])</span>
+<span class="sd">        True</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">_maybe_switch</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_maybe_switch</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_maybe_switch</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">_answer</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">_maybe_switch</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_answer</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_answer</span>
+        <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;`</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">` is not a switch in </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_switch_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span>
+                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Return True if the given key is set to the given value or</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str or list of str</span>
+<span class="sd">            key to check</span>
+
+<span class="sd">        value : bool</span>
+<span class="sd">            value to check for</span>
+
+<span class="sd">        exclusive : bool</span>
+<span class="sd">            return False if forking (both True and False)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if the given key is set to the given value or False</span>
+<span class="sd">            otherwise. If exclusive is True, return False if the key</span>
+<span class="sd">            is set to both True and False.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">exclusive</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_is_on_off</span><span class="p">(</span><span class="n">key</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">bool</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">is</span> <span class="n">value</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="Configuration.switch_is_off"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_off">[docs]</a>    <span class="k">def</span> <span class="nf">switch_is_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Return True if the given key is set to &#39;off&#39; OR &#39;on&#39; and &#39;off&#39;</span>
+<span class="sd">        or False otherwise. Used for tracking forking.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str or list of str</span>
+<span class="sd">            key to check</span>
+
+<span class="sd">        exclusive : bool, optional, default: False</span>
+<span class="sd">            return False if the key is set to &#39;on&#39; and &#39;off&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if key is set to &#39;off&#39;, False if not set to &#39;off&#39;.</span>
+<span class="sd">            If exclusive is set to True, return False if the key is</span>
+<span class="sd">            set to &#39;on&#39; and &#39;off&#39;.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; c = Configuration()</span>
+<span class="sd">        &gt;&gt;&gt; c.switch_is_off([&#39;nuisance_corrections&#39;, &#39;2-nuisance_regression&#39;,</span>
+<span class="sd">        ...                  &#39;run&#39;])</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; c = Configuration({&#39;nuisance_corrections&#39;: {</span>
+<span class="sd">        ...     &#39;2-nuisance_regression&#39;: {&#39;run&#39;: [True, False]}}})</span>
+<span class="sd">        &gt;&gt;&gt; c.switch_is_off([&#39;nuisance_corrections&#39;, &#39;2-nuisance_regression&#39;,</span>
+<span class="sd">        ...                  &#39;run&#39;])</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; c.switch_is_off([&#39;nuisance_corrections&#39;, &#39;2-nuisance_regression&#39;,</span>
+<span class="sd">        ...                  &#39;run&#39;], exclusive=True)</span>
+<span class="sd">        False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_if_switch</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_switch_bool</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Configuration.switch_is_on"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_on">[docs]</a>    <span class="k">def</span> <span class="nf">switch_is_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Return True if the given key is set to both &#39;on&#39; and &#39;off&#39;</span>
+<span class="sd">        or False otherwise. Used for tracking forking.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str or list of str</span>
+<span class="sd">            key to check</span>
+
+<span class="sd">        exclusive : bool, optional, default: False</span>
+<span class="sd">            return False if the key is set to &#39;on&#39; and &#39;off&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if key is set to &#39;on&#39;, False if not set to &#39;on&#39;.</span>
+<span class="sd">            If exclusive is set to True, return False if the key is</span>
+<span class="sd">            set to &#39;on&#39; and &#39;off&#39;.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; c = Configuration()</span>
+<span class="sd">        &gt;&gt;&gt; c.switch_is_on([&#39;nuisance_corrections&#39;, &#39;2-nuisance_regression&#39;,</span>
+<span class="sd">        ...                 &#39;run&#39;])</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; c = Configuration({&#39;nuisance_corrections&#39;: {</span>
+<span class="sd">        ...     &#39;2-nuisance_regression&#39;: {&#39;run&#39;: [True, False]}}})</span>
+<span class="sd">        &gt;&gt;&gt; c.switch_is_on([&#39;nuisance_corrections&#39;, &#39;2-nuisance_regression&#39;,</span>
+<span class="sd">        ...                 &#39;run&#39;])</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; c.switch_is_on([&#39;nuisance_corrections&#39;, &#39;2-nuisance_regression&#39;,</span>
+<span class="sd">        ...                 &#39;run&#39;], exclusive=True)</span>
+<span class="sd">        False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_if_switch</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_switch_bool</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Configuration.switch_is_on_off"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_on_off">[docs]</a>    <span class="k">def</span> <span class="nf">switch_is_on_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Return True if the given key is set to both &#39;on&#39; and &#39;off&#39;</span>
+<span class="sd">        or False otherwise. Used for tracking forking.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str or list of str</span>
+<span class="sd">            key to check</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if key is set to &#39;on&#39; and &#39;off&#39;, False otherwise</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; c = Configuration()</span>
+<span class="sd">        &gt;&gt;&gt; c.switch_is_on_off([&#39;nuisance_corrections&#39;,</span>
+<span class="sd">        ...                     &#39;2-nuisance_regression&#39;, &#39;run&#39;])</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; c = Configuration({&#39;nuisance_corrections&#39;: {</span>
+<span class="sd">        ...     &#39;2-nuisance_regression&#39;: {&#39;run&#39;: [True, False]}}})</span>
+<span class="sd">        &gt;&gt;&gt; c.switch_is_on_off([&#39;nuisance_corrections&#39;,</span>
+<span class="sd">        ...                     &#39;2-nuisance_regression&#39;, &#39;run&#39;])</span>
+<span class="sd">        True</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_if_switch</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">and</span> <span class="kc">False</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Configuration.key_type_error"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.key_type_error">[docs]</a>    <span class="k">def</span> <span class="nf">key_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>

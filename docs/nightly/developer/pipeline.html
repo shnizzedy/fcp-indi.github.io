@@ -1,11 +1,11 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" /><link rel="next" title="Templates and Atlases" href="templates" /><link rel="prev" title="Installing CPAC" href="installation" />
 
-    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.08.19 -->
         <title>Pipeline Development - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
@@ -423,12 +423,6 @@ checks before returning validated config_dict.</p>
 <section id="module-CPAC.pipeline.utils">
 <span id="pipeline-utilities"></span><h3>Pipeline Utilities<a class="headerlink" href="#module-CPAC.pipeline.utils" title="Permalink to this heading">#</a></h3>
 <p>C-PAC pipeline engine utilities</p>
-<dl class="py exception">
-<dt class="sig sig-object py" id="CPAC.pipeline.utils.FilteredUnfilteredError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.utils.</span></span><span class="sig-name descname"><span class="pre">FilteredUnfilteredError</span></span><a class="reference internal" href="../_modules/CPAC/pipeline/utils#FilteredUnfilteredError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.utils.FilteredUnfilteredError" title="Permalink to this definition">#</a></dt>
-<dd><p>Custom error class to catch “filtered” outputs with “filt-none”.</p>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.pipeline.utils.name_fork">
 <span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.utils.</span></span><span class="sig-name descname"><span class="pre">name_fork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dct</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/utils#name_fork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.utils.name_fork" title="Permalink to this definition">#</a></dt>
@@ -457,10 +451,10 @@ checks before returning validated config_dict.</p>
 <span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.utils.</span></span><span class="sig-name descname"><span class="pre">present_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/CPAC/pipeline/utils#present_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.utils.present_outputs" title="Permalink to this definition">#</a></dt>
 <dd><p>Given an outputs dictionary and a list of output keys, returns
 the subset of <code class="docutils literal notranslate"><span class="pre">outputs</span></code> that includes all keys in <code class="docutils literal notranslate"><span class="pre">keys</span></code> that are
-present. I.e., <a class="reference internal" href="workflows/func_preproc#CPAC.func_preproc.func_motion.motion_correct_connections" title="CPAC.func_preproc.func_motion.motion_correct_connections"><code class="xref py py-func docutils literal notranslate"><span class="pre">motion_correct_connections</span></code></a>
+present. I.e., ~:py:func:<cite>CPAC.func_preproc.func_motion.motion_correct_connections</cite>
 will have different items in its <code class="docutils literal notranslate"><span class="pre">outputs</span></code> dictionary at different
 times depending on the <code class="docutils literal notranslate"><span class="pre">motion_correction</span></code> configuration;
-<a class="reference internal" href="workflows/func_preproc#CPAC.func_preproc.func_motion.func_motion_estimates" title="CPAC.func_preproc.func_motion.func_motion_estimates"><code class="xref py py-func docutils literal notranslate"><span class="pre">func_motion_estimates</span></code></a> can
+~:py:func:<cite>CPAC.func_preproc.func_motion.func_motion_estimates</cite> can
 then wrap that <code class="docutils literal notranslate"><span class="pre">outputs</span></code> in this function and provide a list of
 keys of the desired outputs to include, if they are present in the
 provided <code class="docutils literal notranslate"><span class="pre">outputs</span></code> dictionary, eliminating the need for multiple
@@ -624,7 +618,6 @@ output keys.</p>
 <li><a class="reference internal" href="#CPAC.pipeline.schema.schema"><code class="docutils literal notranslate"><span class="pre">schema</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.pipeline.schema.str_to_bool1_1"><code class="docutils literal notranslate"><span class="pre">str_to_bool1_1</span></code></a></li>
 <li><a class="reference internal" href="#module-CPAC.pipeline.utils">Pipeline Utilities</a><ul>
-<li><a class="reference internal" href="#CPAC.pipeline.utils.FilteredUnfilteredError"><code class="docutils literal notranslate"><span class="pre">FilteredUnfilteredError</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.pipeline.utils.name_fork"><code class="docutils literal notranslate"><span class="pre">name_fork</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.pipeline.utils.present_outputs"><code class="docutils literal notranslate"><span class="pre">present_outputs</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.pipeline.utils.source_set"><code class="docutils literal notranslate"><span class="pre">source_set</span></code></a></li>

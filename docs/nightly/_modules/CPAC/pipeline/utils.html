@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.08.19 -->
         <title>CPAC.pipeline.utils - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
@@ -339,10 +339,6 @@
 <span class="n">MOVEMENT_FILTER_KEYS</span> <span class="o">=</span> <span class="n">motion_estimate_filter</span><span class="o">.</span><span class="n">outputs</span>
 
 
-<div class="viewcode-block" id="FilteredUnfilteredError"><a class="viewcode-back" href="../../../developer/pipeline#CPAC.pipeline.utils.FilteredUnfilteredError">[docs]</a><span class="k">class</span> <span class="nc">FilteredUnfilteredError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom error class to catch &quot;filtered&quot; outputs with &quot;filt-none&quot;.&quot;&quot;&quot;</span></div>
-
-
 <div class="viewcode-block" id="name_fork"><a class="viewcode-back" href="../../../developer/pipeline#CPAC.pipeline.utils.name_fork">[docs]</a><span class="k">def</span> <span class="nf">name_fork</span><span class="p">(</span><span class="n">resource_idx</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">json_info</span><span class="p">,</span> <span class="n">out_dct</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and insert entities for forkpoints</span>
 
@@ -362,36 +358,38 @@
 
 <span class="sd">    out_dct : dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="kc">True</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;motion_estimate_filter&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">switch_is_on</span><span class="p">([</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;motion_estimate_filter&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]):</span>
         <span class="n">filt_value</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">_motion_variant</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">_key</span><span class="p">:</span> <span class="n">json_info</span><span class="p">[</span><span class="s1">&#39;CpacVariant&#39;</span><span class="p">][</span><span class="n">_key</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">_key</span> <span class="ow">in</span> <span class="n">MOVEMENT_FILTER_KEYS</span>
             <span class="k">if</span> <span class="n">_key</span> <span class="ow">in</span> <span class="n">json_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CpacVariant&#39;</span><span class="p">,</span> <span class="p">{})}</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">filt_value</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">json_info</span><span class="p">[</span><span class="s1">&#39;CpacVariant&#39;</span><span class="p">][</span><span class="n">_k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                    <span class="s1">&#39;motion_estimate_filter_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
-                <span class="p">)</span> <span class="k">for</span> <span class="n">_k</span><span class="p">,</span> <span class="n">_v</span> <span class="ow">in</span> <span class="n">_motion_variant</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">_v</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;unfiltered-&#39;</span> <span class="ow">in</span> <span class="n">resource_idx</span><span class="p">:</span>
+            <span class="n">resource_idx</span> <span class="o">=</span> <span class="n">resource_idx</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;unfiltered-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
             <span class="n">filt_value</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
-            <span class="k">if</span> <span class="s1">&#39;filtered&#39;</span> <span class="ow">in</span> <span class="n">resource_idx</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">FilteredUnfilteredError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">filt_value</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">json_info</span><span class="p">[</span><span class="s1">&#39;CpacVariant&#39;</span><span class="p">][</span><span class="n">_k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                        <span class="s1">&#39;motion_estimate_filter_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+                    <span class="p">)</span> <span class="k">for</span> <span class="n">_k</span><span class="p">,</span> <span class="n">_v</span> <span class="ow">in</span> <span class="n">_motion_variant</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">_v</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="n">filt_value</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
         <span class="n">resource_idx</span><span class="p">,</span> <span class="n">out_dct</span> <span class="o">=</span> <span class="n">_update_resource_idx</span><span class="p">(</span><span class="n">resource_idx</span><span class="p">,</span> <span class="n">out_dct</span><span class="p">,</span>
                                                      <span class="s1">&#39;filt&#39;</span><span class="p">,</span> <span class="n">filt_value</span><span class="p">)</span>
-    <span class="k">if</span> <span class="kc">True</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">switch_is_on</span><span class="p">([</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]):</span>
         <span class="n">reg_value</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;regressors&#39;</span> <span class="ow">in</span> <span class="n">json_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CpacVariant&#39;</span><span class="p">,</span> <span class="p">{})</span>
                 <span class="ow">and</span> <span class="n">json_info</span><span class="p">[</span><span class="s1">&#39;CpacVariant&#39;</span><span class="p">][</span><span class="s1">&#39;regressors&#39;</span><span class="p">]):</span>
             <span class="n">reg_value</span> <span class="o">=</span> <span class="n">json_info</span><span class="p">[</span><span class="s1">&#39;CpacVariant&#39;</span><span class="p">][</span>
                 <span class="s1">&#39;regressors&#39;</span>
             <span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;nuisance_regressors_generation_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="kc">False</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+        <span class="k">elif</span> <span class="n">cfg</span><span class="o">.</span><span class="n">switch_is_off</span><span class="p">([</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]):</span>
             <span class="n">reg_value</span> <span class="o">=</span> <span class="s1">&#39;Off&#39;</span>
         <span class="n">resource_idx</span><span class="p">,</span> <span class="n">out_dct</span> <span class="o">=</span> <span class="n">_update_resource_idx</span><span class="p">(</span><span class="n">resource_idx</span><span class="p">,</span> <span class="n">out_dct</span><span class="p">,</span>
                                                      <span class="s1">&#39;reg&#39;</span><span class="p">,</span> <span class="n">reg_value</span><span class="p">)</span>
@@ -402,10 +400,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given an outputs dictionary and a list of output keys, returns</span>
 <span class="sd">    the subset of ``outputs`` that includes all keys in ``keys`` that are</span>
-<span class="sd">    present. I.e., :py:func:`~CPAC.func_preproc.func_motion.motion_correct_connections`</span>
+<span class="sd">    present. I.e., ~:py:func:`CPAC.func_preproc.func_motion.motion_correct_connections`</span>
 <span class="sd">    will have different items in its ``outputs`` dictionary at different</span>
 <span class="sd">    times depending on the ``motion_correction`` configuration;</span>
-<span class="sd">    :py:func:`~CPAC.func_preproc.func_motion.func_motion_estimates` can</span>
+<span class="sd">    ~:py:func:`CPAC.func_preproc.func_motion.func_motion_estimates` can</span>
 <span class="sd">    then wrap that ``outputs`` in this function and provide a list of</span>
 <span class="sd">    keys of the desired outputs to include, if they are present in the</span>
 <span class="sd">    provided ``outputs`` dictionary, eliminating the need for multiple</span>
