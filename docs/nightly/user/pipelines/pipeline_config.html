@@ -246,6 +246,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../developer/index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Developer Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/installation">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/pipeline">Pipeline Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/pipeline#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/pipeline#engine">Engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/random_state">Random State</a></li>
@@ -412,7 +414,7 @@
 <h3>Definitions<a class="headerlink" href="#definitions" title="Permalink to this heading">#</a></h3>
 <ul>
 <li><dl class="simple">
-<dt>Workflow</dt><dd><p>A workflow accomplishes a particular processing task (e.g. functional preprocessing, scrubbing, nuisance correction). Each workflow can be turned on or off in the pipeline configuration.  Sometimes a workflow can be set to both on and off, allowing for pipelines to branch.</p>
+<dt>Workflow</dt><dd><p>A workflow accomplishes a particular processing task (e.g. functional preprocessing, scrubbing, nuisance correction). Each workflow can be turned on or off in the pipeline ~:py:class:<cite>Configuration</cite>.  Sometimes a workflow can be set to both on and off, allowing for pipelines to branch.</p>
 </dd>
 </dl>
 </li>
@@ -553,7 +555,7 @@
 <span class="go">        -v /tmp:/tmp \</span>
 <span class="go">        -v /Users/You/Documents:/configs \</span>
 <span class="go">        -v /Users/You/resources:/resources \</span>
-<span class="go">        fcpindi/c-pac:latest /bids_dataset /outputs participant --pipeline_file /configs/pipeline_config.yml</span>
+<span class="go">        fcpindi/c-pac:latest /bids_dataset /outputs participant --pipeline-file /configs/pipeline_config.yml</span>
 </pre></div>
 </div>
 <p>Or you can provide it to the C-PAC Singularity container like so:</p>
@@ -561,7 +563,7 @@
 <span class="go">        -B /Users/You/some_folder:/outputs \</span>
 <span class="go">        -B /tmp:/tmp \</span>
 <span class="go">        -B /Users/You/Documents:/configs \</span>
-<span class="go">        fcpindi_c-pac_latest-{date}-{hash value}.img s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant --pipeline_file /configs/pipeline_config.yml</span>
+<span class="go">        fcpindi_c-pac_latest-{date}-{hash value}.img s3://fcp-indi/data/Projects/ADHD200/RawDataBIDS /outputs participant --pipeline-file /configs/pipeline_config.yml</span>
 </pre></div>
 </div>
 <p><strong>Reporting errors and getting help</strong></p>
@@ -576,12 +578,12 @@
 <p>in your pipeline configuration file. You can use the name of a <a class="reference internal" href="preconfig"><span class="doc">preconfigured pipeline</span></a> instead of a filepath if you want to base a configuration file on a preconfigured pipeline. If <code class="docutils literal notranslate"><span class="pre">FROM</span></code> is not specified, the pipeline will be based on <a class="reference internal" href="default"><span class="doc">the default pipeline</span></a>.</p>
 <p>C-PAC will include all expected keys from the pipeline file specified in <code class="docutils literal notranslate"><span class="pre">FROM</span></code> (or the default pipeline if none is specified). Any keys specified in a pipeline configuration file will take precedence over the same key in the <code class="docutils literal notranslate"><span class="pre">FROM</span></code> base configuration, but all omitted keys will retain their values from the <code class="docutils literal notranslate"><span class="pre">FROM</span></code> base configuration.</p>
 <p>From terminal, you can quickly generate a default pipeline configuration YAML file template in the directory you are in:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">pipe_config</span> <span class="n">new_template</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">pipe</span><span class="o">-</span><span class="n">config</span> <span class="n">new</span><span class="o">-</span><span class="n">template</span>
 </pre></div>
 </div>
 <p>You can then edit the file as needed. For values that you want to leave at the default, you can either leave the key as-is, or you can remove the key, and C-PAC will automatically use value from the default pipeline configuration (or from the pipeline specified in <code class="docutils literal notranslate"><span class="pre">FROM</span></code>).</p>
 <p>If you want to run the analysis from terminal:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">run</span> <span class="o">--</span><span class="n">pipe_config</span> <span class="p">{</span><span class="n">path</span> <span class="n">to</span> <span class="n">pipeline</span> <span class="n">config</span><span class="p">}</span> <span class="p">{</span><span class="n">path</span> <span class="n">to</span> <span class="n">data</span> <span class="n">config</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">run</span> <span class="o">--</span><span class="n">pipe</span><span class="o">-</span><span class="n">config</span> <span class="p">{</span><span class="n">path</span> <span class="n">to</span> <span class="n">pipeline</span> <span class="n">config</span><span class="p">}</span> <span class="p">{</span><span class="n">path</span> <span class="n">to</span> <span class="n">data</span> <span class="n">config</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Pipeline configuration files, like the data settings and data configuration files discussed in the <a class="reference internal" href="../subject_list_config"><span class="doc">data configuration builder section</span></a>, are stored as YAML files.  Similarly, each of the parameters used by C-PAC to assemble your pipeline can be specified as nested key-value pairs, so a pipeline configuration YAML would have multiple lines of the form <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> like so</p>

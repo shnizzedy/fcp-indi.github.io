@@ -246,6 +246,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Developer Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../developer/installation">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/pipeline">Pipeline Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/pipeline#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/pipeline#engine">Engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/random_state">Random State</a></li>
@@ -334,15 +336,15 @@ The data configuration file layout has changed significantly from older versions
 <h3>Create data_settings.yml template file<a class="headerlink" href="#create-data-settings-yml-template-file" title="Permalink to this heading">#</a></h3>
 <p>You can configure the settings explained below in the <strong>data settings</strong> YAML file, then use the C-PAC command-line interface to generate your <strong>data configuration</strong> file.</p>
 <p>If you don’t already have a data settings YAML file, you can generate one in your current directory by running:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">data_config</span> <span class="n">new_settings_template</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">data</span><span class="o">-</span><span class="n">config</span> <span class="n">new</span><span class="o">-</span><span class="n">settings</span><span class="o">-</span><span class="n">template</span>
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> <span class="n">bids_dir</span> <span class="n">outputs_dir</span> <span class="n">cli</span> <span class="o">--</span> <span class="n">utils</span> <span class="n">data_config</span> <span class="n">new_settings_template</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run C-PAC_latest.sif $BIDS_DIR $OUTPUTS_DIR cli -- utils data-config new-settings-template
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -i --rm --user $(id -u):$(id -g) -v /path/to/data_config:/scratch -w=&quot;/scratch&quot; fcpindi/c-pac:latest bids_dir outputs_dir cli -- utils data_config new_settings_template
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -i --rm --user $(id -u):$(id -g) -v /path/to/data_config:/scratch -w=&quot;/scratch&quot; fcpindi/c-pac:latest $BIDS_DIR $OUTPUTS_DIR cli -- utils data-config new-settings-template
 </pre></div>
 </div>
 <p>If running a container directly (either of the latter options rather than the first option, which is through <a class="reference internal" href="cpac"><span class="doc">cpac (Python package)</span></a>), <code class="docutils literal notranslate"><span class="pre">bids_dir</span></code> and <code class="docutils literal notranslate"><span class="pre">outputs_dir</span></code> are required but not used, so any non-null string will work for those positional arguments.</p>
@@ -364,7 +366,7 @@ The data configuration file layout has changed significantly from older versions
 <span class="o">-</span><span class="n">B</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="ow">in</span><span class="o">/</span><span class="n">data_settings</span><span class="o">/</span><span class="mi">1</span> \
 <span class="o">-</span><span class="n">B</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="ow">in</span><span class="o">/</span><span class="n">data_settings</span><span class="o">/</span><span class="mi">2</span> \
 <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">bids_dir</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">outputs</span> <span class="n">cli</span> <span class="o">--</span> <span class="n">utils</span> \
-<span class="n">data_config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">data</span><span class="o">-</span><span class="n">config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
 <p>or:</p>
@@ -375,7 +377,7 @@ The data configuration file layout has changed significantly from older versions
 -v /path/to/data/in/data_settings/2:/path/to/data/in/data_settings/2 \
 -v /path/to/data_config:/scratch -w=&quot;/scratch&quot; \
 fcpindi/c-pac:latest /path/to/bids_dir /path/to/outputs cli -- utils \
-data_config build /path/to/data_settings.yml
+data-config build /path/to/data_settings.yml
 </pre></div>
 </div>
 <p>Continue below for some example use cases.</p>
@@ -421,15 +423,15 @@ data_config build /path/to/data_settings.yml
 </div>
 <p>You can also fill in the AWS credentials file field, and the inclusion and exclusion fields, as needed.</p>
 <p>Once your data settings file is ready, generate your data configuration file by running:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">data_config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">data</span><span class="o">-</span><span class="n">config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> <span class="n">bids_dir</span> <span class="n">outputs_dir</span> <span class="n">cli</span> <span class="o">--</span> <span class="n">utils</span> <span class="n">data_config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run C-PAC_latest.sif $BIDS_DIR $OUTPUTS_DIR cli -- utils data-config build /path/to/data_settings.yml
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -i --rm --user $(id -u) -v /path/to/data_config:/scratch -w=&quot;/scratch&quot; fcpindi/c-pac:latest bids_dir outputs_dir cli -- utils data_config build /path/to/data_settings.yml
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -i --rm --user $(id -u) -v /path/to/data_config:/scratch -w=&quot;/scratch&quot; fcpindi/c-pac:latest $BIDS_DIR $OUTPUTS_DIR cli -- utils data-config build /path/to/data_settings.yml
 </pre></div>
 </div>
 </section>
@@ -455,15 +457,15 @@ data_config build /path/to/data_settings.yml
 </div>
 <p>You can also fill in the AWS credentials file field, and the inclusion and exclusion fields, as needed.</p>
 <p>Once your data settings file is ready, generate your data configuration file by running:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">data_config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpac</span> <span class="n">utils</span> <span class="n">data</span><span class="o">-</span><span class="n">config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">run</span> <span class="n">C</span><span class="o">-</span><span class="n">PAC_latest</span><span class="o">.</span><span class="n">sif</span> <span class="n">bids_dir</span> <span class="n">outputs_dir</span> <span class="n">cli</span> <span class="o">--</span> <span class="n">utils</span> <span class="n">data_config</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">data_settings</span><span class="o">.</span><span class="n">yml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>singularity run C-PAC_latest.sif $BIDS_DIR $OUTPUTS_DIR cli -- utils data-config build /path/to/data_settings.yml
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -i --rm --user $(id -u) -v /path/to/data_config:/scratch -w=&quot;/scratch&quot; fcpindi/c-pac:latest bids_dir outputs_dir cli -- utils data_config build /path/to/data_settings.yml
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -i --rm --user $(id -u) -v /path/to/data_config:/scratch -w=&quot;/scratch&quot; fcpindi/c-pac:latest $BIDS_DIR $OUTPUTS_DIR cli -- utils data-config build /path/to/data_settings.yml
 </pre></div>
 </div>
 </section>

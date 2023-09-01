@@ -244,6 +244,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="developer/index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Developer Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="developer/installation">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/pipeline">Pipeline Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer/pipeline#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer/pipeline#engine">Engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer/random_state">Random State</a></li>
@@ -316,7 +318,7 @@
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#Z"><strong>Z</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#Y"><strong>Y</strong></a> | <a href="#Z"><strong>Z</strong></a></div>
 </section>
 <section id="_" class="genindex-section">
   <h2>_</h2>
@@ -329,6 +331,20 @@
 </li>
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.__init__">(CPAC.pipeline.nipype_pipeline_engine.Workflow method)</a>
 </li>
+          <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.__init__">(CPAC.pipeline.nodeblock.NodeBlockFunction method)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.__init__">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.__init__">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.__init__">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.__init__">(CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.__init__">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.__init__">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.__init__">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.__init__">(CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.__init__">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffValue.__init__">(CPAC.utils.configuration.diff.DiffValue method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffValue.__init__">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.YamlTemplate.__init__">(CPAC.utils.configuration.yaml_template.YamlTemplate method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.YamlTemplate.__init__">[1]</a>
+</li>
           <li><a href="developer/nodes#CPAC.utils.interfaces.function.Function.__init__">(CPAC.utils.interfaces.function.Function method)</a>
 </li>
           <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.__init__">(CPAC.utils.monitoring.custom_logging.MockLogger method)</a>
@@ -338,6 +354,46 @@
           <li><a href="developer/logging#nipype.utils.logger.Logging.__init__">(nipype.utils.logger.Logging method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration._check_if_switch">_check_if_switch() (CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration._check_if_switch">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration._check_if_switch">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration._check_if_switch">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template._count_indent">_count_indent() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template._count_indent">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template._format_list_items">_format_list_items() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template._format_list_items">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration._nonestr_to_None">_nonestr_to_None() (CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration._nonestr_to_None">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration._nonestr_to_None">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration._nonestr_to_None">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.YamlTemplate._parse_comments">_parse_comments() (CPAC.utils.configuration.yaml_template.YamlTemplate method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.YamlTemplate._parse_comments">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict._return_one_value">_return_one_value() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict._return_one_value">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict._s_value">_s_value() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict._s_value">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration._switch_bool">_switch_bool() (CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration._switch_bool">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration._switch_bool">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration._switch_bool">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict._t_value">_t_value() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict._t_value">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration._update_attr">_update_attr() (CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration._update_attr">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration._update_attr">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration._update_attr">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="developer/engine#CPAC.pipeline.utils._update_resource_idx">_update_resource_idx() (in module CPAC.pipeline.utils)</a>, <a href="developer/pipeline#CPAC.pipeline.utils._update_resource_idx">[1]</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -362,10 +418,10 @@
         </ul></li>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.all_native_filter">all_native_filter (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.all_template_filter">all_template_filter (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/nodes#CPAC.utils.interfaces.function.Function.always_run">always_run (CPAC.utils.interfaces.function.Function property)</a>
 
         <ul>
@@ -379,6 +435,8 @@
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.anat_refined_mask">anat_refined_mask() (in module CPAC.func_preproc.func_preproc)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.any">any (CPAC.utils.outputs.Outputs attribute)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.args">args (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.args">[1]</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.ndmg_utils.graph.as_matrix">as_matrix() (CPAC.utils.ndmg_utils.graph method)</a>
 </li>
@@ -471,9 +529,19 @@
         <li><a href="developer/utils#CPAC.utils.create_fsl_model.check_multicollinearity">check_multicollinearity() (in module CPAC.utils.create_fsl_model)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.check_pattern">check_pattern() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.check_pattern">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.check_pattern">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.check_pattern">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.check_pattern">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.configuration.check_pname">check_pname() (in module CPAC.utils.configuration)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.check_pname">(in module CPAC.utils.configuration.configuration)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.check_pname">[1]</a>
 </li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.utils.check_prov_for_motion_tool">check_prov_for_motion_tool() (in module CPAC.utils.utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.utils.check_prov_for_regtool">check_prov_for_regtool() (in module CPAC.utils.utils)</a>
@@ -488,6 +556,8 @@
 </li>
         <li><a href="developer/utils#CPAC.utils.bids_utils.cl_strip_brackets">cl_strip_brackets() (in module CPAC.utils.bids_utils)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.clear">clear() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.clear">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.clone">clone() (CPAC.pipeline.nipype_pipeline_engine.MapNode method)</a>
 
         <ul>
@@ -500,7 +570,11 @@
 </li>
         <li><a href="developer/utils#CPAC.utils.bids_utils.collect_bids_files_configs">collect_bids_files_configs() (in module CPAC.utils.bids_utils)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.collect_key_list">collect_key_list() (in module CPAC.utils.configuration.configuration)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.collect_key_list">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.bids_utils.combine_multiple_entity_instances">combine_multiple_entity_instances() (in module CPAC.utils.bids_utils)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.YamlTemplate.comments">comments (CPAC.utils.configuration.yaml_template.YamlTemplate attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.YamlTemplate.comments">[1]</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.symlinks.compile_strategy_name">compile_strategy_name() (in module CPAC.utils.symlinks)</a>
 </li>
@@ -512,17 +586,27 @@
 </li>
         <li><a href="developer/utils#CPAC.utils.test_init.concordance">concordance() (in module CPAC.utils.test_init)</a>
 </li>
+        <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.config">config (CPAC.pipeline.nodeblock.NodeBlockFunction attribute)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.config">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration">Configuration (class in CPAC.utils.configuration)</a>
 
         <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration">(class in CPAC.utils.configuration.configuration)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration">[1]</a>
+</li>
           <li><a href="developer/utils#CPAC.utils.extract_data.Configuration">(class in CPAC.utils.extract_data)</a>
 </li>
           <li><a href="developer/utils#CPAC.utils.extract_data_multiscan.Configuration">(class in CPAC.utils.extract_data_multiscan)</a>
 </li>
         </ul></li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.configuration_from_file">configuration_from_file() (in module CPAC.utils.configuration.configuration)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.configuration_from_file">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation">ConfigurationDictUpdateConflation</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.connect">connect() (CPAC.pipeline.nipype_pipeline_engine.Workflow method)</a>
 </li>
         <li><a href="developer/workflows/network_centrality#CPAC.network_centrality.convert_pvalue_to_r">convert_pvalue_to_r() (in module CPAC.network_centrality)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.copy">copy() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.copy">[1]</a>
 </li>
         <li><a href="developer/workflows/easy_thresh#CPAC.easy_thresh.copy_geom">copy_geom() (in module CPAC.easy_thresh)</a>
 </li>
@@ -608,6 +692,13 @@
 </li>
         </ul></li>
         <li>
+    CPAC.pipeline.nodeblock
+
+        <ul>
+          <li><a href="developer/engine#module-CPAC.pipeline.nodeblock">module</a>, <a href="developer/pipeline#module-CPAC.pipeline.nodeblock">[1]</a>
+</li>
+        </ul></li>
+        <li>
     CPAC.pipeline.schema
 
         <ul>
@@ -618,7 +709,7 @@
     CPAC.pipeline.utils
 
         <ul>
-          <li><a href="developer/pipeline#module-CPAC.pipeline.utils">module</a>
+          <li><a href="developer/engine#module-CPAC.pipeline.utils">module</a>, <a href="developer/pipeline#module-0">[1]</a>, <a href="developer/pipeline#module-CPAC.pipeline.utils">[2]</a>
 </li>
         </ul></li>
         <li>
@@ -671,6 +762,29 @@
 </li>
         </ul></li>
         <li>
+    CPAC.utils.configuration.configuration
+
+        <ul>
+          <li><a href="developer/configuration#module-CPAC.utils.configuration.configuration">module</a>, <a href="developer/pipeline#module-CPAC.utils.configuration.configuration">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    CPAC.utils.configuration.diff
+
+        <ul>
+          <li><a href="developer/configuration#module-CPAC.utils.configuration.diff">module</a>, <a href="developer/pipeline#module-CPAC.utils.configuration.diff">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    CPAC.utils.configuration.yaml_template
+
+        <ul>
+          <li><a href="developer/configuration#module-CPAC.utils.configuration.yaml_template">module</a>, <a href="developer/pipeline#module-CPAC.utils.configuration.yaml_template">[1]</a>
+</li>
+        </ul></li>
+        <li>
     CPAC.utils.create_flame_model_files
 
         <ul>
@@ -684,8 +798,6 @@
           <li><a href="developer/utils#module-CPAC.utils.create_fsl_flame_preset">module</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     CPAC.utils.create_fsl_model
 
@@ -941,6 +1053,8 @@
 </li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_wf_edit_func">create_wf_edit_func() (in module CPAC.func_preproc.func_preproc)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.create_yaml_from_template">create_yaml_from_template() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.create_yaml_from_template">[1]</a>
+</li>
         <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.critical">critical() (CPAC.utils.monitoring.custom_logging.MockLogger method)</a>
 </li>
     </ul></td>
@@ -951,6 +1065,8 @@
   <h2>D</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.dct_diff">dct_diff() (in module CPAC.utils.configuration.diff)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.dct_diff">[1]</a>
+</li>
         <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.debug">debug() (CPAC.utils.monitoring.custom_logging.MockLogger method)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.debugging">debugging (CPAC.utils.outputs.Outputs attribute)</a>
@@ -964,9 +1080,21 @@
         <li><a href="developer/utils#CPAC.utils.utils.delete_nested_value">delete_nested_value() (in module CPAC.utils.utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.dict">dict() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.dict">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.dict">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.dict">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.dict">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.diff_dict">diff_dict() (in module CPAC.utils.configuration.diff)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.diff_dict">[1]</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict">DiffDict (class in CPAC.utils.configuration.diff)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffValue">DiffValue (class in CPAC.utils.configuration.diff)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffValue">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.disconnect">disconnect() (CPAC.pipeline.nipype_pipeline_engine.Workflow method)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.ga.do_it">do_it() (in module CPAC.utils.ga)</a>
@@ -978,6 +1106,10 @@
         <li><a href="developer/utils#CPAC.utils.test_init.download_resource_from_s3">download_resource_from_s3() (in module CPAC.utils.test_init)</a>
 </li>
         <li><a href="developer/nodes#CPAC.utils.monitoring.draw_gantt_chart.draw_nodes">draw_nodes() (in module CPAC.utils.monitoring.draw_gantt_chart)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.YamlTemplate.dump">dump (CPAC.utils.configuration.yaml_template.YamlTemplate attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.YamlTemplate.dump">[1]</a>
+</li>
+        <li><a href="developer/configuration#id0">dump() (CPAC.utils.configuration.yaml_template.YamlTemplate method)</a>, <a href="developer/pipeline#id0">[1]</a>
 </li>
         <li><a href="developer/xcpqc#CPAC.qc.xcp.dvcorr">dvcorr() (in module CPAC.qc.xcp)</a>
 </li>
@@ -991,16 +1123,20 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/workflows/easy_thresh#CPAC.easy_thresh.easy_thresh">easy_thresh() (in module CPAC.easy_thresh)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.end_lineno">end_lineno (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.end_lineno">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.end_offset">end_offset (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.end_offset">[1]</a>
+</li>
         <li><a href="developer/workflows/seg_preproc#CPAC.seg_preproc.erosion">erosion() (in module CPAC.seg_preproc)</a>
 </li>
         <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.error">error() (CPAC.utils.monitoring.custom_logging.MockLogger method)</a>
 </li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_motion.estimate_reference_image">estimate_reference_image() (in module CPAC.func_preproc.func_motion)</a>
 </li>
-        <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.exception">exception() (CPAC.utils.monitoring.custom_logging.MockLogger method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.exception">exception() (CPAC.utils.monitoring.custom_logging.MockLogger method)</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.export">export() (CPAC.pipeline.nipype_pipeline_engine.Workflow method)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.extract_data.extract_data">extract_data() (in module CPAC.utils.extract_data)</a>
@@ -1027,7 +1163,11 @@
 </li>
         <li><a href="developer/utils#CPAC.utils.monitoring.failed_to_start">failed_to_start() (in module CPAC.utils.monitoring)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.filename">filename (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.filename">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.utils.find_files">find_files() (in module CPAC.utils.utils)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.fromkeys">fromkeys() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.fromkeys">[1]</a>
 </li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.fullname">fullname (CPAC.pipeline.nipype_pipeline_engine.MapNode property)</a>
 
@@ -1037,16 +1177,20 @@
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.fullname">(CPAC.pipeline.nipype_pipeline_engine.Workflow property)</a>
 </li>
         </ul></li>
-        <li><a href="developer/utils#CPAC.utils.outputs.Outputs.func">func (CPAC.utils.outputs.Outputs attribute)</a>
+        <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.func">func (CPAC.pipeline.nodeblock.NodeBlockFunction attribute)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.func">[1]</a>
+
+        <ul>
+          <li><a href="developer/utils#CPAC.utils.outputs.Outputs.func">(CPAC.utils.outputs.Outputs attribute)</a>
 </li>
+        </ul></li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_despike">func_despike() (in module CPAC.func_preproc.func_preproc)</a>
 </li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_despike_template">func_despike_template() (in module CPAC.func_preproc.func_preproc)</a>
 </li>
-        <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_mask_normalize">func_mask_normalize() (in module CPAC.func_preproc.func_preproc)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_mask_normalize">func_mask_normalize() (in module CPAC.func_preproc.func_preproc)</a>
+</li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_mean">func_mean() (in module CPAC.func_preproc.func_preproc)</a>
 </li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_motion.func_motion_correct">func_motion_correct() (in module CPAC.func_preproc.func_motion)</a>
@@ -1091,6 +1235,8 @@
 </li>
         <li><a href="developer/xcpqc#CPAC.qc.xcp.generate_xcp_qc">generate_xcp_qc() (in module CPAC.qc.xcp)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.get">get() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.get">[1]</a>
+</li>
         <li><a href="developer/xcpqc#CPAC.qc.xcp.get_bids_info">get_bids_info() (in module CPAC.qc.xcp)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.create_fsl_model.get_custom_roi_info">get_custom_roi_info() (in module CPAC.utils.create_fsl_model)</a>
@@ -1119,14 +1265,24 @@
 </li>
         <li><a href="developer/workflows/scrubbing#CPAC.scrubbing.get_mov_parameters">get_mov_parameters() (in module CPAC.scrubbing)</a>
 </li>
-        <li><a href="developer/utils#CPAC.utils.configuration.Configuration.get_nested">get_nested() (CPAC.utils.configuration.Configuration method)</a>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.YamlTemplate.get_nested">get_nested (CPAC.utils.configuration.yaml_template.YamlTemplate attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.YamlTemplate.get_nested">[1]</a>
 </li>
+        <li><a href="developer/utils#CPAC.utils.configuration.Configuration.get_nested">get_nested() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.get_nested">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.get_nested">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.get_nested">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.get_nested">[1]</a>
+</li>
+          <li><a href="developer/configuration#id4">(CPAC.utils.configuration.yaml_template.YamlTemplate method)</a>, <a href="developer/pipeline#id4">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.get_node">get_node() (CPAC.pipeline.nipype_pipeline_engine.Workflow method)</a>
 </li>
         <li><a href="developer/workflows/vmhc#CPAC.vmhc.get_operand_expression">get_operand_expression() (in module CPAC.vmhc)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.utils.get_operand_string">get_operand_string() (in module CPAC.utils.utils)</a>
 </li>
         <li><a href="developer/workflows/group_analysis#CPAC.group_analysis.get_operation">get_operation() (in module CPAC.group_analysis)</a>
@@ -1191,6 +1347,8 @@
 </li>
         <li><a href="developer/workflows/seg_preproc#CPAC.seg_preproc.hardcoded_antsJointLabelFusion">hardcoded_antsJointLabelFusion() (in module CPAC.seg_preproc)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.hash_data_config">hash_data_config() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.hash_data_config">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.hash_exists">hash_exists() (CPAC.pipeline.nipype_pipeline_engine.MapNode method)</a>
 
         <ul>
@@ -1219,6 +1377,8 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.ImageTo1D">ImageTo1D (class in CPAC.generate_motion_statistics)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.indent">indent() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.indent">[1]</a>
+</li>
         <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.info">info() (CPAC.utils.monitoring.custom_logging.MockLogger method)</a>
 </li>
         <li><a href="developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.ImageTo1D.input_spec">input_spec (CPAC.generate_motion_statistics.ImageTo1D attribute)</a>
@@ -1233,6 +1393,8 @@
 
         <ul>
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node.inputs">(CPAC.pipeline.nipype_pipeline_engine.Node property)</a>
+</li>
+          <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.inputs">(CPAC.pipeline.nodeblock.NodeBlockFunction attribute)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.inputs">[1]</a>
 </li>
         </ul></li>
         <li><a href="developer/utils#CPAC.utils.bids_utils.insert_entity">insert_entity() (in module CPAC.utils.bids_utils)</a>
@@ -1255,6 +1417,8 @@
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node.is_cached">(CPAC.pipeline.nipype_pipeline_engine.Node method)</a>
 </li>
         </ul></li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.items">items() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.items">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.itername">itername (CPAC.pipeline.nipype_pipeline_engine.MapNode property)</a>
 
         <ul>
@@ -1272,11 +1436,25 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.key_type_error">key_type_error() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.key_type_error">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.key_type_error">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.key_type_error">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.key_type_error">[1]</a>
+</li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.keys">keys() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.keys">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.keys">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.keys">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.keys">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.keys">(CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.keys">[1]</a>
+</li>
+        </ul></li>
     </ul></td>
   </tr></table>
 </section>
@@ -1285,6 +1463,16 @@
   <h2>L</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.left">left (CPAC.utils.configuration.diff.DiffDict attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.left">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffValue.left">(CPAC.utils.configuration.diff.DiffValue attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffValue.left">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.legacy_nodeblock_dict">legacy_nodeblock_dict() (CPAC.pipeline.nodeblock.NodeBlockFunction method)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.legacy_nodeblock_dict">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.lineno">lineno (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.lineno">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.typing.LIST">LIST (in module CPAC.utils.typing)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.utils.list_item_replace">list_item_replace() (in module CPAC.utils.utils)</a>
@@ -1301,12 +1489,12 @@
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.load">(CPAC.pipeline.nipype_pipeline_engine.Workflow static method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.bids_utils.load_cpac_data_config">load_cpac_data_config() (in module CPAC.utils.bids_utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.create_fsl_model.load_group_participant_list">load_group_participant_list() (in module CPAC.utils.create_fsl_model)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/nodes#CPAC.utils.interfaces.function.Function.load_inputs_from_json">load_inputs_from_json() (CPAC.utils.interfaces.function.Function method)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.create_fsl_model.load_pheno_file">load_pheno_file() (in module CPAC.utils.create_fsl_model)</a>
@@ -1355,6 +1543,12 @@
         </ul></li>
         <li><a href="developer/utils#CPAC.utils.extract_parameters.merge">merge() (in module CPAC.utils.extract_parameters)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.minuend">minuend (CPAC.utils.configuration.diff.DiffDict attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.minuend">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffValue.minuend">(CPAC.utils.configuration.diff.DiffValue attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffValue.minuend">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.utils.mm_to_degrees">mm_to_degrees() (in module CPAC.func_preproc.utils)</a>
 </li>
         <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger">MockLogger (class in CPAC.utils.monitoring.custom_logging)</a>
@@ -1387,9 +1581,11 @@
 </li>
           <li><a href="developer/workflows/network_centrality#module-CPAC.network_centrality">CPAC.network_centrality</a>
 </li>
+          <li><a href="developer/engine#module-CPAC.pipeline.nodeblock">CPAC.pipeline.nodeblock</a>, <a href="developer/pipeline#module-CPAC.pipeline.nodeblock">[1]</a>
+</li>
           <li><a href="developer/pipeline#module-CPAC.pipeline.schema">CPAC.pipeline.schema</a>, <a href="developer/schema#module-CPAC.pipeline.schema">[1]</a>
 </li>
-          <li><a href="developer/pipeline#module-CPAC.pipeline.utils">CPAC.pipeline.utils</a>
+          <li><a href="developer/engine#module-CPAC.pipeline.utils">CPAC.pipeline.utils</a>, <a href="developer/pipeline#module-0">[1]</a>, <a href="developer/pipeline#module-CPAC.pipeline.utils">[2]</a>
 </li>
           <li><a href="developer/xcpqc#module-CPAC.qc.xcp">CPAC.qc.xcp</a>
 </li>
@@ -1404,6 +1600,12 @@
           <li><a href="developer/utils#module-CPAC.utils.bids_utils">CPAC.utils.bids_utils</a>
 </li>
           <li><a href="developer/utils#module-CPAC.utils.configuration">CPAC.utils.configuration</a>
+</li>
+          <li><a href="developer/configuration#module-CPAC.utils.configuration.configuration">CPAC.utils.configuration.configuration</a>, <a href="developer/pipeline#module-CPAC.utils.configuration.configuration">[1]</a>
+</li>
+          <li><a href="developer/configuration#module-CPAC.utils.configuration.diff">CPAC.utils.configuration.diff</a>, <a href="developer/pipeline#module-CPAC.utils.configuration.diff">[1]</a>
+</li>
+          <li><a href="developer/configuration#module-CPAC.utils.configuration.yaml_template">CPAC.utils.configuration.yaml_template</a>, <a href="developer/pipeline#module-CPAC.utils.configuration.yaml_template">[1]</a>
 </li>
           <li><a href="developer/utils#module-CPAC.utils.create_flame_model_files">CPAC.utils.create_flame_model_files</a>
 </li>
@@ -1478,6 +1680,8 @@
 </li>
         <li><a href="developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.motion_power_statistics">motion_power_statistics() (in module CPAC.generate_motion_statistics)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.msg">msg (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.msg">[1]</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -1499,8 +1703,10 @@
 </li>
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.name">(CPAC.pipeline.nipype_pipeline_engine.Workflow property)</a>
 </li>
+          <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.name">(CPAC.pipeline.nodeblock.NodeBlockFunction attribute)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.name">[1]</a>
+</li>
         </ul></li>
-        <li><a href="developer/pipeline#CPAC.pipeline.utils.name_fork">name_fork() (in module CPAC.pipeline.utils)</a>
+        <li><a href="developer/engine#CPAC.pipeline.utils.name_fork">name_fork() (in module CPAC.pipeline.utils)</a>, <a href="developer/pipeline#CPAC.pipeline.utils.name_fork">[1]</a>, <a href="developer/pipeline#id6">[2]</a>
 </li>
         <li><a href="developer/pipeline#CPAC.pipeline.schema.name_motion_filter">name_motion_filter() (in module CPAC.pipeline.schema)</a>, <a href="developer/schema#CPAC.pipeline.schema.name_motion_filter">[1]</a>
 </li>
@@ -1508,10 +1714,10 @@
 </li>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.native_raw">native_raw (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.native_smooth">native_smooth (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.ndmg_utils.ndmg_create_graphs">ndmg_create_graphs() (in module CPAC.utils.ndmg_utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.ndmg_utils.ndmg_roi_timeseries">ndmg_roi_timeseries() (in module CPAC.utils.ndmg_utils)</a>
@@ -1521,6 +1727,10 @@
         <li><a href="developer/utils#CPAC.utils.nifti_utils.nifti_image_input">nifti_image_input() (in module CPAC.utils.nifti_utils)</a>
 </li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node">Node (class in CPAC.pipeline.nipype_pipeline_engine)</a>
+</li>
+        <li><a href="developer/engine#CPAC.pipeline.nodeblock.nodeblock">nodeblock() (in module CPAC.pipeline.nodeblock)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.nodeblock">[1]</a>
+</li>
+        <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction">NodeBlockFunction (class in CPAC.pipeline.nodeblock)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction">[1]</a>
 </li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_motion.normalize_motion_parameters">normalize_motion_parameters() (in module CPAC.func_preproc.func_motion)</a>
 </li>
@@ -1538,9 +1748,17 @@
   <h2>O</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.offset">offset (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.offset">[1]</a>
+</li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.utils.oned_text_concat">oned_text_concat() (in module CPAC.func_preproc.utils)</a>
 </li>
+        <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.option_key">option_key (CPAC.pipeline.nodeblock.NodeBlockFunction attribute)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.option_key">[1]</a>
+</li>
+        <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.option_val">option_val (CPAC.pipeline.nodeblock.NodeBlockFunction attribute)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.option_val">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.utils.ordereddict_to_dict">ordereddict_to_dict() (in module CPAC.utils.utils)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.YamlTemplate.original">original (CPAC.utils.configuration.yaml_template.YamlTemplate attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.YamlTemplate.original">[1]</a>
 </li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.output_dir">output_dir() (CPAC.pipeline.nipype_pipeline_engine.MapNode method)</a>
 
@@ -1548,6 +1766,8 @@
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node.output_dir">(CPAC.pipeline.nipype_pipeline_engine.Node method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.ImageTo1D.output_spec">output_spec (CPAC.generate_motion_statistics.ImageTo1D attribute)</a>
 
         <ul>
@@ -1556,14 +1776,14 @@
           <li><a href="developer/nodes#nipype.interfaces.base.core.Interface.output_spec">(nipype.interfaces.base.core.Interface attribute)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs">Outputs (class in CPAC.utils.outputs)</a>
 </li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.outputs">outputs (CPAC.pipeline.nipype_pipeline_engine.MapNode property)</a>
 
         <ul>
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node.outputs">(CPAC.pipeline.nipype_pipeline_engine.Node property)</a>
+</li>
+          <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.outputs">(CPAC.pipeline.nodeblock.NodeBlockFunction attribute)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.outputs">[1]</a>
 </li>
         </ul></li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.override_mem_gb">override_mem_gb() (CPAC.pipeline.nipype_pipeline_engine.MapNode method)</a>
@@ -1600,19 +1820,31 @@
 </li>
         <li><a href="developer/workflows/seg_preproc#CPAC.seg_preproc.pick_wm_prob_2">pick_wm_prob_2() (in module CPAC.seg_preproc)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.pop">pop() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.pop">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.popitem">popitem() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.popitem">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.test_init.populate_all_templates">populate_all_templates() (in module CPAC.utils.test_init)</a>
+</li>
+        <li><a href="developer/utils#CPAC.utils.test_init.populate_template_config">populate_template_config() (in module CPAC.utils.test_init)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="developer/utils#CPAC.utils.test_init.populate_template_config">populate_template_config() (in module CPAC.utils.test_init)</a>
-</li>
         <li><a href="developer/utils#CPAC.utils.create_fsl_model.positive">positive() (in module CPAC.utils.create_fsl_model)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.configuration.preconfig_yaml">preconfig_yaml() (in module CPAC.utils.configuration)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.preconfig_yaml">(in module CPAC.utils.configuration.configuration)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.preconfig_yaml">[1]</a>
 </li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.configuration.Preconfiguration">Preconfiguration (class in CPAC.utils.configuration)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration">(class in CPAC.utils.configuration.configuration)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration">[1]</a>
 </li>
-        <li><a href="developer/pipeline#CPAC.pipeline.utils.present_outputs">present_outputs() (in module CPAC.pipeline.utils)</a>
+        </ul></li>
+        <li><a href="developer/engine#CPAC.pipeline.utils.present_outputs">present_outputs() (in module CPAC.pipeline.utils)</a>, <a href="developer/pipeline#CPAC.pipeline.utils.present_outputs">[1]</a>, <a href="developer/pipeline#id7">[2]</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.create_fsl_flame_preset.preset_paired_two_group">preset_paired_two_group() (in module CPAC.utils.create_fsl_flame_preset)</a>
 </li>
@@ -1621,6 +1853,8 @@
         <li><a href="developer/utils#CPAC.utils.create_fsl_flame_preset.preset_tripled_two_group">preset_tripled_two_group() (in module CPAC.utils.create_fsl_flame_preset)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.create_fsl_flame_preset.preset_unpaired_two_group">preset_unpaired_two_group() (in module CPAC.utils.create_fsl_flame_preset)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.print_file_and_line">print_file_and_line (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.print_file_and_line">[1]</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.create_fsl_model.process_contrast">process_contrast() (in module CPAC.utils.create_fsl_model)</a>
 </li>
@@ -1678,14 +1912,20 @@
           <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node.result">(CPAC.pipeline.nipype_pipeline_engine.Node property)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.test_init.return_all_niis">return_all_niis() (in module CPAC.utils.test_init)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.test_init.return_aws_creds">return_aws_creds() (in module CPAC.utils.test_init)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.return_config_elements">return_config_elements() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.return_config_elements">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.return_config_elements">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.return_config_elements">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.return_config_elements">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.test_init.return_resource_dir">return_resource_dir() (in module CPAC.utils.test_init)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.test_init.return_resource_subfolder">return_resource_subfolder() (in module CPAC.utils.test_init)</a>
@@ -1698,6 +1938,12 @@
 </li>
         <li><a href="developer/utils#CPAC.utils.test_init.return_test_subj">return_test_subj() (in module CPAC.utils.test_init)</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.right">right (CPAC.utils.configuration.diff.DiffDict attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.right">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffValue.right">(CPAC.utils.configuration.diff.DiffValue attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffValue.right">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.run">run() (CPAC.pipeline.nipype_pipeline_engine.MapNode method)</a>
 
         <ul>
@@ -1728,6 +1974,12 @@
   <h2>S</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.s_value">s_value (CPAC.utils.configuration.diff.DiffDict attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.s_value">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffValue.s_value">(CPAC.utils.configuration.diff.DiffValue attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffValue.s_value">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.utils.safe_shape">safe_shape() (in module CPAC.utils.utils)</a>
 </li>
         <li><a href="developer/pipeline#CPAC.pipeline.schema.sanitize">sanitize() (in module CPAC.pipeline.schema)</a>, <a href="developer/schema#CPAC.pipeline.schema.sanitize">[1]</a>
@@ -1746,6 +1998,8 @@
 </li>
         <li><a href="developer/pipeline#CPAC.pipeline.schema.schema">schema() (in module CPAC.pipeline.schema)</a>, <a href="developer/schema#CPAC.pipeline.schema.schema">[1]</a>
 </li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.set_from_ENV">set_from_ENV() (in module CPAC.utils.configuration.configuration)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.set_from_ENV">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.set_input">set_input() (CPAC.pipeline.nipype_pipeline_engine.MapNode method)</a>
 
         <ul>
@@ -1753,26 +2007,38 @@
 </li>
         </ul></li>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.set_nested">set_nested() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.set_nested">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.set_nested">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.set_nested">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.set_nested">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.utils.set_nested_value">set_nested_value() (in module CPAC.utils.utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.configuration.set_subject">set_subject() (in module CPAC.utils.configuration)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.set_subject">(in module CPAC.utils.configuration.configuration)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.set_subject">[1]</a>
 </li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.monitoring.set_up_logger">set_up_logger() (in module CPAC.utils.monitoring)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.setdefault">setdefault() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.setdefault">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.test_init.setup_test_logger">setup_test_logger() (in module CPAC.utils.test_init)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.test_resources.setup_test_wf">setup_test_wf() (in module CPAC.utils.test_resources)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developer/utils#CPAC.utils.pytest.skipif">skipif() (in module CPAC.utils.pytest)</a>
 </li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.slice_timing_wf">slice_timing_wf() (in module CPAC.func_preproc.func_preproc)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.test_init.smooth_nii_file">smooth_nii_file() (in module CPAC.utils.test_init)</a>
 </li>
-        <li><a href="developer/pipeline#CPAC.pipeline.utils.source_set">source_set() (in module CPAC.pipeline.utils)</a>
+        <li><a href="developer/engine#CPAC.pipeline.utils.source_set">source_set() (in module CPAC.pipeline.utils)</a>, <a href="developer/pipeline#CPAC.pipeline.utils.source_set">[1]</a>, <a href="developer/pipeline#id8">[2]</a>
 </li>
         <li><a href="developer/workflows/func_preproc#CPAC.func_preproc.utils.split_ts_chunks">split_ts_chunks() (in module CPAC.func_preproc.utils)</a>
 </li>
@@ -1781,15 +2047,47 @@
         <li><a href="developer/utils#CPAC.utils.bids_utils.sub_list_filter_by_labels">sub_list_filter_by_labels() (in module CPAC.utils.bids_utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.sub_pattern">sub_pattern() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.sub_pattern">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.sub_pattern">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.sub_pattern">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.sub_pattern">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.subtrahend">subtrahend (CPAC.utils.configuration.diff.DiffDict attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.subtrahend">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffValue.subtrahend">(CPAC.utils.configuration.diff.DiffValue attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffValue.subtrahend">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.ndmg_utils.graph.summary">summary() (CPAC.utils.ndmg_utils.graph method)</a>
 </li>
+        <li><a href="developer/engine#CPAC.pipeline.nodeblock.NodeBlockFunction.switch">switch (CPAC.pipeline.nodeblock.NodeBlockFunction attribute)</a>, <a href="developer/pipeline#CPAC.pipeline.nodeblock.NodeBlockFunction.switch">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.switch_is_off">switch_is_off() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.switch_is_off">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.switch_is_off">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.switch_is_off">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.switch_is_off">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.switch_is_on">switch_is_on() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.switch_is_on">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.switch_is_on">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.switch_is_on">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.switch_is_on">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.configuration.Configuration.switch_is_on_off">switch_is_on_off() (CPAC.utils.configuration.Configuration method)</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.switch_is_on_off">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.switch_is_on_off">[1]</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.switch_is_on_off">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.switch_is_on_off">[1]</a>
+</li>
+        </ul></li>
     </ul></td>
   </tr></table>
 </section>
@@ -1798,18 +2096,26 @@
   <h2>T</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.t_value">t_value (CPAC.utils.configuration.diff.DiffDict attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.t_value">[1]</a>
+
+        <ul>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffValue.t_value">(CPAC.utils.configuration.diff.DiffValue attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffValue.t_value">[1]</a>
+</li>
+        </ul></li>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.template_nonsmooth">template_nonsmooth (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.template_raw">template_raw (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.template_smooth">template_smooth (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
-        <li><a href="developer/utils#CPAC.utils.outputs.Outputs.to_fisherz">to_fisherz (CPAC.utils.outputs.Outputs attribute)</a>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.text">text (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation attribute)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.text">[1]</a>
 </li>
-        <li><a href="developer/utils#CPAC.utils.outputs.Outputs.to_smooth">to_smooth (CPAC.utils.outputs.Outputs attribute)</a>
+        <li><a href="developer/utils#CPAC.utils.outputs.Outputs.to_fisherz">to_fisherz (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/utils#CPAC.utils.outputs.Outputs.to_smooth">to_smooth (CPAC.utils.outputs.Outputs attribute)</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.outputs.Outputs.to_zstd">to_zstd (CPAC.utils.outputs.Outputs attribute)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.ga.track_config">track_config() (in module CPAC.utils.ga)</a>
@@ -1837,9 +2143,19 @@
 </li>
           <li><a href="developer/utils#CPAC.utils.configuration.Configuration.update">(CPAC.utils.configuration.Configuration method)</a>
 </li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Configuration.update">(CPAC.utils.configuration.configuration.Configuration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Configuration.update">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.configuration.Preconfiguration.update">(CPAC.utils.configuration.configuration.Preconfiguration method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.Preconfiguration.update">[1]</a>
+</li>
+          <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.update">(CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.update">[1]</a>
+</li>
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.update_a_preconfig">update_a_preconfig() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.update_a_preconfig">[1]</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.update_all_preconfigs">update_all_preconfigs() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.update_all_preconfigs">[1]</a>
+</li>
         <li><a href="developer/utils#CPAC.utils.utils.update_config_dict">update_config_dict() (in module CPAC.utils.utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.utils.update_nested_dict">update_nested_dict() (in module CPAC.utils.utils)</a>
@@ -1847,6 +2163,8 @@
         <li><a href="developer/utils#CPAC.utils.utils.update_pipeline_values_1_8">update_pipeline_values_1_8() (in module CPAC.utils.utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.utils.update_values_from_list">update_values_from_list() (in module CPAC.utils.utils)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.upgrade_pipeline_to_1_8">upgrade_pipeline_to_1_8() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.upgrade_pipeline_to_1_8">[1]</a>
 </li>
     </ul></td>
   </tr></table>
@@ -1856,6 +2174,8 @@
   <h2>V</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.diff.DiffDict.values">values() (CPAC.utils.configuration.diff.DiffDict method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.diff.DiffDict.values">[1]</a>
+</li>
         <li><a href="developer/nodes#CPAC.utils.interfaces.function.Function.version">version (CPAC.utils.interfaces.function.Function property)</a>
 
         <ul>
@@ -1877,6 +2197,8 @@
         <li><a href="developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.warning">warning() (CPAC.utils.monitoring.custom_logging.MockLogger method)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.bids_utils.with_key">with_key() (in module CPAC.utils.bids_utils)</a>
+</li>
+        <li><a href="developer/configuration#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.with_traceback">with_traceback() (CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation method)</a>, <a href="developer/pipeline#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation.with_traceback">[1]</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.bids_utils.without_key">without_key() (in module CPAC.utils.bids_utils)</a>
 </li>
@@ -1907,6 +2229,20 @@
         <li><a href="developer/utils#CPAC.utils.utils.write_output_json">write_output_json() (in module CPAC.utils.utils)</a>
 </li>
         <li><a href="developer/utils#CPAC.utils.utils.write_to_log">write_to_log() (in module CPAC.utils.utils)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Y" class="genindex-section">
+  <h2>Y</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.yaml_bool">yaml_bool() (in module CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.yaml_bool">[1]</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developer/configuration#CPAC.utils.configuration.yaml_template.YamlTemplate">YamlTemplate (class in CPAC.utils.configuration.yaml_template)</a>, <a href="developer/pipeline#CPAC.utils.configuration.yaml_template.YamlTemplate">[1]</a>
 </li>
     </ul></td>
   </tr></table>
