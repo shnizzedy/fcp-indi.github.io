@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.2.0, furo 2022.09.29"/>
-        <title>CPAC.generate_motion_statistics.utils - C-PAC 1.8.6.dev Beta documentation</title>
+        <title>CPAC.network_centrality.network_centrality - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -313,8 +313,8 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for CPAC.generate_motion_statistics.utils</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (C) 2023  C-PAC Developers</span>
+          <h1>Source code for CPAC.network_centrality.network_centrality</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2015-2023  C-PAC Developers</span>
 
 <span class="c1"># This file is part of C-PAC.</span>
 
@@ -330,110 +330,180 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="sd">&quot;&quot;&quot;Utilities for motion parameters&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">nipype.interfaces.afni.preprocess</span> <span class="kn">import</span> <span class="n">DegreeCentrality</span><span class="p">,</span> <span class="n">LFCD</span>
+<span class="kn">from</span> <span class="nn">nipype.pipeline.engine</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">CPAC.network_centrality.utils</span> <span class="kn">import</span> <span class="n">ThresholdOptionError</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.schema</span> <span class="kn">import</span> <span class="n">valid_options</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.docs</span> <span class="kn">import</span> <span class="n">docstring_parameter</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.afni</span> <span class="kn">import</span> <span class="n">AFNI_GTE_21_1_1</span><span class="p">,</span> <span class="n">ECM</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.typing</span> <span class="kn">import</span> <span class="n">LIST</span>
 
 
-<div class="viewcode-block" id="affine_file_from_params_file"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.affine_file_from_params_file">[docs]</a><span class="k">def</span> <span class="nf">affine_file_from_params_file</span><span class="p">(</span><span class="n">params_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">affine_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
-                                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a 6-DOF motion parameters array into a 4x4 affine matrix.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    params_file : str</span>
-<span class="sd">        path to a motion parameter file (6 DOF, one timepoint per line)</span>
-
-<span class="sd">    affine_file : str</span>
-<span class="sd">        path to a 4x4 affine matrix file (the first 12 values,</span>
-<span class="sd">        one timepoint per line), optional</span>
-<span class="sd">        If included, comments will be passed on to filtered affine file</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    affine_file : str</span>
-<span class="sd">        path to a 4x4 affine matrix file (the first 12 values,</span>
-<span class="sd">        one timepoint per line)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">from</span> <span class="nn">CPAC.generate_motion_statistics.utils</span> <span class="kn">import</span> <span class="n">affine_from_params</span>
-
-    <span class="c1">## load parameters file into array</span>
-    <span class="n">affine</span> <span class="o">=</span> <span class="n">affine_from_params</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">params_file</span><span class="p">))</span>
-    <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="k">if</span> <span class="n">affine_file</span><span class="p">:</span>
-        <span class="c1"># grab comment(s), if any</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">affine_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
-            <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">_f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-                                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)])</span>
-    <span class="n">basename</span> <span class="o">=</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">affine_file</span><span class="p">)</span> <span class="k">if</span> <span class="n">affine_file</span>
-                <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;affine_</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">params_file</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">affine_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s1">/filtered_</span><span class="si">{</span><span class="n">basename</span><span class="si">}</span><span class="s1">&#39;</span>
-
-    <span class="c1"># drop bottom [0, 0, 0, 1] row from each matrix</span>
-    <span class="c1"># insert original comments, if any, as header</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">affine_file</span><span class="p">,</span> <span class="n">affine</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">affine</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">12</span><span class="p">),</span>
-               <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">affine_file</span></div>
-
-
-<div class="viewcode-block" id="affine_from_params"><a class="viewcode-back" href="../../../developer/workflows/generate_motion_statistics#CPAC.generate_motion_statistics.affine_from_params">[docs]</a><span class="k">def</span> <span class="nf">affine_from_params</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a 6-DOF motion parameters array into a 4x4 affine matrix</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    params : np.ndarray</span>
-<span class="sd">        2-dimensional array (t x 6) with the first dimension as timepoints and</span>
-<span class="sd">        the second dimension containing these 6 elements</span>
-<span class="sd">        (as output by `3dvolreg -1Dfile`):</span>
-<span class="sd">        roll, pitch, yaw in degrees counterclockwise, and</span>
-<span class="sd">        displacement in millimeters in the respective</span>
-<span class="sd">        superior, left and posterior directions</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    affine : np.ndarray</span>
-<span class="sd">        t x 4 x 4 affine matrix with</span>
-<span class="sd">        the upper-left 3 x 3 matrix encoding rotation,</span>
-<span class="sd">        the top three values in the fourth column encoding translation</span>
-<span class="sd">        and the bottom row being [0, 0, 0, 1] for each timepoint</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">nipype.algorithms.rapidart</span> <span class="kn">import</span> <span class="n">_get_affine_matrix</span>
-    <span class="kn">from</span> <span class="nn">scipy.spatial.transform</span> <span class="kn">import</span> <span class="n">Rotation</span>
-
-    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="n">affine</span> <span class="o">=</span> <span class="n">_get_affine_matrix</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;AFNI&#39;</span><span class="p">)</span>
-        <span class="n">affine</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rotation</span><span class="o">.</span><span class="n">from_euler</span><span class="p">(</span><span class="s2">&quot;ZXY&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">],</span>
-                                             <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">()</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">affine</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span></div>
-
-
-<span class="k">def</span> <span class="nf">load_mats</span><span class="p">(</span><span class="n">mat_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<div class="viewcode-block" id="create_centrality_wf"><a class="viewcode-back" href="../../../developer/workflows/network_centrality#CPAC.network_centrality.network_centrality.create_centrality_wf">[docs]</a><span class="nd">@docstring_parameter</span><span class="p">(</span><span class="n">m_options</span><span class="o">=</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;centrality&#39;</span><span class="p">][</span><span class="s1">&#39;method_options&#39;</span><span class="p">],</span>
+                     <span class="n">t_options</span><span class="o">=</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;centrality&#39;</span><span class="p">][</span>
+                        <span class="s1">&#39;threshold_options&#39;</span><span class="p">],</span>
+                     <span class="n">w_options</span><span class="o">=</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;centrality&#39;</span><span class="p">][</span><span class="s1">&#39;weight_options&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">create_centrality_wf</span><span class="p">(</span><span class="n">wf_name</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">method_option</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">weight_options</span> <span class="p">:</span> <span class="n">LIST</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">threshold_option</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">threshold</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">num_threads</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                         <span class="n">memory_gb</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                         <span class="n">base_dir</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workflow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Given a directory of affince matrices as output by MCFLIRT, </span>
-<span class="sd">    return an array of these matrices</span>
-<span class="sd">    </span>
+<span class="sd">    Function to create the afni-based centrality workflow</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    mat_dir : str</span>
-<span class="sd">        path to MCFLIRT matrix output</span>
+<span class="sd">    wf_name : string</span>
+<span class="sd">        the name of the workflow</span>
+<span class="sd">    method_option : string</span>
+<span class="sd">        one of {m_options}</span>
+<span class="sd">    weight_options : list</span>
+<span class="sd">        one or more of {w_options}</span>
+<span class="sd">    threshold_option : string</span>
+<span class="sd">        one of {t_options}</span>
+<span class="sd">    threshold : float</span>
+<span class="sd">        the threshold value for thresholding the similarity matrix</span>
+<span class="sd">    num_threads : integer, optional</span>
+<span class="sd">        the number of threads to utilize for centrality computation; default=1</span>
+<span class="sd">    memory_gb : float,optional</span>
+<span class="sd">        the amount of memory the centrality calculation will take (GB);</span>
+<span class="sd">        default=1.0</span>
+<span class="sd">    base_dir : path or str, optional</span>
+<span class="sd">        the base directory for the workflow; default=None</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    np.ndarray</span>
-<span class="sd">        t x 4 x 4 affine matrix</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="n">mats</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">mat_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">mat_dir</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;MAT_*&quot;</span><span class="p">)))</span>
-    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">mat_paths</span><span class="p">:</span>
-        <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="n">mats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
-    <span class="n">mats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">mats</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mats</span>
+<span class="sd">    centrality_wf : nipype Workflow</span>
+<span class="sd">        the initialized nipype workflow for the afni centrality command</span>
+
+<span class="sd">    .. seealso::</span>
+
+<span class="sd">        :py:func:`~CPAC.network_centrality.pipelin</span>
+<span class="sd">e.connect_centrality_workflow`</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># pylint: disable=line-too-long</span>
+    <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+    <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
+    <span class="kn">from</span> <span class="nn">CPAC.network_centrality</span> <span class="kn">import</span> <span class="n">utils</span>
+    <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
+
+    <span class="n">test_thresh</span> <span class="o">=</span> <span class="n">threshold</span>
+
+    <span class="k">if</span> <span class="n">threshold_option</span> <span class="o">==</span> <span class="s1">&#39;Sparsity threshold&#39;</span><span class="p">:</span>
+        <span class="n">test_thresh</span> <span class="o">=</span> <span class="n">threshold</span> <span class="o">/</span> <span class="mf">100.0</span>
+
+    <span class="n">method_option</span><span class="p">,</span> <span class="n">threshold_option</span> <span class="o">=</span> \
+        <span class="n">utils</span><span class="o">.</span><span class="n">check_centrality_params</span><span class="p">(</span><span class="n">method_option</span><span class="p">,</span> <span class="n">threshold_option</span><span class="p">,</span>
+                                      <span class="n">test_thresh</span><span class="p">)</span>
+    <span class="c1"># Eigenvector centrality and AFNI ≥ 21.1.1?</span>
+    <span class="n">ecm_gte_21_1_01</span> <span class="o">=</span> <span class="p">((</span><span class="n">method_option</span> <span class="o">==</span> <span class="s1">&#39;eigenvector_centrality&#39;</span><span class="p">)</span> <span class="ow">and</span>
+                       <span class="n">AFNI_GTE_21_1_1</span><span class="p">)</span>
+    <span class="n">out_names</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">method_option</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">weight_options</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">base_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">centrality_wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">centrality_wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">,</span> <span class="n">base_dir</span><span class="o">=</span><span class="n">base_dir</span><span class="p">)</span>
+
+    <span class="n">input_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">,</span>
+                                                        <span class="s1">&#39;template&#39;</span><span class="p">,</span>
+                                                        <span class="s1">&#39;threshold&#39;</span><span class="p">]),</span>
+                         <span class="n">name</span><span class="o">=</span><span class="s1">&#39;inputspec&#39;</span><span class="p">)</span>
+    <span class="n">input_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+    <span class="n">output_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;outfile_list&#39;</span><span class="p">]),</span>
+                          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;outputspec&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Degree centrality</span>
+    <span class="k">if</span> <span class="n">method_option</span> <span class="o">==</span> <span class="s1">&#39;degree_centrality&#39;</span><span class="p">:</span>
+        <span class="n">afni_centrality_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">DegreeCentrality</span><span class="p">(</span><span class="n">environ</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;OMP_NUM_THREADS&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_threads</span><span class="p">)</span>
+            <span class="p">}),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;afni_centrality&#39;</span><span class="p">,</span> <span class="n">mem_gb</span><span class="o">=</span><span class="n">memory_gb</span><span class="p">)</span>
+        <span class="n">afni_centrality_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> \
+            <span class="s1">&#39;degree_centrality_merged.nii.gz&#39;</span>
+
+    <span class="c1"># Eigenvector centrality</span>
+    <span class="k">elif</span> <span class="n">method_option</span> <span class="o">==</span> <span class="s1">&#39;eigenvector_centrality&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ecm_gte_21_1_01</span><span class="p">:</span>
+            <span class="n">afni_centrality_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">MapNode</span><span class="p">(</span><span class="n">ECM</span><span class="p">(</span><span class="n">environ</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;OMP_NUM_THREADS&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_threads</span><span class="p">)</span>
+            <span class="p">}),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;afni_centrality&#39;</span><span class="p">,</span> <span class="n">mem_gb</span><span class="o">=</span><span class="n">memory_gb</span><span class="p">,</span>
+                <span class="n">iterfield</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;do_binary&#39;</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">])</span>
+            <span class="n">afni_centrality_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s1">&#39;eigenvector_centrality_</span><span class="si">{</span><span class="n">w_option</span><span class="si">}</span><span class="s1">.nii.gz&#39;</span> <span class="k">for</span>
+                <span class="n">w_option</span> <span class="ow">in</span> <span class="n">weight_options</span><span class="p">]</span>
+            <span class="n">afni_centrality_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">do_binary</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">w_option</span> <span class="o">==</span> <span class="s1">&#39;Binarized&#39;</span> <span class="k">for</span> <span class="n">w_option</span> <span class="ow">in</span> <span class="n">weight_options</span><span class="p">]</span>
+            <span class="n">centrality_wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">afni_centrality_node</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
+                                  <span class="n">output_node</span><span class="p">,</span> <span class="s1">&#39;outfile_list&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">afni_centrality_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">ECM</span><span class="p">(</span><span class="n">environ</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;OMP_NUM_THREADS&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_threads</span><span class="p">)</span>
+            <span class="p">}),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;afni_centrality&#39;</span><span class="p">,</span> <span class="n">mem_gb</span><span class="o">=</span><span class="n">memory_gb</span><span class="p">)</span>
+            <span class="n">afni_centrality_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> \
+                <span class="s1">&#39;eigenvector_centrality_merged.nii.gz&#39;</span>
+        <span class="n">afni_centrality_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">memory_gb</span>  <span class="c1"># 3dECM input only</span>
+
+    <span class="c1"># lFCD</span>
+    <span class="k">elif</span> <span class="n">method_option</span> <span class="o">==</span> <span class="s1">&#39;local_functional_connectivity_density&#39;</span><span class="p">:</span>
+        <span class="n">afni_centrality_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">LFCD</span><span class="p">(</span><span class="n">environ</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;OMP_NUM_THREADS&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_threads</span><span class="p">)</span>
+            <span class="p">}),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;afni_centrality&#39;</span><span class="p">,</span> <span class="n">mem_gb</span><span class="o">=</span><span class="n">memory_gb</span><span class="p">)</span>
+        <span class="n">afni_centrality_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="s1">&#39;lfcd_merged.nii.gz&#39;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ecm_gte_21_1_01</span><span class="p">:</span>
+        <span class="c1"># Need to separate sub-briks except for 3dECM if AFNI &gt; 21.1.01</span>
+        <span class="n">sep_subbriks_node</span> <span class="o">=</span> \
+            <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nifti_file&#39;</span><span class="p">,</span> <span class="s1">&#39;out_names&#39;</span><span class="p">],</span>
+                             <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;output_niftis&#39;</span><span class="p">],</span>
+                             <span class="n">function</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">sep_nifti_subbriks</span><span class="p">),</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sep_nifti_subbriks&#39;</span><span class="p">)</span>
+        <span class="n">sep_subbriks_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_names</span> <span class="o">=</span> <span class="n">out_names</span>
+        <span class="n">centrality_wf</span><span class="o">.</span><span class="n">connect</span><span class="p">([(</span><span class="n">afni_centrality_node</span><span class="p">,</span> <span class="n">sep_subbriks_node</span><span class="p">,</span>
+                                <span class="p">[(</span><span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="s1">&#39;nifti_file&#39;</span><span class="p">)]),</span>
+                               <span class="p">(</span><span class="n">sep_subbriks_node</span><span class="p">,</span> <span class="n">output_node</span><span class="p">,</span>
+                                <span class="p">[(</span><span class="s1">&#39;output_niftis&#39;</span><span class="p">,</span> <span class="s1">&#39;outfile_list&#39;</span><span class="p">)])])</span>
+
+    <span class="n">afni_centrality_node</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">num_threads</span> <span class="o">=</span> <span class="n">num_threads</span>
+
+    <span class="c1"># Connect input image and mask template</span>
+    <span class="n">centrality_wf</span><span class="o">.</span><span class="n">connect</span><span class="p">([(</span><span class="n">input_node</span><span class="p">,</span> <span class="n">afni_centrality_node</span><span class="p">,</span>
+                            <span class="p">[(</span><span class="s1">&#39;in_file&#39;</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">),</span>
+                             <span class="p">(</span><span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;mask&#39;</span><span class="p">)])])</span>
+
+    <span class="c1"># If we&#39;re doing significance thresholding, convert to correlation</span>
+    <span class="k">if</span> <span class="n">threshold_option</span> <span class="o">==</span> <span class="s1">&#39;Significance threshold&#39;</span><span class="p">:</span>
+        <span class="c1"># Check and (possibly) conver threshold</span>
+        <span class="n">convert_thr_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+            <span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;datafile&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;p_value&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;two_tailed&#39;</span><span class="p">],</span>
+                     <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rvalue_threshold&#39;</span><span class="p">],</span>
+                     <span class="n">function</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">convert_pvalue_to_r</span><span class="p">),</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;convert_threshold&#39;</span><span class="p">)</span>
+        <span class="c1"># Wire workflow to connect in conversion node</span>
+        <span class="n">centrality_wf</span><span class="o">.</span><span class="n">connect</span><span class="p">([(</span><span class="n">input_node</span><span class="p">,</span> <span class="n">convert_thr_node</span><span class="p">,</span>
+                                <span class="p">[(</span><span class="s1">&#39;in_file&#39;</span><span class="p">,</span> <span class="s1">&#39;datafile&#39;</span><span class="p">),</span>
+                                 <span class="p">(</span><span class="s1">&#39;threshold&#39;</span><span class="p">,</span> <span class="s1">&#39;p_value&#39;</span><span class="p">)]),</span>
+                               <span class="p">(</span><span class="n">convert_thr_node</span><span class="p">,</span> <span class="n">afni_centrality_node</span><span class="p">,</span>
+                                <span class="p">[(</span><span class="s1">&#39;rvalue_threshold&#39;</span><span class="p">,</span> <span class="s1">&#39;thresh&#39;</span><span class="p">)])])</span>
+
+    <span class="c1"># Sparsity thresholding</span>
+    <span class="k">elif</span> <span class="n">threshold_option</span> <span class="o">==</span> <span class="s1">&#39;Sparsity threshold&#39;</span><span class="p">:</span>
+        <span class="c1"># Check to make sure it&#39;s not lFCD</span>
+        <span class="k">if</span> <span class="n">method_option</span> <span class="o">==</span> <span class="s1">&#39;local_functional_connectivity_density&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ThresholdOptionError</span><span class="p">(</span><span class="n">threshold_option</span><span class="p">,</span> <span class="n">method_option</span><span class="p">)</span>
+
+        <span class="c1"># Otherwise, connect threshold to sparsity input</span>
+        <span class="n">centrality_wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;threshold&#39;</span><span class="p">,</span>
+                              <span class="n">afni_centrality_node</span><span class="p">,</span> <span class="s1">&#39;sparsity&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Correlation thresholding</span>
+    <span class="k">elif</span> <span class="n">threshold_option</span> <span class="o">==</span> <span class="s1">&#39;Correlation threshold&#39;</span><span class="p">:</span>
+        <span class="n">centrality_wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;threshold&#39;</span><span class="p">,</span>
+                              <span class="n">afni_centrality_node</span><span class="p">,</span> <span class="s1">&#39;thresh&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">centrality_wf</span></div>
 </pre></div>
         </article>
       </div>
