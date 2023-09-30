@@ -351,10 +351,41 @@ default=1.0</p></li>
 <span class="target" id="module-CPAC.network_centrality.pipeline"></span><dl class="py function">
 <dt class="sig sig-object py" id="CPAC.network_centrality.pipeline.connect_centrality_workflow">
 <span class="sig-prename descclassname"><span class="pre">CPAC.network_centrality.pipeline.</span></span><span class="sig-name descname"><span class="pre">connect_centrality_workflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workflow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resample_functional_to_template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method_option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/network_centrality/pipeline#connect_centrality_workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.network_centrality.pipeline.connect_centrality_workflow" title="Permalink to this definition">#</a></dt>
-<dd><div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>Unable to execute python code at exec.py:31:</p>
-<p>name ‘valid_options’ is not defined</p>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nipype.interfaces.utility</span> <span class="kn">import</span> <span class="n">IdentityInterface</span>
+<span class="kn">from</span> <span class="nn">CPAC.network_centrality.utils</span> <span class="kn">import</span> <span class="n">create_merge_node</span>
+<span class="kn">from</span> <span class="nn">CPAC.network_centrality.pipeline</span> <span class="kn">import</span>            <span class="n">connect_centrality_workflow</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.schema</span> <span class="kn">import</span> <span class="n">valid_options</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;centrality&#39;</span><span class="p">)</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">({</span><span class="s1">&#39;network_centrality&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">method</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;weight_options&#39;</span><span class="p">:</span> <span class="n">valid_options</span><span class="p">[</span>
+            <span class="s1">&#39;centrality&#39;</span><span class="p">][</span><span class="s1">&#39;weight_options&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;correlation_threshold_option&#39;</span><span class="p">:</span> <span class="s1">&#39;Significance threshold&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;correlation_threshold&#39;</span><span class="p">:</span> <span class="mf">0.001</span>
+    <span class="p">}</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;degree_centrality&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;eigenvector_centrality&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;local_functional_connectivity_density&#39;</span><span class="p">]</span>
+<span class="p">}})</span>
+<span class="n">pipe_num</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">resample_functional_to_template</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+    <span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;resample_functional_to_template&#39;</span><span class="p">]),</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;resample_functional_to_template&#39;</span><span class="p">)</span>
+<span class="n">template_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+    <span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;template_node&#39;</span><span class="p">]),</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;template_node&#39;</span><span class="p">)</span>
+<span class="n">merge_node</span> <span class="o">=</span> <span class="n">create_merge_node</span><span class="p">(</span><span class="n">pipe_num</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;centrality&#39;</span><span class="p">][</span><span class="s1">&#39;method_options&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">network_centrality</span><span class="p">[</span><span class="n">option</span><span class="p">][</span><span class="s1">&#39;weight_options&#39;</span><span class="p">]:</span>
+        <span class="n">connect_centrality_workflow</span><span class="p">(</span>
+            <span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">resample_functional_to_template</span><span class="p">,</span> <span class="n">template_node</span><span class="p">,</span>
+            <span class="s1">&#39;template_node&#39;</span><span class="p">,</span> <span class="n">merge_node</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">write_graph</span><span class="p">(</span>
+    <span class="n">graph2use</span><span class="o">=</span><span class="s1">&#39;orig&#39;</span><span class="p">,</span>
+    <span class="n">dotfilename</span><span class="o">=</span><span class="s1">&#39;./images/generated/network_centrality.dot&#39;</span><span class="p">)</span>
+</pre></div>
 </div>
 <p>High Level Workflow Graph:</p>
 <a class="reference internal image-reference" href="images/generated/network_centrality.png"><img alt="images/generated/network_centrality.png" src="images/generated/network_centrality.png" style="width: 500px;" /></a>

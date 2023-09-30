@@ -1,0 +1,17 @@
+strict digraph  {
+"resample_functional_to_template (utility)";
+"afni_centrality_degree_centrality_0";
+"afni_centrality_eigenvector_centrality_0";
+"afni_centrality_local_functional_connectivity_density_0";
+"centrality_merge_node_0 (interfaces)";
+"template_node (utility)";
+"resample_functional_to_template (utility)" -> "afni_centrality_degree_centrality_0";
+"resample_functional_to_template (utility)" -> "afni_centrality_eigenvector_centrality_0";
+"resample_functional_to_template (utility)" -> "afni_centrality_local_functional_connectivity_density_0";
+"afni_centrality_degree_centrality_0" -> "centrality_merge_node_0 (interfaces)";
+"afni_centrality_eigenvector_centrality_0" -> "centrality_merge_node_0 (interfaces)";
+"afni_centrality_local_functional_connectivity_density_0" -> "centrality_merge_node_0 (interfaces)";
+"template_node (utility)" -> "afni_centrality_degree_centrality_0";
+"template_node (utility)" -> "afni_centrality_eigenvector_centrality_0";
+"template_node (utility)" -> "afni_centrality_local_functional_connectivity_density_0";
+}
