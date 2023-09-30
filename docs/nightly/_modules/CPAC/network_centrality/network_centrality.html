@@ -352,7 +352,11 @@
                          <span class="n">base_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workflow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to create the afni-based centrality workflow</span>
+<span class="sd">    Function to create the afni-based centrality workflow.</span>
+
+<span class="sd">    .. seealso::</span>
+
+<span class="sd">        :py:func:`~CPAC.network_centrality.pipeline.connect_centrality_workflow`</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -378,10 +382,6 @@
 <span class="sd">    -------</span>
 <span class="sd">    centrality_wf : nipype Workflow</span>
 <span class="sd">        the initialized nipype workflow for the afni centrality command</span>
-
-<span class="sd">    .. seealso::</span>
-
-<span class="sd">        :py:func:`~CPAC.network_centrality.pipeline.connect_centrality_workflow`</span>
 <span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># pylint: disable=line-too-long</span>
     <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
     <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>

@@ -320,7 +320,11 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.network_centrality.network_centrality.create_centrality_wf">
 <span class="sig-prename descclassname"><span class="pre">CPAC.network_centrality.network_centrality.</span></span><span class="sig-name descname"><span class="pre">create_centrality_wf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method_option</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_option</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_gb</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">nipype.pipeline.engine.workflows.Workflow</span></span></span><a class="reference internal" href="../../_modules/CPAC/network_centrality/network_centrality#create_centrality_wf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.network_centrality.network_centrality.create_centrality_wf" title="Permalink to this definition">#</a></dt>
-<dd><p>Function to create the afni-based centrality workflow</p>
+<dd><p>Function to create the afni-based centrality workflow.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#CPAC.network_centrality.pipeline.connect_centrality_workflow" title="CPAC.network_centrality.pipeline.connect_centrality_workflow"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect_centrality_workflow</span></code></a></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -336,11 +340,10 @@ default=1.0</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>centrality_wf</strong> (<em>nipype Workflow</em>) – the initialized nipype workflow for the afni centrality command</p></li>
-<li><p><em>.. seealso::</em> – <a class="reference internal" href="#CPAC.network_centrality.pipeline.connect_centrality_workflow" title="CPAC.network_centrality.pipeline.connect_centrality_workflow"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect_centrality_workflow</span></code></a></p></li>
-</ul>
-</p>
+<dd class="field-even"><p><strong>centrality_wf</strong> – the initialized nipype workflow for the afni centrality command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nipype Workflow</p>
 </dd>
 </dl>
 </dd></dl>
