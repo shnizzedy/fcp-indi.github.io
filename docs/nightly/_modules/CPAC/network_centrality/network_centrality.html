@@ -345,11 +345,11 @@
                      <span class="n">t_options</span><span class="o">=</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;centrality&#39;</span><span class="p">][</span>
                         <span class="s1">&#39;threshold_options&#39;</span><span class="p">],</span>
                      <span class="n">w_options</span><span class="o">=</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;centrality&#39;</span><span class="p">][</span><span class="s1">&#39;weight_options&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">create_centrality_wf</span><span class="p">(</span><span class="n">wf_name</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">method_option</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                         <span class="n">weight_options</span> <span class="p">:</span> <span class="n">LIST</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">threshold_option</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                         <span class="n">threshold</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">num_threads</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                         <span class="n">memory_gb</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-                         <span class="n">base_dir</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">def</span> <span class="nf">create_centrality_wf</span><span class="p">(</span><span class="n">wf_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">method_option</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">weight_options</span><span class="p">:</span> <span class="n">LIST</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">threshold_option</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">num_threads</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                         <span class="n">memory_gb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                         <span class="n">base_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workflow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to create the afni-based centrality workflow</span>
@@ -381,8 +381,7 @@
 
 <span class="sd">    .. seealso::</span>
 
-<span class="sd">        :py:func:`~CPAC.network_centrality.pipelin</span>
-<span class="sd">e.connect_centrality_workflow`</span>
+<span class="sd">        :py:func:`~CPAC.network_centrality.pipeline.connect_centrality_workflow`</span>
 <span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># pylint: disable=line-too-long</span>
     <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
     <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
