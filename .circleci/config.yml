@@ -122,6 +122,7 @@ jobs:
     working_directory: /home/circleci/build
     docker:
       - image: ghcr.io/fcp-indi/c-pac:nightly
+        user: root
     steps:
       - checkout:
           path: /home/circleci/build
@@ -138,6 +139,7 @@ jobs:
     working_directory: /home/circleci/build
     docker:
       - image: ghcr.io/fcp-indi/c-pac:nightly
+        user: root
     steps:
       - checkout:
           path: /home/circleci/build
