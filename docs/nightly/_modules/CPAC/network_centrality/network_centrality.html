@@ -356,7 +356,9 @@
 
 <span class="sd">    .. seealso::</span>
 
-<span class="sd">        :py:func:`~CPAC.network_centrality.pipeline.connect_centrality_workflow`</span>
+<span class="sd">        * :py:func:`~CPAC.network_centrality.pipeline.connect_centrality_workflow`</span>
+<span class="sd">        * :py:func:`~CPAC.network_centrality.utils.create_merge_node`</span>
+<span class="sd">        * :py:func:`~CPAC.network_centrality.utils.sep_nifti_subbriks`</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -382,6 +384,24 @@
 <span class="sd">    -------</span>
 <span class="sd">    centrality_wf : nipype Workflow</span>
 <span class="sd">        the initialized nipype workflow for the afni centrality command</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Workflow Inputs::</span>
+
+<span class="sd">        inputspec.in_file : string</span>
+<span class="sd">            path to input functional data NIfTI file</span>
+
+<span class="sd">        inputspec.template : string</span>
+<span class="sd">            path to input mask template NIfTI file</span>
+
+<span class="sd">        inputspec.threshold : float</span>
+<span class="sd">            threshold value for thresholding the similarity matrix</span>
+
+<span class="sd">    Workflow Outputs::</span>
+
+<span class="sd">        outputspec.outfile_list : list of strings</span>
+<span class="sd">            list of paths to output files (binarized and weighted)</span>
 <span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># pylint: disable=line-too-long</span>
     <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
     <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>

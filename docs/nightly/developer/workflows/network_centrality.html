@@ -323,7 +323,11 @@
 <dd><p>Function to create the afni-based centrality workflow.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#CPAC.network_centrality.pipeline.connect_centrality_workflow" title="CPAC.network_centrality.pipeline.connect_centrality_workflow"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect_centrality_workflow</span></code></a></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#CPAC.network_centrality.pipeline.connect_centrality_workflow" title="CPAC.network_centrality.pipeline.connect_centrality_workflow"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect_centrality_workflow</span></code></a></p></li>
+<li><p><a class="reference internal" href="#CPAC.network_centrality.utils.create_merge_node" title="CPAC.network_centrality.utils.create_merge_node"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_merge_node</span></code></a></p></li>
+<li><p><a class="reference internal" href="#CPAC.network_centrality.utils.sep_nifti_subbriks" title="CPAC.network_centrality.utils.sep_nifti_subbriks"><code class="xref py py-func docutils literal notranslate"><span class="pre">sep_nifti_subbriks</span></code></a></p></li>
+</ul>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -346,6 +350,23 @@ default=1.0</p></li>
 <dd class="field-odd"><p>nipype Workflow</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">in_file</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="nb">input</span> <span class="n">functional</span> <span class="n">data</span> <span class="n">NIfTI</span> <span class="n">file</span>
+
+<span class="n">inputspec</span><span class="o">.</span><span class="n">template</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="nb">input</span> <span class="n">mask</span> <span class="n">template</span> <span class="n">NIfTI</span> <span class="n">file</span>
+
+<span class="n">inputspec</span><span class="o">.</span><span class="n">threshold</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="n">threshold</span> <span class="n">value</span> <span class="k">for</span> <span class="n">thresholding</span> <span class="n">the</span> <span class="n">similarity</span> <span class="n">matrix</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">outfile_list</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">strings</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">paths</span> <span class="n">to</span> <span class="n">output</span> <span class="n">files</span> <span class="p">(</span><span class="n">binarized</span> <span class="ow">and</span> <span class="n">weighted</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <span class="target" id="module-CPAC.network_centrality.pipeline"></span><dl class="py function">
@@ -443,12 +464,75 @@ threshold for the returned correlation value</p></li>
 <dt class="sig sig-object py" id="CPAC.network_centrality.utils.create_merge_node">
 <span class="sig-prename descclassname"><span class="pre">CPAC.network_centrality.utils.</span></span><span class="sig-name descname"><span class="pre">create_merge_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.engine.Node"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.engine.Node</span></a></span></span><a class="reference internal" href="../../_modules/CPAC/network_centrality/utils#create_merge_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.network_centrality.utils.create_merge_node" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a merge node for the centrality workflow</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pipe_num</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a merge node for the centrality workflow</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../nodes#CPAC.pipeline.nipype_pipeline_engine.Node" title="CPAC.pipeline.nipype_pipeline_engine.Node">Node</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Node Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deg_list</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">strings</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">paths</span> <span class="n">to</span> <span class="n">degree</span> <span class="n">centrality</span> <span class="n">outputs</span>
+
+<span class="n">eig_list</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">strings</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">paths</span> <span class="n">to</span> <span class="n">eigenvector</span> <span class="n">centrality</span> <span class="n">outputs</span>
+
+<span class="n">lfcd_list</span> <span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">strings</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">paths</span> <span class="n">to</span> <span class="n">local</span> <span class="n">functional</span> <span class="n">connectivity</span> <span class="n">density</span> <span class="n">outputs</span>
+</pre></div>
+</div>
+<p>Node Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">degree_weighted</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">weighted</span> <span class="n">degree</span> <span class="n">centrality</span> <span class="n">output</span>
+
+<span class="n">degree_binarized</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">binarized</span> <span class="n">degree</span> <span class="n">centrality</span> <span class="n">output</span>
+
+<span class="n">eigen_weighted</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">weighted</span> <span class="n">eigenvector</span> <span class="n">centrality</span> <span class="n">output</span>
+
+<span class="n">eigen_binarized</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">binarized</span> <span class="n">eigenvector</span> <span class="n">centrality</span> <span class="n">output</span>
+
+<span class="n">lfcd_weighted</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">weighted</span> <span class="n">local</span> <span class="n">functional</span> <span class="n">connectivity</span> <span class="n">density</span> <span class="n">output</span>
+
+<span class="n">lfcd_binarized</span> <span class="p">:</span> <span class="n">string</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">binarized</span> <span class="n">local</span> <span class="n">functional</span> <span class="n">connectivity</span> <span class="n">density</span> <span class="n">output</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.network_centrality.utils.merge_lists">
 <span class="sig-prename descclassname"><span class="pre">CPAC.network_centrality.utils.</span></span><span class="sig-name descname"><span class="pre">merge_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deg_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eig_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lfcd_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/network_centrality/utils#merge_lists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.network_centrality.utils.merge_lists" title="Permalink to this definition">#</a></dt>
-<dd><p>Function to actually do the list merging</p>
+<dd><p>Function to actually do the list merging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deg_list</strong> (<em>list of str</em><em>, </em><em>optional</em>) – list of paths to degree centrality outputs</p></li>
+<li><p><strong>eig_list</strong> (<em>list of str</em><em>, </em><em>optional</em>) – list of paths to eigenvector centrality outputs</p></li>
+<li><p><strong>lfcd_list</strong> (<em>list of str</em><em>, </em><em>optional</em>) – list of paths to local functional connectivity density outputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>degree_weighted</strong> (<em>str</em>) – path to weighted degree centrality output</p></li>
+<li><p><strong>degree_binarized</strong> (<em>str</em>) – path to binarized degree centrality output</p></li>
+<li><p><strong>eigen_weighted</strong> (<em>str</em>) – path to weighted eigenvector centrality output</p></li>
+<li><p><strong>eigen_binarized</strong> (<em>str</em>) – path to binarized eigenvector centrality output</p></li>
+<li><p><strong>lfcd_weighted</strong> (<em>str</em>) – path to weighted local functional connectivity density output</p></li>
+<li><p><strong>lfcd_binarized</strong> (<em>str</em>) – path to binarized local functional connectivity density output</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">

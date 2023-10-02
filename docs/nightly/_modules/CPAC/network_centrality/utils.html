@@ -392,7 +392,39 @@
 <div class="viewcode-block" id="merge_lists"><a class="viewcode-back" href="../../../developer/workflows/network_centrality#CPAC.network_centrality.utils.merge_lists">[docs]</a><span class="k">def</span> <span class="nf">merge_lists</span><span class="p">(</span><span class="n">deg_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LIST</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">eig_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LIST</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">lfcd_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LIST</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to actually do the list merging&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to actually do the list merging.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    deg_list : list of str, optional</span>
+<span class="sd">        list of paths to degree centrality outputs</span>
+
+<span class="sd">    eig_list : list of str, optional</span>
+<span class="sd">        list of paths to eigenvector centrality outputs</span>
+
+<span class="sd">    lfcd_list : list of str, optional</span>
+<span class="sd">        list of paths to local functional connectivity density outputs</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    degree_weighted : str</span>
+<span class="sd">        path to weighted degree centrality output</span>
+
+<span class="sd">    degree_binarized : str</span>
+<span class="sd">        path to binarized degree centrality output</span>
+
+<span class="sd">    eigen_weighted : str</span>
+<span class="sd">        path to weighted eigenvector centrality output</span>
+
+<span class="sd">    eigen_binarized : str</span>
+<span class="sd">        path to binarized eigenvector centrality output</span>
+
+<span class="sd">    lfcd_weighted : str</span>
+<span class="sd">        path to weighted local functional connectivity density output</span>
+
+<span class="sd">    lfcd_binarized : str</span>
+<span class="sd">        path to binarized local functional connectivity density output</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="n">deg_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">deg_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">eig_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -430,7 +462,50 @@
 
 
 <div class="viewcode-block" id="create_merge_node"><a class="viewcode-back" href="../../../developer/workflows/network_centrality#CPAC.network_centrality.utils.create_merge_node">[docs]</a><span class="k">def</span> <span class="nf">create_merge_node</span><span class="p">(</span><span class="n">pipe_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Create a merge node for the centrality workflow&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Create a merge node for the centrality workflow</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pipe_num : int</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Node</span>
+<span class="sd">        a merge node for the centrality workflow</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Node Inputs::</span>
+
+<span class="sd">        deg_list : list of strings</span>
+<span class="sd">            list of paths to degree centrality outputs</span>
+
+<span class="sd">        eig_list : list of strings</span>
+<span class="sd">            list of paths to eigenvector centrality outputs</span>
+
+<span class="sd">        lfcd_list : list of strings</span>
+<span class="sd">            list of paths to local functional connectivity density outputs</span>
+
+<span class="sd">    Node Outputs::</span>
+
+<span class="sd">        degree_weighted : string</span>
+<span class="sd">            path to weighted degree centrality output</span>
+
+<span class="sd">        degree_binarized : string</span>
+<span class="sd">            path to binarized degree centrality output</span>
+
+<span class="sd">        eigen_weighted : string</span>
+<span class="sd">            path to weighted eigenvector centrality output</span>
+
+<span class="sd">        eigen_binarized : string</span>
+<span class="sd">            path to binarized eigenvector centrality output</span>
+
+<span class="sd">        lfcd_weighted : string</span>
+<span class="sd">            path to weighted local functional connectivity density output</span>
+
+<span class="sd">        lfcd_binarized : string</span>
+<span class="sd">            path to binarized local functional connectivity density output</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;deg_list&#39;</span><span class="p">,</span> <span class="s1">&#39;eig_list&#39;</span><span class="p">,</span> <span class="s1">&#39;lfcd_list&#39;</span><span class="p">],</span>
                          <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;degree_weighted&#39;</span><span class="p">,</span>
                                        <span class="s1">&#39;degree_binarized&#39;</span><span class="p">,</span>
