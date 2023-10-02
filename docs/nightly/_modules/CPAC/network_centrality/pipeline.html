@@ -359,19 +359,19 @@
 <span class="sd">       from CPAC.utils.configuration import Configuration</span>
 <span class="sd">       from CPAC.utils.interfaces.function import Function</span>
 <span class="sd">       wf = pe.Workflow(name=&#39;centrality&#39;)</span>
-<span class="sd">       cfg = Configuration({&#39;network_centrality&#39;: {</span>
-<span class="sd">           method: {</span>
-<span class="sd">               &#39;weight_options&#39;: valid_options[</span>
-<span class="sd">                   &#39;centrality&#39;][&#39;weight_options&#39;],</span>
+<span class="sd">       # Sphinx didn&#39;t like a comprehension here</span>
+<span class="sd">       _d = {&#39;network_centrality&#39;: {}}</span>
+<span class="sd">       for method in [&#39;degree_centrality&#39;,</span>
+<span class="sd">                      &#39;eigenvector_centrality&#39;,</span>
+<span class="sd">                      &#39;local_functional_connectivity_density&#39;]:</span>
+<span class="sd">           _d[&#39;network_centrality&#39;][method] = {</span>
+<span class="sd">               &#39;weight_options&#39;: valid_options[&#39;centrality&#39;][&#39;weight_options&#39;],</span>
 <span class="sd">               &#39;correlation_threshold_option&#39;: &#39;Significance threshold&#39;,</span>
-<span class="sd">               &#39;correlation_threshold&#39;: 0.001</span>
-<span class="sd">           } for method in [&#39;degree_centrality&#39;,</span>
-<span class="sd">                            &#39;eigenvector_centrality&#39;,</span>
-<span class="sd">                            &#39;local_functional_connectivity_density&#39;]</span>
-<span class="sd">       }})</span>
+<span class="sd">               &#39;correlation_threshold&#39;: 0.001}</span>
+<span class="sd">       cfg = Configuration(_d)</span>
 <span class="sd">       pipe_num = 0</span>
 <span class="sd">       resample_functional_to_template = pe.Node(</span>
-<span class="sd">           IdentityInterface(fields=[&#39;resample_functional_to_template&#39;]),</span>
+<span class="sd">           IdentityInterface(fields=[&#39;in_file&#39;, &#39;reference&#39;, &#39;out_file&#39;]),</span>
 <span class="sd">           name=&#39;resample_functional_to_template&#39;)</span>
 <span class="sd">       template_node = pe.Node(</span>
 <span class="sd">           IdentityInterface(fields=[&#39;template_node&#39;]),</span>
@@ -385,6 +385,9 @@
 <span class="sd">       wf.write_graph(</span>
 <span class="sd">           graph2use=&#39;orig&#39;,</span>
 <span class="sd">           dotfilename=&#39;./images/generated/network_centrality.dot&#39;)</span>
+<span class="sd">       wf.write_graph(</span>
+<span class="sd">           graph2use=&#39;hierarchical&#39;,</span>
+<span class="sd">           dotfilename=&#39;./images/generated/network_centrality.dot&#39;)</span>
 
 <span class="sd">    High Level Workflow Graph:</span>
 
@@ -393,7 +396,7 @@
 
 <span class="sd">    Detailed Workflow Graph:</span>
 
-<span class="sd">    .. image:: ../../images/generated/network_centrality.png</span>
+<span class="sd">    .. image:: ../../images/generated/network_centrality_detailed.png</span>
 <span class="sd">        :width: 500</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Set method_options variables</span>
