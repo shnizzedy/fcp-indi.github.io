@@ -315,8 +315,279 @@
           </label>
         </div>
         <article role="main">
-          <section id="timeseries-analysis">
-<h1>Timeseries Analysis<a class="headerlink" href="#timeseries-analysis" title="Permalink to this headline">#</a></h1>
+          <section id="module-CPAC.timeseries">
+<span id="timeseries-analysis"></span><h1>Timeseries Analysis<a class="headerlink" href="#module-CPAC.timeseries" title="Permalink to this headline">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.timeseries.gen_roi_timeseries">
+<span class="sig-prename descclassname"><span class="pre">CPAC.timeseries.</span></span><span class="sig-name descname"><span class="pre">gen_roi_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/timeseries/timeseries_analysis#gen_roi_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.timeseries.gen_roi_timeseries" title="Permalink to this definition">#</a></dt>
+<dd><p>Method to extract mean of voxel across
+all timepoints for each node in roi mask</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_file</strong> (<em>string</em>) – path to input functional data</p></li>
+<li><p><strong>template</strong> (<em>string</em>) – path to input roi mask in functional native space</p></li>
+<li><p><strong>output_type</strong> (<em>list</em>) – list of two boolean values suggesting
+the output types - numpy npz file and csv
+format</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out_list</strong> – list of 1D file, txt file, csv file and/or npz file containing
+mean timeseries for each scan corresponding
+to each node in roi mask</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.timeseries.gen_vertices_timeseries">
+<span class="sig-prename descclassname"><span class="pre">CPAC.timeseries.</span></span><span class="sig-name descname"><span class="pre">gen_vertices_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rh_surface_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lh_surface_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/timeseries/timeseries_analysis#gen_vertices_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.timeseries.gen_vertices_timeseries" title="Permalink to this definition">#</a></dt>
+<dd><p>Method to extract timeseries from vertices
+of a freesurfer surface file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rh_surface_file</strong> (<em>string</em><em> (</em><em>mgz/mgh file</em><em>)</em>) – left hemisphere FreeSurfer surface file</p></li>
+<li><p><strong>lh_surface_file</strong> (<em>string</em><em> (</em><em>mgz/mgh file</em><em>)</em>) – right hemisphere FreeSurfer surface file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out_list</strong> – list of vertices timeseries csv files</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string (list of file)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.timeseries.gen_voxel_timeseries">
+<span class="sig-prename descclassname"><span class="pre">CPAC.timeseries.</span></span><span class="sig-name descname"><span class="pre">gen_voxel_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/timeseries/timeseries_analysis#gen_voxel_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.timeseries.gen_voxel_timeseries" title="Permalink to this definition">#</a></dt>
+<dd><p>Method to extract timeseries for each voxel
+in the data that is present in the input mask</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datafile</strong> (<em>string</em><em> (</em><em>nifti file</em><em>)</em>) – path to input functional data</p></li>
+<li><p><strong>template</strong> (<em>string</em><em> (</em><em>nifti file</em><em>)</em>) – path to input mask in functional native space</p></li>
+<li><p><strong>output_type</strong> (<em>list</em>) – list of two boolean values suggesting
+the output types - numpy npz file and csv
+format</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out_list</strong> – Based on ouput_type options method returns a list containing
+path to npz and csv file having timeseries of each voxel in
+the data that is present in the input mask.The row header
+corresponds to voxel’s xyz cordinates and column headers corresponds
+to the volume index in the csv. By default it outputs afni compatible
+1D file with mean of timeseries of voxels across timepoints.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of files</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.timeseries.get_roi_timeseries">
+<span class="sig-prename descclassname"><span class="pre">CPAC.timeseries.</span></span><span class="sig-name descname"><span class="pre">get_roi_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'roi_timeseries'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/timeseries/timeseries_analysis#get_roi_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.timeseries.get_roi_timeseries" title="Permalink to this definition">#</a></dt>
+<dd><p>Workflow to extract timeseries for each node in the ROI mask.
+For each node, mean across all the timepoint is calculated and stored
+in csv and npz format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – name of the workflow</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>wflow</strong> – workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>workflow object</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/master/CPAC/timeseries/timeseries_analysis.py">Source</a></p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">rest</span> <span class="p">:</span> <span class="n">string</span>  <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="nb">input</span> <span class="n">functional</span> <span class="n">data</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">output_type</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="n">boolean</span><span class="p">)</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">boolean</span> <span class="k">for</span> <span class="n">csv</span> <span class="ow">and</span> <span class="n">npz</span> <span class="n">file</span> <span class="n">formats</span>
+<span class="n">input_roi</span><span class="o">.</span><span class="n">roi</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">ROI</span> <span class="n">mask</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">roi_ts</span> <span class="p">:</span> <span class="n">numpy</span> <span class="n">array</span>
+    <span class="n">Voxel</span> <span class="n">time</span> <span class="n">series</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">numpy</span> <span class="n">array</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">create</span> <span class="n">ndmg</span> <span class="n">graphs</span><span class="o">.</span>
+
+<span class="n">outputspec</span><span class="o">.</span><span class="n">roi_outputs</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="n">files</span><span class="p">)</span>
+    <span class="n">Voxel</span> <span class="n">time</span> <span class="n">series</span> <span class="n">stored</span> <span class="ow">in</span> <span class="mi">1</span><span class="n">D</span> <span class="p">(</span><span class="n">column</span> <span class="n">wise</span> <span class="n">timeseries</span> <span class="k">for</span> <span class="n">each</span> <span class="n">node</span><span class="p">),</span>
+    <span class="n">csv</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="n">npz</span> <span class="n">files</span><span class="o">.</span> <span class="n">By</span> <span class="n">default</span> <span class="n">it</span> <span class="n">outputs</span> <span class="n">timeseries</span> <span class="ow">in</span> <span class="n">a</span> <span class="mi">1</span><span class="n">D</span> <span class="n">file</span><span class="o">.</span>
+    <span class="n">The</span> <span class="mi">1</span><span class="n">D</span> <span class="n">file</span> <span class="ow">is</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">afni</span> <span class="n">interfaces</span><span class="o">.</span>
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">CPAC.timeseries.timeseries_analysis</span> <span class="k">as</span> <span class="nn">t</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">get_roi_timeseries</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">rest</span> <span class="o">=</span> <span class="s1">&#39;/home/data/rest.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_roi</span><span class="o">.</span><span class="n">roi</span> <span class="o">=</span> <span class="s1">&#39;/usr/local/fsl/data/atlases/HarvardOxford/HarvardOxford-cort-maxprob-thr0-2mm.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">output_type</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">]</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">base_dir</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.timeseries.get_spatial_map_timeseries">
+<span class="sig-prename descclassname"><span class="pre">CPAC.timeseries.</span></span><span class="sig-name descname"><span class="pre">get_spatial_map_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spatial_map_timeseries'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/timeseries/timeseries_analysis#get_spatial_map_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.timeseries.get_spatial_map_timeseries" title="Permalink to this definition">#</a></dt>
+<dd><p>Workflow to regress each provided spatial
+map to the subjects functional 4D file in order
+to return a timeseries for each of the maps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – name of the workflow</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>wflow</strong> – workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>workflow object</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/master/CPAC/timeseries/timeseries_analysis.py">Source</a></p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">subject_rest</span> <span class="p">:</span> <span class="n">string</span>  <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="nb">input</span> <span class="n">functional</span> <span class="n">data</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">subject_mask</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">subject</span> <span class="n">functional</span> <span class="n">mask</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">spatial_map</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">Spatial</span> <span class="n">Maps</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">demean</span> <span class="p">:</span> <span class="n">Boolean</span>
+    <span class="n">control</span> <span class="n">whether</span> <span class="n">to</span> <span class="n">demean</span> <span class="n">model</span> <span class="ow">and</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">subject_timeseries</span><span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">txt</span> <span class="n">file</span><span class="p">)</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">time</span> <span class="n">series</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">space</span> <span class="n">separated</span>
+    <span class="n">txt</span> <span class="n">file</span>
+    <span class="n">the</span> <span class="n">columns</span> <span class="n">are</span> <span class="n">spatial</span> <span class="n">maps</span><span class="p">,</span> <span class="n">rows</span> <span class="n">are</span> <span class="n">timepoints</span>
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">CPAC.timeseries.timeseries_analysis</span> <span class="k">as</span> <span class="nn">t</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">get_spatial_map_timeseries</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">subject_rest</span> <span class="o">=</span> <span class="s1">&#39;/home/data/rest.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">subject_mask</span> <span class="o">=</span> <span class="s1">&#39;/home/data/rest_mask.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">ICA_map</span> <span class="o">=</span> <span class="s1">&#39;/home/data/spatialmaps/spatial_map.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">demean</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">base_dir</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.timeseries.get_vertices_timeseries">
+<span class="sig-prename descclassname"><span class="pre">CPAC.timeseries.</span></span><span class="sig-name descname"><span class="pre">get_vertices_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vertices_timeseries'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/timeseries/timeseries_analysis#get_vertices_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.timeseries.get_vertices_timeseries" title="Permalink to this definition">#</a></dt>
+<dd><p>Workflow to get vertices time series from a FreeSurfer surface file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – name of the workflow</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>wflow</strong> – workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>workflow object</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/master/CPAC/timeseries/timeseries_analysis.py">Source</a></p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">lh_surface_file</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">left</span> <span class="n">hemishpere</span> <span class="n">surface</span> <span class="n">file</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">rh_surface_file</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">right</span> <span class="n">hemisphere</span> <span class="n">surface</span> <span class="n">file</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">surface_outputs</span><span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">csv</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="n">npz</span> <span class="n">files</span><span class="p">)</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">timeseries</span> <span class="n">matrices</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">csv</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span>
+    <span class="n">npz</span> <span class="n">files</span>
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">CPAC.timeseries.timeseries_analysis</span> <span class="k">as</span> <span class="nn">t</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">get_vertices_timeseries</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">lh_surface_file</span> <span class="o">=</span> <span class="s1">&#39;/home/data/outputs/SurfaceRegistration/lh_surface_file.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">rh_surface_file</span> <span class="o">=</span> <span class="s1">&#39;/home/data/outputs/SurfaceRegistration/rh_surface_file.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">base_dir</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CPAC.timeseries.get_voxel_timeseries">
+<span class="sig-prename descclassname"><span class="pre">CPAC.timeseries.</span></span><span class="sig-name descname"><span class="pre">get_voxel_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'voxel_timeseries'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/timeseries/timeseries_analysis#get_voxel_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.timeseries.get_voxel_timeseries" title="Permalink to this definition">#</a></dt>
+<dd><p>Workflow to extract time series for each voxel
+in the data that is present in the input mask</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wf_name</strong> (<em>string</em>) – name of the workflow</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>wflow</strong> – workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>workflow object</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/master/CPAC/timeseries/timeseries_analysis.py">Source</a></p>
+<p>Workflow Inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">rest</span> <span class="p">:</span> <span class="n">string</span>  <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="nb">input</span> <span class="n">functional</span> <span class="n">data</span>
+<span class="n">inputspec</span><span class="o">.</span><span class="n">output_type</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="n">boolean</span><span class="p">)</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">boolean</span> <span class="k">for</span> <span class="n">csv</span> <span class="ow">and</span> <span class="n">npz</span> <span class="n">file</span> <span class="n">formats</span>
+<span class="n">input_mask</span><span class="o">.</span><span class="n">masks</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">path</span> <span class="n">to</span> <span class="n">ROI</span> <span class="n">mask</span>
+</pre></div>
+</div>
+<p>Workflow Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">mask_outputs</span><span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="mi">1</span><span class="n">D</span><span class="p">,</span> <span class="n">csv</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="n">npz</span> <span class="n">files</span><span class="p">)</span>
+    <span class="nb">list</span> <span class="n">of</span> <span class="n">time</span> <span class="n">series</span> <span class="n">matrices</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">csv</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span>
+    <span class="n">npz</span> <span class="n">files</span><span class="o">.</span><span class="n">By</span> <span class="n">default</span> <span class="n">it</span> <span class="n">outputs</span> <span class="n">mean</span> <span class="n">of</span> <span class="n">voxels</span>
+    <span class="n">across</span> <span class="n">each</span> <span class="n">time</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">afni</span> <span class="n">compatible</span> <span class="mi">1</span><span class="n">D</span> <span class="n">file</span><span class="o">.</span>
+
+<span class="n">High</span> <span class="n">Level</span> <span class="n">Workflow</span> <span class="n">Graph</span><span class="p">:</span>
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">CPAC.timeseries.timeseries_analysis</span> <span class="k">as</span> <span class="nn">t</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">get_voxel_timeseries</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">rest</span> <span class="o">=</span> <span class="s1">&#39;/home/data/rest.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_mask</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="s1">&#39;/usr/local/fsl/data/standard/MNI152_T1_2mm_brain.nii.gz&#39;</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">output_type</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">base_dir</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
         </article>
