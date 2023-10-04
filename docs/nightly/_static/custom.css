@@ -19,8 +19,8 @@
   height: auto;
 }
 
-/* empty <div><div><pre><span></span></pre> elements ―
-   see 'hideEmptyPreSpan.js' */
-div[class*=" highlight-"], div[class^=highlight-] .hidden {
+/* empty content highlight divs ―
+   see 'hideEmptyHighlights.js' */
+div[class*=" highlight"].hidden, div[class^=highlight].hidden {
 	display: none;
 }
