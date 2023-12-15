@@ -466,12 +466,15 @@
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;regional_homogeneity&quot;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">],</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;space-template_desc-brain_mask&quot;</span><span class="p">],</span>
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-template_reho&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">reho_space_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  
     <span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">regional_homogeneity</span><span class="p">[</span><span class="s1">&#39;cluster_size&#39;</span><span class="p">]</span>
 
     <span class="c1"># Check the cluster size is supported</span>
@@ -484,11 +487,12 @@
     <span class="n">reho</span> <span class="o">=</span> <span class="n">create_reho</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;reho_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">reho</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cluster_size</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_res_filt&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
-        <span class="s1">&#39;space-template_res-derivative_desc-bold_mask&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;space-template_res-derivative_desc-bold_mask&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;space-template_desc-brain_mask&#39;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_mask&#39;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>

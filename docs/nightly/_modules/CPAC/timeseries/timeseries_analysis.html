@@ -1303,7 +1303,9 @@
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;spatial_regression&quot;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;timeseries_extraction&quot;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">],</span>
-    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">],</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">,</span> 
+            <span class="p">[</span><span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space-template_desc-brain_mask&quot;</span><span class="p">]],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-SpatReg_timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;atlas_name&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">spatial_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1354,7 +1356,7 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">resample_spatial_map_to_native_space</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span>
                <span class="n">spatial_map_timeseries</span><span class="p">,</span> <span class="s1">&#39;inputspec.spatial_map&#39;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-template_desc-bold_mask&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;space-template_desc-bold_mask&#39;</span><span class="p">,</span> <span class="s1">&#39;space-template_desc-brain_mask&#39;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">spatial_map_timeseries</span><span class="p">,</span> <span class="s1">&#39;inputspec.subject_mask&#39;</span><span class="p">)</span>
 
     <span class="c1"># &#39;atlas_name&#39; will be an iterable and will carry through</span>
@@ -1405,6 +1407,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/scripts/furo.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/hideEmptyHighlights.js"></script>
     <script defer="defer" src="../../../_static/versionList.js"></script>
     </body>
 </html>

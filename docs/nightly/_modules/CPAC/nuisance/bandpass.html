@@ -427,18 +427,28 @@
         
         <span class="k">else</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="p">[]</span>
 
-            <span class="n">regressor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">)</span>
+                <span class="c1"># header wouldn&#39;t be longer than 5, right? I don&#39;t want to </span>
+                <span class="c1"># loop over the whole file</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            
+            <span class="c1"># usecols=[list]</span>
+            <span class="n">regressor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
             <span class="n">Yc</span> <span class="o">=</span> <span class="n">regressor</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
             <span class="n">Y_bp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">Yc</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+
+            <span class="c1"># Modify to allow just 1 regressor column</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="n">regressor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">regressor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
                 <span class="n">Y_bp</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ideal_bandpass</span><span class="p">(</span><span class="n">Yc</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">sample_period</span><span class="p">,</span>
                                             <span class="n">bandpass_freqs</span><span class="p">)</span>
 
             <span class="n">regressor_bandpassed_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
                                     <span class="s1">&#39;regressor_bandpassed_demeaned_filtered.1D&#39;</span><span class="p">)</span>
-
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">regressor_bandpassed_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ofd</span><span class="p">:</span>
                 <span class="c1"># write out the header information</span>
                 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
@@ -447,7 +457,6 @@
                 <span class="n">nuisance_regressors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Y_bp</span><span class="p">)</span>
                 <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">ofd</span><span class="p">,</span> <span class="n">nuisance_regressors</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.18f</span><span class="s1">&#39;</span><span class="p">,</span>
                         <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-
     <span class="k">return</span> <span class="n">bandpassed_file</span><span class="p">,</span> <span class="n">regressor_bandpassed_file</span></div>
 
 
@@ -520,6 +529,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/scripts/furo.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/hideEmptyHighlights.js"></script>
     <script defer="defer" src="../../../_static/versionList.js"></script>
     </body>
 </html>

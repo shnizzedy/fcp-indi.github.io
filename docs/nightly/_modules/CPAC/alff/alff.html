@@ -603,8 +603,12 @@
             <span class="p">[</span>
                 <span class="s2">&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span>
             <span class="p">],</span>
-            <span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;space-template_desc-bold_mask&quot;</span>
+            <span class="p">],</span>
         <span class="p">)</span>
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-template_alff&quot;</span><span class="p">,</span> <span class="s2">&quot;space-template_falff&quot;</span><span class="p">],</span>
@@ -619,14 +623,13 @@
         <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">]</span>
     <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s1">&#39;hp_input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;hp&#39;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span><span class="p">)</span>
     <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s1">&#39;lp_input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;lp&#39;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span><span class="p">)</span>
-
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">])</span>
+                                     <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_res&#39;</span><span class="p">)</span>
-
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">])</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_mask&#39;</span><span class="p">)</span>
-
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;space-template_alff&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;outputspec.alff_img&#39;</span><span class="p">),</span>
         <span class="s1">&#39;space-template_falff&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;outputspec.falff_img&#39;</span><span class="p">)</span>

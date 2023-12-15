@@ -337,9 +337,10 @@
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">permutations</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathvalidate</span> <span class="kn">import</span> <span class="n">sanitize_filename</span>
-<span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">All</span><span class="p">,</span> <span class="n">ALLOW_EXTRA</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Capitalize</span><span class="p">,</span> <span class="n">Coerce</span><span class="p">,</span> \
-                       <span class="n">ExclusiveInvalid</span><span class="p">,</span> <span class="n">In</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Lower</span><span class="p">,</span> <span class="n">Match</span><span class="p">,</span> <span class="n">Maybe</span><span class="p">,</span> \
-                       <span class="n">Optional</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Required</span><span class="p">,</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">Title</span>
+<span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">All</span><span class="p">,</span> <span class="n">ALLOW_EXTRA</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">BooleanInvalid</span><span class="p">,</span> <span class="n">Capitalize</span><span class="p">,</span> \
+                       <span class="n">Coerce</span><span class="p">,</span> <span class="n">ExclusiveInvalid</span><span class="p">,</span> <span class="n">In</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">LengthInvalid</span><span class="p">,</span> \
+                       <span class="n">Lower</span><span class="p">,</span> <span class="n">Match</span><span class="p">,</span> <span class="n">Maybe</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Required</span><span class="p">,</span> \
+                       <span class="n">Schema</span><span class="p">,</span> <span class="n">Title</span>
 <span class="kn">from</span> <span class="nn">CPAC</span> <span class="kn">import</span> <span class="n">docs_prefix</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.datatypes</span> <span class="kn">import</span> <span class="n">ListFromItem</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">YAML_BOOLS</span>
@@ -379,6 +380,10 @@
             <span class="k">pass</span>
         <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="kc">True</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">YAML_BOOLS</span><span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="k">else</span>
              <span class="kc">False</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">YAML_BOOLS</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="n">BooleanInvalid</span><span class="p">(</span><span class="s1">&#39;Type boolean value was expected, type &#39;</span>
+                             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;__name__&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span><span class="si">}</span><span class="s1"> &#39;</span>
+                             <span class="sa">f</span><span class="s1">&#39;value</span><span class="se">\n\n</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="se">\n\n</span><span class="s1">was provided&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
@@ -400,21 +405,22 @@
                              <span class="s1">&#39;Correlation threshold&#39;</span><span class="p">],</span>
        <span class="s1">&#39;weight_options&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Binarized&#39;</span><span class="p">,</span> <span class="s1">&#39;Weighted&#39;</span><span class="p">]</span>
     <span class="p">},</span>
+    <span class="s1">&#39;motion_correction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">,</span> <span class="s1">&#39;mcflirt&#39;</span><span class="p">],</span>
     <span class="s1">&#39;sca&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;roi_paths&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Avg&#39;</span><span class="p">,</span> <span class="s1">&#39;DualReg&#39;</span><span class="p">,</span> <span class="s1">&#39;MultReg&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;roi_paths&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Avg&#39;</span><span class="p">,</span> <span class="s1">&#39;DualReg&#39;</span><span class="p">,</span> <span class="s1">&#39;MultReg&#39;</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="s1">&#39;segmentation&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FSL-FAST&#39;</span><span class="p">,</span> <span class="s1">&#39;ANTs_Prior_Based&#39;</span><span class="p">,</span> <span class="s1">&#39;Template_Based&#39;</span><span class="p">],</span>
         <span class="s1">&#39;template&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;EPI_Template&#39;</span><span class="p">,</span> <span class="s1">&#39;T1_Template&#39;</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="s1">&#39;timeseries&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;roi_paths&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Avg&#39;</span><span class="p">,</span> <span class="s1">&#39;Voxel&#39;</span><span class="p">,</span> <span class="s1">&#39;SpatialReg&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;roi_paths&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Avg&#39;</span><span class="p">,</span> <span class="s1">&#39;Voxel&#39;</span><span class="p">,</span> <span class="s1">&#39;SpatialReg&#39;</span><span class="p">],</span>
     <span class="p">},</span>
     <span class="s1">&#39;connectivity_matrix&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;AFNI&#39;</span><span class="p">,</span> <span class="s1">&#39;Nilearn&#39;</span><span class="p">,</span> <span class="s1">&#39;ndmg&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;measure&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Pearson&#39;</span><span class="p">,</span> <span class="s1">&#39;Partial&#39;</span><span class="p">,</span> <span class="s1">&#39;Spearman&#39;</span><span class="p">,</span> <span class="s1">&#39;MGC&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;AFNI&#39;</span><span class="p">,</span> <span class="s1">&#39;Nilearn&#39;</span><span class="p">,</span> <span class="s1">&#39;ndmg&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;measure&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Pearson&#39;</span><span class="p">,</span> <span class="s1">&#39;Partial&#39;</span><span class="p">,</span> <span class="s1">&#39;Spearman&#39;</span><span class="p">,</span> <span class="s1">&#39;MGC&#39;</span><span class="p">,</span>
                     <span class="c1"># &#39;TangentEmbed&#39;  # &quot;Skip tangent embedding for now&quot;</span>
-                    <span class="p">},</span>
+        <span class="p">],</span>
     <span class="p">},</span>
     <span class="s1">&#39;Regressors&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;CompCor&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -730,6 +736,10 @@
         <span class="p">},</span>
         <span class="s1">&#39;Debugging&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;outdir_ingress&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;Template&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s1">&#39;anatomical_preproc&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -1066,6 +1076,9 @@
             <span class="s1">&#39;start_tr&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="s1">&#39;stop_tr&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">All</span><span class="p">(</span><span class="n">Capitalize</span><span class="p">,</span> <span class="s1">&#39;End&#39;</span><span class="p">)))</span>
         <span class="p">},</span>
+        <span class="s1">&#39;update_header&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+        <span class="p">},</span>
         <span class="s1">&#39;scaling&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="s1">&#39;scaling_factor&#39;</span><span class="p">:</span> <span class="n">Number</span>
@@ -1086,7 +1099,14 @@
                 <span class="s1">&#39;calculate_motion_after&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s1">&#39;motion_correction&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">In</span><span class="p">({</span><span class="s1">&#39;3dvolreg&#39;</span><span class="p">,</span> <span class="s1">&#39;mcflirt&#39;</span><span class="p">})],</span>
+                <span class="s1">&#39;using&#39;</span><span class="p">:</span> <span class="n">Optional</span><span class="p">(</span><span class="n">All</span><span class="p">(</span><span class="n">Coerce</span><span class="p">(</span><span class="n">ListFromItem</span><span class="p">),</span>
+                                      <span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Forking is currently broken for this option. &#39;</span>
+                        <span class="s1">&#39;Please use separate configs if you want to &#39;</span>
+                        <span class="s1">&#39;use each of 3dvolreg and mcflirt. Follow &#39;</span>
+                        <span class="s1">&#39;https://github.com/FCP-INDI/C-PAC/issues/1935 &#39;</span>
+                        <span class="s1">&#39;to see when this issue is resolved.&#39;</span><span class="p">),</span>
+                             <span class="p">[</span><span class="n">In</span><span class="p">(</span><span class="n">valid_options</span><span class="p">[</span><span class="s1">&#39;motion_correction&#39;</span><span class="p">])])),</span>
                 <span class="s1">&#39;AFNI-3dvolreg&#39;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s1">&#39;functional_volreg_twopass&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
                 <span class="p">},</span>
@@ -1185,6 +1205,12 @@
             <span class="s1">&#39;space&#39;</span><span class="p">:</span> <span class="n">All</span><span class="p">(</span><span class="n">Coerce</span><span class="p">(</span><span class="n">ListFromItem</span><span class="p">),</span>
                          <span class="p">[</span><span class="n">All</span><span class="p">(</span><span class="n">Lower</span><span class="p">,</span> <span class="n">In</span><span class="p">({</span><span class="s1">&#39;native&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">}))]),</span>
             <span class="s1">&#39;create_regressors&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+            <span class="s1">&#39;ingress_regressors&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">bool1_1</span><span class="p">,</span>
+                <span class="s1">&#39;Regressors&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
+                    <span class="s1">&#39;Columns&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">]},</span>
+            <span class="p">},</span>
             <span class="s1">&#39;Regressors&#39;</span><span class="p">:</span> <span class="n">Maybe</span><span class="p">([</span><span class="n">Schema</span><span class="p">({</span>
                 <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="n">Required</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
                 <span class="s1">&#39;Censor&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -1425,6 +1451,38 @@
                     <span class="n">motion_filter</span><span class="p">,</span> <span class="n">motion_filters</span><span class="p">[</span><span class="s1">&#39;filters&#39;</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">motion_filters</span><span class="p">[</span><span class="s1">&#39;filters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># &#39;motion_correction.using&#39; is only optional if &#39;run&#39; is Off</span>
+        <span class="n">mec</span> <span class="o">=</span> <span class="n">partially_validated</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">][</span>
+            <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">mec</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># max should be len(valid_options[&#39;motion_correction&#39;])</span>
+                <span class="c1"># once #1935 is resolved</span>
+                <span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="n">mec</span><span class="p">[</span><span class="s1">&#39;motion_correction&#39;</span><span class="p">][</span><span class="s1">&#39;using&#39;</span><span class="p">])</span>
+            <span class="k">except</span> <span class="n">LengthInvalid</span><span class="p">:</span>
+                <span class="n">mec_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;motion_estimates_and_correction&#39;</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="n">LengthInvalid</span><span class="p">(</span>  <span class="c1"># pylint: disable=raise-missing-from</span>
+                    <span class="sa">f</span><span class="s1">&#39;If data[</span><span class="si">{</span><span class="s2">&quot;][&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">repr</span><span class="p">,</span><span class="w"> </span><span class="n">mec_path</span><span class="p">))</span><span class="si">}</span><span class="s1">][</span><span class="se">\&#39;</span><span class="s1">run</span><span class="se">\&#39;</span><span class="s1">] is &#39;</span>
+                    <span class="c1"># length must be between 1 and</span>
+                    <span class="c1"># len(valid_options[&#39;motion_correction&#39;]) once #1935 is</span>
+                    <span class="c1"># resolved</span>
+                    <span class="s1">&#39;True, length of list must be exactly 1&#39;</span><span class="p">,</span>
+                    <span class="n">path</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">mec_path</span><span class="p">,</span> <span class="s1">&#39;motion_correction&#39;</span><span class="p">,</span> <span class="s1">&#39;using&#39;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Check for mutually exclusive options</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">partially_validated</span><span class="p">[</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">][</span>
+            <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;ingress_regressors&#39;</span><span class="p">][</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="ow">and</span>
+            <span class="n">partially_validated</span><span class="p">[</span><span class="s1">&#39;nuisance_corrections&#39;</span><span class="p">][</span>
+                <span class="s1">&#39;2-nuisance_regression&#39;</span><span class="p">][</span><span class="s1">&#39;create_regressors&#39;</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="n">ExclusiveInvalid</span><span class="p">(</span>
+                <span class="s2">&quot;[!] Ingress_regressors and create_regressors can&#39;t both run! &quot;</span>
+                <span class="s2">&quot; Try turning one option off.</span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">partially_validated</span></div>

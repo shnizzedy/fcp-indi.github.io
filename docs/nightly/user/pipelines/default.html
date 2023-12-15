@@ -1333,6 +1333,11 @@
 
 <span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
 
+<span class="w">  </span><span class="nt">update_header</span><span class="p">:</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1"># Convert raw data from LPI to RPI</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">  </span>
 <span class="w">  </span><span class="nt">truncation</span><span class="p">:</span>
 
 <span class="w">    </span><span class="c1"># First timepoint to include in analysis.</span>
@@ -1391,7 +1396,9 @@
 <span class="w">    </span><span class="nt">motion_correction</span><span class="p">:</span>
 
 <span class="w">      </span><span class="c1"># using: [&#39;3dvolreg&#39;, &#39;mcflirt&#39;]</span>
-<span class="w">      </span><span class="c1"># this is a fork point</span>
+<span class="w">      </span><span class="c1"># Forking is currently broken for this option.</span>
+<span class="w">      </span><span class="c1"># Please use separate configs if you want to use each of 3dvolreg and mcflirt.</span>
+<span class="w">      </span><span class="c1"># Follow https://github.com/FCP-INDI/C-PAC/issues/1935 to see when this issue is resolved.</span>
 <span class="w">      </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;3dvolreg&#39;</span><span class="p p-Indicator">]</span>
 
 <span class="w">      </span><span class="c1"># option parameters</span>
