@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" /><link rel="next" title="Deprecating a version of C-PAC" href="deprecating" /><link rel="prev" title="Testing CPAC" href="testing" />
 
     <link rel="shortcut icon" href="../_static/favicon.ico"/><meta name="generator" content="sphinx-4.2.0, furo 2022.09.29"/>
-        <title>Continuous Integration - C-PAC 1.8.6.dev Beta documentation</title>
+        <title>&lt;no title&gt; - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -158,7 +158,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../user/index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../user/quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/subject_list_config">2. Specify Your Data</a></li>
@@ -243,7 +243,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../user/versions">C-PAC versions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index">Developer Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline">Pipeline Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="templates">Templates and Atlases</a></li>
@@ -276,7 +276,6 @@
 <li class="toctree-l2"><a class="reference internal" href="workflows/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing">Testing CPAC</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Continuous Integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deprecating">Deprecating a version of C-PAC</a></li>
 </ul>
 </li>
@@ -309,27 +308,13 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="continuous-integration">
-<h1>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">#</a></h1>
-<dl class="field-list simple">
-<dt class="field-odd">orphan</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>Our continous integration flow relies on GitHub Actions, GitHub Container Registry, CircleCI and Docker Hub. GitHub Actions builds staging images based on changes to Dockerfiles and pushes those images to GitHub Container Registry. On each push, once staging images are built or determined to be up to date, GitHub Actions installs C-PAC into a development image for each variant (standard, lite, fMRIPrep-LTS, and ABCD-HCP). CircleCI runs tests in both Docker and Singularity for each of these images and generates a coverage report if all tests pass. On release, CircleCI also pushes production images to Docker Hub.</p>
-<div class="svg-flowchart docutils container">
-<p><a class="reference external" href="/_static/flowcharts/CI-flow.svg">Open image</a></p>
-</div>
-<section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">#</a></h2>
-</section>
-</section>
-
+          
         </article>
       </div>
       <footer>
@@ -375,27 +360,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Continuous Integration</a><ul>
-<li><a class="reference internal" href="#contents">Contents</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
