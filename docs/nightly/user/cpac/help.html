@@ -276,7 +276,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../../developer/workflows/index#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/xcpqc">eXtensible Connectivity Pipeline-style quality control files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/testing">Testing CPAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../developer/continuous_integration">Continuous Integration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../developer/continuous_integration">Continuous Integration</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../developer/deprecating">Deprecating a version of C-PAC</a></li>
 </ul>
 </li>
@@ -320,7 +322,7 @@
 <span class="go">usage: cpac [-h] [--version] [-o OPT] [-B CUSTOM_BINDING]</span>
 <span class="go">            [--platform {docker,singularity}] [--image IMAGE] [--tag TAG]</span>
 <span class="go">            [--working_dir PATH] [-v] [-vv]</span>
-<span class="go">            {run,utils,version,group,gradients,tsconcat,pull,upgrade,enter,bash,shell,parse-resources,parse_resources,crash}</span>
+<span class="go">            {run,utils,version,group,pull,upgrade,enter,bash,shell,parse-resources,parse_resources,crash}</span>
 <span class="go">            ...</span>
 
 <span class="go">cpac: a Python package that simplifies using C-PAC &lt;http://fcp-indi.github.io&gt; containerized images.</span>
@@ -355,7 +357,7 @@
 <span class="go">- https://github.com/FCP-INDI/cpac/issues</span>
 
 <span class="go">positional arguments:</span>
-<span class="go">  {run,utils,version,group,gradients,tsconcat,pull,upgrade,enter,bash,shell,parse-resources,parse_resources,crash}</span>
+<span class="go">  {run,utils,version,group,pull,upgrade,enter,bash,shell,parse-resources,parse_resources,crash}</span>
 <span class="go">    run                 Run C-PAC. See</span>
 <span class="go">                        &quot;cpac [--platform {docker,singularity}] [--image IMAGE] [--tag TAG] run --help&quot;</span>
 <span class="go">                        for more information.</span>
@@ -366,8 +368,6 @@
 <span class="go">    group               Run a group level analysis in C-PAC. See</span>
 <span class="go">                        &quot;cpac [--platform {docker,singularity}] [--image IMAGE] [--tag TAG] group --help&quot;</span>
 <span class="go">                        for more information.</span>
-<span class="go">    gradients           Run ba_timeseries_gradients</span>
-<span class="go">    tsconcat            Run ba-tsconcat</span>
 <span class="go">    pull (upgrade)      Upgrade your local C-PAC version to the latest version</span>
 <span class="go">                        by pulling from Docker Hub or other repository.</span>
 <span class="go">                        Use with &quot;--image&quot; and/or &quot;--tag&quot; to specify an image</span>
@@ -375,8 +375,6 @@
 <span class="go">    enter (bash, shell)</span>
 <span class="go">                        Enter a new C-PAC container via BASH.</span>
 <span class="go">    parse-resources (parse_resources)</span>
-<span class="go">                        .</span>
-
 <span class="go">                        When provided with a `callback.log` file, this utility can sort through</span>
 <span class="go">                        the memory `runtime` usage, `estimate`, and associated `efficiency`, to</span>
 <span class="go">                        identify the `n` tasks with the `highest` or `lowest` of each of these</span>
