@@ -4,12 +4,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.08.19 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
         <title>CPAC.utils.utils - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=b0c66299" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
     
 
@@ -159,6 +159,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../user/index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/release_notes/v1.8.6">Latest Release: Version 1.8.6 Beta (Jan 15, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../user/quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../user/subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../user/pipelines/pipeline_config">3. Select Your Pipeline</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -245,8 +246,6 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../developer/index">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Developer Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../developer/installation">Installing CPAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../developer/pipeline">Pipeline Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../developer/pipeline#configuration">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../developer/pipeline#engine">Engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../developer/templates">Templates and Atlases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../developer/nodes">Nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../developer/random_state">Random State</a></li>
@@ -488,21 +487,6 @@
     <span class="kn">import</span> <span class="nn">re</span>
     <span class="kn">from</span> <span class="nn">CPAC.utils.bids_utils</span> <span class="kn">import</span> <span class="n">combine_multiple_entity_instances</span><span class="p">,</span> \
                                       <span class="n">res_in_filename</span>
-    <span class="kn">from</span> <span class="nn">CPAC.utils.outputs</span> <span class="kn">import</span> <span class="n">Outputs</span>
-
-    <span class="c1"># set motion output resource suffixes to &quot;motion&quot;</span>
-    <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">Outputs</span><span class="o">.</span><span class="n">motion</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.*</span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s1">.*&#39;</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
-            <span class="n">resource</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;framewise-?[dD]isplacement&#39;</span><span class="p">,</span> <span class="s1">&#39;FD&#39;</span><span class="p">,</span> <span class="n">resource</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s1">&#39;_&#39;</span> <span class="ow">in</span> <span class="n">resource</span><span class="p">:</span>
-                <span class="n">entities</span> <span class="o">=</span> <span class="p">[</span><span class="n">entity</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">entity</span>
-                            <span class="ow">in</span> <span class="n">resource</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
-                <span class="n">resource</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="sa">f</span><span class="s1">&#39;desc-</span><span class="si">{</span><span class="n">entities</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;motion&#39;</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">resource</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;desc-</span><span class="si">{</span><span class="n">resource</span><span class="si">}</span><span class="s1">_motion&#39;</span>
-            <span class="k">break</span>  <span class="c1"># only need to do this once, in case of more than one match</span>
-
     <span class="k">if</span> <span class="n">atlas_id</span><span class="p">:</span>
         <span class="k">if</span> <span class="s1">&#39;_desc-&#39;</span> <span class="ow">in</span> <span class="n">atlas_id</span><span class="p">:</span>
             <span class="n">atlas</span><span class="p">,</span> <span class="n">desc</span> <span class="o">=</span> <span class="n">atlas_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_desc-&#39;</span><span class="p">)</span>
@@ -518,7 +502,6 @@
         <span class="n">part_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;sub-</span><span class="si">{</span><span class="n">part_id</span><span class="si">}</span><span class="s1">&#39;</span>
     <span class="k">if</span> <span class="s1">&#39;ses-&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ses_id</span><span class="p">:</span>
         <span class="n">ses_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;ses-</span><span class="si">{</span><span class="n">ses_id</span><span class="si">}</span><span class="s1">&#39;</span>
-
     <span class="k">if</span> <span class="n">scan_id</span><span class="p">:</span>
         <span class="n">out_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">part_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">ses_id</span><span class="si">}</span><span class="s1">_task-</span><span class="si">{</span><span class="n">scan_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">resource</span><span class="si">}</span><span class="s1">&#39;</span>
     <span class="k">else</span><span class="p">:</span>
@@ -545,7 +528,6 @@
         <span class="n">out_filename</span> <span class="o">=</span> <span class="n">out_filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_space-T1w_&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">subdir</span> <span class="o">==</span> <span class="s1">&#39;func&#39;</span><span class="p">:</span>
         <span class="n">out_filename</span> <span class="o">=</span> <span class="n">out_filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_space-bold_&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
-
     <span class="k">return</span> <span class="n">combine_multiple_entity_instances</span><span class="p">(</span>
         <span class="n">res_in_filename</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">out_filename</span><span class="p">))</span></div>
 
@@ -1029,7 +1011,6 @@
 
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
-
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
@@ -1067,7 +1048,7 @@
 <span class="sd">    pe_direction : str</span>
 <span class="sd">    effective_echo_spacing : float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">json</span>
     <span class="kn">import</span> <span class="nn">warnings</span>
@@ -1089,7 +1070,6 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pipeconfig_stop_indx</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="s2">&quot;End&quot;</span> <span class="ow">in</span> <span class="n">pipeconfig_stop_indx</span> <span class="ow">or</span> <span class="s2">&quot;end&quot;</span> <span class="ow">in</span> <span class="n">pipeconfig_stop_indx</span><span class="p">:</span>
             <span class="n">pipeconfig_stop_indx</span> <span class="o">=</span> <span class="kc">None</span>
-
     <span class="k">if</span> <span class="n">data_config_scan_params</span><span class="p">:</span>
         <span class="k">if</span> <span class="s2">&quot;.json&quot;</span> <span class="ow">in</span> <span class="n">data_config_scan_params</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_config_scan_params</span><span class="p">):</span>
@@ -1133,14 +1113,29 @@
             <span class="c1"># TODO: better handling of errant key values!!!</span>
             <span class="c1"># TODO: use schema validator to deal with it</span>
             <span class="c1"># get details from the configuration</span>
-            <span class="n">TR</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
-                <span class="n">try_fetch_parameter</span><span class="p">(</span>
-                    <span class="n">params_dct</span><span class="p">,</span>
-                    <span class="n">subject_id</span><span class="p">,</span>
-                    <span class="n">scan</span><span class="p">,</span>
-                    <span class="p">[</span><span class="s1">&#39;TR&#39;</span><span class="p">,</span> <span class="s1">&#39;RepetitionTime&#39;</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span> 
+                <span class="n">TR</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                    <span class="n">try_fetch_parameter</span><span class="p">(</span>
+                        <span class="n">params_dct</span><span class="p">,</span>
+                        <span class="n">subject_id</span><span class="p">,</span>
+                        <span class="n">scan</span><span class="p">,</span>
+                        <span class="p">[</span><span class="s1">&#39;TR&#39;</span><span class="p">,</span> <span class="s1">&#39;RepetitionTime&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
                 <span class="p">)</span>
-            <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="n">TR</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">try</span><span class="p">:</span> 
+                <span class="n">template</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
+                    <span class="n">try_fetch_parameter</span><span class="p">(</span>
+                        <span class="n">params_dct</span><span class="p">,</span>
+                        <span class="n">subject_id</span><span class="p">,</span>
+                        <span class="n">scan</span><span class="p">,</span>
+                        <span class="p">[</span><span class="s1">&#39;Template&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="n">template</span> <span class="o">=</span> <span class="kc">None</span>
 
             <span class="n">pattern</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
                 <span class="n">try_fetch_parameter</span><span class="p">(</span>
@@ -1178,7 +1173,6 @@
                   <span class="s2">&quot;information included in the data configuration file for &quot;</span> \
                   <span class="sa">f</span><span class="s2">&quot;the participant </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">first_tr</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">first_tr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">first_tr</span> <span class="o">=</span> <span class="n">pipeconfig_start_indx</span>
 
@@ -1205,7 +1199,6 @@
 
     <span class="n">valid_patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;alt+z&#39;</span><span class="p">,</span> <span class="s1">&#39;altplus&#39;</span><span class="p">,</span> <span class="s1">&#39;alt+z2&#39;</span><span class="p">,</span> <span class="s1">&#39;alt-z&#39;</span><span class="p">,</span> <span class="s1">&#39;altminus&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;alt-z2&#39;</span><span class="p">,</span> <span class="s1">&#39;seq+z&#39;</span><span class="p">,</span> <span class="s1">&#39;seqplus&#39;</span><span class="p">,</span> <span class="s1">&#39;seq-z&#39;</span><span class="p">,</span> <span class="s1">&#39;seqminus&#39;</span><span class="p">]</span>
-
     <span class="k">if</span> <span class="n">pattern</span> <span class="ow">and</span> <span class="n">pattern</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">pattern</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_patterns</span><span class="p">:</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> \
@@ -1287,6 +1280,7 @@
 
     <span class="k">return</span> <span class="p">(</span><span class="n">tr</span> <span class="k">if</span> <span class="n">tr</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">tpattern</span> <span class="k">if</span> <span class="n">tpattern</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">template</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">ref_slice</span><span class="p">,</span>
             <span class="n">start_indx</span><span class="p">,</span>
             <span class="n">stop_indx</span><span class="p">,</span>
@@ -1336,7 +1330,7 @@
                       <span class="s1">&#39;the config and subject list files.&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">TR</span></div>
-
+        
 
 <div class="viewcode-block" id="add_afni_prefix"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.add_afni_prefix">[docs]</a><span class="k">def</span> <span class="nf">add_afni_prefix</span><span class="p">(</span><span class="n">tpattern</span><span class="p">):</span>
     <span class="k">if</span> <span class="s2">&quot;.txt&quot;</span> <span class="ow">in</span> <span class="n">tpattern</span><span class="p">:</span>
@@ -3120,6 +3114,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
     <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
     </body>
 </html>

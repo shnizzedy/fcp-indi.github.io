@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
         <title>CPAC.utils.datasource - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=b0c66299" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
     
 
@@ -159,6 +159,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../user/index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/release_notes/v1.8.6">Latest Release: Version 1.8.6 Beta (Jan 15, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../user/quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../user/subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../user/pipelines/pipeline_config">3. Select Your Pipeline</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -334,6 +335,8 @@
 <span class="kn">import</span> <span class="nn">csv</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 <span class="kn">from</span> <span class="nn">nipype</span> <span class="kn">import</span> <span class="n">logging</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
@@ -482,7 +485,7 @@
                         <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scan</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="create_func_datasource"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_func_datasource">[docs]</a><span class="k">def</span> <span class="nf">create_func_datasource</span><span class="p">(</span><span class="n">rest_dict</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;func_datasource&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_func_datasource"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_func_datasource">[docs]</a><span class="k">def</span> <span class="nf">create_func_datasource</span><span class="p">(</span><span class="n">rest_dict</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;func_datasource&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the functional timeseries-related file paths for each</span>
 <span class="sd">    series/scan, from the dictionary of functional files described in the data</span>
 <span class="sd">    configuration (sublist) YAML file.</span>
@@ -506,16 +509,19 @@
                          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;outputspec&#39;</span><span class="p">)</span>
 
     <span class="c1"># have this here for now because of the big change in the data</span>
-    <span class="c1"># configuration format</span>
-    <span class="n">check_scan</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;func_scan_dct&#39;</span><span class="p">,</span>
+    <span class="c1"># configuration format </span>
+    <span class="c1"># (Not necessary with ingress - format does not comply)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rpool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;derivatives-dir&#39;</span><span class="p">):</span>
+        <span class="n">check_scan</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;func_scan_dct&#39;</span><span class="p">,</span>
                                                         <span class="s1">&#39;scan&#39;</span><span class="p">],</span>
                                            <span class="n">output_names</span><span class="o">=</span><span class="p">[],</span>
                                            <span class="n">function</span><span class="o">=</span><span class="n">check_func_scan</span><span class="p">,</span>
                                            <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
                          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;check_func_scan&#39;</span><span class="p">)</span>
 
-    <span class="n">check_scan</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">func_scan_dct</span> <span class="o">=</span> <span class="n">rest_dict</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="n">check_scan</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">)</span>
+        <span class="n">check_scan</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">func_scan_dct</span> <span class="o">=</span> <span class="n">rest_dict</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="n">check_scan</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">)</span>
+
 
     <span class="c1"># get the functional scan itself</span>
     <span class="n">selectrest</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span>
@@ -683,8 +689,8 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">dwell_time</span><span class="p">,</span> <span class="n">pe_direction</span><span class="p">,</span> <span class="n">total_readout</span><span class="p">,</span> <span class="n">echo_time</span><span class="p">,</span> 
             <span class="n">echo_time_one</span><span class="p">,</span> <span class="n">echo_time_two</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="calc_delta_te_and_asym_ratio"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.calc_delta_te_and_asym_ratio">[docs]</a><span class="k">def</span> <span class="nf">calc_delta_te_and_asym_ratio</span><span class="p">(</span><span class="n">effective_echo_spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<div class="viewcode-block" id="calc_delta_te_and_asym_ratio"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.calc_delta_te_and_asym_ratio">[docs]</a><span class="nd">@Function</span><span class="o">.</span><span class="n">sig_imports</span><span class="p">([</span><span class="s1">&#39;from CPAC.utils.typing import TUPLE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">calc_delta_te_and_asym_ratio</span><span class="p">(</span><span class="n">effective_echo_spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                                  <span class="n">echo_times</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TUPLE</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcluate ``deltaTE`` and ``ees_asym_ratio`` from given metadata</span>
 
@@ -908,6 +914,7 @@
                      <span class="s1">&#39;pipeconfig_stop_indx&#39;</span><span class="p">],</span>
         <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;tpattern&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;template&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;ref_slice&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;start_indx&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;stop_indx&#39;</span><span class="p">,</span>
@@ -922,16 +929,33 @@
             <span class="s1">&#39;start_tr&#39;</span><span class="p">],</span>
         <span class="n">pipeconfig_stop_indx</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span><span class="s1">&#39;truncation&#39;</span><span class="p">][</span><span class="s1">&#39;stop_tr&#39;</span><span class="p">])</span>
 
-    <span class="c1"># wire in the scan parameter workflow</span>
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">rpool</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scan-params&#39;</span><span class="p">)[</span>
-        <span class="s2">&quot;[&#39;scan-params:scan_params_ingress&#39;]&quot;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s1">&#39;data_config_scan_params&#39;</span><span class="p">)</span>
-
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">rpool</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">)[</span><span class="s2">&quot;[&#39;scan:func_ingress&#39;]&quot;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">)</span>
 
+    <span class="c1"># Workaround for extracting metadata with ingress</span>
+    <span class="k">if</span> <span class="n">rpool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s1">&#39;derivatives-dir&#39;</span><span class="p">):</span>
+        <span class="n">selectrest_json</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span>
+                                                        <span class="s1">&#39;rest_dict&#39;</span><span class="p">,</span>
+                                                        <span class="s1">&#39;resource&#39;</span><span class="p">],</span>
+                                           <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">],</span>
+                                           <span class="n">function</span><span class="o">=</span><span class="n">get_rest</span><span class="p">,</span>
+                                           <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                         <span class="n">name</span><span class="o">=</span><span class="s1">&#39;selectrest_json&#39;</span><span class="p">)</span>
+        <span class="n">selectrest_json</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rest_dict</span> <span class="o">=</span> <span class="n">sub_dict</span>
+        <span class="n">selectrest_json</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">resource</span> <span class="o">=</span> <span class="s2">&quot;scan_parameters&quot;</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">selectrest_json</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">)</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">selectrest_json</span><span class="p">,</span> <span class="s1">&#39;file_path&#39;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s1">&#39;data_config_scan_params&#39;</span><span class="p">)</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># wire in the scan parameter workflow</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">rpool</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scan-params&#39;</span><span class="p">)[</span>
+            <span class="s2">&quot;[&#39;scan-params:scan_params_ingress&#39;]&quot;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s1">&#39;data_config_scan_params&#39;</span><span class="p">)</span>
+
     <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s1">&#39;tr&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">)</span>
     <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="s1">&#39;tpattern&#39;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s1">&#39;tpattern&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">)</span>
+    <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> 
                    <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">)</span>
     <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="s1">&#39;start-tr&#39;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s1">&#39;start_indx&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                    <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">)</span>
@@ -964,7 +988,7 @@
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
 
     <span class="n">inputnode</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span>
-        <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;unique_id&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;creds_path&#39;</span><span class="p">,</span>
+        <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;unique_id&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="s1">&#39;creds_path&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;dl_dir&#39;</span><span class="p">],</span>
         <span class="n">mandatory_inputs</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">name</span><span class="o">=</span><span class="s1">&#39;inputnode&#39;</span><span class="p">)</span>
@@ -984,10 +1008,12 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s1">&#39;dl_dir&#39;</span><span class="p">,</span> <span class="n">check_s3_node</span><span class="p">,</span> <span class="s1">&#39;dl_dir&#39;</span><span class="p">)</span>
 
     <span class="n">outputnode</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;unique_id&#39;</span><span class="p">,</span>
-                                                        <span class="s1">&#39;data&#39;</span><span class="p">]),</span>
+                                                        <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+                                                        <span class="s1">&#39;scan&#39;</span><span class="p">]),</span>
                          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;outputspec&#39;</span><span class="p">)</span>
 
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s1">&#39;unique_id&#39;</span><span class="p">,</span> <span class="n">outputnode</span><span class="p">,</span> <span class="s1">&#39;unique_id&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="n">outputnode</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">check_s3_node</span><span class="p">,</span> <span class="s1">&#39;local_path&#39;</span><span class="p">,</span> <span class="n">outputnode</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">wf</span></div>
@@ -1218,6 +1244,52 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">ts_analysis_dict</span><span class="p">,</span> <span class="n">sca_analysis_dict</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="get_highest_local_res"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_highest_local_res">[docs]</a><span class="k">def</span> <span class="nf">get_highest_local_res</span><span class="p">(</span><span class="n">template</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">tagname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given a reference template path and a resolution string, get all</span>
+<span class="sd">    resolutions of that template in the same local path and return the</span>
+<span class="sd">    highest resolution.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    template : Path or str</span>
+
+<span class="sd">    tagname : str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    LookupError</span>
+<span class="sd">        If no matching local template is found.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; get_highest_local_res(</span>
+<span class="sd">    ...     &#39;/cpac_templates/MacaqueYerkes19_T1w_2mm_brain.nii.gz&#39;, &#39;2mm&#39;)</span>
+<span class="sd">    PosixPath(&#39;/cpac_templates/MacaqueYerkes19_T1w_0.5mm_brain.nii.gz&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; get_highest_local_res(</span>
+<span class="sd">    ...     &#39;/cpac_templates/dne_T1w_2mm.nii.gz&#39;, &#39;2mm&#39;)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">       ...</span>
+<span class="sd">    LookupError: Could not find template /cpac_templates/dne_T1w_2mm.nii.gz</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">CPAC.pipeline.schema</span> <span class="kn">import</span> <span class="n">RESOLUTION_REGEX</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+    <span class="n">template_pattern</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">RESOLUTION_REGEX</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">_part</span><span class="p">)</span> <span class="k">for</span> <span class="n">_part</span> <span class="ow">in</span> <span class="n">template</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">tagname</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]))</span>
+    <span class="n">matching_templates</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">template</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span>
+                          <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">template_pattern</span><span class="p">,</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="p">)]</span>
+    <span class="n">matching_templates</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">matching_templates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find template </span><span class="si">{</span><span class="n">template</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="res_string_to_tuple"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.res_string_to_tuple">[docs]</a><span class="k">def</span> <span class="nf">res_string_to_tuple</span><span class="p">(</span><span class="n">resolution</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a resolution string to a tuple of floats.</span>
@@ -1263,9 +1335,12 @@
 
     <span class="k">if</span> <span class="n">local_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">tagname</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ref_template</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tagname</span><span class="p">,</span> <span class="s1">&#39;1mm&#39;</span><span class="p">)</span>
-            <span class="n">local_path</span> <span class="o">=</span> <span class="n">check_for_s3</span><span class="p">(</span><span class="n">ref_template</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">tagname</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s2">&quot;s3&quot;</span> <span class="ow">in</span> <span class="n">template</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">template</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s3:&#39;</span><span class="p">):</span>
+                <span class="n">ref_template</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tagname</span><span class="p">,</span> <span class="s1">&#39;1mm&#39;</span><span class="p">)</span>
+                <span class="n">local_path</span> <span class="o">=</span> <span class="n">check_for_s3</span><span class="p">(</span><span class="n">ref_template</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">local_path</span> <span class="o">=</span> <span class="n">get_highest_local_res</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">tagname</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">tagname</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">template</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s3:&#39;</span><span class="p">):</span>
             <span class="n">local_path</span> <span class="o">=</span> <span class="n">check_for_s3</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">local_path</span> <span class="o">=</span> <span class="n">template</span>
@@ -1619,6 +1694,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
     <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
     </body>
 </html>

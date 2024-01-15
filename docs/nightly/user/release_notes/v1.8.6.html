@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../../genindex" /><link rel="search" title="Search" href="../../search" />
+<link rel="index" title="Index" href="../../genindex" /><link rel="search" title="Search" href="../../search" /><link rel="next" title="C-PAC Quickstart" href="../quick" /><link rel="prev" title="User Documentation" href="../index" />
 
     <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>Version 0.1.1 Alpha - 2012.10.15 - C-PAC 1.8.6.dev Beta documentation</title>
+        <title>Latest Release: Version 1.8.6 Beta (Jan 15, 2024) - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -158,9 +158,9 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="v1.8.6">Latest Release: Version 1.8.6 Beta (Jan 15, 2024)</a></li>
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Latest Release: Version 1.8.6 Beta (Jan 15, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../pipelines/pipeline_config">3. Select Your Pipeline</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -317,16 +317,44 @@
           </label>
         </div>
         <article role="main">
-          <section id="version-0-1-1-alpha-2012-10-15">
-<h1>Version 0.1.1 Alpha - 2012.10.15<a class="headerlink" href="#version-0-1-1-alpha-2012-10-15" title="Permalink to this heading">#</a></h1>
+          <section id="latest-release-version-1-8-6-beta-jan-15-2024">
+<h1>Latest Release: Version 1.8.6 Beta (Jan 15, 2024)<a class="headerlink" href="#latest-release-version-1-8-6-beta-jan-15-2024" title="Permalink to this heading">#</a></h1>
+<p><strong>New Features</strong></p>
 <ul class="simple">
-<li><p><strong>Scrubbing:</strong> Users can now specify the number of TRs that should be removed before and after an offending TR.</p></li>
-<li><p><strong>Scrubbing:</strong> C-PAC now prints a warning specifying the number of time points left after scrubbing. If no time points are left, C-PAC will crash and print an error.</p></li>
-<li><p><strong>Slice Timing:</strong> Users can now specify which sites are run with slice timing correction.</p></li>
-<li><p><strong>Slice Timing:</strong> Slice timing correction is now able to read slice timing information directly from an image file, and works on Multiband sequences.</p></li>
-<li><p><strong>Timeseries:</strong> Users can now specify a different number of initial TRs to be removed for each site.</p></li>
-<li><p><strong>Data Config:</strong> Data extraction now works for the NKI-TRT data set, and automatically extracts scan parameters for each subject from the image file.</p></li>
-<li><p><strong>Fix:</strong> C-PAC no longer crashes if dot is not installed. Instead, it prints an error and contines running.</p></li>
+<li><p>C-PAC can now ingress` fMRIPrep &lt;<a class="reference external" href="https://www2.childmind.org/e/908232/en-stable-/3mvpmy/2326103788/h/_5fpbWs4zmSoHM8JlOMzlLaQ62nt_LTCkOtj1s5TL_E">https://www2.childmind.org/e/908232/en-stable-/3mvpmy/2326103788/h/_5fpbWs4zmSoHM8JlOMzlLaQ62nt_LTCkOtj1s5TL_E</a>&gt;`_ output data.</p>
+<ul>
+<li><p>Users can now perform further processing on fMRIPrep-processed data through C-PAC, using any template-space processing they wish to employ. This includes using the nuisance confounds generated by fMRIPrep to perform nuisance denoising on the preprocessed BOLD data.</p></li>
+<li><p>A fMRIPrep-ingress pre-configured pipeline configuration (pre-config) has been created to make it easy to get started. This pre-config can be modified to suit a user’s specific processing needs.</p></li>
+<li><p>This is part of a wider project leading to the ability to easily ingress any BIDS-format output directory.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Improvements</strong></p>
+<ul class="simple">
+<li><p>The motion parameter and motion derivative outputs have been converted to BIDS-compliant formats.</p></li>
+<li><p>A tip box has been added to appear when C-PAC returns with a “missing outputs” error.</p></li>
+<li><p>The data configuration builder tool can now easily add` FreeSurfer &lt;<a class="reference external" href="https://www2.childmind.org/e/908232/2023-12-21/3mvpn2/2326103788/h/_5fpbWs4zmSoHM8JlOMzlLaQ62nt_LTCkOtj1s5TL_E">https://www2.childmind.org/e/908232/2023-12-21/3mvpn2/2326103788/h/_5fpbWs4zmSoHM8JlOMzlLaQ62nt_LTCkOtj1s5TL_E</a>&gt;`_ output directories for the purpose of ingressing FreeSurfer data into your C-PAC pipeline.</p></li>
+<li><p>A large number of C-PAC’s dependencies has been upgraded to more recent versions, including</p>
+<ul>
+<li><p>Ubuntu (18.04 ‘Bionic Beaver’→22.04 ‘Jammy Jellyfish’)</p></li>
+<li><p>Python (3.7.13→3.10.6)</p></li>
+<li><p>AFNI (21.1.00 ‘Domitian’→23.3.09 ‘Septimius Severus’)</p></li>
+<li><p>ANTs (2.3.3 ‘Leptomyrmex’→2.4.3 ‘Emplastus’)</p></li>
+<li><p>FSL (5.0.9→6.0.6.5)</p></li>
+<li><p>Nipype (1.5.1→1.8.6)</p></li>
+</ul>
+</li>
+<li><p>Please refer to <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/v1.8.6/CHANGELOG.md#upgraded-dependencies">the “Upgraded dependencies” section of the changelog for 1.8.6</a> or <a class="reference external" href="https://fcp-indi.github.io/docs/latest/user/release_notes/v1.8.6">the release notes in the user guide</a> for a full list of these upgrades.</p></li>
+<li><p>torch, a large dependency that is used by U-Net and nothing else in C-PAC, has been removed from the pre-installed dependencies in the C-PAC image and is now installed in the container at runtime if U-Net is selected in the configuration being run.</p></li>
+</ul>
+<p><strong>Bug Fixes</strong></p>
+<ul class="simple">
+<li><p>When motion parameters are filtered, C-PAC now uses the filtered version of the motion parameters downstream - for example, in nuisance regression/denoising.</p></li>
+<li><p>Fixed a bug where some connectivity matrices wouldn’t generate if anatomical and functional outputs were in different resolutions.</p></li>
+<li><p>Repaired the handling of <code class="docutils literal notranslate"><span class="pre">3dECM</span></code> (network centrality) outputs for AFNI≥21.1.1.</p></li>
+<li><p>Fixed a bug (introduced in v1.8.0) where sparsity thresholds were not being scaled for network centrality.</p></li>
+<li><p>Fixed a bug where <code class="docutils literal notranslate"><span class="pre">calculate_motion_first</span></code> would not calculate motion at all.</p></li>
+<li><p>Fixed an error message that was reporting missing resources in pipeline nodeblocks, but was referring to the incorrect nodeblock in question.</p></li>
 </ul>
 </section>
 
@@ -335,8 +363,26 @@
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="../quick">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">C-PAC Quickstart</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../index">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">User Documentation</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
