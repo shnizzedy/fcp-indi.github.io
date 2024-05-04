@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../../genindex" /><link rel="search" title="Search" href="../../search" /><link rel="next" title="Bootstrap Analysis of Stable Clusters" href="basc" /><link rel="prev" title="Segmentation Workflow" href="seg_preproc" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.04.27 -->
         <title>Seed Based Correlation Analysis - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=fe2d11c3" />
     
@@ -113,6 +113,8 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
 
 
 <div class="page">
@@ -160,7 +162,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../user/index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../user/release_notes/v1.8.6">Latest Release: Version 1.8.6 Beta (Jan 15, 2024)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user/release_notes/v1.8.7">Latest Release: Version 1.8.7 Beta (May 03, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../user/quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../user/subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../user/pipelines/pipeline_config">3. Select Your Pipeline</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -316,12 +318,12 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <article role="main">
+        <article role="main" id="furo-main-content">
           <section id="module-CPAC.sca">
-<span id="seed-based-correlation-analysis"></span><h1>Seed Based Correlation Analysis<a class="headerlink" href="#module-CPAC.sca" title="Permalink to this heading">#</a></h1>
+<span id="seed-based-correlation-analysis"></span><h1>Seed Based Correlation Analysis<a class="headerlink" href="#module-CPAC.sca" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.sca.compute_fisher_z_score">
-<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">compute_fisher_z_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">correlation_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeseries_one_d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#compute_fisher_z_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.compute_fisher_z_score" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">compute_fisher_z_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">correlation_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeseries_one_d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#compute_fisher_z_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.compute_fisher_z_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the fisher z transform of the input correlation map
 If the correlation map contains data for multiple ROIs then
 the function returns z score for each ROI as a seperate nifti
@@ -341,7 +343,7 @@ file</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.sca.create_sca">
-<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">create_sca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_sca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sca'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_sca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.create_sca" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">create_sca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_sca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sca'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_sca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.create_sca" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map of the correlations of the Region of Interest(Seed in native or MNI space) with the rest of brain voxels.
 The map is normalized to contain Z-scores, mapped in standard space and treated with spatial smoothing.</p>
 <dl class="field-list simple">
@@ -402,7 +404,7 @@ nifti files</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.sca.create_temporal_reg">
-<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">create_temporal_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wflow_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temporal_reg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SR'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_temporal_reg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.create_temporal_reg" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">create_temporal_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wflow_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temporal_reg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SR'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_temporal_reg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.create_temporal_reg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Temporal multiple regression workflow
 Provides a spatial map of parameter estimates corresponding to each
 provided timeseries in a timeseries.txt file as regressors</p>
@@ -484,7 +486,7 @@ showing activation patterns related to those in the timeseries.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.sca.map_to_roi">
-<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">map_to_roi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#map_to_roi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.map_to_roi" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">map_to_roi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#map_to_roi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.map_to_roi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renames the outputs of the temporal multiple regression workflow for sca
 according to the header information of the timeseries.txt file that was
 passed
@@ -587,11 +589,16 @@ containing the names of the timeseries</p>
       
     </aside>
   </div>
-</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=cb37d366"></script>
+</div><script src="../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=cb37d366"></script>
     <script src="../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
-    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/underscore.js?v=f1230927"></script>
+    <script src="../../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../../_static/searchtools.js?v=8e93b666"></script>
     <script src="../../_static/hideEmptyHighlights.js?v=af317073"></script>
     <script defer="defer" src="../../_static/versionList.js?v=f2bc52a7"></script>
     </body>

@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" />
 
-    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.04.27 -->
         <title>cpac (Python package) - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=fe2d11c3" />
     
@@ -113,6 +113,8 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
 
 
 <div class="page">
@@ -160,7 +162,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="release_notes/v1.8.6">Latest Release: Version 1.8.6 Beta (Jan 15, 2024)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/v1.8.7">Latest Release: Version 1.8.7 Beta (May 03, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="pipelines/pipeline_config">3. Select Your Pipeline</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -316,16 +318,16 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <article role="main">
+        <article role="main" id="furo-main-content">
           <section id="cpac-python-package">
-<h1>cpac (Python package)<a class="headerlink" href="#cpac-python-package" title="Permalink to this heading">#</a></h1>
+<h1>cpac (Python package)<a class="headerlink" href="#cpac-python-package" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://pypi.org/project/cpac/">cpac</a> is available so that you can easily run analyses without needing interact with the container platform that allows you to run C-PAC without installing all of the underlying software.</p>
 <p><code class="docutils literal notranslate"><span class="pre">cpac</span></code> requires Python 3.8 or greater. To get cpac, simply</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install cpac</span>
 </pre></div>
 </div>
 <section id="run-extra-packages-with-cpac">
-<h2>Run extra packages with cpac<a class="headerlink" href="#run-extra-packages-with-cpac" title="Permalink to this heading">#</a></h2>
+<h2>Run extra packages with cpac<a class="headerlink" href="#run-extra-packages-with-cpac" title="Permalink to this heading">¶</a></h2>
 <p>Beginning with v1.8.5, <code class="docutils literal notranslate"><span class="pre">cpac</span></code> can run <a class="reference external" href="https://cmi-dair.github.io/ba-timeseries-gradients/ba_timeseries_gradients.html"><code class="docutils literal notranslate"><span class="pre">ba_timeseries_gradients</span></code></a> and/or <a class="reference external" href="https://cmi-dair.github.io/tsconcat/tsconcat.html"><code class="docutils literal notranslate"><span class="pre">tsconcat</span></code></a> in addition to C-PAC. If either package is already installed, <code class="docutils literal notranslate"><span class="pre">cpac</span></code> will use the installed version. You can install them with the relevant extras, like one of the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install cpac[ba_timeseries_gradients]</span>
 <span class="go">pip install cpac[tsconcat]</span>
@@ -338,7 +340,7 @@
 </div>
 </section>
 <section id="download-upgrade-c-pac-with-cpac">
-<h2>Download / Upgrade C-PAC with cpac<a class="headerlink" href="#download-upgrade-c-pac-with-cpac" title="Permalink to this heading">#</a></h2>
+<h2>Download / Upgrade C-PAC with cpac<a class="headerlink" href="#download-upgrade-c-pac-with-cpac" title="Permalink to this heading">¶</a></h2>
 <p>To download or upgrade a particular C-PAC image,</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac pull</span>
 </pre></div>
@@ -358,7 +360,7 @@
 </div>
 </section>
 <section id="run-c-pac-with-cpac">
-<h2>Run C-PAC with cpac<a class="headerlink" href="#run-c-pac-with-cpac" title="Permalink to this heading">#</a></h2>
+<h2>Run C-PAC with cpac<a class="headerlink" href="#run-c-pac-with-cpac" title="Permalink to this heading">¶</a></h2>
 <p>To run C-PAC in participant mode for one participant, using a BIDS dataset stored on your machine or server and using the container image’s default pipeline configuration:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cpac run /Users/You/local_bids_data /Users/You/some_folder_for_outputs participant</span>
 </pre></div>
@@ -367,7 +369,7 @@
 <p>You can specify a platform with the <code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">docker</span></code> or <code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">singularity</span></code>. If you specify a platform without specifying an image, these are the defaults, using the first successfully found image:</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac<span class="w"> </span>--help
 
 <span class="go">usage: cpac [-h] [--version] [-o OPT] [-B CUSTOM_BINDING]</span>
@@ -472,14 +474,14 @@
 </pre></div>
 </div>
 <section id="platform-docker">
-<h3><code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">docker</span></code><a class="headerlink" href="#platform-docker" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">docker</span></code><a class="headerlink" href="#platform-docker" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Look for <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> locally.</p></li>
 <li><p>Pull <code class="docutils literal notranslate"><span class="pre">fcpindi/c-pac:latest</span></code> from Docker Hub.</p></li>
 </ul>
 </section>
 <section id="platform-singularity">
-<h3><code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">singularity</span></code><a class="headerlink" href="#platform-singularity" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">singularity</span></code><a class="headerlink" href="#platform-singularity" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Look in the present working directory for any Singularity images. If more than one is found, use the most recently modified.</p></li>
 <li><p>Pull <code class="docutils literal notranslate"><span class="pre">FCP-INDI/C-PAC</span></code> from Singularity Hub.</p></li>
@@ -513,7 +515,7 @@
 </section>
 </section>
 <section id="usage-cpac-run">
-<h2>Usage: cpac run<a class="headerlink" href="#usage-cpac-run" title="Permalink to this heading">#</a></h2>
+<h2>Usage: cpac run<a class="headerlink" href="#usage-cpac-run" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac<span class="w"> </span>run<span class="w"> </span>--help
 
 <span class="go">Loading 🐳 Docker</span>
@@ -547,10 +549,10 @@
 <span class="go">              [--monitoring]</span>
 <span class="go">              bids_dir output_dir {participant,group,test_config,cli}</span>
 
-<span class="go">C-PAC Pipeline Runner. Copyright (C) 2022 C-PAC Developers. This program comes</span>
-<span class="go">with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to</span>
-<span class="go">redistribute it under certain conditions. For details, see https://fcp-</span>
-<span class="go">indi.github.io/docs/v1.8.6/license or the COPYING and COPYING.LESSER files</span>
+<span class="go">C-PAC Pipeline Runner. Copyright (C) 2022-2024 C-PAC Developers. This program</span>
+<span class="go">comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome</span>
+<span class="go">to redistribute it under certain conditions. For details, see https://fcp-</span>
+<span class="go">indi.github.io/docs/nightly/license or the COPYING and COPYING.LESSER files</span>
 <span class="go">included in the source code.</span>
 
 <span class="go">positional arguments:</span>
@@ -608,7 +610,7 @@
 <span class="go">                        ingress&#39;, &#39;fmriprep-options&#39;, &#39;fx-options&#39;, &#39;monkey&#39;,</span>
 <span class="go">                        &#39;ndmg&#39;, &#39;nhp-macaque&#39;, &#39;preproc&#39;, &#39;rbc-options&#39;,</span>
 <span class="go">                        &#39;rodent&#39;]. See https://fcp-</span>
-<span class="go">                        indi.github.io/docs/latest/user/pipelines/preconfig</span>
+<span class="go">                        indi.github.io/docs/nightly/user/pipelines/preconfig</span>
 <span class="go">                        for more information about the preconfigured</span>
 <span class="go">                        pipelines.</span>
 <span class="go">  --aws-input-creds AWS_INPUT_CREDS, --aws_input_creds AWS_INPUT_CREDS</span>
@@ -737,7 +739,7 @@
 </div>
 </section>
 <section id="usage-cpac-utils">
-<h2>Usage: cpac utils<a class="headerlink" href="#usage-cpac-utils" title="Permalink to this heading">#</a></h2>
+<h2>Usage: cpac utils<a class="headerlink" href="#usage-cpac-utils" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cpac<span class="w"> </span>utils<span class="w"> </span>--help
 
 <span class="go">Loading 🐳 Docker</span>
@@ -839,11 +841,16 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=cb37d366"></script>
+</div><script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=cb37d366"></script>
     <script src="../_static/doctools.js?v=d248f5b3"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
-    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/underscore.js?v=f1230927"></script>
+    <script src="../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../_static/searchtools.js?v=8e93b666"></script>
     <script src="../_static/hideEmptyHighlights.js?v=af317073"></script>
     <script defer="defer" src="../_static/versionList.js?v=f2bc52a7"></script>
     </body>

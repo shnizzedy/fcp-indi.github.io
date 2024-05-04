@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" /><link rel="next" title="Utilities" href="utils" /><link rel="prev" title="Network Centrality" href="workflows/network_centrality" />
 
-    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.04.27 -->
         <title>eXtensible Connectivity Pipeline-style quality control files - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=fe2d11c3" />
     
@@ -113,6 +113,8 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
 
 
 <div class="page">
@@ -160,7 +162,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../user/index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../user/release_notes/v1.8.6">Latest Release: Version 1.8.6 Beta (Jan 15, 2024)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user/release_notes/v1.8.7">Latest Release: Version 1.8.7 Beta (May 03, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../user/pipelines/pipeline_config">3. Select Your Pipeline</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -316,15 +318,15 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <article role="main">
+        <article role="main" id="furo-main-content">
           <section id="module-CPAC.qc.xcp">
-<span id="extensible-connectivity-pipeline-style-quality-control-files"></span><h1>eXtensible Connectivity Pipeline-style quality control files<a class="headerlink" href="#module-CPAC.qc.xcp" title="Permalink to this heading">#</a></h1>
+<span id="extensible-connectivity-pipeline-style-quality-control-files"></span><h1>eXtensible Connectivity Pipeline-style quality control files<a class="headerlink" href="#module-CPAC.qc.xcp" title="Permalink to this heading">¶</a></h1>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference external" href="https://fcp-indi.github.io/docs/user/xcpqc">User Guide: Generate eXtensible Connectivity Pipeline-style quality control files</a></p>
 </div>
 <section id="columns">
-<h2>Columns<a class="headerlink" href="#columns" title="Permalink to this heading">#</a></h2>
+<h2>Columns<a class="headerlink" href="#columns" title="Permalink to this heading">¶</a></h2>
 <dl class="simple">
 <dt>sub<span class="classifier">str</span></dt><dd><p>subject label <a class="footnote-reference brackets" href="#footcite-bids21" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 </dd>
@@ -379,13 +381,13 @@ functional scan</p>
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.dvcorr">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">dvcorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fdj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#dvcorr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.dvcorr" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">dvcorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fdj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#dvcorr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.dvcorr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to correlate DVARS and FD-J</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.generate_xcp_qc">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">generate_xcp_qc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">censor_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framewise_displacement_jenkinson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars_after</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#generate_xcp_qc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.generate_xcp_qc" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">generate_xcp_qc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">censor_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framewise_displacement_jenkinson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars_after</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#generate_xcp_qc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.generate_xcp_qc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to generate an RBC-style QC CSV</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -422,7 +424,7 @@ with space-T1w_desc-brain_mask reference</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.get_bids_info">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">get_bids_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#get_bids_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.get_bids_info" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">get_bids_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#get_bids_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.get_bids_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to gather BIDS information from a strat_pool</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -464,7 +466,7 @@ with space-T1w_desc-brain_mask reference</p></li>
 <p><em>NodeBlockFunction</em>: <strong>qc_xcp</strong></p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.qc_xcp">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">qc_xcp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#qc_xcp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.qc_xcp" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">qc_xcp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#qc_xcp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.qc_xcp" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -578,11 +580,16 @@ with space-T1w_desc-brain_mask reference</p></li>
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=cb37d366"></script>
+</div><script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=cb37d366"></script>
     <script src="../_static/doctools.js?v=d248f5b3"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
-    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/underscore.js?v=f1230927"></script>
+    <script src="../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../_static/searchtools.js?v=8e93b666"></script>
     <script src="../_static/hideEmptyHighlights.js?v=af317073"></script>
     <script defer="defer" src="../_static/versionList.js?v=f2bc52a7"></script>
     </body>

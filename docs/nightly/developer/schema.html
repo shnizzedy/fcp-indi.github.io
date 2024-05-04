@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" />
 
-    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.04.27 -->
         <title>Validation Schema - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=437aa6ec" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=fe2d11c3" />
     
@@ -113,6 +113,8 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
 
 
 <div class="page">
@@ -160,7 +162,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../user/index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../user/release_notes/v1.8.6">Latest Release: Version 1.8.6 Beta (Jan 15, 2024)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user/release_notes/v1.8.7">Latest Release: Version 1.8.7 Beta (May 03, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../user/pipelines/pipeline_config">3. Select Your Pipeline</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -316,14 +318,14 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <article role="main">
+        <article role="main" id="furo-main-content">
           <section id="validation-schema">
-<span id="id1"></span><h1>Validation Schema<a class="headerlink" href="#validation-schema" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1>Validation Schema<a class="headerlink" href="#validation-schema" title="Permalink to this heading">¶</a></h1>
 <p>C-PAC uses <a class="reference external" href="alecthomas.github.io/voluptuous/docs/_build/html">voluptuous</a> to validate pipeline configurations against defined types and value restrictions. Default values should be set in <a class="reference internal" href="../user/pipelines/default"><span class="doc">the default pipeline</span></a> along with comments explaining each option.</p>
 <span class="target" id="module-CPAC.pipeline.schema"></span><p>Validation schema for C-PAC pipeline configurations</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.pipeline.schema.name_motion_filter">
-<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">name_motion_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mfilter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mfilters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#name_motion_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.name_motion_filter" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">name_motion_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mfilter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mfilters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#name_motion_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.name_motion_filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a motion filter, create a short string for the filename</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -362,7 +364,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.pipeline.schema.permutation_message">
-<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">permutation_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#permutation_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.permutation_message" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">permutation_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#permutation_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.permutation_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to give a clean, human-readable error message for keys
 that accept permutation values</p>
 <dl class="field-list simple">
@@ -383,13 +385,13 @@ that accept permutation values</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.pipeline.schema.sanitize">
-<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">sanitize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#sanitize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.sanitize" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">sanitize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#sanitize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.sanitize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sanitize a filename and replace whitespaces with underscores</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.pipeline.schema.schema">
-<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.schema" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate a pipeline configuration against the latest validation schema
 by first applying backwards-compatibility patches, then applying
 Voluptuous validation, then handling complex configuration interaction
@@ -406,7 +408,7 @@ checks before returning validated config_dict.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.pipeline.schema.str_to_bool1_1">
-<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">str_to_bool1_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#str_to_bool1_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.str_to_bool1_1" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.schema.</span></span><span class="sig-name descname"><span class="pre">str_to_bool1_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/schema#str_to_bool1_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.schema.str_to_bool1_1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert strings to Booleans for YAML1.1 syntax</p>
 <p>Ref <a class="reference external" href="https://yaml.org/type/bool.html">https://yaml.org/type/bool.html</a></p>
 <dl class="field-list simple">
@@ -475,11 +477,16 @@ checks before returning validated config_dict.</p>
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=cb37d366"></script>
+</div><script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=cb37d366"></script>
     <script src="../_static/doctools.js?v=d248f5b3"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
-    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/underscore.js?v=f1230927"></script>
+    <script src="../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../_static/searchtools.js?v=8e93b666"></script>
     <script src="../_static/hideEmptyHighlights.js?v=af317073"></script>
     <script defer="defer" src="../_static/versionList.js?v=f2bc52a7"></script>
     </body>
