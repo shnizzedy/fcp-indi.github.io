@@ -387,19 +387,27 @@
 <h2>Variants<a class="headerlink" href="#variants" title="Permalink to this heading">¶</a></h2>
 <section id="primary-image">
 <h3>Primary image<a class="headerlink" href="#primary-image" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://hub.docker.com/layers/fcpindi/c-pac/release-v1.8.7/images/sha256-590200a9f6b87e4c67a7b19627f332d54fab94a54c0fc5ed709d6fa31017569f"><img alt="latest-primary-badge" src="https://img.shields.io/badge/last_published_version-C--PAC_1.8.7-green" /></a></p>
 <p>Non-variant, primary image (no <code class="docutils literal notranslate"><span class="pre">${VARIANT}</span></code> or an empty string, e.g. <code class="docutils literal notranslate"><span class="pre">release-</span></code><code class="docutils literal notranslate"><span class="pre">nightly</span></code>)</p>
 </section>
 <section id="lite-variant">
 <h3>Lite variant<a class="headerlink" href="#lite-variant" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://hub.docker.com/layers/fcpindi/c-pac/release-v1.8.7-lite/images/sha256-7e983fdf82a005509c96cee3aa90755e2783d9c8835a46cabacf94540ddb9f3a"><img alt="latest-lite-badge" src="https://img.shields.io/badge/last_published_version-C--PAC_1.8.7-green" /></a></p>
 <p><code class="docutils literal notranslate"><span class="pre">-lite</span></code>, primary image without FreeSurfer for a smaller image for runs that don’t need FreeSurfer (e.g., <code class="docutils literal notranslate"><span class="pre">release-</span></code><code class="docutils literal notranslate"><span class="pre">nightly</span></code><code class="docutils literal notranslate"><span class="pre">-lite</span></code>)</p>
 </section>
+<section id="stale-variants">
+<h3>Stale variants<a class="headerlink" href="#stale-variants" title="Permalink to this heading">¶</a></h3>
+<p>The following variants were version-matched to other pipelines years ago but have not been recently harmonized.</p>
 <section id="abcd-hcp-variant">
-<h3>ABCD-HCP variant<a class="headerlink" href="#abcd-hcp-variant" title="Permalink to this heading">¶</a></h3>
+<h4>ABCD-HCP variant<a class="headerlink" href="#abcd-hcp-variant" title="Permalink to this heading">¶</a></h4>
+<a class="reference external image-reference" href="https://hub.docker.com/layers/fcpindi/c-pac/release-v1.8.7-ABCD-HCP/images/sha256-859bd8b11c38f07f53c75c7d06543bc3f35aa7ec368bb2ac0d9362ba365fe90e"><img alt="https://img.shields.io/badge/last_published_version-C--PAC_1.8.7_%7C_abcd--hcp--pipeline&#64;e480a8f-yellow" src="https://img.shields.io/badge/last_published_version-C--PAC_1.8.7_%7C_abcd--hcp--pipeline&#64;e480a8f-yellow" /></a>
 <p><code class="docutils literal notranslate"><span class="pre">-ABCD-HCP</span></code>, image with software dependencies version-matched to <a class="reference external" href="https://github.com/DCAN-Labs/abcd-hcp-pipeline/blob/e480a8f99534f1b05f37bf44c64827384b69b383/Dockerfile">ABCD-HCP BIDS fMRI Pipeline</a> (e.g., <code class="docutils literal notranslate"><span class="pre">release-</span></code><code class="docutils literal notranslate"><span class="pre">nightly</span></code><code class="docutils literal notranslate"><span class="pre">-ABCD-HCP</span></code>)</p>
 </section>
 <section id="fmriprep-lts-variant">
-<h3>fMRIPrep-LTS variant<a class="headerlink" href="#fmriprep-lts-variant" title="Permalink to this heading">¶</a></h3>
+<h4>fMRIPrep-LTS variant<a class="headerlink" href="#fmriprep-lts-variant" title="Permalink to this heading">¶</a></h4>
+<a class="reference external image-reference" href="https://hub.docker.com/layers/fcpindi/c-pac/release-v1.8.7-fMRIPrep-LTS/images/sha256-cf30cb0643477f01067db9bd173f425f891644e0c0103cf754e1aa5e2b000938"><img alt="https://img.shields.io/badge/last_published_version-C--PAC_1.8.7_%7C_fMRIPrep--LTS_20.2.1-yellow" src="https://img.shields.io/badge/last_published_version-C--PAC_1.8.7_%7C_fMRIPrep--LTS_20.2.1-yellow" /></a>
 <p><code class="docutils literal notranslate"><span class="pre">-fMRIPrep-LTS</span></code>, image with software dependencies version-matched to <a class="reference external" href="https://reproducibility.stanford.edu/fmriprep-lts#long-term-support-lts">fMRIPrep LTS</a> (e.g., <code class="docutils literal notranslate"><span class="pre">release-</span></code><code class="docutils literal notranslate"><span class="pre">nightly</span></code><code class="docutils literal notranslate"><span class="pre">-fMRIPrep-LTS</span></code>)</p>
+</section>
 </section>
 </section>
 </section>
@@ -463,8 +471,11 @@
 <li><a class="reference internal" href="#variants">Variants</a><ul>
 <li><a class="reference internal" href="#primary-image">Primary image</a></li>
 <li><a class="reference internal" href="#lite-variant">Lite variant</a></li>
+<li><a class="reference internal" href="#stale-variants">Stale variants</a><ul>
 <li><a class="reference internal" href="#abcd-hcp-variant">ABCD-HCP variant</a></li>
 <li><a class="reference internal" href="#fmriprep-lts-variant">fMRIPrep-LTS variant</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
