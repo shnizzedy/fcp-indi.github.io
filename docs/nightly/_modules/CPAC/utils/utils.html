@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="">
+<html class="no-js" lang="en" data-content_root="../../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
         <title>CPAC.utils.utils - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
@@ -419,13 +419,18 @@
               <span class="kc">False</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;false&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">)}</span>
 
 
-<div class="viewcode-block" id="get_last_prov_entry"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_last_prov_entry">[docs]</a><span class="k">def</span> <span class="nf">get_last_prov_entry</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
+<div class="viewcode-block" id="get_last_prov_entry">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_last_prov_entry">[docs]</a>
+<span class="k">def</span> <span class="nf">get_last_prov_entry</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prov</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">prov</span> <span class="o">=</span> <span class="n">prov</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">prov</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="check_prov_for_regtool"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_prov_for_regtool">[docs]</a><span class="k">def</span> <span class="nf">check_prov_for_regtool</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
+
+<div class="viewcode-block" id="check_prov_for_regtool">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_prov_for_regtool">[docs]</a>
+<span class="k">def</span> <span class="nf">check_prov_for_regtool</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
     <span class="n">last_entry</span> <span class="o">=</span> <span class="n">get_last_prov_entry</span><span class="p">(</span><span class="n">prov</span><span class="p">)</span>
     <span class="n">last_node</span> <span class="o">=</span> <span class="n">last_entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="s1">&#39;ants&#39;</span> <span class="ow">in</span> <span class="n">last_node</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
@@ -476,7 +481,10 @@
             <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="check_prov_for_motion_tool"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_prov_for_motion_tool">[docs]</a><span class="k">def</span> <span class="nf">check_prov_for_motion_tool</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
+
+<div class="viewcode-block" id="check_prov_for_motion_tool">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_prov_for_motion_tool">[docs]</a>
+<span class="k">def</span> <span class="nf">check_prov_for_motion_tool</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
     <span class="n">last_entry</span> <span class="o">=</span> <span class="n">get_last_prov_entry</span><span class="p">(</span><span class="n">prov</span><span class="p">)</span>
     <span class="n">last_node</span> <span class="o">=</span> <span class="n">last_entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="s1">&#39;3dvolreg&#39;</span> <span class="ow">in</span> <span class="n">last_node</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
@@ -496,11 +504,17 @@
 
 
 
-<div class="viewcode-block" id="get_flag"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_flag">[docs]</a><span class="k">def</span> <span class="nf">get_flag</span><span class="p">(</span><span class="n">in_flag</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_flag">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_flag">[docs]</a>
+<span class="k">def</span> <span class="nf">get_flag</span><span class="p">(</span><span class="n">in_flag</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">in_flag</span></div>
 
 
-<div class="viewcode-block" id="get_flag_wf"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_flag_wf">[docs]</a><span class="k">def</span> <span class="nf">get_flag_wf</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;get_flag&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_flag_wf">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_flag_wf">[docs]</a>
+<span class="k">def</span> <span class="nf">get_flag_wf</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;get_flag&#39;</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
     <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
 
@@ -516,7 +530,10 @@
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;in_flag&#39;</span><span class="p">,</span> <span class="n">get_flag</span><span class="p">,</span> <span class="s1">&#39;in_flag&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="read_json"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.read_json">[docs]</a><span class="k">def</span> <span class="nf">read_json</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
+
+<div class="viewcode-block" id="read_json">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.read_json">[docs]</a>
+<span class="k">def</span> <span class="nf">read_json</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json_dct</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -525,7 +542,10 @@
     <span class="k">return</span> <span class="n">json_dct</span></div>
 
 
-<div class="viewcode-block" id="create_id_string"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.create_id_string">[docs]</a><span class="k">def</span> <span class="nf">create_id_string</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">unique_id</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">scan_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="create_id_string">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.create_id_string">[docs]</a>
+<span class="k">def</span> <span class="nf">create_id_string</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">unique_id</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">scan_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">template_desc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">atlas_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">subdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the unique key-value identifier string for BIDS-Derivatives</span>
@@ -590,7 +610,10 @@
         <span class="n">res_in_filename</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">out_filename</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="write_output_json"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.write_output_json">[docs]</a><span class="k">def</span> <span class="nf">write_output_json</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="write_output_json">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.write_output_json">[docs]</a>
+<span class="k">def</span> <span class="nf">write_output_json</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">basedir</span><span class="p">:</span>
         <span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
     <span class="k">if</span> <span class="s1">&#39;.json&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
@@ -602,7 +625,10 @@
     <span class="k">return</span> <span class="n">json_file</span></div>
 
 
-<div class="viewcode-block" id="get_zscore"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_zscore">[docs]</a><span class="k">def</span> <span class="nf">get_zscore</span><span class="p">(</span><span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;z_score&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_zscore">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_zscore">[docs]</a>
+<span class="k">def</span> <span class="nf">get_zscore</span><span class="p">(</span><span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;z_score&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to calculate z-scores</span>
 
@@ -728,7 +754,10 @@
     <span class="k">return</span> <span class="n">wflow</span></div>
 
 
-<div class="viewcode-block" id="get_fisher_zscore"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_fisher_zscore">[docs]</a><span class="k">def</span> <span class="nf">get_fisher_zscore</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;fisher_z_score&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_fisher_zscore">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_fisher_zscore">[docs]</a>
+<span class="k">def</span> <span class="nf">get_fisher_zscore</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;fisher_z_score&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Runs the compute_fisher_z_score function as part of a one-node workflow.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -778,7 +807,10 @@
     <span class="k">return</span> <span class="n">wflow</span></div>
 
 
-<div class="viewcode-block" id="compute_fisher_z_score"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.compute_fisher_z_score">[docs]</a><span class="k">def</span> <span class="nf">compute_fisher_z_score</span><span class="p">(</span><span class="n">correlation_file</span><span class="p">,</span> <span class="n">timeseries_one_d</span><span class="p">,</span> <span class="n">input_name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="compute_fisher_z_score">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.compute_fisher_z_score">[docs]</a>
+<span class="k">def</span> <span class="nf">compute_fisher_z_score</span><span class="p">(</span><span class="n">correlation_file</span><span class="p">,</span> <span class="n">timeseries_one_d</span><span class="p">,</span> <span class="n">input_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the fisher z transform of the input correlation map</span>
 <span class="sd">    If the correlation map contains data for multiple ROIs then</span>
@@ -837,7 +869,10 @@
     <span class="k">return</span> <span class="n">out_file</span></div>
 
 
-<div class="viewcode-block" id="get_operand_string"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_operand_string">[docs]</a><span class="k">def</span> <span class="nf">get_operand_string</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_operand_string">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_operand_string">[docs]</a>
+<span class="k">def</span> <span class="nf">get_operand_string</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to get operand string for Fsl Maths</span>
 
@@ -859,7 +894,10 @@
     <span class="k">return</span> <span class="n">op_string</span></div>
 
 
-<div class="viewcode-block" id="get_roi_num_list"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_roi_num_list">[docs]</a><span class="k">def</span> <span class="nf">get_roi_num_list</span><span class="p">(</span><span class="n">timeseries_file</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_roi_num_list">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_roi_num_list">[docs]</a>
+<span class="k">def</span> <span class="nf">get_roi_num_list</span><span class="p">(</span><span class="n">timeseries_file</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># extracts the ROI labels from the 3dROIstats output CSV file</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">timeseries_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">roi_file_lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
@@ -896,7 +934,10 @@
     <span class="k">return</span> <span class="n">roi_list</span></div>
 
 
-<div class="viewcode-block" id="safe_shape"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.safe_shape">[docs]</a><span class="k">def</span> <span class="nf">safe_shape</span><span class="p">(</span><span class="o">*</span><span class="n">vol_data</span><span class="p">):</span>
+
+<div class="viewcode-block" id="safe_shape">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.safe_shape">[docs]</a>
+<span class="k">def</span> <span class="nf">safe_shape</span><span class="p">(</span><span class="o">*</span><span class="n">vol_data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks if the volume (first three dimensions) of multiple ndarrays</span>
 <span class="sd">    are the same shape.</span>
@@ -920,7 +961,10 @@
     <span class="k">return</span> <span class="n">same_volume</span></div>
 
 
-<div class="viewcode-block" id="extract_one_d"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.extract_one_d">[docs]</a><span class="k">def</span> <span class="nf">extract_one_d</span><span class="p">(</span><span class="n">list_timeseries</span><span class="p">):</span>
+
+<div class="viewcode-block" id="extract_one_d">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.extract_one_d">[docs]</a>
+<span class="k">def</span> <span class="nf">extract_one_d</span><span class="p">(</span><span class="n">list_timeseries</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_timeseries</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="s1">&#39;.1D&#39;</span> <span class="ow">in</span> <span class="n">list_timeseries</span> <span class="ow">or</span> <span class="s1">&#39;.csv&#39;</span> <span class="ow">in</span> <span class="n">list_timeseries</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">list_timeseries</span>
@@ -933,7 +977,10 @@
                     <span class="s2">&quot; file. Files found:&quot;</span> <span class="o">+</span> <span class="n">list_timeseries</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="extract_txt"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.extract_txt">[docs]</a><span class="k">def</span> <span class="nf">extract_txt</span><span class="p">(</span><span class="n">list_timeseries</span><span class="p">):</span>
+
+<div class="viewcode-block" id="extract_txt">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.extract_txt">[docs]</a>
+<span class="k">def</span> <span class="nf">extract_txt</span><span class="p">(</span><span class="n">list_timeseries</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to extract txt file containing</span>
 <span class="sd">    roi timeseries required for dual regression</span>
@@ -955,7 +1002,10 @@
     <span class="k">return</span> <span class="n">out_file</span></div>
 
 
-<div class="viewcode-block" id="zscore"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.zscore">[docs]</a><span class="k">def</span> <span class="nf">zscore</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+
+<div class="viewcode-block" id="zscore">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.zscore">[docs]</a>
+<span class="k">def</span> <span class="nf">zscore</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">data</span> <span class="o">-=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">/=</span> <span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -963,7 +1013,10 @@
     <span class="k">return</span> <span class="n">data</span></div>
 
 
-<div class="viewcode-block" id="correlation"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.correlation">[docs]</a><span class="k">def</span> <span class="nf">correlation</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">,</span>
+
+<div class="viewcode-block" id="correlation">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.correlation">[docs]</a>
+<span class="k">def</span> <span class="nf">correlation</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">,</span>
                 <span class="n">match_rows</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_scored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">d1</span> <span class="o">=</span> <span class="n">matrix1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">d2</span> <span class="o">=</span> <span class="n">matrix2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -996,7 +1049,10 @@
     <span class="k">return</span> <span class="n">r</span></div>
 
 
-<div class="viewcode-block" id="check"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check">[docs]</a><span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">params_dct</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">,</span> <span class="n">val_to_check</span><span class="p">,</span> <span class="n">throw_exception</span><span class="p">):</span>
+
+<div class="viewcode-block" id="check">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check">[docs]</a>
+<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">params_dct</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">,</span> <span class="n">val_to_check</span><span class="p">,</span> <span class="n">throw_exception</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">val_to_check</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params_dct</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">throw_exception</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Missing Value for </span><span class="si">{0}</span><span class="s2"> for participant &quot;</span>
@@ -1022,7 +1078,10 @@
     <span class="k">return</span> <span class="n">ret_val</span></div>
 
 
-<div class="viewcode-block" id="check_random_state"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_random_state">[docs]</a><span class="k">def</span> <span class="nf">check_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+
+<div class="viewcode-block" id="check_random_state">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_random_state">[docs]</a>
+<span class="k">def</span> <span class="nf">check_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Turn seed into a np.random.RandomState instance</span>
 <span class="sd">    Code from scikit-learn (https://github.com/scikit-learn/scikit-learn)</span>
@@ -1045,7 +1104,10 @@
                      <span class="s1">&#39; instance&#39;</span> <span class="o">%</span> <span class="n">seed</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="try_fetch_parameter"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.try_fetch_parameter">[docs]</a><span class="k">def</span> <span class="nf">try_fetch_parameter</span><span class="p">(</span><span class="n">scan_parameters</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+
+<div class="viewcode-block" id="try_fetch_parameter">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.try_fetch_parameter">[docs]</a>
+<span class="k">def</span> <span class="nf">try_fetch_parameter</span><span class="p">(</span><span class="n">scan_parameters</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
     <span class="n">scan_parameters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
         <span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">v</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">scan_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
@@ -1072,7 +1134,10 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="get_scan_params"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_scan_params">[docs]</a><span class="k">def</span> <span class="nf">get_scan_params</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">pipeconfig_start_indx</span><span class="p">,</span>
+
+<div class="viewcode-block" id="get_scan_params">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_scan_params">[docs]</a>
+<span class="k">def</span> <span class="nf">get_scan_params</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">pipeconfig_start_indx</span><span class="p">,</span>
                     <span class="n">pipeconfig_stop_indx</span><span class="p">,</span> <span class="n">data_config_scan_params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to extract slice timing correction parameters</span>
@@ -1346,7 +1411,10 @@
             <span class="n">effective_echo_spacing</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_tr"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_tr">[docs]</a><span class="k">def</span> <span class="nf">get_tr</span><span class="p">(</span><span class="n">tr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_tr">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_tr">[docs]</a>
+<span class="k">def</span> <span class="nf">get_tr</span><span class="p">(</span><span class="n">tr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to return TR in seconds</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1361,7 +1429,10 @@
     <span class="k">return</span> <span class="n">tr</span></div>
 
 
-<div class="viewcode-block" id="check_tr"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_tr">[docs]</a><span class="k">def</span> <span class="nf">check_tr</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">in_file</span><span class="p">):</span>
+
+<div class="viewcode-block" id="check_tr">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_tr">[docs]</a>
+<span class="k">def</span> <span class="nf">check_tr</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">in_file</span><span class="p">):</span>
     <span class="c1"># imageData would have to be the image data from the funcFlow workflow,</span>
     <span class="c1"># funcFlow outputspec.subject</span>
     <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
@@ -1388,15 +1459,21 @@
                       <span class="s1">&#39;the config and subject list files.&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">TR</span></div>
+
         
 
-<div class="viewcode-block" id="add_afni_prefix"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.add_afni_prefix">[docs]</a><span class="k">def</span> <span class="nf">add_afni_prefix</span><span class="p">(</span><span class="n">tpattern</span><span class="p">):</span>
+<div class="viewcode-block" id="add_afni_prefix">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.add_afni_prefix">[docs]</a>
+<span class="k">def</span> <span class="nf">add_afni_prefix</span><span class="p">(</span><span class="n">tpattern</span><span class="p">):</span>
     <span class="k">if</span> <span class="s2">&quot;.txt&quot;</span> <span class="ow">in</span> <span class="n">tpattern</span><span class="p">:</span>
         <span class="n">tpattern</span> <span class="o">=</span> <span class="s2">&quot;@</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tpattern</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">tpattern</span></div>
 
 
-<div class="viewcode-block" id="write_to_log"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.write_to_log">[docs]</a><span class="k">def</span> <span class="nf">write_to_log</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">):</span>
+
+<div class="viewcode-block" id="write_to_log">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.write_to_log">[docs]</a>
+<span class="k">def</span> <span class="nf">write_to_log</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to write into log file the status of the workflow run.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1506,7 +1583,10 @@
     <span class="k">return</span> <span class="n">out_file</span></div>
 
 
-<div class="viewcode-block" id="create_log"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.create_log">[docs]</a><span class="k">def</span> <span class="nf">create_log</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">scan_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="create_log">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.create_log">[docs]</a>
+<span class="k">def</span> <span class="nf">create_log</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">scan_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to create log</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1557,12 +1637,18 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-<div class="viewcode-block" id="pick_wm"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.pick_wm">[docs]</a><span class="k">def</span> <span class="nf">pick_wm</span><span class="p">(</span><span class="n">seg_prob_list</span><span class="p">):</span>
+
+<div class="viewcode-block" id="pick_wm">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.pick_wm">[docs]</a>
+<span class="k">def</span> <span class="nf">pick_wm</span><span class="p">(</span><span class="n">seg_prob_list</span><span class="p">):</span>
     <span class="n">seg_prob_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">seg_prob_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="find_files"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.find_files">[docs]</a><span class="k">def</span> <span class="nf">find_files</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+
+<div class="viewcode-block" id="find_files">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.find_files">[docs]</a>
+<span class="k">def</span> <span class="nf">find_files</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">basename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
@@ -1570,7 +1656,10 @@
                 <span class="k">yield</span> <span class="n">filename</span></div>
 
 
-<div class="viewcode-block" id="extract_output_mean"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.extract_output_mean">[docs]</a><span class="k">def</span> <span class="nf">extract_output_mean</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">output_name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="extract_output_mean">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.extract_output_mean">[docs]</a>
+<span class="k">def</span> <span class="nf">extract_output_mean</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">output_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    function takes &#39;in_file&#39;, which should be an intermediary 1D file</span>
 <span class="sd">    from individual-level analysis, containing the mean of the output across</span>
@@ -1649,7 +1738,10 @@
     <span class="k">return</span> <span class="n">output_means_file</span></div>
 
 
-<div class="viewcode-block" id="create_output_mean_csv"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.create_output_mean_csv">[docs]</a><span class="k">def</span> <span class="nf">create_output_mean_csv</span><span class="p">(</span><span class="n">subject_dir</span><span class="p">):</span>
+
+<div class="viewcode-block" id="create_output_mean_csv">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.create_output_mean_csv">[docs]</a>
+<span class="k">def</span> <span class="nf">create_output_mean_csv</span><span class="p">(</span><span class="n">subject_dir</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    this function finds all of the mean_{output}.txt files in the subject&#39;s</span>
 <span class="sd">    output directory, collects the data and organizes them into one .csv</span>
@@ -1708,12 +1800,18 @@
         <span class="n">csv_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">val_string</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="check_command_path"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_command_path">[docs]</a><span class="k">def</span> <span class="nf">check_command_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+
+<div class="viewcode-block" id="check_command_path">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_command_path">[docs]</a>
+<span class="k">def</span> <span class="nf">check_command_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &gt;/dev/null 2&gt;&amp;1&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">32512</span></div>
 
 
-<div class="viewcode-block" id="check_system_deps"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_system_deps">[docs]</a><span class="k">def</span> <span class="nf">check_system_deps</span><span class="p">(</span><span class="n">check_ants</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+<div class="viewcode-block" id="check_system_deps">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_system_deps">[docs]</a>
+<span class="k">def</span> <span class="nf">check_system_deps</span><span class="p">(</span><span class="n">check_ants</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                       <span class="n">check_ica_aroma</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                       <span class="n">check_centrality_degree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                       <span class="n">check_centrality_lfcd</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1762,8 +1860,11 @@
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err</span><span class="p">)</span></div>
 
 
+
 <span class="c1"># Check pipeline config againts computer resources</span>
-<div class="viewcode-block" id="check_config_resources"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_config_resources">[docs]</a><span class="k">def</span> <span class="nf">check_config_resources</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<div class="viewcode-block" id="check_config_resources">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_config_resources">[docs]</a>
+<span class="k">def</span> <span class="nf">check_config_resources</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
     <span class="c1"># Import packages</span>
     <span class="kn">import</span> <span class="nn">psutil</span>
     <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
@@ -1852,6 +1953,7 @@
     <span class="k">return</span> <span class="n">sub_mem_gb</span><span class="p">,</span> <span class="n">num_cores_per_sub</span><span class="p">,</span> <span class="n">num_ants_cores</span><span class="p">,</span> <span class="n">num_omp_cores</span></div>
 
 
+
 <span class="k">def</span> <span class="nf">_check_nested_types</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Helper function to check types for *_nested_value functions&#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -1861,7 +1963,9 @@
             <span class="sa">f</span><span class="s1">&#39;Expected list, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="delete_nested_value"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.delete_nested_value">[docs]</a><span class="k">def</span> <span class="nf">delete_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+<div class="viewcode-block" id="delete_nested_value">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.delete_nested_value">[docs]</a>
+<span class="k">def</span> <span class="nf">delete_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Helper function to delete nested values</span>
 
 <span class="sd">    Parameters</span>
@@ -1891,7 +1995,10 @@
     <span class="k">return</span> <span class="n">d</span></div>
 
 
-<div class="viewcode-block" id="load_preconfig"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.load_preconfig">[docs]</a><span class="k">def</span> <span class="nf">load_preconfig</span><span class="p">(</span><span class="n">pipeline_label</span><span class="p">):</span>
+
+<div class="viewcode-block" id="load_preconfig">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.load_preconfig">[docs]</a>
+<span class="k">def</span> <span class="nf">load_preconfig</span><span class="p">(</span><span class="n">pipeline_label</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">pkg_resources</span> <span class="k">as</span> <span class="nn">p</span>
 
@@ -1918,7 +2025,10 @@
     <span class="k">return</span> <span class="n">pipeline_file</span></div>
 
 
-<div class="viewcode-block" id="ordereddict_to_dict"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.ordereddict_to_dict">[docs]</a><span class="k">def</span> <span class="nf">ordereddict_to_dict</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ordereddict_to_dict">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.ordereddict_to_dict">[docs]</a>
+<span class="k">def</span> <span class="nf">ordereddict_to_dict</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    this function convert ordereddict into regular dict</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -1928,7 +2038,10 @@
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="repickle"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.repickle">[docs]</a><span class="k">def</span> <span class="nf">repickle</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+
+<div class="viewcode-block" id="repickle">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.repickle">[docs]</a>
+<span class="k">def</span> <span class="nf">repickle</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to check all of the pickles in a given directory, recursively, and</span>
 <span class="sd">    convert any Python 2 pickles found to Python 3 pickles.</span>
@@ -1980,6 +2093,7 @@
                         <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pickle </span><span class="si">{</span><span class="n">fn</span><span class="si">}</span><span class="s2"> is a Python 3 pickle.&quot;</span><span class="p">)</span></div>
+
 
 
 <span class="k">def</span> <span class="nf">_pickle2</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -2160,7 +2274,9 @@
     <span class="k">return</span> <span class="n">config_dict</span>
 
 
-<div class="viewcode-block" id="concat_list"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.concat_list">[docs]</a><span class="k">def</span> <span class="nf">concat_list</span><span class="p">(</span><span class="n">in_list1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_list2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="concat_list">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.concat_list">[docs]</a>
+<span class="k">def</span> <span class="nf">concat_list</span><span class="p">(</span><span class="n">in_list1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_list2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -2193,7 +2309,10 @@
     <span class="k">return</span> <span class="n">out_list</span></div>
 
 
-<div class="viewcode-block" id="list_item_replace"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.list_item_replace">[docs]</a><span class="k">def</span> <span class="nf">list_item_replace</span><span class="p">(</span><span class="n">l</span><span class="p">,</span>  <span class="c1"># noqa: E741  # pylint: disable=invalid-name</span>
+
+<div class="viewcode-block" id="list_item_replace">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.list_item_replace">[docs]</a>
+<span class="k">def</span> <span class="nf">list_item_replace</span><span class="p">(</span><span class="n">l</span><span class="p">,</span>  <span class="c1"># noqa: E741  # pylint: disable=invalid-name</span>
                       <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to replace an item in a list</span>
 
@@ -2226,7 +2345,10 @@
     <span class="k">return</span> <span class="n">l</span></div>
 
 
-<div class="viewcode-block" id="lookup_nested_value"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.lookup_nested_value">[docs]</a><span class="k">def</span> <span class="nf">lookup_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+
+<div class="viewcode-block" id="lookup_nested_value">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.lookup_nested_value">[docs]</a>
+<span class="k">def</span> <span class="nf">lookup_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Helper method to look up nested values</span>
 
 <span class="sd">    Parameters</span>
@@ -2258,6 +2380,7 @@
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">e</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">keys</span><span class="p">,)</span>
             <span class="k">raise</span></div>
+
 
 
 <span class="k">def</span> <span class="nf">_now_runswitch</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">key_sequence</span><span class="p">):</span>
@@ -2306,7 +2429,9 @@
     <span class="k">return</span> <span class="n">value</span>
 
 
-<div class="viewcode-block" id="remove_False"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.remove_False">[docs]</a><span class="k">def</span> <span class="nf">remove_False</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<div class="viewcode-block" id="remove_False">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.remove_False">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_False</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to remove &quot;Off&quot; and False from a list at a given nested key.</span>
 
 <span class="sd">    Parameters</span>
@@ -2329,7 +2454,10 @@
     <span class="k">return</span> <span class="n">set_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="remove_None"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.remove_None">[docs]</a><span class="k">def</span> <span class="nf">remove_None</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+
+<div class="viewcode-block" id="remove_None">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.remove_None">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_None</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to remove &quot;None&quot; and None from a list at a given nested key.</span>
 
 <span class="sd">    Parameters</span>
@@ -2352,7 +2480,10 @@
     <span class="k">return</span> <span class="n">set_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="replace_in_strings"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.replace_in_strings">[docs]</a><span class="k">def</span> <span class="nf">replace_in_strings</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">replacements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="replace_in_strings">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.replace_in_strings">[docs]</a>
+<span class="k">def</span> <span class="nf">replace_in_strings</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">replacements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Helper function to recursively replace substrings.</span>
 
 <span class="sd">    Parameters</span>
@@ -2388,7 +2519,10 @@
     <span class="k">return</span> <span class="n">d</span></div>
 
 
-<div class="viewcode-block" id="set_nested_value"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.set_nested_value">[docs]</a><span class="k">def</span> <span class="nf">set_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+<div class="viewcode-block" id="set_nested_value">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.set_nested_value">[docs]</a>
+<span class="k">def</span> <span class="nf">set_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Helper method to set nested values</span>
 
 <span class="sd">    Parameters</span>
@@ -2420,7 +2554,10 @@
     <span class="k">return</span> <span class="n">d</span></div>
 
 
-<div class="viewcode-block" id="update_config_dict"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_config_dict">[docs]</a><span class="k">def</span> <span class="nf">update_config_dict</span><span class="p">(</span><span class="n">old_dict</span><span class="p">):</span>
+
+<div class="viewcode-block" id="update_config_dict">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_config_dict">[docs]</a>
+<span class="k">def</span> <span class="nf">update_config_dict</span><span class="p">(</span><span class="n">old_dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to convert an old config dict to a new config dict</span>
 
 <span class="sd">    Parameters</span>
@@ -2715,7 +2852,10 @@
     <span class="k">return</span> <span class="n">new_dict</span><span class="p">,</span> <span class="n">old_dict</span><span class="p">,</span> <span class="n">update_nested_dict</span><span class="p">(</span><span class="n">new_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">old_dict</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="update_nested_dict"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_nested_dict">[docs]</a><span class="k">def</span> <span class="nf">update_nested_dict</span><span class="p">(</span><span class="n">d_base</span><span class="p">,</span> <span class="n">d_update</span><span class="p">,</span> <span class="n">fully_specified</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="update_nested_dict">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_nested_dict">[docs]</a>
+<span class="k">def</span> <span class="nf">update_nested_dict</span><span class="p">(</span><span class="n">d_base</span><span class="p">,</span> <span class="n">d_update</span><span class="p">,</span> <span class="n">fully_specified</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update dictionary of varying depth.</span>
 
 <span class="sd">    Parameters</span>
@@ -2833,7 +2973,10 @@
     <span class="k">return</span> <span class="n">d_new</span></div>
 
 
-<div class="viewcode-block" id="update_pipeline_values_1_8"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_pipeline_values_1_8">[docs]</a><span class="k">def</span> <span class="nf">update_pipeline_values_1_8</span><span class="p">(</span><span class="n">d_old</span><span class="p">):</span>
+
+<div class="viewcode-block" id="update_pipeline_values_1_8">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_pipeline_values_1_8">[docs]</a>
+<span class="k">def</span> <span class="nf">update_pipeline_values_1_8</span><span class="p">(</span><span class="n">d_old</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to update pipeline config values that changed from</span>
 <span class="sd">    C-PAC 1.7 to 1.8.</span>
 
@@ -2960,7 +3103,10 @@
     <span class="k">return</span> <span class="n">update_values_from_list</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="update_values_from_list"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_values_from_list">[docs]</a><span class="k">def</span> <span class="nf">update_values_from_list</span><span class="p">(</span><span class="n">d_old</span><span class="p">,</span> <span class="n">last_exception</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="update_values_from_list">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_values_from_list">[docs]</a>
+<span class="k">def</span> <span class="nf">update_values_from_list</span><span class="p">(</span><span class="n">d_old</span><span class="p">,</span> <span class="n">last_exception</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to convert 1-length lists of an expected type to</span>
 <span class="sd">    single items of that type, or to convert singletons of an expected</span>
 <span class="sd">    list of a type into lists thereof. Also handles some type</span>
@@ -3057,6 +3203,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">e</span>
     <span class="k">return</span> <span class="n">d</span></div>
+
 
 
 <span class="k">def</span> <span class="nf">_replace_changed_values</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">nested_key</span><span class="p">,</span> <span class="n">replacement_list</span><span class="p">):</span>
@@ -3169,9 +3316,9 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=cb37d366"></script>
+    <script src="../../../_static/documentation_options.js?v=1c233aae"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/underscore.js?v=f1230927"></script>

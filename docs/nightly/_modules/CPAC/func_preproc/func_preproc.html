@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="">
+<html class="no-js" lang="en" data-content_root="../../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
         <title>CPAC.func_preproc.func_preproc - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
@@ -406,7 +406,9 @@
 <span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">add_afni_prefix</span>
 
 
-<div class="viewcode-block" id="collect_arguments"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.collect_arguments">[docs]</a><span class="k">def</span> <span class="nf">collect_arguments</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="collect_arguments">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.collect_arguments">[docs]</a>
+<span class="k">def</span> <span class="nf">collect_arguments</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
     <span class="n">command_args</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
         <span class="n">command_args</span> <span class="o">+=</span> <span class="p">[</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
@@ -414,7 +416,10 @@
     <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command_args</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="anat_refined_mask"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.anat_refined_mask">[docs]</a><span class="k">def</span> <span class="nf">anat_refined_mask</span><span class="p">(</span><span class="n">init_bold_mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;init_bold_mask&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="anat_refined_mask">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.anat_refined_mask">[docs]</a>
+<span class="k">def</span> <span class="nf">anat_refined_mask</span><span class="p">(</span><span class="n">init_bold_mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;init_bold_mask&#39;</span><span class="p">):</span>
 
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
 
@@ -546,7 +551,10 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-<div class="viewcode-block" id="anat_based_mask"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.anat_based_mask">[docs]</a><span class="k">def</span> <span class="nf">anat_based_mask</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;bold_mask&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="anat_based_mask">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.anat_based_mask">[docs]</a>
+<span class="k">def</span> <span class="nf">anat_based_mask</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;bold_mask&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;reference `DCAN lab BOLD mask &lt;https://github.com/DCAN-Labs/DCAN-HCP/blob/master/fMRIVolume/scripts/DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased.sh&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
@@ -626,7 +634,10 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-<div class="viewcode-block" id="create_scale_func_wf"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_scale_func_wf">[docs]</a><span class="k">def</span> <span class="nf">create_scale_func_wf</span><span class="p">(</span><span class="n">scaling_factor</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;scale_func&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="create_scale_func_wf">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_scale_func_wf">[docs]</a>
+<span class="k">def</span> <span class="nf">create_scale_func_wf</span><span class="p">(</span><span class="n">scaling_factor</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;scale_func&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow to scale func data.</span>
 
 <span class="sd">    Workflow Inputs::</span>
@@ -676,7 +687,10 @@
     <span class="k">return</span> <span class="n">preproc</span></div>
 
 
-<div class="viewcode-block" id="create_wf_edit_func"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_wf_edit_func">[docs]</a><span class="k">def</span> <span class="nf">create_wf_edit_func</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;edit_func&quot;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="create_wf_edit_func">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_wf_edit_func">[docs]</a>
+<span class="k">def</span> <span class="nf">create_wf_edit_func</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;edit_func&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow to edit the scan to the proscribed TRs.</span>
 
 <span class="sd">    Workflow Inputs::</span>
@@ -768,7 +782,10 @@
     <span class="k">return</span> <span class="n">preproc</span></div>
 
 
-<div class="viewcode-block" id="slice_timing_wf"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.slice_timing_wf">[docs]</a><span class="k">def</span> <span class="nf">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;slice_timing&#39;</span><span class="p">,</span> <span class="n">tpattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tzero</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="slice_timing_wf">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.slice_timing_wf">[docs]</a>
+<span class="k">def</span> <span class="nf">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;slice_timing&#39;</span><span class="p">,</span> <span class="n">tpattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tzero</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># allocate a workflow object</span>
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
@@ -832,7 +849,10 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-<div class="viewcode-block" id="get_idx"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.get_idx">[docs]</a><span class="k">def</span> <span class="nf">get_idx</span><span class="p">(</span><span class="n">in_files</span><span class="p">,</span> <span class="n">stop_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_idx">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.get_idx">[docs]</a>
+<span class="k">def</span> <span class="nf">get_idx</span><span class="p">(</span><span class="n">in_files</span><span class="p">,</span> <span class="n">stop_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to get the first and the last slice for</span>
 <span class="sd">    the functional run. It verifies the user specified</span>
@@ -890,7 +910,10 @@
     <span class="k">return</span> <span class="n">stopidx</span><span class="p">,</span> <span class="n">startidx</span></div>
 
 
-<div class="viewcode-block" id="func_reorient"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_reorient">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_reorient">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_reorient">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_reorient&#39;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;update_header&#39;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">],</span>
@@ -928,7 +951,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="func_scaling"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_scaling">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_scaling">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_scaling">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_scaling&#39;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;scaling&#39;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">],</span>
@@ -952,7 +978,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="func_truncate"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_truncate">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_truncate">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_truncate">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_truncate&#39;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;truncation&#39;</span><span class="p">],</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">],</span>
@@ -986,7 +1015,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="func_despike"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_despike">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_despike">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_despike">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_despike&#39;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;despiking&#39;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">],</span>
@@ -1015,7 +1047,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="func_despike_template"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_despike_template">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_despike_template">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_despike_template">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_despike_template&#39;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;despiking&#39;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">],</span>
@@ -1065,7 +1100,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="func_slice_time"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_slice_time">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_slice_time">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_slice_time">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_slice_time&#39;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;slice_timing_correction&#39;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">],</span>
@@ -1101,7 +1139,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bold_mask_afni"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_afni">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="bold_mask_afni">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_afni">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bold_mask_afni&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;func_masking&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
@@ -1127,7 +1168,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bold_mask_fsl"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_fsl">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="bold_mask_fsl">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_fsl">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bold_mask_fsl&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;func_masking&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
@@ -1280,7 +1324,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bold_mask_fsl_afni"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_fsl_afni">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="bold_mask_fsl_afni">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_fsl_afni">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bold_mask_fsl_afni&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;func_masking&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
@@ -1459,7 +1506,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bold_mask_anatomical_refined"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_anatomical_refined">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="bold_mask_anatomical_refined">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_anatomical_refined">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bold_mask_anatomical_refined&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;func_masking&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
@@ -1578,7 +1628,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bold_mask_anatomical_based"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_anatomical_based">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="bold_mask_anatomical_based">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_anatomical_based">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bold_mask_anatomical_based&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;func_masking&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
@@ -1669,7 +1722,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bold_mask_anatomical_resampled"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_anatomical_resampled">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="bold_mask_anatomical_resampled">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_anatomical_resampled">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bold_mask_anatomical_resampled&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;func_masking&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
@@ -1737,7 +1793,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bold_mask_ccs"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_ccs">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="bold_mask_ccs">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_mask_ccs">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bold_mask_ccs&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;func_masking&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
@@ -1878,7 +1937,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bold_masking"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_masking">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="bold_masking">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.bold_masking">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bold_masking&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;func_masking&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
@@ -1908,7 +1970,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="func_mean"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_mean">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_mean">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_mean">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_mean&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;generate_func_mean&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">],</span>
@@ -1932,7 +1997,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="func_normalize"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_normalize">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_normalize">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_normalize">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_normalize&#39;</span><span class="p">,</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">,</span> <span class="s1">&#39;normalize_func&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]],</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;desc-preproc_bold&#39;</span><span class="p">],</span>
@@ -1957,7 +2025,10 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="func_mask_normalize"><a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_mask_normalize">[docs]</a><span class="nd">@nodeblock</span><span class="p">(</span>
+
+<div class="viewcode-block" id="func_mask_normalize">
+<a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.func_mask_normalize">[docs]</a>
+<span class="nd">@nodeblock</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;func_mask_normalize&#39;</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;functional_preproc&#39;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">],</span>
@@ -1982,6 +2053,7 @@
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
+
 </pre></div>
         </article>
       </div>
@@ -2016,9 +2088,9 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=cb37d366"></script>
+    <script src="../../../_static/documentation_options.js?v=1c233aae"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/underscore.js?v=f1230927"></script>
