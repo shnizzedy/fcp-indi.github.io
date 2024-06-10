@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="../../../">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
         <title>CPAC.utils.datasource - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
@@ -409,9 +409,7 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;nipype.workflow&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="bidsier_prefix">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.bidsier_prefix">[docs]</a>
-<span class="k">def</span> <span class="nf">bidsier_prefix</span><span class="p">(</span><span class="n">unique_id</span><span class="p">):</span>
+<div class="viewcode-block" id="bidsier_prefix"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.bidsier_prefix">[docs]</a><span class="k">def</span> <span class="nf">bidsier_prefix</span><span class="p">(</span><span class="n">unique_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to return a BIDSier prefix for a given unique_id</span>
 
@@ -443,10 +441,7 @@
     <span class="k">return</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">components</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="get_rest">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_rest">[docs]</a>
-<span class="k">def</span> <span class="nf">get_rest</span><span class="p">(</span><span class="n">scan</span><span class="p">,</span> <span class="n">rest_dict</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="s2">&quot;scan&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="get_rest"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_rest">[docs]</a><span class="k">def</span> <span class="nf">get_rest</span><span class="p">(</span><span class="n">scan</span><span class="p">,</span> <span class="n">rest_dict</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="s2">&quot;scan&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the file path of the chosen resource stored in the functional</span>
 <span class="sd">    file dictionary, if it exists.</span>
 
@@ -467,25 +462,16 @@
     <span class="k">return</span> <span class="n">file_path</span></div>
 
 
-
-<div class="viewcode-block" id="extract_scan_params_dct">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.extract_scan_params_dct">[docs]</a>
-<span class="k">def</span> <span class="nf">extract_scan_params_dct</span><span class="p">(</span><span class="n">scan_params_dct</span><span class="p">):</span>
+<div class="viewcode-block" id="extract_scan_params_dct"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.extract_scan_params_dct">[docs]</a><span class="k">def</span> <span class="nf">extract_scan_params_dct</span><span class="p">(</span><span class="n">scan_params_dct</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">scan_params_dct</span></div>
 
 
-
-<div class="viewcode-block" id="get_map">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_map">[docs]</a>
-<span class="k">def</span> <span class="nf">get_map</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">map_dct</span><span class="p">):</span>
+<div class="viewcode-block" id="get_map"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_map">[docs]</a><span class="k">def</span> <span class="nf">get_map</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">map_dct</span><span class="p">):</span>
     <span class="c1"># return the spatial map required</span>
     <span class="k">return</span> <span class="n">map_dct</span><span class="p">[</span><span class="nb">map</span><span class="p">]</span></div>
 
 
-
-<div class="viewcode-block" id="select_model_files">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.select_model_files">[docs]</a>
-<span class="k">def</span> <span class="nf">select_model_files</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">ftest</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+<div class="viewcode-block" id="select_model_files"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.select_model_files">[docs]</a><span class="k">def</span> <span class="nf">select_model_files</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">ftest</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to select model files</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -524,10 +510,7 @@
     <span class="k">return</span> <span class="n">fts_file</span><span class="p">,</span> <span class="n">con_file</span><span class="p">,</span> <span class="n">grp_file</span><span class="p">,</span> <span class="n">mat_file</span></div>
 
 
-
-<div class="viewcode-block" id="check_func_scan">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.check_func_scan">[docs]</a>
-<span class="k">def</span> <span class="nf">check_func_scan</span><span class="p">(</span><span class="n">func_scan_dct</span><span class="p">,</span> <span class="n">scan</span><span class="p">):</span>
+<div class="viewcode-block" id="check_func_scan"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.check_func_scan">[docs]</a><span class="k">def</span> <span class="nf">check_func_scan</span><span class="p">(</span><span class="n">func_scan_dct</span><span class="p">,</span> <span class="n">scan</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run some checks on the functional timeseries-related files for a given</span>
 <span class="sd">    series/scan name or label.&quot;&quot;&quot;</span>
 
@@ -560,10 +543,7 @@
                         <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scan</span><span class="p">))</span></div>
 
 
-
-<div class="viewcode-block" id="create_func_datasource">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_func_datasource">[docs]</a>
-<span class="k">def</span> <span class="nf">create_func_datasource</span><span class="p">(</span><span class="n">rest_dict</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;func_datasource&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_func_datasource"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_func_datasource">[docs]</a><span class="k">def</span> <span class="nf">create_func_datasource</span><span class="p">(</span><span class="n">rest_dict</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;func_datasource&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the functional timeseries-related file paths for each</span>
 <span class="sd">    series/scan, from the dictionary of functional files described in the data</span>
 <span class="sd">    configuration (sublist) YAML file.</span>
@@ -663,10 +643,7 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-
-<div class="viewcode-block" id="create_fmap_datasource">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_fmap_datasource">[docs]</a>
-<span class="k">def</span> <span class="nf">create_fmap_datasource</span><span class="p">(</span><span class="n">fmap_dct</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;fmap_datasource&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_fmap_datasource"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_fmap_datasource">[docs]</a><span class="k">def</span> <span class="nf">create_fmap_datasource</span><span class="p">(</span><span class="n">fmap_dct</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;fmap_datasource&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the field map files, from the dictionary of functional files</span>
 <span class="sd">    described in the data configuration (sublist) YAML file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -748,10 +725,7 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-
-<div class="viewcode-block" id="get_fmap_phasediff_metadata">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_fmap_phasediff_metadata">[docs]</a>
-<span class="k">def</span> <span class="nf">get_fmap_phasediff_metadata</span><span class="p">(</span><span class="n">data_config_scan_params</span><span class="p">):</span>
+<div class="viewcode-block" id="get_fmap_phasediff_metadata"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_fmap_phasediff_metadata">[docs]</a><span class="k">def</span> <span class="nf">get_fmap_phasediff_metadata</span><span class="p">(</span><span class="n">data_config_scan_params</span><span class="p">):</span>
     <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_config_scan_params</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span>
             <span class="s2">&quot;.json&quot;</span> <span class="ow">in</span> <span class="n">data_config_scan_params</span><span class="p">):</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_config_scan_params</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
@@ -773,10 +747,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">dwell_time</span><span class="p">,</span> <span class="n">pe_direction</span><span class="p">,</span> <span class="n">total_readout</span><span class="p">,</span> <span class="n">echo_time</span><span class="p">,</span> 
             <span class="n">echo_time_one</span><span class="p">,</span> <span class="n">echo_time_two</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="calc_delta_te_and_asym_ratio">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.calc_delta_te_and_asym_ratio">[docs]</a>
-<span class="nd">@Function</span><span class="o">.</span><span class="n">sig_imports</span><span class="p">([</span><span class="s1">&#39;from CPAC.utils.typing import TUPLE&#39;</span><span class="p">])</span>
+<div class="viewcode-block" id="calc_delta_te_and_asym_ratio"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.calc_delta_te_and_asym_ratio">[docs]</a><span class="nd">@Function</span><span class="o">.</span><span class="n">sig_imports</span><span class="p">([</span><span class="s1">&#39;from CPAC.utils.typing import TUPLE&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">calc_delta_te_and_asym_ratio</span><span class="p">(</span><span class="n">effective_echo_spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                                  <span class="n">echo_times</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TUPLE</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcluate ``deltaTE`` and ``ees_asym_ratio`` from given metadata</span>
@@ -810,10 +781,7 @@
     <span class="k">return</span> <span class="n">deltaTE</span><span class="p">,</span> <span class="n">ees_asym_ratio</span></div>
 
 
-
-<div class="viewcode-block" id="gather_echo_times">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.gather_echo_times">[docs]</a>
-<span class="k">def</span> <span class="nf">gather_echo_times</span><span class="p">(</span><span class="n">echotime_1</span><span class="p">,</span> <span class="n">echotime_2</span><span class="p">,</span> <span class="n">echotime_3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">echotime_4</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="gather_echo_times"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.gather_echo_times">[docs]</a><span class="k">def</span> <span class="nf">gather_echo_times</span><span class="p">(</span><span class="n">echotime_1</span><span class="p">,</span> <span class="n">echotime_2</span><span class="p">,</span> <span class="n">echotime_3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">echotime_4</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">echotime_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">echotime_1</span><span class="p">,</span> <span class="n">echotime_2</span><span class="p">,</span> <span class="n">echotime_3</span><span class="p">,</span> <span class="n">echotime_4</span><span class="p">]</span>
     <span class="n">echotime_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="n">echotime_list</span><span class="p">))</span>
     <span class="n">echotime_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">echotime_list</span><span class="p">))</span>
@@ -824,10 +792,7 @@
     <span class="k">return</span> <span class="n">echotime_list</span></div>
 
 
-
-<div class="viewcode-block" id="match_epi_fmaps">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.match_epi_fmaps">[docs]</a>
-<span class="k">def</span> <span class="nf">match_epi_fmaps</span><span class="p">(</span><span class="n">bold_pedir</span><span class="p">,</span> <span class="n">epi_fmap_one</span><span class="p">,</span> <span class="n">epi_fmap_params_one</span><span class="p">,</span>
+<div class="viewcode-block" id="match_epi_fmaps"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.match_epi_fmaps">[docs]</a><span class="k">def</span> <span class="nf">match_epi_fmaps</span><span class="p">(</span><span class="n">bold_pedir</span><span class="p">,</span> <span class="n">epi_fmap_one</span><span class="p">,</span> <span class="n">epi_fmap_params_one</span><span class="p">,</span>
                     <span class="n">epi_fmap_two</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epi_fmap_params_two</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse the field map files in the data configuration and determine which</span>
 <span class="sd">    ones have the same and opposite phase-encoding directions as the BOLD scan</span>
@@ -872,10 +837,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">opposite_pe_epi</span><span class="p">,</span> <span class="n">same_pe_epi</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="ingress_func_metadata">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.ingress_func_metadata">[docs]</a>
-<span class="k">def</span> <span class="nf">ingress_func_metadata</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">sub_dict</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">,</span>
+<div class="viewcode-block" id="ingress_func_metadata"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.ingress_func_metadata">[docs]</a><span class="k">def</span> <span class="nf">ingress_func_metadata</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">sub_dict</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">,</span>
                           <span class="n">input_creds_path</span><span class="p">,</span> <span class="n">unique_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_strat</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">name_suffix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">for</span> <span class="n">suffix_part</span> <span class="ow">in</span> <span class="p">(</span><span class="n">unique_id</span><span class="p">,</span> <span class="n">num_strat</span><span class="p">):</span>
@@ -1077,10 +1039,7 @@
     <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">blip</span><span class="p">,</span> <span class="n">fmap_rp_list</span></div>
 
 
-
-<div class="viewcode-block" id="create_general_datasource">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_general_datasource">[docs]</a>
-<span class="k">def</span> <span class="nf">create_general_datasource</span><span class="p">(</span><span class="n">wf_name</span><span class="p">):</span>
+<div class="viewcode-block" id="create_general_datasource"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_general_datasource">[docs]</a><span class="k">def</span> <span class="nf">create_general_datasource</span><span class="p">(</span><span class="n">wf_name</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
     <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
 
@@ -1118,10 +1077,7 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-
-<div class="viewcode-block" id="create_check_for_s3_node">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_check_for_s3_node">[docs]</a>
-<span class="k">def</span> <span class="nf">create_check_for_s3_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">img_type</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="create_check_for_s3_node"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_check_for_s3_node">[docs]</a><span class="k">def</span> <span class="nf">create_check_for_s3_node</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">img_type</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">,</span>
                              <span class="n">creds_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dl_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">map_node</span><span class="p">:</span>
         <span class="n">check_s3_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">MapNode</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">,</span>
@@ -1154,11 +1110,8 @@
     <span class="k">return</span> <span class="n">check_s3_node</span></div>
 
 
-
 <span class="c1"># Check if passed-in file is on S3</span>
-<div class="viewcode-block" id="check_for_s3">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.check_for_s3">[docs]</a>
-<span class="k">def</span> <span class="nf">check_for_s3</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">creds_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dl_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_type</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="check_for_s3"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.check_for_s3">[docs]</a><span class="k">def</span> <span class="nf">check_for_s3</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">creds_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dl_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_type</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">,</span>
                  <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="c1"># Import packages</span>
     <span class="kn">import</span> <span class="nn">os</span>
@@ -1294,10 +1247,7 @@
     <span class="k">return</span> <span class="n">local_path</span></div>
 
 
-
-<div class="viewcode-block" id="gather_extraction_maps">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.gather_extraction_maps">[docs]</a>
-<span class="k">def</span> <span class="nf">gather_extraction_maps</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<div class="viewcode-block" id="gather_extraction_maps"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.gather_extraction_maps">[docs]</a><span class="k">def</span> <span class="nf">gather_extraction_maps</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
     <span class="n">ts_analysis_dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">sca_analysis_dict</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -1352,10 +1302,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">ts_analysis_dict</span><span class="p">,</span> <span class="n">sca_analysis_dict</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="get_highest_local_res">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_highest_local_res">[docs]</a>
-<span class="k">def</span> <span class="nf">get_highest_local_res</span><span class="p">(</span><span class="n">template</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">tagname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<div class="viewcode-block" id="get_highest_local_res"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_highest_local_res">[docs]</a><span class="k">def</span> <span class="nf">get_highest_local_res</span><span class="p">(</span><span class="n">template</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">tagname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Given a reference template path and a resolution string, get all</span>
 <span class="sd">    resolutions of that template in the same local path and return the</span>
 <span class="sd">    highest resolution.</span>
@@ -1401,10 +1348,7 @@
         <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find template </span><span class="si">{</span><span class="n">template</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="res_string_to_tuple">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.res_string_to_tuple">[docs]</a>
-<span class="k">def</span> <span class="nf">res_string_to_tuple</span><span class="p">(</span><span class="n">resolution</span><span class="p">):</span>
+<div class="viewcode-block" id="res_string_to_tuple"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.res_string_to_tuple">[docs]</a><span class="k">def</span> <span class="nf">res_string_to_tuple</span><span class="p">(</span><span class="n">resolution</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a resolution string to a tuple of floats.</span>
 
@@ -1424,10 +1368,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">resolution</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)),)</span> <span class="o">*</span> <span class="mi">3</span></div>
 
 
-
-<div class="viewcode-block" id="resolve_resolution">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.resolve_resolution">[docs]</a>
-<span class="k">def</span> <span class="nf">resolve_resolution</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="resolve_resolution"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.resolve_resolution">[docs]</a><span class="k">def</span> <span class="nf">resolve_resolution</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span>
     <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
     <span class="kn">from</span> <span class="nn">CPAC.utils.datasource</span> <span class="kn">import</span> <span class="n">check_for_s3</span>
@@ -1478,10 +1419,7 @@
     <span class="k">return</span> <span class="n">local_path</span></div>
 
 
-
-<div class="viewcode-block" id="create_anat_datasource">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_anat_datasource">[docs]</a>
-<span class="k">def</span> <span class="nf">create_anat_datasource</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;anat_datasource&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_anat_datasource"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_anat_datasource">[docs]</a><span class="k">def</span> <span class="nf">create_anat_datasource</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;anat_datasource&#39;</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
     <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
 
@@ -1518,10 +1456,7 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-
-<div class="viewcode-block" id="create_roi_mask_dataflow">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_roi_mask_dataflow">[docs]</a>
-<span class="k">def</span> <span class="nf">create_roi_mask_dataflow</span><span class="p">(</span><span class="n">masks</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;datasource_roi_mask&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_roi_mask_dataflow"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_roi_mask_dataflow">[docs]</a><span class="k">def</span> <span class="nf">create_roi_mask_dataflow</span><span class="p">(</span><span class="n">masks</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;datasource_roi_mask&#39;</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">os</span>
 
     <span class="n">mask_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1609,10 +1544,7 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-
-<div class="viewcode-block" id="create_spatial_map_dataflow">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_spatial_map_dataflow">[docs]</a>
-<span class="k">def</span> <span class="nf">create_spatial_map_dataflow</span><span class="p">(</span><span class="n">spatial_maps</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;datasource_maps&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_spatial_map_dataflow"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_spatial_map_dataflow">[docs]</a><span class="k">def</span> <span class="nf">create_spatial_map_dataflow</span><span class="p">(</span><span class="n">spatial_maps</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;datasource_maps&#39;</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">os</span>
 
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
@@ -1688,10 +1620,7 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-
-<div class="viewcode-block" id="create_grp_analysis_dataflow">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_grp_analysis_dataflow">[docs]</a>
-<span class="k">def</span> <span class="nf">create_grp_analysis_dataflow</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;gp_dataflow&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="create_grp_analysis_dataflow"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_grp_analysis_dataflow">[docs]</a><span class="k">def</span> <span class="nf">create_grp_analysis_dataflow</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;gp_dataflow&#39;</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
     <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
     <span class="kn">from</span> <span class="nn">CPAC.utils.datasource</span> <span class="kn">import</span> <span class="n">select_model_files</span>
@@ -1740,10 +1669,7 @@
     <span class="k">return</span> <span class="n">wf</span></div>
 
 
-
-<div class="viewcode-block" id="resample_func_roi">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.resample_func_roi">[docs]</a>
-<span class="k">def</span> <span class="nf">resample_func_roi</span><span class="p">(</span><span class="n">in_func</span><span class="p">,</span> <span class="n">in_roi</span><span class="p">,</span> <span class="n">realignment</span><span class="p">,</span> <span class="n">identity_matrix</span><span class="p">):</span>
+<div class="viewcode-block" id="resample_func_roi"><a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.resample_func_roi">[docs]</a><span class="k">def</span> <span class="nf">resample_func_roi</span><span class="p">(</span><span class="n">in_func</span><span class="p">,</span> <span class="n">in_roi</span><span class="p">,</span> <span class="n">realignment</span><span class="p">,</span> <span class="n">identity_matrix</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nb</span>
     <span class="kn">from</span> <span class="nn">CPAC.utils.monitoring.custom_logging</span> <span class="kn">import</span> <span class="n">log_subprocess</span>
@@ -1789,7 +1715,6 @@
         <span class="n">out_roi</span> <span class="o">=</span> <span class="n">in_roi</span>
 
     <span class="k">return</span> <span class="n">out_func</span><span class="p">,</span> <span class="n">out_roi</span></div>
-
 </pre></div>
         </article>
       </div>
@@ -1824,9 +1749,9 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=1c233aae"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=cb37d366"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/underscore.js?v=f1230927"></script>

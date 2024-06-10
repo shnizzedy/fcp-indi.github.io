@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="../../../../">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex" /><link rel="search" title="Search" href="../../../../search" />
 
-    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
         <title>CPAC.utils.configuration.configuration - C-PAC 1.8.6.dev Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a96c6ba1" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=387cc868" />
@@ -416,9 +416,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="Configuration">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration">[docs]</a>
-<span class="k">class</span> <span class="nc">Configuration</span><span class="p">:</span>
+<div class="viewcode-block" id="Configuration"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration">[docs]</a><span class="k">class</span> <span class="nc">Configuration</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to set dictionary keys as map attributes.</span>
 
@@ -586,19 +584,13 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span><span class="p">(</span><span class="n">dct_diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">dict</span><span class="p">()))</span>
 
-<div class="viewcode-block" id="Configuration.dict">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.dict"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.dict">[docs]</a>    <span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Show contents of a C-PAC configuration as a dict&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">v</span><span class="p">)}</span></div>
 
-
-<div class="viewcode-block" id="Configuration.keys">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.keys">[docs]</a>
-    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.keys"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Show toplevel keys of a C-PAC configuration dict&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
-
 
     <span class="k">def</span> <span class="nf">_nonestr_to_None</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Recursive method to type convert &#39;None&#39; to None in nested</span>
@@ -626,9 +618,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">d</span>
 
-<div class="viewcode-block" id="Configuration.return_config_elements">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.return_config_elements">[docs]</a>
-    <span class="k">def</span> <span class="nf">return_config_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.return_config_elements"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.return_config_elements">[docs]</a>    <span class="k">def</span> <span class="nf">return_config_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># this returns a list of tuples</span>
         <span class="c1"># each tuple contains the name of the element in the yaml config file</span>
         <span class="c1"># and its value</span>
@@ -639,16 +629,10 @@
         <span class="p">]</span>
         <span class="k">return</span> <span class="n">attributes</span></div>
 
-
-<div class="viewcode-block" id="Configuration.sub_pattern">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.sub_pattern">[docs]</a>
-    <span class="k">def</span> <span class="nf">sub_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.sub_pattern"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.sub_pattern">[docs]</a>    <span class="k">def</span> <span class="nf">sub_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">orig_key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">pattern</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)])</span></div>
 
-
-<div class="viewcode-block" id="Configuration.check_pattern">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.check_pattern">[docs]</a>
-    <span class="k">def</span> <span class="nf">check_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.check_pattern"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.check_pattern">[docs]</a>    <span class="k">def</span> <span class="nf">check_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">tags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orig_key</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -671,7 +655,6 @@
                     <span class="k">if</span> <span class="n">pattern</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPECIAL_REPLACEMENT_STRINGS</span><span class="p">:</span>
                         <span class="n">warn</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ae</span><span class="p">),</span> <span class="n">category</span><span class="o">=</span><span class="ne">SyntaxWarning</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">orig_key</span></div>
-
 
     <span class="c1"># method to find any pattern ($) in the configuration</span>
     <span class="c1"># and update the attributes with its pattern value</span>
@@ -703,19 +686,14 @@
                 <span class="n">new_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_pattern</span><span class="p">(</span><span class="n">attr_value</span><span class="p">)</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_key</span><span class="p">,</span> <span class="n">new_key</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Configuration.update">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">ConfigurationDictUpdateConflation</span><span class="p">()):</span>
+<div class="viewcode-block" id="Configuration.update"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">ConfigurationDictUpdateConflation</span><span class="p">()):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ConfigurationDictUpdateConflation</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">val</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="Configuration.get_nested">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.get_nested">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.get_nested"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.get_nested">[docs]</a>    <span class="k">def</span> <span class="nf">get_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">_d</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_d</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -726,10 +704,7 @@
             <span class="k">return</span> <span class="n">_d</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
         <span class="k">return</span> <span class="n">_d</span></div>
 
-
-<div class="viewcode-block" id="Configuration.set_nested">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.set_nested">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
+<div class="viewcode-block" id="Configuration.set_nested"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.set_nested">[docs]</a>    <span class="k">def</span> <span class="nf">set_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -738,7 +713,6 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">return</span> <span class="n">d</span></div>
-
 
     <span class="k">def</span> <span class="nf">_check_if_switch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span>
                          <span class="n">error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -808,9 +782,7 @@
                 <span class="k">return</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="Configuration.switch_is_off">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_off">[docs]</a>
-    <span class="k">def</span> <span class="nf">switch_is_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<div class="viewcode-block" id="Configuration.switch_is_off"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_off">[docs]</a>    <span class="k">def</span> <span class="nf">switch_is_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Return True if the given key is set to &#39;off&#39; OR &#39;on&#39; and &#39;off&#39;</span>
 <span class="sd">        or False otherwise. Used for tracking forking.</span>
@@ -848,10 +820,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_if_switch</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_switch_bool</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="Configuration.switch_is_on">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_on">[docs]</a>
-    <span class="k">def</span> <span class="nf">switch_is_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<div class="viewcode-block" id="Configuration.switch_is_on"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_on">[docs]</a>    <span class="k">def</span> <span class="nf">switch_is_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Return True if the given key is set to &#39;on&#39; OR &#39;on&#39; and &#39;off&#39;</span>
 <span class="sd">        or False otherwise. Used for tracking forking.</span>
@@ -889,10 +858,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_if_switch</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_switch_bool</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="Configuration.switch_is_on_off">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_on_off">[docs]</a>
-    <span class="k">def</span> <span class="nf">switch_is_on_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="Configuration.switch_is_on_off"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_on_off">[docs]</a>    <span class="k">def</span> <span class="nf">switch_is_on_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ConfigKeyType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;Return True if the given key is set to both &#39;on&#39; and &#39;off&#39;</span>
 <span class="sd">        or False otherwise. Used for tracking forking.</span>
 
@@ -923,23 +889,16 @@
             <span class="k">return</span> <span class="kc">True</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">and</span> <span class="kc">False</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
-
-<div class="viewcode-block" id="Configuration.key_type_error">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.key_type_error">[docs]</a>
-    <span class="k">def</span> <span class="nf">key_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<div class="viewcode-block" id="Configuration.key_type_error"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.key_type_error">[docs]</a>    <span class="k">def</span> <span class="nf">key_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
                 <span class="s1">&#39;Configuration key must be a string, list, or tuple;&#39;</span><span class="p">,</span>
                 <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                 <span class="sa">f</span><span class="s1">&#39;`</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="si">}</span><span class="s1">`&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;was given.&#39;</span>
-            <span class="p">]))</span></div>
-</div>
+            <span class="p">]))</span></div></div>
 
 
-
-<div class="viewcode-block" id="check_pname">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.check_pname">[docs]</a>
-<span class="k">def</span> <span class="nf">check_pname</span><span class="p">(</span><span class="n">p_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="check_pname"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.check_pname">[docs]</a><span class="k">def</span> <span class="nf">check_pname</span><span class="p">(</span><span class="n">p_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to check / set `p_name`, the string representation of a</span>
 <span class="sd">    pipeline for use in filetrees</span>
 
@@ -976,7 +935,6 @@
     <span class="k">elif</span> <span class="ow">not</span> <span class="n">p_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;pipeline_&#39;</span><span class="p">):</span>
         <span class="n">p_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;pipeline_</span><span class="si">{</span><span class="n">p_name</span><span class="si">}</span><span class="s1">&#39;</span>
     <span class="k">return</span> <span class="n">p_name</span></div>
-
 
 
 <span class="k">def</span> <span class="nf">collect_key_list</span><span class="p">(</span><span class="n">config_dict</span><span class="p">):</span>
@@ -1021,9 +979,7 @@
         <span class="k">return</span> <span class="n">Configuration</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">config</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="preconfig_yaml">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.preconfig_yaml">[docs]</a>
-<span class="k">def</span> <span class="nf">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="preconfig_yaml"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.preconfig_yaml">[docs]</a><span class="k">def</span> <span class="nf">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the path to a preconfigured pipeline&#39;s YAML file</span>
 
 <span class="sd">    Parameters</span>
@@ -1045,10 +1001,7 @@
         <span class="s2">&quot;resources&quot;</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;pipeline_config_</span><span class="si">{</span><span class="n">preconfig_name</span><span class="si">}</span><span class="s2">.yml&quot;</span><span class="p">))</span></div>
 
 
-
-<div class="viewcode-block" id="Preconfiguration">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Preconfiguration">[docs]</a>
-<span class="k">class</span> <span class="nc">Preconfiguration</span><span class="p">(</span><span class="n">Configuration</span><span class="p">):</span>
+<div class="viewcode-block" id="Preconfiguration"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Preconfiguration">[docs]</a><span class="k">class</span> <span class="nc">Preconfiguration</span><span class="p">(</span><span class="n">Configuration</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A preconfigured Configuration</span>
 
 <span class="sd">    Parameters</span>
@@ -1058,7 +1011,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preconfig</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_map</span><span class="o">=</span><span class="n">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span></div>
-
 
 
 <span class="k">def</span> <span class="nf">set_from_ENV</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
@@ -1105,9 +1057,7 @@
     <span class="k">return</span> <span class="n">conf</span>
 
 
-<div class="viewcode-block" id="set_subject">
-<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.set_subject">[docs]</a>
-<span class="k">def</span> <span class="nf">set_subject</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="s1">&#39;Configuration&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="set_subject"><a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.set_subject">[docs]</a><span class="k">def</span> <span class="nf">set_subject</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="s1">&#39;Configuration&#39;</span><span class="p">,</span>
                 <span class="n">p_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TUPLE</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to set pipeline name and log directory path for a given</span>
 <span class="sd">    sub_dict</span>
@@ -1159,7 +1109,6 @@
     <span class="k">return</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">log_dir</span></div>
 
 
-
 <span class="k">def</span> <span class="nf">nipype_friendly_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace each sequence of non-alphanumeric characters with a single</span>
 <span class="sd">    underscore and remove any leading underscores</span>
@@ -1207,9 +1156,9 @@
   </div>
 </div><script src="../../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../../_static/documentation_options.js?v=1c233aae"></script>
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=cb37d366"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../../../_static/scripts/furo.js?v=4e2eecee"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
