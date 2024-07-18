@@ -429,14 +429,60 @@ functional scan</p>
 </dl>
 </section>
 <dl class="py function">
+<dt class="sig sig-object py" id="CPAC.qc.xcp._connect_motion">
+<span class="sig-name descname"><span class="pre">_connect_motion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qc_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#_connect_motion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp._connect_motion" title="Link to this definition">¶</a></dt>
+<dd><p>Connect the motion metrics to the workflow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wf</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code>) – The workflow to connect the motion metrics to.</p></li>
+<li><p><strong>nodes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary of nodes already collected from the strategy pool.</p></li>
+<li><p><strong>strat_pool</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CPAC.pipeline.engine.ResourcePool</span></code>) – The current strategy pool.</p></li>
+<li><p><strong>qc_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Node</span></code>) – A function node with the function <code class="docutils literal notranslate"><span class="pre">generate_xcp_qc</span></code>.</p></li>
+<li><p><strong>pipe_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>wf</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.dvcorr">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">dvcorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fdj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#dvcorr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.dvcorr" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dvcorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fdj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#dvcorr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.dvcorr" title="Link to this definition">¶</a></dt>
 <dd><p>Correlate DVARS and FD-J.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.generate_xcp_qc">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">generate_xcp_qc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1w_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold2template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">censor_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framewise_displacement_jenkinson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvars_after</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#generate_xcp_qc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.generate_xcp_qc" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">generate_xcp_qc</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">ses</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">run</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">regressors</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">bold2t1w_mask</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">t1w_mask</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">bold2template_mask</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">template_mask</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">original_func</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">final_func</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">movement_parameters</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dvars</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">censor_indices</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">framewise_displacement_jenkinson</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dvars_after</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">template</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#generate_xcp_qc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.generate_xcp_qc" title="Link to this definition">¶</a></dt>
 <dd><p>Generate an RBC-style QC CSV.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -473,7 +519,7 @@ with space-T1w_desc-brain_mask reference</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.get_bids_info">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">get_bids_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#get_bids_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.get_bids_info" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_bids_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/qc/xcp#get_bids_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.get_bids_info" title="Link to this definition">¶</a></dt>
 <dd><p>Gather BIDS information from a strat_pool.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -515,13 +561,37 @@ with space-T1w_desc-brain_mask reference</p></li>
 <p><em>NodeBlockFunction</em>: <strong>qc_xcp</strong></p>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.qc.xcp.qc_xcp">
-<span class="sig-prename descclassname"><span class="pre">CPAC.qc.xcp.</span></span><span class="sig-name descname"><span class="pre">qc_xcp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><span class="pre">Workflow</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="utils#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pipeline#CPAC.pipeline.engine.resource.StratPool" title="CPAC.pipeline.engine.resource.StratPool"><span class="pre">StratPool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><span class="pre">Workflow</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pipeline#CPAC.pipeline.engine.resource.ResourceData" title="CPAC.pipeline.engine.resource.ResourceData"><span class="pre">ResourceData</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/CPAC/qc/xcp#qc_xcp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.qc_xcp" title="Link to this definition">¶</a></dt>
-<dd><p>Generate an XCP-style quality-control file.Call a NodeBlockFunction.</p>
-<p>All node block functions have the same signature.</p>
+<span class="sig-name descname"><span class="pre">qc_xcp</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">wf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><span class="pre">Workflow</span></a></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="utils#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><span class="pre">Configuration</span></a></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">strat_pool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pipeline#CPAC.pipeline.engine.resource.StratPool" title="CPAC.pipeline.engine.resource.StratPool"><span class="pre">StratPool</span></a></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">pipe_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><span class="pre">Workflow</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pipeline#CPAC.pipeline.engine.resource.ResourceData" title="CPAC.pipeline.engine.resource.ResourceData"><span class="pre">ResourceData</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/CPAC/qc/xcp#qc_xcp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.qc.xcp.qc_xcp" title="Link to this definition">¶</a></dt>
+<dd><p>Generate an XCP-style quality-control file.Call a <cite>NodeBlockFunction</cite>.</p>
+<p>All <a href="#id23"><span class="problematic" id="id24">`</span></a>NodeBlockFunction`​s have the same signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wf</strong> (<a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><em>Workflow</em></a>)</p></li>
+<li><p><strong>cfg</strong> (<a class="reference internal" href="utils#CPAC.utils.configuration.Configuration" title="CPAC.utils.configuration.configuration.Configuration"><em>Configuration</em></a>)</p></li>
+<li><p><strong>strat_pool</strong> (<a class="reference internal" href="pipeline#CPAC.pipeline.engine.resource.StratPool" title="CPAC.pipeline.engine.resource.StratPool"><em>StratPool</em></a>)</p></li>
+<li><p><strong>pipe_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>opt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.pipeline.engine.workflows.html#nipype.pipeline.engine.workflows.Workflow" title="(in nipype v1.8.6)"><em>Workflow</em></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference internal" href="pipeline#CPAC.pipeline.engine.resource.ResourceData" title="CPAC.pipeline.engine.resource.ResourceData">ResourceData</a>]]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">References</p>
-<div class="docutils container" id="id23">
+<div class="docutils container" id="id25">
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="footcite-bids21" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
@@ -598,6 +668,7 @@ with space-T1w_desc-brain_mask reference</p></li>
             <ul>
 <li><a class="reference internal" href="#">eXtensible Connectivity Pipeline-style quality control files</a><ul>
 <li><a class="reference internal" href="#columns">Columns</a></li>
+<li><a class="reference internal" href="#CPAC.qc.xcp._connect_motion"><code class="docutils literal notranslate"><span class="pre">_connect_motion</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.qc.xcp.dvcorr"><code class="docutils literal notranslate"><span class="pre">dvcorr</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.qc.xcp.generate_xcp_qc"><code class="docutils literal notranslate"><span class="pre">generate_xcp_qc</span></code></a></li>
 <li><a class="reference internal" href="#CPAC.qc.xcp.get_bids_info"><code class="docutils literal notranslate"><span class="pre">get_bids_info</span></code></a></li>

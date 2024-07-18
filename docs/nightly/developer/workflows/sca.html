@@ -371,7 +371,7 @@
 <span id="seed-based-correlation-analysis"></span><h1>Seed Based Correlation Analysis<a class="headerlink" href="#module-CPAC.sca" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.sca.compute_fisher_z_score">
-<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">compute_fisher_z_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">correlation_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeseries_one_d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#compute_fisher_z_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.compute_fisher_z_score" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">compute_fisher_z_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">correlation_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeseries_one_d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#compute_fisher_z_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.compute_fisher_z_score" title="Link to this definition">¶</a></dt>
 <dd><p>Computes the fisher z transform of the input correlation map
 If the correlation map contains data for multiple ROIs then
 the function returns z score for each ROI as a seperate nifti
@@ -391,7 +391,7 @@ file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.sca.create_sca">
-<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">create_sca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_sca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sca'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_sca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.create_sca" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_sca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_sca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sca'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_sca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.create_sca" title="Link to this definition">¶</a></dt>
 <dd><p>Create map of the correlations of the Region of Interest with the rest of brain voxels.</p>
 <p>(Seed in native or MNI space)</p>
 <p>The map is normalized to contain Z-scores, mapped in standard space and treated with spatial smoothing.</p>
@@ -406,7 +406,8 @@ file.</p>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">workflow</span></code></p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
 <p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/sca/sca.py">Source</a></p>
 <dl class="simple">
 <dt>Workflow Inputs::</dt><dd><dl class="simple">
@@ -444,6 +445,7 @@ nifti files</p></li>
 <p>Detailed Workflow:</p>
 <a class="reference internal image-reference" href="images/generated/sca_detailed.png"><img alt="images/generated/sca_detailed.png" src="images/generated/sca_detailed.png" style="width: 500px;" />
 </a>
+</div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sca_w</span> <span class="o">=</span> <span class="n">create_sca</span><span class="p">(</span><span class="s2">&quot;sca_wf&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sca_w</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">functional_file</span> <span class="o">=</span> <span class="s1">&#39;/home/data/subject/func/rest_bandpassed.nii.gz&#39;</span>  
@@ -455,7 +457,7 @@ nifti files</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.sca.create_temporal_reg">
-<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">create_temporal_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wflow_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temporal_reg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SR'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_temporal_reg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.create_temporal_reg" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_temporal_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wflow_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temporal_reg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SR'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/sca#create_temporal_reg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.create_temporal_reg" title="Link to this definition">¶</a></dt>
 <dd><p>Create temporal multiple regression workflow.</p>
 <p>Provides a spatial map of parameter estimates corresponding to each
 provided timeseries in a timeseries.txt file as regressors.</p>
@@ -480,7 +482,8 @@ containing the names of the timeseries.</p>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">workflow</span></code></p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
 <p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/sca/sca.py">Source</a></p>
 <p>Workflow Inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">subject_rest</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">existing</span> <span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
@@ -501,6 +504,7 @@ containing the names of the timeseries.</p>
 <span class="n">inputspec</span><span class="o">.</span><span class="n">normalize</span> <span class="p">:</span> <span class="n">Boolean</span>
     <span class="n">control</span> <span class="n">whether</span> <span class="n">to</span> <span class="n">normalize</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">timeseries</span> <span class="n">to</span> <span class="n">unit</span> <span class="n">standard</span> <span class="n">deviation</span>
 </pre></div>
+</div>
 </div>
 <p>Workflow Outputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">temp_reg_map</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
@@ -539,7 +543,7 @@ showing activation patterns related to those in the timeseries.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.sca.map_to_roi">
-<span class="sig-prename descclassname"><span class="pre">CPAC.sca.</span></span><span class="sig-name descname"><span class="pre">map_to_roi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#map_to_roi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.map_to_roi" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">map_to_roi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/sca/utils#map_to_roi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.sca.map_to_roi" title="Link to this definition">¶</a></dt>
 <dd><p>Renames the outputs of the temporal multiple regression workflow for sca
 according to the header information of the timeseries.txt file that was
 passed

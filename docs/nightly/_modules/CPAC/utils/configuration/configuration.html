@@ -626,6 +626,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
 
+<div class="viewcode-block" id="Configuration._nonestr_to_None">
+<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration._nonestr_to_None">[docs]</a>
     <span class="k">def</span> <span class="nf">_nonestr_to_None</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Recursive method to type convert &#39;None&#39; to None in nested config.</span>
 
@@ -648,7 +650,8 @@
             <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_nonestr_to_None</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">d</span><span class="p">}</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nonestr_to_None</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">d</span><span class="p">}</span>
-        <span class="k">return</span> <span class="n">d</span>
+        <span class="k">return</span> <span class="n">d</span></div>
+
 
 <div class="viewcode-block" id="Configuration.set_from_ENV">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.set_from_ENV">[docs]</a>
@@ -826,6 +829,8 @@
         <span class="k">return</span> <span class="n">d</span></div>
 
 
+<div class="viewcode-block" id="Configuration._check_if_switch">
+<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration._check_if_switch">[docs]</a>
     <span class="k">def</span> <span class="nf">_check_if_switch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a given entity is a switch.</span>
 
@@ -862,8 +867,11 @@
         <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;`</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">` is not a switch in </span><span class="si">{</span><span class="bp">self</span><span class="si">!s}</span><span class="s2">.&quot;</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
+
+<div class="viewcode-block" id="Configuration._switch_bool">
+<a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration._switch_bool">[docs]</a>
     <span class="k">def</span> <span class="nf">_switch_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the key is set to the given value or False otherwise.</span>
 
@@ -890,7 +898,8 @@
                 <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">is</span> <span class="n">value</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
 
 <div class="viewcode-block" id="Configuration.switch_is_off">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.Configuration.switch_is_off">[docs]</a>

@@ -924,6 +924,8 @@
         <span class="n">write_node_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">is_mapnode</span><span class="o">=</span><span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">MapNode</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">result</span>
 
+<div class="viewcode-block" id="Node._get_hashval">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node._get_hashval">[docs]</a>
     <span class="k">def</span> <span class="nf">_get_hashval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a hash of the input state&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_inputs</span><span class="p">()</span>
@@ -938,8 +940,11 @@
                 <span class="n">hashobject</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">needed_outputs</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_hashvalue</span> <span class="o">=</span> <span class="n">hashobject</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_hashed_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;needed_outputs&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">needed_outputs</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashed_inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashvalue</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashed_inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashvalue</span></div>
 
+
+<div class="viewcode-block" id="Node._get_inputs">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node._get_inputs">[docs]</a>
     <span class="k">def</span> <span class="nf">_get_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve inputs from pointers to results files.</span>
@@ -1012,7 +1017,8 @@
                     <span class="k">raise</span>
 
         <span class="c1"># Successfully set inputs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_got_inputs</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_got_inputs</span> <span class="o">=</span> <span class="kc">True</span></div>
+
 
     <span class="k">def</span> <span class="nf">_update_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">outdatedhash</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">(),</span> <span class="s2">&quot;_0x*.json&quot;</span><span class="p">)):</span>
@@ -1153,6 +1159,8 @@
 
         <span class="k">return</span> <span class="n">result</span>
 
+<div class="viewcode-block" id="Node._copyfiles_to_wd">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node._copyfiles_to_wd">[docs]</a>
     <span class="k">def</span> <span class="nf">_copyfiles_to_wd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">execute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linksonly</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;copy files over and change the inputs&quot;&quot;&quot;</span>
         <span class="n">filecopy_info</span> <span class="o">=</span> <span class="n">get_filecopy_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
@@ -1197,7 +1205,8 @@
                 <span class="n">newfiles</span> <span class="o">=</span> <span class="n">simplify_list</span><span class="p">(</span><span class="n">newfiles</span><span class="p">)</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">],</span> <span class="n">newfiles</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">execute</span> <span class="ow">and</span> <span class="n">linksonly</span><span class="p">:</span>
-            <span class="n">emptydirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">noexist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">emptydirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">noexist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="Node.update">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node.update">[docs]</a>
@@ -1509,6 +1518,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_got_inputs</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span> <span class="o">=</span> <span class="n">serial</span>
 
+<div class="viewcode-block" id="MapNode._create_dynamic_traits">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode._create_dynamic_traits">[docs]</a>
     <span class="k">def</span> <span class="nf">_create_dynamic_traits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basetraits</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nitems</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert specific fields of a trait to accept multiple inputs&quot;&quot;&quot;</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">DynamicTraitedSpec</span><span class="p">()</span>
@@ -1528,7 +1539,8 @@
             <span class="k">if</span> <span class="n">isdefined</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
             <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
 
 <div class="viewcode-block" id="MapNode.set_input">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.set_input">[docs]</a>
@@ -1552,6 +1564,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_interface</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">)</span>
 
+<div class="viewcode-block" id="MapNode._get_hashval">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode._get_hashval">[docs]</a>
     <span class="k">def</span> <span class="nf">_get_hashval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute hash including iterfield lists.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_inputs</span><span class="p">()</span>
@@ -1583,7 +1597,8 @@
             <span class="n">hashvalue</span> <span class="o">=</span> <span class="n">hashobject</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
             <span class="n">hashed_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;needed_outputs&quot;</span><span class="p">,</span> <span class="n">sorted_outputs</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_hashed_inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashvalue</span> <span class="o">=</span> <span class="n">hashed_inputs</span><span class="p">,</span> <span class="n">hashvalue</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashed_inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashvalue</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashed_inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashvalue</span></div>
+
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1714,6 +1729,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_inputs</span><span class="o">.</span><span class="n">trait_set</span><span class="p">(</span><span class="o">**</span><span class="n">old_inputs</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MapNode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_get_inputs</span><span class="p">()</span>
 
+<div class="viewcode-block" id="MapNode._check_iterfield">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode._check_iterfield">[docs]</a>
     <span class="k">def</span> <span class="nf">_check_iterfield</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks iterfield</span>
 
@@ -1736,8 +1753,11 @@
                             <span class="s2">&quot;have the same length. </span><span class="si">%s</span><span class="s2">&quot;</span>
                         <span class="p">)</span>
                         <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
-                    <span class="p">)</span>
+                    <span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="MapNode._run_interface">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode._run_interface">[docs]</a>
     <span class="k">def</span> <span class="nf">_run_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">execute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">updatehash</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the mapnode interface</span>
 
@@ -1803,7 +1823,8 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;[MapNode] Removing folder &quot;</span><span class="si">%s</span><span class="s1">&quot;.&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
 </pre></div>
         </article>
       </div>

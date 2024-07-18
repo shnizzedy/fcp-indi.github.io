@@ -377,7 +377,7 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="sd">&quot;&quot;&quot;Class and decorator for NodeBlock functions.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Classes and decorator for :py:class:`NodeBlock`\u200bs and :py:class:`NodeBlockFunction`\u200bs.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>
 
@@ -403,6 +403,8 @@
 <span class="k">class</span> <span class="nc">NodeBlockFunction</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Store a reference to the nodeblock function and all of its meta-data.&quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="NodeBlockFunction.__init__">
+<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.nodeblock.NodeBlockFunction.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
@@ -415,32 +417,37 @@
         <span class="n">outputs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">NODEBLOCK_OUTPUTS</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Nodeblock function reference.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`Nodeblock` function reference.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">name</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used in the graph and logging to identify the NodeBlock and its component nodes.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Used in the graph and logging to identify the :py:class:`NodeBlock` and its component :py:class:`~nipype.pipeline.engine.Node`\u200bs.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">config</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Indicates the nested keys in a C-PAC pipeline configuration should configure a NodeBlock built from this</span>
-<span class="sd">        function. If config is set to ``None``, then all other configuration-related entities must be specified from the</span>
+<span class="sd">        Indicates the nested keys in a C-PAC pipeline :py:class:`Configuration`</span>
+<span class="sd">        should configure a `NodeBlock` built from this function. If `config` is set to</span>
+<span class="sd">        `None`, then all other configuration-related entities must be specified from the</span>
 <span class="sd">        root of the configuration.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">switch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">switch</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Indicates any keys that should evaluate to True for this NodeBlock to be active. A list of lists of strings</span>
-<span class="sd">        indicates multiple switches that must all be True to run, and is currently only an option if config is set to</span>
-<span class="sd">        ``None``.</span>
+<span class="sd">        Indicates any keys that should evaluate to `True` for this :py:class:`NodeBlock`</span>
+<span class="sd">        to be active. A list of lists of strings indicates multiple `switch`\u200bes</span>
+<span class="sd">        that must all be `True` to run, and is currently only an option if `config` is</span>
+<span class="sd">        set to `None`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">option_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">option_key</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Indicates the nested keys (starting at the nested key indicated by config) that should configure this NodeBlock.</span>
+<span class="sd">        Indicates the nested keys (starting at the nested key indicated by `config`)</span>
+<span class="sd">        that should configure this :py:class:`NodeBlock`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">option_val</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">option_val</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates values for which this NodeBlock should be active.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates values for which this :py:class:`NodeBlock` should be active.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span> <span class="k">if</span> <span class="n">inputs</span> <span class="k">else</span> <span class="p">[]</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ResourcePool keys indicating resources needed for the NodeBlock&#39;s functionality.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:py:class:`~CPAC.pipeline.engine.resource.ResourcePool` keys indicating</span>
+<span class="sd">        resources needed for the :py:class:`NodeBlock`\u200b&#39;s functionality.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">outputs</span> <span class="k">if</span> <span class="n">outputs</span> <span class="k">else</span> <span class="p">[]</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ResourcePool keys indicating resources generated or updated by the NodeBlock, optionally including metadata</span>
+<span class="sd">        :py:class:`~CPAC.pipeline.engine.resource.ResourcePool` keys indicating</span>
+<span class="sd">        resources generated or updated by the `NodeBlock`, optionally including metadata</span>
 <span class="sd">        for the outputs&#39; respective sidecars.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -456,8 +463,11 @@
                 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">NodeBlockFunction</span><span class="o">.</span><span class="fm">__call__</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
             <span class="p">]</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span></div>
 
+
+<div class="viewcode-block" id="NodeBlockFunction.__call__">
+<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.nodeblock.NodeBlockFunction.__call__">[docs]</a>
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">wf</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">,</span>
@@ -466,16 +476,17 @@
         <span class="n">pipe_num</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">],</span>
         <span class="n">opt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Workflow</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ResourceData&quot;</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call a NodeBlockFunction.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call a `NodeBlockFunction`.</span>
 
-<span class="sd">        All node block functions have the same signature.</span>
+<span class="sd">        All `NodeBlockFunction`\u200bs have the same signature.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="NodeBlockFunction.legacy_nodeblock_dict">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.nodeblock.NodeBlockFunction.legacy_nodeblock_dict">[docs]</a>
     <span class="k">def</span> <span class="nf">legacy_nodeblock_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return nodeblock metadata as a dictionary.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return :py:class:`NodeBlock` metadata as a dictionary.</span>
 
 <span class="sd">        Helper for compatibility reasons.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -490,8 +501,10 @@
         <span class="p">}</span></div>
 
 
+<div class="viewcode-block" id="NodeBlockFunction.__repr__">
+<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.nodeblock.NodeBlockFunction.__repr__">[docs]</a>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return reproducible string representation of a NodeBlockFunction.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return reproducible string representation of a `NodeBlockFunction`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;NodeBlockFunction(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2">.&quot;</span>
             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">, &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;, &#39;</span>
@@ -499,25 +512,31 @@
             <span class="sa">f</span><span class="s2">&quot;option_key=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">option_key</span><span class="si">}</span><span class="s2">, option_val=&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">option_val</span><span class="si">}</span><span class="s2">, inputs=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="si">}</span><span class="s2">, &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;outputs=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="si">}</span><span class="s2">)&quot;</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="NodeBlockFunction.__str__">
+<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.nodeblock.NodeBlockFunction.__str__">[docs]</a>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return string representation of a NodeBlockFunction.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return string representation of a `NodeBlockFunction`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;NodeBlockFunction(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+</div>
 
 
 
 <div class="viewcode-block" id="NodeBlock">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.nodeblock.NodeBlock">[docs]</a>
 <span class="k">class</span> <span class="nc">NodeBlock</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A worflow subgraph composed of :py:class:`NodeBlockFunction`s.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A :py:class:`Workflow` subgraph composed of :py:class:`NodeBlockFunction`\u200bs.&quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="NodeBlock.__init__">
+<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.nodeblock.NodeBlock.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">node_block_functions</span><span class="p">:</span> <span class="n">NodeBlockFunction</span> <span class="o">|</span> <span class="n">PIPELINE_BLOCKS</span><span class="p">,</span>
         <span class="n">debug</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a ``NodeBlock`` from a list of py:class:`~CPAC.pipeline.engine.nodeblock.NodeBlockFunction`s.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a `NodeBlock` from a list of py:class:`NodeBlockFunction`\u200bs.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node_block_functions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">node_block_functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">node_block_functions</span><span class="p">]</span>
 
@@ -586,14 +605,18 @@
                     <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">config</span><span class="o">.</span><span class="n">update_config</span><span class="p">({</span><span class="s2">&quot;logging&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;workflow_level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">}})</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">update_logging</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">update_logging</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="NodeBlock.check_output">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.nodeblock.NodeBlock.check_output">[docs]</a>
     <span class="k">def</span> <span class="nf">check_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">NODEBLOCK_OUTPUTS</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a label is listed in a NodeBlock&#39;s ``outputs``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a label is listed in a `NodeBlock`\u200b&#39;s `outputs`.</span>
 
-<span class="sd">        Raises ``NameError`` if a mismatch is found.</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        NameError</span>
+<span class="sd">            If a mismatch is found.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
@@ -610,13 +633,20 @@
     <span class="k">def</span> <span class="nf">list_blocks</span><span class="p">(</span>
         <span class="n">pipeline_blocks</span><span class="p">:</span> <span class="n">PIPELINE_BLOCKS</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;List node blocks line by line.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List :py:class:`NodeBlockFunction`\u200bs line by line.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        pipeline_blocks: list of :py:class:`NodeBlockFunction`s</span>
+<span class="sd">        pipeline_blocks</span>
+<span class="sd">            list of :py:class:`NodeBlockFunction`\u200bs</span>
 
-<span class="sd">        indent: number of spaces after a tab indent</span>
+<span class="sd">        indent</span>
+<span class="sd">            number of spaces after a tab indent</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            formatted list of :py:class:`NodeBlockFunction`\u200bs</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">blockstring</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
             <span class="p">[</span>
@@ -657,26 +687,46 @@
     <span class="n">inputs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">NODEBLOCK_INPUTS</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">outputs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Define a node block.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a :py:class:`NodeBlockFunction`\u200b.</span>
 
-<span class="sd">    Connections to the pipeline configuration and to other node blocks.</span>
+<span class="sd">    Connections to the pipeline :py:class:`Configuration` and to other :py:class:`NodeBlockFunction`\u200bs.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    name: Used in the graph and logging to identify the NodeBlock and its component nodes. Function&#39;s ``.__name__`` is used if ``name`` is not provided.</span>
+<span class="sd">    name</span>
+<span class="sd">        Used in the graph and logging to identify the :py:class:`NodeBlock` and its</span>
+<span class="sd">        component :py:class:`~nipype.pipeline.engine.Node`\u200bs.</span>
+<span class="sd">        The :py:class:`NodeBlockFunction`\u200b&#39;s `.__name__` is used if `name` is not</span>
+<span class="sd">        provided.</span>
 
-<span class="sd">    config: Indicates the nested keys in a C-PAC pipeline configuration should configure a NodeBlock built from this function. If config is set to ``None``, then all other configuration-related entities must be specified from the root of the configuration.</span>
+<span class="sd">    config</span>
+<span class="sd">        Indicates the nested keys in a C-PAC pipeline :py:class:`Configuration` should</span>
+<span class="sd">        configure a :py:class:`NodeBlock` built from this</span>
+<span class="sd">        :py:class:`NodeBlockFunction`\u200b. If `config` is set to `None`, then all other</span>
+<span class="sd">        :py:class:`Configuration`\u200b-related entities must be specified from the root</span>
+<span class="sd">        of the :py:class:`Configuration`\u200b.</span>
 
-<span class="sd">    switch: Indicates any keys that should evaluate to True for this NodeBlock to be active. A list of lists of strings indicates multiple switches that must all be True to run, and is currently only an option if config is set to ``None``.</span>
+<span class="sd">    switch</span>
+<span class="sd">        Indicates any keys that should evaluate to `True` for this :py:class:`NodeBlock`</span>
+<span class="sd">        to be active. A list of lists of strings indicates multiple switches that must</span>
+<span class="sd">        all be `True` to run, and is currently only an option if config is set to</span>
+<span class="sd">        `None`.</span>
 
-<span class="sd">    option_key: Indicates the nested keys (starting at the nested key indicated by config) that should configure this NodeBlock.</span>
+<span class="sd">    option_key</span>
+<span class="sd">        Indicates the nested keys (starting at the nested key indicated by `config`)</span>
+<span class="sd">        that should configure this :py:class:`NodeBlock`\u200b.</span>
 
-<span class="sd">    option_val: Indicates values for which this NodeBlock should be active.</span>
+<span class="sd">    option_val</span>
+<span class="sd">        Indicates values for which this :py:class:`NodeBlock` should be active.</span>
 
-<span class="sd">    inputs: ResourcePool keys indicating files needed for the NodeBlock&#39;s functionality.</span>
+<span class="sd">    inputs</span>
+<span class="sd">        ResourcePool keys indicating files needed for the :py:class:`NodeBlock`\u200b&#39;s</span>
+<span class="sd">        functionality.</span>
 
-<span class="sd">    outputs: ResourcePool keys indicating files generated or updated by the NodeBlock, optionally including metadata for the outputs&#39; respective sidecars.</span>
+<span class="sd">    outputs</span>
+<span class="sd">        :py:class:`~CPAC.pipeline.engine.resource.ResourcePool` keys indicating files</span>
+<span class="sd">        generated or updated by the :py:class:`NodeBlock`, optionally including metadata</span>
+<span class="sd">        for the outputs&#39; respective sidecars.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="k">lambda</span> <span class="n">func</span><span class="p">:</span> <span class="n">NodeBlockFunction</span><span class="p">(</span>
         <span class="n">func</span><span class="p">,</span>

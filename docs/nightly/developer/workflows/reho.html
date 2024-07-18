@@ -371,7 +371,7 @@
 <span id="regional-homogeneity-approach-to-fmri-data-analysis"></span><h1>Regional Homogeneity Approach to fMRI data analysis<a class="headerlink" href="#module-CPAC.reho" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.reho.compute_reho">
-<span class="sig-prename descclassname"><span class="pre">CPAC.reho.</span></span><span class="sig-name descname"><span class="pre">compute_reho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#compute_reho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.compute_reho" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">compute_reho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#compute_reho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.compute_reho" title="Link to this definition">¶</a></dt>
 <dd><p>Computes the ReHo Map, by computing tied ranks of the timepoints,
 followed by computing Kendall’s coefficient concordance(KCC) of a
 timeseries with its neighbours.</p>
@@ -395,7 +395,7 @@ KCC.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.reho.create_reho">
-<span class="sig-prename descclassname"><span class="pre">CPAC.reho.</span></span><span class="sig-name descname"><span class="pre">create_reho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/reho#create_reho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.create_reho" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_reho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/reho#create_reho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.create_reho" title="Link to this definition">¶</a></dt>
 <dd><p>Regional Homogeneity(ReHo) approach to fMRI data analysis.</p>
 <p>This workflow computes the ReHo map, z-score on map</p>
 <dl class="field-list simple">
@@ -409,7 +409,8 @@ KCC.</p></li>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">workflow</span></code></p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
 <p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/reho/reho.py">Source</a></p>
 <p>Workflow Inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">rest_res_filt</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">existing</span> <span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
@@ -422,6 +423,7 @@ KCC.</p></li>
     <span class="n">For</span> <span class="n">a</span> <span class="n">brain</span> <span class="n">voxel</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">neighbouring</span> <span class="n">brain</span> <span class="n">voxels</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">KCC</span><span class="o">.</span>
     <span class="n">Possible</span> <span class="n">values</span> <span class="n">are</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mf">7.</span> <span class="n">Recommended</span> <span class="n">value</span> <span class="mi">27</span>
 </pre></div>
+</div>
 </div>
 <p>Workflow Outputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">raw_reho_map</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
@@ -465,7 +467,7 @@ KCC.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.reho.f_kendall">
-<span class="sig-prename descclassname"><span class="pre">CPAC.reho.</span></span><span class="sig-name descname"><span class="pre">f_kendall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#f_kendall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.f_kendall" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">f_kendall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#f_kendall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.f_kendall" title="Link to this definition">¶</a></dt>
 <dd><p>Calculates the Kendall’s coefficient of concordance for a number of
 time-series in the input matrix.</p>
 <dl class="field-list simple">
@@ -483,7 +485,7 @@ time-series in the input matrix.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.reho.getOpString">
-<span class="sig-prename descclassname"><span class="pre">CPAC.reho.</span></span><span class="sig-name descname"><span class="pre">getOpString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_dev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#getOpString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.getOpString" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getOpString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_dev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#getOpString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.getOpString" title="Link to this definition">¶</a></dt>
 <dd><p>Generate the Operand String to be used in workflow nodes to supply
 mean and std deviation to alff workflow nodes.</p>
 <dl class="field-list simple">

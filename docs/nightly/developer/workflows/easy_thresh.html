@@ -371,7 +371,7 @@
 <span id="easy-thresh"></span><h1>Easy thresh<a class="headerlink" href="#module-CPAC.easy_thresh" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.easy_thresh.copy_geom">
-<span class="sig-prename descclassname"><span class="pre">CPAC.easy_thresh.</span></span><span class="sig-name descname"><span class="pre">copy_geom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile_b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/easy_thresh/easy_thresh#copy_geom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.easy_thresh.copy_geom" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">copy_geom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile_b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/easy_thresh/easy_thresh#copy_geom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.easy_thresh.copy_geom" title="Link to this definition">¶</a></dt>
 <dd><p>Call fsl fslcpgeom command to copy certain parts of the header information.</p>
 <p>Copy (image dimensions, voxel dimensions, voxel dimensions units string, image
 orientation/origin or qform/sform info) from one image to another.</p>
@@ -397,7 +397,7 @@ in the header.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.easy_thresh.easy_thresh">
-<span class="sig-prename descclassname"><span class="pre">CPAC.easy_thresh.</span></span><span class="sig-name descname"><span class="pre">easy_thresh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/easy_thresh/easy_thresh#easy_thresh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.easy_thresh.easy_thresh" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">easy_thresh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/easy_thresh/easy_thresh#easy_thresh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.easy_thresh.easy_thresh" title="Link to this definition">¶</a></dt>
 <dd><p>Carry out cluster-based thresholding and colour activation overlaying.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -410,7 +410,8 @@ in the header.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
 <p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/easy_thresh/easy_thresh.py">Source</a></p>
 <p>Workflow Inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">z_stats</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
@@ -452,6 +453,7 @@ in the header.</p>
     <span class="n">local</span> <span class="n">maxima</span> <span class="n">text</span> <span class="n">file</span><span class="p">,</span> <span class="n">defines</span> <span class="n">the</span> <span class="n">coordinates</span> <span class="n">of</span> <span class="n">maximum</span> <span class="n">value</span>
     <span class="ow">in</span> <span class="n">the</span> <span class="n">cluster</span>
 </pre></div>
+</div>
 </div>
 <p>Order of commands:</p>
 <ul>
@@ -556,7 +558,7 @@ maximum intensity).</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.easy_thresh.get_standard_background_img">
-<span class="sig-prename descclassname"><span class="pre">CPAC.easy_thresh.</span></span><span class="sig-name descname"><span class="pre">get_standard_background_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/easy_thresh/easy_thresh#get_standard_background_img"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.easy_thresh.get_standard_background_img" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_standard_background_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/easy_thresh/easy_thresh#get_standard_background_img"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.easy_thresh.get_standard_background_img" title="Link to this definition">¶</a></dt>
 <dd><p>Get the standard brain image from FSL standard data directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -579,7 +581,7 @@ maximum intensity).</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.easy_thresh.get_tuple">
-<span class="sig-prename descclassname"><span class="pre">CPAC.easy_thresh.</span></span><span class="sig-name descname"><span class="pre">get_tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile_b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/easy_thresh/easy_thresh#get_tuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.easy_thresh.get_tuple" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile_b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/easy_thresh/easy_thresh#get_tuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.easy_thresh.get_tuple" title="Link to this definition">¶</a></dt>
 <dd><p>Return tuple of z_threhsold maximum intensity values of Zstatistic image for input to the overlay.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

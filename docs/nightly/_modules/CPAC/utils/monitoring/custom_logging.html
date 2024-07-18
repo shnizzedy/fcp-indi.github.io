@@ -541,6 +541,8 @@
 
     <span class="n">exception</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="o">.</span><span class="vm">__doc__</span>
 
+<div class="viewcode-block" id="MockLogger._factory_log">
+<a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger._factory_log">[docs]</a>
     <span class="k">def</span> <span class="nf">_factory_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate a log method like `self.log(message)` for a given built-in level.&quot;&quot;&quot;</span>
 
@@ -564,7 +566,8 @@
                     <span class="k">else</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="n">_lazy_sub</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="n">items</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">log_file</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">_log</span>
+        <span class="k">return</span> <span class="n">_log</span></div>
+
 
 <div class="viewcode-block" id="MockLogger.delete">
 <a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.delete">[docs]</a>

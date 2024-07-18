@@ -371,7 +371,7 @@
 <span id="multivariate-distance-matrix-regression-mdmr"></span><h1>Multivariate Distance Matrix Regression (MDMR)<a class="headerlink" href="#module-CPAC.cwas" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.cwas.create_cwas">
-<span class="sig-prename descclassname"><span class="pre">CPAC.cwas.</span></span><span class="sig-name descname"><span class="pre">create_cwas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cwas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crash_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/cwas/pipeline#create_cwas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.cwas.create_cwas" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_cwas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cwas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crash_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/cwas/pipeline#create_cwas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.cwas.create_cwas" title="Link to this definition">¶</a></dt>
 <dd><p>Connectome Wide Association Studies.</p>
 <p>This workflow performs CWAS on a group of subjects.</p>
 <dl class="field-list simple">
@@ -385,7 +385,8 @@
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Workflow</span></code></p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
 <p>Workflow Inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inputspec.subjects : dict (subject id: nifti files)
     4-D timeseries of a group of subjects normalized to MNI space
@@ -427,6 +428,7 @@ inputspec.parallel_nodes : integer
 <p>Detailed Workflow Graph:</p>
 <a class="reference internal image-reference" href="images/generated/cwas_detailed.png"><img alt="images/generated/cwas_detailed.png" src="images/generated/cwas_detailed.png" style="width: 500px;" />
 </a>
+</div>
 <p class="rubric">References</p>
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id1" role="doc-footnote">
@@ -438,7 +440,7 @@ inputspec.parallel_nodes : integer
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.cwas.joint_mask">
-<span class="sig-prename descclassname"><span class="pre">CPAC.cwas.</span></span><span class="sig-name descname"><span class="pre">joint_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subjects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/cwas/cwas#joint_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.cwas.joint_mask" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">joint_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subjects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/cwas/cwas#joint_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.cwas.joint_mask" title="Link to this definition">¶</a></dt>
 <dd><p>Create a joint mask.</p>
 <p>A joint mask is an intersection common to all the subjects in a provided list
 and a provided mask.</p>
@@ -460,7 +462,19 @@ and a provided mask.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.cwas.nifti_cwas">
-<span class="sig-prename descclassname"><span class="pre">CPAC.cwas.</span></span><span class="sig-name descname"><span class="pre">nifti_cwas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subjects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressor_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">participant_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permutations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voxel_range</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/cwas/cwas#nifti_cwas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.cwas.nifti_cwas" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nifti_cwas</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">subjects</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">mask_file</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">regressor_file</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">participant_column</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">columns_string</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">permutations</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">voxel_range</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/cwas/cwas#nifti_cwas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.cwas.nifti_cwas" title="Link to this definition">¶</a></dt>
 <dd><p>Perform CWAS for a group of subjects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

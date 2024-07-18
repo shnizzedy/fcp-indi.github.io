@@ -978,6 +978,8 @@
 
 
 
+<div class="viewcode-block" id="_timing">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart._timing">[docs]</a>
 <span class="k">def</span> <span class="nf">_timing</span><span class="p">(</span><span class="n">nodes_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Covert timestamps from strings to datetimes.</span>
 
@@ -1019,9 +1021,12 @@
                     <span class="n">new_node_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_timing_timestamp</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
                 <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                     <span class="k">pass</span>
-        <span class="k">return</span> <span class="n">new_node_list</span>
+        <span class="k">return</span> <span class="n">new_node_list</span></div>
 
 
+
+<div class="viewcode-block" id="_timing_timestamp">
+<a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart._timing_timestamp">[docs]</a>
 <span class="k">def</span> <span class="nf">_timing_timestamp</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert timestamps in a node from string to datetime.</span>
 
@@ -1045,7 +1050,8 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="s2">&quot;finish&quot;</span><span class="p">}</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">))</span>
         <span class="k">else</span> <span class="n">v</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-    <span class="p">}</span>
+    <span class="p">}</span></div>
+
 </pre></div>
         </article>
       </div>
