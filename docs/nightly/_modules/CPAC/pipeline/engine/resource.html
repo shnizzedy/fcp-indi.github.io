@@ -377,7 +377,7 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="sd">&quot;&quot;&quot;:py:class:`Resource`\u200bs and :py:class:`ResourcePool`\u200bs for C-PAC.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;:py:class:`Resource` s and :py:class:`ResourcePool` s for C-PAC.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">ast</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">KeysView</span>
@@ -454,8 +454,6 @@
 <span class="k">class</span> <span class="nc">DataPaths</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Store subject-session specific data paths.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="DataPaths.__init__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.DataPaths.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data_paths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">part_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -481,22 +479,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">site_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;site_id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ses_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unique_id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unique_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">part_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ses_id</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">derivatives_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;derivatives_dir&quot;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derivatives_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;derivatives_dir&quot;</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="DataPaths.__repr__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.DataPaths.__repr__">[docs]</a>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return reproducible string representation of `DataPaths` instance.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;DataPaths(data_paths=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;DataPaths(data_paths=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-
-<div class="viewcode-block" id="DataPaths.__str__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.DataPaths.__str__">[docs]</a>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return string representation of a `DataPaths` instance.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;DataPaths(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">)&gt;&quot;</span></div>
-
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;DataPaths(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
 
 <div class="viewcode-block" id="DataPaths.as_dict">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.DataPaths.as_dict">[docs]</a>
@@ -588,7 +579,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Attribute and tuple access for `ResourceData`.&quot;&quot;&quot;</span>
 
     <span class="n">node</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resource :py:class:`~pe.Node`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resource :py:class:`~nipype.pipeline.engine.Node`.&quot;&quot;&quot;</span>
     <span class="n">out</span><span class="p">:</span> <span class="nb">str</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Output key.&quot;&quot;&quot;</span></div>
 
@@ -599,17 +590,14 @@
 <span class="k">class</span> <span class="nc">Resource</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A single `Resource` and its methods.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Resource.__init__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.Resource.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">json</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a `Resource`.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">ResourceData</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tuple of source :py:class:`~pe.Node` and output key.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_json</span> <span class="o">=</span> <span class="n">json</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tuple of source :py:class:`~nipype.pipeline.engine.Node` and output key.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_json</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">json</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Metadata.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">}</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Dictionary-style subscriptable keys.&quot;&quot;&quot;</span></div>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Dictionary-style subscriptable keys.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Resource.keys">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.Resource.keys">[docs]</a>
@@ -618,25 +606,17 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Resource.__contains__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.Resource.__contains__">[docs]</a>
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return `True` if `item` in `self.keys()`, `False` otherwise.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``True`` if `item` in :py:method:`~Resource.keys()`, ``False`` otherwise.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
-
-<div class="viewcode-block" id="Resource.__getitem__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.Resource.__getitem__">[docs]</a>
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Provide legacy dict-style get access.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Key &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; not set in </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2">.&quot;</span>
-        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="Resource.__repr__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.Resource.__repr__">[docs]</a>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return reproducible string for `Resource`.&quot;&quot;&quot;</span>
         <span class="n">positional</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Resource(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">, json=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">json</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -645,24 +625,17 @@
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">positional</span><span class="si">}{</span><span class="n">kw</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">positional</span><span class="si">}{</span><span class="n">kw</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-
-<div class="viewcode-block" id="Resource.__setitem__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.Resource.__setitem__">[docs]</a>
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Provide legacy dict-style set access for `Resource`.&quot;&quot;&quot;</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="Resource.__str__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.Resource.__str__">[docs]</a>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return string representation of `Resource`.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span></div>
-
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <div class="viewcode-block" id="Resource.get_json">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.Resource.get_json">[docs]</a>
@@ -696,10 +669,8 @@
 <span class="k">class</span> <span class="nc">_Pool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;All Resources.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="_Pool.__init__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource._Pool.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :py:class:`ResourcePool` or :py:class:`StratPool`\u200b.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :py:class:`ResourcePool` or :py:class:`StratPool` .&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ants_interp</span><span class="p">:</span> <span class="nb">str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">:</span> <span class="n">Configuration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">creds_paths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
@@ -723,11 +694,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">run_zscoring</span><span class="p">:</span> <span class="nb">bool</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unique_id</span><span class="p">:</span> <span class="nb">str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">zscoring_bool</span><span class="p">:</span> <span class="nb">bool</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wf</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wf</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span>
 
-
-<div class="viewcode-block" id="_Pool.__repr__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource._Pool.__repr__">[docs]</a>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return reproducible `_Pool` string.&quot;&quot;&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
@@ -735,17 +703,13 @@
             <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;rpool&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;cfg&quot;</span><span class="p">,</span> <span class="s2">&quot;pipe_list&quot;</span><span class="p">]</span>
             <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="p">]</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span>
 
-
-<div class="viewcode-block" id="_Pool.__str__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource._Pool.__str__">[docs]</a>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return string representation of a `_Pool`.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rpool</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rpool</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></div>
-
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rpool</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <div class="viewcode-block" id="_Pool.generate_prov_string">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource._Pool.generate_prov_string">[docs]</a>
@@ -785,12 +749,9 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rpool</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="_Pool.__contains__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource._Pool.__contains__">[docs]</a>
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return `True` if key in `_Pool`, `False` otherwise.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``True`` if key in `_Pool`, ``False`` otherwise.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
 <div class="viewcode-block" id="_Pool.get_resource_from_prov">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource._Pool.get_resource_from_prov">[docs]</a>
@@ -897,7 +858,7 @@
         <span class="n">Optional</span><span class="p">[</span><span class="n">Resource</span> <span class="o">|</span> <span class="n">STRAT_DICT</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">]</span>
         <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Resource</span> <span class="o">|</span> <span class="n">STRAT_DICT</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a dictionary of strats or a single :py:class:`Resource`\u200b.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a dictionary of strats or a single :py:class:`Resource` .&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">resource</span> <span class="o">=</span> <span class="p">[</span><span class="n">resource</span><span class="p">]</span>
         <span class="c1"># if a list of potential inputs are given, pick the first one found</span>
@@ -935,7 +896,7 @@
 <div class="viewcode-block" id="ResourcePool">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.ResourcePool">[docs]</a>
 <span class="k">class</span> <span class="nc">ResourcePool</span><span class="p">(</span><span class="n">_Pool</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A pool of :py:class:`Resource`\u200bs.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A pool of :py:class:`Resource` s.&quot;&quot;&quot;</span>
 
     <span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.nodeblock</span> <span class="kn">import</span> <span class="p">(</span>
         <span class="n">NODEBLOCK_INPUTS</span><span class="p">,</span>
@@ -943,8 +904,6 @@
         <span class="n">PIPELINE_BLOCKS</span><span class="p">,</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="ResourcePool.__init__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.ResourcePool.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -1068,15 +1027,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ingress_raw_anat_data</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">data_paths</span><span class="o">.</span><span class="n">func</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">ingress_raw_func_data</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ingress_pipeconfig_paths</span><span class="p">()</span></div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">ingress_pipeconfig_paths</span><span class="p">()</span>
 
 <div class="viewcode-block" id="ResourcePool.back_propogate_template_name">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.ResourcePool.back_propogate_template_name">[docs]</a>
     <span class="k">def</span> <span class="nf">back_propogate_template_name</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">resource_idx</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">json_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">id_string</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find and apply the template name from a :py:class:`Resource`\u200b&#39;s provenance.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find and apply the template name from a :py:class:`Resource` &#39;s provenance.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s2">&quot;template&quot;</span> <span class="ow">in</span> <span class="n">resource_idx</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s2">&quot;derivatives-dir&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s2">&quot;template&quot;</span><span class="p">):</span>
                 <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;template&quot;</span><span class="p">)</span>
@@ -1458,7 +1416,7 @@
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a dictionary of strats.</span>
 
-<span class="sd">        Inside those, are dictionaries like ``{&#39;data&#39;: (node, out), &#39;json&#39;: info}``.</span>
+<span class="sd">        Inside those are dictionaries like ``{&#39;data&#39;: (node, out), &#39;json&#39;: info}``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">pipe_idx</span><span class="p">,</span> <span class="n">report_fetched</span><span class="p">,</span> <span class="n">optional</span><span class="p">)</span></div>
 
@@ -1555,7 +1513,7 @@
     <span class="k">def</span> <span class="nf">get_strats</span><span class="p">(</span>  <span class="c1"># noqa: PLR0912,PLR0915</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">resources</span><span class="p">:</span> <span class="n">NODEBLOCK_INPUTS</span><span class="p">,</span> <span class="n">debug</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">,</span> <span class="s2">&quot;StratPool&quot;</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a dictionary of :py:class:`StratPool`\u200bs.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a dictionary of :py:class:`StratPool` s.&quot;&quot;&quot;</span>
         <span class="c1"># TODO: NOTE: NOT COMPATIBLE WITH SUB-RPOOL/STRAT_POOLS</span>
         <span class="c1"># TODO: (and it doesn&#39;t have to be)</span>
         <span class="kn">import</span> <span class="nn">itertools</span>
@@ -1797,7 +1755,7 @@
 <div class="viewcode-block" id="ResourcePool.initialize_nipype_wf">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.ResourcePool.initialize_nipype_wf">[docs]</a>
     <span class="k">def</span> <span class="nf">initialize_nipype_wf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new nipype :py:class:`~pe.Workflow`\u200b.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new nipype :py:class:`~nipype.pipeline.engine.Workflow` .&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">workflow_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;cpac</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -2478,7 +2436,7 @@
     <span class="k">def</span> <span class="nf">create_func_datasource</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">rest_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;func_datasource&quot;</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a :py:class:`~pe.Workflow` to gather timeseries data.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a :py:class:`~nipype.pipeline.engine.Workflow` to gather timeseries data.</span>
 
 <span class="sd">        Return the functional timeseries-related file paths for each series/scan from the</span>
 <span class="sd">        dictionary of functional files described in the data configuration (sublist) YAML</span>
@@ -2856,7 +2814,7 @@
 <div class="viewcode-block" id="ResourcePool.connect_block">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.ResourcePool.connect_block">[docs]</a>
     <span class="k">def</span> <span class="nf">connect_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wf</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="n">NodeBlock</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>  <span class="c1"># noqa: PLR0912,PLR0915</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Connect a :py:class:`NodeBlock` via the `ResourcePool`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Connect a :py:class:`~CPAC.pipeline.engine.nodeblock.NodeBlock` via the `ResourcePool`.&quot;&quot;&quot;</span>
         <span class="n">debug</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s2">&quot;Debugging&quot;</span><span class="p">][</span><span class="s2">&quot;verbose&quot;</span><span class="p">])</span>  <span class="c1"># type: ignore [attr-defined]</span>
         <span class="n">all_opts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -3230,7 +3188,7 @@
         <span class="n">pipe_idx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">,</span>
         <span class="n">pipe_x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find the appropriate bold-to-template transform for given ``pipe_idx``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find the appropriate bold-to-template transform for given `pipe_idx`.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xfm</span><span class="p">:</span>
             <span class="n">json_info</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">json_info</span><span class="p">)</span>
 
@@ -3487,7 +3445,7 @@
     <span class="k">def</span> <span class="nf">_config_lookup</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">keylist</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">fallback_type</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">NoneType</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lookup a :py:class:`Configuration` key, return `None` if not found.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lookup a :py:class:`~CPAC.utils.configuration.Configuration` key, return ``None`` if not found.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="n">keylist</span><span class="p">]</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
@@ -3504,9 +3462,9 @@
 <div class="viewcode-block" id="ResourcePool._get_unlabelled">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.ResourcePool._get_unlabelled">[docs]</a>
     <span class="k">def</span> <span class="nf">_get_unlabelled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unlabelled :py:class:`Resource`\u200bs.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get unlabelled :py:class:`Resource` s.</span>
 
-<span class="sd">        These :py:class:`Resource`\u200bs need integer suffixes to differentiate.</span>
+<span class="sd">        These :py:class:`Resource` s need integer suffixes to differentiate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">CPAC.func_preproc.func_motion</span> <span class="kn">import</span> <span class="n">motion_estimate_filter</span>
 
@@ -3558,10 +3516,8 @@
 <div class="viewcode-block" id="StratPool">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.StratPool">[docs]</a>
 <span class="k">class</span> <span class="nc">StratPool</span><span class="p">(</span><span class="n">_Pool</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A pool of :py:class:`ResourcePool`s keyed by strategy.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A pool of :py:class:`ResourcePool` s keyed by strategy.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="StratPool.__init__">
-<a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.StratPool.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">cfg</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
@@ -3580,8 +3536,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_regressor_dct</span><span class="p">:</span> <span class="nb">dict</span></div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">_regressor_dct</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="StratPool.append_name">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.StratPool.append_name">[docs]</a>
@@ -3659,7 +3614,7 @@
         <span class="n">report_fetched</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">optional</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a :py:class:`Resource`\u200b.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a :py:class:`Resource` .&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">pipe_idx</span><span class="p">,</span> <span class="n">report_fetched</span><span class="p">,</span> <span class="n">optional</span><span class="p">)</span></div>
 
 
@@ -3701,7 +3656,7 @@
 <div class="viewcode-block" id="StratPool.get_cpac_provenance">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource.StratPool.get_cpac_provenance">[docs]</a>
     <span class="k">def</span> <span class="nf">get_cpac_provenance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get &quot;CpacProvenance&quot; for a given :py:class:`Resource`\u200b.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get &quot;CpacProvenance&quot; for a given :py:class:`Resource` .&quot;&quot;&quot;</span>
         <span class="c1"># NOTE: strat_resource has to be entered properly by the developer</span>
         <span class="c1"># it has to either be rpool[resource][strat] or strat_pool[resource]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -3826,7 +3781,7 @@
 <div class="viewcode-block" id="_check_null">
 <a class="viewcode-back" href="../../../../developer/pipeline#CPAC.pipeline.engine.resource._check_null">[docs]</a>
 <span class="k">def</span> <span class="nf">_check_null</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return `None` if `val` == &quot;none&quot; (case-insensitive).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``None`` if `val` == &quot;none&quot; (case-insensitive).&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">val</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span> <span class="k">else</span> <span class="n">val</span>
     <span class="k">return</span> <span class="n">val</span></div>

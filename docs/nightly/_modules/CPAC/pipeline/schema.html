@@ -384,7 +384,7 @@
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">permutations</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">CalledProcessError</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span> <span class="k">as</span> <span class="n">TypeOptional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span> <span class="k">as</span> <span class="n">TypeAny</span><span class="p">,</span> <span class="n">Optional</span> <span class="k">as</span> <span class="n">TypeOptional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathvalidate</span> <span class="kn">import</span> <span class="n">sanitize_filename</span>
@@ -429,8 +429,8 @@
 
 <div class="viewcode-block" id="str_to_bool1_1">
 <a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.str_to_bool1_1">[docs]</a>
-<span class="k">def</span> <span class="nf">str_to_bool1_1</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pylint: disable=invalid-name</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert strings to Booleans for YAML1.1 syntax[1]_.</span>
+<span class="k">def</span> <span class="nf">str_to_bool1_1</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">TypeAny</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pylint: disable=invalid-name</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert strings to Booleans for YAML1.1 syntax [1]_.</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
@@ -1609,7 +1609,7 @@
 
 <span class="sd">    Validate against the latest validation schema by first applying backwards-</span>
 <span class="sd">    compatibility patches, then applying Voluptuous validation, then handling complex</span>
-<span class="sd">    configuration interaction checks before returning validated config_dict.</span>
+<span class="sd">    configuration interaction checks before returning validated `config_dict`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">_changes_1_8_0_to_1_8_1</span>
 

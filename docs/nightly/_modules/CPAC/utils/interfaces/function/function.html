@@ -519,32 +519,30 @@
 <span class="sd">    Automatically imports global Nipype loggers.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Function.__init__">
-<a class="viewcode-back" href="../../../../../developer/nodes#CPAC.utils.interfaces.function.Function.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">input_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">output_names</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">,</span>
-        <span class="n">function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">imports</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">as_module</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">input_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">output_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;out&quot;</span><span class="p">,</span>
+        <span class="n">function</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">imports</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">as_module</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="o">**</span><span class="n">inputs</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :py:func`~CPAC.utils.interfaces.function.Function` interface.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :py:func:`~CPAC.utils.interfaces.function.Function` interface.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        input_names : single str or list or None</span>
+<span class="sd">        input_names</span>
 <span class="sd">            names corresponding to function inputs</span>
 <span class="sd">            if ``None``, derive input names from function argument names</span>
-<span class="sd">        output_names : single str or list</span>
+<span class="sd">        output_names</span>
 <span class="sd">            names corresponding to function outputs (default: &#39;out&#39;).</span>
 <span class="sd">            if list of length &gt; 1, has to match the number of outputs</span>
-<span class="sd">        function : callable</span>
+<span class="sd">        function</span>
 <span class="sd">            callable python object. must be able to execute in an</span>
-<span class="sd">            isolated namespace (possibly in concert with the ``imports``</span>
+<span class="sd">            isolated namespace (possibly in concert with the `imports`</span>
 <span class="sd">            parameter)</span>
-<span class="sd">        imports : list of strings</span>
+<span class="sd">        imports</span>
 <span class="sd">            list of import statements that allow the function to execute</span>
 <span class="sd">            in an otherwise empty namespace. If these collide with</span>
 <span class="sd">            imports defined via the :py:meth:`Function.sig_imports`</span>
@@ -600,8 +598,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">imports</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">imports</span><span class="p">,</span> <span class="o">*</span><span class="n">_AUTOLOGGING_IMPORTS</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_out</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_names</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_out</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></div>
-
+            <span class="bp">self</span><span class="o">.</span><span class="n">_out</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Function.sig_imports">
 <a class="viewcode-back" href="../../../../../developer/utils#CPAC.utils.interfaces.function.Function.sig_imports">[docs]</a>
@@ -614,12 +611,11 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        imports : list of str</span>
+<span class="sd">        imports</span>
 <span class="sd">            import statements to import the function in an otherwise empty</span>
 <span class="sd">            namespace. If these collide with imports defined via the</span>
-<span class="sd">            :py:meth:`Function.__init__` initialization method, the</span>
-<span class="sd">            imports given as a parameter here will be overridden by</span>
-<span class="sd">            those from the initializer.</span>
+<span class="sd">            :py:meth:`Function.__init__` method, the imports given as a parameter here</span>
+<span class="sd">            will be overridden by those from the initializer.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>

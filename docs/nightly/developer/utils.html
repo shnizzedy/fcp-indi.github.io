@@ -1039,11 +1039,12 @@ more):</p>
 …    yaml.safe_load(SLACK_420349[‘preconfig’]))
 &gt;&gt;&gt; slack_420349_preconfig[‘pipeline_setup’, ‘pipeline_name’]
 ‘slack_420349_preconfig’</p>
+<p>Initialize a Configuration instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>config_map</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em> | </em><em>None</em>)</p></li>
-<li><p><strong>skip_env_check</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+<li><p><strong>config_map</strong> (<a class="reference internal" href="#CPAC.utils.configuration.Configuration.dict" title="CPAC.utils.configuration.Configuration.dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <em>optional</em>)</p></li>
+<li><p><strong>skip_env_check</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1334,6 +1335,15 @@ set to ‘on’ and ‘off’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>preconfig</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The canonical name of the preconfig to load</p>
+</dd>
+</dl>
+<p>Initialize a Configuration instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config_map</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <em>optional</em>)</p></li>
+<li><p><strong>skip_env_check</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>)</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -2136,6 +2146,7 @@ Raises CoerceInvalid if impossible.</p>
 <span class="go">&#39;string&#39;</span>
 </pre></div>
 </div>
+<p>Initialize item from list.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -2163,6 +2174,7 @@ Raises CoerceInvalid if impossible.</p>
 <span class="go">[]</span>
 </pre></div>
 </div>
+<p>Initialize ListFromItem.</p>
 </dd></dl>
 
 </section>
@@ -2598,11 +2610,11 @@ slow network connection), the tracking is dropped.</p></li>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span>
 
 <dl>
-<dd><em class="sig-param"><span class="n"><span class="pre">input_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">output_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">as_module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">input_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">output_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'out'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.12)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">as_module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
 <dd><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em>,</dd>
 </dl>
 
@@ -2620,6 +2632,26 @@ slow network connection), the tracking is dropped.</p></li>
 </div></blockquote>
 <p>Can automatically set a module name on the interface.</p>
 <p>Automatically imports global Nipype loggers.</p>
+<p>Initialize a <a class="reference internal" href="#CPAC.utils.interfaces.function.Function" title="CPAC.utils.interfaces.function.Function"><code class="xref py py-func docutils literal notranslate"><span class="pre">Function</span></code></a> interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>] </em><em>| </em><em>None</em>) – names corresponding to function inputs
+if <code class="docutils literal notranslate"><span class="pre">None</span></code>, derive input names from function argument names</p></li>
+<li><p><strong>output_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>] </em><em>| </em><em>None</em>) – names corresponding to function outputs (default: ‘out’).
+if list of length &gt; 1, has to match the number of outputs</p></li>
+<li><p><strong>function</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.12)"><em>Callable</em></a><em> | </em><em>None</em>) – callable python object. must be able to execute in an
+isolated namespace (possibly in concert with the <cite>imports</cite>
+parameter)</p></li>
+<li><p><strong>imports</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>] </em><em>| </em><em>None</em>) – list of import statements that allow the function to execute
+in an otherwise empty namespace. If these collide with
+imports defined via the <a class="reference internal" href="#CPAC.utils.interfaces.function.Function.sig_imports" title="CPAC.utils.interfaces.function.Function.sig_imports"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Function.sig_imports</span></code></a>
+decorator, the imports given as a parameter here will take
+precedence over those from the decorator.</p></li>
+<li><p><strong>as_module</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.sig_imports">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sig_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.12)"><span class="pre">Callable</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function/function#Function.sig_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.sig_imports" title="Link to this definition">¶</a></dt>
@@ -2628,11 +2660,10 @@ slow network connection), the tracking is dropped.</p></li>
 and for avoiding redefinitions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>imports</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – import statements to import the function in an otherwise empty
+<dd class="field-odd"><p><strong>imports</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – import statements to import the function in an otherwise empty
 namespace. If these collide with imports defined via the
-<a class="reference internal" href="nodes#CPAC.utils.interfaces.function.Function.__init__" title="CPAC.utils.interfaces.function.Function.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Function.__init__</span></code></a> initialization method, the
-imports given as a parameter here will be overridden by
-those from the initializer.</p>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Function.__init__</span></code> method, the imports given as a parameter here
+will be overridden by those from the initializer.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>func</strong></p>
@@ -2716,7 +2747,8 @@ See <a class="reference external" href="https://nipype.readthedocs.io/en/latest/
 </dl>
 
 <span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#LoggingHTTPServer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.LoggingHTTPServer" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Constructor.  May be extended, do not override.</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.LoggingRequestHandler">
@@ -2862,7 +2894,30 @@ instead of a <code class="docutils literal notranslate"><span class="pre">loggin
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.utils.ndmg_utils.graph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rois</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dwi'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/ndmg_utils#graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.ndmg_utils.graph" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Initializes the graph with nodes corresponding to the number of ROIs
+<strong>Positional Arguments:</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>N:</dt><dd><ul class="simple">
+<li><p>Number of rois</p></li>
+</ul>
+</dd>
+<dt>rois:</dt><dd><ul class="simple">
+<li><p>Set of ROIs as either an array or niftii file)</p></li>
+</ul>
+</dd>
+<dt>attr:</dt><dd><ul class="simple">
+<li><p>Node or graph attributes. Can be a list. If 1 dimensional
+will be interpretted as a graph attribute. If N
+dimensional will be interpretted as node attributes. If
+it is any other dimensional, it will be ignored.</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p># Adapted from ndmg v0.1.1
+# Copyright 2016 NeuroData (<a class="reference external" href="http://neurodata.io">http://neurodata.io</a>)</p>
+<dl class="py method">
 <dt class="sig sig-object py" id="CPAC.utils.ndmg_utils.graph.as_matrix">
 <span class="sig-name descname"><span class="pre">as_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/ndmg_utils#graph.as_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.ndmg_utils.graph.as_matrix" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the graph as a matrix.</p>
@@ -3705,6 +3760,7 @@ executed</p>
 <dt class="sig sig-object py" id="CPAC.utils.utils.ScanParameters">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ScanParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/utils#ScanParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.utils.ScanParameters" title="Link to this definition">¶</a></dt>
 <dd><p>A dictionary of scan parameters and access methods.</p>
+<p>Initialize ScanParameters dict and metadata.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

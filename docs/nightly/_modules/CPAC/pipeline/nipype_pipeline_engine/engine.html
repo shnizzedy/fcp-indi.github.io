@@ -519,8 +519,6 @@
         <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;    &gt;&gt;&gt; realign.inputs.in_files = &#39;functional.nii&#39;&quot;</span><span class="p">}</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="Node.__init__">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Node.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>
@@ -557,8 +555,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_mem_x</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">delattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_mem_x&quot;</span><span class="p">)</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;skip_timeout&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
-
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;skip_timeout&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
     <span class="n">_orig_sig_params</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">]]]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
         <span class="n">signature</span><span class="p">(</span><span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
@@ -866,13 +863,10 @@
         <span class="n">pe</span><span class="o">.</span><span class="n">MapNode</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;    ...                           &#39;functional3.nii&#39;]&quot;</span><span class="p">}</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="MapNode.__init__">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.MapNode.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">_&quot;</span></div>
-
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">_&quot;</span>
 
     <span class="n">_parameters</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">_custom_params</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
@@ -897,8 +891,6 @@
 <span class="k">class</span> <span class="nc">Workflow</span><span class="p">(</span><span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Controls the setup and execution of a pipeline of processes.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Workflow.__init__">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">base_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a workflow object.</span>
 
@@ -919,8 +911,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_nodes_cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_nested_workflows_cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span></div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nested_workflows_cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Workflow._configure_exec_nodes">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._configure_exec_nodes">[docs]</a>

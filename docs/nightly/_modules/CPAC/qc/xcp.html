@@ -430,6 +430,7 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">fsl</span>
+<span class="kn">from</span> <span class="nn">nipype.pipeline.engine</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Workflow</span>
 
 <span class="kn">from</span> <span class="nn">CPAC.generate_motion_statistics.generate_motion_statistics</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">DVARS_strip_t0</span><span class="p">,</span>
@@ -437,6 +438,7 @@
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
 <span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.resource</span> <span class="kn">import</span> <span class="n">StratPool</span>
 <span class="kn">from</span> <span class="nn">CPAC.qc.qcmetrics</span> <span class="kn">import</span> <span class="n">regisQ</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
 
@@ -450,29 +452,25 @@
 
 <div class="viewcode-block" id="_connect_motion">
 <a class="viewcode-back" href="../../../developer/xcpqc#CPAC.qc.xcp._connect_motion">[docs]</a>
-<span class="k">def</span> <span class="nf">_connect_motion</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">qc_file</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_connect_motion</span><span class="p">(</span>
+    <span class="n">wf</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">:</span> <span class="n">StratPool</span><span class="p">,</span> <span class="n">qc_file</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workflow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Connect the motion metrics to the workflow.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    wf : nipype.pipeline.engine.Workflow</span>
+<span class="sd">    wf</span>
 <span class="sd">        The workflow to connect the motion metrics to.</span>
 
-<span class="sd">    nodes : dict</span>
+<span class="sd">    nodes</span>
 <span class="sd">        Dictionary of nodes already collected from the strategy pool.</span>
 
-<span class="sd">    strat_pool : CPAC.pipeline.engine.ResourcePool</span>
+<span class="sd">    strat_pool</span>
 <span class="sd">        The current strategy pool.</span>
 
-<span class="sd">    qc_file : nipype.pipeline.engine.Node</span>
-<span class="sd">        A function node with the function ``generate_xcp_qc``.</span>
-
-<span class="sd">    pipe_num : int</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    wf : nipype.pipeline.engine.Workflow</span>
+<span class="sd">    qc_file</span>
+<span class="sd">        A function node with the function :py:func:`generate_xcp_qc` .</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=invalid-name, too-many-arguments</span>
     <span class="k">try</span><span class="p">:</span>

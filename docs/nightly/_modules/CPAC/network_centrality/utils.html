@@ -756,13 +756,10 @@
 <span class="k">class</span> <span class="nc">MethodOptionError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a selected centrality method option is not supported.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="MethodOptionError.__init__">
-<a class="viewcode-back" href="../../../developer/workflows/network_centrality#CPAC.network_centrality.utils.MethodOptionError.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_option</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method_option</span> <span class="o">=</span> <span class="n">method_option</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Method option &#39;</span><span class="si">%s</span><span class="s2">&#39; not supported&quot;</span> <span class="o">%</span> <span class="n">method_option</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
-</div>
 
 
 
@@ -771,8 +768,6 @@
 <span class="k">class</span> <span class="nc">ThresholdError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Selected threshold value is not supported for selected threshold option.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ThresholdError.__init__">
-<a class="viewcode-back" href="../../../developer/workflows/network_centrality#CPAC.network_centrality.utils.ThresholdError.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold_option</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold_option</span> <span class="o">=</span> <span class="n">threshold_option</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
@@ -788,7 +783,6 @@
             <span class="sa">f</span><span class="s2">&quot;and less than or equal to 1.</span><span class="se">\n</span><span class="s2"> Currently it is set at </span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
-</div>
 
 
 
@@ -797,8 +791,6 @@
 <span class="k">class</span> <span class="nc">ThresholdOptionError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Selected threshold option is not supported for selected centrality measure.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ThresholdOptionError.__init__">
-<a class="viewcode-back" href="../../../developer/workflows/network_centrality#CPAC.network_centrality.utils.ThresholdOptionError.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold_option</span><span class="p">,</span> <span class="n">method_option</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method_option</span> <span class="o">=</span> <span class="n">method_option</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold_option</span> <span class="o">=</span> <span class="n">threshold_option</span>
@@ -819,7 +811,6 @@
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;. &#39;</span><span class="si">{</span><span class="n">method_option</span><span class="si">}</span><span class="s2">&#39; must use </span><span class="si">{</span><span class="n">_valid_options</span><span class="si">}</span><span class="s2">.&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
-</div>
 
 </pre></div>
         </article>

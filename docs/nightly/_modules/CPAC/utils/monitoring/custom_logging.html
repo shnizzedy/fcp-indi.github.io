@@ -521,8 +521,6 @@
 <span class="k">class</span> <span class="nc">MockLogger</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mock logging.Logger to provide API without keeping the logger in memory.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="MockLogger.__init__">
-<a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
@@ -530,8 +528,7 @@
         <span class="n">MOCK_LOGGERS</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="k">for</span> <span class="n">loglevel</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="s2">&quot;warning&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">]:</span>
             <span class="c1"># set up log methods for all built-in levels</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loglevel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factory_log</span><span class="p">(</span><span class="n">loglevel</span><span class="p">))</span></div>
-
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loglevel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factory_log</span><span class="p">(</span><span class="n">loglevel</span><span class="p">))</span>
 
 <div class="viewcode-block" id="MockLogger.exception">
 <a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.exception">[docs]</a>
