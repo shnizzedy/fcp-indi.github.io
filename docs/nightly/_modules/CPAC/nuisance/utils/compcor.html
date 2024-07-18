@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex" /><link rel="search" title="Search" href="../../../../search" />
 
-    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
-        <title>CPAC.nuisance.utils.compcor - C-PAC 1.8.6.dev Beta documentation</title>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+        <title>CPAC.nuisance.utils.compcor - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=387cc868" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=fe2d11c3" />
     
     
@@ -88,19 +88,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -141,7 +128,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -179,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../../index"><div class="brand">C-PAC 1.8.6.dev Beta documentation</div></a>
+      <a href="../../../../index"><div class="brand">C-PAC 1.8.8.dev1 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +193,7 @@
     <img class="sidebar-logo" src="../../../../_static/cpac_logo_vertical.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.6.dev Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.8.dev1 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../../search" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -374,97 +361,156 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for CPAC.nuisance.utils.compcor</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">signal</span>
-<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nb</span>
+<span></span><span class="c1"># Copyright (C) 2019-2024  C-PAC Developers</span>
+
+<span class="c1"># This file is part of C-PAC.</span>
+
+<span class="c1"># C-PAC is free software: you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the</span>
+<span class="c1"># Free Software Foundation, either version 3 of the License, or (at your</span>
+<span class="c1"># option) any later version.</span>
+
+<span class="c1"># C-PAC is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<span class="c1"># License for more details.</span>
+
+<span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
+<span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils</span> <span class="kn">import</span> <span class="n">safe_shape</span>
-<span class="kn">from</span> <span class="nn">nipype</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="kn">from</span> <span class="nn">nibabel.filebasedimages</span> <span class="kn">import</span> <span class="n">ImageFileError</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
 <span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">svd</span>
 
-<span class="n">iflogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;nipype.interface&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils</span> <span class="kn">import</span> <span class="n">safe_shape</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">IFLOGGER</span>
 
 
 <span class="k">def</span> <span class="nf">calc_compcor_components</span><span class="p">(</span><span class="n">data_filename</span><span class="p">,</span> <span class="n">num_components</span><span class="p">,</span> <span class="n">mask_filename</span><span class="p">):</span>
-
     <span class="k">if</span> <span class="n">num_components</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Improper value for num_components (</span><span class="si">{0}</span><span class="s1">), should be &gt;= 1.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_components</span><span class="p">))</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Improper value for num_components (</span><span class="si">{</span><span class="n">num_components</span><span class="si">}</span><span class="s2">), should be &gt;= 1.&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">image_data</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_filename</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unable to load data from </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_filename</span><span class="p">))</span>
-        <span class="k">raise</span>
+        <span class="n">image_data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_filename</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">ImageFileError</span><span class="p">,</span> <span class="ne">MemoryError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Unable to load data from </span><span class="si">{</span><span class="n">data_filename</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">ImageFileError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">binary_mask</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mask_filename</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unable to load data from </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mask_filename</span><span class="p">))</span>
+        <span class="n">binary_mask</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mask_filename</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">ImageFileError</span><span class="p">,</span> <span class="ne">MemoryError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Unable to load data from </span><span class="si">{</span><span class="n">mask_filename</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">raise</span> <span class="n">ImageFileError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">safe_shape</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">binary_mask</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The data in </span><span class="si">{0}</span><span class="s1"> and </span><span class="si">{1}</span><span class="s1"> do not have a consistent shape&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_filename</span><span class="p">,</span> <span class="n">mask_filename</span><span class="p">))</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The data in </span><span class="si">{</span><span class="n">data_filename</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">mask_filename</span><span class="si">}</span><span class="s2"> do not have a&quot;</span>
+            <span class="s2">&quot; consistent shape&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="c1"># make sure that the values in binary_mask are binary</span>
     <span class="n">binary_mask</span><span class="p">[</span><span class="n">binary_mask</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">binary_mask</span><span class="p">[</span><span class="n">binary_mask</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="c1"># reduce the image data to only the voxels in the binary mask</span>
-    <span class="n">image_data</span> <span class="o">=</span> <span class="n">image_data</span><span class="p">[</span><span class="n">binary_mask</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">image_data</span> <span class="o">=</span> <span class="n">image_data</span><span class="p">[</span><span class="n">binary_mask</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
 
     <span class="c1"># filter out any voxels whose variance equals 0</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Removing zero variance components&#39;</span><span class="p">)</span>
-    <span class="n">image_data</span> <span class="o">=</span> <span class="n">image_data</span><span class="p">[</span><span class="n">image_data</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">,:]</span>
+    <span class="n">IFLOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Removing zero variance components&quot;</span><span class="p">)</span>
+    <span class="n">image_data</span> <span class="o">=</span> <span class="n">image_data</span><span class="p">[</span><span class="n">image_data</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
 
     <span class="k">if</span> <span class="n">image_data</span><span class="o">.</span><span class="n">shape</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
-        <span class="n">err</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">[!] No wm or csf signals left after removing those &quot;</span> \
-              <span class="s2">&quot;with zero variance.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">[!] No wm or csf signals left after removing those &quot;</span>
+            <span class="s2">&quot;with zero variance.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Detrending and centering data&#39;</span><span class="p">)</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">detrend</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">IFLOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Detrending and centering data&quot;</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">detrend</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
     <span class="n">Yc</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">Yc</span> <span class="o">=</span> <span class="n">Yc</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Yc</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Yc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="n">Yc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Calculating SVD decomposition of Y*Y</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">Yc</span> <span class="o">=</span> <span class="n">Yc</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Yc</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Yc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="n">Yc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">IFLOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Calculating SVD decomposition of Y*Y&#39;&quot;</span><span class="p">)</span>
     <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">Yc</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># write out the resulting regressor file</span>
-    <span class="n">regressor_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;compcor_regressors.1D&#39;</span><span class="p">)</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">,</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">num_components</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%16g</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">regressor_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;compcor_regressors.1D&quot;</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">,</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">num_components</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%16g</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">regressor_file</span>
 
 
-<span class="c1"># cosine_filter adapted from nipype &#39;https://github.com/nipy/nipype/blob/d353f0d879826031334b09d33e9443b8c9b3e7fe/nipype/algorithms/confounds.py&#39;</span>
 <div class="viewcode-block" id="cosine_filter">
 <a class="viewcode-back" href="../../../../developer/workflows/nuisance#CPAC.nuisance.cosine_filter">[docs]</a>
-<span class="k">def</span> <span class="nf">cosine_filter</span><span class="p">(</span><span class="n">input_image_path</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">period_cut</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">remove_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">failure_mode</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">cosine_filter</span><span class="p">(</span>
+    <span class="n">input_image_path</span><span class="p">,</span>
+    <span class="n">timestep</span><span class="p">,</span>
+    <span class="n">period_cut</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">remove_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">failure_mode</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    input_image_path: string</span>
+<span class="sd">    `cosine_filter` adapted from Nipype.</span>
+
+<span class="sd">    https://github.com/nipy/nipype/blob/d353f0d/nipype/algorithms/confounds.py#L1086-L1107</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_image_path : string</span>
 <span class="sd">            Bold image to be filtered.</span>
-<span class="sd">    timestep: float</span>
+<span class="sd">    timestep : float</span>
 <span class="sd">            &#39;Repetition time (TR) of series (in sec) - derived from image header if unspecified&#39;</span>
-<span class="sd">    period_cut: float</span>
-<span class="sd">            Minimum period (in sec) for DCT high-pass filter, nipype default value: 128</span>
-
+<span class="sd">    period_cut : float</span>
+<span class="sd">            Minimum period (in sec) for DCT high-pass filter, nipype default value: 128.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># STATEMENT OF CHANGES:</span>
+    <span class="c1">#     This function is derived from sources licensed under the Apache-2.0 terms,</span>
+    <span class="c1">#     and this function has been changed.</span>
 
-    <span class="kn">from</span> <span class="nn">CPAC.nuisance.utils.compcor</span> <span class="kn">import</span> <span class="n">_full_rank</span>
-    <span class="kn">from</span> <span class="nn">CPAC.nuisance.utils.compcor</span> <span class="kn">import</span> <span class="n">_cosine_drift</span>
+    <span class="c1"># CHANGES:</span>
+    <span class="c1">#     * Refactored to take and return filepaths instead of loaded data</span>
+    <span class="c1">#     * Removed caluclation and return of `non_constant_regressors`</span>
+    <span class="c1">#     * Modified docstring to reflect local changes</span>
+    <span class="c1">#     * Updated style to match C-PAC codebase</span>
 
-    <span class="n">input_img</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input_image_path</span><span class="p">)</span>
+    <span class="c1"># ORIGINAL WORK&#39;S ATTRIBUTION NOTICE:</span>
+    <span class="c1">#    Copyright (c) 2009-2016, Nipype developers</span>
+
+    <span class="c1">#    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+    <span class="c1">#    you may not use this file except in compliance with the License.</span>
+    <span class="c1">#    You may obtain a copy of the License at</span>
+
+    <span class="c1">#        http://www.apache.org/licenses/LICENSE-2.0</span>
+
+    <span class="c1">#    Unless required by applicable law or agreed to in writing, software</span>
+    <span class="c1">#    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+    <span class="c1">#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+    <span class="c1">#    See the License for the specific language governing permissions and</span>
+    <span class="c1">#    limitations under the License.</span>
+
+    <span class="c1">#    Prior to release 0.12, Nipype was licensed under a BSD license.</span>
+
+    <span class="c1"># Modifications copyright (C) 2019 - 2024  C-PAC Developers</span>
+    <span class="kn">from</span> <span class="nn">nipype.algorithms.confounds</span> <span class="kn">import</span> <span class="n">_cosine_drift</span><span class="p">,</span> <span class="n">_full_rank</span>
+
+    <span class="n">input_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input_image_path</span><span class="p">)</span>
     <span class="n">input_data</span> <span class="o">=</span> <span class="n">input_img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
 
     <span class="n">datashape</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">timepoints</span> <span class="o">=</span> <span class="n">datashape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">datashape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">failure_mode</span> <span class="o">!=</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">datashape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">failure_mode</span> <span class="o">!=</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 
     <span class="n">input_data</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">timepoints</span><span class="p">))</span>
 
     <span class="n">frametimes</span> <span class="o">=</span> <span class="n">timestep</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">timepoints</span><span class="p">)</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">_full_rank</span><span class="p">(</span><span class="n">_cosine_drift</span><span class="p">(</span><span class="n">period_cut</span><span class="p">,</span> <span class="n">frametimes</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">non_constant_regressors</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 
     <span class="n">betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">input_data</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -477,10 +523,9 @@
     <span class="n">output_data</span> <span class="o">=</span> <span class="n">residuals</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">datashape</span><span class="p">)</span>
 
     <span class="n">hdr</span> <span class="o">=</span> <span class="n">input_img</span><span class="o">.</span><span class="n">header</span>
-    <span class="n">output_img</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span>
-                                <span class="n">affine</span><span class="o">=</span><span class="n">input_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+    <span class="n">output_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="n">input_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
 
-    <span class="n">file_name</span> <span class="o">=</span> <span class="n">input_image_path</span><span class="p">[</span><span class="n">input_image_path</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="n">input_image_path</span><span class="p">[</span><span class="n">input_image_path</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span>
 
     <span class="n">cosfiltered_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">file_name</span><span class="p">)</span>
 
@@ -490,73 +535,15 @@
 
 
 
-<span class="c1"># _cosine_drift and _full_rank copied from nipype &#39;https://github.com/nipy/nipype/blob/d353f0d879826031334b09d33e9443b8c9b3e7fe/nipype/algorithms/confounds.py&#39;</span>
-<span class="k">def</span> <span class="nf">_cosine_drift</span><span class="p">(</span><span class="n">period_cut</span><span class="p">,</span> <span class="n">frametimes</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">     Create a cosine drift matrix with periods greater or equals to period_cut</span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    period_cut : float</span>
-<span class="sd">         Cut period of the low-pass filter (in sec)</span>
-<span class="sd">    frametimes : array of shape(nscans)</span>
-<span class="sd">         The sampling times (in sec)</span>
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    cdrift :  array of shape(n_scans, n_drifts)</span>
-<span class="sd">             cosin drifts plus a constant regressor at cdrift[:,0]</span>
-<span class="sd">    Ref: http://en.wikipedia.org/wiki/Discrete_cosine_transform DCT-II</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">len_tim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">frametimes</span><span class="p">)</span>
-    <span class="n">n_times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">len_tim</span><span class="p">)</span>
-    <span class="n">hfcut</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">period_cut</span>    <span class="c1">#  input parameter is the period</span>
-
-    <span class="c1"># frametimes.max() should be (len_tim-1)*dt</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">frametimes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">frametimes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="c1"># hfcut = 1/(2*dt) yields len_time</span>
-    <span class="c1"># If series is too short, return constant regressor</span>
-    <span class="n">order</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">len_tim</span> <span class="o">*</span> <span class="n">hfcut</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">cdrift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">len_tim</span><span class="p">,</span> <span class="n">order</span><span class="p">))</span>
-    <span class="n">nfct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">len_tim</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-        <span class="n">cdrift</span><span class="p">[:,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nfct</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">len_tim</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_times</span> <span class="o">+</span> <span class="mf">.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span><span class="p">)</span>
-
-    <span class="n">cdrift</span><span class="p">[:,</span> <span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>    <span class="c1">#  or 1./sqrt(len_tim) to normalize</span>
-    <span class="k">return</span> <span class="n">cdrift</span>
-
-<span class="k">def</span> <span class="nf">_full_rank</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">cmax</span><span class="o">=</span><span class="mf">1e15</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function possibly adds a scalar matrix to X</span>
-<span class="sd">    to guarantee that the condition number is smaller than a given threshold.</span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    X : array of shape(nrows, ncols)</span>
-<span class="sd">    cmax=1.e-15, float tolerance for condition number</span>
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    X : array of shape(nrows, ncols) after regularization</span>
-<span class="sd">    cmax=1.e-15, float tolerance for condition number</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">fallback_svd</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">smax</span><span class="p">,</span> <span class="n">smin</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">s</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">smax</span> <span class="o">/</span> <span class="n">smin</span>
-    <span class="k">if</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="n">cmax</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">c</span>
-    <span class="n">iflogger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Matrix is singular at working precision, regularizing...&#39;</span><span class="p">)</span>
-    <span class="n">lda</span> <span class="o">=</span> <span class="p">(</span><span class="n">smax</span> <span class="o">-</span> <span class="n">cmax</span> <span class="o">*</span> <span class="n">smin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">cmax</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">lda</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">V</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">cmax</span>
-
-
 <span class="k">def</span> <span class="nf">fallback_svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="n">full_matrices</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="n">compute_uv</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
         <span class="k">pass</span>
 
-    <span class="k">return</span> <span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="n">full_matrices</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="n">compute_uv</span><span class="p">,</span> <span class="n">lapack_driver</span><span class="o">=</span><span class="s1">&#39;gesvd&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">svd</span><span class="p">(</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="n">full_matrices</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="n">compute_uv</span><span class="p">,</span> <span class="n">lapack_driver</span><span class="o">=</span><span class="s2">&quot;gesvd&quot;</span>
+    <span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">TR_string_to_float</span><span class="p">(</span><span class="n">tr</span><span class="p">):</span>
@@ -574,19 +561,21 @@
 <span class="sd">    tr in seconds (float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Improper type for TR_string_to_float (</span><span class="si">{</span><span class="n">tr</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Improper type for TR_string_to_float (</span><span class="si">{</span><span class="n">tr</span><span class="si">}</span><span class="s2">).&quot;</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-    <span class="n">tr_str</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">tr_str</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">tr_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;ms&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tr_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;ms&quot;</span><span class="p">):</span>
             <span class="n">tr_numeric</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tr_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="mf">0.001</span>
-        <span class="k">elif</span> <span class="n">tr</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="n">tr</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">):</span>
             <span class="n">tr_numeric</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tr_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">tr_numeric</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tr_str</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Can not convert TR string to float: &quot;</span><span class="si">{</span><span class="n">tr</span><span class="si">}</span><span class="s1">&quot;.&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Can not convert TR string to float: &quot;</span><span class="si">{</span><span class="n">tr</span><span class="si">}</span><span class="s1">&quot;.&#39;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
 
     <span class="k">return</span> <span class="n">tr_numeric</span>
 </pre></div>
@@ -623,10 +612,10 @@
   </div>
 </div><script src="../../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../../_static/documentation_options.js?v=1c233aae"></script>
+    <script src="../../../../_static/documentation_options.js?v=fda68b68"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>

@@ -5,11 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" /><link rel="next" title="Random State" href="random_state" /><link rel="prev" title="Templates and Atlases" href="templates" />
 
-    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
-        <title>Nodes - C-PAC 1.8.6.dev Beta documentation</title>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+        <title>Nodes - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=fe2d11c3" />
     
     
@@ -89,19 +89,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -142,7 +129,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -180,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index"><div class="brand">C-PAC 1.8.6.dev Beta documentation</div></a>
+      <a href="../index"><div class="brand">C-PAC 1.8.8.dev1 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +194,7 @@
     <img class="sidebar-logo" src="../_static/cpac_logo_vertical.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.6.dev Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.8.dev1 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -404,7 +391,7 @@
 </div></blockquote>
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_gb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">throttle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node" title="Link to this definition">¶</a></dt>
 <dd><p>Wraps interface objects for use in pipeline</p>
 <p>A Node creates a sandbox-like directory for executing the underlying
 interface. It will copy or link inputs into this directory to ensure that
@@ -422,7 +409,7 @@ re-executed.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Node.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.__init__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_gb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">throttle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Node.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.__init__" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -507,6 +494,8 @@ an actual path.</p>
 * ‘xyz’ (spatial)
 * ‘t’ (temporal)</p>
 </p></li>
+<li><p><strong>throttle</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – Assume this Node will use all available memory if no observation run is
+provided.</p></li>
 </ul>
 </dd>
 </dl>
@@ -588,15 +577,25 @@ cached results are up-to-date.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node.mem_gb">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mem_gb</span></span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.mem_gb" title="Link to this definition">¶</a></dt>
-<dd><p>Get estimated memory (GB)</p>
+<dd><p>Get estimated memory (GB).</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Node.mem_x">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mem_x</span></span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.mem_x" title="Link to this definition">¶</a></dt>
-<dd><p>Get dict of ‘multiplier’ (memory multiplier), ‘file’ (input file)
-and multiplier mode (spatial * temporal, spatial only or
-temporal only). Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if already consumed or not set.</p>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mem_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Node.mem_x" title="Link to this definition">¶</a></dt>
+<dd><p>Get dict of ‘multiplier’, ‘file’, and ‘multiplier mode’.</p>
+<p>‘multiplier’ is a memory multiplier.
+‘file’ is an input file.
+‘multiplier mode’ is one of</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>spatial * temporal</p></li>
+<li><p>spatial only
+or</p></li>
+<li><p>temporal only.</p></li>
+</ul>
+</div></blockquote>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if already consumed or not set.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -675,7 +674,7 @@ updates the hash without re-running.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.MapNode">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.</span></span><span class="sig-name descname"><span class="pre">MapNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#MapNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.pipeline.nipype_pipeline_engine.</span></span><span class="sig-name descname"><span class="pre">MapNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">throttle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#MapNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode" title="Link to this definition">¶</a></dt>
 <dd><p>Wraps interface objects that need to be iterated on a list of inputs.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipype</span> <span class="kn">import</span> <span class="n">MapNode</span>
@@ -689,7 +688,7 @@ updates the hash without re-running.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.MapNode.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mem_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#MapNode.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.__init__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itersource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synchronize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needed_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_without_submitting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_procs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">throttle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#MapNode.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.__init__" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -774,6 +773,8 @@ an actual path.</p>
 * ‘xyz’ (spatial)
 * ‘t’ (temporal)</p>
 </p></li>
+<li><p><strong>throttle</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – Assume this Node will use all available memory if no observation run is
+provided.</p></li>
 </ul>
 </dd>
 </dl>
@@ -861,15 +862,25 @@ cached results are up-to-date.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.MapNode.mem_gb">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mem_gb</span></span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.mem_gb" title="Link to this definition">¶</a></dt>
-<dd><p>Get estimated memory (GB)</p>
+<dd><p>Get estimated memory (GB).</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.MapNode.mem_x">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mem_x</span></span><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.mem_x" title="Link to this definition">¶</a></dt>
-<dd><p>Get dict of ‘multiplier’ (memory multiplier), ‘file’ (input file)
-and multiplier mode (spatial * temporal, spatial only or
-temporal only). Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if already consumed or not set.</p>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mem_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.MapNode.mem_x" title="Link to this definition">¶</a></dt>
+<dd><p>Get dict of ‘multiplier’, ‘file’, and ‘multiplier mode’.</p>
+<p>‘multiplier’ is a memory multiplier.
+‘file’ is an input file.
+‘multiplier mode’ is one of</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>spatial * temporal</p></li>
+<li><p>spatial only
+or</p></li>
+<li><p>temporal only.</p></li>
+</ul>
+</div></blockquote>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if already consumed or not set.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1025,8 +1036,8 @@ Only applies to interfaces being run within a workflow context.</p>
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CPAC.utils.interfaces.function.</span></span><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function/function#Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function" title="Link to this definition">¶</a></dt>
 <dd><p>Runs arbitrary function as an interface</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="s1">&#39;def func(arg1, arg2=5): return arg1 + arg2&#39;</span>
+<blockquote>
+<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="s1">&#39;def func(arg1, arg2=5): return arg1 + arg2&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fi</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;arg2&#39;</span><span class="p">],</span> <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fi</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">function_str</span> <span class="o">=</span> <span class="n">func</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">arg1</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1034,10 +1045,14 @@ Only applies to interfaces being run within a workflow context.</p>
 <span class="go">6</span>
 </pre></div>
 </div>
+</div></blockquote>
+<p>Can automatically set a module name on the interface.</p>
+<p>Automatically imports global Nipype loggers.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function/function#Function.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.__init__" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Initialize a :py:func`~CPAC.utils.interfaces.function.Function` interface.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input_names</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">single</span> <span class="pre">str</span></code> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>) – names corresponding to function inputs
@@ -1104,24 +1119,7 @@ Only applies to interfaces being run within a workflow context.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_exception</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.run" title="Link to this definition">¶</a></dt>
-<dd><p>Execute this interface.</p>
-<p>This interface will not raise an exception if runtime.returncode is
-non-zero.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cwd</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">specify</span> <span class="pre">a</span> <span class="pre">folder</span> <span class="pre">where</span> <span class="pre">the</span> <span class="pre">interface</span> <span class="pre">should</span> <span class="pre">be</span> <span class="pre">run</span></code>)</p></li>
-<li><p><strong>inputs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">allows</span> <span class="pre">the</span> <span class="pre">interface</span> <span class="pre">settings</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">be</span> <span class="pre">updated</span></code>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>results</strong> – A copy of the instance that was executed, provenance information and,
-if successful, results</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://nipype.readthedocs.io/en/1.8.6/api/generated/nipype.interfaces.base.support.html#nipype.interfaces.base.support.InterfaceResult" title="(in nipype v1.8.6)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nipype.interfaces.base.support.InterfaceResult</span></code></a></p>
-</dd>
-</dl>
+<dd><p>Execute the command.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1132,10 +1130,9 @@ if successful, results</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.utils.interfaces.function.Function.sig_imports">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sig_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.12)"><span class="pre">Callable</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function/function#Function.sig_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.sig_imports" title="Link to this definition">¶</a></dt>
-<dd><p>Sets an <code class="docutils literal notranslate"><span class="pre">ns_imports</span></code> attribute on a function for
-Function-node functions.
-This can be useful for classes needed for decorators, typehints
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sig_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.12)"><span class="pre">Callable</span></a></span></span><a class="reference internal" href="../_modules/CPAC/utils/interfaces/function/function#Function.sig_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.interfaces.function.Function.sig_imports" title="Link to this definition">¶</a></dt>
+<dd><p>Set an <code class="docutils literal notranslate"><span class="pre">ns_imports</span></code> attribute on a function for Function-node functions.</p>
+<p>This can be useful for classes needed for decorators, typehints
 and for avoiding redefinitions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1161,25 +1158,16 @@ decorator tested here being applied.
 …                     output_names=[‘out_file’],
 …                     function=calculate_FD_J,
 …                     as_module=True)
-&gt;&gt;&gt; calc_fdj.imports  # doctest: +NORMALIZE_WHITESPACE
-[‘from CPAC.utils.interfaces.function import Function’,</p>
-<blockquote>
-<div><p>‘import os’,
-‘import sys’,
-‘from typing import Optional’,
-‘import numpy as np’,
-‘from CPAC.utils.pytest import skipif’,
-‘from CPAC.utils.typing import LITERAL, TUPLE’]</p>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">signature</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipype.utils.functions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">getsource</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">create_function_from_source</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">create_function_from_source</span><span class="p">(</span><span class="n">getsource</span><span class="p">(</span><span class="n">calculate_FD_J</span><span class="p">),</span>
-<span class="gp">... </span>                                <span class="n">calc_fdj</span><span class="o">.</span><span class="n">imports</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">calculate_FD_J</span><span class="p">)</span> <span class="o">==</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="go">True</span>
-</pre></div>
-</div>
+&gt;&gt;&gt; calc_fdj.imports == [“from CPAC.utils.interfaces.function import Function”,
+…     <a href="#id2"><span class="problematic" id="id3">*</span></a>calculate_FD_J.ns_imports, <a href="#id4"><span class="problematic" id="id5">*</span></a>_AUTOLOGGING_IMPORTS]
+True
+&gt;&gt;&gt; from inspect import signature
+&gt;&gt;&gt; from nipype.utils.functions import (getsource,
+…     create_function_from_source)
+&gt;&gt;&gt; f = create_function_from_source(getsource(calculate_FD_J),
+…                                 calc_fdj.imports)
+&gt;&gt;&gt; inspect.signature(calculate_FD_J) == inspect.signature(f)
+True</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1197,13 +1185,16 @@ decorator tested here being applied.
 <dl class="py method">
 <dt class="sig sig-object py" id="CPAC.pipeline.nipype_pipeline_engine.Workflow.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/pipeline/nipype_pipeline_engine/engine#Workflow.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.pipeline.nipype_pipeline_engine.Workflow.__init__" title="Link to this definition">¶</a></dt>
-<dd><p>Create a workflow object.
-:param name: unique identifier for the workflow
-:type name: <code class="xref py py-class docutils literal notranslate"><span class="pre">alphanumeric</span> <span class="pre">string</span></code>
-:param base_dir: path to workflow storage
-:type base_dir: <code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>
-:param debug: enable verbose debug-level logging
-:type debug: <code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>, <em>optional</em></p>
+<dd><p>Create a workflow object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">alphanumeric</span> <span class="pre">string</span></code>) – unique identifier for the workflow</p></li>
+<li><p><strong>base_dir</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <em>optional</em>) – path to workflow storage</p></li>
+<li><p><strong>debug</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">boolean</span></code>, <em>optional</em>) – enable verbose debug-level logging</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1403,24 +1394,23 @@ False.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.log_nodes_cb">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.</span></span><span class="sig-name descname"><span class="pre">log_nodes_cb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/monitoring#log_nodes_cb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.log_nodes_cb" title="Link to this definition">¶</a></dt>
-<dd><p>Function to record node run statistics to a log file as json
-dictionaries</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>node</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nipype.pipeline.engine.Node</span></code>) – the node being logged</p></li>
-<li><p><strong>status</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – acceptable values are ‘start’, ‘end’; otherwise it is
-considered and error</p></li>
-</ul>
+<dd><dl>
+<dt>Function to record node run statistics to a log file as json</dt><dd><p>dictionaries</p>
+<dl class="simple">
+<dt>node<span class="classifier">nipype.pipeline.engine.Node</span></dt><dd><p>the node being logged</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>this function does not return any values, it logs the node
-status info to the callback logger</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+<dt>status<span class="classifier">string</span></dt><dd><p>acceptable values are ‘start’, ‘end’; otherwise it is
+considered and error</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>None</dt><dd><p>this function does not return any values, it logs the node
+status info to the callback logger</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Modified from <a class="reference external" href="https://github.com/nipy/nipype/blob/5ab2fa0/nipype/utils/profiler.py#L112-L156">https://github.com/nipy/nipype/blob/5ab2fa0/nipype/utils/profiler.py#L112-L156</a></p>
 </dd></dl>
 
 <p id="module-CPAC.utils.monitoring.draw_gantt_chart">Module to draw an html gantt chart from logfile produced by
@@ -1430,7 +1420,7 @@ status info to the callback logger</p>
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.draw_gantt_chart.calculate_resource_timeseries">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.draw_gantt_chart.</span></span><span class="sig-name descname"><span class="pre">calculate_resource_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">events</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/draw_gantt_chart#calculate_resource_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.draw_gantt_chart.calculate_resource_timeseries" title="Link to this definition">¶</a></dt>
 <dd><p>Given as event dictionary, calculate the resources used
-as a timeseries</p>
+as a timeseries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1454,7 +1444,7 @@ and the resource amount as values</p>
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.draw_gantt_chart.create_event_dict">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.draw_gantt_chart.</span></span><span class="sig-name descname"><span class="pre">create_event_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/draw_gantt_chart#create_event_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.draw_gantt_chart.create_event_dict" title="Link to this definition">¶</a></dt>
 <dd><p>Function to generate a dictionary of event (start/finish) nodes
-from the nodes list</p>
+from the nodes list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1476,7 +1466,7 @@ the pipeline execution to the value node it accompanies</p>
 <dt class="sig sig-object py" id="CPAC.utils.monitoring.draw_gantt_chart.draw_nodes">
 <span class="sig-prename descclassname"><span class="pre">CPAC.utils.monitoring.draw_gantt_chart.</span></span><span class="sig-name descname"><span class="pre">draw_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute_scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">space_between_minutes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CPAC/utils/monitoring/draw_gantt_chart#draw_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.utils.monitoring.draw_gantt_chart.draw_nodes" title="Link to this definition">¶</a></dt>
 <dd><p>Function to return the html-string of the node drawings for the
-gantt chart</p>
+gantt chart.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1533,15 +1523,15 @@ file in the same directory as the callback log path passed in</p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">import</span> <span class="pre">logging.handlers</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">from</span> <span class="pre">nipype.utils.profiler</span> <span class="pre">import</span> <span class="pre">log_nodes_cb</span></code></p></li>
 <li><p># log_filename = <code class="docutils literal notranslate"><span class="pre">'callback.log'</span></code></p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">logger</span> <span class="pre">=</span> <span class="pre">logging.getLogger(``</span></code>’callback’<a href="#id2"><span class="problematic" id="id3">``</span></a><code class="xref py py-class docutils literal notranslate"><span class="pre">)</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">logger</span> <span class="pre">=</span> <span class="pre">logging.getLogger(``</span></code>’callback’<a href="#id6"><span class="problematic" id="id7">``</span></a><code class="xref py py-class docutils literal notranslate"><span class="pre">)</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">logger.setLevel(logging.DEBUG)</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">handler</span> <span class="pre">=</span> <span class="pre">logging.FileHandler(log_filename)</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">logger.addHandler(handler)</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">#create</span> <span class="pre">workflow</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">workflow</span> <span class="pre">=</span> <span class="pre">...</span></code></p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">workflow.run(plugin=``</span></code>’MultiProc’<a href="#id4"><span class="problematic" id="id5">``</span></a><code class="xref py py-class docutils literal notranslate"><span class="pre">,</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">workflow.run(plugin=``</span></code>’MultiProc’<a href="#id8"><span class="problematic" id="id9">``</span></a><code class="xref py py-class docutils literal notranslate"><span class="pre">,</span></code></p></li>
 <li><p><strong>#     plugin_args={‘n_procs’</strong> (<code class="docutils literal notranslate"><span class="pre">8</span></code>, <code class="docutils literal notranslate"><span class="pre">'memory'</span></code><code class="xref py py-class docutils literal notranslate"><span class="pre">:12</span></code>, <code class="docutils literal notranslate"><span class="pre">'status_callback'</span></code>: <code class="xref py py-class docutils literal notranslate"><span class="pre">log_nodes_cb``</span></code>}``:class:<cite>)</cite>)</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">generate_gantt_chart(``</span></code>’callback.log’<a href="#id6"><span class="problematic" id="id7">``</span></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">8)</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">#</span> <span class="pre">generate_gantt_chart(``</span></code>’callback.log’<a href="#id10"><span class="problematic" id="id11">``</span></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">8)</span></code></p></li>
 </ul>
 </p>
 </dd>
@@ -1767,10 +1757,10 @@ generate an interactive HTML chart.</p>
   </div>
 </div><script src="../_static/jquery.js?v=5d32c60e"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=1c233aae"></script>
+    <script src="../_static/documentation_options.js?v=fda68b68"></script>
     <script src="../_static/doctools.js?v=d248f5b3"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/underscore.js?v=f1230927"></script>
     <script src="../_static/doctools.js?v=d248f5b3"></script>

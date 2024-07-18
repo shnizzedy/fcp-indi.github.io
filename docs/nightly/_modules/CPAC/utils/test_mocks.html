@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
-        <title>CPAC.utils.test_mocks - C-PAC 1.8.6.dev Beta documentation</title>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+        <title>CPAC.utils.test_mocks - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
     
@@ -88,19 +88,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -141,7 +128,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -179,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index"><div class="brand">C-PAC 1.8.6.dev Beta documentation</div></a>
+      <a href="../../../index"><div class="brand">C-PAC 1.8.8.dev1 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +193,7 @@
     <img class="sidebar-logo" src="../../../_static/cpac_logo_vertical.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.6.dev Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.8.dev1 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -375,7 +362,9 @@
         <article role="main" id="furo-main-content">
           <h1>Source code for CPAC.utils.test_mocks</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
+
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
+
 <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.datasource</span> <span class="kn">import</span> <span class="n">resolve_resolution</span>
@@ -387,210 +376,238 @@
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_mocks.file_node">[docs]</a>
 <span class="k">def</span> <span class="nf">file_node</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">file_node_num</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="n">input_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
-        <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;file_node_</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">file_node_num</span><span class="p">)</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]),</span>
+        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;file_node_</span><span class="si">{</span><span class="n">file_node_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">input_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">path</span>
-    <span class="k">return</span> <span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;file&#39;</span></div>
+    <span class="k">return</span> <span class="n">input_node</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="configuration_strategy_mock">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_mocks.configuration_strategy_mock">[docs]</a>
-<span class="k">def</span> <span class="nf">configuration_strategy_mock</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;FSL&#39;</span><span class="p">):</span>
-    <span class="n">fsldir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FSLDIR&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">configuration_strategy_mock</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;FSL&quot;</span><span class="p">):</span>
+    <span class="n">fsldir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;FSLDIR&quot;</span><span class="p">)</span>
     <span class="c1"># mock the config dictionary</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">({</span>
-        <span class="s2">&quot;pipeline_setup&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;output_directory&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/output/output/pipeline_analysis_nuisance/&quot;</span>
-                        <span class="s2">&quot;sub-M10978008_ses-NFB3&quot;</span>
-            <span class="p">},</span>
-            <span class="s2">&quot;working_directory&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/scratch/pipeline_tests&quot;</span>
-            <span class="p">},</span>
-            <span class="s2">&quot;system_config&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;num_ants_threads&quot;</span><span class="p">:</span> <span class="mi">4</span>
-            <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;registration_workflows&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;functional_registration&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;EPI_registration&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;FSL-FNIRT&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;identity_matrix&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fsldir</span><span class="si">}</span><span class="s2">/etc/flirtsch/&quot;</span>
-                                           <span class="s2">&quot;ident.mat&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;interpolation&quot;</span><span class="p">:</span> <span class="s2">&quot;sinc&quot;</span>
-                    <span class="p">}</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;pipeline_setup&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;output_directory&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/output/output/pipeline_analysis_nuisance/&quot;</span>
+                    <span class="s2">&quot;sub-M10978008_ses-NFB3&quot;</span>
                 <span class="p">},</span>
-                <span class="s2">&quot;func_registration_to_template&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;ANTs_pipelines&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;interpolation&quot;</span><span class="p">:</span> <span class="s2">&quot;LanczosWindowedSinc&quot;</span>
-                    <span class="p">},</span>
-                    <span class="s2">&quot;output_resolution&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;func_preproc_outputs&quot;</span><span class="p">:</span> <span class="s2">&quot;3mm&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;func_derivative_outputs&quot;</span><span class="p">:</span> <span class="s2">&quot;3mm&quot;</span>
-                    <span class="p">},</span>
-                    <span class="s2">&quot;target_template&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;T1_template&quot;</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="s2">&quot;T1w_template_for_resample&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fsldir</span><span class="si">}</span><span class="s2">/&quot;</span>
-                                                         <span class="s2">&quot;data/standard/&quot;</span>
-                                                         <span class="s2">&quot;MNI152_T1_1mm_brain.&quot;</span>
-                                                         <span class="s2">&quot;nii.gz&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;T1w_brain_template_funcreg&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fsldir</span><span class="si">}</span><span class="s2">/&quot;</span>
-                                                          <span class="s2">&quot;data/standard/&quot;</span>
-                                                          <span class="s2">&quot;MNI152_T1_&quot;</span>
-                                                          <span class="s2">&quot;${resolution_for_&quot;</span>
-                                                          <span class="s2">&quot;func_preproc}_&quot;</span>
-                                                          <span class="s2">&quot;brain.nii.gz&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;T1w_template_funcreg&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fsldir</span><span class="si">}</span><span class="s2">/data/&quot;</span>
-                                                    <span class="s2">&quot;standard/MNI152_T1_&quot;</span>
-                                                    <span class="s2">&quot;${resolution_for_func_&quot;</span>
-                                                    <span class="s2">&quot;preproc}.nii.gz&quot;</span>
+                <span class="s2">&quot;working_directory&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/scratch/pipeline_tests&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;system_config&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;num_ants_threads&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;registration_workflows&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;functional_registration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;EPI_registration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;FSL-FNIRT&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;identity_matrix&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fsldir</span><span class="si">}</span><span class="s2">/etc/flirtsch/ident.mat&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;interpolation&quot;</span><span class="p">:</span> <span class="s2">&quot;sinc&quot;</span><span class="p">,</span>
                         <span class="p">}</span>
-                    <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;func_registration_to_template&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;ANTs_pipelines&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;interpolation&quot;</span><span class="p">:</span> <span class="s2">&quot;LanczosWindowedSinc&quot;</span><span class="p">},</span>
+                        <span class="s2">&quot;output_resolution&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;func_preproc_outputs&quot;</span><span class="p">:</span> <span class="s2">&quot;3mm&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;func_derivative_outputs&quot;</span><span class="p">:</span> <span class="s2">&quot;3mm&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;target_template&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;T1_template&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="s2">&quot;T1w_template_for_resample&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fsldir</span><span class="si">}</span><span class="s2">/&quot;</span>
+                                <span class="s2">&quot;data/standard/&quot;</span>
+                                <span class="s2">&quot;MNI152_T1_1mm_brain.&quot;</span>
+                                <span class="s2">&quot;nii.gz&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;T1w_brain_template_funcreg&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fsldir</span><span class="si">}</span><span class="s2">/&quot;</span>
+                                <span class="s2">&quot;data/standard/&quot;</span>
+                                <span class="s2">&quot;MNI152_T1_&quot;</span>
+                                <span class="s2">&quot;${resolution_for_&quot;</span>
+                                <span class="s2">&quot;func_preproc}_&quot;</span>
+                                <span class="s2">&quot;brain.nii.gz&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;T1w_template_funcreg&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fsldir</span><span class="si">}</span><span class="s2">/data/&quot;</span>
+                                <span class="s2">&quot;standard/MNI152_T1_&quot;</span>
+                                <span class="s2">&quot;${resolution_for_func_&quot;</span>
+                                <span class="s2">&quot;preproc}.nii.gz&quot;</span><span class="p">,</span>
+                            <span class="p">}</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
                 <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;post_processing&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;spatial_smoothing&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;fwhm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-            <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;post_processing&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;spatial_smoothing&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fwhm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]}},</span>
         <span class="p">}</span>
-    <span class="p">})</span>
+    <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;ANTS&#39;</span><span class="p">:</span>
-        <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;regOption&#39;</span><span class="p">,</span> <span class="s1">&#39;ANTS&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;ANTS&quot;</span><span class="p">:</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;regOption&quot;</span><span class="p">,</span> <span class="s2">&quot;ANTS&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;regOption&#39;</span><span class="p">,</span> <span class="s1">&#39;FSL&#39;</span><span class="p">)</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;regOption&quot;</span><span class="p">,</span> <span class="s2">&quot;FSL&quot;</span><span class="p">)</span>
 
     <span class="c1"># mock the strategy</span>
     <span class="n">strat</span> <span class="o">=</span> <span class="n">Strategy</span><span class="p">()</span>
 
     <span class="n">resource_dict</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;functional_nuisance_residuals&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;motion_correct/_scan_test/&quot;</span>
-                <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
-                <span class="s2">&quot;volreg.nii.gz&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;mean_functional&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;mean_functional/&quot;</span>
-                <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
-                <span class="s2">&quot;volreg_calc_tstat.nii.gz&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;functional_brain_mask&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;functional_brain_mask/_scan_test/&quot;</span>
-                <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
-                <span class="s2">&quot;volreg_mask.nii.gz&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;motion_correct&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;motion_correct/_scan_test/&quot;</span>
-                <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
-                <span class="s2">&quot;volreg.nii.gz&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;anatomical_brain&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;anatomical_brain/&quot;</span>
-                <span class="s2">&quot;sub-M10978008_ses-NFB3_acq-ao_brain_resample.nii.gz&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;ants_initial_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;ants_initial_xfm/&quot;</span>
-                <span class="s2">&quot;transform0DerivedInitialMovingTranslation.mat&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;ants_affine_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;ants_affine_xfm/transform2Affine.mat&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;ants_rigid_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;ants_rigid_xfm/transform1Rigid.mat&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;anatomical_to_mni_linear_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;anatomical_to_mni_linear_xfm/&quot;</span>
-                <span class="s2">&quot;sub-M10978008_ses-NFB3_T1w_resample_calc_flirt.mat&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;functional_to_anat_linear_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;functional_to_anat_linear_xfm/_scan_test/&quot;</span>
-                <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
-                <span class="s2">&quot;volreg_calc_tstat_flirt.mat&quot;</span><span class="p">),</span>
-            <span class="s1">&#39;ants_symm_warp_field&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;anatomical_to_symmetric_mni_nonlinear_xfm/&quot;</span>
-                <span class="s2">&quot;transform3Warp.nii.gz&quot;</span><span class="p">),</span>
-            <span class="s1">&#39;ants_symm_affine_xfm&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;ants_symmetric_affine_xfm/transform2Affine.mat&quot;</span><span class="p">),</span>
-            <span class="s1">&#39;ants_symm_rigid_xfm&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;ants_symmetric_rigid_xfm/transform1Rigid.mat&quot;</span><span class="p">),</span>
-            <span class="s1">&#39;ants_symm_initial_xfm&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-                <span class="s2">&quot;ants_symmetric_initial_xfm/&quot;</span>
-                <span class="s2">&quot;transform0DerivedInitialMovingTranslation.mat&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;dr_tempreg_maps_files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="s1">&#39;/scratch&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;resting_preproc_sub-M10978008_ses-NFB3_cpac105&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;temporal_dual_regression_0/_scan_test/&#39;</span>
-                <span class="s1">&#39;_selector_CSF-2mmE-M_aC-WM-2mmE-DPC5_G-M_M-SDB_P-2/&#39;</span>
-                <span class="s1">&#39;_spatial_map_PNAS_Smith09_rsn10_spatial_map_file_&#39;</span>
-                <span class="s1">&#39;..cpac_templates..PNAS_Smith09_rsn10.nii.gz/&#39;</span>
-                <span class="s1">&#39;split_raw_volumes/temp_reg_map_000</span><span class="si">{0}</span><span class="s1">.nii.gz&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-            <span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+        <span class="s2">&quot;functional_nuisance_residuals&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;motion_correct/_scan_test/&quot;</span>
+            <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
+            <span class="s2">&quot;volreg.nii.gz&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;mean_functional&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;mean_functional/&quot;</span>
+            <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
+            <span class="s2">&quot;volreg_calc_tstat.nii.gz&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;functional_brain_mask&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;functional_brain_mask/_scan_test/&quot;</span>
+            <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
+            <span class="s2">&quot;volreg_mask.nii.gz&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;motion_correct&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;motion_correct/_scan_test/&quot;</span>
+            <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
+            <span class="s2">&quot;volreg.nii.gz&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;anatomical_brain&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;anatomical_brain/sub-M10978008_ses-NFB3_acq-ao_brain_resample.nii.gz&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;ants_initial_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;ants_initial_xfm/transform0DerivedInitialMovingTranslation.mat&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;ants_affine_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;ants_affine_xfm/transform2Affine.mat&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;ants_rigid_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;ants_rigid_xfm/transform1Rigid.mat&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;anatomical_to_mni_linear_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;anatomical_to_mni_linear_xfm/&quot;</span>
+            <span class="s2">&quot;sub-M10978008_ses-NFB3_T1w_resample_calc_flirt.mat&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;functional_to_anat_linear_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;functional_to_anat_linear_xfm/_scan_test/&quot;</span>
+            <span class="s2">&quot;sub-M10978008_ses-NFB3_task-test_bold_calc_tshift_resample_&quot;</span>
+            <span class="s2">&quot;volreg_calc_tstat_flirt.mat&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;ants_symm_warp_field&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;anatomical_to_symmetric_mni_nonlinear_xfm/transform3Warp.nii.gz&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;ants_symm_affine_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;ants_symmetric_affine_xfm/transform2Affine.mat&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;ants_symm_rigid_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;ants_symmetric_rigid_xfm/transform1Rigid.mat&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;ants_symm_initial_xfm&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;ants_symmetric_initial_xfm/&quot;</span>
+            <span class="s2">&quot;transform0DerivedInitialMovingTranslation.mat&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;dr_tempreg_maps_files&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;/scratch&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;resting_preproc_sub-M10978008_ses-NFB3_cpac105&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;temporal_dual_regression_0/_scan_test/&quot;</span>
+                <span class="s2">&quot;_selector_CSF-2mmE-M_aC-WM-2mmE-DPC5_G-M_M-SDB_P-2/&quot;</span>
+                <span class="s2">&quot;_spatial_map_PNAS_Smith09_rsn10_spatial_map_file_&quot;</span>
+                <span class="s2">&quot;..cpac_templates..PNAS_Smith09_rsn10.nii.gz/&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;split_raw_volumes/temp_reg_map_000</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">.nii.gz&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="p">],</span>
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;ANTS&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;ANTS&quot;</span><span class="p">:</span>
         <span class="n">resource_dict</span><span class="p">[</span><span class="s2">&quot;anatomical_to_mni_nonlinear_xfm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
-            <span class="s2">&quot;anatomical_to_mni_nonlinear_xfm/transform3Warp.nii.gz&quot;</span><span class="p">)</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;anatomical_to_mni_nonlinear_xfm/transform3Warp.nii.gz&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">resource_dict</span><span class="p">[</span><span class="s2">&quot;anatomical_to_mni_nonlinear_xfm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;output_directory&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">],</span>
+            <span class="n">c</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">],</span>
             <span class="s2">&quot;anatomical_to_mni_nonlinear_xfm/&quot;</span>
-            <span class="s2">&quot;sub-M10978008_ses-NFB3_T1w_resample_fieldwarp.nii.gz&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;sub-M10978008_ses-NFB3_T1w_resample_fieldwarp.nii.gz&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="n">file_node_num</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">resource</span><span class="p">,</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">resource_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span>
-            <span class="n">resource</span><span class="p">:</span> <span class="n">file_node</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">file_node_num</span><span class="p">)</span>
-        <span class="p">})</span>
-        <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="n">resource</span><span class="o">+</span><span class="s1">&#39;_0&#39;</span><span class="p">)</span>
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span><span class="n">resource</span><span class="p">:</span> <span class="n">file_node</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">file_node_num</span><span class="p">)})</span>
+        <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="n">resource</span> <span class="o">+</span> <span class="s2">&quot;_0&quot;</span><span class="p">)</span>
         <span class="n">file_node_num</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="n">templates_for_resampling</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;registration_workflows&#39;</span><span class="p">,</span> <span class="s1">&#39;functional_registration&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">,</span> <span class="s1">&#39;output_resolution&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;func_preproc_outputs&#39;</span><span class="p">],</span>
-         <span class="n">c</span><span class="p">[</span><span class="s1">&#39;registration_workflows&#39;</span><span class="p">,</span> <span class="s1">&#39;functional_registration&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">,</span> <span class="s1">&#39;target_template&#39;</span><span class="p">,</span> <span class="s1">&#39;T1_template&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;T1w_brain_template_funcreg&#39;</span><span class="p">],</span>
-         <span class="s1">&#39;template_brain_for_func_preproc&#39;</span><span class="p">,</span>
-         <span class="s1">&#39;resolution_for_func_preproc&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;registration_workflows&#39;</span><span class="p">,</span> <span class="s1">&#39;functional_registration&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">,</span> <span class="s1">&#39;output_resolution&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;func_preproc_outputs&#39;</span><span class="p">],</span>
-         <span class="n">c</span><span class="p">[</span><span class="s1">&#39;registration_workflows&#39;</span><span class="p">,</span> <span class="s1">&#39;functional_registration&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;func_registration_to_template&#39;</span><span class="p">,</span> <span class="s1">&#39;target_template&#39;</span><span class="p">,</span> <span class="s1">&#39;T1_template&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;T1w_brain_template_funcreg&#39;</span><span class="p">],</span>
-         <span class="s1">&#39;template_skull_for_func_preproc&#39;</span><span class="p">,</span>
-         <span class="s1">&#39;resolution_for_func_preproc&#39;</span><span class="p">)</span>
+        <span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span>
+                <span class="s2">&quot;registration_workflows&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;functional_registration&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;func_registration_to_template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;output_resolution&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;func_preproc_outputs&quot;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="n">c</span><span class="p">[</span>
+                <span class="s2">&quot;registration_workflows&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;functional_registration&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;func_registration_to_template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;target_template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;T1_template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;T1w_brain_template_funcreg&quot;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;template_brain_for_func_preproc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resolution_for_func_preproc&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="p">(</span>
+            <span class="n">c</span><span class="p">[</span>
+                <span class="s2">&quot;registration_workflows&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;functional_registration&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;func_registration_to_template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;output_resolution&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;func_preproc_outputs&quot;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="n">c</span><span class="p">[</span>
+                <span class="s2">&quot;registration_workflows&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;functional_registration&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;func_registration_to_template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;target_template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;T1_template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;T1w_brain_template_funcreg&quot;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;template_skull_for_func_preproc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resolution_for_func_preproc&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
     <span class="p">]</span>
 
     <span class="k">for</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">templates_for_resampling</span><span class="p">:</span>
-        <span class="n">resampled_template</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span>
-            <span class="s1">&#39;resolution&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;template_name&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span>
-        <span class="p">],</span>
-                                              <span class="n">output_names</span><span class="o">=</span><span class="p">[</span>
-            <span class="s1">&#39;resampled_template&#39;</span>
-        <span class="p">],</span>
-                                              <span class="n">function</span><span class="o">=</span><span class="n">resolve_resolution</span><span class="p">,</span>
-                                              <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-                                        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;resampled_&#39;</span> <span class="o">+</span> <span class="n">template_name</span><span class="p">)</span>
+        <span class="n">resampled_template</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+            <span class="n">Function</span><span class="p">(</span>
+                <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;resolution&quot;</span><span class="p">,</span> <span class="s2">&quot;template&quot;</span><span class="p">,</span> <span class="s2">&quot;template_name&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">],</span>
+                <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;resampled_template&quot;</span><span class="p">],</span>
+                <span class="n">function</span><span class="o">=</span><span class="n">resolve_resolution</span><span class="p">,</span>
+                <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;resampled_&quot;</span> <span class="o">+</span> <span class="n">template_name</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="n">resampled_template</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="n">resolution</span>
         <span class="n">resampled_template</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span>
         <span class="n">resampled_template</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">template_name</span> <span class="o">=</span> <span class="n">template_name</span>
         <span class="n">resampled_template</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span>
 
-        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">({</span>
-            <span class="n">template_name</span><span class="p">:</span> <span class="p">(</span><span class="n">resampled_template</span><span class="p">,</span> <span class="s1">&#39;resampled_template&#39;</span><span class="p">)})</span>
-        <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="s1">&#39;resampled_template_0&#39;</span><span class="p">)</span>
+        <span class="n">strat</span><span class="o">.</span><span class="n">update_resource_pool</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">template_name</span><span class="p">:</span> <span class="p">(</span><span class="n">resampled_template</span><span class="p">,</span> <span class="s2">&quot;resampled_template&quot;</span><span class="p">)}</span>
+        <span class="p">)</span>
+        <span class="n">strat</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="s2">&quot;resampled_template_0&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">strat</span></div>
 
@@ -628,10 +645,10 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=1c233aae"></script>
+    <script src="../../../_static/documentation_options.js?v=fda68b68"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>

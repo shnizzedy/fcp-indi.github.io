@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
-        <title>CPAC.reho.reho - C-PAC 1.8.6.dev Beta documentation</title>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+        <title>CPAC.reho.reho - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
     
@@ -88,19 +88,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -141,7 +128,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -179,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index"><div class="brand">C-PAC 1.8.6.dev Beta documentation</div></a>
+      <a href="../../../index"><div class="brand">C-PAC 1.8.8.dev1 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +193,7 @@
     <img class="sidebar-logo" src="../../../_static/cpac_logo_vertical.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.6.dev Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.8.dev1 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -375,25 +362,40 @@
         <article role="main" id="furo-main-content">
           <h1>Source code for CPAC.reho.reho</h1><div class="highlight"><pre>
 <span></span><span class="c1"># coding: utf-8</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">import</span> <span class="nn">nipype.interfaces.fsl</span> <span class="k">as</span> <span class="nn">fsl</span>
+<span class="c1"># Copyright (C) 2012-2024  C-PAC Developers</span>
+
+<span class="c1"># This file is part of C-PAC.</span>
+
+<span class="c1"># C-PAC is free software: you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the</span>
+<span class="c1"># Free Software Foundation, either version 3 of the License, or (at your</span>
+<span class="c1"># option) any later version.</span>
+
+<span class="c1"># C-PAC is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<span class="c1"># License for more details.</span>
+
+<span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
+<span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+
+<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
 <span class="kn">from</span> <span class="nn">CPAC.reho.utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
 
 
 <div class="viewcode-block" id="create_reho">
 <a class="viewcode-back" href="../../../developer/workflows/reho#CPAC.reho.create_reho">[docs]</a>
 <span class="k">def</span> <span class="nf">create_reho</span><span class="p">(</span><span class="n">wf_name</span><span class="p">):</span>
-
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Regional Homogeneity(ReHo) approach to fMRI data analysis</span>
+<span class="sd">    Regional Homogeneity(ReHo) approach to fMRI data analysis.</span>
 
 <span class="sd">    This workflow computes the ReHo map, z-score on map</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
 <span class="sd">    None</span>
 
 <span class="sd">    Returns</span>
@@ -403,8 +405,7 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-
-<span class="sd">    `Source &lt;https://github.com/FCP-INDI/C-PAC/blob/master/CPAC/reho/reho.py&gt;`_</span>
+<span class="sd">    `Source &lt;https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/reho/reho.py&gt;`_</span>
 
 <span class="sd">    Workflow Inputs: ::</span>
 
@@ -462,30 +463,38 @@
 <span class="sd">    &gt;&gt;&gt; wf.inputs.inputspec.cluster_size = 27</span>
 <span class="sd">    &gt;&gt;&gt; wf.run()  # doctest: +SKIP</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">reHo</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
-    <span class="n">inputNode</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cluster_size&#39;</span><span class="p">,</span>
-                                                       <span class="s1">&#39;rest_res_filt&#39;</span><span class="p">,</span>
-                                                       <span class="s1">&#39;rest_mask&#39;</span><span class="p">]),</span>
-                        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;inputspec&#39;</span><span class="p">)</span>
+    <span class="n">inputNode</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cluster_size&quot;</span><span class="p">,</span> <span class="s2">&quot;rest_res_filt&quot;</span><span class="p">,</span> <span class="s2">&quot;rest_mask&quot;</span><span class="p">]),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;inputspec&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 
-    <span class="n">outputNode</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;raw_reho_map&#39;</span><span class="p">]),</span>
-                         <span class="n">name</span><span class="o">=</span><span class="s1">&#39;outputspec&#39;</span><span class="p">)</span>
+    <span class="n">outputNode</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;raw_reho_map&quot;</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputspec&quot;</span>
+    <span class="p">)</span>
 
-    <span class="n">reho_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;import os&#39;</span><span class="p">,</span> <span class="s1">&#39;import sys&#39;</span><span class="p">,</span> <span class="s1">&#39;import nibabel as nb&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;import numpy as np&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;from CPAC.reho.utils import f_kendall&#39;</span><span class="p">]</span>
-    <span class="n">raw_reho_map</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;in_file&#39;</span><span class="p">,</span> <span class="s1">&#39;mask_file&#39;</span><span class="p">,</span>
-                                                      <span class="s1">&#39;cluster_size&#39;</span><span class="p">],</span>
-                                         <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;out_file&#39;</span><span class="p">],</span>
-                                         <span class="n">function</span><span class="o">=</span><span class="n">compute_reho</span><span class="p">,</span>
-                                         <span class="n">imports</span><span class="o">=</span><span class="n">reho_imports</span><span class="p">),</span>
-                           <span class="n">name</span><span class="o">=</span><span class="s1">&#39;reho_map&#39;</span><span class="p">,</span> <span class="n">mem_gb</span><span class="o">=</span><span class="mf">6.0</span><span class="p">)</span>
+    <span class="n">reho_imports</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;import os&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;import sys&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;import nibabel as nib&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;import numpy as np&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;from CPAC.reho.utils import f_kendall&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">raw_reho_map</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">Function</span><span class="p">(</span>
+            <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;in_file&quot;</span><span class="p">,</span> <span class="s2">&quot;mask_file&quot;</span><span class="p">,</span> <span class="s2">&quot;cluster_size&quot;</span><span class="p">],</span>
+            <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;out_file&quot;</span><span class="p">],</span>
+            <span class="n">function</span><span class="o">=</span><span class="n">compute_reho</span><span class="p">,</span>
+            <span class="n">imports</span><span class="o">=</span><span class="n">reho_imports</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;reho_map&quot;</span><span class="p">,</span>
+        <span class="n">mem_gb</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span>
+    <span class="p">)</span>
 
-    <span class="n">reHo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="s1">&#39;rest_res_filt&#39;</span><span class="p">,</span> <span class="n">raw_reho_map</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
-    <span class="n">reHo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="s1">&#39;rest_mask&#39;</span><span class="p">,</span> <span class="n">raw_reho_map</span><span class="p">,</span> <span class="s1">&#39;mask_file&#39;</span><span class="p">)</span>
-    <span class="n">reHo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="s1">&#39;cluster_size&#39;</span><span class="p">,</span> <span class="n">raw_reho_map</span><span class="p">,</span> <span class="s1">&#39;cluster_size&#39;</span><span class="p">)</span>
-    <span class="n">reHo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">raw_reho_map</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">outputNode</span><span class="p">,</span> <span class="s1">&#39;raw_reho_map&#39;</span><span class="p">)</span>
+    <span class="n">reHo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="s2">&quot;rest_res_filt&quot;</span><span class="p">,</span> <span class="n">raw_reho_map</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">)</span>
+    <span class="n">reHo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="s2">&quot;rest_mask&quot;</span><span class="p">,</span> <span class="n">raw_reho_map</span><span class="p">,</span> <span class="s2">&quot;mask_file&quot;</span><span class="p">)</span>
+    <span class="n">reHo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="s2">&quot;cluster_size&quot;</span><span class="p">,</span> <span class="n">raw_reho_map</span><span class="p">,</span> <span class="s2">&quot;cluster_size&quot;</span><span class="p">)</span>
+    <span class="n">reHo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">raw_reho_map</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">outputNode</span><span class="p">,</span> <span class="s2">&quot;raw_reho_map&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">reHo</span></div>
 
@@ -499,27 +508,27 @@
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;reho&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">reho</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">regional_homogeneity</span><span class="p">[</span><span class="s1">&#39;cluster_size&#39;</span><span class="p">]</span>
+    <span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">regional_homogeneity</span><span class="p">[</span><span class="s2">&quot;cluster_size&quot;</span><span class="p">]</span>
 
     <span class="c1"># Check the cluster size is supported</span>
     <span class="k">if</span> <span class="n">cluster_size</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">27</span><span class="p">]:</span>
-        <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Cluster size specified: </span><span class="si">%d</span><span class="s1">, is not &#39;</span> \
-                  <span class="s1">&#39;supported. Change to 7, 19, or 27 and try &#39;</span> \
-                  <span class="s1">&#39;again&#39;</span> <span class="o">%</span> <span class="n">cluster_size</span>
+        <span class="n">err_msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;Cluster size specified: </span><span class="si">%d</span><span class="s2">, is not &quot;</span>
+            <span class="s2">&quot;supported. Change to 7, 19, or 27 and try &quot;</span>
+            <span class="s2">&quot;again&quot;</span> <span class="o">%</span> <span class="n">cluster_size</span>
+        <span class="p">)</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
 
-    <span class="n">reho</span> <span class="o">=</span> <span class="n">create_reho</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;reho_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">reho</span> <span class="o">=</span> <span class="n">create_reho</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;reho_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">reho</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cluster_size</span>
 
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_res_filt&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s2">&quot;inputspec.rest_res_filt&quot;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-bold_desc-brain_mask&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_mask&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s2">&quot;inputspec.rest_mask&quot;</span><span class="p">)</span>
 
-    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;reho&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">reho</span><span class="p">,</span> <span class="s1">&#39;outputspec.raw_reho_map&#39;</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;reho&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">reho</span><span class="p">,</span> <span class="s2">&quot;outputspec.raw_reho_map&quot;</span><span class="p">)}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
@@ -529,38 +538,49 @@
     <span class="n">config</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;regional_homogeneity&quot;</span><span class="p">],</span>
     <span class="n">switch</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">],</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">[</span><span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">],</span>
-        <span class="p">[</span><span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;space-template_desc-brain_mask&quot;</span><span class="p">],</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space-template_desc-brain_mask&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-template_reho&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">reho_space_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-  
-    <span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">regional_homogeneity</span><span class="p">[</span><span class="s1">&#39;cluster_size&#39;</span><span class="p">]</span>
+    <span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">regional_homogeneity</span><span class="p">[</span><span class="s2">&quot;cluster_size&quot;</span><span class="p">]</span>
 
     <span class="c1"># Check the cluster size is supported</span>
     <span class="k">if</span> <span class="n">cluster_size</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">27</span><span class="p">]:</span>
-        <span class="n">err_msg</span> <span class="o">=</span> <span class="s1">&#39;Cluster size specified: </span><span class="si">%d</span><span class="s1">, is not &#39;</span> \
-                  <span class="s1">&#39;supported. Change to 7, 19, or 27 and try &#39;</span> \
-                  <span class="s1">&#39;again&#39;</span> <span class="o">%</span> <span class="n">cluster_size</span>
+        <span class="n">err_msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;Cluster size specified: </span><span class="si">%d</span><span class="s2">, is not &quot;</span>
+            <span class="s2">&quot;supported. Change to 7, 19, or 27 and try &quot;</span>
+            <span class="s2">&quot;again&quot;</span> <span class="o">%</span> <span class="n">cluster_size</span>
+        <span class="p">)</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
 
-    <span class="n">reho</span> <span class="o">=</span> <span class="n">create_reho</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;reho_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">reho</span> <span class="o">=</span> <span class="n">create_reho</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;reho_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">reho</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cluster_size</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
-                                    <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">])</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_res_filt&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s2">&quot;inputspec.rest_res_filt&quot;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;space-template_res-derivative_desc-bold_mask&#39;</span><span class="p">,</span>
-                                          <span class="s1">&#39;space-template_desc-brain_mask&#39;</span><span class="p">])</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_mask&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space-template_desc-brain_mask&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">reho</span><span class="p">,</span> <span class="s2">&quot;inputspec.rest_mask&quot;</span><span class="p">)</span>
 
-    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;space-template_reho&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">reho</span><span class="p">,</span> <span class="s1">&#39;outputspec.raw_reho_map&#39;</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;space-template_reho&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">reho</span><span class="p">,</span> <span class="s2">&quot;outputspec.raw_reho_map&quot;</span><span class="p">)}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 </pre></div>
@@ -597,10 +617,10 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=1c233aae"></script>
+    <script src="../../../_static/documentation_options.js?v=fda68b68"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>

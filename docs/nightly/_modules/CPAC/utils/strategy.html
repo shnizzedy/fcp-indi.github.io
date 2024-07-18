@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
-        <title>CPAC.utils.strategy - C-PAC 1.8.6.dev Beta documentation</title>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+        <title>CPAC.utils.strategy - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
     
@@ -88,19 +88,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -141,7 +128,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -179,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index"><div class="brand">C-PAC 1.8.6.dev Beta documentation</div></a>
+      <a href="../../../index"><div class="brand">C-PAC 1.8.8.dev1 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +193,7 @@
     <img class="sidebar-logo" src="../../../_static/cpac_logo_vertical.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.6.dev Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.8.dev1 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -374,7 +361,7 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for CPAC.utils.strategy</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (C) 2018-2022  C-PAC Developers</span>
+<span></span><span class="c1"># Copyright (C) 2018-2024  C-PAC Developers</span>
 
 <span class="c1"># This file is part of C-PAC.</span>
 
@@ -390,16 +377,14 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">six</span>
+
 <span class="kn">from</span> <span class="nn">CPAC.pipeline.engine</span> <span class="kn">import</span> <span class="n">ResourcePool</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;nipype.workflow&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">WFLOGGER</span>
 
 
 <div class="viewcode-block" id="Strategy">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.strategy.Strategy">[docs]</a>
 <span class="k">class</span> <span class="nc">Strategy</span><span class="p">:</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_resource_pool</span> <span class="o">=</span> <span class="n">ResourcePool</span><span class="p">({})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">leaf_node</span> <span class="o">=</span> <span class="kc">None</span>
@@ -410,12 +395,6 @@
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.strategy.Strategy.append_name">[docs]</a>
     <span class="k">def</span> <span class="nf">append_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Strategy.get_name">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.strategy.Strategy.get_name">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
 
 
 <div class="viewcode-block" id="Strategy.set_leaf_properties">
@@ -440,9 +419,9 @@
 <div class="viewcode-block" id="Strategy.get_nodes_names">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.strategy.Strategy.get_nodes_names">[docs]</a>
     <span class="k">def</span> <span class="nf">get_nodes_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">pieces</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">pieces</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
         <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pieces</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pieces</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pieces</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="Strategy.get_node_from_resource_pool">
@@ -451,18 +430,18 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource_pool</span><span class="p">[</span><span class="n">resource_key</span><span class="p">]</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;No node for output: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">resource_key</span><span class="p">)</span>
+            <span class="n">WFLOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;No node for output: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">resource_key</span><span class="p">)</span>
             <span class="k">raise</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">resource_pool</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;Strategy&#39;s ResourcePool dict&#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource_pool</span><span class="o">.</span><span class="n">get_entire_rpool</span><span class="p">()</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Strategy&#39;s ResourcePool dict.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource_pool</span><span class="o">.</span><span class="n">rpool</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rpool</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;Strategy&#39;s ResourcePool&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Strategy&#39;s ResourcePool.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource_pool</span>
 
 <div class="viewcode-block" id="Strategy.update_resource_pool">
@@ -471,8 +450,8 @@
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">resources</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource_pool</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">override</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-                    <span class="s1">&#39;Key </span><span class="si">%s</span><span class="s1"> already exists in resource pool, &#39;</span>
-                    <span class="s1">&#39;replacing with </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="s2">&quot;Key </span><span class="si">%s</span><span class="s2"> already exists in resource pool, &quot;</span>
+                    <span class="s2">&quot;replacing with </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
                 <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">resource_pool</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
 
@@ -484,15 +463,15 @@
 
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_key</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource_key</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource_pool</span><span class="p">[</span><span class="n">resource_key</span><span class="p">]</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;No node for output: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">resource_key</span><span class="p">)</span>
+            <span class="n">WFLOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;No node for output: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">resource_key</span><span class="p">)</span>
             <span class="k">raise</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_key</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource_key</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">resource_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource_pool</span>
 
 <div class="viewcode-block" id="Strategy.fork">
@@ -511,11 +490,9 @@
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.strategy.Strategy.get_forking_points">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forking_points</span><span class="p">(</span><span class="n">strategies</span><span class="p">):</span>
-
         <span class="n">forking_points</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">strat</span> <span class="ow">in</span> <span class="n">strategies</span><span class="p">:</span>
-
             <span class="n">strat_node_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">strat</span><span class="o">.</span><span class="n">get_nodes_names</span><span class="p">())</span>
 
             <span class="n">strat_forking</span> <span class="o">=</span> <span class="p">[]</span>
@@ -534,7 +511,6 @@
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.strategy.Strategy.get_forking_labels">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forking_labels</span><span class="p">(</span><span class="n">strategies</span><span class="p">):</span>
-
         <span class="n">fork_names</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># fork_points is a list of lists, each list containing node names of</span>
@@ -542,82 +518,80 @@
         <span class="n">fork_points</span> <span class="o">=</span> <span class="n">Strategy</span><span class="o">.</span><span class="n">get_forking_points</span><span class="p">(</span><span class="n">strategies</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">fork_point</span> <span class="ow">in</span> <span class="n">fork_points</span><span class="p">:</span>
-            
             <span class="n">fork_point</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
             <span class="n">fork_name</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="k">for</span> <span class="n">fork</span> <span class="ow">in</span> <span class="n">fork_point</span><span class="p">:</span>
-                
-                <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
                 <span class="c1"># TODO: reorganize labels</span>
-                <span class="c1"># registration </span>
-                <span class="k">if</span> <span class="s1">&#39;anat_mni_ants_register&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;anat-ants&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;anat_mni_fnirt_register&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;anat-fnirt&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;anat_mni_flirt_register&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;anat-flirt&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;func_to_epi_ants&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;func-ants&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;func_to_epi_fsl&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;func-fsl&#39;</span>
-                <span class="c1"># skullstripping </span>
-                <span class="k">if</span> <span class="s1">&#39;func_preproc_afni&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;func-3dautomask&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;func_preproc_fsl&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;func-bet&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;func_preproc_fsl_afni&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;func-bet-3dautomask&#39;</span>
+                <span class="c1"># registration</span>
+                <span class="k">if</span> <span class="s2">&quot;anat_mni_ants_register&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;anat-ants&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;anat_mni_fnirt_register&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;anat-fnirt&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;anat_mni_flirt_register&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;anat-flirt&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;func_to_epi_ants&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;func-ants&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;func_to_epi_fsl&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;func-fsl&quot;</span>
+                <span class="c1"># skullstripping</span>
+                <span class="k">if</span> <span class="s2">&quot;func_preproc_afni&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;func-3dautomask&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;func_preproc_fsl&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;func-bet&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;func_preproc_fsl_afni&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;func-bet-3dautomask&quot;</span>
 
                 <span class="c1"># motion correction reference</span>
-                <span class="k">if</span> <span class="s1">&#39;mean&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;median&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;median&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;selected_volume&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;selected_volume&#39;</span>
+                <span class="k">if</span> <span class="s2">&quot;mean&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;median&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;median&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;selected_volume&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;selected_volume&quot;</span>
                 <span class="c1"># motion correction</span>
-                <span class="k">if</span> <span class="s1">&#39;mcflirt&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">+=</span> <span class="s1">&#39;_func-mcflirt&#39;</span> 
-                <span class="k">if</span> <span class="s1">&#39;3dvolreg&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">+=</span> <span class="s1">&#39;_func-3dvolreg&#39;</span>     
-                <span class="k">if</span> <span class="s1">&#39;anat_refined&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;func-anat-refined&#39;</span> 
-                <span class="k">if</span> <span class="s1">&#39;motion_filter&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;motion-filter&#39;</span>
+                <span class="k">if</span> <span class="s2">&quot;mcflirt&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">+=</span> <span class="s2">&quot;_func-mcflirt&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;3dvolreg&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">+=</span> <span class="s2">&quot;_func-3dvolreg&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;anat_refined&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;func-anat-refined&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;motion_filter&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;motion-filter&quot;</span>
                 <span class="c1"># distortion correction</span>
-                <span class="k">if</span> <span class="s1">&#39;epi_distcorr&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;dist-corr&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;bbreg&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;bbreg&#39;</span> 
-                
-                <span class="k">if</span> <span class="s1">&#39;aroma&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;aroma&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;nuisance&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;nuisance&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;frequency_filter&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;freq-filter&#39;</span>
-                
-                <span class="k">if</span> <span class="s1">&#39;gen_motion_stats_before_stc&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;motion_stats_before_stc&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;despike&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;despike&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;slice&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;slice&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;anat_preproc_afni&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;anat-afni&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;anat_preproc_bet&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;anat-bet&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;anat_preproc_ants&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;anat-ants&#39;</span>
-                <span class="k">if</span> <span class="s1">&#39;anat_preproc_unet&#39;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
-                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s1">&#39;anat-unet&#39;</span>
+                <span class="k">if</span> <span class="s2">&quot;epi_distcorr&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;dist-corr&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;bbreg&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;bbreg&quot;</span>
+
+                <span class="k">if</span> <span class="s2">&quot;aroma&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;aroma&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;nuisance&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;nuisance&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;frequency_filter&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;freq-filter&quot;</span>
+
+                <span class="k">if</span> <span class="s2">&quot;gen_motion_stats_before_stc&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;motion_stats_before_stc&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;despike&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;despike&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;slice&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;slice&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;anat_preproc_afni&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;anat-afni&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;anat_preproc_bet&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;anat-bet&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;anat_preproc_ants&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;anat-ants&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;anat_preproc_unet&quot;</span> <span class="ow">in</span> <span class="n">fork</span><span class="p">:</span>
+                    <span class="n">fork_label</span> <span class="o">=</span> <span class="s2">&quot;anat-unet&quot;</span>
 
                 <span class="n">fork_name</span> <span class="o">+=</span> <span class="p">[</span><span class="n">fork_label</span><span class="p">]</span>
 
-            <span class="n">fork_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">fork_name</span><span class="p">))))</span>
+            <span class="n">fork_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">fork_name</span><span class="p">))))</span>
 
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">strategies</span><span class="p">,</span> <span class="n">fork_names</span><span class="p">))</span></div>
 </div>
@@ -656,10 +630,10 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=1c233aae"></script>
+    <script src="../../../_static/documentation_options.js?v=fda68b68"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>

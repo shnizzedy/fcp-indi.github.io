@@ -5,11 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../../genindex" /><link rel="search" title="Search" href="../../search" /><link rel="next" title="Generate Motion and Power Statistics" href="generate_motion_statistics" /><link rel="prev" title="Voxel Mirrored Homotopic Connectivity Analysis" href="vmhc" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
-        <title>Regional Homogeneity Approach to fMRI data analysis - C-PAC 1.8.6.dev Beta documentation</title>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+        <title>Regional Homogeneity Approach to fMRI data analysis - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=fe2d11c3" />
     
     
@@ -89,19 +89,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -142,7 +129,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -180,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index"><div class="brand">C-PAC 1.8.6.dev Beta documentation</div></a>
+      <a href="../../index"><div class="brand">C-PAC 1.8.8.dev1 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +194,7 @@
     <img class="sidebar-logo" src="../../_static/cpac_logo_vertical.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.6.dev Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.8.dev1 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -387,7 +374,7 @@
 <span class="sig-prename descclassname"><span class="pre">CPAC.reho.</span></span><span class="sig-name descname"><span class="pre">compute_reho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#compute_reho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.compute_reho" title="Link to this definition">¶</a></dt>
 <dd><p>Computes the ReHo Map, by computing tied ranks of the timepoints,
 followed by computing Kendall’s coefficient concordance(KCC) of a
-timeseries with its neighbours</p>
+timeseries with its neighbours.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -409,7 +396,7 @@ KCC.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.reho.create_reho">
 <span class="sig-prename descclassname"><span class="pre">CPAC.reho.</span></span><span class="sig-name descname"><span class="pre">create_reho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/reho#create_reho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.create_reho" title="Link to this definition">¶</a></dt>
-<dd><p>Regional Homogeneity(ReHo) approach to fMRI data analysis</p>
+<dd><p>Regional Homogeneity(ReHo) approach to fMRI data analysis.</p>
 <p>This workflow computes the ReHo map, z-score on map</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -423,7 +410,7 @@ KCC.</p></li>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/master/CPAC/reho/reho.py">Source</a></p>
+<p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/reho/reho.py">Source</a></p>
 <p>Workflow Inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">rest_res_filt</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">existing</span> <span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
     <span class="n">Input</span> <span class="n">EPI</span> <span class="mi">4</span><span class="n">D</span> <span class="n">Volume</span>
@@ -480,7 +467,7 @@ KCC.</p></li>
 <dt class="sig sig-object py" id="CPAC.reho.f_kendall">
 <span class="sig-prename descclassname"><span class="pre">CPAC.reho.</span></span><span class="sig-name descname"><span class="pre">f_kendall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#f_kendall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.f_kendall" title="Link to this definition">¶</a></dt>
 <dd><p>Calculates the Kendall’s coefficient of concordance for a number of
-time-series in the input matrix</p>
+time-series in the input matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>timeseries_matrix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – A matrix of ranks of a subset subject’s brain voxels</p>
@@ -498,7 +485,7 @@ time-series in the input matrix</p>
 <dt class="sig sig-object py" id="CPAC.reho.getOpString">
 <span class="sig-prename descclassname"><span class="pre">CPAC.reho.</span></span><span class="sig-name descname"><span class="pre">getOpString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_dev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/reho/utils#getOpString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.reho.getOpString" title="Link to this definition">¶</a></dt>
 <dd><p>Generate the Operand String to be used in workflow nodes to supply
-mean and std deviation to alff workflow nodes</p>
+mean and std deviation to alff workflow nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -590,10 +577,10 @@ mean and std deviation to alff workflow nodes</p>
   </div>
 </div><script src="../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=1c233aae"></script>
+    <script src="../../_static/documentation_options.js?v=fda68b68"></script>
     <script src="../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/underscore.js?v=f1230927"></script>
     <script src="../../_static/doctools.js?v=d248f5b3"></script>

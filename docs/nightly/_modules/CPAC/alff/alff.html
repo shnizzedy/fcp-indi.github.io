@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.05.06 -->
-        <title>CPAC.alff.alff - C-PAC 1.8.6.dev Beta documentation</title>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+        <title>CPAC.alff.alff - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
     
@@ -88,19 +88,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -141,7 +128,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -179,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index"><div class="brand">C-PAC 1.8.6.dev Beta documentation</div></a>
+      <a href="../../../index"><div class="brand">C-PAC 1.8.8.dev1 Beta documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +193,7 @@
     <img class="sidebar-logo" src="../../../_static/cpac_logo_vertical.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">C-PAC 1.8.6.dev Beta documentation</span>
+  <span class="sidebar-brand-text">C-PAC 1.8.8.dev1 Beta documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -375,20 +362,40 @@
         <article role="main" id="furo-main-content">
           <h1>Source code for CPAC.alff.alff</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (C) 2012-2024  C-PAC Developers</span>
 
+<span class="c1"># This file is part of C-PAC.</span>
+
+<span class="c1"># C-PAC is free software: you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the</span>
+<span class="c1"># Free Software Foundation, either version 3 of the License, or (at your</span>
+<span class="c1"># option) any later version.</span>
+
+<span class="c1"># C-PAC is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="c1"># ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public</span>
+<span class="c1"># License for more details.</span>
+
+<span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
+<span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
+
 <span class="kn">from</span> <span class="nn">nipype.interfaces.afni</span> <span class="kn">import</span> <span class="n">preprocess</span>
 <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+
 <span class="kn">from</span> <span class="nn">CPAC.alff.utils</span> <span class="kn">import</span> <span class="n">get_opt_string</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span> <span class="nn">CPAC.registration.registration</span> <span class="kn">import</span> <span class="n">apply_transform</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">check_prov_for_regtool</span>
 
 
 <div class="viewcode-block" id="create_alff">
 <a class="viewcode-back" href="../../../developer/workflows/alff#CPAC.alff.alff.create_alff">[docs]</a>
-<span class="k">def</span> <span class="nf">create_alff</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s1">&#39;alff_workflow&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">create_alff</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;alff_workflow&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate Amplitude of low frequency oscillations (ALFF) and fractional ALFF maps</span>
+<span class="sd">    Calculate Amplitude of low frequency oscillations (ALFF) and fractional ALFF maps.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -402,7 +409,7 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    `Source &lt;https://github.com/FCP-INDI/C-PAC/blob/master/CPAC/alff/alff.py&gt;`_</span>
+<span class="sd">    `Source &lt;https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/alff/alff.py&gt;`_</span>
 
 <span class="sd">    Workflow Inputs::</span>
 
@@ -515,12 +522,10 @@
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
-
 <span class="sd">    .. [1] Zou, Q.-H., Zhu, C.-Z., Yang, Y., Zuo, X.-N., Long, X.-Y., Cao, Q.-J., Wang, Y.-F., et al. (2008). An improved approach to detection of amplitude of low-frequency fluctuation (ALFF) for resting-state fMRI: fractional ALFF. Journal of neuroscience methods, 172(1), 137-41. doi:10.10</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-
 <span class="sd">    &gt;&gt;&gt; alff_w = create_alff()</span>
 <span class="sd">    &gt;&gt;&gt; alff_w.inputs.hp_input.hp = [0.01]</span>
 <span class="sd">    &gt;&gt;&gt; alff_w.inputs.lp_input.lp = [0.1]</span>
@@ -530,90 +535,89 @@
 <span class="sd">    &gt;&gt;&gt; alff_w.inputs.inputspec.rest_mask= &#39;/home/data/subject/func/rest_mask.nii.gz&#39;</span>
 <span class="sd">    &gt;&gt;&gt; alff_w.run() # doctest: +SKIP</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
-    <span class="n">input_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rest_res&#39;</span><span class="p">,</span>
-                                                        <span class="s1">&#39;rest_mask&#39;</span><span class="p">]),</span>
-                         <span class="n">name</span><span class="o">=</span><span class="s1">&#39;inputspec&#39;</span><span class="p">)</span>
+    <span class="n">input_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rest_res&quot;</span><span class="p">,</span> <span class="s2">&quot;rest_mask&quot;</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;inputspec&quot;</span>
+    <span class="p">)</span>
 
-    <span class="n">input_node_hp</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hp&#39;</span><span class="p">]),</span>
-                            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;hp_input&#39;</span><span class="p">)</span>
+    <span class="n">input_node_hp</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;hp&quot;</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hp_input&quot;</span><span class="p">)</span>
 
-    <span class="n">input_node_lp</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lp&#39;</span><span class="p">]),</span>
-                            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;lp_input&#39;</span><span class="p">)</span>
+    <span class="n">input_node_lp</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lp&quot;</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;lp_input&quot;</span><span class="p">)</span>
 
-    <span class="n">output_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;alff_img&#39;</span><span class="p">,</span>
-                                                         <span class="s1">&#39;falff_img&#39;</span><span class="p">]),</span>
-                          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;outputspec&#39;</span><span class="p">)</span>
+    <span class="n">output_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;alff_img&quot;</span><span class="p">,</span> <span class="s2">&quot;falff_img&quot;</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputspec&quot;</span>
+    <span class="p">)</span>
 
     <span class="c1"># filtering</span>
-    <span class="n">bandpass</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Bandpass</span><span class="p">(),</span>
-                       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bandpass_filtering&#39;</span><span class="p">)</span>
-    <span class="n">bandpass</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
-    <span class="n">bandpass</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span>
-                                            <span class="s1">&#39;residual_filtered.nii.gz&#39;</span><span class="p">)</span>
+    <span class="n">bandpass</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Bandpass</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bandpass_filtering&quot;</span><span class="p">)</span>
+    <span class="n">bandpass</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s2">&quot;NIFTI_GZ&quot;</span>
+    <span class="n">bandpass</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;residual_filtered.nii.gz&quot;</span><span class="p">)</span>
 
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node_hp</span><span class="p">,</span> <span class="s1">&#39;hp&#39;</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">,</span> <span class="s1">&#39;highpass&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node_lp</span><span class="p">,</span> <span class="s1">&#39;lp&#39;</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">,</span> <span class="s1">&#39;lowpass&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;rest_res&#39;</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node_hp</span><span class="p">,</span> <span class="s2">&quot;hp&quot;</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">,</span> <span class="s2">&quot;highpass&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node_lp</span><span class="p">,</span> <span class="s2">&quot;lp&quot;</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">,</span> <span class="s2">&quot;lowpass&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s2">&quot;rest_res&quot;</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">)</span>
 
-    <span class="n">get_option_string</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">],</span>
-                                              <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;option_string&#39;</span><span class="p">],</span>
-                                              <span class="n">function</span><span class="o">=</span><span class="n">get_opt_string</span><span class="p">),</span>
-                                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;get_option_string&#39;</span><span class="p">)</span>
+    <span class="n">get_option_string</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">Function</span><span class="p">(</span>
+            <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mask&quot;</span><span class="p">],</span>
+            <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;option_string&quot;</span><span class="p">],</span>
+            <span class="n">function</span><span class="o">=</span><span class="n">get_opt_string</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_option_string&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;rest_mask&#39;</span><span class="p">,</span> <span class="n">get_option_string</span><span class="p">,</span> <span class="s1">&#39;mask&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s2">&quot;rest_mask&quot;</span><span class="p">,</span> <span class="n">get_option_string</span><span class="p">,</span> <span class="s2">&quot;mask&quot;</span><span class="p">)</span>
 
     <span class="c1"># standard deviation over frequency</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">nipype.interfaces.afni</span> <span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
-        <span class="n">stddev_filtered</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span>
-                                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;stddev_filtered&#39;</span><span class="p">)</span>
+
+        <span class="n">stddev_filtered</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;stddev_filtered&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="n">stddev_filtered</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span>
-                                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;stddev_filtered&#39;</span><span class="p">)</span>
+        <span class="n">stddev_filtered</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;stddev_filtered&quot;</span><span class="p">)</span>
 
-    <span class="n">stddev_filtered</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
-    <span class="n">stddev_filtered</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span>
-                                                   <span class="s1">&#39;alff.nii.gz&#39;</span><span class="p">)</span>
+    <span class="n">stddev_filtered</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s2">&quot;NIFTI_GZ&quot;</span>
+    <span class="n">stddev_filtered</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;alff.nii.gz&quot;</span><span class="p">)</span>
 
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">bandpass</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">stddev_filtered</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">get_option_string</span><span class="p">,</span> <span class="s1">&#39;option_string&#39;</span><span class="p">,</span> <span class="n">stddev_filtered</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">bandpass</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">stddev_filtered</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">get_option_string</span><span class="p">,</span> <span class="s2">&quot;option_string&quot;</span><span class="p">,</span> <span class="n">stddev_filtered</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">)</span>
 
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">stddev_filtered</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">output_node</span><span class="p">,</span> <span class="s1">&#39;alff_img&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">stddev_filtered</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">output_node</span><span class="p">,</span> <span class="s2">&quot;alff_img&quot;</span><span class="p">)</span>
 
     <span class="c1"># standard deviation of the unfiltered nuisance corrected image</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">stddev_unfiltered</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span>
-                                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;stddev_unfiltered&#39;</span><span class="p">)</span>
+        <span class="n">stddev_unfiltered</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+            <span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;stddev_unfiltered&quot;</span>
+        <span class="p">)</span>
     <span class="k">except</span> <span class="ne">UnboundLocalError</span><span class="p">:</span>
-        <span class="n">stddev_unfiltered</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span>
-                                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;stddev_unfiltered&#39;</span><span class="p">)</span>
+        <span class="n">stddev_unfiltered</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+            <span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;stddev_unfiltered&quot;</span>
+        <span class="p">)</span>
 
-    <span class="n">stddev_unfiltered</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
-    <span class="n">stddev_unfiltered</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span>
-                                                     <span class="s1">&#39;residual_3dT.nii.gz&#39;</span><span class="p">)</span>
+    <span class="n">stddev_unfiltered</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s2">&quot;NIFTI_GZ&quot;</span>
+    <span class="n">stddev_unfiltered</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;residual_3dT.nii.gz&quot;</span>
+    <span class="p">)</span>
 
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;rest_res&#39;</span><span class="p">,</span> <span class="n">stddev_unfiltered</span><span class="p">,</span> <span class="s1">&#39;in_file&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">get_option_string</span><span class="p">,</span> <span class="s1">&#39;option_string&#39;</span><span class="p">,</span> <span class="n">stddev_unfiltered</span><span class="p">,</span>
-               <span class="s1">&#39;options&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s2">&quot;rest_res&quot;</span><span class="p">,</span> <span class="n">stddev_unfiltered</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">get_option_string</span><span class="p">,</span> <span class="s2">&quot;option_string&quot;</span><span class="p">,</span> <span class="n">stddev_unfiltered</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">)</span>
 
     <span class="c1"># falff calculations</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">falff</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">Calc</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;falff&#39;</span><span class="p">)</span>
+        <span class="n">falff</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">Calc</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;falff&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">UnboundLocalError</span><span class="p">:</span>
-        <span class="n">falff</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Calc</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;falff&#39;</span><span class="p">)</span>
+        <span class="n">falff</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Calc</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;falff&quot;</span><span class="p">)</span>
 
-    <span class="n">falff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="s1">&#39;-float&#39;</span>
-    <span class="n">falff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="s1">&#39;(1.0*bool(a))*((1.0*b)/(1.0*c))&#39;</span>
-    <span class="n">falff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s1">&#39;NIFTI_GZ&#39;</span>
-    <span class="n">falff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s1">&#39;falff.nii.gz&#39;</span><span class="p">)</span>
+    <span class="n">falff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="s2">&quot;-float&quot;</span>
+    <span class="n">falff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="s2">&quot;(1.0*bool(a))*((1.0*b)/(1.0*c))&quot;</span>
+    <span class="n">falff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s2">&quot;NIFTI_GZ&quot;</span>
+    <span class="n">falff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;falff.nii.gz&quot;</span><span class="p">)</span>
 
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s1">&#39;rest_mask&#39;</span><span class="p">,</span> <span class="n">falff</span><span class="p">,</span> <span class="s1">&#39;in_file_a&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">stddev_filtered</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">falff</span><span class="p">,</span> <span class="s1">&#39;in_file_b&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">stddev_unfiltered</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">falff</span><span class="p">,</span> <span class="s1">&#39;in_file_c&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="s2">&quot;rest_mask&quot;</span><span class="p">,</span> <span class="n">falff</span><span class="p">,</span> <span class="s2">&quot;in_file_a&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">stddev_filtered</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">falff</span><span class="p">,</span> <span class="s2">&quot;in_file_b&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">stddev_unfiltered</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">falff</span><span class="p">,</span> <span class="s2">&quot;in_file_c&quot;</span><span class="p">)</span>
 
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">falff</span><span class="p">,</span> <span class="s1">&#39;out_file&#39;</span><span class="p">,</span> <span class="n">output_node</span><span class="p">,</span> <span class="s1">&#39;falff_img&#39;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">falff</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">output_node</span><span class="p">,</span> <span class="s2">&quot;falff_img&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">wf</span></div>
 
@@ -634,26 +638,22 @@
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;alff&quot;</span><span class="p">,</span> <span class="s2">&quot;falff&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">alff_falff</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">alff</span> <span class="o">=</span> <span class="n">create_alff</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alff_falff_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="n">alff</span> <span class="o">=</span> <span class="n">create_alff</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;alff_falff_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s2">&quot;highpass_cutoff&quot;</span><span class="p">]</span>
+    <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s2">&quot;lowpass_cutoff&quot;</span><span class="p">]</span>
+    <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s2">&quot;hp_input&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;hp&quot;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span><span class="p">)</span>
+    <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s2">&quot;lp_input&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;lp&quot;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span><span class="p">)</span>
 
-    <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span> <span class="o">=</span> \
-        <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s1">&#39;highpass_cutoff&#39;</span><span class="p">]</span>
-    <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span> <span class="o">=</span> \
-        <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">]</span>
-    <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s1">&#39;hp_input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;hp&#39;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span><span class="p">)</span>
-    <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s1">&#39;lp_input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;lp&#39;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-denoisedNofilt_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">])</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s2">&quot;inputspec.rest_res&quot;</span><span class="p">)</span>
 
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;desc-denoisedNofilt_bold&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">])</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_res&#39;</span><span class="p">)</span>
-
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;space-bold_desc-brain_mask&#39;</span><span class="p">)</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_mask&#39;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s2">&quot;inputspec.rest_mask&quot;</span><span class="p">)</span>
 
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;alff&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;outputspec.alff_img&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;falff&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;outputspec.falff_img&#39;</span><span class="p">)</span>
+        <span class="s2">&quot;alff&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s2">&quot;outputspec.alff_img&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;falff&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s2">&quot;outputspec.falff_img&quot;</span><span class="p">),</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
@@ -671,37 +671,95 @@
             <span class="p">[</span>
                 <span class="s2">&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span>
+                <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">,</span>
             <span class="p">],</span>
             <span class="p">[</span>
                 <span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;space-template_desc-bold_mask&quot;</span>
+                <span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">,</span>
             <span class="p">],</span>
+            <span class="s2">&quot;desc-denoisedNofilt_bold&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;T1w-brain-template-deriv&quot;</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">],</span>
-    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-template_alff&quot;</span><span class="p">,</span> <span class="s2">&quot;space-template_falff&quot;</span><span class="p">],</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;space-template_alff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;space-template_falff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">alff_falff_space_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s2">&quot;desc-denoisedNofilt_bold&quot;</span><span class="p">):</span>
+        <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span>
+            <span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span>
+        <span class="p">)</span>
+        <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
 
-    <span class="n">alff</span> <span class="o">=</span> <span class="n">create_alff</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;alff_falff_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">num_cpus</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s2">&quot;system_config&quot;</span><span class="p">][</span><span class="s2">&quot;max_cores_per_participant&quot;</span><span class="p">]</span>
 
-    <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span> <span class="o">=</span> \
-        <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s1">&#39;highpass_cutoff&#39;</span><span class="p">]</span>
-    <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span> <span class="o">=</span> \
-        <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s1">&#39;lowpass_cutoff&#39;</span><span class="p">]</span>
-    <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s1">&#39;hp_input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;hp&#39;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span><span class="p">)</span>
-    <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s1">&#39;lp_input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;lp&#39;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span><span class="p">)</span>
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">])</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_res&#39;</span><span class="p">)</span>
-    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">])</span>
-    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;inputspec.rest_mask&#39;</span><span class="p">)</span>
-    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;space-template_alff&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;outputspec.alff_img&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;space-template_falff&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s1">&#39;outputspec.falff_img&#39;</span><span class="p">)</span>
-    <span class="p">}</span>
+        <span class="n">num_ants_cores</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s2">&quot;system_config&quot;</span><span class="p">][</span><span class="s2">&quot;num_ants_threads&quot;</span><span class="p">]</span>
+
+        <span class="n">apply_xfm</span> <span class="o">=</span> <span class="n">apply_transform</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;warp_denoisedNofilt_to_T1template_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">reg_tool</span><span class="p">,</span>
+            <span class="n">time_series</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">num_cpus</span><span class="o">=</span><span class="n">num_cpus</span><span class="p">,</span>
+            <span class="n">num_ants_cores</span><span class="o">=</span><span class="n">num_ants_cores</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">reg_tool</span> <span class="o">==</span> <span class="s2">&quot;ants&quot;</span><span class="p">:</span>
+            <span class="n">apply_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">interpolation</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span>
+                <span class="s2">&quot;functional_registration&quot;</span>
+            <span class="p">][</span><span class="s2">&quot;func_registration_to_template&quot;</span><span class="p">][</span><span class="s2">&quot;ANTs_pipelines&quot;</span><span class="p">][</span><span class="s2">&quot;interpolation&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">reg_tool</span> <span class="o">==</span> <span class="s2">&quot;fsl&quot;</span><span class="p">:</span>
+            <span class="n">apply_xfm</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">interpolation</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span>
+                <span class="s2">&quot;functional_registration&quot;</span>
+            <span class="p">][</span><span class="s2">&quot;func_registration_to_template&quot;</span><span class="p">][</span><span class="s2">&quot;FNIRT_pipelines&quot;</span><span class="p">][</span><span class="s2">&quot;interpolation&quot;</span><span class="p">]</span>
+
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-denoisedNofilt_bold&quot;</span><span class="p">)</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">apply_xfm</span><span class="p">,</span> <span class="s2">&quot;inputspec.input_image&quot;</span><span class="p">)</span>
+
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;T1w-brain-template-deriv&quot;</span><span class="p">)</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">apply_xfm</span><span class="p">,</span> <span class="s2">&quot;inputspec.reference&quot;</span><span class="p">)</span>
+
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">apply_xfm</span><span class="p">,</span> <span class="s2">&quot;inputspec.transform&quot;</span><span class="p">)</span>
+
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">apply_xfm</span><span class="p">,</span>
+                <span class="s2">&quot;outputspec.output_image&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+    <span class="n">alff</span> <span class="o">=</span> <span class="n">create_alff</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alff_falff_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s2">&quot;highpass_cutoff&quot;</span><span class="p">]</span>
+    <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">amplitude_low_frequency_fluctuation</span><span class="p">[</span><span class="s2">&quot;lowpass_cutoff&quot;</span><span class="p">]</span>
+    <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s2">&quot;hp_input&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;hp&quot;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hp_input</span><span class="o">.</span><span class="n">hp</span><span class="p">)</span>
+    <span class="n">alff</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span><span class="s2">&quot;lp_input&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterables</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;lp&quot;</span><span class="p">,</span> <span class="n">alff</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">lp_input</span><span class="o">.</span><span class="n">lp</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;space-template_res-derivative_desc-denoisedNofilt_bold&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s2">&quot;inputspec.rest_res&quot;</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">alff</span><span class="p">,</span> <span class="s2">&quot;inputspec.rest_mask&quot;</span><span class="p">)</span>
+
+    <span class="n">outputs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;space-template_alff&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s2">&quot;outputspec.alff_img&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;space-template_falff&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">alff</span><span class="p">,</span> <span class="s2">&quot;outputspec.falff_img&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></div>
 
@@ -739,10 +797,10 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=1c233aae"></script>
+    <script src="../../../_static/documentation_options.js?v=fda68b68"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
