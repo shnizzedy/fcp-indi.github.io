@@ -3734,7 +3734,7 @@
 <span class="sd">            If regressor dictionary does not exist in current strategy.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># pylint: disable=attribute-defined-outside-init</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_regressor_dct&quot;</span><span class="p">):</span>  <span class="c1"># memoized</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_regressor_dct&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_regressor_dct</span><span class="p">:</span>  <span class="c1"># memoized</span>
             <span class="c1"># pylint: disable=access-member-before-definition</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_regressor_dct</span>
         <span class="n">key_error</span> <span class="o">=</span> <span class="ne">KeyError</span><span class="p">(</span>
