@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex" /><link rel="search" title="Search" href="../../../../search" />
 
-    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>CPAC.utils.monitoring.draw_gantt_chart - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=fe2d11c3" />
     
@@ -978,8 +978,6 @@
 
 
 
-<div class="viewcode-block" id="_timing">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart._timing">[docs]</a>
 <span class="k">def</span> <span class="nf">_timing</span><span class="p">(</span><span class="n">nodes_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Covert timestamps from strings to datetimes.</span>
 
@@ -1021,12 +1019,9 @@
                     <span class="n">new_node_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_timing_timestamp</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
                 <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                     <span class="k">pass</span>
-        <span class="k">return</span> <span class="n">new_node_list</span></div>
+        <span class="k">return</span> <span class="n">new_node_list</span>
 
 
-
-<div class="viewcode-block" id="_timing_timestamp">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart._timing_timestamp">[docs]</a>
 <span class="k">def</span> <span class="nf">_timing_timestamp</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert timestamps in a node from string to datetime.</span>
 
@@ -1050,8 +1045,7 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="s2">&quot;finish&quot;</span><span class="p">}</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">))</span>
         <span class="k">else</span> <span class="n">v</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-    <span class="p">}</span></div>
-
+    <span class="p">}</span>
 </pre></div>
         </article>
       </div>

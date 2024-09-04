@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>CPAC.func_preproc.func_preproc - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
@@ -385,7 +385,7 @@
 
 <span class="kn">from</span> <span class="nn">CPAC.func_preproc.utils</span> <span class="kn">import</span> <span class="n">nullify</span>
 <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.ants</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">AI</span><span class="p">,</span>  <span class="c1"># niworkflows</span>
@@ -1403,7 +1403,7 @@
     <span class="c1">#     and this function has been changed.</span>
 
     <span class="c1"># CHANGES:</span>
-    <span class="c1">#     * Converted from a plain function to a CPAC.pipeline.engine.nodeblock.NodeBlockFunction</span>
+    <span class="c1">#     * Converted from a plain function to a CPAC.pipeline.nodeblock.NodeBlockFunction</span>
     <span class="c1">#     * Removed Registration version check</span>
     <span class="c1">#     * Hardcoded Registration parameters instead of loading epi_atlasbased_brainmask.json</span>
     <span class="c1">#     * Uses C-PAC&#39;s ``FSL-AFNI-brain-probseg`` template in place of ``templateflow.api.get(&quot;MNI152NLin2009cAsym&quot;, resolution=1, label=&quot;brain&quot;, suffix=&quot;probseg&quot;)``</span>

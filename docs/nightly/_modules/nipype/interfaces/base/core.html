@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex" /><link rel="search" title="Search" href="../../../../search" />
 
-    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>nipype.interfaces.base.core - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=fe2d11c3" />
     
@@ -461,13 +461,10 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;interfaces should implement a version property&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-<div class="viewcode-block" id="Interface._outputs">
-<a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface._outputs">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_outputs</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes outputs&quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
-
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 <div class="viewcode-block" id="Interface.help">
 <a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface.help">[docs]</a>
@@ -481,9 +478,12 @@
         <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># R1710</span></div>
 
 
+<div class="viewcode-block" id="Interface.__init__">
+<a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Subclasses must implement __init__&quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 
 <div class="viewcode-block" id="Interface.run">
 <a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface.run">[docs]</a>
@@ -499,15 +499,10 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
-<div class="viewcode-block" id="Interface._list_outputs">
-<a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface._list_outputs">[docs]</a>
     <span class="k">def</span> <span class="nf">_list_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;List expected outputs&quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-
-<div class="viewcode-block" id="Interface._get_filecopy_info">
-<a class="viewcode-back" href="../../../../developer/nodes#nipype.interfaces.base.core.Interface._get_filecopy_info">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_get_filecopy_info</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Provides information about file inputs to copy or link to cwd.</span>
@@ -518,7 +513,6 @@
             <span class="s2">&quot;in nipype-1.1.6 and will be removed in 1.2.0&quot;</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">get_filecopy_info</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span></div>
-</div>
 
 
 

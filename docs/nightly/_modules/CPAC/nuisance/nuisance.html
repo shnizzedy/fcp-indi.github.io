@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>CPAC.nuisance.nuisance - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
@@ -400,8 +400,8 @@
     <span class="n">TR_string_to_float</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.resource</span> <span class="kn">import</span> <span class="n">StratPool</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine</span> <span class="kn">import</span> <span class="n">ResourcePool</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
 <span class="kn">from</span> <span class="nn">CPAC.registration.registration</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">apply_transform</span><span class="p">,</span>
     <span class="n">warp_timeseries_to_EPItemplate</span><span class="p">,</span>
@@ -2779,12 +2779,34 @@
 <span class="k">def</span> <span class="nf">nuisance_regressors_generation</span><span class="p">(</span>
     <span class="n">wf</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">,</span>
     <span class="n">cfg</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
-    <span class="n">strat_pool</span><span class="p">:</span> <span class="n">StratPool</span><span class="p">,</span>
+    <span class="n">strat_pool</span><span class="p">:</span> <span class="n">ResourcePool</span><span class="p">,</span>
     <span class="n">pipe_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">opt</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="n">space</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Workflow</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate nuisance regressors.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate nuisance regressors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wf : ~nipype.pipeline.engine.workflows.Workflow</span>
+
+<span class="sd">    cfg : ~CPAC.utils.configuration.Configuration</span>
+
+<span class="sd">    strat_pool : ~CPAC.pipeline.engine.ResourcePool</span>
+
+<span class="sd">    pipe_num : int</span>
+
+<span class="sd">    opt : dict</span>
+
+<span class="sd">    space : str</span>
+<span class="sd">        T1w or bold</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    wf : nipype.pipeline.engine.workflows.Workflow</span>
+
+<span class="sd">    outputs : dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">prefixes</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;space-</span><span class="si">{</span><span class="n">space</span><span class="si">}</span><span class="s2">_&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">space</span> <span class="o">==</span> <span class="s2">&quot;T1w&quot;</span><span class="p">:</span>
@@ -2801,6 +2823,8 @@
         <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">reg_tool</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">use_ants</span> <span class="o">=</span> <span class="n">reg_tool</span> <span class="o">==</span> <span class="s2">&quot;ants&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">use_ants</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">switch_is_on</span><span class="p">(</span>
         <span class="p">[</span>
             <span class="s2">&quot;functional_preproc&quot;</span><span class="p">,</span>
@@ -3008,7 +3032,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">:</span> <span class="n">StratPool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Nuisance regression in native (BOLD) or template space.</span>
 
 <span class="sd">    Parameters</span>
@@ -3025,7 +3049,7 @@
 
 <span class="sd">    outputs : dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">opt</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">regressor_dct</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">regressor_dct</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
     <span class="n">bandpass</span> <span class="o">=</span> <span class="s2">&quot;Bandpass&quot;</span> <span class="ow">in</span> <span class="n">opt</span>
     <span class="n">bandpass_before</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">bandpass</span>

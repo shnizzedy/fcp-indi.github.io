@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../../genindex" /><link rel="search" title="Search" href="../../search" /><link rel="next" title="Group Analysis" href="group_analysis" /><link rel="prev" title="Generate Motion and Power Statistics" href="generate_motion_statistics" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>Scrubbing - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=fe2d11c3" />
     
@@ -371,7 +371,7 @@
 <span id="scrubbing"></span><h1>Scrubbing<a class="headerlink" href="#module-CPAC.scrubbing" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.scrubbing.create_scrubbing_preproc">
-<span class="sig-name descname"><span class="pre">create_scrubbing_preproc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scrubbing'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/scrubbing/scrubbing#create_scrubbing_preproc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.scrubbing.create_scrubbing_preproc" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.scrubbing.</span></span><span class="sig-name descname"><span class="pre">create_scrubbing_preproc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scrubbing'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/scrubbing/scrubbing#create_scrubbing_preproc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.scrubbing.create_scrubbing_preproc" title="Link to this definition">¶</a></dt>
 <dd><p>Take the list of offending timepoints that are to be removed and remove it from the motion corrected input image.</p>
 <p>Also remove the information of discarded time points from the movement parameters file obtained during motion correction.</p>
 <dl class="field-list simple">
@@ -385,8 +385,7 @@
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 </dd>
 </dl>
-<div class="admonition-notes admonition">
-<p class="admonition-title">Notes</p>
+<p class="rubric">Notes</p>
 <p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/scrubbing/scrubbing.py">Source</a></p>
 <p>Workflow Inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">frames_in_ID</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
@@ -426,7 +425,6 @@ in the frames_in_1D file</p></li>
 <p>Detailed Workflow Graph:</p>
 <a class="reference internal image-reference" href="images/generated/scrubbing_detailed.png"><img alt="images/generated/scrubbing_detailed.png" src="images/generated/scrubbing_detailed.png" style="width: 500px;" />
 </a>
-</div>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CPAC</span> <span class="kn">import</span> <span class="n">scrubbing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">scrubbing</span><span class="o">.</span><span class="n">create_scrubbing_preproc</span><span class="p">()</span>
@@ -440,7 +438,7 @@ in the frames_in_1D file</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.scrubbing.get_indx">
-<span class="sig-name descname"><span class="pre">get_indx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scrub_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frames_in_1D_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/scrubbing/scrubbing#get_indx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.scrubbing.get_indx" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.scrubbing.</span></span><span class="sig-name descname"><span class="pre">get_indx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scrub_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frames_in_1D_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/scrubbing/scrubbing#get_indx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.scrubbing.get_indx" title="Link to this definition">¶</a></dt>
 <dd><p>Get the list of time frames that are to be included.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -458,7 +456,7 @@ looks something like “ 4dfile.nii.gz[0,1,2,..100] “</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.scrubbing.get_mov_parameters">
-<span class="sig-name descname"><span class="pre">get_mov_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile_b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/scrubbing/scrubbing#get_mov_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.scrubbing.get_mov_parameters" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CPAC.scrubbing.</span></span><span class="sig-name descname"><span class="pre">get_mov_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile_b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/scrubbing/scrubbing#get_mov_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.scrubbing.get_mov_parameters" title="Link to this definition">¶</a></dt>
 <dd><p>Get the new movement parameters file after removing the offending time frames.</p>
 <p>(i.e., those exceeding FD 0.5mm/0.2mm threshold).</p>
 <dl class="field-list simple">

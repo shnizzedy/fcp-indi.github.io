@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>CPAC.utils.datasource - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
@@ -383,7 +383,6 @@
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">RequiredFieldInvalid</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
@@ -394,6 +393,7 @@
 <span class="kn">from</span> <span class="nn">CPAC.utils.bids_utils</span> <span class="kn">import</span> <span class="n">bids_remove_entity</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">FMLOGGER</span>
+<span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">get_scan_params</span>
 
 
 <div class="viewcode-block" id="bidsier_prefix">
@@ -432,8 +432,7 @@
 
 <div class="viewcode-block" id="get_rest">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_rest">[docs]</a>
-<span class="nd">@Function</span><span class="o">.</span><span class="n">sig_imports</span><span class="p">([</span><span class="s2">&quot;from pathlib import Path&quot;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">get_rest</span><span class="p">(</span><span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rest_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">resource</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;scan&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">get_rest</span><span class="p">(</span><span class="n">scan</span><span class="p">,</span> <span class="n">rest_dict</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="s2">&quot;scan&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the path of the chosen resource in the functional file dictionary.</span>
 
 <span class="sd">    scan: the scan/series name or label</span>
@@ -505,7 +504,7 @@
 
 <div class="viewcode-block" id="check_func_scan">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.check_func_scan">[docs]</a>
-<span class="k">def</span> <span class="nf">check_func_scan</span><span class="p">(</span><span class="n">func_scan_dct</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">check_func_scan</span><span class="p">(</span><span class="n">func_scan_dct</span><span class="p">,</span> <span class="n">scan</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run some checks on the functional timeseries-related files.</span>
 
 <span class="sd">    For a given series/scan name or label.</span>
@@ -544,6 +543,122 @@
             <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
         <span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_func_datasource">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_func_datasource">[docs]</a>
+<span class="k">def</span> <span class="nf">create_func_datasource</span><span class="p">(</span><span class="n">rest_dict</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;func_datasource&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the functional timeseries-related file paths for each series/scan...</span>
+
+<span class="sd">    ...from the dictionary of functional files described in the data</span>
+<span class="sd">    configuration (sublist) YAML file.</span>
+
+<span class="sd">    Scan input (from inputnode) is an iterable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+
+    <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
+
+    <span class="n">inputnode</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span>
+            <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="s2">&quot;creds_path&quot;</span><span class="p">,</span> <span class="s2">&quot;dl_dir&quot;</span><span class="p">],</span> <span class="n">mandatory_inputs</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;inputnode&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">outputnode</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span>
+            <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;rest&quot;</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="s2">&quot;scan_params&quot;</span><span class="p">,</span> <span class="s2">&quot;phase_diff&quot;</span><span class="p">,</span> <span class="s2">&quot;magnitude&quot;</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputspec&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># have this here for now because of the big change in the data</span>
+    <span class="c1"># configuration format</span>
+    <span class="c1"># (Not necessary with ingress - format does not comply)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rpool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s2">&quot;derivatives-dir&quot;</span><span class="p">):</span>
+        <span class="n">check_scan</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+            <span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span>
+                <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;func_scan_dct&quot;</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">],</span>
+                <span class="n">output_names</span><span class="o">=</span><span class="p">[],</span>
+                <span class="n">function</span><span class="o">=</span><span class="n">check_func_scan</span><span class="p">,</span>
+                <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;check_func_scan&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">check_scan</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">func_scan_dct</span> <span class="o">=</span> <span class="n">rest_dict</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="n">check_scan</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get the functional scan itself</span>
+    <span class="n">selectrest</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span>
+            <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="s2">&quot;rest_dict&quot;</span><span class="p">,</span> <span class="s2">&quot;resource&quot;</span><span class="p">],</span>
+            <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;file_path&quot;</span><span class="p">],</span>
+            <span class="n">function</span><span class="o">=</span><span class="n">get_rest</span><span class="p">,</span>
+            <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;selectrest&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">selectrest</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rest_dict</span> <span class="o">=</span> <span class="n">rest_dict</span>
+    <span class="n">selectrest</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">resource</span> <span class="o">=</span> <span class="s2">&quot;scan&quot;</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="n">selectrest</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">)</span>
+
+    <span class="c1"># check to see if it&#39;s on an Amazon AWS S3 bucket, and download it, if it</span>
+    <span class="c1"># is - otherwise, just return the local file path</span>
+    <span class="n">check_s3_node</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span>
+            <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;file_path&quot;</span><span class="p">,</span> <span class="s2">&quot;creds_path&quot;</span><span class="p">,</span> <span class="s2">&quot;dl_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;img_type&quot;</span><span class="p">],</span>
+            <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;local_path&quot;</span><span class="p">],</span>
+            <span class="n">function</span><span class="o">=</span><span class="n">check_for_s3</span><span class="p">,</span>
+            <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;check_for_s3&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">selectrest</span><span class="p">,</span> <span class="s2">&quot;file_path&quot;</span><span class="p">,</span> <span class="n">check_s3_node</span><span class="p">,</span> <span class="s2">&quot;file_path&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;creds_path&quot;</span><span class="p">,</span> <span class="n">check_s3_node</span><span class="p">,</span> <span class="s2">&quot;creds_path&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;dl_dir&quot;</span><span class="p">,</span> <span class="n">check_s3_node</span><span class="p">,</span> <span class="s2">&quot;dl_dir&quot;</span><span class="p">)</span>
+    <span class="n">check_s3_node</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">img_type</span> <span class="o">=</span> <span class="s2">&quot;func&quot;</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="n">outputnode</span><span class="p">,</span> <span class="s2">&quot;subject&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">check_s3_node</span><span class="p">,</span> <span class="s2">&quot;local_path&quot;</span><span class="p">,</span> <span class="n">outputnode</span><span class="p">,</span> <span class="s2">&quot;rest&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="n">outputnode</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">)</span>
+
+    <span class="c1"># scan parameters CSV</span>
+    <span class="n">select_scan_params</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span>
+            <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="s2">&quot;rest_dict&quot;</span><span class="p">,</span> <span class="s2">&quot;resource&quot;</span><span class="p">],</span>
+            <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;file_path&quot;</span><span class="p">],</span>
+            <span class="n">function</span><span class="o">=</span><span class="n">get_rest</span><span class="p">,</span>
+            <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;select_scan_params&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">select_scan_params</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rest_dict</span> <span class="o">=</span> <span class="n">rest_dict</span>
+    <span class="n">select_scan_params</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">resource</span> <span class="o">=</span> <span class="s2">&quot;scan_parameters&quot;</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="n">select_scan_params</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if the scan parameters file is on AWS S3, download it</span>
+    <span class="n">s3_scan_params</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span>
+            <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;file_path&quot;</span><span class="p">,</span> <span class="s2">&quot;creds_path&quot;</span><span class="p">,</span> <span class="s2">&quot;dl_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;img_type&quot;</span><span class="p">],</span>
+            <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;local_path&quot;</span><span class="p">],</span>
+            <span class="n">function</span><span class="o">=</span><span class="n">check_for_s3</span><span class="p">,</span>
+            <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;s3_scan_params&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">select_scan_params</span><span class="p">,</span> <span class="s2">&quot;file_path&quot;</span><span class="p">,</span> <span class="n">s3_scan_params</span><span class="p">,</span> <span class="s2">&quot;file_path&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;creds_path&quot;</span><span class="p">,</span> <span class="n">s3_scan_params</span><span class="p">,</span> <span class="s2">&quot;creds_path&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputnode</span><span class="p">,</span> <span class="s2">&quot;dl_dir&quot;</span><span class="p">,</span> <span class="n">s3_scan_params</span><span class="p">,</span> <span class="s2">&quot;dl_dir&quot;</span><span class="p">)</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">s3_scan_params</span><span class="p">,</span> <span class="s2">&quot;local_path&quot;</span><span class="p">,</span> <span class="n">outputnode</span><span class="p">,</span> <span class="s2">&quot;scan_params&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wf</span></div>
 
 
 
@@ -645,7 +760,7 @@
 
 <div class="viewcode-block" id="get_fmap_phasediff_metadata">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.get_fmap_phasediff_metadata">[docs]</a>
-<span class="k">def</span> <span class="nf">get_fmap_phasediff_metadata</span><span class="p">(</span><span class="n">data_config_scan_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_fmap_phasediff_metadata</span><span class="p">(</span><span class="n">data_config_scan_params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the scan parameters for a field map phasediff scan.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="p">(</span>
         <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_config_scan_params</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
@@ -794,6 +909,301 @@
 
 
 
+<div class="viewcode-block" id="ingress_func_metadata">
+<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.ingress_func_metadata">[docs]</a>
+<span class="k">def</span> <span class="nf">ingress_func_metadata</span><span class="p">(</span>
+    <span class="n">wf</span><span class="p">,</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="n">rpool</span><span class="p">,</span>
+    <span class="n">sub_dict</span><span class="p">,</span>
+    <span class="n">subject_id</span><span class="p">,</span>
+    <span class="n">input_creds_path</span><span class="p">,</span>
+    <span class="n">unique_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_strat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ingress metadata for functional scans.&quot;&quot;&quot;</span>
+    <span class="n">name_suffix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">suffix_part</span> <span class="ow">in</span> <span class="p">(</span><span class="n">unique_id</span><span class="p">,</span> <span class="n">num_strat</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">suffix_part</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name_suffix</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">suffix_part</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="c1"># Grab field maps</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">blip</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">fmap_rp_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">fmap_TE_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="s2">&quot;fmap&quot;</span> <span class="ow">in</span> <span class="n">sub_dict</span><span class="p">:</span>
+        <span class="n">second</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">orig_key</span> <span class="ow">in</span> <span class="n">sub_dict</span><span class="p">[</span><span class="s2">&quot;fmap&quot;</span><span class="p">]:</span>
+            <span class="n">gather_fmap</span> <span class="o">=</span> <span class="n">create_fmap_datasource</span><span class="p">(</span>
+                <span class="n">sub_dict</span><span class="p">[</span><span class="s2">&quot;fmap&quot;</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;fmap_gather_</span><span class="si">{</span><span class="n">orig_key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="n">gather_fmap</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputnode</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+                <span class="n">subject</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
+                <span class="n">creds_path</span><span class="o">=</span><span class="n">input_creds_path</span><span class="p">,</span>
+                <span class="n">dl_dir</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s2">&quot;working_directory&quot;</span><span class="p">][</span><span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="n">gather_fmap</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputnode</span><span class="o">.</span><span class="n">scan</span> <span class="o">=</span> <span class="n">orig_key</span>
+
+            <span class="n">key</span> <span class="o">=</span> <span class="n">orig_key</span>
+            <span class="k">if</span> <span class="s2">&quot;epi&quot;</span> <span class="ow">in</span> <span class="n">key</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">second</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;epi-1&quot;</span>
+                <span class="n">second</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="s2">&quot;epi&quot;</span> <span class="ow">in</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">second</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;epi-2&quot;</span>
+
+            <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">gather_fmap</span><span class="p">,</span> <span class="s2">&quot;outputspec.rest&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;fmap_ingress&quot;</span><span class="p">)</span>
+            <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-scan-params&quot;</span><span class="p">,</span>
+                <span class="n">gather_fmap</span><span class="p">,</span>
+                <span class="s2">&quot;outputspec.scan_params&quot;</span><span class="p">,</span>
+                <span class="p">{},</span>
+                <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;fmap_params_ingress&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">fmap_rp_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+            <span class="n">get_fmap_metadata_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;import json&quot;</span><span class="p">]</span>
+            <span class="n">get_fmap_metadata</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+                <span class="n">Function</span><span class="p">(</span>
+                    <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;data_config_scan_params&quot;</span><span class="p">],</span>
+                    <span class="n">output_names</span><span class="o">=</span><span class="p">[</span>
+                        <span class="s2">&quot;dwell_time&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;pe_direction&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;total_readout&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;echo_time&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;echo_time_one&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;echo_time_two&quot;</span><span class="p">,</span>
+                    <span class="p">],</span>
+                    <span class="n">function</span><span class="o">=</span><span class="n">get_fmap_phasediff_metadata</span><span class="p">,</span>
+                    <span class="n">imports</span><span class="o">=</span><span class="n">get_fmap_metadata_imports</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">_get_metadata</span><span class="si">{</span><span class="n">name_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+                <span class="n">gather_fmap</span><span class="p">,</span>
+                <span class="s2">&quot;outputspec.scan_params&quot;</span><span class="p">,</span>
+                <span class="n">get_fmap_metadata</span><span class="p">,</span>
+                <span class="s2">&quot;data_config_scan_params&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="s2">&quot;phase&quot;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+                <span class="c1"># leave it open to all three options, in case there is a</span>
+                <span class="c1"># phasediff image with either a single EchoTime field (which</span>
+                <span class="c1"># usually matches one of the magnitude EchoTimes), OR</span>
+                <span class="c1"># a phasediff with an EchoTime1 and EchoTime2</span>
+
+                <span class="c1"># at least one of these rpool keys will have a None value,</span>
+                <span class="c1"># which will be sorted out in gather_echo_times below</span>
+                <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-TE&quot;</span><span class="p">,</span>
+                    <span class="n">get_fmap_metadata</span><span class="p">,</span>
+                    <span class="s2">&quot;echo_time&quot;</span><span class="p">,</span>
+                    <span class="p">{},</span>
+                    <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;fmap_TE_ingress&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">fmap_TE_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-TE&quot;</span><span class="p">)</span>
+
+                <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-TE1&quot;</span><span class="p">,</span>
+                    <span class="n">get_fmap_metadata</span><span class="p">,</span>
+                    <span class="s2">&quot;echo_time_one&quot;</span><span class="p">,</span>
+                    <span class="p">{},</span>
+                    <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;fmap_TE1_ingress&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">fmap_TE_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-TE1&quot;</span><span class="p">)</span>
+
+                <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-TE2&quot;</span><span class="p">,</span>
+                    <span class="n">get_fmap_metadata</span><span class="p">,</span>
+                    <span class="s2">&quot;echo_time_two&quot;</span><span class="p">,</span>
+                    <span class="p">{},</span>
+                    <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;fmap_TE2_ingress&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">fmap_TE_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-TE2&quot;</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="s2">&quot;magnitude&quot;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+                <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-TE&quot;</span><span class="p">,</span>
+                    <span class="n">get_fmap_metadata</span><span class="p">,</span>
+                    <span class="s2">&quot;echo_time&quot;</span><span class="p">,</span>
+                    <span class="p">{},</span>
+                    <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;fmap_TE_ingress&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">fmap_TE_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-TE&quot;</span><span class="p">)</span>
+
+            <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-dwell&quot;</span><span class="p">,</span>
+                <span class="n">get_fmap_metadata</span><span class="p">,</span>
+                <span class="s2">&quot;dwell_time&quot;</span><span class="p">,</span>
+                <span class="p">{},</span>
+                <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;fmap_dwell_ingress&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-pedir&quot;</span><span class="p">,</span>
+                <span class="n">get_fmap_metadata</span><span class="p">,</span>
+                <span class="s2">&quot;pe_direction&quot;</span><span class="p">,</span>
+                <span class="p">{},</span>
+                <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;fmap_pedir_ingress&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-total-readout&quot;</span><span class="p">,</span>
+                <span class="n">get_fmap_metadata</span><span class="p">,</span>
+                <span class="s2">&quot;total_readout&quot;</span><span class="p">,</span>
+                <span class="p">{},</span>
+                <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;fmap_readout_ingress&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="s2">&quot;phase&quot;</span> <span class="ow">in</span> <span class="n">key</span> <span class="ow">or</span> <span class="s2">&quot;mag&quot;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;epi_[AP]</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">):</span>
+                <span class="n">blip</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">diff</span><span class="p">:</span>
+            <span class="n">calc_delta_ratio</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+                <span class="n">Function</span><span class="p">(</span>
+                    <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;effective_echo_spacing&quot;</span><span class="p">,</span> <span class="s2">&quot;echo_times&quot;</span><span class="p">],</span>
+                    <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;deltaTE&quot;</span><span class="p">,</span> <span class="s2">&quot;ees_asym_ratio&quot;</span><span class="p">],</span>
+                    <span class="n">function</span><span class="o">=</span><span class="n">calc_delta_te_and_asym_ratio</span><span class="p">,</span>
+                    <span class="n">imports</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;from typing import Optional&quot;</span><span class="p">],</span>
+                <span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;diff_distcor_calc_delta</span><span class="si">{</span><span class="n">name_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">gather_echoes</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+                <span class="n">Function</span><span class="p">(</span>
+                    <span class="n">input_names</span><span class="o">=</span><span class="p">[</span>
+                        <span class="s2">&quot;echotime_1&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;echotime_2&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;echotime_3&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;echotime_4&quot;</span><span class="p">,</span>
+                    <span class="p">],</span>
+                    <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;echotime_list&quot;</span><span class="p">],</span>
+                    <span class="n">function</span><span class="o">=</span><span class="n">gather_echo_times</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;fugue_gather_echo_times&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">fmap_file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fmap_TE_list</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">rpool</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fmap_file</span><span class="p">)[</span>
+                        <span class="sa">f</span><span class="s2">&quot;[&#39;</span><span class="si">{</span><span class="n">fmap_file</span><span class="si">}</span><span class="s2">:fmap_TE_ingress&#39;]&quot;</span>
+                    <span class="p">][</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+                    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">gather_echoes</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;echotime_</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+
+            <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">gather_echoes</span><span class="p">,</span> <span class="s2">&quot;echotime_list&quot;</span><span class="p">,</span> <span class="n">calc_delta_ratio</span><span class="p">,</span> <span class="s2">&quot;echo_times&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Add in nodes to get parameters from configuration file</span>
+    <span class="c1"># a node which checks if scan_parameters are present for each scan</span>
+    <span class="n">scan_params</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+        <span class="n">Function</span><span class="p">(</span>
+            <span class="n">input_names</span><span class="o">=</span><span class="p">[</span>
+                <span class="s2">&quot;data_config_scan_params&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;subject_id&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;scan&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pipeconfig_tr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pipeconfig_tpattern&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pipeconfig_start_indx&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pipeconfig_stop_indx&quot;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="n">output_names</span><span class="o">=</span><span class="p">[</span>
+                <span class="s2">&quot;tr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;tpattern&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;template&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;ref_slice&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;start_indx&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;stop_indx&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pe_direction&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;effective_echo_spacing&quot;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="n">function</span><span class="o">=</span><span class="n">get_scan_params</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;bold_scan_params_</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}{</span><span class="n">name_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">scan_params</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">subject_id</span> <span class="o">=</span> <span class="n">subject_id</span>
+    <span class="n">scan_params</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+        <span class="n">pipeconfig_start_indx</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span><span class="s2">&quot;truncation&quot;</span><span class="p">][</span><span class="s2">&quot;start_tr&quot;</span><span class="p">],</span>
+        <span class="n">pipeconfig_stop_indx</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">functional_preproc</span><span class="p">[</span><span class="s2">&quot;truncation&quot;</span><span class="p">][</span><span class="s2">&quot;stop_tr&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">rpool</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;scan&quot;</span><span class="p">)[</span><span class="s2">&quot;[&#39;scan:func_ingress&#39;]&quot;</span><span class="p">][</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+    <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Workaround for extracting metadata with ingress</span>
+    <span class="k">if</span> <span class="n">rpool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s2">&quot;derivatives-dir&quot;</span><span class="p">):</span>
+        <span class="n">selectrest_json</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
+            <span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span>
+                <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;scan&quot;</span><span class="p">,</span> <span class="s2">&quot;rest_dict&quot;</span><span class="p">,</span> <span class="s2">&quot;resource&quot;</span><span class="p">],</span>
+                <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;file_path&quot;</span><span class="p">],</span>
+                <span class="n">function</span><span class="o">=</span><span class="n">get_rest</span><span class="p">,</span>
+                <span class="n">as_module</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;selectrest_json&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">selectrest_json</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rest_dict</span> <span class="o">=</span> <span class="n">sub_dict</span>
+        <span class="n">selectrest_json</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">resource</span> <span class="o">=</span> <span class="s2">&quot;scan_parameters&quot;</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">selectrest_json</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">)</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">selectrest_json</span><span class="p">,</span> <span class="s2">&quot;file_path&quot;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;data_config_scan_params&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># wire in the scan parameter workflow</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">rpool</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;scan-params&quot;</span><span class="p">)[</span><span class="s2">&quot;[&#39;scan-params:scan_params_ingress&#39;]&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;data&quot;</span>
+        <span class="p">]</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;data_config_scan_params&quot;</span><span class="p">)</span>
+
+    <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="s2">&quot;TR&quot;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;tr&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">)</span>
+    <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="s2">&quot;tpattern&quot;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;tpattern&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">)</span>
+    <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="s2">&quot;template&quot;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;template&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">)</span>
+    <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+        <span class="s2">&quot;start-tr&quot;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;start_indx&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;func_metadata_ingress&quot;</span>
+    <span class="p">)</span>
+    <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="s2">&quot;stop-tr&quot;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;stop_indx&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">)</span>
+    <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+        <span class="s2">&quot;pe-direction&quot;</span><span class="p">,</span> <span class="n">scan_params</span><span class="p">,</span> <span class="s2">&quot;pe_direction&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;func_metadata_ingress&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">diff</span><span class="p">:</span>
+        <span class="c1"># Connect EffectiveEchoSpacing from functional metadata</span>
+        <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+            <span class="s2">&quot;effectiveEchoSpacing&quot;</span><span class="p">,</span>
+            <span class="n">scan_params</span><span class="p">,</span>
+            <span class="s2">&quot;effective_echo_spacing&quot;</span><span class="p">,</span>
+            <span class="p">{},</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;func_metadata_ingress&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">node</span><span class="p">,</span> <span class="n">out_file</span> <span class="o">=</span> <span class="n">rpool</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;effectiveEchoSpacing&quot;</span><span class="p">)[</span>
+            <span class="s2">&quot;[&#39;effectiveEchoSpacing:func_metadata_ingress&#39;]&quot;</span>
+        <span class="p">][</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+        <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">calc_delta_ratio</span><span class="p">,</span> <span class="s2">&quot;effective_echo_spacing&quot;</span><span class="p">)</span>
+        <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+            <span class="s2">&quot;deltaTE&quot;</span><span class="p">,</span> <span class="n">calc_delta_ratio</span><span class="p">,</span> <span class="s2">&quot;deltaTE&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;deltaTE_ingress&quot;</span>
+        <span class="p">)</span>
+        <span class="n">rpool</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+            <span class="s2">&quot;ees-asym-ratio&quot;</span><span class="p">,</span>
+            <span class="n">calc_delta_ratio</span><span class="p">,</span>
+            <span class="s2">&quot;ees_asym_ratio&quot;</span><span class="p">,</span>
+            <span class="p">{},</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ees_asym_ratio_ingress&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">blip</span><span class="p">,</span> <span class="n">fmap_rp_list</span></div>
+
+
+
 <div class="viewcode-block" id="create_general_datasource">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.create_general_datasource">[docs]</a>
 <span class="k">def</span> <span class="nf">create_general_datasource</span><span class="p">(</span><span class="n">wf_name</span><span class="p">):</span>
@@ -877,16 +1287,9 @@
 
 <div class="viewcode-block" id="check_for_s3">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datasource.check_for_s3">[docs]</a>
-<span class="nd">@function</span><span class="o">.</span><span class="n">Function</span><span class="o">.</span><span class="n">sig_imports</span><span class="p">(</span>
-    <span class="p">[</span><span class="s2">&quot;from pathlib import Path&quot;</span><span class="p">,</span> <span class="s2">&quot;from typing import Optional&quot;</span><span class="p">]</span>
-<span class="p">)</span>
 <span class="k">def</span> <span class="nf">check_for_s3</span><span class="p">(</span>
-    <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">creds_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">dl_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">img_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;other&quot;</span><span class="p">,</span>
-    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">file_path</span><span class="p">,</span> <span class="n">creds_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dl_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_type</span><span class="o">=</span><span class="s2">&quot;other&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if passed-in file is on S3.&quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
     <span class="kn">import</span> <span class="nn">os</span>

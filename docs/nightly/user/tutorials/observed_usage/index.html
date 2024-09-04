@@ -5,11 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" /><link rel="next" title="Troubleshooting and Help" href="../../help" /><link rel="prev" title="C-PAC Tutorials" href="../index" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>1. Tutorial: optimizing memory estimation - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
@@ -368,7 +368,15 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="Tutorial:-optimizing-memory-estimation">
+          <!-- Copyright (C) 2022  C-PAC Developers
+
+This file is part of C-PAC_tutorials.
+
+C-PAC_tutorials is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+C-PAC_tutorials is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with C-PAC. If not, see <https://www.gnu.org/licenses/>. --><section id="Tutorial:-optimizing-memory-estimation">
 <h1><span class="section-number">1. </span>Tutorial: optimizing memory estimation<a class="headerlink" href="#Tutorial:-optimizing-memory-estimation" title="Link to this heading">¶</a></h1>
 <p>(You can <a class="reference external" href="https://raw.githubusercontent.com/FCP-INDI/C-PAC_tutorials/main/observed_usage/index.ipynb">⇩ download this notebook 💾</a> and run it locally.)</p>
 <p>C-PAC has some built-in heuristics for estimating the memory required for each node, but these estimates can be greatly improved by providing observed memory usage for a given configuration and comparable data. This tutorial will step through the process of an observation run and an optimized run.</p>

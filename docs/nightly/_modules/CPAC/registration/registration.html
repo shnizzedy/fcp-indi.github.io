@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>CPAC.registration.registration - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
@@ -380,7 +380,7 @@
 <span class="c1"># pylint: disable=too-many-lines,ungrouped-imports,wrong-import-order</span>
 <span class="sd">&quot;&quot;&quot;Workflows for registration.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">RequiredFieldInvalid</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">ants</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">fsl</span><span class="p">,</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
@@ -389,7 +389,7 @@
 <span class="kn">from</span> <span class="nn">CPAC.anat_preproc.lesion_preproc</span> <span class="kn">import</span> <span class="n">create_lesion_preproc</span>
 <span class="kn">from</span> <span class="nn">CPAC.func_preproc.utils</span> <span class="kn">import</span> <span class="n">chunk_ts</span><span class="p">,</span> <span class="n">split_ts_chunks</span>
 <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
 <span class="kn">from</span> <span class="nn">CPAC.registration.utils</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">change_itk_transform_type</span><span class="p">,</span>
     <span class="n">check_transforms</span><span class="p">,</span>
@@ -402,13 +402,9 @@
     <span class="n">seperate_warps_list</span><span class="p">,</span>
     <span class="n">single_ants_xfm_to_list</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.configuration.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.fsl</span> <span class="kn">import</span> <span class="n">Merge</span> <span class="k">as</span> <span class="n">fslMerge</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">check_prov_for_motion_tool</span><span class="p">,</span> <span class="n">check_prov_for_regtool</span>
-
-<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.resource</span> <span class="kn">import</span> <span class="n">StratPool</span>
 
 
 <span class="k">def</span> <span class="nf">apply_transform</span><span class="p">(</span>
@@ -3004,7 +3000,7 @@
     <span class="n">node</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">connect</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">ants_rc</span><span class="p">,</span> <span class="s2">&quot;inputspec.input_brain&quot;</span><span class="p">)</span>
 
-    <span class="n">t1w_brain_template</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;T1w-brain-template&quot;</span><span class="p">)</span>
+    <span class="n">t1w_brain_template</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span><span class="s2">&quot;T1w-brain-template&quot;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
         <span class="n">t1w_brain_template</span><span class="o">.</span><span class="n">node</span><span class="p">,</span>
         <span class="n">t1w_brain_template</span><span class="o">.</span><span class="n">out</span><span class="p">,</span>
@@ -3023,10 +3019,10 @@
     <span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">ants_rc</span><span class="p">,</span> <span class="s2">&quot;inputspec.input_head&quot;</span><span class="p">)</span>
 
-    <span class="n">t1w_template</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;T1w-template&quot;</span><span class="p">)</span>
+    <span class="n">t1w_template</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span><span class="s2">&quot;T1w-template&quot;</span><span class="p">)</span>
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">t1w_template</span><span class="o">.</span><span class="n">node</span><span class="p">,</span> <span class="n">t1w_template</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">ants_rc</span><span class="p">,</span> <span class="s2">&quot;inputspec.reference_head&quot;</span><span class="p">)</span>
 
-    <span class="n">brain_mask</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+    <span class="n">brain_mask</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span>
         <span class="p">[</span>
             <span class="s2">&quot;space-T1w_desc-brain_mask&quot;</span><span class="p">,</span>
             <span class="s2">&quot;space-longitudinal_desc-brain_mask&quot;</span><span class="p">,</span>
@@ -5804,8 +5800,8 @@
 
 <span class="k">def</span> <span class="nf">warp_resource_to_template</span><span class="p">(</span>
     <span class="n">wf</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">,</span>
-    <span class="n">cfg</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
-    <span class="n">strat_pool</span><span class="p">:</span> <span class="s2">&quot;StratPool&quot;</span><span class="p">,</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="n">strat_pool</span><span class="p">,</span>
     <span class="n">pipe_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">input_resource</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">xfm</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -5816,24 +5812,24 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    wf</span>
+<span class="sd">    wf : pe.Workflow</span>
 
-<span class="sd">    cfg</span>
+<span class="sd">    cfg : CPAC.utils.configuration.Configuration</span>
 
-<span class="sd">    strat_pool</span>
+<span class="sd">    strat_pool : CPAC.pipeline.engine.ResourcePool</span>
 
-<span class="sd">    pipe_num</span>
+<span class="sd">    pipe_num : int</span>
 
-<span class="sd">    input_resource</span>
+<span class="sd">    input_resource : str or list</span>
 <span class="sd">        key for the resource to warp to template</span>
 
-<span class="sd">    xfm</span>
+<span class="sd">    xfm : str</span>
 <span class="sd">        key for the transform to apply</span>
 
-<span class="sd">    reference</span>
+<span class="sd">    reference : str, optional</span>
 <span class="sd">        key for reference if not using f&#39;{template_space}-template&#39;</span>
 
-<span class="sd">    time_series</span>
+<span class="sd">    time_series : boolean, optional</span>
 <span class="sd">        resource to transform is 4D?</span>
 
 <span class="sd">    Returns</span>

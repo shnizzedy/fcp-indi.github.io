@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>CPAC.qc.xcp - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
@@ -430,15 +430,13 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">fsl</span>
-<span class="kn">from</span> <span class="nn">nipype.pipeline.engine</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Workflow</span>
 
 <span class="kn">from</span> <span class="nn">CPAC.generate_motion_statistics.generate_motion_statistics</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">DVARS_strip_t0</span><span class="p">,</span>
     <span class="n">ImageTo1D</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine.resource</span> <span class="kn">import</span> <span class="n">StratPool</span>
+<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
 <span class="kn">from</span> <span class="nn">CPAC.qc.qcmetrics</span> <span class="kn">import</span> <span class="n">regisQ</span>
 <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
 
@@ -450,31 +448,33 @@
 <span class="p">]</span>
 
 
-<div class="viewcode-block" id="_connect_motion">
-<a class="viewcode-back" href="../../../developer/xcpqc#CPAC.qc.xcp._connect_motion">[docs]</a>
-<span class="k">def</span> <span class="nf">_connect_motion</span><span class="p">(</span>
-    <span class="n">wf</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">:</span> <span class="n">StratPool</span><span class="p">,</span> <span class="n">qc_file</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">:</span> <span class="nb">int</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workflow</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">_connect_motion</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">qc_file</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Connect the motion metrics to the workflow.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    wf</span>
+<span class="sd">    wf : nipype.pipeline.engine.Workflow</span>
 <span class="sd">        The workflow to connect the motion metrics to.</span>
 
-<span class="sd">    nodes</span>
+<span class="sd">    nodes : dict</span>
 <span class="sd">        Dictionary of nodes already collected from the strategy pool.</span>
 
-<span class="sd">    strat_pool</span>
+<span class="sd">    strat_pool : CPAC.pipeline.engine.ResourcePool</span>
 <span class="sd">        The current strategy pool.</span>
 
-<span class="sd">    qc_file</span>
-<span class="sd">        A function node with the function :py:func:`generate_xcp_qc` .</span>
+<span class="sd">    qc_file : nipype.pipeline.engine.Node</span>
+<span class="sd">        A function node with the function ``generate_xcp_qc``.</span>
+
+<span class="sd">    pipe_num : int</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    wf : nipype.pipeline.engine.Workflow</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=invalid-name, too-many-arguments</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">nodes</span><span class="p">,</span> <span class="s2">&quot;censor-indices&quot;</span><span class="p">:</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;censor-indices&quot;</span><span class="p">)}</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">nodes</span><span class="p">,</span> <span class="s2">&quot;censor-indices&quot;</span><span class="p">:</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span><span class="s2">&quot;censor-indices&quot;</span><span class="p">)}</span>
         <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
             <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;censor-indices&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">node</span><span class="p">,</span>
             <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;censor-indices&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">out</span><span class="p">,</span>
@@ -520,8 +520,7 @@
             <span class="p">],</span>
         <span class="p">]</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="n">wf</span></div>
-
+    <span class="k">return</span> <span class="n">wf</span>
 
 
 <div class="viewcode-block" id="dvcorr">
@@ -876,7 +875,7 @@
     <span class="p">)</span>
     <span class="n">qc_file</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;preproc&quot;</span>
     <span class="n">qc_file</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">regressors</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;regressors&quot;</span><span class="p">)</span>
+        <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span><span class="s2">&quot;regressors&quot;</span><span class="p">)</span>
         <span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;regressors_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="p">)</span>
@@ -886,7 +885,7 @@
         <span class="n">op_string</span><span class="o">=</span><span class="s2">&quot;-bin &quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">key</span><span class="p">:</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span>
             <span class="s2">&quot;bold&quot;</span><span class="p">,</span>
             <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span>
@@ -901,13 +900,13 @@
         <span class="p">]</span>
         <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
     <span class="p">}</span>
-    <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;bold2template_mask&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+    <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;bold2template_mask&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span>
         <span class="p">[</span><span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">,</span> <span class="s2">&quot;space-EPItemplate_desc-bold_mask&quot;</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;template_mask&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+    <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;template_mask&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span>
         <span class="p">[</span><span class="s2">&quot;T1w-brain-template-mask&quot;</span><span class="p">,</span> <span class="s2">&quot;EPI-template-mask&quot;</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;template&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
+    <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;template&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">node_data</span><span class="p">(</span>
         <span class="p">[</span><span class="s2">&quot;T1w-brain-template-funcreg&quot;</span><span class="p">,</span> <span class="s2">&quot;EPI-brain-template-funcreg&quot;</span><span class="p">]</span>
     <span class="p">)</span>
     <span class="n">resample_bold_mask_to_template</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>

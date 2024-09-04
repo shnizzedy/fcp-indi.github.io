@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex" /><link rel="search" title="Search" href="../../../../search" />
 
-    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>nipype.pipeline.engine.workflows - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=fe2d11c3" />
     
@@ -1113,8 +1113,6 @@
             <span class="p">)</span>
         <span class="n">save_json</span><span class="p">(</span><span class="n">graph_file</span><span class="p">,</span> <span class="n">json_dict</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Workflow._set_needed_outputs">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._set_needed_outputs">[docs]</a>
     <span class="k">def</span> <span class="nf">_set_needed_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize node with list of which outputs are needed.&quot;&quot;&quot;</span>
         <span class="n">rm_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;execution&quot;</span><span class="p">][</span><span class="s2">&quot;remove_unnecessary_outputs&quot;</span><span class="p">]</span>
@@ -1131,8 +1129,7 @@
                     <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sourceinfo</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span>
                 <span class="p">]</span>
             <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span><span class="p">:</span>
-                <span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span><span class="p">)</span></div>
-
+                <span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_configure_exec_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensure that each node knows where to get inputs from&quot;&quot;&quot;</span>
@@ -1146,8 +1143,6 @@
                         <span class="n">sourceinfo</span><span class="p">,</span>
                     <span class="p">)</span>
 
-<div class="viewcode-block" id="Workflow._check_nodes">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._check_nodes">[docs]</a>
     <span class="k">def</span> <span class="nf">_check_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if any of the nodes are already in the graph&quot;&quot;&quot;</span>
         <span class="n">node_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>
@@ -1163,11 +1158,8 @@
                     <span class="k">if</span> <span class="n">this_node_lineage</span> <span class="ow">in</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">_hierarchy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]:</span>
                         <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;Duplicate node name &quot;</span><span class="si">%s</span><span class="s1">&quot; found.&#39;</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">node_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+                <span class="n">node_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="Workflow._has_attr">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._has_attr">[docs]</a>
     <span class="k">def</span> <span class="nf">_has_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if a parameter is available as an input or output&quot;&quot;&quot;</span>
         <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">parameter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
@@ -1232,8 +1224,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">_check_is_already_connected</span><span class="p">(</span><span class="n">targetworkflow</span><span class="p">,</span> <span class="n">targetnode</span><span class="p">,</span> <span class="n">attrname</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">False</span>
 
-        <span class="k">return</span> <span class="kc">True</span></div>
-
+        <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">_check_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_attr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
@@ -1241,8 +1232,6 @@
     <span class="k">def</span> <span class="nf">_check_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_attr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Workflow._get_inputs">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._get_inputs">[docs]</a>
     <span class="k">def</span> <span class="nf">_get_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the inputs of a workflow</span>
 
@@ -1267,11 +1256,8 @@
                         <span class="nb">setattr</span><span class="p">(</span><span class="n">unconnectedinputs</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="n">inputdict</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">unconnectedinputs</span><span class="p">)</span>
                 <span class="nb">getattr</span><span class="p">(</span><span class="n">inputdict</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">on_trait_change</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_input</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">inputdict</span></div>
+        <span class="k">return</span> <span class="n">inputdict</span>
 
-
-<div class="viewcode-block" id="Workflow._get_outputs">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._get_outputs">[docs]</a>
     <span class="k">def</span> <span class="nf">_get_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all possible output ports that are not already connected&quot;&quot;&quot;</span>
         <span class="n">outputdict</span> <span class="o">=</span> <span class="n">TraitedSpec</span><span class="p">()</span>
@@ -1285,18 +1271,12 @@
                     <span class="n">outputs</span><span class="o">.</span><span class="n">add_trait</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">traits</span><span class="o">.</span><span class="n">Any</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="p">))</span>
                     <span class="nb">setattr</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="n">outputdict</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">outputdict</span></div>
+        <span class="k">return</span> <span class="n">outputdict</span>
 
-
-<div class="viewcode-block" id="Workflow._set_input">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._set_input">[docs]</a>
     <span class="k">def</span> <span class="nf">_set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objekt</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Trait callback function to update a node input&quot;&quot;&quot;</span>
-        <span class="n">objekt</span><span class="o">.</span><span class="n">traits</span><span class="p">()[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">)</span></div>
+        <span class="n">objekt</span><span class="o">.</span><span class="n">traits</span><span class="p">()[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="Workflow._set_node_input">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._set_node_input">[docs]</a>
     <span class="k">def</span> <span class="nf">_set_node_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">sourceinfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set inputs of a node given the edge connection&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sourceinfo</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
@@ -1310,8 +1290,7 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">TraitListObject</span><span class="p">):</span>
             <span class="n">newval</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:]</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;setting node input: </span><span class="si">%s</span><span class="s2">-&gt;</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">newval</span><span class="p">))</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">newval</span><span class="p">))</span></div>
-
+        <span class="n">node</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">newval</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_get_all_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">allnodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes_cache</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nested_workflows_cache</span>
@@ -1337,18 +1316,13 @@
             <span class="n">wf</span><span class="o">.</span><span class="n">_has_node</span><span class="p">(</span><span class="n">wanted_node</span><span class="p">)</span> <span class="k">for</span> <span class="n">wf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nested_workflows_cache</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="Workflow._create_flat_graph">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._create_flat_graph">[docs]</a>
     <span class="k">def</span> <span class="nf">_create_flat_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a simple DAG where no node is a workflow.&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Creating flat graph for workflow: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">workflowcopy</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">workflowcopy</span><span class="o">.</span><span class="n">_generate_flatgraph</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">workflowcopy</span><span class="o">.</span><span class="n">_graph</span></div>
+        <span class="k">return</span> <span class="n">workflowcopy</span><span class="o">.</span><span class="n">_graph</span>
 
-
-<div class="viewcode-block" id="Workflow._reset_hierarchy">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._reset_hierarchy">[docs]</a>
     <span class="k">def</span> <span class="nf">_reset_hierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the hierarchy on a graph&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
@@ -1357,11 +1331,8 @@
                 <span class="k">for</span> <span class="n">innernode</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
                     <span class="n">innernode</span><span class="o">.</span><span class="n">_hierarchy</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">innernode</span><span class="o">.</span><span class="n">_hierarchy</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">node</span><span class="o">.</span><span class="n">_hierarchy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
+                <span class="n">node</span><span class="o">.</span><span class="n">_hierarchy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
-
-<div class="viewcode-block" id="Workflow._generate_flatgraph">
-<a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow._generate_flatgraph">[docs]</a>
     <span class="k">def</span> <span class="nf">_generate_flatgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a graph containing only Nodes or MapNodes&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
@@ -1427,8 +1398,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">nodes2remove</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">remove_nodes_from</span><span class="p">(</span><span class="n">nodes2remove</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;finished expanding workflow: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
-
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;finished expanding workflow: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_dot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hierarchy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">simple_form</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span>

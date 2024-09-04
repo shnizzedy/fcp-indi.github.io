@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex" /><link rel="search" title="Search" href="../../../search" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>CPAC.pipeline.schema - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe2d11c3" />
     
@@ -384,7 +384,6 @@
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">permutations</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">CalledProcessError</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span> <span class="k">as</span> <span class="n">TypeAny</span><span class="p">,</span> <span class="n">Optional</span> <span class="k">as</span> <span class="n">TypeOptional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathvalidate</span> <span class="kn">import</span> <span class="n">sanitize_filename</span>
@@ -429,12 +428,18 @@
 
 <div class="viewcode-block" id="str_to_bool1_1">
 <a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.str_to_bool1_1">[docs]</a>
-<span class="k">def</span> <span class="nf">str_to_bool1_1</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">TypeAny</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pylint: disable=invalid-name</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert strings to Booleans for YAML1.1 syntax [1]_.</span>
+<span class="k">def</span> <span class="nf">str_to_bool1_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert strings to Booleans for YAML1.1 syntax.</span>
 
-<span class="sd">    References</span>
+<span class="sd">    Ref https://yaml.org/type/bool.html</span>
+
+<span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    .. [1] 2005-01-18. Oren Ben-Kiki, Clark Evans &amp; Brian Ingerson. `&quot;Boolean Language-Independent Type for YAML™ Version 1.1&quot; [Working Draft] &lt;https://yaml.org/type/bool.html&gt;`_. Copyright © 2001-2005 Oren Ben-Kiki, Clark Evans, Brian Ingerson.</span>
+<span class="sd">    x : any</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -679,8 +684,18 @@
 
 <div class="viewcode-block" id="name_motion_filter">
 <a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.name_motion_filter">[docs]</a>
-<span class="k">def</span> <span class="nf">name_motion_filter</span><span class="p">(</span><span class="n">mfilter</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">mfilters</span><span class="p">:</span> <span class="n">TypeOptional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">name_motion_filter</span><span class="p">(</span><span class="n">mfilter</span><span class="p">,</span> <span class="n">mfilters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Given a motion filter, create a short string for the filename.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mfilter : dict</span>
+
+<span class="sd">    mfliters : list or None</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -741,8 +756,19 @@
 
 <div class="viewcode-block" id="permutation_message">
 <a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.permutation_message">[docs]</a>
-<span class="k">def</span> <span class="nf">permutation_message</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Give a human-readable error message for keys that accept permutation values.&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">permutation_message</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Give a human-readable error message for keys that accept permutation values.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    key: str</span>
+
+<span class="sd">    options: list or set</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    msg: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
 
 <span class="se">\&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="se">\&#39;</span><span class="s2"> takes a dictionary with paths to region-of-interest (ROI)</span>
@@ -760,7 +786,7 @@
 
 <div class="viewcode-block" id="sanitize">
 <a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.sanitize">[docs]</a>
-<span class="k">def</span> <span class="nf">sanitize</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">sanitize</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sanitize a filename and replace whitespaces with underscores.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">sanitize_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span></div>
 
@@ -1604,12 +1630,20 @@
 
 <div class="viewcode-block" id="schema">
 <a class="viewcode-back" href="../../../developer/schema#CPAC.pipeline.schema.schema">[docs]</a>
-<span class="k">def</span> <span class="nf">schema</span><span class="p">(</span><span class="n">config_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">schema</span><span class="p">(</span><span class="n">config_dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate a participant-analysis pipeline configuration.</span>
 
 <span class="sd">    Validate against the latest validation schema by first applying backwards-</span>
 <span class="sd">    compatibility patches, then applying Voluptuous validation, then handling complex</span>
-<span class="sd">    configuration interaction checks before returning validated `config_dict`.</span>
+<span class="sd">    configuration interaction checks before returning validated config_dict.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    config_dict : dict</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">_changes_1_8_0_to_1_8_1</span>
 

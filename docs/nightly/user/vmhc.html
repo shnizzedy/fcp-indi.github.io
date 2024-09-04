@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex" /><link rel="search" title="Search" href="../search" /><link rel="next" title="PyPEER Integration" href="pypeer" /><link rel="prev" title="Seed-based Correlation Analysis (SCA) and Dual Regression" href="sca" />
 
-    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.07.18 -->
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 7.3.2 and Furo 2024.08.06 -->
         <title>Voxel-Mirrored Homotopic Connectivity (VMHC) - C-PAC 1.8.8.dev1 Beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a96c6ba1" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=613ab9ff" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=fe2d11c3" />
     
@@ -411,44 +411,6 @@
 <section id="configuration-without-the-gui">
 <h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Link to this heading">¶</a></h3>
 <p>The following nested key/value pairs will be set to these defaults if not defined in your <a class="reference internal" href="pipelines/pipeline_config"><span class="doc">pipeline configuration YAML</span></a>.</p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">voxel_mirrored_homotopic_connectivity</span><span class="p">:</span>
-
-<span class="w">  </span><span class="c1"># VMHC</span>
-<span class="w">  </span><span class="c1"># Calculate Voxel-mirrored Homotopic Connectivity (VMHC) for all voxels.</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
-
-<span class="w">  </span><span class="nt">symmetric_registration</span><span class="p">:</span>
-
-<span class="w">    </span><span class="c1"># Included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
-<span class="w">    </span><span class="c1"># It is not necessary to change this path unless you intend to use a non-standard symmetric template.</span>
-<span class="w">    </span><span class="nt">T1w_brain_template_symmetric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_${resolution_for_anat}_brain_symmetric.nii.gz</span>
-
-<span class="w">    </span><span class="c1"># Included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
-<span class="w">    </span><span class="c1"># It is not necessary to change this path unless you intend to use a non-standard symmetric template.</span>
-<span class="w">    </span><span class="nt">T1w_brain_template_symmetric_funcreg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_${func_resolution}_brain_symmetric.nii.gz</span>
-
-<span class="w">    </span><span class="c1"># A reference symmetric brain template for resampling</span>
-<span class="w">    </span><span class="nt">T1w_brain_template_symmetric_for_resample</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_1mm_brain_symmetric.nii.gz</span>
-
-<span class="w">    </span><span class="c1"># Included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
-<span class="w">    </span><span class="c1"># It is not necessary to change this path unless you intend to use a non-standard symmetric template.</span>
-<span class="w">    </span><span class="nt">T1w_template_symmetric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_${resolution_for_anat}_symmetric.nii.gz</span>
-
-<span class="w">    </span><span class="c1"># Included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
-<span class="w">    </span><span class="c1"># It is not necessary to change this path unless you intend to use a non-standard symmetric template.</span>
-<span class="w">    </span><span class="nt">T1w_template_symmetric_funcreg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_${func_resolution}_symmetric.nii.gz</span>
-
-<span class="w">    </span><span class="c1"># A reference symmetric skull template for resampling</span>
-<span class="w">    </span><span class="nt">T1w_template_symmetric_for_resample</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_1mm_symmetric.nii.gz</span>
-
-<span class="w">    </span><span class="c1"># Included as part of the &#39;Image Resource Files&#39; package available on the Install page of the User Guide.</span>
-<span class="w">    </span><span class="c1"># It is not necessary to change this path unless you intend to use a non-standard symmetric template.</span>
-<span class="w">    </span><span class="nt">dilated_symmetric_brain_mask</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_${resolution_for_anat}_brain_mask_symmetric_dil.nii.gz</span>
-
-<span class="w">    </span><span class="c1"># A reference symmetric brain mask template for resampling</span>
-<span class="w">    </span><span class="nt">dilated_symmetric_brain_mask_for_resample</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_1mm_brain_mask_symmetric_dil.nii.gz</span>
-</pre></div>
-</div>
 </section>
 </section>
 <section id="references">
