@@ -367,7 +367,410 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
+          <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">%YAML</span><span class="w"> </span><span class="m">1.1</span>
+<span class="nn">---</span>
+<span class="c1"># CPAC Pipeline Configuration YAML file</span>
+<span class="c1"># Version 1.8.8.dev1</span>
+<span class="c1">#</span>
+<span class="c1"># http://fcp-indi.github.io for more info.</span>
+<span class="c1">#</span>
+<span class="c1"># Tip: This file can be edited manually with a text editor for quick modifications.</span>
+<span class="nt">FROM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blank</span>
+
+<span class="nt">pipeline_setup</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># Name for this pipeline configuration - useful for identification.</span>
+<span class="w">  </span><span class="c1"># This string will be sanitized and used in filepaths</span>
+<span class="w">  </span><span class="nt">pipeline_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpac_abcd-options</span>
+<span class="w">  </span><span class="nt">system_config</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># The maximum amount of memory each participant&#39;s workflow can allocate.</span>
+<span class="w">    </span><span class="c1"># Use this to place an upper bound of memory usage.</span>
+<span class="w">    </span><span class="c1"># - Warning: &#39;Memory Per Participant&#39; multiplied by &#39;Number of Participants to Run Simultaneously&#39;</span>
+<span class="w">    </span><span class="c1">#   must not be more than the total amount of RAM.</span>
+<span class="w">    </span><span class="c1"># - Conversely, using too little RAM can impede the speed of a pipeline run.</span>
+<span class="w">    </span><span class="c1"># - It is recommended that you set this to a value that when multiplied by</span>
+<span class="w">    </span><span class="c1">#   &#39;Number of Participants to Run Simultaneously&#39; is as much RAM you can safely allocate.</span>
+<span class="w">    </span><span class="nt">maximum_memory_per_participant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+
+<span class="c1"># PREPROCESSING</span>
+<span class="c1"># -------------</span>
+<span class="nt">surface_analysis</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># Run freesurfer_abcd_preproc to obtain preprocessed T1w for reconall</span>
+<span class="w">  </span><span class="nt">abcd_prefreesurfer_prep</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">  </span><span class="c1"># Will run Freesurfer for surface-based analysis. Will output traditional Freesurfer derivatives.</span>
+<span class="w">  </span><span class="c1"># If you wish to employ Freesurfer outputs for brain masking or tissue segmentation in the voxel-based pipeline,</span>
+<span class="w">  </span><span class="c1"># select those &#39;Freesurfer-&#39; labeled options further below in anatomical_preproc.</span>
+<span class="w">  </span><span class="nt">freesurfer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run_reconall</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">    </span><span class="c1"># Ingress freesurfer recon-all folder</span>
+<span class="w">    </span><span class="nt">ingress_reconall</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">  </span><span class="c1"># Run ABCD-HCP post FreeSurfer and fMRISurface pipeline</span>
+<span class="w">  </span><span class="nt">post_freesurfer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">  </span><span class="nt">amplitude_low_frequency_fluctuation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">  </span><span class="nt">regional_homogeneity</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">  </span><span class="nt">surface_connectivity</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="nt">anatomical_preproc</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">  </span><span class="nt">acpc_alignment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">T1w_brain_ACPC_template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$FSLDIR/data/standard/MNI152_T1_1mm_brain.nii.gz</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">    </span><span class="c1"># Run ACPC alignment before non-local means filtering or N4 bias</span>
+<span class="w">    </span><span class="c1"># correction</span>
+<span class="w">    </span><span class="nt">run_before_preproc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="w">    </span><span class="c1"># ACPC aligned template</span>
+<span class="w">    </span><span class="nt">T1w_ACPC_template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/MNI152_T1_1mm.nii.gz</span>
+
+<span class="w">  </span><span class="nt">brain_extraction</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">    </span><span class="c1"># using: [&#39;3dSkullStrip&#39;, &#39;BET&#39;, &#39;UNet&#39;, &#39;niworkflows-ants&#39;, &#39;FreeSurfer-ABCD&#39;, &#39;FreeSurfer-BET-Tight&#39;, &#39;FreeSurfer-BET-Loose&#39;, &#39;FreeSurfer-Brainmask&#39;]</span>
+<span class="w">    </span><span class="c1"># this is a fork option</span>
+<span class="w">    </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">FreeSurfer-ABCD</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="c1"># Non-local means filtering via ANTs DenoiseImage</span>
+<span class="w">  </span><span class="nt">non_local_means_filtering</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># this is a fork option</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">On</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="c1"># options: &#39;Gaussian&#39; or &#39;Rician&#39;</span>
+<span class="w">    </span><span class="nt">noise_model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rician</span>
+
+<span class="w">  </span><span class="c1"># N4 bias field correction via ANTs</span>
+<span class="w">  </span><span class="nt">n4_bias_field_correction</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># this is a fork option</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">On</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="c1"># An integer to resample the input image to save computation time. Shrink factors &lt;= 4 are commonly used.</span>
+<span class="w">    </span><span class="nt">shrink_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="nt">segmentation</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># Automatically segment anatomical images into white matter, gray matter,</span>
+<span class="w">  </span><span class="c1"># and CSF based on prior probability maps.</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="nt">registration_workflows</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">anatomical_registration</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">    </span><span class="nt">registration</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">FSL-FNIRT</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># Reference mask with 2mm resolution to be used during FNIRT-based brain extraction in ABCD-options pipeline.</span>
+<span class="w">        </span><span class="nt">ref_mask_res-2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/MNI152_T1_2mm_brain_mask_dil.nii.gz</span>
+
+<span class="w">        </span><span class="c1"># Template with 2mm resolution to be used during FNIRT-based brain extraction in ABCD-options pipeline.</span>
+<span class="w">        </span><span class="nt">T1w_template_res-2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/MNI152_T1_2mm.nii.gz</span>
+
+<span class="w">      </span><span class="c1"># option parameters</span>
+<span class="w">      </span><span class="nt">ANTs</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># ANTs parameters for T1-template-based registration</span>
+<span class="w">        </span><span class="nt">T1_registration</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">verbose</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">float</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">collapse-output-transforms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">dimensionality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">winsorize-image-intensities</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">lowerQuantile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+<span class="w">              </span><span class="nt">upperQuantile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.995</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">initial-moving-transform</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">initializationFeature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">transforms</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Rigid</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">convergence</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">convergenceThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1e-6</span>
+<span class="w">                  </span><span class="nt">convergenceWindowSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">                  </span><span class="nt">iteration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000x500x250x100</span>
+<span class="w">                </span><span class="nt">gradientStep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">                </span><span class="nt">masks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+<span class="w">                </span><span class="nt">metric</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">metricWeight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">                  </span><span class="nt">numberOfBins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32</span>
+<span class="w">                  </span><span class="nt">samplingPercentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.25</span>
+<span class="w">                  </span><span class="nt">samplingStrategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Regular</span>
+<span class="w">                  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MI</span>
+<span class="w">                </span><span class="nt">shrink-factors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8x4x2x1</span>
+<span class="w">                </span><span class="nt">smoothing-sigmas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0x2.0x1.0x0.0</span>
+<span class="w">                </span><span class="nt">use-histogram-matching</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Affine</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">convergence</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">convergenceThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1e-6</span>
+<span class="w">                  </span><span class="nt">convergenceWindowSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">                  </span><span class="nt">iteration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000x500x250x100</span>
+<span class="w">                </span><span class="nt">gradientStep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">                </span><span class="nt">masks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+<span class="w">                </span><span class="nt">metric</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">metricWeight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">                  </span><span class="nt">numberOfBins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32</span>
+<span class="w">                  </span><span class="nt">samplingPercentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.25</span>
+<span class="w">                  </span><span class="nt">samplingStrategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Regular</span>
+<span class="w">                  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MI</span>
+<span class="w">                </span><span class="nt">shrink-factors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8x4x2x1</span>
+<span class="w">                </span><span class="nt">smoothing-sigmas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0x2.0x1.0x0.0</span>
+<span class="w">                </span><span class="nt">use-histogram-matching</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">SyN</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">convergence</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">convergenceThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1e-6</span>
+<span class="w">                  </span><span class="nt">convergenceWindowSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">                  </span><span class="nt">iteration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100x70x50x20</span>
+<span class="w">                </span><span class="nt">gradientStep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">                </span><span class="nt">masks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">                </span><span class="nt">metric</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">metricWeight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">                  </span><span class="nt">radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">                  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CC</span>
+<span class="w">                </span><span class="nt">shrink-factors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8x4x2x1</span>
+<span class="w">                </span><span class="nt">smoothing-sigmas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0x2.0x1.0x0.0</span>
+<span class="w">                </span><span class="nt">totalFieldVarianceInVoxelSpace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">                </span><span class="nt">updateFieldVarianceInVoxelSpace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
+<span class="w">                </span><span class="nt">use-histogram-matching</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="w">        </span><span class="c1"># Interpolation method for writing out transformed anatomical images.</span>
+<span class="w">        </span><span class="c1"># Possible values: Linear, BSpline, LanczosWindowedSinc</span>
+<span class="w">        </span><span class="nt">interpolation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Linear</span>
+
+<span class="w">    </span><span class="nt">overwrite_transform</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">    </span><span class="c1"># The resolution to which anatomical images should be transformed during registration.</span>
+<span class="w">    </span><span class="c1"># This is the resolution at which processed anatomical files will be output.</span>
+<span class="w">    </span><span class="nt">resolution_for_anat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1mm</span>
+
+<span class="w">    </span><span class="c1"># Template to be used during registration.</span>
+<span class="w">    </span><span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
+<span class="w">    </span><span class="nt">T1w_brain_template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/MNI152_T1_${resolution_for_anat}_brain.nii.gz</span>
+
+<span class="w">    </span><span class="c1"># Template to be used during registration.</span>
+<span class="w">    </span><span class="c1"># It is not necessary to change this path unless you intend to use a non-standard template.</span>
+<span class="w">    </span><span class="nt">T1w_brain_template_mask</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/dcan-tools/pipeline/global/templates/MNI152_T1_${resolution_for_anat}_brain_mask.nii.gz</span>
+
+<span class="w">  </span><span class="nt">functional_registration</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">coregistration</span><span class="p">:</span>
+
+<span class="w">      </span><span class="c1"># functional (BOLD/EPI) registration to anatomical (structural/T1)</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">      </span><span class="nt">func_input_prep</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># Choose whether to use functional brain or skull as the input to functional-to-anatomical registration</span>
+<span class="w">        </span><span class="nt">reg_with_skull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">        </span><span class="c1"># Choose whether to use the mean of the functional/EPI as the input to functional-to-anatomical registration or one of the volumes from the functional 4D timeseries that you choose.</span>
+<span class="w">        </span><span class="c1"># input: [&#39;Mean_Functional&#39;, &#39;Selected_Functional_Volume&#39;, &#39;fmriprep_reference&#39;]</span>
+<span class="w">        </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Selected_Functional_Volume</span><span class="p p-Indicator">]</span>
+
+<span class="w">      </span><span class="c1"># reference: &#39;brain&#39; or &#39;restore-brain&#39;</span>
+<span class="w">      </span><span class="c1"># In ABCD-options pipeline, &#39;restore-brain&#39; is used as coregistration reference</span>
+<span class="w">      </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restore-brain</span>
+
+<span class="w">      </span><span class="c1"># Choose coregistration interpolation</span>
+<span class="w">      </span><span class="nt">interpolation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spline</span>
+
+<span class="w">      </span><span class="c1"># Choose coregistration degree of freedom</span>
+<span class="w">      </span><span class="nt">dof</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
+
+<span class="w">    </span><span class="nt">func_registration_to_template</span><span class="p">:</span>
+
+<span class="w">      </span><span class="c1"># these options modify the application (to the functional data), not the calculation, of the</span>
+<span class="w">      </span><span class="c1"># T1-to-template and EPI-to-template transforms calculated earlier during registration</span>
+<span class="w">      </span><span class="c1"># apply the functional-to-template (T1 template) registration transform to the functional data</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">      </span><span class="nt">apply_transform</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># options: &#39;default&#39;, &#39;abcd&#39;, &#39;single_step_resampling_from_stc&#39;, &#39;dcan_nhp&#39;</span>
+<span class="w">        </span><span class="c1"># &#39;default&#39;: apply func-to-anat and anat-to-template transforms on motion corrected functional image.</span>
+<span class="w">        </span><span class="c1"># &#39;abcd&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of raw functional volume using FSL applywarp based on ABCD-HCP pipeline.</span>
+<span class="w">        </span><span class="c1"># &#39;single_step_resampling_from_stc&#39;: apply motion correction, func-to-anat and anat-to-template transforms on each of slice-time-corrected functional volume using ANTs antsApplyTransform based on fMRIPrep pipeline.</span>
+<span class="w">        </span><span class="c1">#   - if &#39;single_step_resampling_from_stc&#39;, &#39;template&#39; is the only valid option for ``nuisance_corrections: 2-nuisance_regression: space``</span>
+<span class="w">        </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">abcd</span>
+
+<span class="w">      </span><span class="nt">output_resolution</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># The resolution (in mm) to which the preprocessed, registered functional timeseries outputs are written into.</span>
+<span class="w">        </span><span class="c1"># NOTE:</span>
+<span class="w">        </span><span class="c1">#   selecting a 1 mm or 2 mm resolution might substantially increase your RAM needs- these resolutions should be selected with caution.</span>
+<span class="w">        </span><span class="c1">#   for most cases, 3 mm or 4 mm resolutions are suggested.</span>
+<span class="w">        </span><span class="c1"># NOTE:</span>
+<span class="w">        </span><span class="c1">#   this also includes the single-volume 3D preprocessed functional data,</span>
+<span class="w">        </span><span class="c1">#   such as the mean functional (mean EPI) in template space</span>
+<span class="w">        </span><span class="nt">func_preproc_outputs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2mm</span>
+
+<span class="w">        </span><span class="c1"># The resolution (in mm) to which the registered derivative outputs are written into.</span>
+<span class="w">        </span><span class="c1"># NOTE:</span>
+<span class="w">        </span><span class="c1">#   this is for the single-volume functional-space outputs (i.e. derivatives)</span>
+<span class="w">        </span><span class="c1">#   thus, a higher resolution may not result in a large increase in RAM needs as above</span>
+<span class="w">        </span><span class="nt">func_derivative_outputs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2mm</span>
+
+<span class="w">      </span><span class="nt">ANTs_pipelines</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># Interpolation method for writing out transformed functional images.</span>
+<span class="w">        </span><span class="c1"># Possible values: Linear, BSpline, LanczosWindowedSinc</span>
+<span class="w">        </span><span class="nt">interpolation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Linear</span>
+
+<span class="nt">functional_preproc</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">  </span><span class="nt">motion_estimates_and_correction</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">    </span><span class="nt">motion_estimates</span><span class="p">:</span>
+
+<span class="w">      </span><span class="c1"># calculate motion statistics BEFORE slice-timing correction</span>
+<span class="w">      </span><span class="nt">calculate_motion_first</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">      </span><span class="c1"># calculate motion statistics AFTER motion correction</span>
+<span class="w">      </span><span class="nt">calculate_motion_after</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="w">    </span><span class="nt">motion_correction</span><span class="p">:</span>
+
+<span class="w">      </span><span class="c1"># using: [&#39;3dvolreg&#39;, &#39;mcflirt&#39;]</span>
+<span class="w">      </span><span class="c1"># Forking is currently broken for this option.</span>
+<span class="w">      </span><span class="c1"># Please use separate configs if you want to use each of 3dvolreg and mcflirt.</span>
+<span class="w">      </span><span class="c1"># Follow https://github.com/FCP-INDI/C-PAC/issues/1935 to see when this issue is resolved.</span>
+<span class="w">      </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mcflirt</span><span class="p p-Indicator">]</span>
+
+<span class="w">      </span><span class="c1"># Choose motion correction reference. Options: mean, median, selected_volume, fmriprep_reference</span>
+<span class="w">      </span><span class="nt">motion_correction_reference</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">selected_volume</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">distortion_correction</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># this is a fork point</span>
+<span class="w">    </span><span class="c1">#   run: [On, Off] - this will run both and fork the pipeline</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">On</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="c1"># using: [&#39;PhaseDiff&#39;, &#39;Blip&#39;, &#39;Blip-FSL-TOPUP&#39;]</span>
+<span class="w">    </span><span class="c1">#   PhaseDiff - Perform field map correction using a single phase difference image, a subtraction of the two phase images from each echo. Default scanner for this method is SIEMENS.</span>
+<span class="w">    </span><span class="c1">#   Blip - Uses AFNI 3dQWarp to calculate the distortion unwarp for EPI field maps of opposite/same phase encoding direction.</span>
+<span class="w">    </span><span class="c1">#   Blip-FSL-TOPUP - Uses FSL TOPUP to calculate the distortion unwarp for EPI field maps of opposite/same phase encoding direction.</span>
+<span class="w">    </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">PhaseDiff</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Blip-FSL-TOPUP</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">func_masking</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">    </span><span class="c1"># Apply functional mask in native space</span>
+<span class="w">    </span><span class="nt">apply_func_mask_in_native_space</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="w">    </span><span class="c1"># using: [&#39;AFNI&#39;, &#39;FSL&#39;, &#39;FSL_AFNI&#39;, &#39;Anatomical_Refined&#39;, &#39;Anatomical_Based&#39;, &#39;Anatomical_Resampled&#39;, &#39;CCS_Anatomical_Refined&#39;]</span>
+<span class="w">    </span><span class="c1"># FSL_AFNI: fMRIPrep-style BOLD mask. Ref: https://github.com/nipreps/niworkflows/blob/a221f612/niworkflows/func/util.py#L246-L514</span>
+<span class="w">    </span><span class="c1"># Anatomical_Refined: 1. binarize anat mask, in case it is not a binary mask. 2. fill holes of anat mask 3. init_bold_mask : input raw func → dilate init func brain mask 4. refined_bold_mask : input motion corrected func → dilate anatomical mask 5. get final func mask</span>
+<span class="w">    </span><span class="c1"># Anatomical_Based: Generate the BOLD mask by basing it off of the anatomical brain mask. Adapted from DCAN Lab&#39;s BOLD mask method from the ABCD pipeline.</span>
+<span class="w">    </span><span class="c1"># Anatomical_Resampled: Resample anatomical brain mask in standard space to get BOLD brain mask in standard space. Adapted from DCAN Lab&#39;s BOLD mask method from the ABCD pipeline. (&quot;Create fMRI resolution standard space files for T1w image, wmparc, and brain mask […] don&#39;t use FLIRT to do spline interpolation with -applyisoxfm for the 2mm and 1mm cases because it doesn&#39;t know the peculiarities of the MNI template FOVs&quot;)</span>
+<span class="w">    </span><span class="c1"># CCS_Anatomical_Refined: Generate the BOLD mask by basing it off of the anatomical brain. Adapted from the BOLD mask method from the CCS pipeline.</span>
+<span class="w">    </span><span class="c1"># this is a fork point</span>
+<span class="w">    </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Anatomical_Resampled</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">generate_func_mean</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Generate mean functional image</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">  </span><span class="nt">coreg_prep</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Generate sbref</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="nt">nuisance_corrections</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">2-nuisance_regression</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Select which nuisance signal corrections to apply</span>
+<span class="w">    </span><span class="nt">Regressors</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="w">        </span><span class="nt">Bandpass</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">bottom_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">          </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="w">          </span><span class="nt">top_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">        </span><span class="nt">Motion</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">include_delayed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">          </span><span class="nt">include_delayed_squared</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+<span class="w">          </span><span class="nt">include_squared</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">    </span><span class="c1"># Process and refine masks used to produce regressors and time series for</span>
+<span class="w">    </span><span class="c1"># regression.</span>
+<span class="w">    </span><span class="nt">regressor_masks</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">erode_anatomical_brain_mask</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># Erode brain mask in millimeters, default for brain mask is 30 mm</span>
+<span class="w">        </span><span class="c1"># Brain erosion default is using millimeters.</span>
+<span class="w">        </span><span class="nt">brain_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+
+<span class="w">      </span><span class="nt">erode_csf</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># Erode cerebrospinal fluid mask in millimeters, default for cerebrospinal fluid is 30mm</span>
+<span class="w">        </span><span class="c1"># Cerebrospinal fluid erosion default is using millimeters.</span>
+<span class="w">        </span><span class="nt">csf_mask_erosion_mm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+
+<span class="w">      </span><span class="nt">erode_wm</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span>
+<span class="w">        </span><span class="c1"># Default proportion is 0.6 for white matter mask.</span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span>
+<span class="w">        </span><span class="c1"># White matter erosion default is using proportion erosion method when use erosion for white matter.</span>
+<span class="w">        </span><span class="nt">wm_erosion_prop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span>
+
+<span class="w">      </span><span class="nt">erode_gm</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># Target volume ratio, if using erosion.</span>
+<span class="w">        </span><span class="c1"># If using erosion, using both proportion and millimeters is not recommended.</span>
+<span class="w">        </span><span class="nt">gm_erosion_prop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span>
+
+<span class="nt">timeseries_extraction</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">connectivity_matrix</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Create a connectivity matrix from timeseries data</span>
+<span class="w">    </span><span class="c1"># Options:</span>
+<span class="w">    </span><span class="c1">#  [&#39;AFNI&#39;, &#39;Nilearn&#39;, &#39;ndmg&#39;]</span>
+<span class="w">    </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Nilearn</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">ndmg</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="c1"># Options:</span>
+<span class="w">    </span><span class="c1">#  [&#39;Pearson&#39;, &#39;Partial&#39;]</span>
+<span class="w">    </span><span class="c1"># Note: These options are not configurable for ndmg, which will ignore these options</span>
+<span class="w">    </span><span class="nt">measure</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Pearson</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Partial</span><span class="p p-Indicator">]</span>
+
+<span class="nt">amplitude_low_frequency_fluctuation</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># space: Template or Native</span>
+<span class="w">  </span><span class="nt">target_space</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Native</span><span class="p p-Indicator">]</span>
+
+<span class="nt">regional_homogeneity</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># space: Template or Native</span>
+<span class="w">  </span><span class="nt">target_space</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Native</span><span class="p p-Indicator">]</span>
+
+<span class="c1"># OUTPUTS AND DERIVATIVES</span>
+<span class="c1"># -----------------------</span>
+<span class="nt">post_processing</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">spatial_smoothing</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="w">  </span><span class="nt">z-scoring</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="nt">seed_based_correlation_analysis</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># Enter paths to region-of-interest (ROI) NIFTI files (.nii or .nii.gz) to be used for seed-based correlation analysis, and then select which types of analyses to run.</span>
+<span class="w">  </span><span class="c1"># Denote which analyses to run for each ROI path by listing the names below. For example, if you wish to run Avg and MultReg, you would enter: &#39;/path/to/ROI.nii.gz&#39;: Avg, MultReg</span>
+<span class="w">  </span><span class="c1"># available analyses:</span>
+<span class="w">  </span><span class="c1">#   /path/to/atlas.nii.gz: Avg, DualReg, MultReg</span>
+<span class="w">  </span><span class="nt">sca_roi_paths</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">/cpac_templates/CC400.nii.gz</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Avg</span>
+</pre></div>
+</div>
+
         </article>
       </div>
       <footer>

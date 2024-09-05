@@ -367,7 +367,176 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
+          <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">%YAML</span><span class="w"> </span><span class="m">1.1</span>
+<span class="nn">---</span>
+<span class="c1"># CPAC Pipeline Configuration YAML file</span>
+<span class="c1"># Version 1.8.8.dev1</span>
+<span class="c1">#</span>
+<span class="c1"># http://fcp-indi.github.io for more info.</span>
+<span class="c1">#</span>
+<span class="c1"># Tip: This file can be edited manually with a text editor for quick modifications.</span>
+<span class="nt">FROM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+
+<span class="nt">pipeline_setup</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># Name for this pipeline configuration - useful for identification.</span>
+<span class="w">  </span><span class="c1"># This string will be sanitized and used in filepaths</span>
+<span class="w">  </span><span class="nt">pipeline_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpac_anat</span>
+<span class="w">  </span><span class="nt">system_config</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Select Off if you intend to run CPAC on a single machine.</span>
+<span class="w">    </span><span class="c1"># If set to On, CPAC will attempt to submit jobs through the job scheduler / resource manager selected below.</span>
+<span class="w">    </span><span class="nt">on_grid</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">SGE</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># SGE Parallel Environment to use when running CPAC.</span>
+<span class="w">        </span><span class="c1"># Only applies when you are running on a grid or compute cluster using SGE.</span>
+<span class="w">        </span><span class="nt">parallel_environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpac</span>
+
+<span class="w">    </span><span class="c1"># The maximum amount of memory each participant&#39;s workflow can allocate.</span>
+<span class="w">    </span><span class="c1"># Use this to place an upper bound of memory usage.</span>
+<span class="w">    </span><span class="c1"># - Warning: &#39;Memory Per Participant&#39; multiplied by &#39;Number of Participants to Run Simultaneously&#39;</span>
+<span class="w">    </span><span class="c1">#   must not be more than the total amount of RAM.</span>
+<span class="w">    </span><span class="c1"># - Conversely, using too little RAM can impede the speed of a pipeline run.</span>
+<span class="w">    </span><span class="c1"># - It is recommended that you set this to a value that when multiplied by</span>
+<span class="w">    </span><span class="c1">#   &#39;Number of Participants to Run Simultaneously&#39; is as much RAM you can safely allocate.</span>
+<span class="w">    </span><span class="nt">maximum_memory_per_participant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+
+<span class="w">  </span><span class="nt">working_directory</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Deletes the contents of the Working Directory after running.</span>
+<span class="w">    </span><span class="c1"># This saves disk space, but any additional preprocessing or analysis will have to be completely re-run.</span>
+<span class="w">    </span><span class="nt">remove_working_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="w">  </span><span class="nt">Amazon-AWS</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Enable server-side 256-AES encryption on data to the S3 bucket</span>
+<span class="w">    </span><span class="nt">s3_encryption</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">On</span>
+
+<span class="nt">anatomical_preproc</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># N4 bias field correction via ANTs</span>
+<span class="w">  </span><span class="nt">n4_bias_field_correction</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># this is a fork option</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">On</span><span class="p p-Indicator">]</span>
+
+<span class="nt">segmentation</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tissue_segmentation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">Template_Based</span><span class="p">:</span>
+
+<span class="w">      </span><span class="c1"># These masks should be in the same space of your registration template, e.g. if</span>
+<span class="w">      </span><span class="c1"># you choose &#39;EPI Template&#39; , below tissue masks should also be EPI template tissue masks.</span>
+<span class="w">      </span><span class="c1">#</span>
+<span class="w">      </span><span class="c1"># Options: [&#39;T1_Template&#39;, &#39;EPI_Template&#39;]</span>
+<span class="w">      </span><span class="nt">template_for_segmentation</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+
+<span class="nt">registration_workflows</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">anatomical_registration</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Register skull-on anatomical image to a template.</span>
+<span class="w">    </span><span class="nt">reg_with_skull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="w">  </span><span class="nt">functional_registration</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">coregistration</span><span class="p">:</span>
+
+<span class="w">      </span><span class="c1"># functional (BOLD/EPI) registration to anatomical (structural/T1)</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+<span class="w">      </span><span class="nt">boundary_based_registration</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># this is a fork point</span>
+<span class="w">        </span><span class="c1">#   run: [On, Off] - this will run both and fork the pipeline</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Off</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">func_registration_to_template</span><span class="p">:</span>
+
+<span class="w">      </span><span class="c1"># these options modify the application (to the functional data), not the calculation, of the</span>
+<span class="w">      </span><span class="c1"># T1-to-template and EPI-to-template transforms calculated earlier during registration</span>
+<span class="w">      </span><span class="c1"># apply the functional-to-template (T1 template) registration transform to the functional data</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="w">    </span><span class="nt">EPI_registration</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ANTs</span><span class="p">:</span>
+
+<span class="w">        </span><span class="c1"># EPI registration configuration - synonymous with T1_registration</span>
+<span class="w">        </span><span class="c1"># parameters under anatomical registration above</span>
+<span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
+
+<span class="nt">functional_preproc</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+<span class="w">  </span><span class="nt">distortion_correction</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># using: [&#39;PhaseDiff&#39;, &#39;Blip&#39;, &#39;Blip-FSL-TOPUP&#39;]</span>
+<span class="w">    </span><span class="c1">#   PhaseDiff - Perform field map correction using a single phase difference image, a subtraction of the two phase images from each echo. Default scanner for this method is SIEMENS.</span>
+<span class="w">    </span><span class="c1">#   Blip - Uses AFNI 3dQWarp to calculate the distortion unwarp for EPI field maps of opposite/same phase encoding direction.</span>
+<span class="w">    </span><span class="c1">#   Blip-FSL-TOPUP - Uses FSL TOPUP to calculate the distortion unwarp for EPI field maps of opposite/same phase encoding direction.</span>
+<span class="w">    </span><span class="nt">using</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+
+<span class="nt">nuisance_corrections</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">2-nuisance_regression</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># this is a fork point</span>
+<span class="w">    </span><span class="c1">#   run: [On, Off] - this will run both and fork the pipeline</span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Off</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="c1"># Select which nuisance signal corrections to apply</span>
+<span class="w">    </span><span class="nt">Regressors</span><span class="p">:</span>
+
+<span class="nt">timeseries_extraction</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="nt">amplitude_low_frequency_fluctuation</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># ALFF &amp; f/ALFF</span>
+<span class="w">  </span><span class="c1"># Calculate Amplitude of Low Frequency Fluctuations (ALFF) and fractional ALFF (f/ALFF) for all voxels.</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="nt">regional_homogeneity</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># ReHo</span>
+<span class="w">  </span><span class="c1"># Calculate Regional Homogeneity (ReHo) for all voxels.</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="nt">voxel_mirrored_homotopic_connectivity</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># VMHC</span>
+<span class="w">  </span><span class="c1"># Calculate Voxel-mirrored Homotopic Connectivity (VMHC) for all voxels.</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="nt">network_centrality</span><span class="p">:</span>
+
+<span class="w">  </span><span class="c1"># Calculate Degree, Eigenvector Centrality, or Functional Connectivity Density.</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Off</span>
+
+<span class="w">  </span><span class="c1"># Maximum amount of RAM (in GB) to be used when calculating Degree Centrality.</span>
+<span class="w">  </span><span class="c1"># Calculating Eigenvector Centrality will require additional memory based on the size of the mask or number of ROI nodes.</span>
+<span class="w">  </span><span class="nt">memory_allocation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
+
+<span class="w">  </span><span class="c1"># Full path to a NIFTI file describing the mask. Centrality will be calculated for all voxels within the mask.</span>
+<span class="w">  </span><span class="nt">template_specification_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3://fcp-indi/resources/cpac/resources/mask-thr50-3mm.nii.gz</span>
+<span class="w">  </span><span class="nt">eigenvector_centrality</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Enable/Disable eigenvector centrality by selecting the connectivity weights</span>
+<span class="w">    </span><span class="c1">#   weight_options: [&#39;Binarized&#39;, &#39;Weighted&#39;]</span>
+<span class="w">    </span><span class="c1"># disable this type of centrality with:</span>
+<span class="w">    </span><span class="c1">#   weight_options: []</span>
+<span class="w">    </span><span class="nt">weight_options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Binarized</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Weighted</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">local_functional_connectivity_density</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># Select the type of threshold used when creating the lFCD adjacency matrix.</span>
+<span class="w">    </span><span class="c1"># options:</span>
+<span class="w">    </span><span class="c1">#   &#39;Significance threshold&#39;, &#39;Correlation threshold&#39;</span>
+<span class="w">    </span><span class="nt">correlation_threshold_option</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Significance threshold</span>
+
+<span class="w">    </span><span class="c1"># Based on the Threshold Type selected above, enter a Threshold Value.</span>
+<span class="w">    </span><span class="c1"># P-value for Significance Threshold</span>
+<span class="w">    </span><span class="c1"># Sparsity value for Sparsity Threshold</span>
+<span class="w">    </span><span class="c1"># Pearson&#39;s r value for Correlation Threshold</span>
+<span class="w">    </span><span class="nt">correlation_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+</pre></div>
+</div>
+
         </article>
       </div>
       <footer>
