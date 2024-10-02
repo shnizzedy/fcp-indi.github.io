@@ -444,9 +444,9 @@
 <section id="i-have-a-pipeline-configuration-that-used-to-work-but-now-i-m-getting-errors-that-start-with-oserror-file-ndmg-atlases-label-human-why">
 <h3>I have a pipeline configuration that used to work, but now I’m getting errors that start with <code class="docutils literal notranslate"><span class="pre">OSError:</span> <span class="pre">File</span> <span class="pre">/ndmg_atlases/label/Human/</span></code>. Why?<a class="headerlink" href="#i-have-a-pipeline-configuration-that-used-to-work-but-now-i-m-getting-errors-that-start-with-oserror-file-ndmg-atlases-label-human-why" title="Link to this heading">¶</a></h3>
 <p>On July 20, 2020, Neuroparc released v1.0. In moving from v0 to v1, the paths to several of the Neuroparc atlases changed. The atlases are used by C-PAC in its default and preconfigured pipelines. C-PAC v1.7.0 includes the Neuroparc v1.0 paths, but <strong>if you are using a pipeline based on C-PAC 1.6.2a or older, you will need to update any Nueroparc v0 paths in your config</strong></p>
-<div class="table-wrapper docutils container" id="id1">
-<table class="docutils align-default" id="id1">
-<caption><span class="caption-text">All paths begin with <code class="docutils literal notranslate"><span class="pre">/ndmg_atlases/label/Human/</span></code></span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id5">
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">All paths begin with <code class="docutils literal notranslate"><span class="pre">/ndmg_atlases/label/Human/</span></code></span><a class="headerlink" href="#id5" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Neuroparc v0</p></th>
 <th class="head"><p>Neuroparc v1</p></th>
@@ -555,6 +555,32 @@
 <p>When running C-PAC with an input BIDS directory, no data configuration file and without the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag, C-PAC would crash with a <code class="docutils literal notranslate"><span class="pre">bids-validator:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> message. The <code class="docutils literal notranslate"><span class="pre">bids-validator</span></code> CLI was restored to the C-PAC container images in version 1.8.8.</p>
 </section>
 </section>
+<section id="first-two-trs-not-affected-by-bandpass-filter">
+<h3>First two TRs not affected by bandpass filter<a class="headerlink" href="#first-two-trs-not-affected-by-bandpass-filter" title="Link to this heading">¶</a></h3>
+<section id="id1">
+<h4>🐛 First two TRs not affected by bandpass filter<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.8.6.</span></p>
+</div>
+<div class="versionremoved">
+<p><span class="versionmodified removed">Removed in version 1.8.8.</span></p>
+</div>
+<p>Issue <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/issues/2152">#2152</a> resolved in <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/issues/2153">#2153</a></p>
+<p>When running C-PAC v1.8.6 or v1.8.7 with a bandpass filter, the <code class="docutils literal notranslate"><span class="pre">1D</span></code> file is treated as if the header is 5 rows regardless of how many rows are in the actual header (typically 3 rows).</p>
+<p>n input BIDS directory, no data configuration file and without the <code class="docutils literal notranslate"><span class="pre">--skip_bids_validator</span></code> flag, C-PAC would crash with a <code class="docutils literal notranslate"><span class="pre">bids-validator:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> message. The <code class="docutils literal notranslate"><span class="pre">bids-validator</span></code> CLI was restored to the C-PAC container images in version 1.8.8.</p>
+<section id="id2">
+<h5>Workarounds<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h5>
+<section id="id3">
+<h6>Preferred<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h6>
+<p>Use an unaffected version of C-PAC if using bandpass filters.</p>
+</section>
+<section id="id4">
+<h6>Alternative<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h6>
+<p>If you’re using an affected version of C-PAC, you can make sure the 1D files have 5-row headers. This may require deleting some downstream working files and outputs and rerunning after modifying the intermediate <code class="docutils literal notranslate"><span class="pre">1D</span></code> file(s).</p>
+</section>
+</section>
+</section>
+</section>
 </section>
 </section>
 
@@ -641,6 +667,17 @@
 <li><a class="reference internal" href="#recently-resolved-common-issues">Recently Resolved Common Issues</a><ul>
 <li><a class="reference internal" href="#bids-validator-command-not-found"><code class="docutils literal notranslate"><span class="pre">bids-validator:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code></a><ul>
 <li><a class="reference internal" href="#bids-validator-is-missing-from-c-pac-image"><code class="docutils literal notranslate"><span class="pre">bids-validator</span></code> is missing from C-PAC image</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#first-two-trs-not-affected-by-bandpass-filter">First two TRs not affected by bandpass filter</a><ul>
+<li><a class="reference internal" href="#id1">🐛 First two TRs not affected by bandpass filter</a><ul>
+<li><a class="reference internal" href="#id2">Workarounds</a><ul>
+<li><a class="reference internal" href="#id3">Preferred</a></li>
+<li><a class="reference internal" href="#id4">Alternative</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

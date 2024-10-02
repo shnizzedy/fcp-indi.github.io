@@ -373,7 +373,7 @@
 <h2>human<a class="headerlink" href="#human" title="Link to this heading">¶</a></h2>
 <section id="default-the-default-pipeline">
 <h3>default: The Default Pipeline<a class="headerlink" href="#default-the-default-pipeline" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="default"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_default.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_default.yml</a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>C-PAC runs this pipeline by default, and it is not necessary to invoke the <cite>–preconfig</cite> flag to run it.</p>
@@ -386,16 +386,36 @@
 </div>
 <p>C-PAC is packaged with a default processing pipeline so that you can get your data preprocessing and analysis started immediately. Just pull the C-PAC Docker container and kick off the container with your data, and you’re on your way.</p>
 <p>The default processing pipeline performs fMRI processing using four strategies, with and without global signal regression, with and without bandpass filtering.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><a class="reference internal" href="../known-issues/FCP-INDI/C-PAC/2152"><span class="doc">🐛 First two TRs not affected by bandpass filter</span></a></p>
+</div>
 <p>Anatomical processing begins with conforming the data to RPI orientation and removing orientation header information that will interfere with further processing. A non-linear transform between skull-on images and a 2mm MNI brain-only template are calculated using ANTs<a class="footnote-reference brackets" href="#footcite-avan08" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 1.8.5: </span>Images are them skull-stripped using FSL’s BET<a class="footnote-reference brackets" href="#footcite-smit02" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> (was using AFNI’s 3dSkullStrip<a class="footnote-reference brackets" href="#footcite-cox96" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> prior to v1.8.5. See <a class="reference internal" href="../release_notes/v1.8.5"><span class="doc">Version 1.8.5 Beta (May 24, 2023)</span></a> for details.) and subsequently segmented into WM, GM, and CSF using FSL’s FAST tool<a class="footnote-reference brackets" href="#footcite-zhan01" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
 </div>
 <p>The resulting WM mask was multiplied by a WM prior map that was transformed into individual space using the inverse of the linear transforms previously calculated during the ANTs procedure. A CSF mask was multiplied by a ventricle map derived from the Harvard-Oxford atlas distributed with FSL<a class="footnote-reference brackets" href="#footcite-smit04" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. Skull-stripped images and grey matter tissue maps are written into MNI space at 2mm resolution.</p>
 <p>Functional preprocessing begins with resampling the data to RPI orientation, and slice timing correction. Next, motion correction is performed using a two-stage approach in which the images are first coregistered to the mean fMRI and then a new mean is calculated and used as the target for a second coregistration (AFNI 3dvolreg<a class="footnote-reference brackets" href="#footcite-cox99" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>). A 7 degree of freedom linear transform between the mean fMRI and the structural image is calculated using FSL’s implementation of boundary-based registration<a class="footnote-reference brackets" href="#footcite-zhan01" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. Nuisance variable regression (NVR) is performed on motion corrected data using a 2nd order polynomial, a 24-regressor model of motion<a class="footnote-reference brackets" href="#footcite-fris96" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, 5 nuisance signals, identified via principal components analysis of signals obtained from white matter (CompCor<a class="footnote-reference brackets" href="#footcite-behz07" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>), and mean CSF signal. WM and CSF signals were extracted using the previously described masks after transforming the fMRI data to match them in 2mm space using the inverse of the linear fMRI-sMRI transform. The NVR procedure is performed twice, with and without the inclusion of the global signal as a nuisance regressor. The residuals of the NVR procedure are processed with and without bandpass filtering (0.01Hz &lt; f &lt; 0.1Hz), written into MNI space at 3mm resolution and subsequently smoothed using a 6mm FWHM kernel.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><a class="reference internal" href="../known-issues/FCP-INDI/C-PAC/2152"><span class="doc">🐛 First two TRs not affected by bandpass filter</span></a></p>
+</div>
 <p>Several different individual level analysis are performed on the fMRI data including:</p>
 <ul class="simple">
 <li><p><strong>Amplitude of low frequency fluctuations (alff)</strong><a class="footnote-reference brackets" href="#footcite-zang07" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>: the variance of each voxel is calculated after bandpass filtering in original space and subsequently written into MNI space at 2mm resolution and spatially smoothed using a 6mm FWHM kernel.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><a class="reference internal" href="../known-issues/FCP-INDI/C-PAC/2152"><span class="doc">🐛 First two TRs not affected by bandpass filter</span></a></p>
+</div>
+<ul class="simple">
 <li><p><strong>Fractional amplitude of low frequency fluctuations (falff)</strong><a class="footnote-reference brackets" href="#footcite-zou08" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>: Similar to alff except that the variance of the bandpassed signal is divided by the total variance (variance of non-bandpassed signal).</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><a class="reference internal" href="../known-issues/FCP-INDI/C-PAC/2152"><span class="doc">🐛 First two TRs not affected by bandpass filter</span></a></p>
+</div>
+<ul class="simple">
 <li><p><strong>Regional homogeneity (ReHo)</strong><a class="footnote-reference brackets" href="#footcite-zang04" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>: a simultaneous Kendall rank correlation is calculated between each voxel’s time course and the time courses of the 27 voxels that are face, edge, and corner touching the voxel. ReHo is calculated in original space and subsequently written into MNI space at 2mm resolution and spatially smoothed using a 6mm FWHM kernel.</p></li>
 <li><p><strong>Voxel mirrored homotopic connectivity (VMHC)</strong><a class="footnote-reference brackets" href="#footcite-star08" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>: an non-linear transform is calculated between the skull-on anatomical data and a symmetric brain template in 2mm space. Using this transform, processed fMRI data are written in to symmetric MNI space at 2mm and the correlation between each voxel and its analog in the contralateral hemisphere is calculated. The Fisher transform is applied to the resulting values, which are then spatially smoothed using a 6mm FWHM kernel.</p></li>
 <li><p><strong>Weighted and binarized degree centrality (DC)</strong><a class="footnote-reference brackets" href="#footcite-buck09" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>: fMRI data is written into MNI space at 2mm resolution and spatially smoothed using a 6mm FWHM kernel. The voxel x voxel similarity matrix is calculated by the correlation between every pair of voxel time courses and then thresholded so that only the top 5% of correlations remain. For each voxel, binarized DC is the number of connections that remain for the voxel after thresholding and weighted DC is the average correlation coefficient across the remaining connections.</p></li>
@@ -509,7 +529,6 @@
 </section>
 <section id="abcd-options">
 <h3>abcd-options<a class="headerlink" href="#abcd-options" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="abcd-options"><span class="doc">Pipeline Configuration YAML</span></a></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><a class="reference internal" href="../known-issues/FCP-INDI/C-PAC/2104"><span class="doc">Freesurfer-based pipeline hangs if recon-all and ABCD surface post-processing are run in the same pipeline</span></a></p>
@@ -517,7 +536,7 @@
 </section>
 <section id="anat-only-default-with-anatomical-preprocessing-only">
 <h3>anat-only: Default with Anatomical Preprocessing Only<a class="headerlink" href="#anat-only-default-with-anatomical-preprocessing-only" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="anat-only"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_anat-only.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_anat-only.yml</a></p>
 <p>Based on the preprocessing decisions of the default pipeline, this preconfiguration allows you to immediately kick off a run with only anatomical preprocessing selected. This includes:</p>
 <ul class="simple">
 <li><p>Brain extraction (via AFNI 3dSkullStrip)</p></li>
@@ -527,7 +546,7 @@
 </section>
 <section id="preproc-default-without-derivatives">
 <h3>preproc: Default without Derivatives<a class="headerlink" href="#preproc-default-without-derivatives" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="preproc"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_preproc.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_preproc.yml</a></p>
 <p>Based on the preprocessing decisions of the default pipeline, this preconfiguration allows you to preprocess all of your data, without launching into calculation of outputs and data derivatives. This includes:</p>
 <p>Anatomical:</p>
 <ul class="simple">
@@ -545,8 +564,8 @@
 </ul>
 </section>
 <section id="fmriprep-options-fmriprep-options-pipeline">
-<h3>fmriprep-options: fMRIPrep options Pipeline<a class="headerlink" href="#fmriprep-options-fmriprep-options-pipeline" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="fmriprep-options"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<h3>fmriprep-options: fmriprep-Options Pipeline<a class="headerlink" href="#fmriprep-options-fmriprep-options-pipeline" title="Link to this heading">¶</a></h3>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_fmriprep-options.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_fmriprep-options.yml</a></p>
 <p>This pipeline is designed to increase reproducibility with the preprocessing results of the fmriprep pipeline package<a class="footnote-reference brackets" href="#footcite-fmri16" id="id27" role="doc-noteref"><span class="fn-bracket">[</span>24<span class="fn-bracket">]</span></a> produced by the <a class="reference external" href="https://poldracklab.stanford.edu/">Poldrack Lab at Stanford University</a>.</p>
 <section id="id28">
 <h4>References<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h4>
@@ -568,7 +587,7 @@
 </section>
 <section id="ndmg-neurodata-s-ndmg-f-pipeline">
 <h3>ndmg: Neurodata’s ‘ndmg-f’ Pipeline<a class="headerlink" href="#ndmg-neurodata-s-ndmg-f-pipeline" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="ndmg"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_ndmg.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_ndmg.yml</a></p>
 <p>This pipeline is the result of <a class="reference external" href="https://neurodata.io/">Neurodata’s</a> study to converge upon the intersection of pipeline configuration decisions that maximizes discriminability between participants’ data, drawing from the connectome graphs produced (labeled ‘ndmg_graph’ in the C-PAC output directory). This pipeline invokes a minimal set of preprocessing.</p>
 <p>Note, the ‘ndmg_graph’ connectome graph outputs are always produced by C-PAC. This pipeline configuration simply replicates the preprocessing methods described in the paper, linked below.</p>
 <section id="id85">
@@ -584,7 +603,7 @@
 </section>
 <section id="rbc-options-reprobrainchart-options-pipeline">
 <h3>rbc-options: ReproBrainChart Options Pipeline<a class="headerlink" href="#rbc-options-reprobrainchart-options-pipeline" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="rbc-options"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_rbc-options.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_rbc-options.yml</a></p>
 <p>RBC-options pipeline was built and integrated in C-PAC based on the Reproducible Brain Charts initiative, which aims to aggregate and harmonize phenotypic and neuroimage data to delineate node mechanisms regarding developmental basis of psychopathology in youth and yield reproducible growth charts of brain development<a class="footnote-reference brackets" href="#footcite-hoff21" id="id141" role="doc-noteref"><span class="fn-bracket">[</span>25<span class="fn-bracket">]</span></a>.</p>
 <section id="id142">
 <h4>References<a class="headerlink" href="#id142" title="Link to this heading">¶</a></h4>
@@ -603,7 +622,7 @@
 <h2>non-human primate<a class="headerlink" href="#non-human-primate" title="Link to this heading">¶</a></h2>
 <section id="monkey-default-with-monkey-preprocessing">
 <h3>monkey: Default with Monkey Preprocessing<a class="headerlink" href="#monkey-default-with-monkey-preprocessing" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="monkey"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_monkey.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_monkey.yml</a></p>
 <p>This pipeline is based on the work of Xu et al.<a class="footnote-reference brackets" href="#footcite-xu19" id="id144" role="doc-noteref"><span class="fn-bracket">[</span>26<span class="fn-bracket">]</span></a> and nhp-ABCD-BIDS-pipeline.<a class="footnote-reference brackets" href="#footcite-stur20" id="id145" role="doc-noteref"><span class="fn-bracket">[</span>27<span class="fn-bracket">]</span></a></p>
 <section id="id146">
 <h4>References<a class="headerlink" href="#id146" title="Link to this heading">¶</a></h4>
@@ -651,12 +670,12 @@
 <h2>testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
 <section id="benchmark-ants-c-pac-benchmark-with-ants-registration">
 <h3>benchmark-ANTS: C-PAC Benchmark with ANTs Registration<a class="headerlink" href="#benchmark-ants-c-pac-benchmark-with-ants-registration" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="benchmark-ANTS"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_benchmark-ANTS.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_benchmark-ANTS.yml</a></p>
 <p>The benchmark pipeline has remained mostly unchanged since the project’s inception, and is used at the end of each release cycle to ensure the results of C-PAC’s key outputs have not changed. It is designed to test a wide range of pipeline options. This pipeline is based on registration-to-template using the ANTs/ITK toolset, as this decision impacts many other aspects of the pipeline further downstream.</p>
 </section>
 <section id="benchmark-fnirt-c-pac-benchmark-with-fsl-fnirt-registration">
 <h3>benchmark-FNIRT: C-PAC Benchmark with FSL FNIRT Registration<a class="headerlink" href="#benchmark-fnirt-c-pac-benchmark-with-fsl-fnirt-registration" title="Link to this heading">¶</a></h3>
-<p><a class="reference internal" href="benchmark-FNIRT"><span class="doc">Pipeline Configuration YAML</span></a></p>
+<p>Pipeline Configuration YAML: <a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_benchmark-FNIRT.yml">https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/resources/configs/pipeline_config_benchmark-FNIRT.yml</a></p>
 <p>The benchmark pipeline has remained mostly unchanged since the project’s inception, and is used at the end of each release cycle to ensure the results of C-PAC’s key outputs have not changed. It is designed to test a wide range of pipeline options. This pipeline is based on registration-to-template using the FSL FLIRT &amp; FNIRT, as this decision impacts many other aspects of the pipeline further downstream.</p>
 </section>
 </section>
@@ -726,7 +745,7 @@
 <li><a class="reference internal" href="#abcd-options">abcd-options</a></li>
 <li><a class="reference internal" href="#anat-only-default-with-anatomical-preprocessing-only">anat-only: Default with Anatomical Preprocessing Only</a></li>
 <li><a class="reference internal" href="#preproc-default-without-derivatives">preproc: Default without Derivatives</a></li>
-<li><a class="reference internal" href="#fmriprep-options-fmriprep-options-pipeline">fmriprep-options: fMRIPrep options Pipeline</a><ul>
+<li><a class="reference internal" href="#fmriprep-options-fmriprep-options-pipeline">fmriprep-options: fmriprep-Options Pipeline</a><ul>
 <li><a class="reference internal" href="#id28">References</a></li>
 </ul>
 </li>
