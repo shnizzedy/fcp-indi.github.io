@@ -204,7 +204,6 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../user/index">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../user/release_notes/v1.8.7">Latest Release: Version 1.8.7 Beta (May 03, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../user/quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../user/subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../user/pipelines/pipeline_config">3. Select Your Pipeline</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -377,8 +376,8 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>realigned_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Path of a realigned nifti file.</p></li>
-<li><p><strong>bandpass_freqs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Tuple containing the bandpass frequencies. (LowCutoff_HighPass HighCutoff_LowPass)</p></li>
-<li><p><strong>sample_period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Length of sampling period in seconds.  If not specified,
+<li><p><strong>bandpass_freqs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Tuple containing the bandpass frequencies. (LowCutoff_HighPass HighCutoff_LowPass)</p></li>
+<li><p><strong>sample_period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Length of sampling period in seconds.  If not specified,
 this value is read from the nifti file provided.</p></li>
 </ul>
 </dd>
@@ -400,8 +399,8 @@ this value is read from the nifti file provided.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input_image_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Bold image to be filtered.</p></li>
-<li><p><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – ‘Repetition time (TR) of series (in sec) - derived from image header if unspecified’</p></li>
-<li><p><strong>period_cut</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Minimum period (in sec) for DCT high-pass filter, nipype default value: 128.</p></li>
+<li><p><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – ‘Repetition time (TR) of series (in sec) - derived from image header if unspecified’</p></li>
+<li><p><strong>period_cut</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Minimum period (in sec) for DCT high-pass filter, nipype default value: 128.</p></li>
 </ul>
 </dd>
 </dl>
@@ -790,6 +789,6 @@ this operation.</p>
     <script src="../../_static/underscore.js?v=f1230927"></script>
     <script src="../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../_static/versionList.js?v=5e25a132"></script>
     </body>
 </html>

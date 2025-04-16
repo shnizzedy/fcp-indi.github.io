@@ -204,7 +204,6 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="release_notes/v1.8.7">Latest Release: Version 1.8.7 Beta (May 03, 2024)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quick">1. C-PAC Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="subject_list_config">2. Specify Your Data</a></li>
 <li class="toctree-l2 current has-children"><a class="reference internal" href="pipelines/pipeline_config">3. Select Your Pipeline</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 3. Select Your Pipeline</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
@@ -478,10 +477,6 @@ Power and colleagues (2011) proposed two measures to identify volumes contaminat
 <li><p><strong>Run Temporal Filtering - [Off, On, On/Off]:</strong> Apply a temporal band-pass filter to functional data.</p></li>
 <li><p><strong>Select regressors: - [dialogue: Low-frequency cutoff, High-frequency cutoff]:</strong>  Clicking on the <em>+</em> icon to the right of the box here will bring up a dialog where you can define the upper and lower cutoffs for the bandpass filter.  You may generate multiple sets of bandpass filter strategies in this way.  When you are done defining bandpasses, check the box next to each bandpass you would like to run.</p></li>
 </ol>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><a class="reference internal" href="known-issues/FCP-INDI/C-PAC/2152"><span class="doc">🐛 First two TRs not affected by bandpass filter</span></a></p>
-</div>
 </section>
 <section id="configuration-without-the-gui">
 <span id="nuisance-no-gui"></span><h3>Configuration Without the GUI<a class="headerlink" href="#configuration-without-the-gui" title="Link to this heading">¶</a></h3>
@@ -1042,10 +1037,6 @@ Power and colleagues (2011) proposed two measures to identify volumes contaminat
 <li><p>If there are regressor strategies under <span class="xref std std-ref">nuisance_corrections &gt; 2-nuisance_regression &gt; Regressors</span>, the ‘Name’ field of one strategy must match the name of the regressor strategy listed under <span class="xref std std-ref">ingress_regressors</span>. If you are not running bandpass filtering, the field <span class="xref std std-ref">nuisance_corrections &gt; 2-nuisance_regression &gt; Regressors</span> can be blank. See below for an example.</p></li>
 <li><p>Nuisance regression cannot fork with ingressed regressors</p></li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><a class="reference internal" href="known-issues/FCP-INDI/C-PAC/2152"><span class="doc">🐛 First two TRs not affected by bandpass filter</span></a></p>
-</div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of nuisance regression section of pipeline file</span>
 <span class="nt">nuisance_corrections</span><span class="p">:</span>
 <span class="w"> </span><span class="nt">2-nuisance_regression</span><span class="p">:</span>
@@ -1219,6 +1210,6 @@ Fox, M.D., Snyder, A.Z., Vincent, J.L., Corbetta, M., Van Essen, D.C., Raichle, 
     <script src="../_static/underscore.js?v=f1230927"></script>
     <script src="../_static/doctools.js?v=d248f5b3"></script>
     <script src="../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../_static/versionList.js?v=5e25a132"></script>
     </body>
 </html>
