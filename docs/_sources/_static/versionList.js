@@ -49,13 +49,33 @@ function versionDropdown() {
 
 
 function redirectVersion(here, version) {
-  const indexInString = here.search(versionPattern);
-  let suffix = here.slice(indexInString, here.length).split('\/');
-  suffix = '/' + suffix.slice(1,suffix.length).join('\/');
-  const selectedLocation = here.slice(0, indexInString) + version + suffix;
-  if (selectedLocation !== here) {
-    window.location.replace(selectedLocation);
-  }
+  // Fetch the list of valid versions
+  fetch("https://fcp-indi.github.io/docs/versions.txt")
+    .then(response => response.text())
+    .then(version_list => {
+      const validVersions = version_list.split('\n').filter(v => v.trim() !== '');
+
+      // Construct the redirect URL
+      const indexInString = here.search(versionPattern);
+      let suffix = here.slice(indexInString, here.length).split('\/');
+      suffix = '/' + suffix.slice(1, suffix.length).join('\/');
+      const selectedVersion = here.slice(0, indexInString) + version;
+      const selectedLocation = selectedVersion + suffix;
+
+      // Validate the version parameter
+      if (!validVersions.includes(selectedVersion)) {
+        console.error("Invalid version selected:", version);
+        return; // Do not proceed with the redirect
+      }
+
+      // Perform the redirect if the URL is different and version is valid
+      if (selectedLocation !== here) {
+        window.location.replace(selectedLocation);
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching valid versions:", error);
+    });
 }
 
 
