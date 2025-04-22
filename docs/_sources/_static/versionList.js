@@ -63,7 +63,7 @@ function redirectVersion(here, version) {
       const selectedLocation = selectedVersion + suffix;
 
       // Validate the version parameter
-      if (!validVersions.includes(selectedVersion)) {
+      if (!validVersions.includes(version)) {
         console.error("Invalid version selected:", version);
         return; // Do not proceed with the redirect
       }
