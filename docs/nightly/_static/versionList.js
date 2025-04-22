@@ -1,9 +1,44 @@
 const versionPattern = /(?<=.*fcp-indi\.github\..*\/docs\/)(.*)(?=\/.*)/;
 
+function fetchValidVersions() {
+  return fetch("https://fcp-indi.github.io/docs/versions.txt")
+    .then(response => response.text())
+    .then(version_list => version_list.split('\n').filter(v => v.trim() !== ''));
+}
+
+function validateAndRedirect(here, version) {
+  fetchValidVersions().then(validVersions => {
+    // Construct the redirect URL
+    const indexInString = here.search(versionPattern);
+    let suffix = here.slice(indexInString, here.length).split('\/');
+    suffix = '/' + suffix.slice(1, suffix.length).join('\/');
+    const selectedVersion = here.slice(0, indexInString) + version;
+    const selectedLocation = selectedVersion + suffix;
+
+    // Validate the version parameter
+    if (!validVersions.includes(version)) {
+      console.error("Invalid version selected:", version);
+      return; // Do not proceed with the redirect
+    }
+
+    // Ensure the new URL is in the same domain
+    const currentDomain = new URL(here).origin;
+    const newDomain = new URL(selectedLocation).origin;
+    if (currentDomain !== newDomain) {
+      console.error("Redirect URL is not in the same domain:", selectedLocation);
+      return; // Do not proceed with the redirect
+    }
+
+    // Perform the redirect if the URL is different and version is valid
+    if (selectedLocation !== here) {
+      window.location.replace(selectedLocation);
+    }}
+  );
+}
+
 function createDropdown(here) {
   let promisedDropdown = function(resolve, reject) {
-    fetch("https://fcp-indi.github.io/docs/versions.txt").then(response => response.text().then(version_list => {
-      const versions = version_list.split('\n');
+    fetchValidVersions().then(versions => {
       let dropdownElement = document.createElement('select');
       versions.forEach(version => {
         let option = document.createElement('option');
@@ -16,7 +51,7 @@ function createDropdown(here) {
         }
       });
       resolve(dropdownElement);
-    }));
+    });
   }
   return new Promise(promisedDropdown);
 }
@@ -41,43 +76,10 @@ function versionDropdown() {
       newTitle.appendChild(document.createTextNode(" »"));
       item.innerHTML = newTitle.innerHTML;
       item.addEventListener('change', (event) => {
-        redirectVersion(here, event.target.value);
+        validateAndRedirect(here, event.target.value);
       });
     }
   });
 }
-
-
-function redirectVersion(here, version) {
-  // Fetch the list of valid versions
-  fetch("https://fcp-indi.github.io/docs/versions.txt")
-    .then(response => response.text())
-    .then(version_list => {
-      const validVersions = version_list.split('\n').filter(v => v.trim() !== '');
-
-      // Construct the redirect URL
-      const indexInString = here.search(versionPattern);
-      let suffix = here.slice(indexInString, here.length).split('\/');
-      suffix = '/' + suffix.slice(1, suffix.length).join('\/');
-      const selectedVersion = here.slice(0, indexInString) + version;
-      const selectedLocation = selectedVersion + suffix;
-
-      // Validate the version parameter
-      if (!validVersions.includes(version)) {
-        console.error("Invalid version selected:", version);
-        return; // Do not proceed with the redirect
-      }
-
-      // Perform the redirect if the URL is different and version is valid
-      if (selectedLocation !== here) {
-        window.location.replace(selectedLocation);
-      }
-    })
-    .catch(error => {
-      console.error("Error fetching valid versions:", error);
-    });
-}
-
-
 
 versionDropdown();
