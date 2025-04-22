@@ -233,6 +233,14 @@ var Documentation = {
 // quick alias for translations
 _ = Documentation.gettext;
 
+const _ready = (callback) => {
+  if (document.readyState !== "loading") {
+    callback();
+  } else {
+    document.addEventListener("DOMContentLoaded", callback);
+  }
+};
+
 $(document).ready(function() {
   Documentation.init();
 });
