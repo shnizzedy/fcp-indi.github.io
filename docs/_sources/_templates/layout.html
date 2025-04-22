@@ -1,5 +1,10 @@
 {% extends "!layout.html" %}
 
+{% block extrahead %}
+{{ super() }}
+<script src="{{ pathto('_static/underscore.js', 1) }}"></script>
+{% endblock %}
+
 {% block footer %}
 {{ super() }}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19224662-10"></script>
