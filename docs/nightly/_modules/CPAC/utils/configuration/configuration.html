@@ -378,16 +378,16 @@
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
 <span class="sd">&quot;&quot;&quot;C-PAC Configuration class and related functions.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
-<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
 
-<span class="kn">from</span> <span class="nn">click</span> <span class="kn">import</span> <span class="n">BadParameter</span>
-<span class="kn">import</span> <span class="nn">pkg_resources</span> <span class="k">as</span> <span class="nn">p</span>
-<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">click</span><span class="w"> </span><span class="kn">import</span> <span class="n">BadParameter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pkg_resources</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">p</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 
-<span class="kn">from</span> <span class="nn">.diff</span> <span class="kn">import</span> <span class="n">dct_diff</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.diff</span><span class="w"> </span><span class="kn">import</span> <span class="n">dct_diff</span>
 
 <span class="n">CONFIG_KEY_TYPE</span> <span class="o">=</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="n">SPECIAL_REPLACEMENT_STRINGS</span> <span class="o">=</span> <span class="p">{</span><span class="sa">r</span><span class="s2">&quot;$</span><span class="si">{resolution_for_anat}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$</span><span class="si">{func_resolution}</span><span class="s2">&quot;</span><span class="p">}</span>
@@ -395,10 +395,10 @@
 
 <div class="viewcode-block" id="ConfigurationDictUpdateConflation">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.ConfigurationDictUpdateConflation">[docs]</a>
-<span class="k">class</span> <span class="nc">ConfigurationDictUpdateConflation</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationDictUpdateConflation</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom exception to clarify similar methods.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s2">&quot;`Configuration().update` requires a key and a value. &quot;</span>
             <span class="s2">&quot;Perhaps you meant `Configuration().dict().update`?&quot;</span>
@@ -409,7 +409,7 @@
 
 <div class="viewcode-block" id="Configuration">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration">[docs]</a>
-<span class="k">class</span> <span class="nc">Configuration</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Configuration</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to set dictionary keys as map attributes.</span>
 
@@ -471,7 +471,7 @@
 <span class="sd">    &#39;slack_420349_preconfig&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">config_map</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">skip_env_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a Configuration instance.</span>
@@ -482,8 +482,8 @@
 
 <span class="sd">        skip_env_check : bool, optional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">CPAC.pipeline.schema</span> <span class="kn">import</span> <span class="n">schema</span>
-        <span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">lookup_nested_value</span><span class="p">,</span> <span class="n">update_nested_dict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">schema</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">lookup_nested_value</span><span class="p">,</span> <span class="n">update_nested_dict</span>
 
         <span class="k">if</span> <span class="n">config_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">config_map</span> <span class="o">=</span> <span class="p">{}</span>
@@ -552,20 +552,20 @@
         <span class="c1"># set working directory as an environment variable</span>
         <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CPAC_WORKDIR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;pipeline_setup&quot;</span><span class="p">,</span> <span class="s2">&quot;working_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;C-PAC Configuration (&#39;</span><span class="si">{</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;pipeline_setup&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;pipeline_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Show Configuration as a dict when accessed directly.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">newone</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)({})</span>
         <span class="n">newone</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
         <span class="n">newone</span><span class="o">.</span><span class="n">_update_attr</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">newone</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -573,7 +573,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">key_type_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -581,7 +581,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">key_type_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;Configuration&quot;</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Configuration&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;Configuration&quot;</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Configuration&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the set difference between two Configurations.</span>
 
 <span class="sd">        Examples</span>
@@ -619,19 +619,19 @@
 
 <div class="viewcode-block" id="Configuration.dict">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Show contents of a C-PAC configuration as a dict.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">v</span><span class="p">)}</span></div>
 
 
 <div class="viewcode-block" id="Configuration.keys">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.keys">[docs]</a>
-    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Show toplevel keys of a C-PAC configuration dict.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_nonestr_to_None</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_nonestr_to_None</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Recursive method to type convert &#39;None&#39; to None in nested config.</span>
 
 <span class="sd">        Parameters</span>
@@ -657,7 +657,7 @@
 
 <div class="viewcode-block" id="Configuration.set_from_ENV">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.set_from_ENV">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_from_ENV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_from_ENV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Replace strings like $VAR and ${VAR} with environment variable values.</span>
 
 <span class="sd">        Parameters</span>
@@ -702,7 +702,7 @@
 
 <div class="viewcode-block" id="Configuration.set_without_ENV">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.set_without_ENV">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_without_ENV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_without_ENV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retain strings like $VAR and ${VAR} when setting attributes.</span>
 
 <span class="sd">        Parameters</span>
@@ -734,13 +734,13 @@
 
 <div class="viewcode-block" id="Configuration.sub_pattern">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.sub_pattern">[docs]</a>
-    <span class="k">def</span> <span class="nf">sub_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sub_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">orig_key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">pattern</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)])</span></div>
 
 
 <div class="viewcode-block" id="Configuration.check_pattern">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.check_pattern">[docs]</a>
-    <span class="k">def</span> <span class="nf">check_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orig_key</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">tags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orig_key</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -764,8 +764,8 @@
 
     <span class="c1"># method to find any pattern ($) in the configuration</span>
     <span class="c1"># and update the attributes with its pattern value</span>
-    <span class="k">def</span> <span class="nf">_update_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">check_path</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">check_path</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
                     <span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid path- </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">. Please check your configuration file&quot;</span><span class="p">)</span>
@@ -796,7 +796,7 @@
 
 <div class="viewcode-block" id="Configuration.update">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">ConfigurationDictUpdateConflation</span><span class="p">()):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">ConfigurationDictUpdateConflation</span><span class="p">()):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ConfigurationDictUpdateConflation</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
@@ -806,7 +806,7 @@
 
 <div class="viewcode-block" id="Configuration.get_nested">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.get_nested">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">_d</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_d</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -820,7 +820,7 @@
 
 <div class="viewcode-block" id="Configuration.set_nested">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.set_nested">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">d</span><span class="p">[</span><span class="n">keys</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -831,7 +831,7 @@
         <span class="k">return</span> <span class="n">d</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_check_if_switch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_if_switch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a given entity is a switch.</span>
 
 <span class="sd">        Parameters</span>
@@ -869,7 +869,7 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">_switch_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_switch_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the key is set to the given value or False otherwise.</span>
 
 <span class="sd">        Parameters</span>
@@ -899,7 +899,7 @@
 
 <div class="viewcode-block" id="Configuration.switch_is_off">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.switch_is_off">[docs]</a>
-    <span class="k">def</span> <span class="nf">switch_is_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">switch_is_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the key is set to &#39;off&#39; OR &#39;on&#39; and &#39;off&#39; or False otherwise.</span>
 
 <span class="sd">        Used for tracking forking.</span>
@@ -940,7 +940,7 @@
 
 <div class="viewcode-block" id="Configuration.switch_is_on">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.switch_is_on">[docs]</a>
-    <span class="k">def</span> <span class="nf">switch_is_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">switch_is_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">,</span> <span class="n">exclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the key is set to &#39;on&#39; OR &#39;on&#39; and &#39;off&#39; or False otherwise.</span>
 
 <span class="sd">        Used for tracking forking.</span>
@@ -981,7 +981,7 @@
 
 <div class="viewcode-block" id="Configuration.switch_is_on_off">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.switch_is_on_off">[docs]</a>
-    <span class="k">def</span> <span class="nf">switch_is_on_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">switch_is_on_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">CONFIG_KEY_TYPE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the key is set to both &#39;on&#39; and &#39;off&#39; or False otherwise.</span>
 
 <span class="sd">        Used for tracking forking.</span>
@@ -1016,7 +1016,7 @@
 
 <div class="viewcode-block" id="Configuration.key_type_error">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Configuration.key_type_error">[docs]</a>
-    <span class="k">def</span> <span class="nf">key_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">key_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Raise a KeyError if an inappropriate type of key is attempted.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
             <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
@@ -1034,7 +1034,7 @@
 
 <div class="viewcode-block" id="check_pname">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.check_pname">[docs]</a>
-<span class="k">def</span> <span class="nf">check_pname</span><span class="p">(</span><span class="n">p_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_pname</span><span class="p">(</span><span class="n">p_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check / set `p_name`, the str representation of a pipeline for use in filetrees.</span>
 
 <span class="sd">    Parameters</span>
@@ -1075,7 +1075,7 @@
 
 <div class="viewcode-block" id="collect_key_list">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.collect_key_list">[docs]</a>
-<span class="k">def</span> <span class="nf">collect_key_list</span><span class="p">(</span><span class="n">config_dict</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">collect_key_list</span><span class="p">(</span><span class="n">config_dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of lists of keys for a nested dictionary.</span>
 
 <span class="sd">    Parameters</span>
@@ -1104,7 +1104,7 @@
 
 <div class="viewcode-block" id="configuration_from_file">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.configuration_from_file">[docs]</a>
-<span class="k">def</span> <span class="nf">configuration_from_file</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">configuration_from_file</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a Configuration from a pipeline config file.</span>
 
 <span class="sd">    Parameters</span>
@@ -1123,7 +1123,7 @@
 
 <div class="viewcode-block" id="preconfig_yaml">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.preconfig_yaml">[docs]</a>
-<span class="k">def</span> <span class="nf">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig_name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig_name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the path to a preconfigured pipeline&#39;s YAML file.</span>
 
 <span class="sd">    Raises BadParameter if an invalid preconfig name is given.</span>
@@ -1140,7 +1140,7 @@
 <span class="sd">    str or dict</span>
 <span class="sd">        path to YAML file or dict loaded from YAML</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">ALL_PIPELINE_CONFIGS</span><span class="p">,</span> <span class="n">AVAILABLE_PIPELINE_CONFIGS</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">ALL_PIPELINE_CONFIGS</span><span class="p">,</span> <span class="n">AVAILABLE_PIPELINE_CONFIGS</span>
 
     <span class="k">if</span> <span class="n">preconfig_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALL_PIPELINE_CONFIGS</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
@@ -1164,7 +1164,7 @@
 
 <div class="viewcode-block" id="Preconfiguration">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.Preconfiguration">[docs]</a>
-<span class="k">class</span> <span class="nc">Preconfiguration</span><span class="p">(</span><span class="n">Configuration</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Preconfiguration</span><span class="p">(</span><span class="n">Configuration</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A preconfigured Configuration.</span>
 
 <span class="sd">    Parameters</span>
@@ -1173,7 +1173,7 @@
 <span class="sd">        The canonical name of the preconfig to load</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preconfig</span><span class="p">,</span> <span class="n">skip_env_check</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preconfig</span><span class="p">,</span> <span class="n">skip_env_check</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">config_map</span><span class="o">=</span><span class="n">preconfig_yaml</span><span class="p">(</span><span class="n">preconfig</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="n">skip_env_check</span><span class="o">=</span><span class="n">skip_env_check</span>
         <span class="p">)</span></div>
@@ -1182,7 +1182,7 @@
 
 <div class="viewcode-block" id="set_subject">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.set_subject">[docs]</a>
-<span class="k">def</span> <span class="nf">set_subject</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_subject</span><span class="p">(</span>
     <span class="n">sub_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pipe_config</span><span class="p">:</span> <span class="s2">&quot;Configuration&quot;</span><span class="p">,</span> <span class="n">p_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set pipeline name and log directory path for a given sub_dict.</span>
@@ -1238,7 +1238,7 @@
 
 <div class="viewcode-block" id="nipype_friendly_name">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.configuration.nipype_friendly_name">[docs]</a>
-<span class="k">def</span> <span class="nf">nipype_friendly_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nipype_friendly_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace each sequence of non-alphanumeric characters...</span>
 
 <span class="sd">    ...with a single underscore and remove any leading underscores.</span>
@@ -1295,6 +1295,6 @@
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

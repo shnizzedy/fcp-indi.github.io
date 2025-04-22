@@ -365,7 +365,7 @@
 
 <div class="viewcode-block" id="ItemFromList">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datatypes.ItemFromList">[docs]</a>
-<span class="k">class</span> <span class="nc">ItemFromList</span><span class="p">:</span>  <span class="c1"># pylint: disable=too-few-public-methods</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ItemFromList</span><span class="p">:</span>  <span class="c1"># pylint: disable=too-few-public-methods</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Coerce single-item lists into just the only item in the list.</span>
 <span class="sd">    Returns item if item is not a list, set, or tuple.</span>
 <span class="sd">    Raises CoerceInvalid if impossible.</span>
@@ -382,9 +382,9 @@
 <span class="sd">    &#39;string&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">list_of_one</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">list_of_one</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize item from list.&quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">CoerceInvalid</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">LengthInvalid</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">voluptuous</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoerceInvalid</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">LengthInvalid</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_of_one</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="k">return</span> <span class="n">list_of_one</span>
@@ -395,14 +395,14 @@
                 <span class="sa">f</span><span class="s2">&quot;Cannot coerce list of length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_one</span><span class="p">)</span><span class="si">}</span><span class="s2"> to item&quot;</span>
                 <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="kc">None</span>
                 <span class="k">else</span> <span class="n">msg</span>
-            <span class="p">)</span> <span class="kn">from</span> <span class="nn">length_invalid</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">length_invalid</span>
         <span class="k">return</span> <span class="n">list_of_one</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
 
 <div class="viewcode-block" id="ListFromItem">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.datatypes.ListFromItem">[docs]</a>
-<span class="k">class</span> <span class="nc">ListFromItem</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ListFromItem</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Subclass of list to coerce non-lists into lists.</span>
 
 <span class="sd">    Examples</span>
@@ -427,7 +427,7 @@
 <span class="sd">    []</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ListFromItem.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -478,6 +478,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

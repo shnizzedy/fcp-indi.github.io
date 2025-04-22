@@ -381,7 +381,7 @@
 
 <div class="viewcode-block" id="dct_diff">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.diff.dct_diff">[docs]</a>
-<span class="k">def</span> <span class="nf">dct_diff</span><span class="p">(</span><span class="n">dct1</span><span class="p">,</span> <span class="n">dct2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dct_diff</span><span class="p">(</span><span class="n">dct1</span><span class="p">,</span> <span class="n">dct2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to compare 2 nested dicts, dropping values unspecified</span>
 <span class="sd">    in the second. Adapted from https://github.com/FCP-INDI/CPAC_regtest_pack/blob/9056ef63/cpac_pipe_diff.py#L31-L78.</span>
 
@@ -450,7 +450,7 @@
 
 <div class="viewcode-block" id="diff_dict">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.diff.diff_dict">[docs]</a>
-<span class="k">def</span> <span class="nf">diff_dict</span><span class="p">(</span><span class="n">diff</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">diff_dict</span><span class="p">(</span><span class="n">diff</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Method to return a dict of only changes given a nested dict</span>
 <span class="sd">    of ``(dict1_value, dict2_value)`` tuples.</span>
 
@@ -491,7 +491,7 @@
 
 <div class="viewcode-block" id="DiffDict">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.diff.DiffDict">[docs]</a>
-<span class="k">class</span> <span class="nc">DiffDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DiffDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to semantically store a dictionary of set differences from</span>
 <span class="sd">    ``Configuration(S) - Configuration(T)``.</span>
 
@@ -520,7 +520,7 @@
 <span class="sd">        dictionary of differing values from ``Configuration(T)``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Dictionary of difference ``Configuration(S) - Configuration(T)``.</span>
 
 <span class="sd">        Each value in a ~DiffDict should be either a ``DiffDict`` or a</span>
@@ -530,7 +530,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minuend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s_value</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subtrahend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_value</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_return_one_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which_value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_return_one_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which_value</span><span class="p">):</span>
         <span class="n">return_dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">DiffDict</span><span class="p">,</span> <span class="n">DiffValue</span><span class="p">)):</span>
@@ -539,13 +539,13 @@
                 <span class="n">return_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
         <span class="k">return</span> <span class="n">return_dict</span>
 
-    <span class="k">def</span> <span class="nf">_s_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_s_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a dictionary of only the differing ``&#39;S&#39;`` values that differ</span>
 <span class="sd">        in ``S - T``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_one_value</span><span class="p">(</span><span class="s2">&quot;s_value&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_t_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_t_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a dictionary of only the differing ``&#39;T&#39;`` values that differ</span>
 <span class="sd">        in ``S - T``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -555,7 +555,7 @@
 
 <div class="viewcode-block" id="DiffValue">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.diff.DiffValue">[docs]</a>
-<span class="k">class</span> <span class="nc">DiffValue</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DiffValue</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to semantically store values of set difference from</span>
 <span class="sd">    ``Configuration(S) - Configuration(T)``.</span>
 
@@ -580,7 +580,7 @@
 <span class="sd">        value from ``Configuration(T)``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_value</span><span class="p">,</span> <span class="n">t_value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_value</span><span class="p">,</span> <span class="n">t_value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Different values from ``Configuration(S) - Configuration(T)``.</span>
 
 <span class="sd">        Parameters</span>
@@ -594,10 +594,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minuend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_value</span> <span class="o">=</span> <span class="n">s_value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subtrahend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_value</span> <span class="o">=</span> <span class="n">t_value</span>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">2</span>  <span class="c1"># self.__repr__ should always be a 2-tuple</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">s_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_value</span><span class="p">))</span></div>
 
 </pre></div>
@@ -642,6 +642,6 @@
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

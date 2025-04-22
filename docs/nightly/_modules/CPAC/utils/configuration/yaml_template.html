@@ -379,26 +379,26 @@
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
 <span class="sd">&quot;&quot;&quot;Functions to create YAML configuration files from templates.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha1</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hashlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">sha1</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">click</span> <span class="kn">import</span> <span class="n">BadParameter</span>
-<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">click</span><span class="w"> </span><span class="kn">import</span> <span class="n">BadParameter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">preconfig_yaml</span><span class="p">,</span> <span class="n">Preconfiguration</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">UTLOGGER</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">update_config_dict</span><span class="p">,</span> <span class="n">update_pipeline_values_1_8</span><span class="p">,</span> <span class="n">YAML_BOOLS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">preconfig_yaml</span><span class="p">,</span> <span class="n">Preconfiguration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">UTLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">update_config_dict</span><span class="p">,</span> <span class="n">update_pipeline_values_1_8</span><span class="p">,</span> <span class="n">YAML_BOOLS</span>
 
 <span class="n">YAML_LOOKUP</span> <span class="o">=</span> <span class="p">{</span><span class="n">yaml_str</span><span class="p">:</span> <span class="n">key</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">YAML_BOOLS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">yaml_str</span> <span class="ow">in</span> <span class="n">value</span><span class="p">}</span>
 
 
 <div class="viewcode-block" id="YamlTemplate">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.YamlTemplate">[docs]</a>
-<span class="k">class</span> <span class="nc">YamlTemplate</span><span class="p">:</span>  <span class="c1"># pylint: disable=too-few-public-methods</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">YamlTemplate</span><span class="p">:</span>  <span class="c1"># pylint: disable=too-few-public-methods</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to link YAML comments to the contents of a YAML file.</span>
 
 <span class="sd">    Attributes</span>
@@ -417,7 +417,7 @@
 <span class="sd">    original : str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_yaml</span><span class="p">,</span> <span class="n">base_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_yaml</span><span class="p">,</span> <span class="n">base_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a YamlTemplate.</span>
 
 <span class="sd">        Parameters</span>
@@ -449,7 +449,7 @@
 
 <div class="viewcode-block" id="YamlTemplate.dump">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.YamlTemplate.dump">[docs]</a>
-    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Dump YAML from a new dictionary with comments from template dictionary.</span>
 
 <span class="sd">        Parameters</span>
@@ -545,7 +545,7 @@
         <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">{3,}&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_dump</span><span class="p">))</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_parse_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Split YAML into lines</span>
         <span class="n">yaml_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="c1"># Initialize comment and key</span>
@@ -576,7 +576,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_count_indent</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_count_indent</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine indentation level.</span>
 
 <span class="sd">    Parameters</span>
@@ -599,7 +599,7 @@
 
 <div class="viewcode-block" id="create_yaml_from_template">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.create_yaml_from_template">[docs]</a>
-<span class="k">def</span> <span class="nf">create_yaml_from_template</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_yaml_from_template</span><span class="p">(</span>
     <span class="n">d</span><span class="p">:</span> <span class="n">Configuration</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">,</span>  <span class="c1"># pylint: disable=invalid-name</span>
     <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
     <span class="n">import_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -672,7 +672,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_format_list_items</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_format_list_items</span><span class="p">(</span>
     <span class="n">l</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>  <span class="c1"># noqa: E741  # pylint:disable=invalid-name</span>
     <span class="n">line_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">short_list_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
@@ -723,7 +723,7 @@
 
 <div class="viewcode-block" id="hash_data_config">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.hash_data_config">[docs]</a>
-<span class="k">def</span> <span class="nf">hash_data_config</span><span class="p">(</span><span class="n">sub_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hash_data_config</span><span class="p">(</span><span class="n">sub_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a short SHA1 hash from a data config subject list of dicts.</span>
 
 <span class="sd">    Parameters</span>
@@ -756,7 +756,7 @@
 
 <div class="viewcode-block" id="indent">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.indent">[docs]</a>
-<span class="k">def</span> <span class="nf">indent</span><span class="p">(</span><span class="n">line_level</span><span class="p">,</span> <span class="n">plus</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">indent</span><span class="p">(</span><span class="n">line_level</span><span class="p">,</span> <span class="n">plus</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return an indent string for a given level.</span>
 
 <span class="sd">    Parameters</span>
@@ -775,7 +775,7 @@
 
 <div class="viewcode-block" id="yaml_bool">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.yaml_bool">[docs]</a>
-<span class="k">def</span> <span class="nf">yaml_bool</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">yaml_bool</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Give On/Off value to bools.</span>
 
 <span class="sd">    Parameters</span>
@@ -815,7 +815,7 @@
 
 <div class="viewcode-block" id="upgrade_pipeline_to_1_8">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.upgrade_pipeline_to_1_8">[docs]</a>
-<span class="k">def</span> <span class="nf">upgrade_pipeline_to_1_8</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">upgrade_pipeline_to_1_8</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Upgrade a C-PAC 1.7 pipeline config to C-PAC 1.8.</span>
 
 <span class="sd">    Parameters</span>
@@ -862,7 +862,7 @@
 
 <div class="viewcode-block" id="update_a_preconfig">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.update_a_preconfig">[docs]</a>
-<span class="k">def</span> <span class="nf">update_a_preconfig</span><span class="p">(</span><span class="n">preconfig</span><span class="p">,</span> <span class="n">import_from</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_a_preconfig</span><span class="p">(</span><span class="n">preconfig</span><span class="p">,</span> <span class="n">import_from</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update a preconfig with comments from another config.</span>
 
 <span class="sd">    Parameters</span>
@@ -884,9 +884,9 @@
 
 <div class="viewcode-block" id="update_all_preconfigs">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.configuration.yaml_template.update_all_preconfigs">[docs]</a>
-<span class="k">def</span> <span class="nf">update_all_preconfigs</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_all_preconfigs</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update all other preconfigs with comments from default.&quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">ALL_PIPELINE_CONFIGS</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">ALL_PIPELINE_CONFIGS</span>
 
     <span class="n">not_from_blank</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s2">&quot;anat-only&quot;</span><span class="p">,</span>
@@ -952,6 +952,6 @@
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

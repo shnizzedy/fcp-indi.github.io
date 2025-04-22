@@ -378,22 +378,22 @@
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
 <span class="sd">&quot;&quot;&quot;Funtions for logging.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">exc_info</span> <span class="k">as</span> <span class="n">sys_exc_info</span>
-<span class="kn">from</span> <span class="nn">traceback</span> <span class="kn">import</span> <span class="n">print_exception</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sys</span><span class="w"> </span><span class="kn">import</span> <span class="n">exc_info</span> <span class="k">as</span> <span class="n">sys_exc_info</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">traceback</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_exception</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span>
 
-<span class="kn">from</span> <span class="nn">nipype</span> <span class="kn">import</span> <span class="n">logging</span> <span class="k">as</span> <span class="n">nipype_logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype</span><span class="w"> </span><span class="kn">import</span> <span class="n">logging</span> <span class="k">as</span> <span class="n">nipype_logging</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils.docs</span> <span class="kn">import</span> <span class="n">docstring_parameter</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring.config</span> <span class="kn">import</span> <span class="n">MOCK_LOGGERS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.docs</span><span class="w"> </span><span class="kn">import</span> <span class="n">docstring_parameter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">MOCK_LOGGERS</span>
 
 
 <div class="viewcode-block" id="failed_to_start">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.monitoring.custom_logging.failed_to_start">[docs]</a>
-<span class="k">def</span> <span class="nf">failed_to_start</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">exception</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">failed_to_start</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Launch a failed-to-start logger for a run that failed to start.</span>
 
 <span class="sd">    Must be called from within an ``except`` block.</span>
@@ -413,7 +413,7 @@
 
 <div class="viewcode-block" id="getLogger">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.monitoring.custom_logging.getLogger">[docs]</a>
-<span class="k">def</span> <span class="nf">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>  <span class="c1"># pylint: disable=invalid-name</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a mock logger if one exists, falling back on real loggers.</span>
 
 <span class="sd">    Parameters</span>
@@ -445,7 +445,7 @@
 <span class="n">WFLOGGER</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;nipype.workflow&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">log_failed_subprocess</span><span class="p">(</span><span class="n">cpe</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_failed_subprocess</span><span class="p">(</span><span class="n">cpe</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Pass STDERR from a subprocess to the interface&#39;s logger.</span>
 
 <span class="sd">    Parameters</span>
@@ -457,7 +457,7 @@
 
 <div class="viewcode-block" id="log_subprocess">
 <a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.log_subprocess">[docs]</a>
-<span class="k">def</span> <span class="nf">log_subprocess</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_subprocess</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Pass STDERR and STDOUT from subprocess to interface&#39;s logger.</span>
 
 <span class="sd">    This function is nearly a drop-in replacement for `subprocess.check_output`.</span>
@@ -515,22 +515,22 @@
 
 
 <span class="c1"># pylint: disable=too-few-public-methods</span>
-<span class="k">class</span> <span class="nc">MockHandler</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MockHandler</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Handler for MockLogger.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span> <span class="o">=</span> <span class="n">filename</span>  <span class="c1"># pylint: disable=invalid-name</span>
 
 
 <span class="c1"># pylint: disable=too-few-public-methods</span>
 <div class="viewcode-block" id="MockLogger">
 <a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger">[docs]</a>
-<span class="k">class</span> <span class="nc">MockLogger</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MockLogger</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mock logging.Logger to provide API without keeping the logger in memory.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MockLogger.__init__">
 <a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[</span><span class="n">MockHandler</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">))]</span>
@@ -542,17 +542,17 @@
 
 <div class="viewcode-block" id="MockLogger.exception">
 <a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.exception">[docs]</a>
-    <span class="k">def</span> <span class="nf">exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">exc_info</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
     <span class="n">exception</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="o">.</span><span class="vm">__doc__</span>
 
-    <span class="k">def</span> <span class="nf">_factory_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_factory_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate a log method like `self.log(message)` for a given built-in level.&quot;&quot;&quot;</span>
 
         <span class="nd">@docstring_parameter</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">_log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="n">items</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="n">items</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Log a message if logging level &gt;= {level}. See `Logging Levels &lt;https://docs.python.org/3/library/logging.html#levels&gt;`_ for a list of levels.&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="nb">getattr</span><span class="p">(</span>
                 <span class="n">logging</span><span class="p">,</span> <span class="n">level</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span>
@@ -577,13 +577,13 @@
 
 <div class="viewcode-block" id="MockLogger.delete">
 <a class="viewcode-back" href="../../../../developer/logging#CPAC.utils.monitoring.custom_logging.MockLogger.delete">[docs]</a>
-    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete the mock logger from memory.&quot;&quot;&quot;</span>
         <span class="k">del</span> <span class="n">MOCK_LOGGERS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span></div>
 
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_get_first_file_handler</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_first_file_handler</span><span class="p">(</span>
         <span class="n">handlers</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span> <span class="o">|</span> <span class="n">MockHandler</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span> <span class="o">|</span> <span class="n">MockHandler</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Given a list of Handlers, return the first FileHandler found or return None.&quot;&quot;&quot;</span>
@@ -594,7 +594,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_lazy_sub</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="n">items</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_lazy_sub</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="n">items</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Given lazy-logging syntax, return string with substitutions.</span>
 
 <span class="sd">    Parameters</span>
@@ -624,7 +624,7 @@
 
 <div class="viewcode-block" id="set_up_logger">
 <a class="viewcode-back" href="../../../../developer/utils#CPAC.utils.monitoring.custom_logging.set_up_logger">[docs]</a>
-<span class="k">def</span> <span class="nf">set_up_logger</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_up_logger</span><span class="p">(</span>
     <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mock</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">overwrite_existing</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialize a logger.</span>
@@ -737,6 +737,6 @@
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

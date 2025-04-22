@@ -376,19 +376,19 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-<span class="kn">from</span> <span class="nn">nibabel.filebasedimages</span> <span class="kn">import</span> <span class="n">ImageFileError</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">svd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nibabel.filebasedimages</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageFileError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">svd</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils</span> <span class="kn">import</span> <span class="n">safe_shape</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">IFLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_shape</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFLOGGER</span>
 
 
-<span class="k">def</span> <span class="nf">calc_compcor_components</span><span class="p">(</span><span class="n">data_filename</span><span class="p">,</span> <span class="n">num_components</span><span class="p">,</span> <span class="n">mask_filename</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_compcor_components</span><span class="p">(</span><span class="n">data_filename</span><span class="p">,</span> <span class="n">num_components</span><span class="p">,</span> <span class="n">mask_filename</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">num_components</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Improper value for num_components (</span><span class="si">{</span><span class="n">num_components</span><span class="si">}</span><span class="s2">), should be &gt;= 1.&quot;</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -397,13 +397,13 @@
         <span class="n">image_data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_filename</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="n">ImageFileError</span><span class="p">,</span> <span class="ne">MemoryError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Unable to load data from </span><span class="si">{</span><span class="n">data_filename</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">raise</span> <span class="n">ImageFileError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">raise</span> <span class="n">ImageFileError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">binary_mask</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mask_filename</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="n">ImageFileError</span><span class="p">,</span> <span class="ne">MemoryError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Unable to load data from </span><span class="si">{</span><span class="n">mask_filename</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">raise</span> <span class="n">ImageFileError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">raise</span> <span class="n">ImageFileError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">safe_shape</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">binary_mask</span><span class="p">):</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
@@ -446,7 +446,7 @@
 
 <div class="viewcode-block" id="cosine_filter">
 <a class="viewcode-back" href="../../../../developer/workflows/nuisance#CPAC.nuisance.cosine_filter">[docs]</a>
-<span class="k">def</span> <span class="nf">cosine_filter</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cosine_filter</span><span class="p">(</span>
     <span class="n">input_image_path</span><span class="p">,</span>
     <span class="n">timestep</span><span class="p">,</span>
     <span class="n">period_cut</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
@@ -455,33 +455,18 @@
     <span class="n">failure_mode</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Apply cosine filter to the input BOLD image using the discrete cosine transform (DCT) method.</span>
+<span class="sd">    `cosine_filter` adapted from Nipype.</span>
 
-<span class="sd">    Adapted from nipype implementation. https://github.com/nipy/nipype/blob/d353f0d/nipype/algorithms/confounds.py#L1086-L1107</span>
-<span class="sd">    It removes the low-frequency drift from the voxel time series. The filtered image is saved to disk.</span>
-
+<span class="sd">    https://github.com/nipy/nipype/blob/d353f0d/nipype/algorithms/confounds.py#L1086-L1107</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    input_image_path : str</span>
-<span class="sd">        Path to the BOLD image to be filtered.</span>
+<span class="sd">    input_image_path : string</span>
+<span class="sd">            Bold image to be filtered.</span>
 <span class="sd">    timestep : float</span>
-<span class="sd">        Repetition time (TR) of the series (in seconds). Derived from image header if unspecified.</span>
-<span class="sd">    period_cut : float, optional</span>
-<span class="sd">        Minimum period (in seconds) for the DCT high-pass filter. Default value is 128.</span>
-<span class="sd">    remove_mean : bool, optional</span>
-<span class="sd">        Whether to remove the mean from the voxel time series before filtering. Default is True.</span>
-<span class="sd">    axis : int, optional</span>
-<span class="sd">        The axis along which to apply the filter. Default is -1 (last axis).</span>
-<span class="sd">    failure_mode : {&#39;error&#39;, &#39;ignore&#39;}, optional</span>
-<span class="sd">        Specifies how to handle failure modes. If set to &#39;error&#39;, the function raises an error.</span>
-<span class="sd">        If set to &#39;ignore&#39;, it returns the input data unchanged in case of failure. Default is &#39;error&#39;.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    cosfiltered_img : str</span>
-<span class="sd">        Path to the filtered BOLD image.</span>
-
+<span class="sd">            &#39;Repetition time (TR) of series (in sec) - derived from image header if unspecified&#39;</span>
+<span class="sd">    period_cut : float</span>
+<span class="sd">            Minimum period (in sec) for DCT high-pass filter, nipype default value: 128.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># STATEMENT OF CHANGES:</span>
     <span class="c1">#     This function is derived from sources licensed under the Apache-2.0 terms,</span>
@@ -492,7 +477,6 @@
     <span class="c1">#     * Removed caluclation and return of `non_constant_regressors`</span>
     <span class="c1">#     * Modified docstring to reflect local changes</span>
     <span class="c1">#     * Updated style to match C-PAC codebase</span>
-    <span class="c1">#     * Updated to use generator and iterate over voxel time series to optimize memory usage.</span>
 
     <span class="c1"># ORIGINAL WORK&#39;S ATTRIBUTION NOTICE:</span>
     <span class="c1">#    Copyright (c) 2009-2016, Nipype developers</span>
@@ -512,78 +496,45 @@
     <span class="c1">#    Prior to release 0.12, Nipype was licensed under a BSD license.</span>
 
     <span class="c1"># Modifications copyright (C) 2019 - 2024  C-PAC Developers</span>
-    <span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">nipype.algorithms.confounds</span><span class="w"> </span><span class="kn">import</span> <span class="n">_cosine_drift</span><span class="p">,</span> <span class="n">_full_rank</span>
 
-        <span class="k">def</span> <span class="nf">voxel_generator</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">datashape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">datashape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">datashape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
-                        <span class="k">yield</span> <span class="n">input_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">input_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input_image_path</span><span class="p">)</span>
+    <span class="n">input_data</span> <span class="o">=</span> <span class="n">input_img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
 
-        <span class="kn">from</span> <span class="nn">nipype.algorithms.confounds</span> <span class="kn">import</span> <span class="n">_cosine_drift</span><span class="p">,</span> <span class="n">_full_rank</span>
+    <span class="n">datashape</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">timepoints</span> <span class="o">=</span> <span class="n">datashape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">datashape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">failure_mode</span> <span class="o">!=</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 
-        <span class="n">input_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input_image_path</span><span class="p">)</span>
-        <span class="n">input_data</span> <span class="o">=</span> <span class="n">input_img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
-        <span class="n">datashape</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">shape</span>
-        <span class="n">timepoints</span> <span class="o">=</span> <span class="n">datashape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">datashape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">failure_mode</span> <span class="o">!=</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+    <span class="n">input_data</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">timepoints</span><span class="p">))</span>
 
-        <span class="n">frametimes</span> <span class="o">=</span> <span class="n">timestep</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">timepoints</span><span class="p">)</span>
-        <span class="n">X_full</span> <span class="o">=</span> <span class="n">_full_rank</span><span class="p">(</span><span class="n">_cosine_drift</span><span class="p">(</span><span class="n">period_cut</span><span class="p">,</span> <span class="n">frametimes</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">frametimes</span> <span class="o">=</span> <span class="n">timestep</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">timepoints</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">_full_rank</span><span class="p">(</span><span class="n">_cosine_drift</span><span class="p">(</span><span class="n">period_cut</span><span class="p">,</span> <span class="n">frametimes</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="c1"># Generate X with and without the mean column</span>
-        <span class="n">X_with_mean</span> <span class="o">=</span> <span class="n">X_full</span>
-        <span class="n">X_without_mean</span> <span class="o">=</span> <span class="n">X_full</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">X_full</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">X_full</span>
+    <span class="n">betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">input_data</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="c1"># Reshape the input data to bring the time dimension to the last axis if it&#39;s not already</span>
-        <span class="k">if</span> <span class="n">axis</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">reshaped_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">reshaped_data</span> <span class="o">=</span> <span class="n">input_data</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">remove_mean</span><span class="p">:</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">betas</span> <span class="o">=</span> <span class="n">betas</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="n">reshaped_output_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">reshaped_data</span><span class="p">)</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">input_data</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 
-        <span class="c1"># Choose the appropriate X matrix</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">X_without_mean</span> <span class="k">if</span> <span class="n">remove_mean</span> <span class="k">else</span> <span class="n">X_with_mean</span>
+    <span class="n">output_data</span> <span class="o">=</span> <span class="n">residuals</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">datashape</span><span class="p">)</span>
 
-        <span class="n">voxel_gen</span> <span class="o">=</span> <span class="n">voxel_generator</span><span class="p">()</span>
+    <span class="n">hdr</span> <span class="o">=</span> <span class="n">input_img</span><span class="o">.</span><span class="n">header</span>
+    <span class="n">output_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="n">input_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">reshaped_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">IFLOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;calculating </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">reshaped_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> row of voxels&quot;</span>
-            <span class="p">)</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">reshaped_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">reshaped_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
-                    <span class="n">voxel_time_series</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">voxel_gen</span><span class="p">)</span>
-                    <span class="n">betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">voxel_time_series</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="n">input_image_path</span><span class="p">[</span><span class="n">input_image_path</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span>
 
-                    <span class="n">residuals</span> <span class="o">=</span> <span class="n">voxel_time_series</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span>
-                    <span class="n">reshaped_output_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">residuals</span>
+    <span class="n">cosfiltered_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">file_name</span><span class="p">)</span>
 
-        <span class="c1"># Move the time dimension back to its original position if it was reshaped</span>
-        <span class="k">if</span> <span class="n">axis</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">output_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">reshaped_output_data</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">output_data</span> <span class="o">=</span> <span class="n">reshaped_output_data</span>
+    <span class="n">output_img</span><span class="o">.</span><span class="n">to_filename</span><span class="p">(</span><span class="n">cosfiltered_img</span><span class="p">)</span>
 
-        <span class="n">hdr</span> <span class="o">=</span> <span class="n">input_img</span><span class="o">.</span><span class="n">header</span>
-        <span class="n">output_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="n">input_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
-        <span class="n">file_name</span> <span class="o">=</span> <span class="n">input_image_path</span><span class="p">[</span><span class="n">input_image_path</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span>
-
-        <span class="n">cosfiltered_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">file_name</span><span class="p">)</span>
-
-        <span class="n">output_img</span><span class="o">.</span><span class="n">to_filename</span><span class="p">(</span><span class="n">cosfiltered_img</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">cosfiltered_img</span>
-
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error in cosine_filter: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">IFLOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">cosfiltered_img</span></div>
 
 
 
-<span class="k">def</span> <span class="nf">fallback_svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fallback_svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="n">full_matrices</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="n">compute_uv</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
@@ -594,7 +545,7 @@
     <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">TR_string_to_float</span><span class="p">(</span><span class="n">tr</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">TR_string_to_float</span><span class="p">(</span><span class="n">tr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert TR string to seconds (float). Suffixes &#39;s&#39; or &#39;ms&#39; to indicate</span>
 <span class="sd">    seconds or milliseconds.</span>
@@ -623,7 +574,7 @@
             <span class="n">tr_numeric</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tr_str</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Can not convert TR string to float: &quot;</span><span class="si">{</span><span class="n">tr</span><span class="si">}</span><span class="s1">&quot;.&#39;</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
     <span class="k">return</span> <span class="n">tr_numeric</span>
 </pre></div>
@@ -668,6 +619,6 @@
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

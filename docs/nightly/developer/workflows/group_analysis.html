@@ -423,7 +423,7 @@ and non-significant ones</p></li>
 <p>Workflow Outputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">merged</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
     <span class="mi">4</span><span class="n">D</span> <span class="n">volume</span> <span class="n">file</span> <span class="n">after</span> <span class="n">merging</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">derivative</span>
-    <span class="n">files</span> <span class="kn">from</span> <span class="nn">each</span> <span class="n">specified</span> <span class="n">subject</span><span class="o">.</span>
+    <span class="n">files</span> <span class="kn">from</span><span class="w"> </span><span class="nn">each</span> <span class="n">specified</span> <span class="n">subject</span><span class="o">.</span>
 
 <span class="n">outputspec</span><span class="o">.</span><span class="n">zstats</span> <span class="p">:</span> <span class="nb">list</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">files</span><span class="p">)</span>
     <span class="n">Z</span> <span class="n">statistic</span> <span class="n">image</span> <span class="k">for</span> <span class="n">each</span> <span class="n">t</span> <span class="n">contrast</span>
@@ -531,7 +531,7 @@ and non-significant ones</p></li>
 <a class="reference internal image-reference" href="images/generated/group_analysis_detailed.png"><img alt="images/generated/group_analysis_detailed.png" src="images/generated/group_analysis_detailed.png" style="width: 800px;" />
 </a>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CPAC.group_analysis</span> <span class="kn">import</span> <span class="n">create_fsl_flame_wf</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.group_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_fsl_flame_wf</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">preproc</span> <span class="o">=</span> <span class="n">create_fsl_flame_wf</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">preproc</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">mat_file</span> <span class="o">=</span> <span class="s1">&#39;../group_models/anova_with_meanFD/anova_with_meanFD.mat&#39;</span>  
 <span class="gp">&gt;&gt;&gt; </span><span class="n">preproc</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">con_file</span> <span class="o">=</span> <span class="s1">&#39;../group_models/anova_with_meanFD/anova_with_meanFD.con&#39;</span>  
@@ -649,6 +649,6 @@ and non-significant ones</p></li>
     <script src="../../_static/underscore.js?v=f1230927"></script>
     <script src="../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

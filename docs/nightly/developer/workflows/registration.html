@@ -396,7 +396,7 @@ take in the appropriate field map-related inputs.</p></li>
 <span class="n">inputspec</span><span class="o">.</span><span class="n">anat</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
     <span class="n">Corresponding</span> <span class="n">full</span><span class="o">-</span><span class="n">head</span> <span class="ow">or</span> <span class="n">brain</span> <span class="n">scan</span> <span class="n">of</span> <span class="n">subject</span>
 <span class="n">inputspec</span><span class="o">.</span><span class="n">linear_reg_matrix</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
-    <span class="n">Affine</span> <span class="n">matrix</span> <span class="kn">from</span> <span class="nn">linear</span> <span class="n">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">registration</span>
+    <span class="n">Affine</span> <span class="n">matrix</span> <span class="kn">from</span><span class="w"> </span><span class="nn">linear</span> <span class="n">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">registration</span>
 <span class="n">inputspec</span><span class="o">.</span><span class="n">anat_wm_segmentation</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
     <span class="n">White</span> <span class="n">matter</span> <span class="n">segmentation</span> <span class="n">probability</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">anatomical</span> <span class="n">space</span>
 <span class="n">inputspec</span><span class="o">.</span><span class="n">bbr_schedule</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="o">.</span><span class="n">sch</span> <span class="n">file</span><span class="p">)</span>
@@ -405,7 +405,7 @@ take in the appropriate field map-related inputs.</p></li>
 </div>
 <p>Workflow Outputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">func_to_anat_linear_xfm</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
-    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span> <span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
+    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span><span class="w"> </span><span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
 <span class="n">outputspec</span><span class="o">.</span><span class="n">anat_func</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
     <span class="n">Functional</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">anatomical</span> <span class="n">space</span>
 </pre></div>
@@ -566,7 +566,7 @@ take in the appropriate field map-related inputs.</p></li>
 </div>
 <p>Workflow Outputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">func_to_anat_linear_xfm_nobbreg</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
-    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span> <span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
+    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span><span class="w"> </span><span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
 <span class="n">outputspec</span><span class="o">.</span><span class="n">anat_func_nobbreg</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
     <span class="n">Functional</span> <span class="n">scan</span> <span class="n">registered</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">space</span>
 </pre></div>
@@ -605,7 +605,7 @@ ref: <a class="reference external" href="https://github.com/DCAN-Labs/dcan-macaq
 </div>
 <p>Workflow Outputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputspec</span><span class="o">.</span><span class="n">func_to_anat_linear_xfm_nobbreg</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">mat</span> <span class="n">file</span><span class="p">)</span>
-    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span> <span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
+    <span class="n">Affine</span> <span class="n">transformation</span> <span class="kn">from</span><span class="w"> </span><span class="nn">functional</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">native</span> <span class="n">space</span>
 <span class="n">outputspec</span><span class="o">.</span><span class="n">anat_func_nobbreg</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
     <span class="n">Functional</span> <span class="n">scan</span> <span class="n">registered</span> <span class="n">to</span> <span class="n">anatomical</span> <span class="n">space</span>
 </pre></div>
@@ -811,6 +811,6 @@ entered in its place if there are other parameters for other stages.</p>
     <script src="../../_static/underscore.js?v=f1230927"></script>
     <script src="../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

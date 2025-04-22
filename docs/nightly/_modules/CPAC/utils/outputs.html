@@ -360,13 +360,13 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for CPAC.utils.outputs</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">pkg_resources</span> <span class="k">as</span> <span class="nn">p</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pkg_resources</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">p</span>
 
 
 <div class="viewcode-block" id="Outputs">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.outputs.Outputs">[docs]</a>
-<span class="k">class</span> <span class="nc">Outputs</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Outputs</span><span class="p">:</span>
     <span class="c1"># Settle some things about the resource pool reference and the output directory</span>
     <span class="n">reference_csv</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;CPAC&quot;</span><span class="p">,</span> <span class="s2">&quot;resources/cpac_outputs.tsv&quot;</span><span class="p">)</span>
 
@@ -446,7 +446,7 @@
         <span class="n">reference</span><span class="p">[</span><span class="n">all_template_filter</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">reference</span><span class="p">[</span><span class="s2">&quot;To z-std&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Yes&quot;</span><span class="p">)][</span><span class="s2">&quot;Resource&quot;</span><span class="p">]</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_is_cifti</span><span class="p">(</span><span class="n">_file_key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_cifti</span><span class="p">(</span><span class="n">_file_key</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_file_key</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;CIFTI &quot;</span><span class="p">)</span>
 
     <span class="n">ciftis</span> <span class="o">=</span> <span class="n">reference</span><span class="p">[</span><span class="n">reference</span><span class="o">.</span><span class="n">File</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_is_cifti</span><span class="p">)][[</span><span class="s2">&quot;Resource&quot;</span><span class="p">,</span> <span class="s2">&quot;File&quot;</span><span class="p">]]</span>
@@ -456,7 +456,7 @@
         <span class="k">if</span> <span class="s2">&quot; &quot;</span> <span class="ow">in</span> <span class="n">cifti</span><span class="o">.</span><span class="n">File</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">_is_gifti</span><span class="p">(</span><span class="n">_file_key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_gifti</span><span class="p">(</span><span class="n">_file_key</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_file_key</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;GIFTI &quot;</span><span class="p">)</span>
 
     <span class="n">giftis</span> <span class="o">=</span> <span class="n">reference</span><span class="p">[</span><span class="n">reference</span><span class="o">.</span><span class="n">File</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_is_gifti</span><span class="p">)][[</span><span class="s2">&quot;Resource&quot;</span><span class="p">,</span> <span class="s2">&quot;File&quot;</span><span class="p">]]</span>
@@ -508,6 +508,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

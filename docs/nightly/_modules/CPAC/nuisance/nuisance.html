@@ -376,47 +376,47 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">fsl</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces.afni</span> <span class="kn">import</span> <span class="n">MaskTool</span><span class="p">,</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
-<span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
-<span class="kn">from</span> <span class="nn">nipype.pipeline.engine.workflows</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">fsl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces.afni</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaskTool</span><span class="p">,</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nipype.interfaces.utility</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">util</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.pipeline.engine.workflows</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workflow</span>
 
-<span class="kn">import</span> <span class="nn">CPAC</span>
-<span class="kn">from</span> <span class="nn">CPAC.aroma.aroma</span> <span class="kn">import</span> <span class="n">create_aroma</span>
-<span class="kn">from</span> <span class="nn">CPAC.nuisance.utils</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">CPAC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.aroma.aroma</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_aroma</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.nuisance.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">find_offending_time_points</span><span class="p">,</span>
     <span class="n">generate_summarize_tissue_mask</span><span class="p">,</span>
     <span class="n">temporal_variance_mask</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.nuisance.utils.compcor</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.nuisance.utils.compcor</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">calc_compcor_components</span><span class="p">,</span>
     <span class="n">cosine_filter</span><span class="p">,</span>
     <span class="n">TR_string_to_float</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.engine</span> <span class="kn">import</span> <span class="n">ResourcePool</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.registration.registration</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourcePool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.nodeblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.registration.registration</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">apply_transform</span><span class="p">,</span>
     <span class="n">warp_timeseries_to_EPItemplate</span><span class="p">,</span>
     <span class="n">warp_timeseries_to_T1template</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.seg_preproc.utils</span> <span class="kn">import</span> <span class="n">erosion</span><span class="p">,</span> <span class="n">mask_erosion</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.datasource</span> <span class="kn">import</span> <span class="n">check_for_s3</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.pc</span> <span class="kn">import</span> <span class="n">PC</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">IFLOGGER</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">check_prov_for_regtool</span>
-<span class="kn">from</span> <span class="nn">.bandpass</span> <span class="kn">import</span> <span class="n">afni_1dBandpass</span><span class="p">,</span> <span class="n">bandpass_voxels</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.seg_preproc.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">erosion</span><span class="p">,</span> <span class="n">mask_erosion</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">Configuration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.datasource</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_for_s3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces.function</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces.pc</span><span class="w"> </span><span class="kn">import</span> <span class="n">PC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_prov_for_regtool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.bandpass</span><span class="w"> </span><span class="kn">import</span> <span class="n">afni_1dBandpass</span><span class="p">,</span> <span class="n">bandpass_voxels</span>
 
 
-<span class="k">def</span> <span class="nf">choose_nuisance_blocks</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">generate_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">choose_nuisance_blocks</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">rpool</span><span class="p">,</span> <span class="n">generate_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handle selecting appropriate blocks based on existing config and resource pool.</span>
 
@@ -459,7 +459,7 @@
     <span class="k">return</span> <span class="n">nuisance</span>
 
 
-<span class="k">def</span> <span class="nf">erode_mask</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">segmentmap</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">segmentmap</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
     <span class="n">inputspec</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
@@ -473,7 +473,7 @@
         <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;eroded_mask&quot;</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputspec&quot;</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">form_mask_erosion_prop</span><span class="p">(</span><span class="n">erosion_prop</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">form_mask_erosion_prop</span><span class="p">(</span><span class="n">erosion_prop</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">erosion_prop</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="n">erosion_prop</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">erosion_prop</span><span class="o">**</span><span class="mi">3</span>
@@ -537,7 +537,7 @@
     <span class="k">return</span> <span class="n">wf</span>
 
 
-<span class="k">def</span> <span class="nf">gather_nuisance</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gather_nuisance</span><span class="p">(</span>
     <span class="n">functional_file_path</span><span class="p">,</span>
     <span class="n">selector</span><span class="p">,</span>
     <span class="n">grey_matter_summary_file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -667,7 +667,7 @@
             <span class="n">regressors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Could not read regressor </span><span class="si">{</span><span class="n">regressor_type</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">regressor_file</span><span class="si">}</span><span class="s2">.&quot;</span>
-            <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span>
+            <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
 
         <span class="k">if</span> <span class="n">regressors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">regressor_length</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
@@ -860,7 +860,7 @@
 
 <div class="viewcode-block" id="create_regressor_workflow">
 <a class="viewcode-back" href="../../../developer/workflows/nuisance#CPAC.nuisance.create_regressor_workflow">[docs]</a>
-<span class="k">def</span> <span class="nf">create_regressor_workflow</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_regressor_workflow</span><span class="p">(</span>
     <span class="n">nuisance_selectors</span><span class="p">,</span>
     <span class="n">use_ants</span><span class="p">,</span>
     <span class="n">ventricle_mask_exist</span><span class="p">,</span>
@@ -1998,7 +1998,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">create_nuisance_regression_workflow</span><span class="p">(</span><span class="n">nuisance_selectors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;nuisance_regression&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_nuisance_regression_workflow</span><span class="p">(</span><span class="n">nuisance_selectors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;nuisance_regression&quot;</span><span class="p">):</span>
     <span class="n">inputspec</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span>
             <span class="n">fields</span><span class="o">=</span><span class="p">[</span>
@@ -2176,7 +2176,7 @@
     <span class="k">return</span> <span class="n">nuisance_wf</span>
 
 
-<span class="k">def</span> <span class="nf">filtering_bold_and_regressors</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">filtering_bold_and_regressors</span><span class="p">(</span>
     <span class="n">nuisance_selectors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;filtering_bold_and_regressors&quot;</span>
 <span class="p">):</span>
     <span class="n">inputspec</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
@@ -2308,7 +2308,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-cleaned_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">ICA_AROMA_FSLreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ICA_AROMA_FSLreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-T1w_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
 
@@ -2355,7 +2355,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-cleaned_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">ICA_AROMA_ANTsreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ICA_AROMA_ANTsreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
 
@@ -2426,7 +2426,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-cleaned_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">ICA_AROMA_FSLEPIreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ICA_AROMA_FSLEPIreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-bold_to-EPItemplate_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
 
@@ -2479,7 +2479,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-cleaned_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">ICA_AROMA_ANTsEPIreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ICA_AROMA_ANTsEPIreg</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-bold_to-EPItemplate_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
 
@@ -2550,7 +2550,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-T1w_desc-eroded_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">erode_mask_T1w</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask_T1w</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">erode</span> <span class="o">=</span> <span class="n">erode_mask</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;erode_T1w_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">segmentmap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">mask_erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span>
         <span class="s2">&quot;2-nuisance_regression&quot;</span>
@@ -2587,7 +2587,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;label-CSF_desc-eroded_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">erode_mask_CSF</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask_CSF</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">erode</span> <span class="o">=</span> <span class="n">erode_mask</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;erode_CSF_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s2">&quot;2-nuisance_regression&quot;</span><span class="p">][</span>
         <span class="s2">&quot;regressor_masks&quot;</span>
@@ -2626,7 +2626,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[[</span><span class="s2">&quot;label-GM_desc-preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;label-GM_mask&quot;</span><span class="p">]],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;label-GM_desc-eroded_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">erode_mask_GM</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask_GM</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">erode</span> <span class="o">=</span> <span class="n">erode_mask</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;erode_GM_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s2">&quot;2-nuisance_regression&quot;</span><span class="p">][</span>
         <span class="s2">&quot;regressor_masks&quot;</span>
@@ -2664,7 +2664,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;label-WM_desc-eroded_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">erode_mask_WM</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask_WM</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">erode</span> <span class="o">=</span> <span class="n">erode_mask</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;erode_WM_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s2">&quot;2-nuisance_regression&quot;</span><span class="p">][</span>
         <span class="s2">&quot;regressor_masks&quot;</span>
@@ -2727,7 +2727,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-confounds_timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;censor-indices&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">nuisance_regressors_generation_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nuisance_regressors_generation_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">nuisance_regressors_generation</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 
 
@@ -2771,11 +2771,11 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-confounds_timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;censor-indices&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">nuisance_regressors_generation_T1w</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nuisance_regressors_generation_T1w</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">nuisance_regressors_generation</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="s2">&quot;T1w&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">nuisance_regressors_generation</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nuisance_regressors_generation</span><span class="p">(</span>
     <span class="n">wf</span><span class="p">:</span> <span class="n">Workflow</span><span class="p">,</span>
     <span class="n">cfg</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
     <span class="n">strat_pool</span><span class="p">:</span> <span class="n">ResourcePool</span><span class="p">,</span>
@@ -3031,7 +3031,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Nuisance regression in native (BOLD) or template space.</span>
 
 <span class="sd">    Parameters</span>
@@ -3218,7 +3218,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pipeline-ingress_desc-confounds_timeseries&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;parsed_regressors&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">ingress_regressors</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ingress_regressors</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">regressors_list</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s2">&quot;2-nuisance_regression&quot;</span><span class="p">][</span>
         <span class="s2">&quot;ingress_regressors&quot;</span>
     <span class="p">][</span><span class="s2">&quot;Regressors&quot;</span><span class="p">][</span><span class="s2">&quot;Columns&quot;</span><span class="p">]</span>
@@ -3257,7 +3257,7 @@
     <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span>
 
 
-<span class="k">def</span> <span class="nf">parse_regressors</span><span class="p">(</span><span class="n">regressors_file</span><span class="p">,</span> <span class="n">regressors_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_regressors</span><span class="p">(</span><span class="n">regressors_file</span><span class="p">,</span> <span class="n">regressors_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parse regressors file from outdir ingress.</span>
 
@@ -3273,7 +3273,7 @@
 <span class="sd">    parsed_regressors: dataframe</span>
 <span class="sd">        Regressors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">regressors_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">):</span>
         <span class="n">full_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">regressors_file</span><span class="p">)</span>
@@ -3343,7 +3343,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">nuisance_regression_native</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nuisance_regression_native</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="s2">&quot;native&quot;</span><span class="p">)</span>
 
 
@@ -3391,7 +3391,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">nuisance_regression_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nuisance_regression_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply nuisance regression to template-space image.&quot;&quot;&quot;</span>
     <span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">nuisance_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="s2">&quot;template&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s2">&quot;space-template_res-derivative_desc-preproc_bold&quot;</span><span class="p">):</span>
@@ -3427,7 +3427,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_desc-eroded_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">erode_mask_bold</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask_bold</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">erode</span> <span class="o">=</span> <span class="n">erode_mask</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;erode_T1w_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">segmentmap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">mask_erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span>
         <span class="s2">&quot;2-nuisance_regression&quot;</span>
@@ -3474,7 +3474,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_label-CSF_desc-eroded_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">erode_mask_boldCSF</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask_boldCSF</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">erode</span> <span class="o">=</span> <span class="n">erode_mask</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;erode_CSF_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s2">&quot;2-nuisance_regression&quot;</span><span class="p">][</span>
         <span class="s2">&quot;regressor_masks&quot;</span>
@@ -3522,7 +3522,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[[</span><span class="s2">&quot;space-bold_label-GM_desc-preproc&quot;</span><span class="p">,</span> <span class="s2">&quot;space-bold_label-GM_mask&quot;</span><span class="p">]],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_label-GM_desc-eroded_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">erode_mask_boldGM</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask_boldGM</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">erode</span> <span class="o">=</span> <span class="n">erode_mask</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;erode_GM_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s2">&quot;2-nuisance_regression&quot;</span><span class="p">][</span>
         <span class="s2">&quot;regressor_masks&quot;</span>
@@ -3572,7 +3572,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_label-WM_desc-eroded_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">erode_mask_boldWM</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">erode_mask_boldWM</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">erode</span> <span class="o">=</span> <span class="n">erode_mask</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;erode_WM_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">erode</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">erode_mm</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nuisance_corrections</span><span class="p">[</span><span class="s2">&quot;2-nuisance_regression&quot;</span><span class="p">][</span>
         <span class="s2">&quot;regressor_masks&quot;</span>
@@ -3640,6 +3640,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

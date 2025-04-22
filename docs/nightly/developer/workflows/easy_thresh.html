@@ -413,10 +413,10 @@ in the header.</p>
 <p><a class="reference external" href="https://github.com/FCP-INDI/C-PAC/blob/main/CPAC/easy_thresh/easy_thresh.py">Source</a></p>
 <p>Workflow Inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputspec</span><span class="o">.</span><span class="n">z_stats</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
-    <span class="n">z_score</span> <span class="n">stats</span> <span class="n">output</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">or</span> <span class="n">f</span> <span class="n">contrast</span> <span class="kn">from</span> <span class="nn">flameo</span>
+    <span class="n">z_score</span> <span class="n">stats</span> <span class="n">output</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">or</span> <span class="n">f</span> <span class="n">contrast</span> <span class="kn">from</span><span class="w"> </span><span class="nn">flameo</span>
 
 <span class="n">inputspec</span><span class="o">.</span><span class="n">merge_mask</span> <span class="p">:</span> <span class="n">string</span> <span class="p">(</span><span class="n">nifti</span> <span class="n">file</span><span class="p">)</span>
-    <span class="n">mask</span> <span class="n">generated</span> <span class="kn">from</span> <span class="mi">4</span><span class="n">D</span> <span class="n">Merged</span> <span class="n">derivative</span> <span class="n">file</span>
+    <span class="n">mask</span> <span class="n">generated</span> <span class="kn">from</span><span class="w"> </span><span class="mi">4</span><span class="n">D</span> <span class="n">Merged</span> <span class="n">derivative</span> <span class="n">file</span>
 
 <span class="n">inputspec</span><span class="o">.</span><span class="n">z_threshold</span> <span class="p">:</span> <span class="nb">float</span>
     <span class="n">Z</span> <span class="n">Statistic</span> <span class="n">threshold</span> <span class="n">value</span> <span class="k">for</span> <span class="n">cluster</span> <span class="n">thresholding</span><span class="o">.</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span>
@@ -541,7 +541,7 @@ maximum intensity).</p>
 <a class="reference internal image-reference" href="images/generated/generated.easy_thresh_detailed.png"><img alt="images/generated/generated.easy_thresh_detailed.png" src="images/generated/generated.easy_thresh_detailed.png" style="width: 800px;" />
 </a>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CPAC.easy_thresh</span> <span class="kn">import</span> <span class="n">easy_thresh</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.easy_thresh</span><span class="w"> </span><span class="kn">import</span> <span class="n">easy_thresh</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">preproc</span> <span class="o">=</span> <span class="n">easy_thresh</span><span class="p">(</span><span class="s2">&quot;new_workflow&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">preproc</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">z_stats</span><span class="o">=</span> <span class="s1">&#39;flameo/stats/zstat1.nii.gz&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">preproc</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inputspec</span><span class="o">.</span><span class="n">merge_mask</span> <span class="o">=</span> <span class="s1">&#39;merge_mask/alff_Z_fn2standard_merged_mask.nii.gz&#39;</span>
@@ -680,6 +680,6 @@ value of z statistic image</p>
     <script src="../../_static/underscore.js?v=f1230927"></script>
     <script src="../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

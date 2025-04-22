@@ -379,17 +379,17 @@
 <span class="c1"># pylint: disable=too-many-lines,ungrouped-imports,wrong-import-order</span>
 <span class="sd">&quot;&quot;&quot;Workflows for registration.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">RequiredFieldInvalid</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">ants</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">fsl</span><span class="p">,</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces.afni</span> <span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">voluptuous</span><span class="w"> </span><span class="kn">import</span> <span class="n">RequiredFieldInvalid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">ants</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">fsl</span><span class="p">,</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces.afni</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.anat_preproc.lesion_preproc</span> <span class="kn">import</span> <span class="n">create_lesion_preproc</span>
-<span class="kn">from</span> <span class="nn">CPAC.func_preproc.utils</span> <span class="kn">import</span> <span class="n">chunk_ts</span><span class="p">,</span> <span class="n">split_ts_chunks</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.registration.utils</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.anat_preproc.lesion_preproc</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_lesion_preproc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.func_preproc.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">chunk_ts</span><span class="p">,</span> <span class="n">split_ts_chunks</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.nodeblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.registration.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">change_itk_transform_type</span><span class="p">,</span>
     <span class="n">check_transforms</span><span class="p">,</span>
     <span class="n">generate_inverse_transform_flags</span><span class="p">,</span>
@@ -401,12 +401,12 @@
     <span class="n">seperate_warps_list</span><span class="p">,</span>
     <span class="n">single_ants_xfm_to_list</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.fsl</span> <span class="kn">import</span> <span class="n">Merge</span> <span class="k">as</span> <span class="n">fslMerge</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">check_prov_for_motion_tool</span><span class="p">,</span> <span class="n">check_prov_for_regtool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces.fsl</span><span class="w"> </span><span class="kn">import</span> <span class="n">Merge</span> <span class="k">as</span> <span class="n">fslMerge</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_prov_for_motion_tool</span><span class="p">,</span> <span class="n">check_prov_for_regtool</span>
 
 
-<span class="k">def</span> <span class="nf">apply_transform</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_transform</span><span class="p">(</span>
     <span class="n">wf_name</span><span class="p">,</span>
     <span class="n">reg_tool</span><span class="p">,</span>
     <span class="n">time_series</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -635,7 +635,7 @@
     <span class="k">return</span> <span class="n">wf</span>
 
 
-<span class="k">def</span> <span class="nf">transform_derivative</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">transform_derivative</span><span class="p">(</span>
     <span class="n">wf_name</span><span class="p">,</span>
     <span class="n">label</span><span class="p">,</span>
     <span class="n">reg_tool</span><span class="p">,</span>
@@ -689,7 +689,7 @@
     <span class="k">return</span> <span class="n">wf</span>
 
 
-<span class="k">def</span> <span class="nf">convert_pedir</span><span class="p">(</span><span class="n">pedir</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="s2">&quot;xyz_to_int&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_pedir</span><span class="p">(</span><span class="n">pedir</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="s2">&quot;xyz_to_int&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;FSL Flirt requires pedir input encoded as an int.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">convert</span> <span class="o">==</span> <span class="s2">&quot;xyz_to_int&quot;</span><span class="p">:</span>
         <span class="n">conv_dct</span> <span class="o">=</span> <span class="p">{</span>
@@ -728,7 +728,7 @@
 
 <div class="viewcode-block" id="create_fsl_flirt_linear_reg">
 <a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_fsl_flirt_linear_reg">[docs]</a>
-<span class="k">def</span> <span class="nf">create_fsl_flirt_linear_reg</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;fsl_flirt_linear_reg&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_fsl_flirt_linear_reg</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;fsl_flirt_linear_reg&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a FLIRT workflow.&quot;&quot;&quot;</span>
     <span class="n">linear_register</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
@@ -772,7 +772,7 @@
 
 <div class="viewcode-block" id="create_fsl_fnirt_nonlinear_reg">
 <a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_fsl_fnirt_nonlinear_reg">[docs]</a>
-<span class="k">def</span> <span class="nf">create_fsl_fnirt_nonlinear_reg</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;fsl_fnirt_nonlinear_reg&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_fsl_fnirt_nonlinear_reg</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;fsl_fnirt_nonlinear_reg&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform non-linear registration of an input to a reference using FSL FNIRT.</span>
 
 <span class="sd">    Parameters</span>
@@ -884,7 +884,7 @@
 
 <div class="viewcode-block" id="create_fsl_fnirt_nonlinear_reg_nhp">
 <a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_fsl_fnirt_nonlinear_reg_nhp">[docs]</a>
-<span class="k">def</span> <span class="nf">create_fsl_fnirt_nonlinear_reg_nhp</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;fsl_fnirt_nonlinear_reg_nhp&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_fsl_fnirt_nonlinear_reg_nhp</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;fsl_fnirt_nonlinear_reg_nhp&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform non-linear registration of an input to a reference using FSL FNIRT.</span>
 
 <span class="sd">    Parameters</span>
@@ -1048,7 +1048,7 @@
 
 <div class="viewcode-block" id="create_register_func_to_anat">
 <a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_register_func_to_anat">[docs]</a>
-<span class="k">def</span> <span class="nf">create_register_func_to_anat</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_register_func_to_anat</span><span class="p">(</span>
     <span class="n">config</span><span class="p">,</span> <span class="n">phase_diff_distcor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;register_func_to_anat&quot;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Register a functional scan in native space to anatomical space...</span>
@@ -1176,7 +1176,7 @@
 
 <div class="viewcode-block" id="create_register_func_to_anat_use_T2">
 <a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_register_func_to_anat_use_T2">[docs]</a>
-<span class="k">def</span> <span class="nf">create_register_func_to_anat_use_T2</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;register_func_to_anat_use_T2&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_register_func_to_anat_use_T2</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;register_func_to_anat_use_T2&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Register a functional scan in native space to anatomical space...</span>
 
 <span class="sd">    ...using a linear transform and does not include bbregister, use T1 and T2 image.</span>
@@ -1336,7 +1336,7 @@
 
 <div class="viewcode-block" id="create_bbregister_func_to_anat">
 <a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_bbregister_func_to_anat">[docs]</a>
-<span class="k">def</span> <span class="nf">create_bbregister_func_to_anat</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_bbregister_func_to_anat</span><span class="p">(</span>
     <span class="n">phase_diff_distcor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bbregister_func_to_anat&quot;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Register a functional scan in native space to structural.</span>
@@ -1419,7 +1419,7 @@
         <span class="n">inputspec</span><span class="p">,</span> <span class="s2">&quot;anat_wm_segmentation&quot;</span><span class="p">,</span> <span class="n">wm_bb_mask</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">bbreg_args</span><span class="p">(</span><span class="n">bbreg_target</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bbreg_args</span><span class="p">(</span><span class="n">bbreg_target</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;-cost bbr -wmseg &quot;</span> <span class="o">+</span> <span class="n">bbreg_target</span>
 
     <span class="n">bbreg_func_to_anat</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">FLIRT</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bbreg_func_to_anat&quot;</span><span class="p">)</span>
@@ -1486,7 +1486,7 @@
 
 <div class="viewcode-block" id="create_wf_calculate_ants_warp">
 <a class="viewcode-back" href="../../../developer/workflows/registration#CPAC.registration.create_wf_calculate_ants_warp">[docs]</a>
-<span class="k">def</span> <span class="nf">create_wf_calculate_ants_warp</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_wf_calculate_ants_warp</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;create_wf_calculate_ants_warp&quot;</span><span class="p">,</span> <span class="n">num_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reg_ants_skull</span><span class="o">=</span><span class="mi">1</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the nonlinear ANTS registration transform.</span>
@@ -1835,7 +1835,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">FSL_registration_connector</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">FSL_registration_connector</span><span class="p">(</span>
     <span class="n">wf_name</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">orig</span><span class="o">=</span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s2">&quot;T1w&quot;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transform raw data to template with FSL.&quot;&quot;&quot;</span>
@@ -2038,7 +2038,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">ANTs_registration_connector</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ANTs_registration_connector</span><span class="p">(</span>
     <span class="n">wf_name</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">orig</span><span class="o">=</span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s2">&quot;T1w&quot;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transform raw data to template with ANTs.&quot;&quot;&quot;</span>
@@ -2119,7 +2119,7 @@
             <span class="s2">&quot;ANTs&quot;</span>
         <span class="p">][</span><span class="s2">&quot;use_lesion_mask&quot;</span><span class="p">]:</span>
             <span class="c1"># Create lesion preproc node to apply afni Refit and Resample</span>
-            <span class="n">lesion_preproc</span> <span class="o">=</span> <span class="n">create_lesion_preproc</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;lesion_preproc</span><span class="si">{</span><span class="n">symm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">lesion_preproc</span> <span class="o">=</span> <span class="n">create_lesion_preproc</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;lesion_preproc</span><span class="si">{</span><span class="n">symm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">inputNode</span><span class="p">,</span> <span class="s2">&quot;lesion_mask&quot;</span><span class="p">,</span> <span class="n">lesion_preproc</span><span class="p">,</span> <span class="s2">&quot;inputspec.lesion&quot;</span><span class="p">)</span>
             <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
                 <span class="n">lesion_preproc</span><span class="p">,</span>
@@ -2466,7 +2466,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">bold_to_T1template_xfm_connector</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_to_T1template_xfm_connector</span><span class="p">(</span>
     <span class="n">wf_name</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">reg_tool</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blip</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transform functional to T1w template.&quot;&quot;&quot;</span>
@@ -2669,7 +2669,7 @@
         <span class="s2">&quot;from-longitudinal_to-template_mode-image_xfm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-template&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">register_FSL_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_FSL_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Register T1w to template with FSL.&quot;&quot;&quot;</span>
     <span class="n">fsl</span><span class="p">,</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">FSL_registration_connector</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;register_</span><span class="si">{</span><span class="n">opt</span><span class="si">}</span><span class="s2">_anat_to_template_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">orig</span><span class="o">=</span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="n">opt</span>
@@ -2768,7 +2768,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">register_symmetric_FSL_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_symmetric_FSL_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Register T1w to symmetric template with FSL.&quot;&quot;&quot;</span>
     <span class="n">fsl</span><span class="p">,</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">FSL_registration_connector</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;register_</span><span class="si">{</span><span class="n">opt</span><span class="si">}</span><span class="s2">_anat_to_template_symmetric_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -2842,7 +2842,7 @@
         <span class="s2">&quot;from-bold_to-EPItemplate_mode-image_xfm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;EPI-template&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">register_FSL_EPI_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_FSL_EPI_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Directly register the mean functional to an EPI template. No T1w involved.&quot;&quot;&quot;</span>
     <span class="n">fsl</span><span class="p">,</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">FSL_registration_connector</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;register_</span><span class="si">{</span><span class="n">opt</span><span class="si">}</span><span class="s2">_EPI_to_template_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -2979,7 +2979,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">register_ANTs_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_ANTs_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Register T1w to template with ANTs.&quot;&quot;&quot;</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span><span class="s2">&quot;anatomical_registration&quot;</span><span class="p">][</span><span class="s2">&quot;registration&quot;</span><span class="p">][</span>
         <span class="s2">&quot;ANTs&quot;</span>
@@ -3114,7 +3114,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">register_symmetric_ANTs_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_symmetric_ANTs_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Register T1 to symmetric template with ANTs.&quot;&quot;&quot;</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span><span class="s2">&quot;anatomical_registration&quot;</span><span class="p">][</span><span class="s2">&quot;registration&quot;</span><span class="p">][</span>
         <span class="s2">&quot;ANTs&quot;</span>
@@ -3204,7 +3204,7 @@
         <span class="s2">&quot;from-EPItemplate_to-bold_mode-image_xfm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;EPI-template&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">register_ANTs_EPI_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_ANTs_EPI_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Directly register the mean functional to an EPI template. No T1w involved.&quot;&quot;&quot;</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">registration_workflows</span><span class="p">[</span><span class="s2">&quot;functional_registration&quot;</span><span class="p">][</span><span class="s2">&quot;EPI_registration&quot;</span><span class="p">][</span>
         <span class="s2">&quot;ANTs&quot;</span>
@@ -3284,7 +3284,7 @@
         <span class="s2">&quot;from-template_to-T1w_mode-image_xfm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-template&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">overwrite_transform_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">overwrite_transform_anat_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Overwrite ANTs transforms with FSL transforms.&quot;&quot;&quot;</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-T1w_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
 
@@ -3524,7 +3524,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;desc-brain_bold&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;desc-motion_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">],</span> <span class="s2">&quot;sbref&quot;</span><span class="p">)],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sbref&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">coregistration_prep_vol</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">coregistration_prep_vol</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create single-band reference for coreg by selecting a functional volume.&quot;&quot;&quot;</span>
     <span class="n">get_func_volume</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni</span><span class="o">.</span><span class="n">Calc</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;get_func_volume_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -3568,7 +3568,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-mean_bold&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sbref&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">coregistration_prep_mean</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">coregistration_prep_mean</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create single-band reference for coregistration from mean BOLD.&quot;&quot;&quot;</span>
     <span class="n">coreg_input</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-mean_bold&quot;</span><span class="p">)</span>
 
@@ -3609,7 +3609,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-ref_bold&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sbref&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">coregistration_prep_fmriprep</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">coregistration_prep_fmriprep</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate fMRIPrep-style single-band reference for coregistration.&quot;&quot;&quot;</span>
     <span class="n">coreg_input</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-ref_bold&quot;</span><span class="p">)</span>
 
@@ -3650,7 +3650,7 @@
         <span class="s2">&quot;from-bold_to-T1w_mode-image_desc-linear_warp&quot;</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">coregistration</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">coregistration</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Coregister BOLD to T1w.&quot;&quot;&quot;</span>
     <span class="n">diff_complete</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s2">&quot;despiked-fieldmap&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span>
@@ -3880,7 +3880,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_func_to_T1template_xfm</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_func_to_T1template_xfm</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a single transform from BOLD-to-T1 coregistration and T1-to-template.</span>
 
 <span class="sd">    Condense the BOLD-to-T1 coregistration transform and the T1-to-template transform into one transform matrix.</span>
@@ -3958,7 +3958,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_func_to_T1template_symmetric_xfm</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_func_to_T1template_symmetric_xfm</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a single transform from coregistration and T1-to-symmetric-template.</span>
 
 <span class="sd">    Condense the BOLD-to-T1 coregistration transform and the T1-to-symmetric-template</span>
@@ -4030,7 +4030,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sbref&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-stc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">apply_phasediff_to_timeseries_separately</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_phasediff_to_timeseries_separately</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply phasediff to timeseries.&quot;&quot;&quot;</span>
     <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">:</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">)}</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">check_rpool</span><span class="p">(</span><span class="s2">&quot;despiked-fieldmap&quot;</span><span class="p">):</span>
@@ -4168,7 +4168,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-stc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">apply_blip_to_timeseries_separately</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_blip_to_timeseries_separately</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply blip to timeseries.&quot;&quot;&quot;</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
@@ -4246,7 +4246,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;space-template_desc-head_T1w&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-template&quot;</span><span class="p">}},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_wholeheadT1_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_wholeheadT1_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp T1 head to template.&quot;&quot;&quot;</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-T1w_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
@@ -4300,7 +4300,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;space-template_desc-brain_mask&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-template&quot;</span><span class="p">}},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_T1mask_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_T1mask_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp T1 mask to template.&quot;&quot;&quot;</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-T1w_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
@@ -4361,7 +4361,7 @@
         <span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-brain-template-funcreg&quot;</span><span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_timeseries_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_timeseries_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp timeseries to T1 template.&quot;&quot;&quot;</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
@@ -4424,7 +4424,7 @@
         <span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_timeseries_to_T1template_deriv</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_timeseries_to_T1template_deriv</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp timeseries to T1 template at derivative resolution.&quot;&quot;&quot;</span>
     <span class="n">xfm_prov</span> <span class="o">=</span> <span class="n">strat_pool</span><span class="o">.</span><span class="n">get_cpac_provenance</span><span class="p">(</span><span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span><span class="p">)</span>
     <span class="n">reg_tool</span> <span class="o">=</span> <span class="n">check_prov_for_regtool</span><span class="p">(</span><span class="n">xfm_prov</span><span class="p">)</span>
@@ -4497,7 +4497,7 @@
         <span class="s2">&quot;space-template_desc-head_bold&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-brain-template-funcreg&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_timeseries_to_T1template_abcd</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_timeseries_to_T1template_abcd</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply motion correction, coreg, anat-to-template transforms...</span>
 
 <span class="sd">    ...on raw functional timeseries using ABCD-style registration.</span>
@@ -4811,7 +4811,7 @@
         <span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-template&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_timeseries_to_T1template_dcan_nhp</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_timeseries_to_T1template_dcan_nhp</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Apply motion correction, coreg, anat-to-template transforms...</span>
 
@@ -5158,7 +5158,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">single_step_resample_timeseries_to_T1template</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">single_step_resample_timeseries_to_T1template</span><span class="p">(</span>
     <span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply motion correction, coreg, anat-to-template transforms...</span>
@@ -5455,7 +5455,7 @@
         <span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_sbref_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_sbref_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp single-band reference to T1 template.&quot;&quot;&quot;</span>
     <span class="n">xfm</span> <span class="o">=</span> <span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span>
     <span class="n">wf</span><span class="p">,</span> <span class="n">apply_xfm</span> <span class="o">=</span> <span class="n">warp_resource_to_template</span><span class="p">(</span>
@@ -5499,7 +5499,7 @@
         <span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-brain-template-funcreg&quot;</span><span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_bold_mask_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_bold_mask_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp BOLD mask to T1 template.&quot;&quot;&quot;</span>
     <span class="n">xfm</span> <span class="o">=</span> <span class="s2">&quot;from-bold_to-template_mode-image_xfm&quot;</span>
     <span class="n">wf</span><span class="p">,</span> <span class="n">apply_xfm</span> <span class="o">=</span> <span class="n">warp_resource_to_template</span><span class="p">(</span>
@@ -5545,7 +5545,7 @@
         <span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_deriv_mask_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_deriv_mask_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transform the BOLD mask to template space...</span>
 
 <span class="sd">    ...and to the resolution set for the derivative outputs.</span>
@@ -5584,7 +5584,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;EPI-template&quot;</span><span class="p">}},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_timeseries_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_timeseries_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp timeseries to EPI template.&quot;&quot;&quot;</span>
     <span class="n">xfm</span> <span class="o">=</span> <span class="s2">&quot;from-bold_to-EPItemplate_mode-image_xfm&quot;</span>
     <span class="n">wf</span><span class="p">,</span> <span class="n">apply_xfm</span><span class="p">,</span> <span class="n">resource</span> <span class="o">=</span> <span class="n">warp_resource_to_template</span><span class="p">(</span>
@@ -5608,7 +5608,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;space-template_desc-mean_bold&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;EPI-template&quot;</span><span class="p">}},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_bold_mean_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_bold_mean_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp mean BOLD to EPI template space.&quot;&quot;&quot;</span>
     <span class="n">xfm</span> <span class="o">=</span> <span class="s2">&quot;from-bold_to-EPItemplate_mode-image_xfm&quot;</span>
     <span class="n">wf</span><span class="p">,</span> <span class="n">apply_xfm</span> <span class="o">=</span> <span class="n">warp_resource_to_template</span><span class="p">(</span>
@@ -5632,7 +5632,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;space-template_desc-bold_mask&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;EPI-template&quot;</span><span class="p">}},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_bold_mask_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_bold_mask_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp BOLD mask to EPI tempalate.&quot;&quot;&quot;</span>
     <span class="n">xfm</span> <span class="o">=</span> <span class="s2">&quot;from-bold_to-EPItemplate_mode-image_xfm&quot;</span>
     <span class="n">wf</span><span class="p">,</span> <span class="n">apply_xfm</span> <span class="o">=</span> <span class="n">warp_resource_to_template</span><span class="p">(</span>
@@ -5664,7 +5664,7 @@
         <span class="s2">&quot;space-template_res-derivative_desc-bold_mask&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;EPI-template&quot;</span><span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_deriv_mask_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_deriv_mask_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transform the BOLD mask to EPI template space...</span>
 
 <span class="sd">    ...and to the resolution set for the derivative outputs.</span>
@@ -5706,7 +5706,7 @@
         <span class="s2">&quot;space-template_label-GM_mask&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-template&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_tissuemask_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_tissuemask_to_T1template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp tissue masks to T1 template.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">warp_tissuemask_to_template</span><span class="p">(</span>
         <span class="n">wf</span><span class="p">,</span>
@@ -5741,7 +5741,7 @@
         <span class="s2">&quot;space-template_label-GM_mask&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;EPI-template&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">warp_tissuemask_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_tissuemask_to_EPItemplate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Warp tissue masks to EPI template.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">warp_tissuemask_to_template</span><span class="p">(</span>
         <span class="n">wf</span><span class="p">,</span>
@@ -5753,7 +5753,7 @@
     <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">warp_tissuemask_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">xfm</span><span class="p">,</span> <span class="n">template_space</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_tissuemask_to_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">xfm</span><span class="p">,</span> <span class="n">template_space</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply transforms to tissue masks.</span>
 
 <span class="sd">    Parameters</span>
@@ -5797,7 +5797,7 @@
     <span class="k">return</span> <span class="n">_warp_return</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">apply_xfm</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">warp_resource_to_template</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">warp_resource_to_template</span><span class="p">(</span>
     <span class="n">wf</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">,</span>
     <span class="n">cfg</span><span class="p">,</span>
     <span class="n">strat_pool</span><span class="p">,</span>
@@ -5891,7 +5891,7 @@
     <span class="k">return</span> <span class="n">wf</span><span class="p">,</span> <span class="n">apply_xfm</span><span class="p">,</span> <span class="n">input_resource</span>
 
 
-<span class="k">def</span> <span class="nf">_warp_return</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_warp_return</span><span class="p">(</span>
     <span class="n">wf</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">,</span> <span class="n">apply_xfm</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">],</span> <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if we have a transform to apply; if not, don&#39;t add the outputs.&quot;&quot;&quot;</span>
@@ -5940,6 +5940,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

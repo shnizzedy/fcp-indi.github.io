@@ -376,12 +376,12 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">WFLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">WFLOGGER</span>
 
 
 <div class="viewcode-block" id="create_dummy_string">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_flame_model_files.create_dummy_string">[docs]</a>
-<span class="k">def</span> <span class="nf">create_dummy_string</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_dummy_string</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
     <span class="n">ppstring</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
         <span class="n">ppstring</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%1.5e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
@@ -392,12 +392,12 @@
 
 <div class="viewcode-block" id="write_mat_file">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_flame_model_files.write_mat_file">[docs]</a>
-<span class="k">def</span> <span class="nf">write_mat_file</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_mat_file</span><span class="p">(</span>
     <span class="n">design_matrix</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">depatsified_EV_names</span><span class="p">,</span> <span class="n">current_output</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="n">dimx</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">dimy</span> <span class="o">=</span> <span class="kc">None</span>
@@ -444,10 +444,10 @@
 
 <div class="viewcode-block" id="create_grp_file">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_flame_model_files.create_grp_file">[docs]</a>
-<span class="k">def</span> <span class="nf">create_grp_file</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">,</span> <span class="n">grp_file_vector</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_grp_file</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">,</span> <span class="n">grp_file_vector</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="n">dimx</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">dimy</span> <span class="o">=</span> <span class="kc">None</span>
@@ -474,10 +474,10 @@
 
 <div class="viewcode-block" id="create_con_file">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_flame_model_files.create_con_file">[docs]</a>
-<span class="k">def</span> <span class="nf">create_con_file</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_con_file</span><span class="p">(</span>
     <span class="n">con_vecs</span><span class="p">,</span> <span class="n">con_names</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> <span class="n">out_dir</span>
 <span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.con&quot;</span>
 
@@ -516,10 +516,10 @@
 
 <div class="viewcode-block" id="create_fts_file">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_flame_model_files.create_fts_file">[docs]</a>
-<span class="k">def</span> <span class="nf">create_fts_file</span><span class="p">(</span><span class="n">ftest_list</span><span class="p">,</span> <span class="n">con_names</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_fts_file</span><span class="p">(</span><span class="n">ftest_list</span><span class="p">,</span> <span class="n">con_names</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">current_output</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="n">WFLOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Found f-tests in your model, writing f-tests file (.fts)..</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -579,7 +579,7 @@
 
 <div class="viewcode-block" id="create_con_ftst_file">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_flame_model_files.create_con_ftst_file">[docs]</a>
-<span class="k">def</span> <span class="nf">create_con_ftst_file</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_con_ftst_file</span><span class="p">(</span>
     <span class="n">con_file</span><span class="p">,</span>
     <span class="n">model_name</span><span class="p">,</span>
     <span class="n">current_output</span><span class="p">,</span>
@@ -589,9 +589,9 @@
     <span class="n">group_sep</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the contrasts and fts file.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;participant_id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
 
@@ -775,7 +775,7 @@
 
 <div class="viewcode-block" id="create_flame_model_files">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_flame_model_files.create_flame_model_files">[docs]</a>
-<span class="k">def</span> <span class="nf">create_flame_model_files</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_flame_model_files</span><span class="p">(</span>
     <span class="n">design_matrix</span><span class="p">,</span>
     <span class="n">col_names</span><span class="p">,</span>
     <span class="n">contrasts_vectors</span><span class="p">,</span>
@@ -871,6 +871,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

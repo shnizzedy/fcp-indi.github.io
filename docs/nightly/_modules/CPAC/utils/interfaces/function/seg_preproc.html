@@ -378,12 +378,12 @@
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
 <span class="sd">&quot;&quot;&quot;Function interfaces for seg_preproc.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function.function</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces.function.function</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
 
 
 <div class="viewcode-block" id="pick_tissue_from_labels_file_interface">
 <a class="viewcode-back" href="../../../../../developer/utils#CPAC.utils.interfaces.function.pick_tissue_from_labels_file_interface">[docs]</a>
-<span class="k">def</span> <span class="nf">pick_tissue_from_labels_file_interface</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pick_tissue_from_labels_file_interface</span><span class="p">(</span><span class="n">input_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Function interface for ~CPAC.seg_preproc.utils.pick_tissue_from_labels_file.</span>
 
 <span class="sd">    Parameters</span>
@@ -395,7 +395,7 @@
 <span class="sd">    nipype.interfaces.base.core.Interface</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=import-outside-toplevel</span>
-    <span class="kn">from</span> <span class="nn">CPAC.seg_preproc.utils</span> <span class="kn">import</span> <span class="n">pick_tissue_from_labels_file</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.seg_preproc.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">pick_tissue_from_labels_file</span>
 
     <span class="k">if</span> <span class="n">input_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">input_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;multiatlas_Labels&quot;</span><span class="p">,</span> <span class="s2">&quot;csf_label&quot;</span><span class="p">,</span> <span class="s2">&quot;gm_label&quot;</span><span class="p">,</span> <span class="s2">&quot;wm_label&quot;</span><span class="p">]</span>
@@ -447,6 +447,6 @@
     <script src="../../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

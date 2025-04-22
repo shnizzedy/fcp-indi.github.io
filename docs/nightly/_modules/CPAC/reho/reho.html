@@ -377,17 +377,17 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nipype.interfaces.utility</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">util</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.reho.utils</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.nodeblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.reho.utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
 
 
 <div class="viewcode-block" id="create_reho">
 <a class="viewcode-back" href="../../../developer/workflows/reho#CPAC.reho.create_reho">[docs]</a>
-<span class="k">def</span> <span class="nf">create_reho</span><span class="p">(</span><span class="n">wf_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_reho</span><span class="p">(</span><span class="n">wf_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Regional Homogeneity(ReHo) approach to fMRI data analysis.</span>
 
@@ -506,7 +506,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;reho&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">reho</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">reho</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">regional_homogeneity</span><span class="p">[</span><span class="s2">&quot;cluster_size&quot;</span><span class="p">]</span>
 
     <span class="c1"># Check the cluster size is supported</span>
@@ -548,7 +548,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-template_reho&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">reho_space_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">reho_space_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">cluster_size</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">regional_homogeneity</span><span class="p">[</span><span class="s2">&quot;cluster_size&quot;</span><span class="p">]</span>
 
     <span class="c1"># Check the cluster size is supported</span>
@@ -624,6 +624,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

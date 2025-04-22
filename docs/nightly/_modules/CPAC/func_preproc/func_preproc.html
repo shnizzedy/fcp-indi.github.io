@@ -379,24 +379,24 @@
 <span class="sd">&quot;&quot;&quot;Functional preprocessing.&quot;&quot;&quot;</span>
 
 <span class="c1"># pylint: disable=ungrouped-imports,wrong-import-order,wrong-import-position</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">ants</span><span class="p">,</span> <span class="n">fsl</span><span class="p">,</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces.afni</span> <span class="kn">import</span> <span class="n">preprocess</span><span class="p">,</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">ants</span><span class="p">,</span> <span class="n">fsl</span><span class="p">,</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces.afni</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess</span><span class="p">,</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">afni_utils</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.func_preproc.utils</span> <span class="kn">import</span> <span class="n">nullify</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.ants</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.func_preproc.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">nullify</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.nodeblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces.ants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">AI</span><span class="p">,</span>  <span class="c1"># niworkflows</span>
     <span class="n">PrintHeader</span><span class="p">,</span>
     <span class="n">SetDirectionByMatrix</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.utils</span> <span class="kn">import</span> <span class="n">add_afni_prefix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_afni_prefix</span>
 
 
 <div class="viewcode-block" id="collect_arguments">
 <a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.collect_arguments">[docs]</a>
-<span class="k">def</span> <span class="nf">collect_arguments</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">collect_arguments</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect arguments.&quot;&quot;&quot;</span>
     <span class="n">command_args</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
@@ -408,7 +408,7 @@
 
 <div class="viewcode-block" id="anat_refined_mask">
 <a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.anat_refined_mask">[docs]</a>
-<span class="k">def</span> <span class="nf">anat_refined_mask</span><span class="p">(</span><span class="n">init_bold_mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;init_bold_mask&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">anat_refined_mask</span><span class="p">(</span><span class="n">init_bold_mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;init_bold_mask&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate an anatomically refined mask.&quot;&quot;&quot;</span>
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
 
@@ -545,7 +545,7 @@
 
 <div class="viewcode-block" id="anat_based_mask">
 <a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.anat_based_mask">[docs]</a>
-<span class="k">def</span> <span class="nf">anat_based_mask</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;bold_mask&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">anat_based_mask</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;bold_mask&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a functional mask from anatomical data.</span>
 
 <span class="sd">    Reference `DCAN lab BOLD mask &lt;https://github.com/DCAN-Labs/DCAN-HCP/blob/a8d495a/fMRIVolume/scripts/DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased.sh&gt;`_.</span>
@@ -621,7 +621,7 @@
 
 <div class="viewcode-block" id="create_scale_func_wf">
 <a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_scale_func_wf">[docs]</a>
-<span class="k">def</span> <span class="nf">create_scale_func_wf</span><span class="p">(</span><span class="n">scaling_factor</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;scale_func&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_scale_func_wf</span><span class="p">(</span><span class="n">scaling_factor</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;scale_func&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow to scale func data.</span>
 
 <span class="sd">    Workflow Inputs::</span>
@@ -670,7 +670,7 @@
 
 <div class="viewcode-block" id="create_wf_edit_func">
 <a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.create_wf_edit_func">[docs]</a>
-<span class="k">def</span> <span class="nf">create_wf_edit_func</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;edit_func&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_wf_edit_func</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;edit_func&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow to edit the scan to the proscribed TRs.</span>
 
 <span class="sd">    Workflow Inputs::</span>
@@ -760,7 +760,7 @@
 
 <div class="viewcode-block" id="slice_timing_wf">
 <a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.slice_timing_wf">[docs]</a>
-<span class="k">def</span> <span class="nf">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;slice_timing&quot;</span><span class="p">,</span> <span class="n">tpattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tzero</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slice_timing_wf</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;slice_timing&quot;</span><span class="p">,</span> <span class="n">tpattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tzero</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate corrected slice-timing.&quot;&quot;&quot;</span>
     <span class="c1"># allocate a workflow object</span>
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
@@ -828,7 +828,7 @@
 
 <div class="viewcode-block" id="get_idx">
 <a class="viewcode-back" href="../../../developer/workflows/func_preproc#CPAC.func_preproc.func_preproc.get_idx">[docs]</a>
-<span class="k">def</span> <span class="nf">get_idx</span><span class="p">(</span><span class="n">in_files</span><span class="p">,</span> <span class="n">stop_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_idx</span><span class="p">(</span><span class="n">in_files</span><span class="p">,</span> <span class="n">stop_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the first and the last slice for the functional run.</span>
 
 <span class="sd">    Verify the user specified first and last slice. If the values are not valid,</span>
@@ -857,7 +857,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">from</span> <span class="nn">nibabel</span> <span class="kn">import</span> <span class="n">load</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">in_files</span><span class="p">)</span>
@@ -893,7 +893,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-reorient_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_reorient</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_reorient</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reorient functional timeseries.&quot;&quot;&quot;</span>
     <span class="n">func_deoblique</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">Refit</span><span class="p">(),</span>
@@ -913,7 +913,7 @@
         <span class="n">mem_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0115</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">),</span>
     <span class="p">)</span>
 
-    <span class="n">func_reorient</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s2">&quot;desired_orientation&quot;</span><span class="p">]</span>
+    <span class="n">func_reorient</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="s2">&quot;RPI&quot;</span>
     <span class="n">func_reorient</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s2">&quot;NIFTI_GZ&quot;</span>
 
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_deoblique</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">func_reorient</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">)</span>
@@ -936,7 +936,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_scaling</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_scaling</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Scale functional timeseries.&quot;&quot;&quot;</span>
     <span class="n">scale_func_wf</span> <span class="o">=</span> <span class="n">create_scale_func_wf</span><span class="p">(</span>
         <span class="n">scaling_factor</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">scaling_factor</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;scale_func_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -963,7 +963,7 @@
         <span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_truncate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_truncate</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Truncate functional timeseries.&quot;&quot;&quot;</span>
     <span class="c1"># if cfg.functional_preproc[&#39;truncation&#39;][&#39;start_tr&#39;] == 0 and \</span>
     <span class="c1">#                cfg.functional_preproc[&#39;truncation&#39;][&#39;stop_tr&#39;] == None:</span>
@@ -1002,7 +1002,7 @@
         <span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_despike</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_despike</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate de-spiked functional timeseries in native space with AFNI.&quot;&quot;&quot;</span>
     <span class="n">despike</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Despike</span><span class="p">(),</span>
@@ -1048,7 +1048,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_despike_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_despike_template</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate de-spiked functional timeseries in template space with AFNI.&quot;&quot;&quot;</span>
     <span class="n">despike</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Despike</span><span class="p">(),</span>
@@ -1106,7 +1106,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_slice_time</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_slice_time</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Genetare slice-time correctied timeseries.&quot;&quot;&quot;</span>
     <span class="n">slice_time</span> <span class="o">=</span> <span class="n">slice_timing_wf</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;func_slice_timing_correction_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -1149,7 +1149,7 @@
         <span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">bold_mask_afni</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_mask_afni</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a functional mask with AFNI.&quot;&quot;&quot;</span>
     <span class="n">func_get_brain_mask</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">interface</span><span class="o">=</span><span class="n">preprocess</span><span class="o">.</span><span class="n">Automask</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;func_get_brain_mask_AFNI_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -1178,7 +1178,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">bold_mask_fsl</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_mask_fsl</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate functional mask with FSL.&quot;&quot;&quot;</span>
     <span class="n">inputnode_bet</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">util</span><span class="o">.</span><span class="n">IdentityInterface</span><span class="p">(</span>
@@ -1279,7 +1279,7 @@
             <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_skull_mean</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">threshold_T</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">)</span>
 
             <span class="c1"># z=$(echo &quot;$T / 10&quot; | bc -l)</span>
-            <span class="k">def</span> <span class="nf">form_thr_string</span><span class="p">(</span><span class="n">thr</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">form_thr_string</span><span class="p">(</span><span class="n">thr</span><span class="p">):</span>
                 <span class="n">threshold_z</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">thr</span> <span class="o">/</span> <span class="mi">10</span><span class="p">))</span>
                 <span class="k">return</span> <span class="s2">&quot;-thr </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">threshold_z</span><span class="p">)</span>
 
@@ -1367,7 +1367,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">bold_mask_fsl_afni</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_mask_fsl_afni</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;fMRIPrep-style BOLD mask.</span>
 
 <span class="sd">        Enhance and run brain extraction on a BOLD EPI image.</span>
@@ -1660,7 +1660,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">bold_mask_anatomical_refined</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_mask_anatomical_refined</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the BOLD mask by basing it off of the refined anatomical brain mask.&quot;&quot;&quot;</span>
     <span class="c1"># binarize anat mask, in case it is not a binary mask.</span>
     <span class="n">anat_brain_mask_bin</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
@@ -1702,7 +1702,7 @@
         <span class="n">mem_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0115</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">),</span>
     <span class="p">)</span>
 
-    <span class="n">func_reorient</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">pipeline_setup</span><span class="p">[</span><span class="s2">&quot;desired_orientation&quot;</span><span class="p">]</span>
+    <span class="n">func_reorient</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="s2">&quot;RPI&quot;</span>
     <span class="n">func_reorient</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">outputtype</span> <span class="o">=</span> <span class="s2">&quot;NIFTI_GZ&quot;</span>
 
     <span class="n">wf</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">func_deoblique</span><span class="p">,</span> <span class="s2">&quot;out_file&quot;</span><span class="p">,</span> <span class="n">func_reorient</span><span class="p">,</span> <span class="s2">&quot;in_file&quot;</span><span class="p">)</span>
@@ -1807,7 +1807,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">bold_mask_anatomical_based</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_mask_anatomical_based</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the BOLD mask by basing it off of the anatomical brain mask.</span>
 
 <span class="sd">    Adapted from `DCAN Lab&#39;s BOLD mask method from the ABCD pipeline &lt;https://github.com/DCAN-Labs/DCAN-HCP/blob/a8d495a/fMRIVolume/scripts/DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased.sh&gt;`_.</span>
@@ -1904,7 +1904,7 @@
         <span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">bold_mask_anatomical_resampled</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_mask_anatomical_resampled</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Resample anatomical brain mask to get BOLD brain mask in standard space.</span>
 
 <span class="sd">    Adapted from `DCAN Lab&#39;s BOLD mask method from the ABCD pipeline &lt;https://github.com/DCAN-Labs/DCAN-HCP/blob/1d90814/fMRIVolume/scripts/OneStepResampling.sh#L121-L132&gt;`_.</span>
@@ -1988,7 +1988,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">,</span> <span class="s2">&quot;desc-ref_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">bold_mask_ccs</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_mask_ccs</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the BOLD mask by basing it off of the anatomical brain.</span>
 
 <span class="sd">    Adapted from `the BOLD mask method from the CCS pipeline &lt;https://github.com/TingsterX/CCS/blob/c5433fc/H1/ccs_01_funcpreproc.sh#L89-L110&gt;`_.</span>
@@ -2129,7 +2129,7 @@
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">bold_masking</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_masking</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a functional brain mask.&quot;&quot;&quot;</span>
     <span class="n">func_edge_detect</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">Calc</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;func_extract_brain_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -2164,7 +2164,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-mean_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_mean</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_mean</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a mean functional image.&quot;&quot;&quot;</span>
     <span class="n">func_mean</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">afni_utils</span><span class="o">.</span><span class="n">TStat</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;func_mean_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -2191,7 +2191,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_normalize</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_normalize</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalize a functional image.&quot;&quot;&quot;</span>
     <span class="n">func_normalize</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ImageMaths</span><span class="p">(),</span>
@@ -2220,7 +2220,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;desc-preproc_bold&quot;</span><span class="p">,</span> <span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">)],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-bold_desc-brain_mask&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">func_mask_normalize</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_mask_normalize</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalize a functional mask.&quot;&quot;&quot;</span>
     <span class="n">func_mask_normalize</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">interface</span><span class="o">=</span><span class="n">fsl</span><span class="o">.</span><span class="n">ImageMaths</span><span class="p">(),</span>
@@ -2280,6 +2280,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

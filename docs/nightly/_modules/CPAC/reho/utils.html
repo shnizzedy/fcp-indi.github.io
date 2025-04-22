@@ -376,18 +376,18 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">IFLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFLOGGER</span>
 
 
 <div class="viewcode-block" id="getOpString">
 <a class="viewcode-back" href="../../../developer/workflows/reho#CPAC.reho.getOpString">[docs]</a>
-<span class="k">def</span> <span class="nf">getOpString</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">getOpString</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate the Operand String to be used in workflow nodes to supply</span>
 <span class="sd">    mean and std deviation to alff workflow nodes.</span>
@@ -415,7 +415,7 @@
 
 <div class="viewcode-block" id="f_kendall">
 <a class="viewcode-back" href="../../../developer/workflows/reho#CPAC.reho.f_kendall">[docs]</a>
-<span class="k">def</span> <span class="nf">f_kendall</span><span class="p">(</span><span class="n">timeseries_matrix</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_kendall</span><span class="p">(</span><span class="n">timeseries_matrix</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the Kendall&#39;s coefficient of concordance for a number of</span>
 <span class="sd">    time-series in the input matrix.</span>
@@ -431,7 +431,7 @@
 <span class="sd">        Kendall&#39;s coefficient of concordance on the given input matrix</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="n">nk</span> <span class="o">=</span> <span class="n">timeseries_matrix</span><span class="o">.</span><span class="n">shape</span>
 
@@ -449,7 +449,7 @@
 
 <div class="viewcode-block" id="compute_reho">
 <a class="viewcode-back" href="../../../developer/workflows/reho#CPAC.reho.compute_reho">[docs]</a>
-<span class="k">def</span> <span class="nf">compute_reho</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">mask_file</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_reho</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">mask_file</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the ReHo Map, by computing tied ranks of the timepoints,</span>
 <span class="sd">    followed by computing Kendall&#39;s coefficient concordance(KCC) of a</span>
@@ -700,6 +700,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

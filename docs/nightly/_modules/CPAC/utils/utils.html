@@ -378,25 +378,25 @@
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
 <span class="sd">&quot;&quot;&quot;General-purpose utilities for C-PAC.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">collections.abc</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">import</span> <span class="nn">fnmatch</span>
-<span class="kn">import</span> <span class="nn">gzip</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">repeat</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">numbers</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">overload</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">collections.abc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fnmatch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gzip</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">repeat</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numbers</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">overload</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">voluptuous.error</span> <span class="kn">import</span> <span class="n">Invalid</span>
-<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">voluptuous.error</span><span class="w"> </span><span class="kn">import</span> <span class="n">Invalid</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.docs</span> <span class="kn">import</span> <span class="n">deprecated</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">FMLOGGER</span><span class="p">,</span> <span class="n">WFLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">Configuration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.docs</span><span class="w"> </span><span class="kn">import</span> <span class="n">deprecated</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces.function</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">FMLOGGER</span><span class="p">,</span> <span class="n">WFLOGGER</span>
 
 <span class="n">CONFIGS_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="o">*</span><span class="n">repeat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;resources/configs/&quot;</span><span class="p">)</span>
@@ -430,7 +430,7 @@
 
 <div class="viewcode-block" id="get_last_prov_entry">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_last_prov_entry">[docs]</a>
-<span class="k">def</span> <span class="nf">get_last_prov_entry</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_last_prov_entry</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the last provenance entry.&quot;&quot;&quot;</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prov</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">prov</span> <span class="o">=</span> <span class="n">prov</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -440,7 +440,7 @@
 
 <div class="viewcode-block" id="check_prov_for_regtool">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_prov_for_regtool">[docs]</a>
-<span class="k">def</span> <span class="nf">check_prov_for_regtool</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_prov_for_regtool</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check provenance for registration tool.&quot;&quot;&quot;</span>
     <span class="n">last_entry</span> <span class="o">=</span> <span class="n">get_last_prov_entry</span><span class="p">(</span><span class="n">prov</span><span class="p">)</span>
     <span class="n">last_node</span> <span class="o">=</span> <span class="n">last_entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
@@ -471,7 +471,7 @@
 
 <div class="viewcode-block" id="check_prov_for_motion_tool">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_prov_for_motion_tool">[docs]</a>
-<span class="k">def</span> <span class="nf">check_prov_for_motion_tool</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_prov_for_motion_tool</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check provenance for motion correction tool.&quot;&quot;&quot;</span>
     <span class="n">last_entry</span> <span class="o">=</span> <span class="n">get_last_prov_entry</span><span class="p">(</span><span class="n">prov</span><span class="p">)</span>
     <span class="n">last_node</span> <span class="o">=</span> <span class="n">last_entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
@@ -488,17 +488,17 @@
 
 
 
-<span class="k">def</span> <span class="nf">_get_flag</span><span class="p">(</span><span class="n">in_flag</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_flag</span><span class="p">(</span><span class="n">in_flag</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">in_flag</span>
 
 
 <div class="viewcode-block" id="get_flag_wf">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_flag_wf">[docs]</a>
-<span class="k">def</span> <span class="nf">get_flag_wf</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;get_flag&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_flag_wf</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;get_flag&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a workflow to get a flag.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nipype.interfaces.utility</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">util</span>
 
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
 
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
 
@@ -514,7 +514,7 @@
 
 <div class="viewcode-block" id="read_json">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.read_json">[docs]</a>
-<span class="k">def</span> <span class="nf">read_json</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_json</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a JSON file and return the contents as a dictionary.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -528,7 +528,7 @@
 
 <div class="viewcode-block" id="create_id_string">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.create_id_string">[docs]</a>
-<span class="k">def</span> <span class="nf">create_id_string</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_id_string</span><span class="p">(</span>
     <span class="n">cfg</span><span class="p">,</span>
     <span class="n">unique_id</span><span class="p">,</span>
     <span class="n">resource</span><span class="p">,</span>
@@ -552,9 +552,9 @@
 <span class="sd">    ...                  scan_id=&#39;rest&#39;, atlas_id=&#39;Yeo_desc-7&#39;)</span>
 <span class="sd">    &#39;sub-1_ses-1_task-rest_atlas-Yeo7_res-3mm_desc-Mean1_timeseries&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
-    <span class="kn">from</span> <span class="nn">CPAC.utils.bids_utils</span> <span class="kn">import</span> <span class="n">combine_multiple_entity_instances</span><span class="p">,</span> <span class="n">res_in_filename</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.bids_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">combine_multiple_entity_instances</span><span class="p">,</span> <span class="n">res_in_filename</span>
 
     <span class="k">if</span> <span class="n">atlas_id</span><span class="p">:</span>
         <span class="k">if</span> <span class="s2">&quot;_desc-&quot;</span> <span class="ow">in</span> <span class="n">atlas_id</span><span class="p">:</span>
@@ -606,7 +606,7 @@
 
 <div class="viewcode-block" id="write_output_json">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.write_output_json">[docs]</a>
-<span class="k">def</span> <span class="nf">write_output_json</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_output_json</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write a dictionary to a JSON file.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">basedir</span><span class="p">:</span>
         <span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -626,7 +626,7 @@
 
 <div class="viewcode-block" id="get_zscore">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_zscore">[docs]</a>
-<span class="k">def</span> <span class="nf">get_zscore</span><span class="p">(</span><span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;z_score&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_zscore</span><span class="p">(</span><span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;z_score&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to calculate z-scores.</span>
 
@@ -682,10 +682,10 @@
 <span class="sd">    &gt;&gt;&gt; wf.run()  # doctest: +SKIP</span>
 <span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># pylint: disable=line-too-long</span>
     <span class="c1"># pylint: disable=import-outside-toplevel,redefined-outer-name,reimported</span>
-    <span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">fsl</span>
-    <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">fsl</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nipype.interfaces.utility</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">util</span>
 
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
 
     <span class="n">wflow</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
 
@@ -768,11 +768,11 @@
 
 <div class="viewcode-block" id="get_fisher_zscore">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_fisher_zscore">[docs]</a>
-<span class="k">def</span> <span class="nf">get_fisher_zscore</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;fisher_z_score&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_fisher_zscore</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">map_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;fisher_z_score&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the compute_fisher_z_score function as part of a one-node workflow.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nipype.interfaces.utility</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">util</span>
 
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
 
     <span class="n">wflow</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
 
@@ -818,7 +818,7 @@
 
 <div class="viewcode-block" id="compute_fisher_z_score">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.compute_fisher_z_score">[docs]</a>
-<span class="k">def</span> <span class="nf">compute_fisher_z_score</span><span class="p">(</span><span class="n">correlation_file</span><span class="p">,</span> <span class="n">timeseries_one_d</span><span class="p">,</span> <span class="n">input_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_fisher_z_score</span><span class="p">(</span><span class="n">correlation_file</span><span class="p">,</span> <span class="n">timeseries_one_d</span><span class="p">,</span> <span class="n">input_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the fisher z transform of the input correlation map.</span>
 
 <span class="sd">    If the correlation map contains data for multiple ROIs then</span>
@@ -836,10 +836,10 @@
 <span class="sd">    out_file : list (nifti files)</span>
 <span class="sd">        list of z_scores for mask or ROI</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
 
     <span class="c1"># get the specific roi number</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">correlation_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -867,10 +867,10 @@
 
 <div class="viewcode-block" id="ScanParameters">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.ScanParameters">[docs]</a>
-<span class="k">class</span> <span class="nc">ScanParameters</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ScanParameters</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A dictionary of scan parameters and access methods.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scan_parameters</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scan_parameters</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ScanParameters dict and metadata.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subject</span> <span class="o">=</span> <span class="n">subject_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scan</span> <span class="o">=</span> <span class="n">scan</span>
@@ -895,7 +895,7 @@
 
 <div class="viewcode-block" id="ScanParameters.check">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.ScanParameters.check">[docs]</a>
-    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val_to_check</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">throw_exception</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val_to_check</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">throw_exception</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that a value is populated for a given key in a parameters dictionary.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">val_to_check</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">throw_exception</span><span class="p">:</span>
@@ -925,7 +925,7 @@
 
 
     <span class="nd">@overload</span>
-    <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
@@ -933,7 +933,7 @@
         <span class="n">throw_exception</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span> <span class="o">...</span>
     <span class="nd">@overload</span>
-    <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
@@ -942,7 +942,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span> <span class="o">...</span>
 <div class="viewcode-block" id="ScanParameters.fetch">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.ScanParameters.fetch">[docs]</a>
-    <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">match_case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">throw_exception</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">match_case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">throw_exception</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch the first found parameter from a scan params dictionary.</span>
 
 <span class="sd">        Returns</span>
@@ -976,7 +976,7 @@
 
 <div class="viewcode-block" id="ScanParameters.fetch_and_convert">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.ScanParameters.fetch_and_convert">[docs]</a>
-    <span class="k">def</span> <span class="nf">fetch_and_convert</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch_and_convert</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">convert_to</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1047,7 +1047,7 @@
 
 <div class="viewcode-block" id="get_operand_string">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.get_operand_string">[docs]</a>
-<span class="k">def</span> <span class="nf">get_operand_string</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_operand_string</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get operand string for fslmaths.</span>
 
 <span class="sd">    Parameters</span>
@@ -1069,7 +1069,7 @@
 
 <div class="viewcode-block" id="safe_shape">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.safe_shape">[docs]</a>
-<span class="k">def</span> <span class="nf">safe_shape</span><span class="p">(</span><span class="o">*</span><span class="n">vol_data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_shape</span><span class="p">(</span><span class="o">*</span><span class="n">vol_data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the volume of multiple ndarrays are the same shape.</span>
 
 <span class="sd">    The volume is encoded in the first three dimensions of the ndarray.</span>
@@ -1096,7 +1096,7 @@
 
 <div class="viewcode-block" id="zscore">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.zscore">[docs]</a>
-<span class="k">def</span> <span class="nf">zscore</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">zscore</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the z-score of a dataset along a given axis.&quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">data</span> <span class="o">-=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1108,7 +1108,7 @@
 
 <div class="viewcode-block" id="correlation">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.correlation">[docs]</a>
-<span class="k">def</span> <span class="nf">correlation</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">,</span> <span class="n">match_rows</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_scored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">correlation</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">,</span> <span class="n">match_rows</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_scored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcluate the correlation between two matrices.&quot;&quot;&quot;</span>
     <span class="n">d1</span> <span class="o">=</span> <span class="n">matrix1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">d2</span> <span class="o">=</span> <span class="n">matrix2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -1144,7 +1144,7 @@
 
 <div class="viewcode-block" id="check_random_state">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_random_state">[docs]</a>
-<span class="k">def</span> <span class="nf">check_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Turn seed into a np.random.RandomState instance.</span>
 
@@ -1180,7 +1180,7 @@
         <span class="s2">&quot;from CPAC.utils.utils import ScanParameters, PE_DIRECTION, VALID_PATTERNS&quot;</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">get_scan_params</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_scan_params</span><span class="p">(</span>
     <span class="n">subject_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">pipeconfig_start_indx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">],</span>
@@ -1298,7 +1298,7 @@
                     <span class="s2">&quot;an input for AFNI 3dTshift (slice timing correction):&quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">tpattern_file</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
-                <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+                <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
         <span class="k">elif</span> <span class="s2">&quot;.txt&quot;</span> <span class="ow">in</span> <span class="n">pattern</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
             <span class="c1"># if the user provided an acquisition pattern text file for</span>
@@ -1374,7 +1374,7 @@
 
 <div class="viewcode-block" id="add_afni_prefix">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.add_afni_prefix">[docs]</a>
-<span class="k">def</span> <span class="nf">add_afni_prefix</span><span class="p">(</span><span class="n">tpattern</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_afni_prefix</span><span class="p">(</span><span class="n">tpattern</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Add &#39;@&#39; prefix to tpattern.txt filename.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="s2">&quot;.txt&quot;</span> <span class="ow">in</span> <span class="n">tpattern</span><span class="p">:</span>
         <span class="n">tpattern</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;@</span><span class="si">{</span><span class="n">tpattern</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -1384,13 +1384,13 @@
 
 <div class="viewcode-block" id="write_to_log">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.write_to_log">[docs]</a>
-<span class="k">def</span> <span class="nf">write_to_log</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_to_log</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write into log file the status of the workflow run.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">datetime</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">time</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-    <span class="kn">from</span> <span class="nn">CPAC</span> <span class="kn">import</span> <span class="n">__version__</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
 
     <span class="n">version</span> <span class="o">=</span> <span class="n">__version__</span>
     <span class="n">subject_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
@@ -1429,7 +1429,7 @@
             <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">scan_id</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;ERROR in write log&quot;</span>
-        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
@@ -1496,12 +1496,12 @@
 
 <div class="viewcode-block" id="create_log">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.create_log">[docs]</a>
-<span class="k">def</span> <span class="nf">create_log</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">scan_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_log</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">scan_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Workflow to create log.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nipype.interfaces.utility</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">util</span>
 
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-    <span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">function</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">function</span>
 
     <span class="n">wf</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wf_name</span><span class="p">)</span>
 
@@ -1548,7 +1548,7 @@
 
 <div class="viewcode-block" id="find_files">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.find_files">[docs]</a>
-<span class="k">def</span> <span class="nf">find_files</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_files</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find files in directory.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">basename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
@@ -1560,7 +1560,7 @@
 
 <div class="viewcode-block" id="extract_output_mean">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.extract_output_mean">[docs]</a>
-<span class="k">def</span> <span class="nf">extract_output_mean</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">output_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_output_mean</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">output_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Copy from a 1D file to a text file.</span>
 
 <span class="sd">    function takes &#39;in_file&#39;, which should be an intermediary 1D file</span>
@@ -1632,9 +1632,9 @@
 
 <div class="viewcode-block" id="check_command_path">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_command_path">[docs]</a>
-<span class="k">def</span> <span class="nf">check_command_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_command_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Chek if command path exists.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &gt;/dev/null 2&gt;&amp;1&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">32512</span>  <span class="c1"># noqa: PLR2004</span></div>
 
@@ -1642,7 +1642,7 @@
 
 <div class="viewcode-block" id="check_system_deps">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_system_deps">[docs]</a>
-<span class="k">def</span> <span class="nf">check_system_deps</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_system_deps</span><span class="p">(</span>
     <span class="n">check_ants</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">check_ica_aroma</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">check_centrality_degree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1694,14 +1694,14 @@
 
 <div class="viewcode-block" id="check_config_resources">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.check_config_resources">[docs]</a>
-<span class="k">def</span> <span class="nf">check_config_resources</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_config_resources</span><span class="p">(</span>
     <span class="n">c</span><span class="p">:</span> <span class="n">Configuration</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check pipeline config againts computer resources.&quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">cpu_count</span>
 
-    <span class="kn">import</span> <span class="nn">psutil</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">sys_virt_mem</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span>
@@ -1804,7 +1804,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_check_nested_types</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_nested_types</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check types for *_nested_value functions.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Expected dict, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">d</span><span class="si">!s}</span><span class="s2">&quot;</span>
@@ -1816,7 +1816,7 @@
 
 <div class="viewcode-block" id="delete_nested_value">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.delete_nested_value">[docs]</a>
-<span class="k">def</span> <span class="nf">delete_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete nested values.</span>
 
 <span class="sd">    Parameters</span>
@@ -1853,7 +1853,7 @@
     <span class="s2">&quot;1.8.8&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Python 2&#39;s end of life was over 4 years prior to this release. A user jumping from a C-PAC version that used Python 2 can use this function in any C-PAC version from 1.6.2 up until its removal in an upcoming version.&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">repickle</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>  <span class="c1"># noqa: T20</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">repickle</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>  <span class="c1"># noqa: T20</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recursively check a directory; convert Python 2 pickles to Python 3 pickles.</span>
 
@@ -1905,7 +1905,7 @@
     <span class="s2">&quot;1.8.8&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Python 2&#39;s end of life was over 4 years prior to this release. A user jumping from a C-PAC version that used Python 2 can use this function in any C-PAC version from 1.6.2 up until its removal in an upcoming version.&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">_pickle2</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1"># noqa: T20</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_pickle2</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1"># noqa: T20</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check if a pickle is a Python 2 pickle.</span>
 
@@ -1943,7 +1943,7 @@
     <span class="k">return</span> <span class="kc">False</span>
 
 
-<span class="k">def</span> <span class="nf">_changes_1_8_0_to_1_8_1</span><span class="p">(</span><span class="n">config_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_changes_1_8_0_to_1_8_1</span><span class="p">(</span><span class="n">config_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Automatically update a configuration dictionary from 1.8.0 to 1.8.1.</span>
 
 <span class="sd">    Examples</span>
@@ -2071,7 +2071,7 @@
     <span class="k">return</span> <span class="n">config_dict</span>
 
 
-<span class="k">def</span> <span class="nf">_combine_labels</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">list_to_combine</span><span class="p">,</span> <span class="n">new_key</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_combine_labels</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">list_to_combine</span><span class="p">,</span> <span class="n">new_key</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Combine formerly separate keys into a combined key.</span>
 
 <span class="sd">    Parameters</span>
@@ -2108,7 +2108,7 @@
 
 <div class="viewcode-block" id="concat_list">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.concat_list">[docs]</a>
-<span class="k">def</span> <span class="nf">concat_list</span><span class="p">(</span><span class="n">in_list1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_list2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">concat_list</span><span class="p">(</span><span class="n">in_list1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_list2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Concatenate a pair of lists.</span>
 
 <span class="sd">    Parameters</span>
@@ -2142,7 +2142,7 @@
 
 <div class="viewcode-block" id="list_item_replace">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.list_item_replace">[docs]</a>
-<span class="k">def</span> <span class="nf">list_item_replace</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_item_replace</span><span class="p">(</span>
     <span class="n">l</span><span class="p">,</span>  <span class="c1"># noqa: E741  # pylint: disable=invalid-name</span>
     <span class="n">old</span><span class="p">,</span>
     <span class="n">new</span><span class="p">,</span>
@@ -2181,7 +2181,7 @@
 
 <div class="viewcode-block" id="lookup_nested_value">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.lookup_nested_value">[docs]</a>
-<span class="k">def</span> <span class="nf">lookup_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lookup_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up nested values.</span>
 
 <span class="sd">    Parameters</span>
@@ -2215,7 +2215,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_now_runswitch</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">key_sequence</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_now_runswitch</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">key_sequence</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a formerly forkable value to a runswitch.</span>
 
 <span class="sd">    Parameters</span>
@@ -2237,7 +2237,7 @@
     <span class="k">return</span> <span class="n">config_dict</span>
 
 
-<span class="k">def</span> <span class="nf">_remove_somethings</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">things_to_remove</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_remove_somethings</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">things_to_remove</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove instances of any in a given set of values from a list.</span>
 
 <span class="sd">    Parameters</span>
@@ -2259,7 +2259,7 @@
 
 <div class="viewcode-block" id="remove_False">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.remove_False">[docs]</a>
-<span class="k">def</span> <span class="nf">remove_False</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_False</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove &quot;Off&quot; and False from a list at a given nested key.</span>
 
 <span class="sd">    Parameters</span>
@@ -2285,7 +2285,7 @@
 
 <div class="viewcode-block" id="remove_None">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.remove_None">[docs]</a>
-<span class="k">def</span> <span class="nf">remove_None</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_None</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove &quot;None&quot; and None from a list at a given nested key.</span>
 
 <span class="sd">    Parameters</span>
@@ -2311,7 +2311,7 @@
 
 <div class="viewcode-block" id="replace_in_strings">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.replace_in_strings">[docs]</a>
-<span class="k">def</span> <span class="nf">replace_in_strings</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">replacements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">replace_in_strings</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">replacements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Recursively replace substrings.</span>
 
 <span class="sd">    Parameters</span>
@@ -2349,7 +2349,7 @@
 
 <div class="viewcode-block" id="set_nested_value">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.set_nested_value">[docs]</a>
-<span class="k">def</span> <span class="nf">set_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set nested values.</span>
 
 <span class="sd">    Parameters</span>
@@ -2381,7 +2381,7 @@
 
 <div class="viewcode-block" id="update_config_dict">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_config_dict">[docs]</a>
-<span class="k">def</span> <span class="nf">update_config_dict</span><span class="p">(</span><span class="n">old_dict</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_config_dict</span><span class="p">(</span><span class="n">old_dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert an old config dict to a new config dict.</span>
 
 <span class="sd">    Parameters</span>
@@ -2411,7 +2411,7 @@
 <span class="sd">    {&#39;pipeline_setup&#39;: {&#39;pipeline_name&#39;: &#39;example-pipeline&#39;}, &#39;2&#39;: None}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">_append_to_list</span><span class="p">(</span><span class="n">current_value</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_append_to_list</span><span class="p">(</span><span class="n">current_value</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add new_value to the current_value list, creating list if it does not exist.</span>
 
 <span class="sd">        Skips falsy elements in new_value.</span>
@@ -2454,7 +2454,7 @@
             <span class="n">current_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_value</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">current_value</span>
 
-    <span class="k">def</span> <span class="nf">_bool_to_str</span><span class="p">(</span><span class="n">old_value</span><span class="p">,</span> <span class="n">value_if_true</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_bool_to_str</span><span class="p">(</span><span class="n">old_value</span><span class="p">,</span> <span class="n">value_if_true</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a True or a list containing a True to a given string.</span>
 
 <span class="sd">        Parameters</span>
@@ -2489,7 +2489,7 @@
             <span class="k">return</span> <span class="n">value_if_true</span>
         <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">_get_old_values</span><span class="p">(</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_old_values</span><span class="p">(</span><span class="n">old_dict</span><span class="p">,</span> <span class="n">new_dict</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get old and current values of a special key being updated.</span>
 
 <span class="sd">        Parameters</span>
@@ -2686,7 +2686,7 @@
 
 <div class="viewcode-block" id="update_nested_dict">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_nested_dict">[docs]</a>
-<span class="k">def</span> <span class="nf">update_nested_dict</span><span class="p">(</span><span class="n">d_base</span><span class="p">,</span> <span class="n">d_update</span><span class="p">,</span> <span class="n">fully_specified</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_nested_dict</span><span class="p">(</span><span class="n">d_base</span><span class="p">,</span> <span class="n">d_update</span><span class="p">,</span> <span class="n">fully_specified</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update dictionary of varying depth.</span>
 
 <span class="sd">    Parameters</span>
@@ -2805,7 +2805,7 @@
 
 <div class="viewcode-block" id="update_pipeline_values_1_8">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_pipeline_values_1_8">[docs]</a>
-<span class="k">def</span> <span class="nf">update_pipeline_values_1_8</span><span class="p">(</span><span class="n">d_old</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_pipeline_values_1_8</span><span class="p">(</span><span class="n">d_old</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update pipeline config values that changed from C-PAC 1.7 to 1.8.</span>
 
 <span class="sd">    Parameters</span>
@@ -2826,7 +2826,7 @@
 <span class="sd">    ...     &#39;using&#39;: [&#39;FSL-FAST Thresholding&#39;]}}})</span>
 <span class="sd">    {&#39;segmentation&#39;: {&#39;tissue_segmentation&#39;: {&#39;using&#39;: [&#39;FSL-FAST&#39;], &#39;FSL-FAST&#39;: {&#39;thresholding&#39;: {&#39;use&#39;: &#39;Auto&#39;}}}}}</span>
 <span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># pylint: disable=line-too-long</span>
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline.schema</span> <span class="kn">import</span> <span class="n">valid_options</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">valid_options</span>
     <span class="c1"># pylint: disable=import-outside-toplevel</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="n">replace_in_strings</span><span class="p">(</span><span class="n">d_old</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
@@ -2942,7 +2942,7 @@
 
 <div class="viewcode-block" id="update_values_from_list">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.utils.update_values_from_list">[docs]</a>
-<span class="k">def</span> <span class="nf">update_values_from_list</span><span class="p">(</span><span class="n">d_old</span><span class="p">,</span> <span class="n">last_exception</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_values_from_list</span><span class="p">(</span><span class="n">d_old</span><span class="p">,</span> <span class="n">last_exception</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert 1-length lists of an expected type to single items of that type...</span>
 
 <span class="sd">    ...or to convert singletons of an expected list of a type into lists thereof.</span>
@@ -2969,7 +2969,7 @@
 <span class="sd">    ...     &#39;1-ICA-AROMA&#39;: {&#39;run&#39;: [False]}}})</span>
 <span class="sd">    {&#39;nuisance_corrections&#39;: {&#39;1-ICA-AROMA&#39;: {&#39;run&#39;: [False]}}}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">CPAC.pipeline.schema</span> <span class="kn">import</span> <span class="n">schema</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">schema</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="n">d_old</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -3041,7 +3041,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_replace_changed_values</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">nested_key</span><span class="p">,</span> <span class="n">replacement_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_replace_changed_values</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">nested_key</span><span class="p">,</span> <span class="n">replacement_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace values changed from C-PAC 1.7 to C-PAC 1.8.</span>
 
 <span class="sd">    Parameters</span>
@@ -3078,7 +3078,7 @@
     <span class="k">return</span> <span class="n">set_nested_value</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">nested_key</span><span class="p">,</span> <span class="n">current_value</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_replace_in_value_list</span><span class="p">(</span><span class="n">current_value</span><span class="p">,</span> <span class="n">replacement_tuple</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_replace_in_value_list</span><span class="p">(</span><span class="n">current_value</span><span class="p">,</span> <span class="n">replacement_tuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make character replacements and drop falsy values.</span>
 
 <span class="sd">    Parameters</span>
@@ -3158,6 +3158,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

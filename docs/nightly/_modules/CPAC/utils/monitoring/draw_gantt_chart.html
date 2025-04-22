@@ -407,17 +407,17 @@
 <span class="sd">See https://nipype.readthedocs.io/en/latest/api/generated/nipype.utils.draw_gantt_chart.html</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
 
-<span class="kn">from</span> <span class="nn">nipype.utils.draw_gantt_chart</span> <span class="kn">import</span> <span class="n">draw_lines</span><span class="p">,</span> <span class="n">draw_resource_bar</span><span class="p">,</span> <span class="n">log_to_dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.utils.draw_gantt_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">draw_lines</span><span class="p">,</span> <span class="n">draw_resource_bar</span><span class="p">,</span> <span class="n">log_to_dict</span>
 
 
 <div class="viewcode-block" id="create_event_dict">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart.create_event_dict">[docs]</a>
-<span class="k">def</span> <span class="nf">create_event_dict</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">nodes_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_event_dict</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">nodes_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to generate a dictionary of event (start/finish) nodes</span>
 <span class="sd">    from the nodes list.</span>
@@ -436,7 +436,7 @@
 <span class="sd">        the pipeline execution to the value node it accompanies</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">copy</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
     <span class="n">events</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes_list</span><span class="p">:</span>
@@ -474,7 +474,7 @@
 
 <div class="viewcode-block" id="calculate_resource_timeseries">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart.calculate_resource_timeseries">[docs]</a>
-<span class="k">def</span> <span class="nf">calculate_resource_timeseries</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_resource_timeseries</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given as event dictionary, calculate the resources used</span>
 <span class="sd">    as a timeseries.</span>
@@ -495,7 +495,7 @@
 <span class="sd">        and the resource amount as values</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -531,7 +531,7 @@
 
 <div class="viewcode-block" id="draw_nodes">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart.draw_nodes">[docs]</a>
-<span class="k">def</span> <span class="nf">draw_nodes</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">nodes_list</span><span class="p">,</span> <span class="n">cores</span><span class="p">,</span> <span class="n">minute_scale</span><span class="p">,</span> <span class="n">space_between_minutes</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_nodes</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">nodes_list</span><span class="p">,</span> <span class="n">cores</span><span class="p">,</span> <span class="n">minute_scale</span><span class="p">,</span> <span class="n">space_between_minutes</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to return the html-string of the node drawings for the</span>
 <span class="sd">    gantt chart.</span>
@@ -637,7 +637,7 @@
 
 <div class="viewcode-block" id="generate_gantt_chart">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart.generate_gantt_chart">[docs]</a>
-<span class="k">def</span> <span class="nf">generate_gantt_chart</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_gantt_chart</span><span class="p">(</span>
     <span class="n">logfile</span><span class="p">,</span>
     <span class="n">cores</span><span class="p">,</span>
     <span class="n">minute_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -873,7 +873,7 @@
 
 <div class="viewcode-block" id="resource_overusage_report">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart.resource_overusage_report">[docs]</a>
-<span class="k">def</span> <span class="nf">resource_overusage_report</span><span class="p">(</span><span class="n">cblog</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">resource_overusage_report</span><span class="p">(</span><span class="n">cblog</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to parse through a callback log for memory and/or</span>
 <span class="sd">    thread usage above estimates / limits.</span>
 
@@ -941,7 +941,7 @@
 
 <div class="viewcode-block" id="resource_report">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.utils.monitoring.draw_gantt_chart.resource_report">[docs]</a>
-<span class="k">def</span> <span class="nf">resource_report</span><span class="p">(</span><span class="n">callback_log</span><span class="p">,</span> <span class="n">num_cores</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">resource_report</span><span class="p">(</span><span class="n">callback_log</span><span class="p">,</span> <span class="n">num_cores</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to attempt to warn any excessive resource usage and</span>
 <span class="sd">    generate an interactive HTML chart.</span>
 
@@ -977,7 +977,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_timing</span><span class="p">(</span><span class="n">nodes_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_timing</span><span class="p">(</span><span class="n">nodes_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Covert timestamps from strings to datetimes.</span>
 
 <span class="sd">    Parameters</span>
@@ -1021,7 +1021,7 @@
         <span class="k">return</span> <span class="n">new_node_list</span>
 
 
-<span class="k">def</span> <span class="nf">_timing_timestamp</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_timing_timestamp</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert timestamps in a node from string to datetime.</span>
 
 <span class="sd">    Parameters</span>
@@ -1087,6 +1087,6 @@
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

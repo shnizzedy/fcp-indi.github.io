@@ -376,27 +376,27 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">fsl</span><span class="p">,</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">fsl</span><span class="p">,</span> <span class="n">utility</span> <span class="k">as</span> <span class="n">util</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.connectome.connectivity_matrix</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.connectome.connectivity_matrix</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">create_connectome_afni</span><span class="p">,</span>
     <span class="n">create_connectome_nilearn</span><span class="p">,</span>
     <span class="n">get_connectome_method</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.datasource</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.nodeblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.datasource</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">create_roi_mask_dataflow</span><span class="p">,</span>
     <span class="n">create_spatial_map_dataflow</span><span class="p">,</span>
     <span class="n">resample_func_roi</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">FMLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">FMLOGGER</span>
 
 
 <div class="viewcode-block" id="get_voxel_timeseries">
 <a class="viewcode-back" href="../../../developer/workflows/timeseries#CPAC.timeseries.get_voxel_timeseries">[docs]</a>
-<span class="k">def</span> <span class="nf">get_voxel_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;voxel_timeseries&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_voxel_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;voxel_timeseries&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract time series for each voxel in data that are present in the input mask.</span>
 
@@ -469,7 +469,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">clean_roi_csv</span><span class="p">(</span><span class="n">roi_csv</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_roi_csv</span><span class="p">(</span><span class="n">roi_csv</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove file path comments from every other row of AFNI&#39;s 3dROIstats output.</span>
 
 <span class="sd">    3dROIstats has a -nobriklab and a -quiet option, but neither remove the</span>
@@ -491,10 +491,10 @@
 <span class="sd">    edited_roi_csv: str</span>
 <span class="sd">        path to CSV</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">roi_csv</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">csv_lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
@@ -534,7 +534,7 @@
 
 <div class="viewcode-block" id="get_roi_timeseries">
 <a class="viewcode-back" href="../../../developer/workflows/timeseries#CPAC.timeseries.get_roi_timeseries">[docs]</a>
-<span class="k">def</span> <span class="nf">get_roi_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;roi_timeseries&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_roi_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;roi_timeseries&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract timeseries for each node in the ROI mask.</span>
 
@@ -627,7 +627,7 @@
 
 <div class="viewcode-block" id="get_spatial_map_timeseries">
 <a class="viewcode-back" href="../../../developer/workflows/timeseries#CPAC.timeseries.get_spatial_map_timeseries">[docs]</a>
-<span class="k">def</span> <span class="nf">get_spatial_map_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;spatial_map_timeseries&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_spatial_map_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;spatial_map_timeseries&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">Workflow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Regress each provided spatial map to the subjects functional 4D file...</span>
 
@@ -707,7 +707,7 @@
 
 <div class="viewcode-block" id="get_vertices_timeseries">
 <a class="viewcode-back" href="../../../developer/workflows/timeseries#CPAC.timeseries.get_vertices_timeseries">[docs]</a>
-<span class="k">def</span> <span class="nf">get_vertices_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;vertices_timeseries&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_vertices_timeseries</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;vertices_timeseries&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to get vertices time series from a FreeSurfer surface file.</span>
 
@@ -776,7 +776,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">get_normalized_moments</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;normalized_moments&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_normalized_moments</span><span class="p">(</span><span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;normalized_moments&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to calculate the normalized moments for skewedness calculations.</span>
 
@@ -836,7 +836,7 @@
 
 <div class="viewcode-block" id="gen_roi_timeseries">
 <a class="viewcode-back" href="../../../developer/workflows/timeseries#CPAC.timeseries.gen_roi_timeseries">[docs]</a>
-<span class="k">def</span> <span class="nf">gen_roi_timeseries</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">output_type</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gen_roi_timeseries</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">output_type</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract mean of voxel across all timepoints for each node in roi mask.</span>
 
@@ -863,12 +863,12 @@
 <span class="sd">    Exception</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">csv</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">shutil</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
 
     <span class="n">unit_data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">template</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
     <span class="c1"># Cast as rounded-up integer</span>
@@ -968,7 +968,7 @@
 
 <div class="viewcode-block" id="gen_voxel_timeseries">
 <a class="viewcode-back" href="../../../developer/workflows/timeseries#CPAC.timeseries.gen_voxel_timeseries">[docs]</a>
-<span class="k">def</span> <span class="nf">gen_voxel_timeseries</span><span class="p">(</span><span class="n">data_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gen_voxel_timeseries</span><span class="p">(</span><span class="n">data_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract timeseries for each voxel in the data that is present in the input mask.</span>
 
@@ -989,11 +989,11 @@
 <span class="sd">    Exception</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">csv</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
 
     <span class="n">unit</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
     <span class="n">unit_data</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
@@ -1042,7 +1042,7 @@
 
 <div class="viewcode-block" id="gen_vertices_timeseries">
 <a class="viewcode-back" href="../../../developer/workflows/timeseries#CPAC.timeseries.gen_vertices_timeseries">[docs]</a>
-<span class="k">def</span> <span class="nf">gen_vertices_timeseries</span><span class="p">(</span><span class="n">rh_surface_file</span><span class="p">,</span> <span class="n">lh_surface_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gen_vertices_timeseries</span><span class="p">(</span><span class="n">rh_surface_file</span><span class="p">,</span> <span class="n">lh_surface_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract timeseries from vertices of a freesurfer surface file.</span>
 
@@ -1059,10 +1059,10 @@
 <span class="sd">        list of vertices timeseries csv files</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">gradunwarp</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">gradunwarp</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="n">out_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">rh_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">rh_surface_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_rh.csv&quot;</span>
@@ -1091,7 +1091,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">resample_function</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;Function&quot;</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">resample_function</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;Function&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a Function interface for :py:func:`~CPAC.utils.datasource.resample_func_roi`.</span>
 
@@ -1122,7 +1122,7 @@
         <span class="s2">&quot;space-template_desc-PartialNilearn_correlations&quot;</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">timeseries_extraction_AVG</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">timeseries_extraction_AVG</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">resample_functional_roi</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">resample_function</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;resample_functional_roi_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="p">)</span>
@@ -1255,7 +1255,7 @@
     <span class="c1"># - NDMG</span>
     <span class="k">if</span> <span class="s2">&quot;ndmg&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;timeseries_extraction&quot;</span><span class="p">,</span> <span class="s2">&quot;connectivity_matrix&quot;</span><span class="p">,</span> <span class="s2">&quot;using&quot;</span><span class="p">]:</span>
         <span class="c1"># pylint: disable=import-outside-toplevel</span>
-        <span class="kn">from</span> <span class="nn">CPAC.utils.ndmg_utils</span> <span class="kn">import</span> <span class="n">ndmg_create_graphs</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.ndmg_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ndmg_create_graphs</span>
 
         <span class="n">ndmg_graph_imports</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;import os&quot;</span><span class="p">,</span> <span class="s2">&quot;from CPAC.utils.ndmg_utils import graph&quot;</span><span class="p">]</span>
         <span class="n">ndmg_graph</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
@@ -1285,7 +1285,7 @@
     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;space-template_desc-preproc_bold&quot;</span><span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-Voxel_timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;atlas_name&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">timeseries_extraction_Voxel</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">timeseries_extraction_Voxel</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">resample_functional_to_mask</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
         <span class="n">resample_function</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;resample_functional_to_mask_</span><span class="si">{</span><span class="n">pipe_num</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="p">)</span>
@@ -1338,7 +1338,7 @@
     <span class="p">],</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;desc-SpatReg_timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;atlas_name&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">spatial_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">spatial_regression</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform spatial regression.</span>
 
 <span class="sd">    Extracts the spatial map timeseries of the given atlases.</span>
@@ -1456,6 +1456,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

@@ -420,24 +420,24 @@
 <span class="sd">    &quot;Normalization of T1w/Functional to Template:[…] Coverage index&quot; :footcite:`xcp_22,Ciri19`</span>
 <span class="sd">&quot;&quot;&quot;</span>  <span class="c1"># pylint: disable=line-too-long</span>
 
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BufferedReader</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BufferedReader</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
-<span class="kn">from</span> <span class="nn">bids.layout</span> <span class="kn">import</span> <span class="n">parse_file_entities</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">fsl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bids.layout</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_file_entities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">afni</span><span class="p">,</span> <span class="n">fsl</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.generate_motion_statistics.generate_motion_statistics</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.generate_motion_statistics.generate_motion_statistics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DVARS_strip_t0</span><span class="p">,</span>
     <span class="n">ImageTo1D</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.qc.qcmetrics</span> <span class="kn">import</span> <span class="n">regisQ</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces.function</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.nodeblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.qc.qcmetrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">regisQ</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces.function</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
 
 <span class="n">motion_params</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;dvars&quot;</span><span class="p">,</span>
@@ -447,7 +447,7 @@
 <span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_connect_motion</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">qc_file</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_connect_motion</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">qc_file</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Connect the motion metrics to the workflow.</span>
 
@@ -524,7 +524,7 @@
 
 <div class="viewcode-block" id="dvcorr">
 <a class="viewcode-back" href="../../../developer/xcpqc#CPAC.qc.xcp.dvcorr">[docs]</a>
-<span class="k">def</span> <span class="nf">dvcorr</span><span class="p">(</span><span class="n">dvars</span><span class="p">,</span> <span class="n">fdj</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dvcorr</span><span class="p">(</span><span class="n">dvars</span><span class="p">,</span> <span class="n">fdj</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Correlate DVARS and FD-J.&quot;&quot;&quot;</span>
     <span class="n">dvars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">dvars</span><span class="p">)</span>
     <span class="n">fdj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">fdj</span><span class="p">)</span>
@@ -542,7 +542,7 @@
 <span class="c1"># Nipype will connect many other nodes as inputs</span>
 <div class="viewcode-block" id="generate_xcp_qc">
 <a class="viewcode-back" href="../../../developer/xcpqc#CPAC.qc.xcp.generate_xcp_qc">[docs]</a>
-<span class="k">def</span> <span class="nf">generate_xcp_qc</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_xcp_qc</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913</span>
     <span class="n">sub</span><span class="p">,</span>
     <span class="n">ses</span><span class="p">,</span>
     <span class="n">task</span><span class="p">,</span>
@@ -718,7 +718,7 @@
 
 <div class="viewcode-block" id="get_bids_info">
 <a class="viewcode-back" href="../../../developer/xcpqc#CPAC.qc.xcp.get_bids_info">[docs]</a>
-<span class="k">def</span> <span class="nf">get_bids_info</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">wf_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_bids_info</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">wf_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gather BIDS information from a strat_pool.</span>
 
@@ -776,7 +776,7 @@
     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">returns</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
         <span class="n">entity_parts</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
 
-        <span class="k">def</span> <span class="nf">get_entity_part</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_entity_part</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
             <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-&quot;</span>
             <span class="n">matching_parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">part</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">entity_parts</span> <span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
             <span class="k">if</span> <span class="n">matching_parts</span><span class="p">:</span>
@@ -826,7 +826,7 @@
         <span class="s2">&quot;space-template_desc-xcp_quality&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-brain-template-mask&quot;</span><span class="p">}</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">qc_xcp</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">qc_xcp</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate an XCP-style quality-control file.&quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=invalid-name, unused-argument</span>
     <span class="k">if</span> <span class="n">cfg</span><span class="p">[</span>
@@ -1015,6 +1015,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

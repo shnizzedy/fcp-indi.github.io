@@ -376,15 +376,15 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">string</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">BinaryIO</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">BinaryIO</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;extract_data_logs&quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
@@ -400,7 +400,7 @@
 
 <div class="viewcode-block" id="extract_data">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.extract_data.extract_data">[docs]</a>
-<span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">param_map</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_data</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">param_map</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a CPAC input subject list Python file.</span>
 
@@ -444,7 +444,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">get_list</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_list</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read each line of the file into list.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">ret_list</span> <span class="o">=</span> <span class="n">arg</span>
@@ -461,7 +461,7 @@
     <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">subjectList</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">subject_list</span> <span class="o">=</span> <span class="n">get_list</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">subjectList</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">checkTemplate</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">checkTemplate</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if `template` is correct.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">template</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
@@ -480,11 +480,11 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_site_list</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_site_list</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
         <span class="n">base</span><span class="p">,</span> <span class="n">relative</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">check_length</span><span class="p">(</span><span class="n">scan_name</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_length</span><span class="p">(</span><span class="n">scan_name</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="s2">&quot;filename- </span><span class="si">%s</span><span class="s2"> is too long.&quot;</span>
@@ -509,7 +509,7 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">create_site_subject_mapping</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">relative</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_site_subject_mapping</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">relative</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create mapping between site and subject.&quot;&quot;&quot;</span>
         <span class="n">site_subject_map</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">base_path_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -534,7 +534,7 @@
 
         <span class="k">return</span> <span class="n">base_path_list</span><span class="p">,</span> <span class="n">site_subject_map</span>
 
-    <span class="k">def</span> <span class="nf">getPath</span><span class="p">(</span><span class="n">template</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getPath</span><span class="p">(</span><span class="n">template</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Split the input template path...</span>
 
 <span class="sd">        ...into base, path before subject directory and relative, path after subject directory.</span>
@@ -586,7 +586,7 @@
     <span class="n">func_relative_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">func_relative</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))</span>
     <span class="n">anat_relative_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">anat_relative</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">check_for_sessions</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">path_length</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_for_sessions</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">path_length</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if there are sessions present.&quot;&quot;&quot;</span>
         <span class="c1"># default</span>
         <span class="n">session_present</span> <span class="o">=</span> <span class="kc">False</span>
@@ -623,7 +623,7 @@
         <span class="s2">&quot;wb&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">fetch_path</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">anat_sub</span><span class="p">,</span> <span class="n">func_sub</span><span class="p">,</span> <span class="n">session_id</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch_path</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">anat_sub</span><span class="p">,</span> <span class="n">func_sub</span><span class="p">,</span> <span class="n">session_id</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extract anatomical and functional path for a session and print to file.</span>
 
@@ -646,12 +646,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="k">def</span> <span class="nf">print_begin_of_file</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">session_id</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">print_begin_of_file</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">session_id</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    subject_id: &#39;&quot;</span> <span class="o">+</span> <span class="n">sub</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    unique_id: &#39;&quot;</span> <span class="o">+</span> <span class="n">session_id</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
 
-            <span class="k">def</span> <span class="nf">print_end_of_file</span><span class="p">(</span><span class="n">sub</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">print_end_of_file</span><span class="p">(</span><span class="n">sub</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">param_map</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;site for sub </span><span class="si">%s</span><span class="s2"> -&gt; </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">subject_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sub</span><span class="p">))</span>
@@ -745,7 +745,7 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">sub</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">walk</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">sub</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Walk across each subject path in the data site path.</span>
 
@@ -842,10 +842,10 @@
 
 <div class="viewcode-block" id="generate_supplementary_files">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.extract_data.generate_supplementary_files">[docs]</a>
-<span class="k">def</span> <span class="nf">generate_supplementary_files</span><span class="p">(</span><span class="n">data_config_outdir</span><span class="p">,</span> <span class="n">data_config_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_supplementary_files</span><span class="p">(</span><span class="n">data_config_outdir</span><span class="p">,</span> <span class="n">data_config_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate phenotypic template file and subject list for group analysis.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">csv</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="n">data_config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_config_outdir</span><span class="p">,</span> <span class="n">data_config_name</span><span class="p">)</span>
 
@@ -1023,7 +1023,7 @@
 
 <div class="viewcode-block" id="read_csv">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.extract_data.read_csv">[docs]</a>
-<span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span><span class="n">csv_input</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="n">csv_input</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read CSV file.</span>
 
 <span class="sd">    &#39;Acquisition&#39;</span>
@@ -1031,8 +1031,8 @@
 <span class="sd">    &#39;Site&#39;</span>
 <span class="sd">    &#39;TR (seconds)&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-    <span class="kn">import</span> <span class="nn">csv</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">csv_input</span><span class="p">,</span> <span class="s2">&quot;U&quot;</span><span class="p">))</span>
@@ -1064,7 +1064,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_sassy_oserror</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_sassy_oserror</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raise a sassy OSError.&quot;&quot;&quot;</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">CPAC says: I couldn&#39;t save this file to your drive:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -1074,7 +1074,7 @@
     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_sassy_try_open_wb</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BinaryIO</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_sassy_try_open_wb</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BinaryIO</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Open a file in &#39;wb&#39; mode or raise a sassy OSError if a file can&#39;t be saved.&quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">try</span><span class="p">:</span>
@@ -1086,10 +1086,10 @@
 
 <div class="viewcode-block" id="Configuration">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.extract_data.Configuration">[docs]</a>
-<span class="k">class</span> <span class="nc">Configuration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Configuration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set dictionary keys as map attributes.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_map</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_map</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config_map</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">config_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
                 <span class="n">config_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1099,7 +1099,7 @@
 
 <div class="viewcode-block" id="run">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.extract_data.run">[docs]</a>
-<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">data_config</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">data_config</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a data config.</span>
 
 <span class="sd">    Parameters</span>
@@ -1175,6 +1175,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

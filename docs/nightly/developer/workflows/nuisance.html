@@ -393,26 +393,15 @@ this value is read from the nifti file provided.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="CPAC.nuisance.cosine_filter">
 <span class="sig-prename descclassname"><span class="pre">CPAC.nuisance.</span></span><span class="sig-name descname"><span class="pre">cosine_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'error'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/CPAC/nuisance/utils/compcor#cosine_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CPAC.nuisance.cosine_filter" title="Link to this definition">¶</a></dt>
-<dd><p>Apply cosine filter to the input BOLD image using the discrete cosine transform (DCT) method.</p>
-<p>Adapted from nipype implementation. <a class="reference external" href="https://github.com/nipy/nipype/blob/d353f0d/nipype/algorithms/confounds.py#L1086-L1107">https://github.com/nipy/nipype/blob/d353f0d/nipype/algorithms/confounds.py#L1086-L1107</a>
-It removes the low-frequency drift from the voxel time series. The filtered image is saved to disk.</p>
+<dd><p><cite>cosine_filter</cite> adapted from Nipype.</p>
+<p><a class="reference external" href="https://github.com/nipy/nipype/blob/d353f0d/nipype/algorithms/confounds.py#L1086-L1107">https://github.com/nipy/nipype/blob/d353f0d/nipype/algorithms/confounds.py#L1086-L1107</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input_image_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Path to the BOLD image to be filtered.</p></li>
-<li><p><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Repetition time (TR) of the series (in seconds). Derived from image header if unspecified.</p></li>
-<li><p><strong>period_cut</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Minimum period (in seconds) for the DCT high-pass filter. Default value is 128.</p></li>
-<li><p><strong>remove_mean</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – Whether to remove the mean from the voxel time series before filtering. Default is True.</p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>optional</em>) – The axis along which to apply the filter. Default is -1 (last axis).</p></li>
-<li><p><strong>failure_mode</strong> (<code class="docutils literal notranslate"><span class="pre">{'error',</span> <span class="pre">'ignore'}</span></code>, <em>optional</em>) – Specifies how to handle failure modes. If set to ‘error’, the function raises an error.
-If set to ‘ignore’, it returns the input data unchanged in case of failure. Default is ‘error’.</p></li>
+<li><p><strong>input_image_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – Bold image to be filtered.</p></li>
+<li><p><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – ‘Repetition time (TR) of series (in sec) - derived from image header if unspecified’</p></li>
+<li><p><strong>period_cut</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Minimum period (in sec) for DCT high-pass filter, nipype default value: 128.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>cosfiltered_img</strong> – Path to the filtered BOLD image.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -800,6 +789,6 @@ this operation.</p>
     <script src="../../_static/underscore.js?v=f1230927"></script>
     <script src="../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

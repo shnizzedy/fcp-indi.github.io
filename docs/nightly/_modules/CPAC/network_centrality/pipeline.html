@@ -376,18 +376,18 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">fsl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">fsl</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.network_centrality.network_centrality</span> <span class="kn">import</span> <span class="n">create_centrality_wf</span>
-<span class="kn">from</span> <span class="nn">CPAC.network_centrality.utils</span> <span class="kn">import</span> <span class="n">check_centrality_params</span><span class="p">,</span> <span class="n">create_merge_node</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nodeblock</span> <span class="kn">import</span> <span class="n">nodeblock</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.schema</span> <span class="kn">import</span> <span class="n">valid_options</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.network_centrality.network_centrality</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_centrality_wf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.network_centrality.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_centrality_params</span><span class="p">,</span> <span class="n">create_merge_node</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.nodeblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">nodeblock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">valid_options</span>
 
 
 <div class="viewcode-block" id="connect_centrality_workflow">
 <a class="viewcode-back" href="../../../developer/workflows/network_centrality#CPAC.network_centrality.pipeline.connect_centrality_workflow">[docs]</a>
-<span class="k">def</span> <span class="nf">connect_centrality_workflow</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connect_centrality_workflow</span><span class="p">(</span>
     <span class="n">workflow</span><span class="p">,</span>
     <span class="n">c</span><span class="p">,</span>
     <span class="n">resample_functional_to_template</span><span class="p">,</span>
@@ -530,7 +530,7 @@
         <span class="s2">&quot;space-template_lfcdb&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Template&quot;</span><span class="p">:</span> <span class="s2">&quot;T1w-brain-template-funcreg&quot;</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">network_centrality</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">network_centrality</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">strat_pool</span><span class="p">,</span> <span class="n">pipe_num</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run Network Centrality.&quot;&quot;&quot;</span>
     <span class="c1"># Resample the functional mni to the centrality mask resolution</span>
     <span class="n">resample_functional_to_template</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span>
@@ -631,6 +631,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

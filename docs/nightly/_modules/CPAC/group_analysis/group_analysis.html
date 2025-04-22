@@ -376,17 +376,17 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">fsl</span>
-<span class="kn">import</span> <span class="nn">nipype.interfaces.utility</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">fsl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nipype.interfaces.utility</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">util</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.easy_thresh</span> <span class="kn">import</span> <span class="n">easy_thresh</span>
-<span class="kn">from</span> <span class="nn">CPAC.pipeline</span> <span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.interfaces</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.easy_thresh</span><span class="w"> </span><span class="kn">import</span> <span class="n">easy_thresh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">nipype_pipeline_engine</span> <span class="k">as</span> <span class="n">pe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
 
 
 <div class="viewcode-block" id="get_operation">
 <a class="viewcode-back" href="../../../developer/workflows/group_analysis#CPAC.group_analysis.get_operation">[docs]</a>
-<span class="k">def</span> <span class="nf">get_operation</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_operation</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create operation string for fslmaths.</span>
 
 <span class="sd">    Parameters</span>
@@ -406,7 +406,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">nibabel</span> <span class="kn">import</span> <span class="n">load</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span>
 
         <span class="n">img</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span>
         <span class="n">hdr</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">header</span>
@@ -418,7 +418,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">label_zstat_files</span><span class="p">(</span><span class="n">zstat_list</span><span class="p">,</span> <span class="n">con_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">label_zstat_files</span><span class="p">(</span><span class="n">zstat_list</span><span class="p">,</span> <span class="n">con_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Rename z-stat file outputs from FSL FLAME using contrast labels.</span>
 
 <span class="sd">    Take in the z-stat file outputs of FSL FLAME and rename them after the</span>
@@ -447,7 +447,7 @@
 
 <div class="viewcode-block" id="create_fsl_flame_wf">
 <a class="viewcode-back" href="../../../developer/workflows/group_analysis#CPAC.group_analysis.create_fsl_flame_wf">[docs]</a>
-<span class="k">def</span> <span class="nf">create_fsl_flame_wf</span><span class="p">(</span><span class="n">ftest</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;groupAnalysis&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_fsl_flame_wf</span><span class="p">(</span><span class="n">ftest</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wf_name</span><span class="o">=</span><span class="s2">&quot;groupAnalysis&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run FSL `FEAT &lt;http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT&gt;`_ BASED Group Analysis.</span>
 
 <span class="sd">    Parameters</span>
@@ -837,7 +837,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">run_feat_pipeline</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_feat_pipeline</span><span class="p">(</span>
     <span class="n">group_config</span><span class="p">,</span>
     <span class="n">merge_file</span><span class="p">,</span>
     <span class="n">merge_mask</span><span class="p">,</span>
@@ -860,7 +860,7 @@
 
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">nipype.interfaces.io</span> <span class="k">as</span> <span class="nn">nio</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nipype.interfaces.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nio</span>
 
     <span class="c1"># get thresholds</span>
     <span class="n">z_threshold</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">group_config</span><span class="o">.</span><span class="n">z_threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -966,6 +966,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

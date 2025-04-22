@@ -408,20 +408,20 @@
 <span class="sd">- `sig_imports` to set necessary imports on function nodes with a decorator</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">FunctionDef</span><span class="p">,</span> <span class="n">parse</span>
-<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
-<span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ast</span><span class="w"> </span><span class="kn">import</span> <span class="n">FunctionDef</span><span class="p">,</span> <span class="n">parse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">nipype.interfaces.base</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces.base</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">isdefined</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces.io</span> <span class="kn">import</span> <span class="n">add_traits</span><span class="p">,</span> <span class="n">IOBase</span>
-<span class="kn">from</span> <span class="nn">nipype.interfaces.utility.wrappers</span> <span class="kn">import</span> <span class="n">Function</span> <span class="k">as</span> <span class="n">NipypeFunction</span>
-<span class="kn">from</span> <span class="nn">nipype.utils.filemanip</span> <span class="kn">import</span> <span class="n">ensure_list</span>
-<span class="kn">from</span> <span class="nn">nipype.utils.functions</span> <span class="kn">import</span> <span class="n">getsource</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_traits</span><span class="p">,</span> <span class="n">IOBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces.utility.wrappers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span> <span class="k">as</span> <span class="n">NipypeFunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.utils.filemanip</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensure_list</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.utils.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">getsource</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils.docs</span> <span class="kn">import</span> <span class="n">outdent_lines</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.docs</span><span class="w"> </span><span class="kn">import</span> <span class="n">outdent_lines</span>
 
 <span class="n">_AUTOLOGGING_IMPORTS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;from CPAC.utils.monitoring.custom_logging import FMLOGGER, IFLOGGER, UTLOGGER,&quot;</span>
@@ -429,13 +429,13 @@
 <span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_as_module</span><span class="p">(</span><span class="n">fxn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ns</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_as_module</span><span class="p">(</span><span class="n">fxn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ns</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get full module name and namespace.&quot;&quot;&quot;</span>
     <span class="n">module</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">fxn</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">module</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">fxn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">_module_imports</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="n">fxn</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">get_function_name_from_source</span><span class="p">(</span><span class="n">function_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_function_name_from_source</span><span class="p">(</span><span class="n">function_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Get the name of a function from its source code.</span>
 
 <span class="sd">    Parameters</span>
@@ -467,11 +467,11 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">FunctionDef</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span>
     <span class="k">except</span> <span class="ne">SyntaxError</span> <span class="k">as</span> <span class="n">syntax_error</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">value_error</span> <span class="kn">from</span> <span class="nn">syntax_error</span>
+        <span class="k">raise</span> <span class="n">value_error</span> <span class="kn">from</span><span class="w"> </span><span class="nn">syntax_error</span>
     <span class="k">raise</span> <span class="n">value_error</span>
 
 
-<span class="k">def</span> <span class="nf">create_function_from_source</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_function_from_source</span><span class="p">(</span>
     <span class="n">function_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">imports</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a function object from a function source.</span>
@@ -504,7 +504,7 @@
             <span class="s2">&quot;another function or inline in the connect string. Any &quot;</span>
             <span class="s2">&quot;imports should be done inside the function.&quot;</span>
         <span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
     <span class="n">ns_funcs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span> <span class="o">-</span> <span class="p">{</span><span class="o">*</span><span class="n">import_keys</span><span class="p">,</span> <span class="s2">&quot;__builtins__&quot;</span><span class="p">})</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ns_funcs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Function or inputs are ill-defined&quot;</span>
     <span class="k">return</span> <span class="n">ns</span><span class="p">[</span><span class="n">ns_funcs</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
@@ -512,7 +512,7 @@
 
 <div class="viewcode-block" id="Function">
 <a class="viewcode-back" href="../../../../../developer/utils#CPAC.utils.interfaces.function.Function">[docs]</a>
-<span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="n">NipypeFunction</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Function</span><span class="p">(</span><span class="n">NipypeFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Can automatically set a module name on the interface.</span>
 
 <span class="sd">    Automatically imports global Nipype loggers.</span>
@@ -520,7 +520,7 @@
 
 <div class="viewcode-block" id="Function.__init__">
 <a class="viewcode-back" href="../../../../../developer/nodes#CPAC.utils.interfaces.function.Function.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">input_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">output_names</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">,</span>
@@ -574,7 +574,7 @@
                         <span class="s2">&quot;function objects defined interactively &quot;</span>
                         <span class="s2">&quot;in a python session&quot;</span>
                     <span class="p">)</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">os_error</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">os_error</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">input_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="n">fninfo</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="vm">__code__</span>
@@ -605,7 +605,7 @@
 <div class="viewcode-block" id="Function.sig_imports">
 <a class="viewcode-back" href="../../../../../developer/utils#CPAC.utils.interfaces.function.Function.sig_imports">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">sig_imports</span><span class="p">(</span><span class="n">imports</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sig_imports</span><span class="p">(</span><span class="n">imports</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set an ``ns_imports`` attribute on a function for Function-node functions.</span>
 
 <span class="sd">        This can be useful for classes needed for decorators, typehints</span>
@@ -646,14 +646,14 @@
 <span class="sd">        True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="nf">_imports</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_imports</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;ns_imports&quot;</span><span class="p">,</span> <span class="n">imports</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">func</span>
 
         <span class="k">return</span> <span class="n">_imports</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_set_function_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_function_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;function_str&quot;</span><span class="p">:</span>
             <span class="n">ns</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_module</span><span class="p">:</span>
@@ -673,7 +673,7 @@
             <span class="n">add_traits</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">new_names</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_input_names</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_names</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_run_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runtime</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runtime</span><span class="p">):</span>
         <span class="c1"># Create function handle</span>
         <span class="n">ns</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_module</span><span class="p">:</span>
@@ -687,7 +687,7 @@
                 <span class="p">)</span>
             <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">import_error</span><span class="p">:</span>
                 <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Could not import module: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">function_str</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">import_error</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">import_error</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">function_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">function_str</span>
         <span class="n">function_handle</span> <span class="o">=</span> <span class="n">create_function_from_source</span><span class="p">(</span><span class="n">function_str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">imports</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
@@ -718,7 +718,7 @@
 <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_module_imports</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ns</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">fxn</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_module_imports</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ns</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">fxn</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Import module-level imports to a namespace.&quot;&quot;&quot;</span>
     <span class="n">exec</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;from </span><span class="si">{</span><span class="n">module</span><span class="si">}</span><span class="s2"> import *&quot;</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
@@ -768,6 +768,6 @@
     <script src="../../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

@@ -368,23 +368,23 @@
 
 <span class="sd">The `Workflow` class provides core functionality for batch processing.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">os.path</span> <span class="k">as</span> <span class="nn">op</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">op</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">logging</span>
-<span class="kn">from</span> <span class="nn">...utils.misc</span> <span class="kn">import</span> <span class="n">str2bool</span>
-<span class="kn">from</span> <span class="nn">...utils.functions</span> <span class="kn">import</span> <span class="n">getsource</span><span class="p">,</span> <span class="n">create_function_from_source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...utils.misc</span><span class="w"> </span><span class="kn">import</span> <span class="n">str2bool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...utils.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">getsource</span><span class="p">,</span> <span class="n">create_function_from_source</span>
 
-<span class="kn">from</span> <span class="nn">...interfaces.base</span> <span class="kn">import</span> <span class="n">traits</span><span class="p">,</span> <span class="n">TraitedSpec</span><span class="p">,</span> <span class="n">TraitDictObject</span><span class="p">,</span> <span class="n">TraitListObject</span>
-<span class="kn">from</span> <span class="nn">...utils.filemanip</span> <span class="kn">import</span> <span class="n">save_json</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...interfaces.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">traits</span><span class="p">,</span> <span class="n">TraitedSpec</span><span class="p">,</span> <span class="n">TraitDictObject</span><span class="p">,</span> <span class="n">TraitListObject</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...utils.filemanip</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">generate_expanded_graph</span><span class="p">,</span>
     <span class="n">export_graph</span><span class="p">,</span>
     <span class="n">write_workflow_prov</span><span class="p">,</span>
@@ -396,16 +396,16 @@
     <span class="n">format_node</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">EngineBase</span>
-<span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">MapNode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">EngineBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.nodes</span><span class="w"> </span><span class="kn">import</span> <span class="n">MapNode</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;nipype.workflow&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">Workflow</span><span class="p">(</span><span class="n">EngineBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Workflow</span><span class="p">(</span><span class="n">EngineBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Controls the setup and execution of a pipeline of processes.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">base_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">base_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a workflow object.</span>
 
 <span class="sd">        Parameters</span>
@@ -416,7 +416,7 @@
 <span class="sd">            path to workflow storage</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">Workflow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">base_dir</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
@@ -427,7 +427,7 @@
     <span class="c1"># PUBLIC API</span>
 <div class="viewcode-block" id="Workflow.clone">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.clone">[docs]</a>
-    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Clone a workflow</span>
 
 <span class="sd">        .. note::</span>
@@ -450,7 +450,7 @@
     <span class="c1"># Graph creation functions</span>
 <div class="viewcode-block" id="Workflow.connect">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.connect">[docs]</a>
-    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Connect nodes in the pipeline.</span>
 
 <span class="sd">        This routine also checks if inputs and outputs are actually provided by</span>
@@ -645,7 +645,7 @@
 
 <div class="viewcode-block" id="Workflow.disconnect">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.disconnect">[docs]</a>
-    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Disconnect nodes</span>
 <span class="sd">        See the docstring for connect for format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -693,7 +693,7 @@
 
 <div class="viewcode-block" id="Workflow.add_nodes">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.add_nodes">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add nodes to a workflow</span>
 
 <span class="sd">        Parameters</span>
@@ -730,7 +730,7 @@
 
 <div class="viewcode-block" id="Workflow.remove_nodes">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.remove_nodes">[docs]</a>
-    <span class="k">def</span> <span class="nf">remove_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove nodes from a workflow</span>
 
 <span class="sd">        Parameters</span>
@@ -744,16 +744,16 @@
 
     <span class="c1"># Input-Output access</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_inputs</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_outputs</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Workflow.get_node">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.get_node">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an internal node by name&quot;&quot;&quot;</span>
         <span class="n">nodenames</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="n">nodename</span> <span class="o">=</span> <span class="n">nodenames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -771,9 +771,9 @@
 
 <div class="viewcode-block" id="Workflow.list_node_names">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.list_node_names">[docs]</a>
-    <span class="k">def</span> <span class="nf">list_node_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_node_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;List names of all nodes in a workflow&quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 
         <span class="n">outlist</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">topological_sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="p">):</span>
@@ -789,7 +789,7 @@
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">outlist</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">write_graph</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_graph</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">dotfilename</span><span class="o">=</span><span class="s2">&quot;graph.dot&quot;</span><span class="p">,</span>
         <span class="n">graph2use</span><span class="o">=</span><span class="s2">&quot;hierarchical&quot;</span><span class="p">,</span>
@@ -866,7 +866,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">outfname</span>
 
-    <span class="k">def</span> <span class="nf">write_hierarchical_dotfile</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_hierarchical_dotfile</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">dotfilename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">simple_form</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">):</span>
         <span class="n">dotlist</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;digraph </span><span class="si">%s</span><span class="s2">{&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
@@ -884,7 +884,7 @@
 
 <div class="viewcode-block" id="Workflow.export">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.export">[docs]</a>
-    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="n">include_config</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Export object into a different format</span>
@@ -901,7 +901,7 @@
 <span class="sd">           whether to include node and workflow config values</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 
         <span class="n">formats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
@@ -980,7 +980,7 @@
 
 <div class="viewcode-block" id="Workflow.run">
 <a class="viewcode-back" href="../../../../developer/nodes#CPAC.pipeline.nipype_pipeline_engine.Workflow.run">[docs]</a>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plugin_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">updatehash</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plugin_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">updatehash</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the workflow</span>
 
 <span class="sd">        Parameters</span>
@@ -1041,7 +1041,7 @@
 
     <span class="c1"># PRIVATE API AND FUNCTIONS</span>
 
-    <span class="k">def</span> <span class="nf">_write_report_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workingdir</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_write_report_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workingdir</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">workingdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">workingdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
         <span class="n">report_dir</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workingdir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
@@ -1097,7 +1097,7 @@
             <span class="n">index_name</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%%</span><span class="s2">0</span><span class="si">%d</span><span class="s2">d_&quot;</span> <span class="o">%</span> <span class="n">index_name</span>
 
-        <span class="k">def</span> <span class="nf">getname</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">getname</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
             <span class="n">name_parts</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">fullname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
             <span class="c1"># return &#39;.&#39;.join(name_parts[:-1] + [template % i + name_parts[-1]])</span>
             <span class="k">return</span> <span class="n">template</span> <span class="o">%</span> <span class="n">i</span> <span class="o">+</span> <span class="n">name_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -1112,7 +1112,7 @@
             <span class="p">)</span>
         <span class="n">save_json</span><span class="p">(</span><span class="n">graph_file</span><span class="p">,</span> <span class="n">json_dict</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_set_needed_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_needed_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize node with list of which outputs are needed.&quot;&quot;&quot;</span>
         <span class="n">rm_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;execution&quot;</span><span class="p">][</span><span class="s2">&quot;remove_unnecessary_outputs&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">rm_outputs</span><span class="p">):</span>
@@ -1130,7 +1130,7 @@
             <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span><span class="p">:</span>
                 <span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">needed_outputs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_configure_exec_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_configure_exec_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensure that each node knows where to get inputs from&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
             <span class="n">node</span><span class="o">.</span><span class="n">input_source</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1142,7 +1142,7 @@
                         <span class="n">sourceinfo</span><span class="p">,</span>
                     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_check_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if any of the nodes are already in the graph&quot;&quot;&quot;</span>
         <span class="n">node_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>
         <span class="n">node_lineage</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">_hierarchy</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>
@@ -1159,7 +1159,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">node_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_has_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_has_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if a parameter is available as an input or output&quot;&quot;&quot;</span>
         <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">parameter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 
@@ -1171,7 +1171,7 @@
         <span class="n">attrname</span> <span class="o">=</span> <span class="n">hierarchy</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
         <span class="n">nodename</span> <span class="o">=</span> <span class="n">hierarchy</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
-        <span class="k">def</span> <span class="nf">_check_is_already_connected</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">attrname</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_check_is_already_connected</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">attrname</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">workflow</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">in_edges</span><span class="p">(</span><span class="n">nbunch</span><span class="o">=</span><span class="n">node</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;connect&quot;</span><span class="p">]:</span>
                     <span class="k">if</span> <span class="n">attrname</span> <span class="o">==</span> <span class="n">cd</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -1225,13 +1225,13 @@
 
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="nf">_check_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_attr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_check_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_attr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_get_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the inputs of a workflow</span>
 
 <span class="sd">        This function does not return any input ports that are already</span>
@@ -1257,7 +1257,7 @@
                 <span class="nb">getattr</span><span class="p">(</span><span class="n">inputdict</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">on_trait_change</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_input</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">inputdict</span>
 
-    <span class="k">def</span> <span class="nf">_get_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all possible output ports that are not already connected&quot;&quot;&quot;</span>
         <span class="n">outputdict</span> <span class="o">=</span> <span class="n">TraitedSpec</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
@@ -1272,11 +1272,11 @@
                 <span class="nb">setattr</span><span class="p">(</span><span class="n">outputdict</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">outputdict</span>
 
-    <span class="k">def</span> <span class="nf">_set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objekt</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objekt</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Trait callback function to update a node input&quot;&quot;&quot;</span>
         <span class="n">objekt</span><span class="o">.</span><span class="n">traits</span><span class="p">()[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_set_node_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">sourceinfo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_node_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">sourceinfo</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set inputs of a node given the edge connection&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sourceinfo</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
             <span class="n">val</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="n">sourceinfo</span><span class="p">)</span>
@@ -1291,13 +1291,13 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;setting node input: </span><span class="si">%s</span><span class="s2">-&gt;</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">newval</span><span class="p">))</span>
         <span class="n">node</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">newval</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_get_all_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_all_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">allnodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes_cache</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nested_workflows_cache</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nested_workflows_cache</span><span class="p">:</span>
             <span class="n">allnodes</span> <span class="o">|=</span> <span class="n">node</span><span class="o">.</span><span class="n">_get_all_nodes</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">allnodes</span>
 
-    <span class="k">def</span> <span class="nf">_update_node_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_node_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="p">)</span>
 
         <span class="n">added_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nodes_cache</span><span class="p">)</span>
@@ -1310,19 +1310,19 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Workflow</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_nested_workflows_cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_has_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wanted_node</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_has_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wanted_node</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">wanted_node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes_cache</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
             <span class="n">wf</span><span class="o">.</span><span class="n">_has_node</span><span class="p">(</span><span class="n">wanted_node</span><span class="p">)</span> <span class="k">for</span> <span class="n">wf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nested_workflows_cache</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_create_flat_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_flat_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a simple DAG where no node is a workflow.&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Creating flat graph for workflow: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">workflowcopy</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">workflowcopy</span><span class="o">.</span><span class="n">_generate_flatgraph</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">workflowcopy</span><span class="o">.</span><span class="n">_graph</span>
 
-    <span class="k">def</span> <span class="nf">_reset_hierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reset_hierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the hierarchy on a graph&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Workflow</span><span class="p">):</span>
@@ -1332,9 +1332,9 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">node</span><span class="o">.</span><span class="n">_hierarchy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
-    <span class="k">def</span> <span class="nf">_generate_flatgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_flatgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a graph containing only Nodes or MapNodes&quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;expanding workflow: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="n">nodes2remove</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1399,11 +1399,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">remove_nodes_from</span><span class="p">(</span><span class="n">nodes2remove</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;finished expanding workflow: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_get_dot</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_dot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hierarchy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">simple_form</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a dot file with connection info&quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 
         <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;  &quot;</span>
@@ -1557,6 +1557,6 @@
     <script src="../../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

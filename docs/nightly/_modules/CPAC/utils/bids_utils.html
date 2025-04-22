@@ -376,37 +376,21 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64decode</span>
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
-<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
 
-<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">BotoCoreError</span>
-<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">BotoCoreError</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">UTLOGGER</span>
-
-
-<div class="viewcode-block" id="SpecifiedBotoCoreError">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.SpecifiedBotoCoreError">[docs]</a>
-<span class="k">class</span> <span class="nc">SpecifiedBotoCoreError</span><span class="p">(</span><span class="n">BotoCoreError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Specified :py:class:`~botocore.exceptions.BotoCoreError`.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize BotoCoreError with message.&quot;&quot;&quot;</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="ne">Exception</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
-
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">UTLOGGER</span>
 
 
 <div class="viewcode-block" id="bids_decode_fname">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.bids_decode_fname">[docs]</a>
-<span class="k">def</span> <span class="nf">bids_decode_fname</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">dbg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bids_decode_fname</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">dbg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">f_dict</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
@@ -498,7 +482,7 @@
 
 <div class="viewcode-block" id="bids_entities_from_filename">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.bids_entities_from_filename">[docs]</a>
-<span class="k">def</span> <span class="nf">bids_entities_from_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bids_entities_from_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to collect a list of BIDS entities from a given</span>
 <span class="sd">    filename.</span>
 
@@ -527,7 +511,7 @@
 
 <div class="viewcode-block" id="bids_match_entities">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.bids_match_entities">[docs]</a>
-<span class="k">def</span> <span class="nf">bids_match_entities</span><span class="p">(</span><span class="n">file_list</span><span class="p">,</span> <span class="n">entities</span><span class="p">,</span> <span class="n">suffix</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bids_match_entities</span><span class="p">(</span><span class="n">file_list</span><span class="p">,</span> <span class="n">entities</span><span class="p">,</span> <span class="n">suffix</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to subset a list of filepaths by a passed BIDS entity.</span>
 
 <span class="sd">    Parameters</span>
@@ -609,7 +593,7 @@
 
 <div class="viewcode-block" id="bids_remove_entity">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.bids_remove_entity">[docs]</a>
-<span class="k">def</span> <span class="nf">bids_remove_entity</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bids_remove_entity</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove an entity from a BIDS string by key.</span>
 
 <span class="sd">    Parameters</span>
@@ -641,7 +625,7 @@
 
 <div class="viewcode-block" id="bids_retrieve_params">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.bids_retrieve_params">[docs]</a>
-<span class="k">def</span> <span class="nf">bids_retrieve_params</span><span class="p">(</span><span class="n">bids_config_dict</span><span class="p">,</span> <span class="n">f_dict</span><span class="p">,</span> <span class="n">dbg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bids_retrieve_params</span><span class="p">(</span><span class="n">bids_config_dict</span><span class="p">,</span> <span class="n">f_dict</span><span class="p">,</span> <span class="n">dbg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Retrieve the BIDS parameters from bids_config_dict for BIDS file</span>
@@ -711,7 +695,7 @@
 
 <div class="viewcode-block" id="bids_parse_sidecar">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.bids_parse_sidecar">[docs]</a>
-<span class="k">def</span> <span class="nf">bids_parse_sidecar</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">dbg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bids_parse_sidecar</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">dbg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="c1"># type: (dict, bool) -&gt; dict</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Uses the BIDS principle of inheritance to build a data structure that</span>
@@ -825,7 +809,7 @@
 
 <div class="viewcode-block" id="bids_shortest_entity">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.bids_shortest_entity">[docs]</a>
-<span class="k">def</span> <span class="nf">bids_shortest_entity</span><span class="p">(</span><span class="n">file_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bids_shortest_entity</span><span class="p">(</span><span class="n">file_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to return the single file with the shortest chain of</span>
 <span class="sd">    BIDS entities from a given list, returning the first if more than</span>
 <span class="sd">    one have the same minimum length.</span>
@@ -867,8 +851,8 @@
 
 <div class="viewcode-block" id="gen_bids_outputs_sublist">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.gen_bids_outputs_sublist">[docs]</a>
-<span class="k">def</span> <span class="nf">gen_bids_outputs_sublist</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">paths_list</span><span class="p">,</span> <span class="n">key_list</span><span class="p">,</span> <span class="n">creds_path</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">copy</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gen_bids_outputs_sublist</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">paths_list</span><span class="p">,</span> <span class="n">key_list</span><span class="p">,</span> <span class="n">creds_path</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
     <span class="n">func_keys</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;functional_to_anat_linear_xfm&quot;</span><span class="p">,</span>
@@ -948,7 +932,7 @@
 
 <div class="viewcode-block" id="bids_gen_cpac_sublist">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.bids_gen_cpac_sublist">[docs]</a>
-<span class="k">def</span> <span class="nf">bids_gen_cpac_sublist</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bids_gen_cpac_sublist</span><span class="p">(</span>
     <span class="n">bids_dir</span><span class="p">,</span>
     <span class="n">paths_list</span><span class="p">,</span>
     <span class="n">config_dict</span><span class="p">,</span>
@@ -1196,7 +1180,7 @@
 
 <div class="viewcode-block" id="collect_bids_files_configs">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.collect_bids_files_configs">[docs]</a>
-<span class="k">def</span> <span class="nf">collect_bids_files_configs</span><span class="p">(</span><span class="n">bids_dir</span><span class="p">,</span> <span class="n">aws_input_creds</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">collect_bids_files_configs</span><span class="p">(</span><span class="n">bids_dir</span><span class="p">,</span> <span class="n">aws_input_creds</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param bids_dir:</span>
 <span class="sd">    :param aws_input_creds:</span>
@@ -1228,7 +1212,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">aws_input_creds</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Could not find aws_input_creds (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">aws_input_creds</span><span class="p">))</span>
 
-        <span class="kn">from</span> <span class="nn">indi_aws</span> <span class="kn">import</span> <span class="n">fetch_creds</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">indi_aws</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_creds</span>
 
         <span class="n">bucket</span> <span class="o">=</span> <span class="n">fetch_creds</span><span class="o">.</span><span class="n">return_bucket</span><span class="p">(</span><span class="n">aws_input_creds</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">)</span>
 
@@ -1249,7 +1233,7 @@
                                 <span class="sa">f</span><span class="s2">&quot;Error retrieving </span><span class="si">{</span><span class="n">s3_obj</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
                                 <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">)&quot;</span>
                             <span class="p">)</span>
-                            <span class="k">raise</span> <span class="n">SpecifiedBotoCoreError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+                            <span class="k">raise</span> <span class="n">BotoCoreError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
                     <span class="k">elif</span> <span class="s2">&quot;nii&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">s3_obj</span><span class="o">.</span><span class="n">key</span><span class="p">):</span>
                         <span class="n">file_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                             <span class="nb">str</span><span class="p">(</span><span class="n">s3_obj</span><span class="o">.</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
@@ -1275,15 +1259,9 @@
                                         <span class="p">):</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">f</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">))</span>
                                     <span class="p">}</span>
                                 <span class="p">)</span>
-                            <span class="k">except</span> <span class="ne">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">unicode_decode_error</span><span class="p">:</span>
+                            <span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
                                 <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Could not decode </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-                                <span class="k">raise</span> <span class="ne">UnicodeDecodeError</span><span class="p">(</span>
-                                    <span class="n">unicode_decode_error</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-                                    <span class="n">unicode_decode_error</span><span class="o">.</span><span class="n">object</span><span class="p">,</span>
-                                    <span class="n">unicode_decode_error</span><span class="o">.</span><span class="n">start</span><span class="p">,</span>
-                                    <span class="n">unicode_decode_error</span><span class="o">.</span><span class="n">end</span><span class="p">,</span>
-                                    <span class="n">msg</span><span class="p">,</span>
-                                <span class="p">)</span>
+                                <span class="k">raise</span> <span class="ne">UnicodeDecodeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">file_paths</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">config_dict</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
@@ -1299,7 +1277,7 @@
 
 <div class="viewcode-block" id="camelCase">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.camelCase">[docs]</a>
-<span class="k">def</span> <span class="nf">camelCase</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pylint: disable=invalid-name</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">camelCase</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># pylint: disable=invalid-name</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a hyphenated string to camelCase.</span>
 
 <span class="sd">    Parameters</span>
@@ -1328,7 +1306,7 @@
 
 <div class="viewcode-block" id="combine_multiple_entity_instances">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.combine_multiple_entity_instances">[docs]</a>
-<span class="k">def</span> <span class="nf">combine_multiple_entity_instances</span><span class="p">(</span><span class="n">bids_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">combine_multiple_entity_instances</span><span class="p">(</span><span class="n">bids_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Combines mutliple instances of a key in a BIDS string to a single</span>
 <span class="sd">    instance by camelCasing and concatenating the values.</span>
 
@@ -1371,7 +1349,7 @@
 
 <div class="viewcode-block" id="insert_entity">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.insert_entity">[docs]</a>
-<span class="k">def</span> <span class="nf">insert_entity</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">insert_entity</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Insert a `f&#39;{key}-{value}&#39;` BIDS entity before `desc-` if</span>
 <span class="sd">    present or before the suffix otherwise.</span>
 
@@ -1406,40 +1384,17 @@
 
 
 
-<div class="viewcode-block" id="apply_modifications">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.apply_modifications">[docs]</a>
-<span class="k">def</span> <span class="nf">apply_modifications</span><span class="p">(</span>
-    <span class="n">yaml_contents</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">modifications</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply modification functions to YAML contents&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">modifications</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">modification</span> <span class="ow">in</span> <span class="n">modifications</span><span class="p">:</span>
-            <span class="n">yaml_contents</span> <span class="o">=</span> <span class="n">modification</span><span class="p">(</span><span class="n">yaml_contents</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">yaml_contents</span></div>
-
-
-
 <div class="viewcode-block" id="load_yaml_config">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.load_yaml_config">[docs]</a>
-<span class="k">def</span> <span class="nf">load_yaml_config</span><span class="p">(</span>
-    <span class="n">config_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">aws_input_creds</span><span class="p">,</span>
-    <span class="n">modifications</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a YAML config file, possibly from AWS, with modifications applied.</span>
-
-<span class="sd">    `modifications` should be a list of functions that take a single string argument (the loaded YAML contents) and return a single string argument (the modified YAML contents).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_yaml_config</span><span class="p">(</span><span class="n">config_filename</span><span class="p">,</span> <span class="n">aws_input_creds</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">config_filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;data:&quot;</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">_header</span><span class="p">,</span> <span class="n">encoded</span> <span class="o">=</span> <span class="n">config_filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">config_content</span> <span class="o">=</span> <span class="n">apply_modifications</span><span class="p">(</span>
-                <span class="n">b64decode</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">modifications</span>
-            <span class="p">)</span>
+            <span class="n">header</span><span class="p">,</span> <span class="n">encoded</span> <span class="o">=</span> <span class="n">config_filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">config_content</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">config_content</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">except</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error! Could not find load config from data URI </span><span class="si">{</span><span class="n">config_filename</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="k">raise</span> <span class="n">SpecifiedBotoCoreError</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">BotoCoreError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">config_filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s3://&quot;</span><span class="p">):</span>
         <span class="c1"># s3 paths begin with s3://bucket/</span>
@@ -1451,7 +1406,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">aws_input_creds</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Could not find aws_input_creds (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">aws_input_creds</span><span class="p">))</span>
 
-        <span class="kn">from</span> <span class="nn">indi_aws</span> <span class="kn">import</span> <span class="n">fetch_creds</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">indi_aws</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_creds</span>
 
         <span class="n">bucket</span> <span class="o">=</span> <span class="n">fetch_creds</span><span class="o">.</span><span class="n">return_bucket</span><span class="p">(</span><span class="n">aws_input_creds</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">)</span>
         <span class="n">downloaded_config</span> <span class="o">=</span> <span class="s2">&quot;/tmp/&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">config_filename</span><span class="p">)</span>
@@ -1461,8 +1416,7 @@
     <span class="n">config_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">config_filename</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">apply_modifications</span><span class="p">(</span><span class="n">_f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">modifications</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">config_filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">))</span>
     <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error! Could not find config file </span><span class="si">{</span><span class="n">config_filename</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
@@ -1471,7 +1425,7 @@
 
 <div class="viewcode-block" id="cl_strip_brackets">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.cl_strip_brackets">[docs]</a>
-<span class="k">def</span> <span class="nf">cl_strip_brackets</span><span class="p">(</span><span class="n">arg_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cl_strip_brackets</span><span class="p">(</span><span class="n">arg_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes &#39;[&#39; from before first and &#39;]&#39; from after final</span>
 <span class="sd">    arguments in a list of commandline arguments.</span>
 
@@ -1500,7 +1454,7 @@
 
 <div class="viewcode-block" id="create_cpac_data_config">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.create_cpac_data_config">[docs]</a>
-<span class="k">def</span> <span class="nf">create_cpac_data_config</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_cpac_data_config</span><span class="p">(</span>
     <span class="n">bids_dir</span><span class="p">,</span>
     <span class="n">participant_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">aws_input_creds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1566,31 +1520,9 @@
 
 
 
-<span class="k">def</span> <span class="nf">_check_value_type</span><span class="p">(</span>
-    <span class="n">sub_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
-    <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;subject_id&quot;</span><span class="p">,</span> <span class="s2">&quot;unique_id&quot;</span><span class="p">],</span>
-    <span class="n">value_type</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">any_or_all</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Iterable</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="nb">any</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if any or all of a key in a sub_list is of a given type.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">any_or_all</span><span class="p">(</span>
-        <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">sub_list</span>
-    <span class="p">)</span>
-
-
-<div class="viewcode-block" id="coerce_data_config_strings">
-<a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.coerce_data_config_strings">[docs]</a>
-<span class="k">def</span> <span class="nf">coerce_data_config_strings</span><span class="p">(</span><span class="n">contents</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Coerge `subject_id` and `unique_id` to be strings.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;subject_id: &quot;</span><span class="p">,</span> <span class="s2">&quot;unique_id: &quot;</span><span class="p">]:</span>
-        <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">(?!!!)&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">!!str &quot;</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">contents</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;: !!str !!&quot;</span><span class="p">,</span> <span class="s2">&quot;: !!&quot;</span><span class="p">)</span></div>
-
-
-
 <div class="viewcode-block" id="load_cpac_data_config">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.load_cpac_data_config">[docs]</a>
-<span class="k">def</span> <span class="nf">load_cpac_data_config</span><span class="p">(</span><span class="n">data_config_file</span><span class="p">,</span> <span class="n">participant_labels</span><span class="p">,</span> <span class="n">aws_input_creds</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_cpac_data_config</span><span class="p">(</span><span class="n">data_config_file</span><span class="p">,</span> <span class="n">participant_labels</span><span class="p">,</span> <span class="n">aws_input_creds</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Loads the file as a check to make sure it is available and readable.</span>
 
@@ -1607,9 +1539,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">sub_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">load_yaml_config</span><span class="p">(</span>
-        <span class="n">data_config_file</span><span class="p">,</span> <span class="n">aws_input_creds</span><span class="p">,</span> <span class="n">modifications</span><span class="o">=</span><span class="p">[</span><span class="n">coerce_data_config_strings</span><span class="p">]</span>
-    <span class="p">)</span>
+    <span class="n">sub_list</span> <span class="o">=</span> <span class="n">load_yaml_config</span><span class="p">(</span><span class="n">data_config_file</span><span class="p">,</span> <span class="n">aws_input_creds</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">participant_labels</span><span class="p">:</span>
         <span class="n">sub_list</span> <span class="o">=</span> <span class="p">[</span>
@@ -1639,7 +1569,7 @@
 
 <div class="viewcode-block" id="res_in_filename">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.res_in_filename">[docs]</a>
-<span class="k">def</span> <span class="nf">res_in_filename</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">res_in_filename</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Specify resolution in filename.</span>
 
 <span class="sd">    Parameters</span>
@@ -1697,7 +1627,7 @@
 
 <div class="viewcode-block" id="sub_list_filter_by_labels">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.sub_list_filter_by_labels">[docs]</a>
-<span class="k">def</span> <span class="nf">sub_list_filter_by_labels</span><span class="p">(</span><span class="n">sub_list</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sub_list_filter_by_labels</span><span class="p">(</span><span class="n">sub_list</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to filter a sub_list by provided BIDS labels for</span>
 <span class="sd">    specified suffixes.</span>
 
@@ -1727,7 +1657,7 @@
 
 <div class="viewcode-block" id="with_key">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.with_key">[docs]</a>
-<span class="k">def</span> <span class="nf">with_key</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">with_key</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a keyed BIDS entity.</span>
 
 <span class="sd">    Parameters</span>
@@ -1755,7 +1685,7 @@
 
 <div class="viewcode-block" id="without_key">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.bids_utils.without_key">[docs]</a>
-<span class="k">def</span> <span class="nf">without_key</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">without_key</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a BIDS entity value.</span>
 
 <span class="sd">    Parameters</span>
@@ -1781,7 +1711,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_t1w_filter</span><span class="p">(</span><span class="n">anat</span><span class="p">,</span> <span class="n">shortest_entity</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_t1w_filter</span><span class="p">(</span><span class="n">anat</span><span class="p">,</span> <span class="n">shortest_entity</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function to filter T1w paths.</span>
 
 <span class="sd">    Parameters</span>
@@ -1812,7 +1742,7 @@
     <span class="k">return</span> <span class="n">anat</span>
 
 
-<span class="k">def</span> <span class="nf">_sub_anat_filter</span><span class="p">(</span><span class="n">anat</span><span class="p">,</span> <span class="n">shortest_entity</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_sub_anat_filter</span><span class="p">(</span><span class="n">anat</span><span class="p">,</span> <span class="n">shortest_entity</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function to filter anat paths in sub_list.</span>
 
 <span class="sd">    Parameters</span>
@@ -1835,7 +1765,7 @@
     <span class="k">return</span> <span class="n">_t1w_filter</span><span class="p">(</span><span class="n">anat</span><span class="p">,</span> <span class="n">shortest_entity</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_sub_list_filter_by_label</span><span class="p">(</span><span class="n">sub_list</span><span class="p">,</span> <span class="n">label_type</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_sub_list_filter_by_label</span><span class="p">(</span><span class="n">sub_list</span><span class="p">,</span> <span class="n">label_type</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to filter a sub_list by a CLI-provided label.</span>
 
 <span class="sd">    Parameters</span>
@@ -1904,7 +1834,7 @@
     <span class="k">return</span> <span class="n">new_sub_list</span>
 
 
-<span class="k">def</span> <span class="nf">_match_functional_scan</span><span class="p">(</span><span class="n">sub_list_func_dict</span><span class="p">,</span> <span class="n">scan_file_to_match</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_match_functional_scan</span><span class="p">(</span><span class="n">sub_list_func_dict</span><span class="p">,</span> <span class="n">scan_file_to_match</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to subset a scan from a sub_list_func_dict by a scan filename.</span>
 
 <span class="sd">    Parameters</span>
@@ -1979,6 +1909,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

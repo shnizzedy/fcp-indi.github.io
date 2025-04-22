@@ -376,7 +376,7 @@
 
 <span class="c1"># You should have received a copy of the GNU Lesser General Public</span>
 <span class="c1"># License along with C-PAC. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">FMLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">FMLOGGER</span>
 
 <span class="c1"># TODO: create a function that can help easily map raw pheno files that do not</span>
 <span class="c1"># TODO: have the participant_session id that CPAC uses</span>
@@ -384,7 +384,7 @@
 
 <div class="viewcode-block" id="read_group_list_text_file">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.read_group_list_text_file">[docs]</a>
-<span class="k">def</span> <span class="nf">read_group_list_text_file</span><span class="p">(</span><span class="n">group_list_text_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_group_list_text_file</span><span class="p">(</span><span class="n">group_list_text_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read in the group-level analysis participant-session list text file.&quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">group_list_text_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">group_list</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
@@ -397,9 +397,9 @@
 
 <div class="viewcode-block" id="read_pheno_csv_into_df">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.read_pheno_csv_into_df">[docs]</a>
-<span class="k">def</span> <span class="nf">read_pheno_csv_into_df</span><span class="p">(</span><span class="n">pheno_csv</span><span class="p">,</span> <span class="n">id_label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_pheno_csv_into_df</span><span class="p">(</span><span class="n">pheno_csv</span><span class="p">,</span> <span class="n">id_label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read the phenotypic file CSV or TSV into a Pandas DataFrame.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pheno_csv</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">id_label</span><span class="p">:</span>
@@ -418,9 +418,9 @@
 
 <div class="viewcode-block" id="write_group_list_text_file">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.write_group_list_text_file">[docs]</a>
-<span class="k">def</span> <span class="nf">write_group_list_text_file</span><span class="p">(</span><span class="n">group_list</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_group_list_text_file</span><span class="p">(</span><span class="n">group_list</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write out the group-level analysis participant list as a text file.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># prevent duplicates - depending on how the design matrix is set up, we</span>
     <span class="c1"># might have multiples of the sub_ses_ID&#39;s, like if we&#39;re doing repeated</span>
@@ -451,9 +451,9 @@
 
 <div class="viewcode-block" id="write_dataframe_to_csv">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.write_dataframe_to_csv">[docs]</a>
-<span class="k">def</span> <span class="nf">write_dataframe_to_csv</span><span class="p">(</span><span class="n">matrix_df</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_dataframe_to_csv</span><span class="p">(</span><span class="n">matrix_df</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write out a matrix Pandas DataFrame into a CSV file.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">out_file</span><span class="p">:</span>
         <span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;matrix.csv&quot;</span><span class="p">)</span>
@@ -479,11 +479,11 @@
 
 <div class="viewcode-block" id="write_config_dct_to_yaml">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.write_config_dct_to_yaml">[docs]</a>
-<span class="k">def</span> <span class="nf">write_config_dct_to_yaml</span><span class="p">(</span><span class="n">config_dct</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_config_dct_to_yaml</span><span class="p">(</span><span class="n">config_dct</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write out a configuration dictionary into a YAML file.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">CPAC</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">CPAC</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">out_file</span><span class="p">:</span>
         <span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;group_config.yml&quot;</span><span class="p">)</span>
@@ -569,7 +569,7 @@
 
 <div class="viewcode-block" id="create_design_matrix_df">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.create_design_matrix_df">[docs]</a>
-<span class="k">def</span> <span class="nf">create_design_matrix_df</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_design_matrix_df</span><span class="p">(</span>
     <span class="n">group_list</span><span class="p">,</span>
     <span class="n">pheno_df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">ev_selections</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -588,7 +588,7 @@
 <span class="sd">    participant-session ID labels in the CPAC individual-level analysis output</span>
 <span class="sd">    directory with the values listed in the phenotype file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
     <span class="n">keep_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;participant_id&quot;</span><span class="p">]</span>
 
@@ -704,13 +704,13 @@
 
 <div class="viewcode-block" id="create_contrasts_template_df">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.create_contrasts_template_df">[docs]</a>
-<span class="k">def</span> <span class="nf">create_contrasts_template_df</span><span class="p">(</span><span class="n">design_df</span><span class="p">,</span> <span class="n">contrasts_dct_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_contrasts_template_df</span><span class="p">(</span><span class="n">design_df</span><span class="p">,</span> <span class="n">contrasts_dct_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the template Pandas DataFrame for the contrasts matrix CSV.</span>
 
 <span class="sd">    The headers in the contrasts matrix needs to match the headers of the</span>
 <span class="sd">    design matrix.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
     <span class="n">contrast_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">design_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="n">contrast_cols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;participant_id&quot;</span><span class="p">)</span>
@@ -755,7 +755,7 @@
 
 <div class="viewcode-block" id="preset_single_group_avg">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.preset_single_group_avg">[docs]</a>
-<span class="k">def</span> <span class="nf">preset_single_group_avg</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preset_single_group_avg</span><span class="p">(</span>
     <span class="n">group_list</span><span class="p">,</span>
     <span class="n">pheno_df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">covariate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -766,7 +766,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up the design matrix CSV for running a single group average</span>
 <span class="sd">    (one-sample T-test).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="p">:</span>
         <span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -856,7 +856,7 @@
 
 <div class="viewcode-block" id="preset_unpaired_two_group">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.preset_unpaired_two_group">[docs]</a>
-<span class="k">def</span> <span class="nf">preset_unpaired_two_group</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preset_unpaired_two_group</span><span class="p">(</span>
     <span class="n">group_list</span><span class="p">,</span>
     <span class="n">pheno_df</span><span class="p">,</span>
     <span class="n">groups</span><span class="p">,</span>
@@ -886,7 +886,7 @@
 <span class="sd">    pull it from the phenotype file, and this function will break it out into</span>
 <span class="sd">    two columns using dummy-coding.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="p">:</span>
         <span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -1044,7 +1044,7 @@
 
 <div class="viewcode-block" id="preset_paired_two_group">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.preset_paired_two_group">[docs]</a>
-<span class="k">def</span> <span class="nf">preset_paired_two_group</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preset_paired_two_group</span><span class="p">(</span>
     <span class="n">group_list</span><span class="p">,</span>
     <span class="n">conditions</span><span class="p">,</span>
     <span class="n">condition_type</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">,</span>
@@ -1067,7 +1067,7 @@
 <span class="sd">        https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</span>
 <span class="sd">            #Paired_Two-Group_Difference_.28Two-Sample_Paired_T-Test.29</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="p">:</span>
         <span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -1233,7 +1233,7 @@
 
 <div class="viewcode-block" id="preset_tripled_two_group">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.preset_tripled_two_group">[docs]</a>
-<span class="k">def</span> <span class="nf">preset_tripled_two_group</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preset_tripled_two_group</span><span class="p">(</span>
     <span class="n">group_list</span><span class="p">,</span>
     <span class="n">conditions</span><span class="p">,</span>
     <span class="n">condition_type</span><span class="o">=</span><span class="s2">&quot;Sessions&quot;</span><span class="p">,</span>
@@ -1256,7 +1256,7 @@
 <span class="sd">        https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FEAT/UserGuide</span>
 <span class="sd">            #Tripled_Two-Group_Difference_.28.22Tripled.22_T-Test.29</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="p">:</span>
         <span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -1464,7 +1464,7 @@
 
 <div class="viewcode-block" id="run">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.create_fsl_flame_preset.run">[docs]</a>
-<span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
     <span class="n">pipeline_dir</span><span class="p">,</span>
     <span class="n">derivative_list</span><span class="p">,</span>
     <span class="n">z_thresh</span><span class="p">,</span>
@@ -1487,10 +1487,10 @@
     <span class="c1"># NOTE: the input parameters above may come in as a dictionary instead</span>
     <span class="c1">#       or something</span>
 
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-    <span class="kn">import</span> <span class="nn">pkg_resources</span> <span class="k">as</span> <span class="nn">p</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pkg_resources</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">p</span>
 
     <span class="c1"># make life easy</span>
     <span class="n">keys_csv</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;CPAC&quot;</span><span class="p">,</span> <span class="s2">&quot;resources/cpac_outputs.csv&quot;</span><span class="p">)</span>
@@ -1532,7 +1532,7 @@
         <span class="k">pass</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">group_list_text_file</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">CPAC.pipeline.cpac_group_runner</span> <span class="kn">import</span> <span class="n">grab_pipeline_dir_subs</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.cpac_group_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">grab_pipeline_dir_subs</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">preset</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;paired_two&quot;</span><span class="p">,</span> <span class="s2">&quot;tripled_two&quot;</span><span class="p">))</span> <span class="ow">and</span> <span class="s2">&quot;Sessions&quot;</span> <span class="ow">in</span> <span class="n">condition_type</span><span class="p">:</span>
             <span class="n">group_list</span> <span class="o">=</span> <span class="n">grab_pipeline_dir_subs</span><span class="p">(</span><span class="n">pipeline_dir</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -1816,6 +1816,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

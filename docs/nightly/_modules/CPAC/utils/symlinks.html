@@ -360,9 +360,9 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for CPAC.utils.symlinks</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">import</span> <span class="nn">errno</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">errno</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="n">output_renamings</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;anatomical_brain&quot;</span><span class="p">:</span> <span class="s2">&quot;anat&quot;</span><span class="p">,</span>
@@ -515,7 +515,7 @@
 
 <div class="viewcode-block" id="group_files_in_strategies">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.symlinks.group_files_in_strategies">[docs]</a>
-<span class="k">def</span> <span class="nf">group_files_in_strategies</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">paths</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">group_files_in_strategies</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">paths</span><span class="p">):</span>
     <span class="n">strategies</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
@@ -567,7 +567,7 @@
 
 <div class="viewcode-block" id="compile_strategy_name">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.symlinks.compile_strategy_name">[docs]</a>
-<span class="k">def</span> <span class="nf">compile_strategy_name</span><span class="p">(</span><span class="n">strategy</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compile_strategy_name</span><span class="p">(</span><span class="n">strategy</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strategy</span><span class="p">:</span>
         <span class="n">fork</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -582,7 +582,7 @@
 
 <div class="viewcode-block" id="create_paths_to_symlinks">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.symlinks.create_paths_to_symlinks">[docs]</a>
-<span class="k">def</span> <span class="nf">create_paths_to_symlinks</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">pipeline_id</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">paths</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_paths_to_symlinks</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">pipeline_id</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">paths</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{}</span>
 
@@ -700,7 +700,7 @@
 
 <div class="viewcode-block" id="create_symlinks">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.symlinks.create_symlinks">[docs]</a>
-<span class="k">def</span> <span class="nf">create_symlinks</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_symlinks</span><span class="p">(</span>
     <span class="n">output_dir</span><span class="p">,</span> <span class="n">pipeline_id</span><span class="p">,</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">symlink_dir</span><span class="o">=</span><span class="s2">&quot;sym_links&quot;</span>
 <span class="p">):</span>
     <span class="n">original_cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -780,6 +780,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

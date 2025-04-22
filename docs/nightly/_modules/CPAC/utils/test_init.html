@@ -384,17 +384,17 @@
 <span class="c1"># Jon Clucas</span>
 <span class="sd">&quot;&quot;&quot;Assist in initializing CPAC tests resources.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">nipype.interfaces.utility</span> <span class="kn">import</span> <span class="n">IdentityInterface</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.interfaces.utility</span><span class="w"> </span><span class="kn">import</span> <span class="n">IdentityInterface</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.pipeline.nipype_pipeline_engine</span> <span class="kn">import</span> <span class="n">Node</span>
-<span class="kn">from</span> <span class="nn">CPAC.utils.monitoring</span> <span class="kn">import</span> <span class="n">UTLOGGER</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.pipeline.nipype_pipeline_engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">UTLOGGER</span>
 
 
 <div class="viewcode-block" id="create_dummy_node">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.create_dummy_node">[docs]</a>
-<span class="k">def</span> <span class="nf">create_dummy_node</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fields</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_dummy_node</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fields</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a dummy IdentityInterface source for upstream resources.</span>
 
@@ -420,7 +420,7 @@
 <span class="c1"># Return tests data config file</span>
 <div class="viewcode-block" id="populate_template_config">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.populate_template_config">[docs]</a>
-<span class="k">def</span> <span class="nf">populate_template_config</span><span class="p">(</span><span class="n">config_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">populate_template_config</span><span class="p">(</span><span class="n">config_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Populate a template config file from CPAC_RESOURCE_DIR with actual filepaths.</span>
 
@@ -436,7 +436,7 @@
 <span class="sd">        filepath to the newly written config file for testing</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">resource_dir</span> <span class="o">=</span> <span class="n">return_resource_dir</span><span class="p">()</span>
@@ -477,7 +477,7 @@
 <span class="c1"># Populate all of the template paths</span>
 <div class="viewcode-block" id="populate_all_templates">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.populate_all_templates">[docs]</a>
-<span class="k">def</span> <span class="nf">populate_all_templates</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">populate_all_templates</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Populate all of the template files.</span>
 
@@ -521,7 +521,7 @@
 <span class="c1"># Get the AWS credentials</span>
 <div class="viewcode-block" id="return_aws_creds">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.return_aws_creds">[docs]</a>
-<span class="k">def</span> <span class="nf">return_aws_creds</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_aws_creds</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the AWS credentials file given by the CPAC_AWS_CREDS environment variable.</span>
 
@@ -536,7 +536,7 @@
 <span class="sd">        access key</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">creds_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CPAC_AWS_CREDS&quot;</span><span class="p">)</span>
@@ -555,7 +555,7 @@
 <span class="c1"># Get the default test bucket name</span>
 <div class="viewcode-block" id="default_bucket_name">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.default_bucket_name">[docs]</a>
-<span class="k">def</span> <span class="nf">default_bucket_name</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">default_bucket_name</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the default S3 bucket name used in test suite.</span>
 
@@ -578,7 +578,7 @@
 <span class="c1"># Grab all nifti files within directory</span>
 <div class="viewcode-block" id="return_all_niis">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.return_all_niis">[docs]</a>
-<span class="k">def</span> <span class="nf">return_all_niis</span><span class="p">(</span><span class="n">base_dir</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_all_niis</span><span class="p">(</span><span class="n">base_dir</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Walk through a base directory and all subsequent files.</span>
 
@@ -595,7 +595,7 @@
 <span class="sd">        a list of filepath strings of the nifti files found in base_dir</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">nii_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -615,7 +615,7 @@
 <span class="c1"># Download the CPAC resource dir from S3</span>
 <div class="viewcode-block" id="download_cpac_resources_from_s3">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.download_cpac_resources_from_s3">[docs]</a>
-<span class="k">def</span> <span class="nf">download_cpac_resources_from_s3</span><span class="p">(</span><span class="n">local_base</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_cpac_resources_from_s3</span><span class="p">(</span><span class="n">local_base</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Download the CPAC testing resources directory from S3.</span>
 
@@ -625,9 +625,9 @@
 <span class="sd">        the local directory to save the &#39;cpac_resources&#39; contents</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-    <span class="kn">from</span> <span class="nn">indi_aws</span> <span class="kn">import</span> <span class="n">aws_utils</span><span class="p">,</span> <span class="n">fetch_creds</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">indi_aws</span><span class="w"> </span><span class="kn">import</span> <span class="n">aws_utils</span><span class="p">,</span> <span class="n">fetch_creds</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">default_bucket_name</span><span class="p">()</span>
@@ -668,7 +668,7 @@
 <span class="c1"># Look for CPAC_RESOURCE_DIR to be in environment</span>
 <div class="viewcode-block" id="return_resource_dir">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.return_resource_dir">[docs]</a>
-<span class="k">def</span> <span class="nf">return_resource_dir</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_resource_dir</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the filepath of the CPAC_RESOURCE_DIR.</span>
 
@@ -684,7 +684,7 @@
 <span class="sd">        the file path on disk where the cpac resources folder is</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">resource_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CPAC_RESOURCE_DIR&quot;</span><span class="p">)</span>
@@ -717,7 +717,7 @@
 <span class="c1"># Return any subfolder of the resource directory</span>
 <div class="viewcode-block" id="return_resource_subfolder">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.return_resource_subfolder">[docs]</a>
-<span class="k">def</span> <span class="nf">return_resource_subfolder</span><span class="p">(</span><span class="n">subfolder</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_resource_subfolder</span><span class="p">(</span><span class="n">subfolder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Funnction to return subfolders of the CPAC_RESOURCE_DIR.</span>
 
@@ -732,7 +732,7 @@
 <span class="sd">        filepath to the resource subfolder</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">resource_dir</span> <span class="o">=</span> <span class="n">return_resource_dir</span><span class="p">()</span>
@@ -752,7 +752,7 @@
 <span class="c1"># Return test strategies obj file</span>
 <div class="viewcode-block" id="return_strats_obj">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.return_strats_obj">[docs]</a>
-<span class="k">def</span> <span class="nf">return_strats_obj</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_strats_obj</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the file path of the strategies obj file from the CPAC_RESOURCE_DIR.</span>
 
@@ -766,7 +766,7 @@
 <span class="sd">        filepath to the strategies obj file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">settings_dir</span> <span class="o">=</span> <span class="n">return_resource_subfolder</span><span class="p">(</span><span class="s2">&quot;resources&quot;</span><span class="p">)</span>
@@ -781,7 +781,7 @@
 <span class="c1"># Return tests subject list</span>
 <div class="viewcode-block" id="return_subject_list">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.return_subject_list">[docs]</a>
-<span class="k">def</span> <span class="nf">return_subject_list</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_subject_list</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the file path of the subject list file from the CPAC_RESOURCE_DIR.</span>
 
@@ -795,7 +795,7 @@
 <span class="sd">        filepath to the subject list yaml file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">config_dir</span> <span class="o">=</span> <span class="n">return_resource_subfolder</span><span class="p">(</span><span class="s2">&quot;subject_lists&quot;</span><span class="p">)</span>
@@ -810,7 +810,7 @@
 <span class="c1"># Return the test subjects measure directories</span>
 <div class="viewcode-block" id="return_subj_measure_dirs">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.return_subj_measure_dirs">[docs]</a>
-<span class="k">def</span> <span class="nf">return_subj_measure_dirs</span><span class="p">(</span><span class="n">measure</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_subj_measure_dirs</span><span class="p">(</span><span class="n">measure</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Grab the base directories of subject&#39;s output files for a given measure or workflow.</span>
 
@@ -828,8 +828,8 @@
 <span class="sd">        the desired measure folder within the test subjects outputs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">glob</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">test_subj</span> <span class="o">=</span> <span class="n">return_test_subj</span><span class="p">()</span>
@@ -853,7 +853,7 @@
 <span class="c1"># Get subject for individual tests</span>
 <div class="viewcode-block" id="return_test_subj">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.return_test_subj">[docs]</a>
-<span class="k">def</span> <span class="nf">return_test_subj</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_test_subj</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the subject id.</span>
 
@@ -869,7 +869,7 @@
 <span class="sd">        the file path on disk where the cpac resources folder is</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">test_subj</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CPAC_TEST_SUBJ&quot;</span><span class="p">)</span>
@@ -902,7 +902,7 @@
 <span class="c1"># Smooth nifti file</span>
 <div class="viewcode-block" id="smooth_nii_file">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.smooth_nii_file">[docs]</a>
-<span class="k">def</span> <span class="nf">smooth_nii_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nii_file</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">,</span> <span class="n">mask_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">smooth_nii_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nii_file</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">,</span> <span class="n">mask_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gaussian smooth nifti files and optionally use a mask on the smoothed data.</span>
 
@@ -921,9 +921,9 @@
 <span class="sd">        smoothed nifti image as a numpy array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-    <span class="kn">import</span> <span class="nn">scipy.ndimage</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.ndimage</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">raw_nii</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">nii_file</span><span class="p">)</span>
@@ -965,14 +965,14 @@
 
 <div class="viewcode-block" id="download_resource_from_s3">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.download_resource_from_s3">[docs]</a>
-<span class="k">def</span> <span class="nf">download_resource_from_s3</span><span class="p">(</span><span class="n">s3_url_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_resource_from_s3</span><span class="p">(</span><span class="n">s3_url_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Download test resource from S3 bucket.&quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="kn">import</span> <span class="nn">tempfile</span>
-    <span class="kn">import</span> <span class="nn">urllib.error</span>
-    <span class="kn">import</span> <span class="nn">urllib.parse</span>
-    <span class="kn">import</span> <span class="nn">urllib.request</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.error</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.parse</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
     <span class="c1"># Init variables</span>
     <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
@@ -991,7 +991,7 @@
 <span class="c1"># Setup log file</span>
 <div class="viewcode-block" id="setup_test_logger">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.setup_test_logger">[docs]</a>
-<span class="k">def</span> <span class="nf">setup_test_logger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">,</span> <span class="n">log_file</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">to_screen</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_test_logger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">,</span> <span class="n">log_file</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">to_screen</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Initialize and configure a logger that can write to file and (optionally) the screen.</span>
 
@@ -1015,9 +1015,9 @@
 <span class="sd">        time information about the program to file and/or screen</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">logging</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
-    <span class="kn">from</span> <span class="nn">CPAC.utils.monitoring.custom_logging</span> <span class="kn">import</span> <span class="n">getLogger</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.monitoring.custom_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">getLogger</span>
 
     <span class="c1"># Init logger, formatter, filehandler, streamhandler</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">)</span>
@@ -1042,9 +1042,9 @@
 
 <div class="viewcode-block" id="pearson_correlation">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.pearson_correlation">[docs]</a>
-<span class="k">def</span> <span class="nf">pearson_correlation</span><span class="p">(</span><span class="n">nii_1</span><span class="p">,</span> <span class="n">nii_2</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pearson_correlation</span><span class="p">(</span><span class="n">nii_1</span><span class="p">,</span> <span class="n">nii_2</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
 
     <span class="n">data_1</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">nii_1</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
     <span class="n">data_2</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">nii_2</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
@@ -1056,7 +1056,7 @@
 <span class="c1"># Calculate concordance correlation coefficient</span>
 <div class="viewcode-block" id="concordance">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.test_init.concordance">[docs]</a>
-<span class="k">def</span> <span class="nf">concordance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">concordance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the concordance correlation coefficient as defined by Lin (1989).</span>
 
@@ -1073,7 +1073,7 @@
 <span class="sd">        the concordance value as a float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import packages</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="c1"># Usage errors check</span>
     <span class="n">x_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1152,6 +1152,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

@@ -362,35 +362,35 @@
           <h1>Source code for CPAC.utils.trimmer</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
 
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">from</span> <span class="nn">nipype.pipeline.engine.utils</span> <span class="kn">import</span> <span class="n">generate_expanded_graph</span>
-<span class="kn">from</span> <span class="nn">indi_aws</span> <span class="kn">import</span> <span class="n">fetch_creds</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nipype.pipeline.engine.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_expanded_graph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">indi_aws</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_creds</span>
 
-<span class="kn">from</span> <span class="nn">CPAC.utils.datasource</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CPAC.utils.datasource</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">create_check_for_s3_node</span><span class="p">,</span>
 <span class="p">)</span>
 
 
 <div class="viewcode-block" id="expand_workflow">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.trimmer.expand_workflow">[docs]</a>
-<span class="k">def</span> <span class="nf">expand_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">expand_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">generate_expanded_graph</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">wf</span><span class="o">.</span><span class="n">_create_flat_graph</span><span class="p">()))</span></div>
 
 
 
 <div class="viewcode-block" id="is_datasink">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.trimmer.is_datasink">[docs]</a>
-<span class="k">def</span> <span class="nf">is_datasink</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_datasink</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Node&quot;</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;DataSink&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="compute_datasink_dirs">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.trimmer.compute_datasink_dirs">[docs]</a>
-<span class="k">def</span> <span class="nf">compute_datasink_dirs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">datasink</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_datasink_dirs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">datasink</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">directories</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">in_edges</span><span class="p">(</span><span class="n">datasink</span><span class="p">):</span>
         <span class="n">src</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">inp</span>
@@ -420,7 +420,7 @@
 
 <div class="viewcode-block" id="list_files">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.trimmer.list_files">[docs]</a>
-<span class="k">def</span> <span class="nf">list_files</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">s3_creds_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_files</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">s3_creds_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s3://&quot;</span><span class="p">):</span>
         <span class="n">pieces</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
         <span class="n">bucket_name</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
@@ -436,7 +436,7 @@
 
 <div class="viewcode-block" id="the_trimmer">
 <a class="viewcode-back" href="../../../developer/utils#CPAC.utils.trimmer.the_trimmer">[docs]</a>
-<span class="k">def</span> <span class="nf">the_trimmer</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">s3_creds_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">the_trimmer</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">s3_creds_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The trimmer: trimming your workflow based on its datasinks.</span>
 
@@ -686,6 +686,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>

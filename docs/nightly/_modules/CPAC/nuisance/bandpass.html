@@ -360,16 +360,14 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for CPAC.nuisance.bandpass</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
-<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-<span class="kn">from</span> <span class="nn">scipy.fftpack</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.fftpack</span><span class="w"> </span><span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
 
 
-<span class="k">def</span> <span class="nf">ideal_bandpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sample_period</span><span class="p">,</span> <span class="n">bandpass_freqs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ideal_bandpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sample_period</span><span class="p">,</span> <span class="n">bandpass_freqs</span><span class="p">):</span>
     <span class="c1"># Derived from YAN Chao-Gan 120504 based on REST.</span>
     <span class="n">sample_freq</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">sample_period</span>
     <span class="n">sample_length</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -408,25 +406,9 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">real_if_close</span><span class="p">(</span><span class="n">ifft</span><span class="p">(</span><span class="n">f_data</span><span class="p">)[:</span><span class="n">sample_length</span><span class="p">])</span>
 
 
-<span class="k">def</span> <span class="nf">read_1D</span><span class="p">(</span><span class="n">one_D</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a header from a 1D file, returing that header and a Numpy Array.&quot;&quot;&quot;</span>
-    <span class="n">header</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">one_D</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
-        <span class="c1"># Each leading line that doesn&#39;t start with a number goes into the header</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">_f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="k">break</span>
-            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-
-    <span class="n">regressor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">one_D</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">header</span><span class="p">,</span> <span class="n">regressor</span>
-
-
 <div class="viewcode-block" id="bandpass_voxels">
 <a class="viewcode-back" href="../../../developer/workflows/nuisance#CPAC.nuisance.bandpass_voxels">[docs]</a>
-<span class="k">def</span> <span class="nf">bandpass_voxels</span><span class="p">(</span><span class="n">realigned_file</span><span class="p">,</span> <span class="n">regressor_file</span><span class="p">,</span> <span class="n">bandpass_freqs</span><span class="p">,</span> <span class="n">sample_period</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bandpass_voxels</span><span class="p">(</span><span class="n">realigned_file</span><span class="p">,</span> <span class="n">regressor_file</span><span class="p">,</span> <span class="n">bandpass_freqs</span><span class="p">,</span> <span class="n">sample_period</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs ideal bandpass filtering on each voxel time-series.</span>
 
 <span class="sd">    Parameters</span>
@@ -488,9 +470,18 @@
             <span class="n">img</span><span class="o">.</span><span class="n">to_filename</span><span class="p">(</span><span class="n">regressor_bandpassed_file</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">header</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-            <span class="n">regressor</span><span class="p">:</span> <span class="n">NDArray</span>
-            <span class="n">header</span><span class="p">,</span> <span class="n">regressor</span> <span class="o">=</span> <span class="n">read_1D</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="p">[]</span>
+
+                <span class="c1"># header wouldn&#39;t be longer than 5, right? I don&#39;t want to</span>
+                <span class="c1"># loop over the whole file</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="c1"># usecols=[list]</span>
+            <span class="n">regressor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">regressor_file</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
             <span class="n">Yc</span> <span class="o">=</span> <span class="n">regressor</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
             <span class="n">Y_bp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">Yc</span><span class="p">)</span>
 
@@ -515,7 +506,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">afni_1dBandpass</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">highpass</span><span class="p">,</span> <span class="n">lowpass</span><span class="p">,</span> <span class="n">tr</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">afni_1dBandpass</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">highpass</span><span class="p">,</span> <span class="n">lowpass</span><span class="p">,</span> <span class="n">tr</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Perform AFNI 1dBandpass.</span>
 
@@ -533,7 +524,7 @@
 <span class="sd">    out_file : string</span>
 <span class="sd">        Path of an output 1D file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
     <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span>
     <span class="n">filename</span><span class="p">,</span> <span class="n">file_extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">basename</span><span class="p">)</span>
@@ -585,6 +576,6 @@
     <script src="../../../_static/underscore.js?v=f1230927"></script>
     <script src="../../../_static/doctools.js?v=d248f5b3"></script>
     <script src="../../../_static/hideEmptyHighlights.js?v=af317073"></script>
-    <script defer="defer" src="../../../_static/versionList.js?v=f2bc52a7"></script>
+    <script defer="defer" src="../../../_static/versionList.js?v=1a0ac902"></script>
     </body>
 </html>
