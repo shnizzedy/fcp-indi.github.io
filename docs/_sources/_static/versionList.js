@@ -6,6 +6,17 @@ function fetchValidVersions() {
     .then(version_list => version_list.split('\n').filter(v => v.trim() !== ''));
 }
 
+function validateDomain(here, selectedLocation) {
+  const currentDomain = new URL(here).origin;
+  const newDomain = new URL(selectedLocation).origin;
+  if (currentDomain !== newDomain) {
+    console.error("Redirect URL is not in the same domain:", selectedLocation);
+    return false;
+  }
+  return true;
+}
+
+
 function validateAndRedirect(here, version) {
   fetchValidVersions().then(validVersions => {
     // Construct the redirect URL
@@ -21,19 +32,11 @@ function validateAndRedirect(here, version) {
       return; // Do not proceed with the redirect
     }
 
-    // Ensure the new URL is in the same domain
-    const currentDomain = new URL(here).origin;
-    const newDomain = new URL(selectedLocation).origin;
-    if (currentDomain !== newDomain) {
-      console.error("Redirect URL is not in the same domain:", selectedLocation);
-      return; // Do not proceed with the redirect
-    }
-
-    // Perform the redirect if the URL is different and version is valid
-    if (selectedLocation !== here) {
+    if ((selectedLocation !== here) && validateDomain(here, selectedLocation)) {
+      // Perform the redirect if the URL is different and version is valid
       window.location.replace(selectedLocation);
-    }}
-  );
+    }
+  });
 }
 
 function createDropdown(here) {
@@ -59,27 +62,29 @@ function createDropdown(here) {
 function versionDropdown() {
   const here = window.location.href;
   const dochome = "https://" + here.split('/').slice(2, 5).join('/');
-  const navTitles = document.querySelectorAll(".brand,.sidebar-brand-text");
-  createDropdown(here).then(dropdown => {
-    for (let item of navTitles) {
-      item.parentElement.removeAttribute("href");
-      let newTitle = document.createElement("div");
-      let newTitlePrefix = document.createElement("a");
-      newTitlePrefix.setAttribute("href", dochome);
-      newTitlePrefix.appendChild(document.createTextNode("C-PAC "));
-      newTitle.appendChild(newTitlePrefix);
-      newTitle.appendChild(dropdown);
-      let newTitleSuffix = document.createElement("a");
-      newTitleSuffix.setAttribute("href", dochome);
-      newTitleSuffix.appendChild(document.createTextNode(" documentation"));
-      newTitle.appendChild(newTitleSuffix);
-      newTitle.appendChild(document.createTextNode(" »"));
-      item.innerHTML = newTitle.innerHTML;
-      item.addEventListener('change', (event) => {
-        validateAndRedirect(here, event.target.value);
-      });
-    }
-  });
+  if (validateDomain(here, dochome)) {
+    const navTitles = document.querySelectorAll(".brand,.sidebar-brand-text");
+    createDropdown(here).then(dropdown => {
+      for (let item of navTitles) {
+        item.parentElement.removeAttribute("href");
+        let newTitle = document.createElement("div");
+        let newTitlePrefix = document.createElement("a");
+        newTitlePrefix.setAttribute("href", dochome);
+        newTitlePrefix.appendChild(document.createTextNode("C-PAC "));
+        newTitle.appendChild(newTitlePrefix);
+        newTitle.appendChild(dropdown);
+        let newTitleSuffix = document.createElement("a");
+        newTitleSuffix.setAttribute("href", dochome);
+        newTitleSuffix.appendChild(document.createTextNode(" documentation"));
+        newTitle.appendChild(newTitleSuffix);
+        newTitle.appendChild(document.createTextNode(" »"));
+        item.innerHTML = newTitle.innerHTML;
+        item.addEventListener('change', (event) => {
+          validateAndRedirect(here, event.target.value);
+        });
+      }
+    });
+  }
 }
 
 versionDropdown();
