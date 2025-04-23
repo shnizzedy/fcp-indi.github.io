@@ -62,19 +62,23 @@ function createDropdown(here) {
 function versionDropdown() {
   const here = window.location.href;
   const dochome = "https://" + here.split('/').slice(2, 5).join('/');
-  if (here.origin === dochome.origin) {
+  if (validateDomain(here, dochome)) {
     const navTitles = document.querySelectorAll(".brand,.sidebar-brand-text");
     createDropdown(here).then(dropdown => {
       for (let item of navTitles) {
         item.parentElement.removeAttribute("href");
         let newTitle = document.createElement("div");
         let newTitlePrefix = document.createElement("a");
-        newTitlePrefix.setAttribute("href", dochome);
+        if (dochome.origin === window.location.origin) {
+          newTitlePrefix.setAttribute("href", dochome);
+        }
         newTitlePrefix.appendChild(document.createTextNode("C-PAC "));
         newTitle.appendChild(newTitlePrefix);
         newTitle.appendChild(dropdown);
         let newTitleSuffix = document.createElement("a");
-        newTitleSuffix.setAttribute("href", dochome);
+        if (dochome.origin === window.location.origin) {
+          newTitleSuffix.setAttribute("href", dochome);
+        }
         newTitleSuffix.appendChild(document.createTextNode(" documentation"));
         newTitle.appendChild(newTitleSuffix);
         newTitle.appendChild(document.createTextNode(" »"));
