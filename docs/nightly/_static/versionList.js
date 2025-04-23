@@ -62,7 +62,7 @@ function createDropdown(here) {
 function versionDropdown() {
   const here = window.location.href;
   const dochome = "https://" + here.split('/').slice(2, 5).join('/');
-  if (validateDomain(here, dochome)) {
+  if (here.origin === dochome.origin) {
     const navTitles = document.querySelectorAll(".brand,.sidebar-brand-text");
     createDropdown(here).then(dropdown => {
       for (let item of navTitles) {
