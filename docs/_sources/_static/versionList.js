@@ -69,12 +69,16 @@ function versionDropdown() {
         item.parentElement.removeAttribute("href");
         let newTitle = document.createElement("div");
         let newTitlePrefix = document.createElement("a");
-        newTitlePrefix.setAttribute("href", dochome);
+        if (dochome.origin === window.location.origin) {
+          newTitlePrefix.setAttribute("href", dochome);
+        }
         newTitlePrefix.appendChild(document.createTextNode("C-PAC "));
         newTitle.appendChild(newTitlePrefix);
         newTitle.appendChild(dropdown);
         let newTitleSuffix = document.createElement("a");
-        newTitleSuffix.setAttribute("href", dochome);
+        if (dochome.origin === window.location.origin) {
+          newTitleSuffix.setAttribute("href", dochome);
+        }
         newTitleSuffix.appendChild(document.createTextNode(" documentation"));
         newTitle.appendChild(newTitleSuffix);
         newTitle.appendChild(document.createTextNode(" »"));
