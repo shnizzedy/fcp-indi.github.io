@@ -9,6 +9,13 @@
  *
  */
 
+const BLACKLISTED_KEY_CONTROL_ELEMENTS = new Set([
+  "TEXTAREA",
+  "INPUT",
+  "SELECT",
+  "BUTTON",
+]);
+
 /**
  * select a different prefix for underscore
  */
