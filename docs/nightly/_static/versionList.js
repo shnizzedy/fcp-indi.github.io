@@ -33,8 +33,9 @@ function validateAndRedirect(here, version) {
     }
 
     if ((selectedLocation !== here) && validateDomain(here, selectedLocation)) {
+      const redirectURL = new URL(selectedLocation);
       // Perform the redirect if the URL is different and version is valid
-      window.location.replace(URL(selectedLocation));
+      window.location.replace(redirectURL);
     }
   });
 }
