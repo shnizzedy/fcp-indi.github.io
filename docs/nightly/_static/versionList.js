@@ -34,7 +34,7 @@ function validateAndRedirect(here, version) {
 
     if ((selectedLocation !== here) && validateDomain(here, selectedLocation)) {
       // Perform the redirect if the URL is different and version is valid
-      window.location.replace(DOMPurify.sanitize(selectedLocation));
+      window.location.replace(URL(selectedLocation));
     }
   });
 }
@@ -61,7 +61,7 @@ function createDropdown(here) {
 
 function versionDropdown() {
   const here = window.location.href;
-  const dochome = new URL(DOMPurify.sanitize("https://" + here.split('/').slice(2, 5).join('/')));
+  const dochome = new URL("https://" + here.split('/').slice(2, 5).join('/'));
   if (validateDomain(here, dochome)) {
     const navTitles = document.querySelectorAll(".brand,.sidebar-brand-text");
     createDropdown(here).then(dropdown => {
